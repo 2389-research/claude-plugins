@@ -1,0 +1,16 @@
+{
+  "name": "2389 Research Plugin Marketplace",
+  "description": "Curated plugins for Claude Code",
+  "plugins": [
+    {
+      "name": "agent-drugs",
+      "displayName": "Agent Drugs",
+      "description": "Digital drugs that modify AI behavior through prompt injection",
+      "version": "1.0.0",
+      "author": "2389 Research",
+      "repository": "https://github.com/2389-research/agent-drugs",
+      "homepage": "https://agent-drugs.web.app",
+      "installUrl": "https://github.com/2389-research/agent-drugs"
+    }
+  ]
+}
