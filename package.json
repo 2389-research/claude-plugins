@@ -1,0 +1,14 @@
+{
+  "name": "claude-plugins",
+  "version": "1.0.0",
+  "description": "Curated plugins for Claude Code",
+  "scripts": {
+    "generate": "node scripts/generate-site.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2389-research/claude-plugins.git"
+  },
+  "author": "2389 Research",
+  "license": "MIT"
+}
