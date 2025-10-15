@@ -3,11 +3,21 @@
   "owner": {
     "name": "2389 Research"
   },
+  "metadata": {
+    "description": "Curated Claude Code plugins for behavioral modification and productivity",
+    "version": "1.0.0"
+  },
   "plugins": [
     {
       "name": "agent-drugs",
-      "source": "https://github.com/2389-research/agent-drugs",
-      "description": "Digital drugs that modify AI behavior through prompt injection"
+      "source": {
+        "source": "url",
+        "url": "https://github.com/2389-research/agent-drugs.git"
+      },
+      "description": "Digital drugs that modify AI behavior through prompt injection",
+      "version": "1.0.0",
+      "keywords": ["behavior", "prompts", "modification", "drugs", "context-injection", "productivity"],
+      "strict": true
     }
   ]
 }
