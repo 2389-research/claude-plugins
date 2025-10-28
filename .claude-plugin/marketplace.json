@@ -1,23 +1,68 @@
 {
-  "name": "2389-research-marketplace",
-  "owner": {
-    "name": "2389 Research"
-  },
-  "metadata": {
-    "description": "Curated Claude Code plugins for behavioral modification and productivity",
-    "version": "1.0.0"
-  },
-  "plugins": [
-    {
-      "name": "agent-drugs",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/2389-research/agent-drugs.git"
-      },
-      "description": "Digital drugs that modify AI behavior through prompt injection",
-      "version": "1.0.0",
-      "keywords": ["behavior", "prompts", "modification", "drugs", "context-injection", "productivity"],
-      "strict": true
-    }
-  ]
+    "name": "2389-research-marketplace",
+    "owner": {
+        "name": "2389 Research"
+    },
+    "metadata": {
+        "description": "Curated Claude Code plugins for behavioral modification and productivity",
+        "version": "1.0.0"
+    },
+    "plugins": [
+        {
+            "name": "agent-drugs",
+            "source": {
+                "source": "url",
+                "url": "https://github.com/2389-research/agent-drugs.git"
+            },
+            "description": "Digital drugs that modify AI behavior through prompt injection",
+            "version": "1.0.0",
+            "keywords": [
+                "behavior",
+                "prompts",
+                "modification",
+                "drugs",
+                "context-injection",
+                "productivity"
+            ],
+            "strict": true
+        },
+        {
+            "name": "socialmedia",
+            "source": {
+                "source": "url",
+                "url": "https://github.com/2389-research/mcp-socialmedia"
+            },
+            "description": "A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions.",
+            "version": "1.0.0",
+            "keywords": [
+                "social-media",
+                "communication",
+                "team-discussion",
+                "collaboration",
+                "agents",
+                "interaction"
+            ],
+            "strict": true
+        },
+        {
+            "name": "journal",
+            "source": {
+                "source": "url",
+                "url": "https://github.com/2389-research/journal-mcp"
+            },
+            "description": "A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts",
+            "version": "1.0.0",
+            "keywords": [
+                "journal",
+                "journaling",
+                "thoughts",
+                "feelings",
+                "processing",
+                "private",
+                "reflection",
+                "diary"
+            ],
+            "strict": true
+        }
+    ]
 }
