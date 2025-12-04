@@ -1,59 +1,96 @@
-# 2389 Research Plugin Marketplace
+# 2389 Internal Development Marketplace
 
-Curated plugins for Claude Code.
+Internal development marketplace for 2389.ai tooling - includes the 2389 skills plugin and curated MCP servers.
 
-## Using the Marketplace
+## Quick Start
 
-Add this marketplace to Claude Code:
+### Installing from Marketplace (Standard)
 
-```
+```bash
+# Add the marketplace
 /plugin marketplace add 2389-research/claude-plugins
+
+# Install the 2389 skills plugin
+/plugin install 2389
 ```
 
-Then install any plugin:
+### Installing MCP Servers
 
-```
+```bash
+# Install external MCP servers from the marketplace
+/plugin install socialmedia
+/plugin install journal
 /plugin install agent-drugs
 ```
 
-## Available Plugins
+## Local Development
 
-Visit [https://2389-research.github.io/claude-plugins](https://2389-research.github.io/claude-plugins) to browse available plugins.
+When developing skills locally, there's a gotcha: the marketplace.json points to the GitHub URL, so `/plugin install 2389` fetches from remote - not your local changes.
 
-## Submitting a Plugin
+**The workaround:** Symlink the plugin cache to your local repo.
 
-1. Fork this repository
-2. Add your plugin entry to `.claude-plugin/marketplace.json`
-3. Submit a pull request
+### Setup for Local Development
 
-### Required Fields
+```bash
+# 1. Clone the repo (if you haven't already)
+git clone https://github.com/2389-research/claude-plugins.git ~/work/2389/claude-plugins
+cd ~/work/2389/claude-plugins
 
-```json
-{
-  "name": "plugin-name",
-  "displayName": "Plugin Display Name",
-  "description": "One-line description of what the plugin does",
-  "version": "1.0.0",
-  "author": "Your Name or Organization",
-  "repository": "https://github.com/your-org/your-plugin",
-  "homepage": "https://your-plugin-site.com",
-  "installUrl": "https://github.com/your-org/your-plugin"
-}
+# 2. Add the marketplace (pointing to your local clone)
+/plugin marketplace add ~/work/2389/claude-plugins
+
+# 3. Install the plugin (this fetches from GitHub, not local)
+/plugin install 2389
+
+# 4. Replace the cache with a symlink to your local repo
+rm -rf ~/.claude/plugins/cache/2389
+ln -s ~/work/2389/claude-plugins ~/.claude/plugins/cache/2389
+
+# 5. Set up permissions
+./install.sh
+
+# 6. Restart Claude Code
 ```
 
-### Review Process
+### Important Notes
 
-- All submissions are manually reviewed
-- Plugins must have a valid `.claude-plugin/plugin.json` file
-- Plugins must be publicly accessible
-- Plugins must not contain malicious code
+- **Don't run `/plugin update 2389`** - it will blow away your symlink and re-fetch from GitHub
+- Changes to skills take effect after restarting Claude Code
+- The symlink makes Claude Code read directly from your working directory
 
-## How It Works
+### Verifying It Works
 
-1. Plugins are listed in `.claude-plugin/marketplace.json`
-2. On merge, GitHub Actions generates a static site from the catalog
-3. GitHub Pages serves the site at `/docs`
-4. Claude Code reads the marketplace.json to install plugins
+After setup, check that skills are loading:
+```
+/skills
+```
+
+You should see `2389:css-development`, `2389:firebase-development`, `2389:terminal-title`, and `2389:using-2389-skills` in the list.
+
+## What's Included
+
+### 2389 Skills Plugin (Local)
+
+- **css-development** - CSS development workflows with Tailwind composition, dark mode, semantic naming
+- **firebase-development** - Firebase project setup, feature development, debugging, validation
+- **terminal-title** - Automatic terminal title updates with emoji + project + topic context
+- **using-2389-skills** - Meta-skill establishing mandatory workflows for 2389 skills
+
+### External MCP Servers
+
+- **socialmedia** - Team communication and activity feed
+- **journal** - Private journaling for notes and reflections
+- **agent-drugs** - Enhanced capabilities and utilities
+
+## Browse Plugins
+
+Visit [https://2389-research.github.io/claude-plugins](https://2389-research.github.io/claude-plugins) to browse all available plugins.
+
+## Documentation
+
+- **CLAUDE.md** - Repository structure, architecture, conventions, troubleshooting
+- **docs/DEVELOPMENT.md** - Detailed skills development guide with examples and patterns
+- **tests/integration/** - Manual test scenarios for skill routing
 
 ## License
 

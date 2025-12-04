@@ -1,13 +1,32 @@
 {
     "name": "2389-research-marketplace",
     "owner": {
-        "name": "2389 Research"
+        "name": "2389 Research",
+        "email": "dev@2389.ai"
     },
     "metadata": {
-        "description": "Curated Claude Code plugins for behavioral modification and productivity",
-        "version": "1.0.0"
+        "description": "Internal development marketplace for 2389 - skills and MCP servers",
+        "version": "2.0.0"
     },
     "plugins": [
+        {
+            "name": "2389",
+            "source": {
+                "source": "url",
+                "url": "https://github.com/2389-research/claude-plugins.git"
+            },
+            "description": "2389 skill collection: CSS development, Firebase, terminal-title, and core workflows",
+            "version": "1.0.0",
+            "keywords": [
+                "skills",
+                "css",
+                "firebase",
+                "terminal",
+                "workflows",
+                "development"
+            ],
+            "strict": false
+        },
         {
             "name": "agent-drugs",
             "source": {
@@ -30,7 +49,7 @@
             "name": "socialmedia",
             "source": {
                 "source": "url",
-                "url": "https://github.com/2389-research/mcp-socialmedia"
+                "url": "https://github.com/2389-research/mcp-socialmedia.git"
             },
             "description": "A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions.",
             "version": "1.0.0",
@@ -48,7 +67,7 @@
             "name": "journal",
             "source": {
                 "source": "url",
-                "url": "https://github.com/2389-research/journal-mcp"
+                "url": "https://github.com/2389-research/journal-mcp.git"
             },
             "description": "A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts",
             "version": "1.0.0",
