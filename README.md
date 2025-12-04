@@ -1,59 +1,82 @@
-# 2389 Research Plugin Marketplace
+# 2389 Internal Development Marketplace
 
-Curated plugins for Claude Code.
+Internal development marketplace for 2389.ai tooling - includes the 2389 skills plugin and curated MCP servers.
 
-## Using the Marketplace
+## Quick Start
 
-Add this marketplace to Claude Code:
+### Installing the 2389 Skills Plugin (Local Development)
 
+For active development on the skills:
+
+```bash
+# Clone the repository
+git clone https://github.com/2389-research/claude-plugins.git
+cd claude-plugins
+
+# Create symlink to Claude skills directory
+ln -s "$(pwd)/skills" ~/.claude/skills/2389
+
+# Set executable permissions on scripts
+./install.sh
 ```
+
+After changes to skills, restart Claude Code to reload.
+
+### Installing from Marketplace
+
+To install as a regular plugin:
+
+```bash
+# Add the marketplace
 /plugin marketplace add 2389-research/claude-plugins
-```
 
-Then install any plugin:
+# Install the 2389 skills plugin
+/plugin install 2389
 
-```
+# Or install external MCP servers
+/plugin install socialmedia
+/plugin install journal
 /plugin install agent-drugs
 ```
 
-## Available Plugins
+## What's Included
 
-Visit [https://2389-research.github.io/claude-plugins](https://2389-research.github.io/claude-plugins) to browse available plugins.
+### 2389 Skills Plugin (Local)
 
-## Submitting a Plugin
+- **css-development** - CSS development workflows with Tailwind composition, dark mode, semantic naming
+- **firebase-development** - Firebase project setup, feature development, debugging, validation
+- **terminal-title** - Automatic terminal title updates with emoji + project + topic context
+- **using-2389-skills** - Meta-skill establishing mandatory workflows for 2389 skills
 
-1. Fork this repository
-2. Add your plugin entry to `.claude-plugin/marketplace.json`
-3. Submit a pull request
+### External MCP Servers
 
-### Required Fields
+- **socialmedia** - Team communication and activity feed
+- **journal** - Private journaling for notes and reflections
+- **agent-drugs** - Enhanced capabilities and utilities
 
-```json
-{
-  "name": "plugin-name",
-  "displayName": "Plugin Display Name",
-  "description": "One-line description of what the plugin does",
-  "version": "1.0.0",
-  "author": "Your Name or Organization",
-  "repository": "https://github.com/your-org/your-plugin",
-  "homepage": "https://your-plugin-site.com",
-  "installUrl": "https://github.com/your-org/your-plugin"
-}
+## Browse Plugins
+
+Visit [https://2389-research.github.io/claude-plugins](https://2389-research.github.io/claude-plugins) to browse all available plugins.
+
+## Development
+
+For comprehensive development documentation, see:
+
+- **CLAUDE.md** - Repository structure, architecture, conventions, troubleshooting
+- **docs/DEVELOPMENT.md** - Detailed skills development guide with examples and patterns
+
+Quick reference for common tasks:
+
+```bash
+# Test skills locally
+cp -r skills/* ~/.claude/skills/
+
+# Regenerate marketplace site
+npm run generate
+
+# See integration tests
+ls tests/integration/
 ```
-
-### Review Process
-
-- All submissions are manually reviewed
-- Plugins must have a valid `.claude-plugin/plugin.json` file
-- Plugins must be publicly accessible
-- Plugins must not contain malicious code
-
-## How It Works
-
-1. Plugins are listed in `.claude-plugin/marketplace.json`
-2. On merge, GitHub Actions generates a static site from the catalog
-3. GitHub Pages serves the site at `/docs`
-4. Claude Code reads the marketplace.json to install plugins
 
 ## License
 
