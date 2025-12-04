@@ -1,13 +1,32 @@
 {
     "name": "2389-research-marketplace",
     "owner": {
-        "name": "2389 Research"
+        "name": "2389 Research",
+        "email": "dev@2389.ai"
     },
     "metadata": {
-        "description": "Curated Claude Code plugins for behavioral modification and productivity",
-        "version": "1.0.0"
+        "description": "Internal development marketplace for 2389 - skills and MCP servers",
+        "version": "2.0.0"
     },
     "plugins": [
+        {
+            "name": "2389",
+            "source": {
+                "source": "local",
+                "path": "./"
+            },
+            "description": "2389 skill collection: CSS development, Firebase, terminal-title, and core workflows",
+            "version": "1.0.0",
+            "keywords": [
+                "skills",
+                "css",
+                "firebase",
+                "terminal",
+                "workflows",
+                "development"
+            ],
+            "strict": false
+        },
         {
             "name": "agent-drugs",
             "source": {
