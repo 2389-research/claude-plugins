@@ -12,8 +12,8 @@
         {
             "name": "2389",
             "source": {
-                "source": "local",
-                "path": "./"
+                "source": "url",
+                "url": "https://github.com/2389-research/claude-plugins.git"
             },
             "description": "2389 skill collection: CSS development, Firebase, terminal-title, and core workflows",
             "version": "1.0.0",
@@ -49,7 +49,7 @@
             "name": "socialmedia",
             "source": {
                 "source": "url",
-                "url": "https://github.com/2389-research/mcp-socialmedia"
+                "url": "https://github.com/2389-research/mcp-socialmedia.git"
             },
             "description": "A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions.",
             "version": "1.0.0",
@@ -67,7 +67,7 @@
             "name": "journal",
             "source": {
                 "source": "url",
-                "url": "https://github.com/2389-research/journal-mcp"
+                "url": "https://github.com/2389-research/journal-mcp.git"
             },
             "description": "A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts",
             "version": "1.0.0",
