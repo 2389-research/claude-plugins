@@ -4,27 +4,7 @@ Internal development marketplace for 2389.ai tooling - includes the 2389 skills 
 
 ## Quick Start
 
-### Installing the 2389 Skills Plugin (Local Development)
-
-For active development on the skills:
-
-```bash
-# Clone the repository
-git clone https://github.com/2389-research/claude-plugins.git
-cd claude-plugins
-
-# Create symlink to Claude skills directory
-ln -s "$(pwd)/skills" ~/.claude/skills/2389
-
-# Set executable permissions on scripts
-./install.sh
-```
-
-After changes to skills, restart Claude Code to reload.
-
-### Installing from Marketplace
-
-To install as a regular plugin:
+### Installing from Marketplace (Standard)
 
 ```bash
 # Add the marketplace
@@ -32,12 +12,60 @@ To install as a regular plugin:
 
 # Install the 2389 skills plugin
 /plugin install 2389
+```
 
-# Or install external MCP servers
+### Installing MCP Servers
+
+```bash
+# Install external MCP servers from the marketplace
 /plugin install socialmedia
 /plugin install journal
 /plugin install agent-drugs
 ```
+
+## Local Development
+
+When developing skills locally, there's a gotcha: the marketplace.json points to the GitHub URL, so `/plugin install 2389` fetches from remote - not your local changes.
+
+**The workaround:** Symlink the plugin cache to your local repo.
+
+### Setup for Local Development
+
+```bash
+# 1. Clone the repo (if you haven't already)
+git clone https://github.com/2389-research/claude-plugins.git ~/work/2389/claude-plugins
+cd ~/work/2389/claude-plugins
+
+# 2. Add the marketplace (pointing to your local clone)
+/plugin marketplace add ~/work/2389/claude-plugins
+
+# 3. Install the plugin (this fetches from GitHub, not local)
+/plugin install 2389
+
+# 4. Replace the cache with a symlink to your local repo
+rm -rf ~/.claude/plugins/cache/2389
+ln -s ~/work/2389/claude-plugins ~/.claude/plugins/cache/2389
+
+# 5. Set up permissions
+./install.sh
+
+# 6. Restart Claude Code
+```
+
+### Important Notes
+
+- **Don't run `/plugin update 2389`** - it will blow away your symlink and re-fetch from GitHub
+- Changes to skills take effect after restarting Claude Code
+- The symlink makes Claude Code read directly from your working directory
+
+### Verifying It Works
+
+After setup, check that skills are loading:
+```
+/skills
+```
+
+You should see `2389:css-development`, `2389:firebase-development`, `2389:terminal-title`, and `2389:using-2389-skills` in the list.
 
 ## What's Included
 
@@ -58,25 +86,11 @@ To install as a regular plugin:
 
 Visit [https://2389-research.github.io/claude-plugins](https://2389-research.github.io/claude-plugins) to browse all available plugins.
 
-## Development
-
-For comprehensive development documentation, see:
+## Documentation
 
 - **CLAUDE.md** - Repository structure, architecture, conventions, troubleshooting
 - **docs/DEVELOPMENT.md** - Detailed skills development guide with examples and patterns
-
-Quick reference for common tasks:
-
-```bash
-# Test skills locally
-cp -r skills/* ~/.claude/skills/
-
-# Regenerate marketplace site
-npm run generate
-
-# See integration tests
-ls tests/integration/
-```
+- **tests/integration/** - Manual test scenarios for skill routing
 
 ## License
 
