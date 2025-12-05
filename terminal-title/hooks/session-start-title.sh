@@ -56,7 +56,7 @@ echo "Detected project name: $PROJECT_NAME" >> "$LOG_FILE"
 # Find the set_title.sh script (relative to this hook script)
 HOOK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PLUGIN_ROOT="$(dirname "$HOOK_DIR")"
-SET_TITLE_SCRIPT="${PLUGIN_ROOT}/skills/terminal-title/scripts/set_title.sh"
+SET_TITLE_SCRIPT="${PLUGIN_ROOT}/skills/scripts/set_title.sh"
 
 echo "HOOK_DIR: $HOOK_DIR" >> "$LOG_FILE"
 echo "PLUGIN_ROOT: $PLUGIN_ROOT" >> "$LOG_FILE"
@@ -74,7 +74,7 @@ if [ -x "$SET_TITLE_SCRIPT" ]; then
 else
     echo "✗ SET_TITLE_SCRIPT not executable, trying fallback" >> "$LOG_FILE"
     # Fallback: try to find it in Claude's plugin directory
-    SET_TITLE_SCRIPT="${HOME}/.claude/plugins/2389-skills/skills/terminal-title/scripts/set_title.sh"
+    SET_TITLE_SCRIPT="${HOME}/.claude/plugins/terminal-title/skills/scripts/set_title.sh"
     echo "Fallback script: $SET_TITLE_SCRIPT" >> "$LOG_FILE"
     if [ -x "$SET_TITLE_SCRIPT" ]; then
         echo "Executing fallback: bash $SET_TITLE_SCRIPT '$PROJECT_NAME' 'Claude Code'" >> "$LOG_FILE"
@@ -97,7 +97,7 @@ cat <<'EOF'
 {
   "hookSpecificOutput": {
     "hookEventName": "SessionStart",
-    "additionalContext": "<CRITICAL_SESSION_START_INSTRUCTION>\n\nBEFORE responding to the user, you MUST:\n\n1. Use the Skill tool to invoke: 2389:terminal-title\n2. This will refine the terminal title from the default set by the command hook\n3. Only THEN respond to the user's message\n\nThis is NOT optional. This is NOT negotiable. The terminal title skill MUST run at session start.\n\nIf you respond to the user without invoking 2389:terminal-title first, you have FAILED.\n\n</CRITICAL_SESSION_START_INSTRUCTION>"
+    "additionalContext": "<CRITICAL_SESSION_START_INSTRUCTION>\n\nBEFORE responding to the user, you MUST:\n\n1. Use the Skill tool to invoke: terminal-title\n2. This will refine the terminal title from the default set by the command hook\n3. Only THEN respond to the user's message\n\nThis is NOT optional. This is NOT negotiable. The terminal title skill MUST run at session start.\n\nIf you respond to the user without invoking terminal-title first, you have FAILED.\n\n</CRITICAL_SESSION_START_INSTRUCTION>"
   }
 }
 EOF

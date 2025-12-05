@@ -1,0 +1,6 @@
+{
+  "name": "firebase-development",
+  "description": "Firebase project workflows including setup, features, debugging, and validation",
+  "version": "1.0.0",
+  "commands": []
+}

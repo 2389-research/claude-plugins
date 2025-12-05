@@ -1,339 +1,307 @@
-# Claude Plugins Repository
+# 2389 Research Internal Marketplace
 
 ## Repository Purpose
 
-This repository serves two functions:
+This repository is a **monorepo marketplace** containing multiple independent Claude Code plugins for 2389.ai internal development workflows.
 
-1. **Skills Plugin**: The "2389" plugin containing curated Claude Code skills for internal development workflows
-2. **Marketplace Catalog**: A catalog listing both local skills and external MCP servers for the 2389 research team
+**Key characteristics:**
+- Each plugin is independently installable
+- Plugins share common development conventions
+- Centralized marketplace catalog in `.claude-plugin/marketplace.json`
+- Auto-generated marketplace site at https://2389-research.github.io/claude-plugins
 
 This is an **internal development marketplace** for 2389.ai tooling, not a public marketplace.
 
-## Architecture Overview
+## Monorepo Structure
 
-### Plugin Structure
-
-The repository itself IS the "2389" plugin:
+The repository contains four independent plugins, each in its own directory:
 
 ```
 claude-plugins/
 ├── .claude-plugin/
-│   ├── plugin.json         # Defines the "2389" plugin
-│   └── marketplace.json    # Catalog of available plugins/servers
-├── skills/                 # Skills included in "2389" plugin
-│   ├── css-development/    # CSS development workflows
-│   ├── firebase-development/ # Firebase project workflows
-│   ├── terminal-title/     # Session title management
-│   └── using-2389-skills/  # Meta-skill for using this plugin
-├── hooks/                  # Claude Code hooks
-│   └── hooks.json          # Session start hooks
+│   └── marketplace.json        # Catalog of all available plugins
+├── css-development/            # CSS development workflows plugin
+│   ├── .claude-plugin/
+│   │   └── plugin.json
+│   ├── skills/
+│   ├── docs/
+│   ├── tests/
+│   ├── CLAUDE.md              # Plugin-specific instructions
+│   └── README.md              # Plugin documentation
+├── firebase-development/       # Firebase workflows plugin
+│   ├── .claude-plugin/
+│   │   └── plugin.json
+│   ├── skills/
+│   ├── docs/
+│   ├── tests/
+│   ├── CLAUDE.md
+│   └── README.md
+├── terminal-title/             # Terminal title management plugin
+│   ├── .claude-plugin/
+│   │   └── plugin.json
+│   ├── hooks/
+│   │   └── hooks.json
+│   ├── skills/
+│   ├── docs/
+│   ├── tests/
+│   ├── CLAUDE.md
+│   └── README.md
+├── workflows/                  # 2389 workflow conventions plugin
+│   ├── .claude-plugin/
+│   │   └── plugin.json
+│   ├── skills/
+│   ├── CLAUDE.md
+│   └── README.md
 ├── docs/
-│   ├── index.html          # Generated marketplace site
-│   ├── DEVELOPMENT.md      # Comprehensive skills development guide
-│   ├── plans/              # Design and implementation documents
-│   └── examples/           # Usage examples for patterns
-├── tests/
-│   └── integration/        # Manual test scenarios
+│   ├── index.html             # Generated marketplace site
+│   ├── style.css
+│   └── DEVELOPMENT.md         # Comprehensive developer guide
 └── scripts/
-    └── generate-site.js    # Marketplace site generator
+    └── generate-site.js       # Marketplace site generator
 ```
 
-### Marketplace Structure
+## Plugin Architecture
 
-The `.claude-plugin/marketplace.json` lists all available plugins:
+Each plugin is self-contained with:
 
-- **Local plugin**: The "2389" skills plugin (source: "./")
-- **External MCP servers**: socialmedia, journal, agent-drugs (source: git URLs)
+1. **`.claude-plugin/plugin.json`** - Plugin configuration
+   ```json
+   {
+     "name": "plugin-name",
+     "description": "What this plugin does",
+     "version": "1.0.0",
+     "commands": []
+   }
+   ```
 
-External plugins live in their own repositories and are referenced by URL.
+2. **`skills/`** - Plugin-specific skills
+   - Main skill (orchestrator)
+   - Sub-skills in subdirectories
+   - Each with `SKILL.md` containing frontmatter + instructions
 
-## Available Skills
+3. **`docs/`** - Plugin-specific documentation
+   - `plans/` - Design and implementation documents
+   - `examples/` - Pattern usage examples
 
-### css-development
+4. **`tests/integration/`** - Plugin-specific test scenarios
 
-Comprehensive CSS development workflow with sub-skills:
-- `css-development:create-component` - Create new styled components
-- `css-development:validate` - Validate CSS against patterns
-- `css-development:refactor` - Refactor existing CSS
+5. **`CLAUDE.md`** - Instructions for Claude about this plugin
+   - Patterns and conventions
+   - Reference codebases
+   - Development workflow
 
-**Patterns:**
-- Semantic class naming (`.user-profile`, `.nav-menu`)
-- Tailwind composition with `@apply`
-- Dark mode by default (`dark:` variants)
-- Test coverage (static analysis + component rendering)
+6. **`README.md`** - Public-facing documentation
+   - Installation instructions
+   - Quick examples
+   - Links to detailed docs
 
-**Reference codebase:** `/Users/dylanr/work/2389/oneonone/hosting`
+## Available Plugins
 
-### firebase-development
+| Plugin | Description | Documentation |
+|--------|-------------|---------------|
+| [css-development](/Users/harper/Public/src/2389/claude-plugins/css-development/) | CSS development workflows with Tailwind composition, semantic naming, and dark mode by default | [CLAUDE.md](/Users/harper/Public/src/2389/claude-plugins/css-development/CLAUDE.md) |
+| [firebase-development](/Users/harper/Public/src/2389/claude-plugins/firebase-development/) | Firebase project workflows including setup, features, debugging, and validation | [CLAUDE.md](/Users/harper/Public/src/2389/claude-plugins/firebase-development/CLAUDE.md) |
+| [terminal-title](/Users/harper/Public/src/2389/claude-plugins/terminal-title/) | Automatically updates terminal title with emoji + project + topic context | [CLAUDE.md](/Users/harper/Public/src/2389/claude-plugins/terminal-title/CLAUDE.md) |
+| [workflows](/Users/harper/Public/src/2389/claude-plugins/workflows/) | 2389 workflow conventions including terminal title updates and TodoWrite patterns | [CLAUDE.md](/Users/harper/Public/src/2389/claude-plugins/workflows/CLAUDE.md) |
 
-Firebase project workflows with sub-skills:
-- `firebase-development:project-setup` - Initialize new Firebase projects
-- `firebase-development:add-feature` - Add features to existing projects
-- `firebase-development:debug` - Debug Firebase issues
-- `firebase-development:validate` - Validate project structure
+## Installation
 
-**Key patterns:**
-- Multi-hosting setup (multiple sites or single hosting)
-- Authentication (custom API keys, Firebase Auth, or both)
-- Cloud Functions (Express, domain-grouped, or individual files)
-- Security models (server-write-only vs client-write with validation)
-- Emulator-first development
-- Modern tooling (TypeScript, vitest, biome)
-
-**Reference codebases:**
-- oneonone: `/Users/dylanr/work/2389/oneonone` (Express API, custom API keys)
-- bot-socialmedia: `/Users/dylanr/work/2389/bot-socialmedia-server` (Domain-grouped, Firebase Auth)
-- meme-rodeo: `/Users/dylanr/work/2389/meme-rodeo` (Individual functions, entitlements)
-
-### terminal-title
-
-Automatically updates terminal title with emoji + project + topic context.
-
-**Auto-invokes:** At session start and topic changes
-
-### using-2389-skills
-
-Meta-skill establishing mandatory workflows for 2389 skills:
-- Terminal title updates
-- Skill usage patterns
-- TodoWrite integration
-
-## Development Commands
-
-### Installation
+### Add Marketplace
 
 ```bash
-# Install the 2389 plugin from this repository
-/plugin install 2389-research/claude-plugins
-
-# Or install from local clone
-/plugin install /path/to/claude-plugins
+/plugin marketplace add 2389-research/claude-plugins
 ```
 
-### Testing Skills
-
-After modifying skills:
+### Install Plugins Individually
 
 ```bash
-# Copy to Claude skills directory for testing
-cp -r skills/css-development ~/.claude/skills/
-cp -r skills/firebase-development ~/.claude/skills/
-cp -r skills/terminal-title ~/.claude/skills/
-cp -r skills/using-2389-skills ~/.claude/skills/
-
-# Run integration tests manually
-# See tests/integration/ for scenarios
+/plugin install css-development@2389-research
+/plugin install firebase-development@2389-research
+/plugin install terminal-title@2389-research
+/plugin install workflows@2389-research
 ```
 
-### Generating Marketplace Site
+Users can install only the plugins they need.
+
+## Adding a New Plugin
+
+### Step 1: Create Plugin Directory Structure
+
+```bash
+mkdir -p new-plugin/.claude-plugin
+mkdir -p new-plugin/skills
+mkdir -p new-plugin/docs/plans
+mkdir -p new-plugin/docs/examples
+mkdir -p new-plugin/tests/integration
+```
+
+### Step 2: Create plugin.json
+
+Create `new-plugin/.claude-plugin/plugin.json`:
+
+```json
+{
+  "name": "new-plugin",
+  "description": "What this plugin does (one sentence, used for auto-detection)",
+  "version": "1.0.0",
+  "commands": []
+}
+```
+
+### Step 3: Create Skills
+
+Create `new-plugin/skills/SKILL.md` with frontmatter:
+
+```markdown
+---
+name: new-plugin
+description: When this skill applies (keywords for auto-detection)
+---
+
+# New Plugin
+
+## Overview
+[What this skill does]
+
+## When This Skill Applies
+[Trigger scenarios]
+
+## Workflow
+[Step-by-step process with TodoWrite integration]
+```
+
+### Step 4: Create Documentation
+
+**new-plugin/README.md** - Public-facing documentation:
+```markdown
+# New Plugin
+
+Brief description
+
+## Installation
+
+\`\`\`bash
+/plugin install new-plugin@2389-research
+\`\`\`
+
+## What This Plugin Provides
+
+List of skills
+
+## Quick Example
+
+Show key usage pattern
+```
+
+**new-plugin/CLAUDE.md** - Instructions for Claude:
+```markdown
+# New Plugin
+
+## Overview
+What this plugin does
+
+## Skills Included
+List of skills with routing logic
+
+## Patterns
+Key patterns this plugin enforces
+
+## Reference Codebases
+Links to example projects
+
+## Development Workflow
+How skills auto-detect and execute
+```
+
+### Step 5: Add to Marketplace
+
+Edit `.claude-plugin/marketplace.json` and add:
+
+```json
+{
+  "name": "new-plugin",
+  "source": "./new-plugin",
+  "description": "What this plugin does",
+  "version": "1.0.0",
+  "keywords": ["tag1", "tag2", "tag3"],
+  "strict": false
+}
+```
+
+### Step 6: Regenerate Marketplace Site
 
 ```bash
 npm run generate
 ```
 
-This creates `docs/index.html` which GitHub Pages serves.
+### Step 7: Test and Commit
 
-## Making Changes
+```bash
+# Test locally
+/plugin install /Users/harper/Public/src/2389/claude-plugins/new-plugin
 
-### Adding a New Skill
+# Commit changes
+git add new-plugin/ .claude-plugin/marketplace.json docs/index.html
+git commit -m "feat: add new-plugin
 
-1. **Create skill directory:**
-   ```bash
-   mkdir skills/new-skill
-   ```
-
-2. **Create SKILL.md with frontmatter:**
-   ```markdown
-   ---
-   name: new-skill
-   description: When this skill applies (for auto-detection)
-   ---
-
-   # New Skill
-
-   ## Overview
-   [What this skill does]
-
-   ## When This Skill Applies
-   [Trigger scenarios]
-
-   ## Workflow
-   [Step-by-step process]
-   ```
-
-3. **Test manually** with scenarios from intended use cases
-
-4. **Document in this file** under "Available Skills"
-
-5. **Add integration tests** in `tests/integration/`
-
-### Adding Sub-Skills
-
-For hierarchical skills (e.g., `css-development:validate`):
-
-1. **Create subdirectory:**
-   ```bash
-   mkdir skills/css-development/new-sub-skill
-   ```
-
-2. **Create SKILL.md** with qualified name:
-   ```markdown
-   ---
-   name: css-development:new-sub-skill
-   description: Specific sub-skill purpose
-   ---
-   ```
-
-3. **Update parent skill** routing logic in `css-development/SKILL.md`
-
-4. **Add integration tests**
-
-### Modifying Skill Patterns
-
-Patterns are centralized in main skill files (`css-development/SKILL.md`, `firebase-development/SKILL.md`):
-
-1. **Update pattern documentation** in main SKILL.md
-2. **Update sub-skills** if they reference the pattern
-3. **Update examples** in `docs/examples/`
-4. **Test with integration scenarios**
-
-See `docs/DEVELOPMENT.md` for comprehensive modification guide.
-
-### Adding External Plugins
-
-To add an MCP server or external plugin to the marketplace:
-
-1. **Edit `.claude-plugin/marketplace.json`:**
-   ```json
-   {
-     "plugins": [
-       {
-         "name": "new-plugin",
-         "description": "What this plugin does",
-         "source": {
-           "source": "url",
-           "url": "https://github.com/org/repo"
-         },
-         "version": "1.0.0",
-         "keywords": ["tag1", "tag2"],
-         "strict": true
-       }
-     ]
-   }
-   ```
-
-2. **Regenerate site:**
-   ```bash
-   npm run generate
-   ```
-
-3. **Commit and push** (GitHub Actions updates GitHub Pages)
-
-### Updating Hook Configuration
-
-Hooks are defined in `hooks/hooks.json`:
-
-```json
-{
-  "hooks": {
-    "sessionStart": {
-      "skill": "terminal-title"
-    }
-  }
-}
+[Description of what the plugin does and why it's needed]"
 ```
 
-After changing hooks, reinstall the plugin for changes to take effect.
+## Marketplace Site Generation
 
-## File Organization
+The marketplace site is auto-generated from `.claude-plugin/marketplace.json`:
 
-### Skills Structure
-
-```
-skills/
-├── css-development/
-│   ├── SKILL.md                    # Main orchestrator
-│   ├── create-component/SKILL.md   # Sub-skill
-│   ├── validate/SKILL.md           # Sub-skill
-│   └── refactor/SKILL.md           # Sub-skill
-├── firebase-development/
-│   ├── SKILL.md                    # Main orchestrator (1323 lines)
-│   ├── project-setup/SKILL.md
-│   ├── add-feature/SKILL.md
-│   ├── debug/SKILL.md
-│   └── validate/SKILL.md
-├── terminal-title/
-│   ├── SKILL.md
-│   └── scripts/set_title.sh        # Shell script for title setting
-└── using-2389-skills/
-    └── SKILL.md                    # Meta-skill
+```bash
+npm run generate
 ```
 
-### Documentation Structure
+This creates `docs/index.html` which GitHub Pages serves at https://2389-research.github.io/claude-plugins
 
-```
-docs/
-├── index.html              # Generated marketplace site
-├── style.css               # Site styling
-├── DEVELOPMENT.md          # Comprehensive developer guide
-├── plans/                  # Design and implementation docs
-│   ├── 2025-01-14-firebase-skills-design.md
-│   ├── 2025-01-14-firebase-skills-implementation.md
-│   ├── 2025-11-13-css-development-skill-design.md
-│   ├── 2025-11-13-css-development-skill-implementation.md
-│   ├── 2025-11-14-terminal-title-skill-design.md
-│   ├── 2025-11-14-terminal-title-implementation.md
-│   ├── 2025-12-03-skills-migration-design.md
-│   └── 2025-12-03-skills-migration-implementation.md
-└── examples/               # Pattern usage examples
-    ├── api-key-authentication.md
-    ├── css-development-examples.md
-    ├── emulator-workflow.md
-    ├── express-function-architecture.md
-    ├── firestore-rules-patterns.md
-    └── multi-hosting-setup.md
-```
+**When to regenerate:**
+- After adding a new plugin
+- After updating plugin descriptions or versions
+- After modifying marketplace.json
 
-### Tests Structure
+GitHub Actions automatically regenerates the site on push to main.
 
-```
-tests/
-└── integration/            # Manual test scenarios
-    ├── firebase-skill-routing.test.md
-    ├── skill-routing.test.md
-    └── terminal-title.test.md
-```
+## Shared Conventions
 
-## Key Conventions
+These conventions apply across **all plugins** in this monorepo:
 
 ### ABOUTME Comments
 
-All code files should start with a 2-line comment:
+All code files should start with a 2-line comment explaining what the file does:
 
 ```typescript
 // ABOUTME: This file handles user authentication
 // ABOUTME: It exports middleware for Express routes
 ```
 
-### Pattern References
-
-Skills reference patterns using @ syntax:
-
-```markdown
-@css-development:validate to check the result
-@firebase-development/pattern-name
-```
+Each line must start with `ABOUTME: ` for easy grepping.
 
 ### TodoWrite Integration
 
-Skills create granular TodoWrite checklists:
+Skills create granular TodoWrite checklists with each task taking 2-5 minutes:
 
-```markdown
-Create TodoWrite checklist with:
-- content: "Action to take"
-- status: "pending" | "in_progress" | "completed"
-- activeForm: "Taking action"
+```javascript
+{
+  content: "Action to take",              // Imperative form
+  status: "pending",                       // or "in_progress" or "completed"
+  activeForm: "Taking action"              // Present continuous form
+}
 ```
+
+**Task lifecycle:**
+1. Create todos for all steps at start
+2. Mark ONE task as in_progress before starting
+3. Complete the work
+4. Mark task as completed immediately after
+5. Move to next task
+
+**Never:**
+- Batch complete multiple tasks
+- Have multiple tasks in_progress simultaneously
+- Skip marking tasks completed
 
 ### File Paths
 
@@ -344,134 +312,232 @@ Always use absolute paths in documentation and skill instructions:
 ❌ styles/components.css
 ```
 
-## Testing Workflow
+### Skill Routing
 
-### Manual Testing
+Main skills (orchestrators) route to sub-skills using colon notation:
 
-1. Copy skills to `~/.claude/skills/`
-2. Run scenarios from `tests/integration/`
-3. Verify:
-   - Auto-detection works
-   - Routing chooses correct sub-skill
-   - TodoWrite checklists created
-   - Steps execute correctly
-   - Output matches expectations
+```
+main-skill → Detects intent → Invokes main-skill:sub-skill
+```
 
-### Regression Testing
+Auto-detection uses skill frontmatter `description` field for keyword matching.
 
-After changes, test all integration scenarios focusing on:
-- Auto-detection for each mode
-- Ambiguity handling
-- Pattern reference usage
-- Composition over creation
-- Dark mode by default (CSS)
+### Test-Driven Development
 
-## Installation Scripts
+All plugins follow TDD:
+1. Write the failing test
+2. Run test to confirm it fails
+3. Write minimal code to pass
+4. Run test to confirm it passes
+5. Refactor while keeping tests green
 
-### install.sh
+### Git Commit Protocol
 
-Sets executable permissions on shell scripts:
+**CRITICAL:** NEVER use `--no-verify` when committing.
+
+**Pre-commit hook failures:**
+1. Read complete error output
+2. Identify which tool failed and why
+3. Explain the fix you will apply
+4. Apply fix and re-run hooks
+5. Only commit after all hooks pass
+
+**Commit message format:**
+```
+type: brief description
+
+Detailed explanation of what changed and why.
+
+Optional references to issues, docs, or related work.
+```
+
+Types: `feat`, `fix`, `refactor`, `docs`, `test`, `build`, `chore`
+
+### Code Quality Standards
+
+- **Simple over clever**: Prefer maintainable solutions
+- **Match existing style**: Consistency within files matters most
+- **Preserve comments**: Unless provably false
+- **Evergreen naming**: No "new" or "improved" in names
+- **Real data only**: No mocking in tests or implementations
+- **Fix, don't workaround**: Address root causes
+
+## Development Commands
+
+### Testing Skills Locally
+
+Copy to Claude skills directory:
 
 ```bash
-./install.sh
+cp -r plugin-name/skills ~/.claude/skills/
 ```
 
-Run after cloning or when adding new scripts.
+Run integration test scenarios from `plugin-name/tests/integration/`.
 
-### Firebase Installation
+### Installing Plugin Locally
 
-See `INSTALL_FIREBASE.md` for comprehensive Firebase setup guide covering:
-- Firebase CLI installation
-- Emulator setup
-- Project initialization
-- Authentication configuration
-
-## Common Tasks
-
-### Updating Skill Descriptions
-
-Skill descriptions control auto-detection. Update frontmatter in SKILL.md:
-
-```markdown
----
-name: skill-name
-description: Keywords that trigger auto-detection (CSS, component, styling, dark mode)
----
+```bash
+/plugin install /Users/harper/Public/src/2389/claude-plugins/plugin-name
 ```
 
-### Adding Code Examples
+### Uninstalling Plugin
 
-Provide complete, runnable examples in skills:
+```bash
+/plugin uninstall plugin-name
+```
 
-```typescript
-// ✅ Good - Complete code
-if (input === '') {
-  throw new Error('Input cannot be empty');
+### Viewing Installed Plugins
+
+```bash
+/plugin list
+```
+
+## File Organization
+
+### Plugin Directory Layout
+
+```
+plugin-name/
+├── .claude-plugin/
+│   └── plugin.json           # Required: Plugin configuration
+├── skills/
+│   ├── SKILL.md              # Main skill (orchestrator)
+│   ├── sub-skill-1/
+│   │   └── SKILL.md          # Sub-skill
+│   └── sub-skill-2/
+│       └── SKILL.md          # Sub-skill
+├── docs/
+│   ├── plans/                # Design and implementation docs
+│   └── examples/             # Pattern usage examples
+├── tests/
+│   └── integration/          # Manual test scenarios
+├── hooks/                    # Optional: Hook configuration
+│   └── hooks.json
+├── CLAUDE.md                 # Required: Instructions for Claude
+└── README.md                 # Required: Public documentation
+```
+
+### Root Directory Layout
+
+```
+claude-plugins/
+├── .claude-plugin/
+│   └── marketplace.json      # Catalog of all plugins
+├── [plugin-directories]/     # One per plugin
+├── docs/
+│   ├── index.html           # Generated marketplace site
+│   ├── style.css            # Site styling
+│   └── DEVELOPMENT.md       # Comprehensive dev guide
+├── scripts/
+│   └── generate-site.js     # Site generator
+├── CLAUDE.md                # This file (monorepo instructions)
+├── README.md                # Marketplace overview
+└── package.json             # For npm run generate
+```
+
+## External MCP Servers
+
+The marketplace also lists external MCP servers maintained in separate repositories:
+
+- **agent-drugs**: https://github.com/2389-research/agent-drugs
+- **socialmedia**: https://github.com/2389-research/mcp-socialmedia
+- **journal**: https://github.com/2389-research/journal-mcp
+
+These are referenced by URL in marketplace.json:
+
+```json
+{
+  "name": "socialmedia",
+  "source": {
+    "source": "url",
+    "url": "https://github.com/2389-research/mcp-socialmedia"
+  },
+  "description": "Social media functionality for AI agents",
+  "version": "1.0.0",
+  "keywords": ["social", "media", "communication"],
+  "strict": true
 }
-
-// ❌ Bad - Just description
-"Add validation for empty input"
 ```
-
-### Referencing Projects
-
-Skills reference actual production codebases:
-
-- **oneonone**: Express API with custom auth
-- **bot-socialmedia**: Domain-grouped functions
-- **meme-rodeo**: Individual function files
-
-Keep skills synchronized with these reference projects.
 
 ## Troubleshooting
 
-### Skill Not Loading
+### Plugin Not Loading
 
-1. Check `.claude-plugin/plugin.json` exists
+1. Check `.claude-plugin/plugin.json` exists in plugin directory
 2. Verify skill frontmatter has name and description
-3. Check skill is in `skills/` directory
-4. Try reinstalling plugin
+3. Check skill is in `skills/` subdirectory of plugin
+4. Try reinstalling: `/plugin uninstall name` then `/plugin install name@2389-research`
 
 ### Hooks Not Firing
 
-1. Check `hooks/hooks.json` syntax
-2. Verify hook references valid skill name
+1. Check `hooks/hooks.json` syntax is valid JSON
+2. Verify hook references valid skill name (check skill frontmatter)
 3. Reinstall plugin after hook changes
 4. Restart Claude Code session
 
-### Routing to Wrong Sub-Skill
+### Marketplace Site Not Updating
 
-1. Review context detection in main SKILL.md
-2. Check sub-skill descriptions
+1. Run `npm run generate` to regenerate
+2. Check `.claude-plugin/marketplace.json` is valid JSON
+3. Verify plugin directories exist at paths specified in marketplace.json
+4. Check GitHub Actions logs if pushing to GitHub
+
+### Skill Routing Issues
+
+1. Review context detection in main skill SKILL.md
+2. Check sub-skill frontmatter descriptions
 3. Add more specific detection rules
-4. Make ambiguous cases prompt user
+4. Make ambiguous cases prompt user for clarification
 
 ## Resources
 
 - **Claude Code Documentation:** https://docs.claude.com/en/docs/claude-code
 - **Skills Guide:** https://docs.claude.com/en/docs/claude-code/skills
+- **Plugins Guide:** https://docs.claude.com/en/docs/claude-code/plugins
 - **MCP Documentation:** https://docs.claude.com/en/docs/claude-code/mcp
-- **Tailwind CSS:** https://tailwindcss.com/docs
-- **Firebase:** https://firebase.google.com/docs
-- **Firebase Emulator Suite:** https://firebase.google.com/docs/emulator-suite
 
 ## Repository Links
 
 - **GitHub:** https://github.com/2389-research/claude-plugins
 - **Marketplace Site:** https://2389-research.github.io/claude-plugins
-- **Related Repos:**
-  - socialmedia MCP: https://github.com/2389-research/mcp-socialmedia
-  - journal MCP: https://github.com/2389-research/journal-mcp
-  - agent-drugs: https://github.com/2389-research/agent-drugs
+- **Development Guide:** [docs/DEVELOPMENT.md](/Users/harper/Public/src/2389/claude-plugins/docs/DEVELOPMENT.md)
+
+## Contributing
+
+### Before Making Changes
+
+1. Read plugin-specific CLAUDE.md in the plugin you're modifying
+2. Review `docs/DEVELOPMENT.md` for comprehensive development guide
+3. Test with integration scenarios from `tests/integration/`
+4. Update documentation (README, CLAUDE.md, examples, tests)
+5. Ensure skill descriptions enable auto-detection
+
+### Submitting Changes
+
+1. Create feature branch
+2. Make changes following shared conventions
+3. Test manually with integration scenarios
+4. Update relevant documentation
+5. Commit with descriptive message (see Git Commit Protocol above)
+6. Submit pull request
+
+### Documentation Standards
+
+- **SKILL.md files:** Markdown with YAML frontmatter
+- **Code examples:** Complete and runnable (not just descriptions)
+- **File paths:** Absolute and exact
+- **Commands:** Include expected output
+- **Checklists:** TodoWrite-compatible format
 
 ## Development Philosophy
 
 ### Quality Standards
 
-- TDD approach for all features
-- Pre-commit hooks must pass
+- TDD approach for all features (write test first)
+- Pre-commit hooks must pass (never use --no-verify)
 - Real data/APIs only (no mocking)
 - Comprehensive error handling
+- Fix root causes, not symptoms
 
 ### Code Style
 
@@ -479,46 +545,22 @@ Keep skills synchronized with these reference projects.
 - Match existing code style within files
 - Preserve comments unless provably false
 - Evergreen naming (no "new" or "improved")
+- Complete code examples in documentation
 
 ### Skill Design Principles
 
-- **Granular checklists** - Each step 2-5 minutes
+- **Granular checklists** - Each TodoWrite task 2-5 minutes
 - **Complete examples** - Show exact code, not descriptions
-- **Exact file paths** - Use absolute paths
+- **Exact file paths** - Use absolute paths always
 - **Pattern centralization** - Document once, reference everywhere
 - **Test coverage** - Integration tests for all workflows
-
-## Contributing
-
-### Before Making Changes
-
-1. Review `docs/DEVELOPMENT.md` for comprehensive guide
-2. Test with integration scenarios
-3. Update documentation (README, examples, tests)
-4. Verify patterns are consistently documented
-5. Ensure skills descriptions enable auto-detection
-
-### Submitting Changes
-
-1. Create feature branch
-2. Make changes following conventions
-3. Test manually with all integration scenarios
-4. Update relevant documentation
-5. Commit with descriptive message
-6. Submit pull request
-
-### Documentation Standards
-
-- **SKILL.md files:** Markdown with YAML frontmatter
-- **Code examples:** Complete and runnable
-- **File paths:** Absolute and exact
-- **Commands:** Include expected output
-- **Checklists:** TodoWrite-compatible format
+- **Auto-detection** - Skills trigger on relevant keywords
 
 ## Notes
 
 - This is an **internal marketplace** for 2389.ai team
-- Skills are **embedded directly** in this repository
+- Plugins are **independently installable** from this monorepo
+- Each plugin is **self-contained** with its own docs/tests
 - MCP servers are **external**, referenced by URL
-- The "2389" plugin name refers to the **skills collection**
-- Marketplace site is **auto-generated** on push to main
+- Marketplace site is **auto-generated** from marketplace.json
+- GitHub Actions **regenerates site** on push to main
