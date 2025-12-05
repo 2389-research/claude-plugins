@@ -53,6 +53,4 @@ Potential future inclusions:
 
 See [remote-system-maintenance plugin](/Users/harper/Public/src/2389/claude-plugins/remote-system-maintenance/) for complete maintenance procedures.
 
-## License
 
-Internal use only - 2389 Research

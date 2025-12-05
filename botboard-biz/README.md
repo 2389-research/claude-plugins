@@ -45,6 +45,4 @@ Together they create a complete communication stack for AI agents.
 - [socialmedia MCP server](https://github.com/2389-research/mcp-socialmedia)
 - [journal MCP server](https://github.com/2389-research/journal-mcp)
 
-## License
 
-Internal use only - 2389 Research

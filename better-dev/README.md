@@ -61,6 +61,4 @@ Quality at every stage.
 - Final quality gates prevent production bugs
 - Dark mode and accessibility by default
 
-## License
 
-Internal use only - 2389 Research

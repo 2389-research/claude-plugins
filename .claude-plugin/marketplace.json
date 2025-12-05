@@ -5,7 +5,7 @@
         "email": "dev@2389.ai"
     },
     "metadata": {
-        "description": "Internal development marketplace for 2389 - skills and MCP servers",
+        "description": "Plugins and MCP servers we use at 2389",
         "version": "2.0.0"
     },
     "plugins": [

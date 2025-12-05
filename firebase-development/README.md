@@ -69,6 +69,4 @@ For enhanced integration with 2389 conventions:
   - [Firestore Rules Patterns](docs/examples/firestore-rules-patterns.md)
   - [Multi-Hosting Setup](docs/examples/multi-hosting-setup.md)
 
-## License
 
-Internal use only - 2389 Research

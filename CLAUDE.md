@@ -1,8 +1,8 @@
-# 2389 Research Internal Marketplace
+# 2389 Research Plugins
 
 ## Repository Purpose
 
-This repository is a **monorepo marketplace** containing multiple independent Claude Code plugins for 2389.ai internal development workflows.
+This repository is a **monorepo marketplace** containing multiple independent Claude Code plugins we use at 2389.
 
 **Key characteristics:**
 - Each plugin is independently installable
@@ -10,7 +10,7 @@ This repository is a **monorepo marketplace** containing multiple independent Cl
 - Centralized marketplace catalog in `.claude-plugin/marketplace.json`
 - Auto-generated marketplace site at https://2389-research.github.io/claude-plugins
 
-This is an **internal development marketplace** for 2389.ai tooling, not a public marketplace.
+These are the plugins and MCP servers we use at 2389.
 
 ## Monorepo Structure
 

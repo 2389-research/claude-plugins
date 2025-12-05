@@ -62,6 +62,4 @@ This plugin establishes task tracking patterns used across all 2389 plugins:
 - [Design Document](docs/2025-11-14-terminal-title-skill-design.md)
 - [Implementation Plan](docs/2025-11-14-terminal-title-implementation.md)
 
-## License
 
-Internal use only - 2389 Research

@@ -1,6 +1,6 @@
-# 2389 Research Internal Marketplace
+# 2389 Research Plugins
 
-Internal development marketplace for 2389 - Claude Code plugins and skills for our team's workflows.
+Claude Code plugins and MCP servers we use at 2389.
 
 ## Installation
 

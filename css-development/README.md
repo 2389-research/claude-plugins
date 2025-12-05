@@ -60,6 +60,4 @@ For enhanced integration with 2389 conventions:
 - [Implementation Plan](docs/plans/2025-11-13-css-development-skill-implementation.md)
 - [Examples](docs/examples/css-development-examples.md)
 
-## License
 
-Internal use only - 2389 Research
