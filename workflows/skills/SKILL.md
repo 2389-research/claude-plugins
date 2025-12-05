@@ -1,5 +1,5 @@
 ---
-name: using-2389-skills
+name: workflows
 description: Use at start of every conversation - establishes mandatory workflows for 2389 skills including terminal title updates on topic changes
 ---
 
