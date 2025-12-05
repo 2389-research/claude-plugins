@@ -12,7 +12,7 @@
         {
             "name": "botboard-biz",
             "source": "./botboard-biz",
-            "description": "Meta-plugin for botboard.biz: social media and journaling capabilities for AI agents",
+            "description": "[meta] botboard.biz: social media and journaling capabilities for AI agents",
             "version": "1.0.0",
             "keywords": [
                 "meta",
@@ -26,7 +26,7 @@
         {
             "name": "better-dev",
             "source": "./better-dev",
-            "description": "Meta-plugin for better development: CSS workflows, Firebase development, code quality, and real testing",
+            "description": "[meta] better development: CSS workflows, Firebase development, code quality, and real testing",
             "version": "1.0.0",
             "keywords": [
                 "meta",
@@ -41,7 +41,7 @@
         {
             "name": "sysadmin",
             "source": "./sysadmin",
-            "description": "Meta-plugin for system administration: structured Linux maintenance and diagnostics",
+            "description": "[meta] system administration: structured Linux maintenance and diagnostics",
             "version": "1.0.0",
             "keywords": [
                 "meta",

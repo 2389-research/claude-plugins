@@ -1,11 +1,11 @@
-# Better Dev Meta Plugin
+# [meta] Better Dev
 
 Meta-plugin that bundles essential development practices for building quality web applications.
 
 ## Installation
 
 ```bash
-/plugin install better-dev@2389-research
+/plugin install meta-better-dev@2389-research
 ```
 
 This will automatically install:

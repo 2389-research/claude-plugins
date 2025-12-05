@@ -1,11 +1,11 @@
-# Sysadmin Meta Plugin
+# [meta] Sysadmin
 
 Meta-plugin for system administration workflows on Linux systems.
 
 ## Installation
 
 ```bash
-/plugin install sysadmin@2389-research
+/plugin install meta-sysadmin@2389-research
 ```
 
 This will automatically install:

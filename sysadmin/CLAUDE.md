@@ -1,4 +1,4 @@
-# Sysadmin Meta Plugin
+# [meta] Sysadmin
 
 ## Overview
 

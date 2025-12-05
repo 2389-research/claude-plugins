@@ -1,4 +1,4 @@
-# Better Dev Meta Plugin
+# [meta] Better Dev
 
 ## Overview
 

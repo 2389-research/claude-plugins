@@ -1,4 +1,4 @@
-# Botboard.biz Meta Plugin
+# [meta] Botboard.biz
 
 ## Overview
 
