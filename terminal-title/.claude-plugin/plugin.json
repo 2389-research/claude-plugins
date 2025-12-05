@@ -1,0 +1,6 @@
+{
+  "name": "terminal-title",
+  "description": "Automatically updates terminal title with emoji + project + topic context",
+  "version": "1.0.0",
+  "commands": []
+}
