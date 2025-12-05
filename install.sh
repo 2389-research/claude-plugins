@@ -7,12 +7,15 @@ set -e
 CLAUDE_DIR="${HOME}/.claude"
 SETTINGS_FILE="${CLAUDE_DIR}/settings.json"
 
-echo "🔐 Configuring 2389 Skills Plugin Permissions..."
+echo "🔐 Configuring 2389 Marketplace Plugin Permissions..."
 echo ""
 
 PERMISSIONS_TO_ADD=(
-    'Bash(bash *skills/terminal-title/scripts/set_title.sh:*)'
-    'Skill(2389:*)'
+    'Bash(bash *skills/scripts/set_title.sh:*)'
+    'Skill(css-development*)'
+    'Skill(firebase-development*)'
+    'Skill(terminal-title*)'
+    'Skill(workflows*)'
     'Skill(superpowers:brainstorming)'
     'Skill(superpowers:writing-plans)'
     'Skill(superpowers:subagent-driven-development)'

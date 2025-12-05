@@ -6,11 +6,11 @@ description: Use at start of every conversation - establishes mandatory workflow
 <!-- ABOUTME: Mandatory workflow for 2389 skills - ensures terminal title updates on topic changes -->
 <!-- ABOUTME: Loaded automatically to remind Claude about 2389-specific patterns and practices -->
 
-# Using 2389 Skills
+# Workflows
 
 ## Overview
 
-This skill establishes mandatory workflows when working in projects with 2389 skills installed. It ensures Claude actively monitors for situations that require skill invocation.
+This skill establishes mandatory workflows when working in projects with 2389 plugins installed. It ensures Claude actively monitors for situations that require skill invocation.
 
 ## MANDATORY: Terminal Title Updates
 
@@ -21,7 +21,7 @@ This skill establishes mandatory workflows when working in projects with 2389 sk
 **BEFORE your first response to the user in any session:**
 
 1. ✅ Check if terminal title was already set by command hook (it runs automatically)
-2. ✅ **IMMEDIATELY invoke `2389:terminal-title` skill** to refine with intelligent context
+2. ✅ **IMMEDIATELY invoke `terminal-title` skill** to refine with intelligent context
 3. ✅ Use Claude's understanding to detect proper project name (not just file parsing)
 4. ✅ Set topic to "Claude Code" for session start
 5. ✅ Then respond to user
@@ -37,7 +37,7 @@ During conversation, before responding to ANY user message, Claude must ask:
 
 **"Has the topic materially shifted from the previous exchange?"**
 
-**If YES → Invoke `2389:terminal-title` skill immediately**
+**If YES → Invoke `terminal-title` skill immediately**
 
 **Topic shift indicators:**
 - User explicitly says "let's talk about X" or "can you help with Y"
@@ -55,7 +55,7 @@ During conversation, before responding to ANY user message, Claude must ask:
 ```
 1. User sends message
 2. Claude checks: "Is this a new topic?"
-3. If yes: Invoke Skill(2389:terminal-title) with new topic
+3. If yes: Invoke Skill(terminal-title) with new topic
 4. Then respond to user's message
 ```
 
@@ -74,26 +74,26 @@ Claude: "I'll help you debug the authentication flow. Let me start by..."
 
 **Team collaboration:** When screensharing, clear titles help teammates understand context instantly.
 
-## Available 2389 Skills
+## Available Skills
 
-Quick reference for other skills in this plugin:
+Quick reference for other skills in the marketplace:
 
 ### CSS Development
-- `2389:css-development` - Routes to CSS workflows
-- `2389:css-development:create-component` - Create new components
-- `2389:css-development:validate` - Review CSS
-- `2389:css-development:refactor` - Transform patterns
+- `css-development` - Routes to CSS workflows
+- `css-development:create-component` - Create new components
+- `css-development:validate` - Review CSS
+- `css-development:refactor` - Transform patterns
 
 ### Firebase Development
-- `2389:firebase-development` - Routes to Firebase workflows
-- `2389:firebase-development:project-setup` - Initialize projects
-- `2389:firebase-development:add-feature` - Add features
-- `2389:firebase-development:debug` - Troubleshoot issues
-- `2389:firebase-development:validate` - Review security
+- `firebase-development` - Routes to Firebase workflows
+- `firebase-development:project-setup` - Initialize projects
+- `firebase-development:add-feature` - Add features
+- `firebase-development:debug` - Troubleshoot issues
+- `firebase-development:validate` - Review security
 
 ### Terminal Title
-- `2389:terminal-title` - Update terminal window title (MANDATORY on topic changes)
+- `terminal-title` - Update terminal window title (MANDATORY on topic changes)
 
 ## Summary
 
-**Single most important rule:** When topic changes, invoke `2389:terminal-title` skill. No exceptions.
+**Single most important rule:** When topic changes, invoke `terminal-title` skill. No exceptions.
