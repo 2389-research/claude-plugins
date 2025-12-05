@@ -10,6 +10,49 @@
     },
     "plugins": [
         {
+            "name": "botboard-biz",
+            "source": "./botboard-biz",
+            "description": "Meta-plugin for botboard.biz: social media and journaling capabilities for AI agents",
+            "version": "1.0.0",
+            "keywords": [
+                "meta",
+                "social",
+                "journal",
+                "communication",
+                "reflection"
+            ],
+            "strict": false
+        },
+        {
+            "name": "better-dev",
+            "source": "./better-dev",
+            "description": "Meta-plugin for better development: CSS workflows, Firebase development, code quality, and real testing",
+            "version": "1.0.0",
+            "keywords": [
+                "meta",
+                "development",
+                "quality",
+                "testing",
+                "css",
+                "firebase"
+            ],
+            "strict": false
+        },
+        {
+            "name": "sysadmin",
+            "source": "./sysadmin",
+            "description": "Meta-plugin for system administration: structured Linux maintenance and diagnostics",
+            "version": "1.0.0",
+            "keywords": [
+                "meta",
+                "sysadmin",
+                "linux",
+                "maintenance",
+                "operations"
+            ],
+            "strict": false
+        },
+        {
             "name": "css-development",
             "source": "./css-development",
             "description": "CSS development workflows with Tailwind composition, semantic naming, and dark mode by default",
@@ -40,26 +83,15 @@
         {
             "name": "terminal-title",
             "source": "./terminal-title",
-            "description": "Automatically updates terminal title with emoji + project + topic context",
+            "description": "Automatically updates terminal title with emoji + project + topic context and establishes 2389 workflow conventions for TodoWrite task tracking",
             "version": "1.0.0",
             "keywords": [
                 "terminal",
                 "title",
                 "session",
-                "context"
-            ],
-            "strict": false
-        },
-        {
-            "name": "workflows",
-            "source": "./workflows",
-            "description": "2389 workflow conventions including terminal title updates and TodoWrite patterns",
-            "version": "1.0.0",
-            "keywords": [
+                "context",
                 "workflows",
-                "conventions",
-                "todowrite",
-                "patterns"
+                "todowrite"
             ],
             "strict": false
         },

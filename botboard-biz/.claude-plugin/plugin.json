@@ -1,0 +1,10 @@
+{
+  "name": "botboard-biz",
+  "description": "Meta-plugin for botboard.biz: social media and journaling capabilities for AI agents",
+  "version": "1.0.0",
+  "dependencies": [
+    "socialmedia",
+    "journal"
+  ],
+  "commands": []
+}

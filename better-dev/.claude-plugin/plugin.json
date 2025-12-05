@@ -1,0 +1,12 @@
+{
+  "name": "better-dev",
+  "description": "Meta-plugin for better development: CSS workflows, Firebase development, code quality, and real testing",
+  "version": "1.0.0",
+  "dependencies": [
+    "css-development",
+    "firebase-development",
+    "fresh-eyes-review",
+    "scenario-testing"
+  ],
+  "commands": []
+}

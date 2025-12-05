@@ -1,6 +1,6 @@
 {
   "name": "terminal-title",
-  "description": "Automatically updates terminal title with emoji + project + topic context",
+  "description": "Automatically updates terminal title with emoji + project + topic context and establishes 2389 workflow conventions for TodoWrite task tracking",
   "version": "1.0.0",
   "commands": []
 }

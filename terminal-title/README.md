@@ -1,6 +1,6 @@
 # Terminal Title Plugin
 
-Automatically updates terminal title with emoji + project + topic context.
+Automatically updates terminal title with emoji + project + topic context. Also establishes 2389 workflow conventions for TodoWrite task tracking.
 
 ## Installation
 
@@ -11,11 +11,17 @@ Automatically updates terminal title with emoji + project + topic context.
 
 ## What This Plugin Provides
 
-Automatic terminal title management:
+**Automatic terminal title management:**
 
 - **Auto-invokes at session start**: Sets initial title based on project context
 - **Updates on topic changes**: Reflects current work in terminal title
 - **Emoji indicators**: Visual cues for quick context switching
+
+**2389 workflow conventions:**
+
+- **TodoWrite patterns**: Granular 2-5 minute task tracking
+- **Task lifecycle management**: One task in-progress at a time
+- **Shared conventions**: Used across all 2389 plugins
 
 ## How It Works
 
@@ -32,12 +38,24 @@ The plugin includes a session start hook that automatically invokes the terminal
 🔥 firebase-app > authentication setup
 ```
 
-## Optional: Install Workflows Plugin
+## TodoWrite Conventions
 
-For enhanced integration with 2389 conventions:
-```bash
-/plugin install workflows@2389-research
+This plugin establishes task tracking patterns used across all 2389 plugins:
+
+```javascript
+{
+  content: "Write the failing test",      // Imperative form
+  status: "pending",                       // or "in_progress" or "completed"
+  activeForm: "Writing the failing test"   // Present continuous form
+}
 ```
+
+**Task lifecycle:**
+1. Create todos for all steps (2-5 minutes each)
+2. Mark ONE task as in_progress
+3. Complete the task
+4. Mark as completed immediately
+5. Move to next task
 
 ## Documentation
 

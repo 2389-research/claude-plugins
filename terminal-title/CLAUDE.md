@@ -2,7 +2,7 @@
 
 ## Overview
 
-This plugin automatically updates the terminal title with emoji + project + topic context to provide visual cues when switching between terminal windows.
+This plugin automatically updates the terminal title with emoji + project + topic context to provide visual cues when switching between terminal windows. It also establishes 2389 workflow conventions for TodoWrite task tracking.
 
 ## Skills Included
 
@@ -13,6 +13,7 @@ Auto-invoked skill that:
 2. Infers topic from recent files or conversation context
 3. Selects appropriate emoji based on project type
 4. Updates terminal title via shell script
+5. Enforces topic change detection throughout conversation
 
 ## Hook Configuration
 
@@ -72,6 +73,30 @@ echo -ne "\033]0;$1\007"
 3. **Title update**: Calls shell script with formatted title
 4. **Runtime updates**: Responds to topic changes during session
 
+## TodoWrite Conventions
+
+Tasks should be granular (2-5 minutes each):
+
+```javascript
+{
+  content: "Write the failing test",      // Imperative form
+  status: "pending",                       // or "in_progress" or "completed"
+  activeForm: "Writing the failing test"   // Present continuous form
+}
+```
+
+**Task lifecycle:**
+1. Create todos for all steps
+2. Mark ONE task as in_progress
+3. Complete the task
+4. Mark as completed
+5. Move to next task
+
+**Never:**
+- Batch complete multiple tasks
+- Have multiple tasks in_progress
+- Skip marking tasks completed
+
 ## Testing
 
 Tests are located in `tests/integration/`:
@@ -82,8 +107,12 @@ Tests are located in `tests/integration/`:
 - [Design Document](docs/2025-11-14-terminal-title-skill-design.md)
 - [Implementation Plan](docs/2025-11-14-terminal-title-implementation.md)
 
-## Integration with Workflows Plugin
+## Integration with Other Plugins
 
-The workflows plugin provides standards for terminal title format and update patterns.
+This plugin establishes conventions used across all 2389 plugins:
 
-To install: `/plugin install workflows@2389-research`
+- **css-development**: Uses TodoWrite conventions for task tracking
+- **firebase-development**: Uses TodoWrite conventions for task tracking
+- **building-multiagent-systems**: Uses TodoWrite for implementation checklists
+- **fresh-eyes-review**: Uses TodoWrite for review checklists
+- **scenario-testing**: Uses TodoWrite for test scenario workflows
