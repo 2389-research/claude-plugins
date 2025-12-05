@@ -49,7 +49,7 @@ This skill runs a bash script to update the terminal title. To prevent Claude fr
 {
   "permissions": {
     "allow": [
-      "Bash(bash *skills/terminal-title/scripts/set_title.sh:*)"
+      "Bash(bash *skills/scripts/set_title.sh:*)"
     ]
   }
 }
@@ -177,7 +177,7 @@ Title updated silently. Continue responding to user without mentioning the title
 **Execution:**
 1. Project: "Skills Repository" (Claude's knowledge)
 2. Topic: "Claude Code" (session start default)
-3. Command: `bash /Users/dylanr/work/2389/skills/skills/terminal-title/scripts/set_title.sh "Skills Repository" "Claude Code"`
+3. Command: `bash /Users/dylanr/work/2389/claude-plugins/terminal-title/skills/scripts/set_title.sh "Skills Repository" "Claude Code"`
 
 **Result:** Terminal title shows `💼 Skills Repository - Claude Code` (script reads emoji from environment)
 
