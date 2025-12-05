@@ -1,97 +1,75 @@
-# 2389 Internal Development Marketplace
+# 2389 Research Internal Marketplace
 
-Internal development marketplace for 2389.ai tooling - includes the 2389 skills plugin and curated MCP servers.
+Internal development marketplace for 2389 - Claude Code plugins and skills for our team's workflows.
 
-## Quick Start
+## Installation
 
-### Installing from Marketplace (Standard)
+Add the marketplace:
 
 ```bash
-# Add the marketplace
 /plugin marketplace add 2389-research/claude-plugins
-
-# Install the 2389 skills plugin
-/plugin install 2389
 ```
 
-### Installing MCP Servers
+Install plugins individually:
 
 ```bash
-# Install external MCP servers from the marketplace
-/plugin install socialmedia
-/plugin install journal
-/plugin install agent-drugs
+/plugin install css-development@2389-research
+/plugin install firebase-development@2389-research
+/plugin install terminal-title@2389-research
+/plugin install workflows@2389-research
 ```
 
-## Local Development
+## Available Plugins
 
-When developing skills locally, there's a gotcha: the marketplace.json points to the GitHub URL, so `/plugin install 2389` fetches from remote - not your local changes.
+| Plugin | Description | Documentation |
+|--------|-------------|---------------|
+| [css-development](css-development/) | CSS development workflows with Tailwind composition, semantic naming, and dark mode by default | [README](css-development/README.md) |
+| [firebase-development](firebase-development/) | Firebase project workflows including setup, features, debugging, and validation | [README](firebase-development/README.md) |
+| [terminal-title](terminal-title/) | Automatically updates terminal title with emoji + project + topic context | [README](terminal-title/README.md) |
+| [workflows](workflows/) | 2389 workflow conventions including terminal title updates and TodoWrite patterns | [README](workflows/README.md) |
 
-**The workaround:** Symlink the plugin cache to your local repo.
+## External MCP Servers
 
-### Setup for Local Development
+This marketplace also lists external MCP servers:
 
-```bash
-# 1. Clone the repo (if you haven't already)
-git clone https://github.com/2389-research/claude-plugins.git ~/work/2389/claude-plugins
-cd ~/work/2389/claude-plugins
+- **agent-drugs** - Digital drugs that modify AI behavior through prompt injection
+- **socialmedia** - Social media functionality for AI agents
+- **journal** - Private journaling capability for Claude
 
-# 2. Add the marketplace (pointing to your local clone)
-/plugin marketplace add ~/work/2389/claude-plugins
+## Marketplace Site
 
-# 3. Install the plugin (this fetches from GitHub, not local)
-/plugin install 2389
+Browse the marketplace: [https://2389-research.github.io/claude-plugins](https://2389-research.github.io/claude-plugins)
 
-# 4. Replace the cache with a symlink to your local repo
-rm -rf ~/.claude/plugins/cache/2389
-ln -s ~/work/2389/claude-plugins ~/.claude/plugins/cache/2389
+## Repository Structure
 
-# 5. Set up permissions
-./install.sh
+This is a monorepo containing multiple independent plugins. Each plugin:
 
-# 6. Restart Claude Code
-```
+- Lives in its own directory (`css-development/`, `firebase-development/`, etc.)
+- Has its own `.claude-plugin/plugin.json` configuration
+- Contains its own skills, docs, and tests
+- Can be installed independently
 
-### Important Notes
+See [CLAUDE.md](CLAUDE.md) for developer documentation on the monorepo structure and conventions.
 
-- **Don't run `/plugin update 2389`** - it will blow away your symlink and re-fetch from GitHub
-- Changes to skills take effect after restarting Claude Code
-- The symlink makes Claude Code read directly from your working directory
+## Contributing
 
-### Verifying It Works
+### Adding a New Plugin
 
-After setup, check that skills are loading:
-```
-/skills
-```
+1. Create plugin directory: `mkdir -p new-plugin/.claude-plugin`
+2. Write `new-plugin/.claude-plugin/plugin.json`
+3. Add skills to `new-plugin/skills/`
+4. Create `new-plugin/README.md` and `new-plugin/CLAUDE.md`
+5. Update `.claude-plugin/marketplace.json` with new plugin entry
+6. Regenerate marketplace site: `npm run generate`
 
-You should see `2389:css-development`, `2389:firebase-development`, `2389:terminal-title`, and `2389:using-2389-skills` in the list.
-
-## What's Included
-
-### 2389 Skills Plugin (Local)
-
-- **css-development** - CSS development workflows with Tailwind composition, dark mode, semantic naming
-- **firebase-development** - Firebase project setup, feature development, debugging, validation
-- **terminal-title** - Automatic terminal title updates with emoji + project + topic context
-- **using-2389-skills** - Meta-skill establishing mandatory workflows for 2389 skills
-
-### External MCP Servers
-
-- **socialmedia** - Team communication and activity feed
-- **journal** - Private journaling for notes and reflections
-- **agent-drugs** - Enhanced capabilities and utilities
-
-## Browse Plugins
-
-Visit [https://2389-research.github.io/claude-plugins](https://2389-research.github.io/claude-plugins) to browse all available plugins.
-
-## Documentation
-
-- **CLAUDE.md** - Repository structure, architecture, conventions, troubleshooting
-- **docs/DEVELOPMENT.md** - Detailed skills development guide with examples and patterns
-- **tests/integration/** - Manual test scenarios for skill routing
+See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for comprehensive development guide.
 
 ## License
 
-MIT
+Internal use only - 2389 Research
+
+## Resources
+
+- **Claude Code Documentation:** https://code.claude.com/docs
+- **Skills Guide:** https://code.claude.com/docs/en/skills
+- **Plugin Development:** https://code.claude.com/docs/en/plugins
