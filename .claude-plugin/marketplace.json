@@ -10,20 +10,56 @@
     },
     "plugins": [
         {
-            "name": "2389",
-            "source": {
-                "source": "url",
-                "url": "https://github.com/2389-research/claude-plugins.git"
-            },
-            "description": "2389 skill collection: CSS development, Firebase, terminal-title, and core workflows",
+            "name": "css-development",
+            "source": "./css-development",
+            "description": "CSS development workflows with Tailwind composition, semantic naming, and dark mode by default",
             "version": "1.0.0",
             "keywords": [
-                "skills",
                 "css",
+                "tailwind",
+                "styling",
+                "components",
+                "dark-mode"
+            ],
+            "strict": false
+        },
+        {
+            "name": "firebase-development",
+            "source": "./firebase-development",
+            "description": "Firebase project workflows including setup, features, debugging, and validation",
+            "version": "1.0.0",
+            "keywords": [
                 "firebase",
+                "firestore",
+                "cloud-functions",
+                "hosting",
+                "emulator"
+            ],
+            "strict": false
+        },
+        {
+            "name": "terminal-title",
+            "source": "./terminal-title",
+            "description": "Automatically updates terminal title with emoji + project + topic context",
+            "version": "1.0.0",
+            "keywords": [
                 "terminal",
+                "title",
+                "session",
+                "context"
+            ],
+            "strict": false
+        },
+        {
+            "name": "workflows",
+            "source": "./workflows",
+            "description": "2389 workflow conventions including terminal title updates and TodoWrite patterns",
+            "version": "1.0.0",
+            "keywords": [
                 "workflows",
-                "development"
+                "conventions",
+                "todowrite",
+                "patterns"
             ],
             "strict": false
         },
