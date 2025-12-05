@@ -64,6 +64,65 @@
             "strict": false
         },
         {
+            "name": "building-multiagent-systems",
+            "source": "./building-multiagent-systems",
+            "description": "Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination",
+            "version": "1.0.0",
+            "keywords": [
+                "multi-agent",
+                "orchestrator",
+                "coordination",
+                "agents",
+                "architecture",
+                "patterns"
+            ],
+            "strict": false
+        },
+        {
+            "name": "fresh-eyes-review",
+            "source": "./fresh-eyes-review",
+            "description": "Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests",
+            "version": "1.0.0",
+            "keywords": [
+                "review",
+                "quality",
+                "security",
+                "commit",
+                "pr",
+                "bugs"
+            ],
+            "strict": false
+        },
+        {
+            "name": "remote-system-maintenance",
+            "source": "./remote-system-maintenance",
+            "description": "Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists",
+            "version": "1.0.0",
+            "keywords": [
+                "linux",
+                "ubuntu",
+                "debian",
+                "maintenance",
+                "diagnostics",
+                "cleanup"
+            ],
+            "strict": false
+        },
+        {
+            "name": "scenario-testing",
+            "source": "./scenario-testing",
+            "description": "End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth",
+            "version": "1.0.0",
+            "keywords": [
+                "testing",
+                "e2e",
+                "scenarios",
+                "no-mocks",
+                "integration"
+            ],
+            "strict": false
+        },
+        {
             "name": "agent-drugs",
             "source": {
                 "source": "url",

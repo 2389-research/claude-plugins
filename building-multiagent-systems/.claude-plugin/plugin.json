@@ -1,0 +1,6 @@
+{
+  "name": "building-multiagent-systems",
+  "description": "Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination",
+  "version": "1.0.0",
+  "commands": []
+}
