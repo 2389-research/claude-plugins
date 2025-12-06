@@ -402,7 +402,7 @@ code {
 
 .cta-button {
   display: inline-block;
-  background: #4f46e5;
+  background: #3730a3;
   color: white;
   padding: 0.875rem 2rem;
   border-radius: 8px;
@@ -413,9 +413,9 @@ code {
 }
 
 .cta-button:hover {
-  background: #4338ca;
+  background: #312e81;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 8px 24px rgba(55, 48, 163, 0.5);
 }
 
 footer {
