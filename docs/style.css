@@ -83,32 +83,71 @@ header {
 
 h1 {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
   font-weight: 700;
-  margin-bottom: 1.25rem;
-  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.04em;
   background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 50%, var(--accent-tertiary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1.2;
+  line-height: 1.1;
+}
+
+.page-subtitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  opacity: 0.9;
 }
 
 .subtitle {
   color: var(--text-secondary);
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  margin-bottom: 1.75rem;
   font-weight: 400;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.owner {
-  font-size: 0.9375rem;
+.header-links {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.header-link {
   color: var(--text-secondary);
-  margin-bottom: 2rem;
+  text-decoration: none;
+  font-size: 0.9375rem;
   font-weight: 500;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.header-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-primary);
+  transition: width 0.2s ease;
+}
+
+.header-link:hover {
+  color: var(--accent-primary);
+}
+
+.header-link:hover::after {
+  width: 100%;
 }
 
 .install-cmd {
@@ -305,6 +344,80 @@ code {
   box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
 }
 
+.about-section {
+  margin-top: 6rem;
+  padding: 3rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.about-section h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.about-section p {
+  color: var(--text-secondary);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  max-width: 800px;
+}
+
+.about-section a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.about-section a:hover {
+  color: var(--accent-secondary);
+}
+
+.cta-box {
+  margin-top: 2.5rem;
+  padding: 2rem;
+  background: rgba(99, 102, 241, 0.05);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.cta-box h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.cta-box p {
+  margin-bottom: 1.5rem;
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--accent-primary);
+  color: white;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.cta-button:hover {
+  background: var(--accent-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+}
+
 footer {
   text-align: center;
   padding: 4rem 2rem 2rem;
@@ -312,6 +425,14 @@ footer {
   font-size: 0.875rem;
   border-top: 1px solid var(--border);
   margin-top: 4rem;
+}
+
+footer p {
+  margin-bottom: 0.75rem;
+}
+
+.footer-links {
+  font-size: 0.8125rem;
 }
 
 footer a {
@@ -337,9 +458,29 @@ footer a:hover {
     font-size: 2rem;
   }
 
+  .page-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .header-links {
+    gap: 1rem;
+  }
+
   .plugin-footer {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .about-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .about-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .cta-box {
+    padding: 1.5rem;
   }
 }
 
