@@ -40,7 +40,19 @@ const html = `<!DOCTYPE html>
 
     <div class="plugins-grid">
       ${marketplace.plugins.map(plugin => {
-        const sourceUrl = plugin.source.url || plugin.source;
+        // Handle different source formats
+        let sourceUrl;
+        if (typeof plugin.source === 'string') {
+          // Local plugin - convert to GitHub URL
+          sourceUrl = `https://github.com/2389-research/claude-plugins/tree/main/${plugin.source.replace('./', '')}`;
+        } else if (plugin.source.url) {
+          // External plugin with URL
+          sourceUrl = plugin.source.url;
+        } else {
+          // Fallback
+          sourceUrl = plugin.source;
+        }
+
         const keywords = plugin.keywords ? `<div class="keywords">${plugin.keywords.map(k => `<span class="keyword">${k}</span>`).join('')}</div>` : '';
         const version = plugin.version ? `<span class="version">v${plugin.version}</span>` : '';
 
