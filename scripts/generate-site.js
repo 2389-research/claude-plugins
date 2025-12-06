@@ -78,12 +78,31 @@ const html = `<!DOCTYPE html>
     </section>
 
     <footer>
-      <p>&copy; 2025 <a href="https://2389.ai">2389 Research</a> • <a href="https://github.com/2389-research/claude-plugins">GitHub</a> • <a href="mailto:hello@2389.ai">Contact</a></p>
-      <p class="footer-links">
-        <a href="https://docs.claude.com/en/docs/claude-code">Claude Code Docs</a> •
-        <a href="https://docs.claude.com/en/docs/claude-code/skills">Skills Guide</a> •
-        <a href="https://docs.claude.com/en/docs/claude-code/plugins">Plugin Development</a>
-      </p>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>2389 Research</h4>
+          <ul>
+            <li><a href="https://2389.ai">About Us</a></li>
+            <li><a href="https://github.com/2389-research/claude-plugins">GitHub</a></li>
+            <li><a href="mailto:hello@2389.ai">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://docs.claude.com/en/docs/claude-code">Claude Code Docs</a></li>
+            <li><a href="https://docs.claude.com/en/docs/claude-code/skills">Skills Guide</a></li>
+            <li><a href="https://docs.claude.com/en/docs/claude-code/plugins">Plugin Development</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Install</h4>
+          <code class="footer-install">/plugin marketplace add 2389-research/claude-plugins</code>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 2389 Research. All plugins are open source.</p>
+      </div>
     </footer>
   </div>
 </body>
