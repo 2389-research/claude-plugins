@@ -6,11 +6,8 @@ const marketplace = JSON.parse(
   fs.readFileSync('.claude-plugin/marketplace.json', 'utf8')
 );
 
-// Format marketplace name for display (convert kebab-case to Title Case)
-const displayName = marketplace.name
-  .split('-')
-  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-  .join(' ');
+// Use a clearer display name
+const displayName = '2389 Research Claude Code Plugin Marketplace';
 
 // Get description from metadata if available
 const marketplaceDescription = marketplace.metadata?.description || 'Claude Code Plugins';

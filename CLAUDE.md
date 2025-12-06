@@ -1,4 +1,4 @@
-# 2389 Research Plugins
+# 2389 Research Claude Code Plugin Marketplace
 
 ## Repository Purpose
 
