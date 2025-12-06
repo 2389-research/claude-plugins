@@ -1,6 +1,6 @@
 # 2389 Research Plugins
 
-Claude Code plugins and MCP servers we use at 2389.
+Claude Code plugins and MCP servers we use at [2389](https://2389.ai).
 
 ## Installation
 
@@ -64,9 +64,13 @@ See [CLAUDE.md](CLAUDE.md) for developer documentation on the monorepo structure
 
 See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for comprehensive development guide.
 
-## License
+## Contact
 
-Internal use only - 2389 Research
+Want to chat about these plugins or how we use Claude Code?
+
+**Email us:** [hello@2389.ai](mailto:hello@2389.ai)
+
+We'd love to hear from you!
 
 ## Resources
 

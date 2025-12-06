@@ -2,7 +2,8 @@
     "name": "2389-research-marketplace",
     "owner": {
         "name": "2389 Research",
-        "email": "dev@2389.ai"
+        "email": "hello@2389.ai",
+        "url": "https://2389.ai"
     },
     "metadata": {
         "description": "Plugins and MCP servers we use at 2389",
