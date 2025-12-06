@@ -420,25 +420,28 @@ code {
 
 footer {
   text-align: center;
-  padding: 4rem 2rem 2rem;
+  padding: 4rem 2rem 3rem;
   color: var(--text-secondary);
-  font-size: 0.875rem;
+  font-size: 1rem;
   border-top: 1px solid var(--border);
   margin-top: 4rem;
+  line-height: 2;
 }
 
 footer p {
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
 }
 
 .footer-links {
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
+  line-height: 2.5;
 }
 
 footer a {
   color: var(--accent-primary);
   text-decoration: none;
   transition: color 0.2s ease;
+  padding: 0 0.5rem;
 }
 
 footer a:hover {
