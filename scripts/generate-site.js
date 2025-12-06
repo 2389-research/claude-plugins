@@ -78,7 +78,7 @@ const html = `<!DOCTYPE html>
     </section>
 
     <footer>
-      <p>&copy; 2024 <a href="https://2389.ai">2389 Research</a> • <a href="https://github.com/2389-research/claude-plugins">GitHub</a> • <a href="mailto:hello@2389.ai">Contact</a></p>
+      <p>&copy; 2025 <a href="https://2389.ai">2389 Research</a> • <a href="https://github.com/2389-research/claude-plugins">GitHub</a> • <a href="mailto:hello@2389.ai">Contact</a></p>
       <p class="footer-links">
         <a href="https://docs.claude.com/en/docs/claude-code">Claude Code Docs</a> •
         <a href="https://docs.claude.com/en/docs/claude-code/skills">Skills Guide</a> •
