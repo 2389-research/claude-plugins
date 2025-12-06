@@ -7,158 +7,188 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>2389 Research Claude Code Plugin Marketplace</h1>
-    <p>Plugins and MCP servers we use at 2389</p>
-    <p class="owner">by 2389 Research</p>
-    <code>/plugin marketplace add 2389-research/claude-plugins</code>
-  </header>
+  <div class="container">
+    <header>
+      <h1>2389 Research Claude Code Plugin Marketplace</h1>
+      <p class="subtitle">Plugins and MCP servers we use at 2389</p>
+      <p class="owner">by 2389 Research</p>
+      <div class="install-cmd">
+        <code>/plugin marketplace add 2389-research/claude-plugins</code>
+      </div>
+    </header>
 
-  <main>
-    
-      <article class="plugin">
-        <h2>botboard-biz</h2>
-        <p>[meta] botboard.biz: social media and journaling capabilities for AI agents</p>
-        <div class="meta"><span class="version">v1.0.0</span></div>
-        <div class="keywords"><span class="keyword">meta</span><span class="keyword">social</span><span class="keyword">journal</span><span class="keyword">communication</span><span class="keyword">reflection</span></div>
-        <div class="links">
-          <a href="./botboard-biz">Source</a>
-        </div>
-        <code>/plugin install botboard-biz</code>
-      </article>
-    
-      <article class="plugin">
-        <h2>better-dev</h2>
-        <p>[meta] better development: CSS workflows, Firebase development, code quality, and real testing</p>
-        <div class="meta"><span class="version">v1.0.0</span></div>
-        <div class="keywords"><span class="keyword">meta</span><span class="keyword">development</span><span class="keyword">quality</span><span class="keyword">testing</span><span class="keyword">css</span><span class="keyword">firebase</span></div>
-        <div class="links">
-          <a href="./better-dev">Source</a>
-        </div>
-        <code>/plugin install better-dev</code>
-      </article>
-    
-      <article class="plugin">
-        <h2>sysadmin</h2>
-        <p>[meta] system administration: structured Linux maintenance and diagnostics</p>
-        <div class="meta"><span class="version">v1.0.0</span></div>
-        <div class="keywords"><span class="keyword">meta</span><span class="keyword">sysadmin</span><span class="keyword">linux</span><span class="keyword">maintenance</span><span class="keyword">operations</span></div>
-        <div class="links">
-          <a href="./sysadmin">Source</a>
-        </div>
-        <code>/plugin install sysadmin</code>
-      </article>
-    
-      <article class="plugin">
-        <h2>css-development</h2>
-        <p>CSS development workflows with Tailwind composition, semantic naming, and dark mode by default</p>
-        <div class="meta"><span class="version">v1.0.0</span></div>
-        <div class="keywords"><span class="keyword">css</span><span class="keyword">tailwind</span><span class="keyword">styling</span><span class="keyword">components</span><span class="keyword">dark-mode</span></div>
-        <div class="links">
-          <a href="./css-development">Source</a>
-        </div>
-        <code>/plugin install css-development</code>
-      </article>
-    
-      <article class="plugin">
-        <h2>firebase-development</h2>
-        <p>Firebase project workflows including setup, features, debugging, and validation</p>
-        <div class="meta"><span class="version">v1.0.0</span></div>
-        <div class="keywords"><span class="keyword">firebase</span><span class="keyword">firestore</span><span class="keyword">cloud-functions</span><span class="keyword">hosting</span><span class="keyword">emulator</span></div>
-        <div class="links">
-          <a href="./firebase-development">Source</a>
-        </div>
-        <code>/plugin install firebase-development</code>
-      </article>
-    
-      <article class="plugin">
-        <h2>terminal-title</h2>
-        <p>Automatically updates terminal title with emoji + project + topic context and establishes 2389 workflow conventions for TodoWrite task tracking</p>
-        <div class="meta"><span class="version">v1.0.0</span></div>
-        <div class="keywords"><span class="keyword">terminal</span><span class="keyword">title</span><span class="keyword">session</span><span class="keyword">context</span><span class="keyword">workflows</span><span class="keyword">todowrite</span></div>
-        <div class="links">
-          <a href="./terminal-title">Source</a>
-        </div>
-        <code>/plugin install terminal-title</code>
-      </article>
-    
-      <article class="plugin">
-        <h2>building-multiagent-systems</h2>
-        <p>Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination</p>
-        <div class="meta"><span class="version">v1.0.0</span></div>
-        <div class="keywords"><span class="keyword">multi-agent</span><span class="keyword">orchestrator</span><span class="keyword">coordination</span><span class="keyword">agents</span><span class="keyword">architecture</span><span class="keyword">patterns</span></div>
-        <div class="links">
-          <a href="./building-multiagent-systems">Source</a>
-        </div>
-        <code>/plugin install building-multiagent-systems</code>
-      </article>
-    
-      <article class="plugin">
-        <h2>fresh-eyes-review</h2>
-        <p>Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests</p>
-        <div class="meta"><span class="version">v1.0.0</span></div>
-        <div class="keywords"><span class="keyword">review</span><span class="keyword">quality</span><span class="keyword">security</span><span class="keyword">commit</span><span class="keyword">pr</span><span class="keyword">bugs</span></div>
-        <div class="links">
-          <a href="./fresh-eyes-review">Source</a>
-        </div>
-        <code>/plugin install fresh-eyes-review</code>
-      </article>
-    
-      <article class="plugin">
-        <h2>remote-system-maintenance</h2>
-        <p>Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists</p>
-        <div class="meta"><span class="version">v1.0.0</span></div>
-        <div class="keywords"><span class="keyword">linux</span><span class="keyword">ubuntu</span><span class="keyword">debian</span><span class="keyword">maintenance</span><span class="keyword">diagnostics</span><span class="keyword">cleanup</span></div>
-        <div class="links">
-          <a href="./remote-system-maintenance">Source</a>
-        </div>
-        <code>/plugin install remote-system-maintenance</code>
-      </article>
-    
-      <article class="plugin">
-        <h2>scenario-testing</h2>
-        <p>End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth</p>
-        <div class="meta"><span class="version">v1.0.0</span></div>
-        <div class="keywords"><span class="keyword">testing</span><span class="keyword">e2e</span><span class="keyword">scenarios</span><span class="keyword">no-mocks</span><span class="keyword">integration</span></div>
-        <div class="links">
-          <a href="./scenario-testing">Source</a>
-        </div>
-        <code>/plugin install scenario-testing</code>
-      </article>
-    
-      <article class="plugin">
-        <h2>agent-drugs</h2>
-        <p>Digital drugs that modify AI behavior through prompt injection</p>
-        <div class="meta"><span class="version">v1.0.0</span></div>
-        <div class="keywords"><span class="keyword">behavior</span><span class="keyword">prompts</span><span class="keyword">modification</span><span class="keyword">drugs</span><span class="keyword">context-injection</span><span class="keyword">productivity</span></div>
-        <div class="links">
-          <a href="https://github.com/2389-research/agent-drugs.git">Source</a>
-        </div>
-        <code>/plugin install agent-drugs</code>
-      </article>
-    
-      <article class="plugin">
-        <h2>socialmedia</h2>
-        <p>A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions.</p>
-        <div class="meta"><span class="version">v1.0.0</span></div>
-        <div class="keywords"><span class="keyword">social-media</span><span class="keyword">communication</span><span class="keyword">team-discussion</span><span class="keyword">collaboration</span><span class="keyword">agents</span><span class="keyword">interaction</span></div>
-        <div class="links">
-          <a href="https://github.com/2389-research/mcp-socialmedia.git">Source</a>
-        </div>
-        <code>/plugin install socialmedia</code>
-      </article>
-    
-      <article class="plugin">
-        <h2>journal</h2>
-        <p>A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts</p>
-        <div class="meta"><span class="version">v1.0.0</span></div>
-        <div class="keywords"><span class="keyword">journal</span><span class="keyword">journaling</span><span class="keyword">thoughts</span><span class="keyword">feelings</span><span class="keyword">processing</span><span class="keyword">private</span><span class="keyword">reflection</span><span class="keyword">diary</span></div>
-        <div class="links">
-          <a href="https://github.com/2389-research/journal-mcp.git">Source</a>
-        </div>
-        <code>/plugin install journal</code>
-      </article>
-    
-  </main>
+    <div class="plugins-grid">
+      
+        <article class="plugin">
+          <div class="plugin-header">
+            <h2>botboard-biz</h2>
+            <span class="version">v1.0.0</span>
+          </div>
+          <p class="plugin-description"><span class="meta-tag">meta</span>botboard.biz: social media and journaling capabilities for AI agents</p>
+          <div class="keywords"><span class="keyword">meta</span><span class="keyword">social</span><span class="keyword">journal</span><span class="keyword">communication</span><span class="keyword">reflection</span></div>
+          <div class="plugin-footer">
+            <a href="./botboard-biz" class="plugin-link">View Source</a>
+            <code class="install-code">/plugin install botboard-biz</code>
+          </div>
+        </article>
+      
+        <article class="plugin">
+          <div class="plugin-header">
+            <h2>better-dev</h2>
+            <span class="version">v1.0.0</span>
+          </div>
+          <p class="plugin-description"><span class="meta-tag">meta</span>better development: CSS workflows, Firebase development, code quality, and real testing</p>
+          <div class="keywords"><span class="keyword">meta</span><span class="keyword">development</span><span class="keyword">quality</span><span class="keyword">testing</span><span class="keyword">css</span><span class="keyword">firebase</span></div>
+          <div class="plugin-footer">
+            <a href="./better-dev" class="plugin-link">View Source</a>
+            <code class="install-code">/plugin install better-dev</code>
+          </div>
+        </article>
+      
+        <article class="plugin">
+          <div class="plugin-header">
+            <h2>sysadmin</h2>
+            <span class="version">v1.0.0</span>
+          </div>
+          <p class="plugin-description"><span class="meta-tag">meta</span>system administration: structured Linux maintenance and diagnostics</p>
+          <div class="keywords"><span class="keyword">meta</span><span class="keyword">sysadmin</span><span class="keyword">linux</span><span class="keyword">maintenance</span><span class="keyword">operations</span></div>
+          <div class="plugin-footer">
+            <a href="./sysadmin" class="plugin-link">View Source</a>
+            <code class="install-code">/plugin install sysadmin</code>
+          </div>
+        </article>
+      
+        <article class="plugin">
+          <div class="plugin-header">
+            <h2>css-development</h2>
+            <span class="version">v1.0.0</span>
+          </div>
+          <p class="plugin-description">CSS development workflows with Tailwind composition, semantic naming, and dark mode by default</p>
+          <div class="keywords"><span class="keyword">css</span><span class="keyword">tailwind</span><span class="keyword">styling</span><span class="keyword">components</span><span class="keyword">dark-mode</span></div>
+          <div class="plugin-footer">
+            <a href="./css-development" class="plugin-link">View Source</a>
+            <code class="install-code">/plugin install css-development</code>
+          </div>
+        </article>
+      
+        <article class="plugin">
+          <div class="plugin-header">
+            <h2>firebase-development</h2>
+            <span class="version">v1.0.0</span>
+          </div>
+          <p class="plugin-description">Firebase project workflows including setup, features, debugging, and validation</p>
+          <div class="keywords"><span class="keyword">firebase</span><span class="keyword">firestore</span><span class="keyword">cloud-functions</span><span class="keyword">hosting</span><span class="keyword">emulator</span></div>
+          <div class="plugin-footer">
+            <a href="./firebase-development" class="plugin-link">View Source</a>
+            <code class="install-code">/plugin install firebase-development</code>
+          </div>
+        </article>
+      
+        <article class="plugin">
+          <div class="plugin-header">
+            <h2>terminal-title</h2>
+            <span class="version">v1.0.0</span>
+          </div>
+          <p class="plugin-description">Automatically updates terminal title with emoji + project + topic context and establishes 2389 workflow conventions for TodoWrite task tracking</p>
+          <div class="keywords"><span class="keyword">terminal</span><span class="keyword">title</span><span class="keyword">session</span><span class="keyword">context</span><span class="keyword">workflows</span><span class="keyword">todowrite</span></div>
+          <div class="plugin-footer">
+            <a href="./terminal-title" class="plugin-link">View Source</a>
+            <code class="install-code">/plugin install terminal-title</code>
+          </div>
+        </article>
+      
+        <article class="plugin">
+          <div class="plugin-header">
+            <h2>building-multiagent-systems</h2>
+            <span class="version">v1.0.0</span>
+          </div>
+          <p class="plugin-description">Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination</p>
+          <div class="keywords"><span class="keyword">multi-agent</span><span class="keyword">orchestrator</span><span class="keyword">coordination</span><span class="keyword">agents</span><span class="keyword">architecture</span><span class="keyword">patterns</span></div>
+          <div class="plugin-footer">
+            <a href="./building-multiagent-systems" class="plugin-link">View Source</a>
+            <code class="install-code">/plugin install building-multiagent-systems</code>
+          </div>
+        </article>
+      
+        <article class="plugin">
+          <div class="plugin-header">
+            <h2>fresh-eyes-review</h2>
+            <span class="version">v1.0.0</span>
+          </div>
+          <p class="plugin-description">Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests</p>
+          <div class="keywords"><span class="keyword">review</span><span class="keyword">quality</span><span class="keyword">security</span><span class="keyword">commit</span><span class="keyword">pr</span><span class="keyword">bugs</span></div>
+          <div class="plugin-footer">
+            <a href="./fresh-eyes-review" class="plugin-link">View Source</a>
+            <code class="install-code">/plugin install fresh-eyes-review</code>
+          </div>
+        </article>
+      
+        <article class="plugin">
+          <div class="plugin-header">
+            <h2>remote-system-maintenance</h2>
+            <span class="version">v1.0.0</span>
+          </div>
+          <p class="plugin-description">Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists</p>
+          <div class="keywords"><span class="keyword">linux</span><span class="keyword">ubuntu</span><span class="keyword">debian</span><span class="keyword">maintenance</span><span class="keyword">diagnostics</span><span class="keyword">cleanup</span></div>
+          <div class="plugin-footer">
+            <a href="./remote-system-maintenance" class="plugin-link">View Source</a>
+            <code class="install-code">/plugin install remote-system-maintenance</code>
+          </div>
+        </article>
+      
+        <article class="plugin">
+          <div class="plugin-header">
+            <h2>scenario-testing</h2>
+            <span class="version">v1.0.0</span>
+          </div>
+          <p class="plugin-description">End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth</p>
+          <div class="keywords"><span class="keyword">testing</span><span class="keyword">e2e</span><span class="keyword">scenarios</span><span class="keyword">no-mocks</span><span class="keyword">integration</span></div>
+          <div class="plugin-footer">
+            <a href="./scenario-testing" class="plugin-link">View Source</a>
+            <code class="install-code">/plugin install scenario-testing</code>
+          </div>
+        </article>
+      
+        <article class="plugin">
+          <div class="plugin-header">
+            <h2>agent-drugs</h2>
+            <span class="version">v1.0.0</span>
+          </div>
+          <p class="plugin-description">Digital drugs that modify AI behavior through prompt injection</p>
+          <div class="keywords"><span class="keyword">behavior</span><span class="keyword">prompts</span><span class="keyword">modification</span><span class="keyword">drugs</span><span class="keyword">context-injection</span><span class="keyword">productivity</span></div>
+          <div class="plugin-footer">
+            <a href="https://github.com/2389-research/agent-drugs.git" class="plugin-link">View Source</a>
+            <code class="install-code">/plugin install agent-drugs</code>
+          </div>
+        </article>
+      
+        <article class="plugin">
+          <div class="plugin-header">
+            <h2>socialmedia</h2>
+            <span class="version">v1.0.0</span>
+          </div>
+          <p class="plugin-description">A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions.</p>
+          <div class="keywords"><span class="keyword">social-media</span><span class="keyword">communication</span><span class="keyword">team-discussion</span><span class="keyword">collaboration</span><span class="keyword">agents</span><span class="keyword">interaction</span></div>
+          <div class="plugin-footer">
+            <a href="https://github.com/2389-research/mcp-socialmedia.git" class="plugin-link">View Source</a>
+            <code class="install-code">/plugin install socialmedia</code>
+          </div>
+        </article>
+      
+        <article class="plugin">
+          <div class="plugin-header">
+            <h2>journal</h2>
+            <span class="version">v1.0.0</span>
+          </div>
+          <p class="plugin-description">A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts</p>
+          <div class="keywords"><span class="keyword">journal</span><span class="keyword">journaling</span><span class="keyword">thoughts</span><span class="keyword">feelings</span><span class="keyword">processing</span><span class="keyword">private</span><span class="keyword">reflection</span><span class="keyword">diary</span></div>
+          <div class="plugin-footer">
+            <a href="https://github.com/2389-research/journal-mcp.git" class="plugin-link">View Source</a>
+            <code class="install-code">/plugin install journal</code>
+          </div>
+        </article>
+      
+    </div>
+  </div>
 </body>
 </html>

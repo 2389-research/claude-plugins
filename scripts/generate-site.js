@@ -22,33 +22,44 @@ const html = `<!DOCTYPE html>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>${displayName}</h1>
-    <p>${marketplaceDescription}</p>
-    <p class="owner">by ${marketplace.owner.name}</p>
-    <code>/plugin marketplace add 2389-research/claude-plugins</code>
-  </header>
+  <div class="container">
+    <header>
+      <h1>${displayName}</h1>
+      <p class="subtitle">${marketplaceDescription}</p>
+      <p class="owner">by ${marketplace.owner.name}</p>
+      <div class="install-cmd">
+        <code>/plugin marketplace add 2389-research/claude-plugins</code>
+      </div>
+    </header>
 
-  <main>
-    ${marketplace.plugins.map(plugin => {
-      const sourceUrl = plugin.source.url || plugin.source;
-      const keywords = plugin.keywords ? `<div class="keywords">${plugin.keywords.map(k => `<span class="keyword">${k}</span>`).join('')}</div>` : '';
-      const version = plugin.version ? `<span class="version">v${plugin.version}</span>` : '';
+    <div class="plugins-grid">
+      ${marketplace.plugins.map(plugin => {
+        const sourceUrl = plugin.source.url || plugin.source;
+        const keywords = plugin.keywords ? `<div class="keywords">${plugin.keywords.map(k => `<span class="keyword">${k}</span>`).join('')}</div>` : '';
+        const version = plugin.version ? `<span class="version">v${plugin.version}</span>` : '';
 
-      return `
-      <article class="plugin">
-        <h2>${plugin.name}</h2>
-        <p>${plugin.description}</p>
-        ${version ? `<div class="meta">${version}</div>` : ''}
-        ${keywords}
-        <div class="links">
-          <a href="${sourceUrl}">Source</a>
-        </div>
-        <code>/plugin install ${plugin.name}</code>
-      </article>
-    `;
-    }).join('')}
-  </main>
+        // Check if description starts with [meta]
+        const isMeta = plugin.description.startsWith('[meta]');
+        const description = isMeta ? plugin.description.substring(7) : plugin.description;
+        const metaTag = isMeta ? '<span class="meta-tag">meta</span>' : '';
+
+        return `
+        <article class="plugin">
+          <div class="plugin-header">
+            <h2>${plugin.name}</h2>
+            ${version}
+          </div>
+          <p class="plugin-description">${metaTag}${description}</p>
+          ${keywords}
+          <div class="plugin-footer">
+            <a href="${sourceUrl}" class="plugin-link">View Source</a>
+            <code class="install-code">/plugin install ${plugin.name}</code>
+          </div>
+        </article>
+      `;
+      }).join('')}
+    </div>
+  </div>
 </body>
 </html>`;
 
