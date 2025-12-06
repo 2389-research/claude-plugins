@@ -346,58 +346,66 @@ code {
 
 .about-section {
   margin-top: 6rem;
-  padding: 3rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  align-items: start;
 }
 
-.about-section h2 {
+.about-content {
+  padding-right: 2rem;
+}
+
+.about-content h2 {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
 }
 
-.about-section p {
+.about-content p {
   color: var(--text-secondary);
   font-size: 1.0625rem;
   line-height: 1.8;
-  margin-bottom: 1.25rem;
-  max-width: 800px;
+  margin-bottom: 1rem;
 }
 
-.about-section a {
+.about-content a {
   color: var(--accent-primary);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.about-section a:hover {
+.about-content a:hover {
   color: var(--accent-secondary);
 }
 
 .cta-box {
-  margin-top: 2.5rem;
-  padding: 2rem;
-  background: rgba(99, 102, 241, 0.05);
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
   text-align: center;
+  position: sticky;
+  top: 2rem;
 }
 
 .cta-box h3 {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
 }
 
 .cta-box p {
   margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.6;
 }
 
 .cta-button {
@@ -514,15 +522,21 @@ footer {
   }
 
   .about-section {
-    padding: 2rem 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
-  .about-section h2 {
+  .about-content {
+    padding-right: 0;
+  }
+
+  .about-content h2 {
     font-size: 1.5rem;
   }
 
   .cta-box {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
+    position: static;
   }
 
   .footer-content {

@@ -67,13 +67,15 @@ const html = `<!DOCTYPE html>
     </div>
 
     <section class="about-section">
-      <h2>About This Marketplace</h2>
-      <p>This is a collection of Claude Code plugins and MCP servers we use at <a href="https://2389.ai">2389 Research</a>. Our plugins focus on development workflows, system administration, testing practices, and agent capabilities.</p>
-      <p>All plugins are open source and available on <a href="https://github.com/2389-research/claude-plugins">GitHub</a>. Feel free to use them, modify them, or contribute improvements.</p>
+      <div class="about-content">
+        <h2>About This Marketplace</h2>
+        <p>A collection of Claude Code plugins and MCP servers from <a href="https://2389.ai">2389 Research</a>. These tools focus on development workflows, system administration, testing practices, and agent capabilities.</p>
+        <p>All plugins are open source. Use them, fork them, contribute back. We'd love to hear how you're using them.</p>
+      </div>
       <div class="cta-box">
-        <h3>Want to chat?</h3>
-        <p>We'd love to hear how you're using these plugins or discuss Claude Code development.</p>
-        <a href="mailto:hello@2389.ai" class="cta-button">Email us at hello@2389.ai</a>
+        <h3>Get in Touch</h3>
+        <p>Questions? Ideas? Want to contribute?</p>
+        <a href="mailto:hello@2389.ai" class="cta-button">Email hello@2389.ai</a>
       </div>
     </section>
 
