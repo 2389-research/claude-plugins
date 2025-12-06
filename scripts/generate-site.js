@@ -7,7 +7,7 @@ const marketplace = JSON.parse(
 );
 
 // Use a clearer display name - split into parts for better layout
-const displayName = '2389 Research';
+const displayName = '2389 Research Inc';
 const displaySubtitle = 'Claude Code Plugin Marketplace';
 
 // Get description from metadata if available
@@ -69,7 +69,7 @@ const html = `<!DOCTYPE html>
     <section class="about-section">
       <div class="about-content">
         <h2>About This Marketplace</h2>
-        <p>A collection of Claude Code plugins and MCP servers from <a href="https://2389.ai">2389 Research</a>. These tools focus on development workflows, system administration, testing practices, and agent capabilities.</p>
+        <p>A collection of Claude Code plugins and MCP servers from <a href="https://2389.ai">2389 Research Inc</a>. These tools focus on development workflows, system administration, testing practices, and agent capabilities.</p>
         <p>All plugins are open source. Use them, fork them, contribute back. We'd love to hear how you're using them.</p>
       </div>
       <div class="cta-box">
@@ -82,7 +82,7 @@ const html = `<!DOCTYPE html>
     <footer>
       <div class="footer-content">
         <div class="footer-section">
-          <h4>2389 Research</h4>
+          <h4>2389 Research Inc</h4>
           <ul>
             <li><a href="https://2389.ai">About Us</a></li>
             <li><a href="https://github.com/2389-research/claude-plugins">GitHub</a></li>
@@ -103,7 +103,7 @@ const html = `<!DOCTYPE html>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 2389 Research. All plugins are open source.</p>
+        <p>&copy; 2025 2389 Research Inc. All plugins are open source.</p>
       </div>
     </footer>
   </div>
