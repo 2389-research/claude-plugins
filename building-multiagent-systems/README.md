@@ -17,7 +17,7 @@ Comprehensive guidance for designing and implementing multi-agent systems with p
 - **Four-layer architecture**: Reasoning, orchestration, tool bus, deterministic adapters - foundation for every agent
 - **Schema-first tools**: Typed contracts for tools enable sub-agent discovery and validation
 - **Deterministic boundary**: Clear separation between LLM reasoning and testable execution
-- **Six coordination patterns**: fan-out/fan-in, sequential pipeline, recursive delegation, work-stealing queue, map-reduce, peer collaboration
+- **Seven coordination patterns**: fan-out/fan-in, sequential pipeline, recursive delegation, work-stealing queue, map-reduce, peer collaboration, MAKER (million-step zero-error)
 - **Foundational patterns**: event-sourcing, hierarchical IDs, agent state machines
 - **Tool coordination**: permission inheritance, locking, rate limiting, caching
 - **Agent collaboration**: subagent spawning, tool inheritance, sub-agent as tool pattern
