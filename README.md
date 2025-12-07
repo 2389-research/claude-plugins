@@ -1,4 +1,5 @@
-# 2389 Research Claude Code Plugin Marketplace
+# 2389 Research 
+## Claude Code Plugin Marketplace
 
 Claude Code plugins and MCP servers we use at [2389](https://2389.ai).
 

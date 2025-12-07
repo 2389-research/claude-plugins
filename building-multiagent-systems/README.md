@@ -10,15 +10,20 @@ Architecture patterns for multi-agent systems where AI agents coordinate to acco
 
 ## What This Plugin Provides
 
-Comprehensive guidance for designing and implementing multi-agent systems with proper coordination, lifecycle management, and production hardening.
+Comprehensive guidance for designing and implementing multi-agent systems with proper coordination, lifecycle management, and production hardening. Based on patterns from real production systems.
 
 ### Key Concepts
 
+- **Four-layer architecture**: Reasoning, orchestration, tool bus, deterministic adapters - foundation for every agent
+- **Schema-first tools**: Typed contracts for tools enable sub-agent discovery and validation
+- **Deterministic boundary**: Clear separation between LLM reasoning and testable execution
 - **Six coordination patterns**: fan-out/fan-in, sequential pipeline, recursive delegation, work-stealing queue, map-reduce, peer collaboration
 - **Foundational patterns**: event-sourcing, hierarchical IDs, agent state machines
-- **Tool coordination**: permissions, locking, rate limiting, caching
-- **Lifecycle management**: cascading stop, orphan detection
-- **Production hardening**: checkpointing, monitoring, cost tracking
+- **Tool coordination**: permission inheritance, locking, rate limiting, caching
+- **Agent collaboration**: subagent spawning, tool inheritance, sub-agent as tool pattern
+- **Lifecycle management**: cascading stop, orphan detection, heartbeat monitoring
+- **Self-modification safety**: When and how sub-agents can modify themselves or each other
+- **Production hardening**: checkpointing, monitoring, cost tracking across agent hierarchies
 
 ## When to Use
 
@@ -31,20 +36,33 @@ Comprehensive guidance for designing and implementing multi-agent systems with p
 ## Quick Example
 
 ```typescript
-// Fan-out/fan-in pattern for parallel code review
+// Four-layer architecture for each agent
+const parentAgent = new Agent({
+  model: 'sonnet',  // Layer 1: Reasoning
+  tools: [editTool, readTool, bashTool],  // Layer 3: Tool bus with schemas
+  permissions: ['file:read', 'file:write']  // Layer 2: Orchestration policy
+});
+
+// Fan-out/fan-in pattern: spawn specialist sub-agents
 const reviewers = [
-  { type: 'security', model: 'smart' },
-  { type: 'performance', model: 'fast' },
-  { type: 'style', model: 'fast' },
-  { type: 'tests', model: 'smart' }
+  { type: 'security', model: 'smart', tools: [readTool] },
+  { type: 'performance', model: 'fast', tools: [readTool] },
+  { type: 'style', model: 'fast', tools: [readTool] },
+  { type: 'tests', model: 'smart', tools: [readTool, bashTool] }
 ];
 
-// Spawn reviewers in parallel
+// Spawn with permission inheritance (read-only for reviewers)
 const results = await Promise.all(
-  reviewers.map(r => spawnReviewer(r.type, r.model))
+  reviewers.map(r => parentAgent.spawnSubAgent({
+    name: r.type,
+    model: r.model,
+    tools: r.tools,
+    permissions: ['file:read'],  // Cannot write - safer
+    timeout: 120000
+  }))
 );
 
-// Cascading cleanup
+// Cascading cleanup with heartbeat monitoring
 async function cleanup() {
   const children = await getChildAgents();
   await Promise.all(children.map(c => c.stop()));
@@ -65,14 +83,19 @@ Before architecting, the skill asks:
 
 ## Common Pitfalls Avoided
 
-- Missing cascading stop → orphaned agents
-- No timeouts → indefinite hangs
-- Unbounded concurrency → resource exhaustion
-- Ignoring cost tracking → budget surprises
-- No partial-failure handling → cascading failures
-- Unpersisted state → unrecoverable workflows
-- Uncoordinated tool access → race conditions
-- Wrong model selection → cost inefficiency
+- **Missing four-layer architecture** → untestable, unsafe agents
+- **LLM calls in tools** → non-deterministic, untestable execution
+- **No schema-first design** → sub-agents can't discover tools
+- **Missing cascading stop** → orphaned agents consuming resources
+- **No permission inheritance** → sub-agents escalate privileges
+- **No timeouts** → indefinite hangs
+- **Unbounded concurrency** → resource exhaustion
+- **Ignoring cost tracking** → budget surprises across agent hierarchy
+- **No partial-failure handling** → cascading failures
+- **Unpersisted state** → unrecoverable workflows
+- **Uncoordinated tool access** → race conditions
+- **Wrong model selection** → cost inefficiency
+- **Self-modification without safety protocol** → agents break themselves
 
 ## Documentation
 
