@@ -17,6 +17,10 @@ Automatically updates terminal title with emoji + project + topic context. **Cro
 
 ## What This Plugin Provides
 
+**Skills provided:**
+
+- `terminal-title` – Automatically manages the terminal title based on project and topic context
+
 **Automatic terminal title management:**
 
 - **Auto-invokes at session start**: Sets initial title based on project context
@@ -43,8 +47,8 @@ The plugin includes a session start hook that automatically invokes the terminal
 
 ## Example
 
-```
-💼 Firebase App - Authentication Setup
+```text
+🔥 firebase-app > authentication setup
 ```
 
 ## TodoWrite Conventions

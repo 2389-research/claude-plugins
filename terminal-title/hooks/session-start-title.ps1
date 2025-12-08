@@ -50,7 +50,7 @@ if (-not $ProjectName) {
         try {
             $FirstHeading = Get-Content $ReadmePath -ErrorAction SilentlyContinue | Select-String -Pattern '^#' | Select-Object -First 1
             if ($FirstHeading) {
-                $ProjectName = $FirstHeading.Line -replace '^#+ ', ''
+                $ProjectName = $FirstHeading.Line -replace '^#+\s*', ''
             }
         } catch {
             # Silently continue if README.md fails

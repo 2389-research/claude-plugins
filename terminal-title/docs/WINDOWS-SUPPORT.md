@@ -8,7 +8,7 @@ As of December 2025, the terminal-title plugin now has full cross-platform suppo
 
 Previously, Windows users would encounter this error on session start:
 
-```
+```text
 Plugin hook error: /bin/bash: C:UsersNat.claudeplugins...
 ```
 
@@ -38,7 +38,7 @@ The solution uses a **multi-script approach** with automatic OS detection:
 
 ### How It Works
 
-```
+```text
 SessionStart Hook Fired
          ↓
 session-start-launcher.sh
@@ -185,7 +185,7 @@ bash skills/scripts/set_title.sh "Test" "Testing"
 **Problem:** PowerShell 7+ not installed or not in PATH
 
 **Solution:**
-1. Install PowerShell 7+ from https://github.com/PowerShell/PowerShell/releases
+1. Install PowerShell 7+ from [the PowerShell releases page](https://github.com/PowerShell/PowerShell/releases)
 2. Add to PATH, or
 3. Edit launcher to use `powershell.exe` instead (legacy PowerShell)
 
@@ -271,5 +271,5 @@ Potential improvements for Windows support:
 ## Contact
 
 For Windows-specific issues or testing feedback:
-- Report issues at: https://github.com/2389-research/claude-plugins/issues
+- Report issues at: <https://github.com/2389-research/claude-plugins/issues>
 - Tag with: `windows`, `terminal-title`, `cross-platform`
