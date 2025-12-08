@@ -1,6 +1,6 @@
 # Terminal Title Plugin
 
-Automatically updates terminal title with emoji + project + topic context. Also establishes 2389 workflow conventions for TodoWrite task tracking.
+Automatically updates terminal title with emoji + project + topic context. **Cross-platform support for Windows, macOS, and Linux.** Also establishes 2389 workflow conventions for TodoWrite task tracking.
 
 ## Installation
 
@@ -8,6 +8,12 @@ Automatically updates terminal title with emoji + project + topic context. Also 
 /plugin marketplace add 2389-research/claude-plugins
 /plugin install terminal-title@2389-research
 ```
+
+### Platform-Specific Setup
+
+**Windows users:** Ensure PowerShell 7+ (`pwsh`) is installed and available in your PATH. The plugin automatically uses PowerShell scripts on Windows.
+
+**Unix/Linux/macOS users:** No additional setup required. The plugin uses bash scripts automatically.
 
 ## What This Plugin Provides
 
@@ -27,10 +33,13 @@ Automatically updates terminal title with emoji + project + topic context. Also 
 
 The plugin includes a session start hook that automatically invokes the terminal-title skill. The skill:
 
-1. Detects current project from working directory
-2. Infers topic from recent files or conversation context
-3. Selects appropriate emoji based on project type
-4. Updates terminal title via shell script
+1. **Detects your operating system** (Windows, macOS, Linux)
+2. **Detects current project** from working directory, git repo, or package.json
+3. **Infers topic** from recent files or conversation context
+4. **Selects appropriate emoji** from environment variable or defaults to 🎉
+5. **Updates terminal title** via platform-specific script:
+   - Windows: PowerShell (`.ps1`)
+   - Unix/Linux/macOS: Bash (`.sh`)
 
 ## Example
 
