@@ -8,6 +8,12 @@ if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" || "$OSTYPE" == "cygwin" ]]; t
     HOOK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     POWERSHELL_SCRIPT="${HOOK_DIR}/session-start-title.ps1"
 
+    # Check if PowerShell script exists
+    if [ ! -f "$POWERSHELL_SCRIPT" ]; then
+        echo "Error: PowerShell script not found: $POWERSHELL_SCRIPT" >&2
+        exit 1
+    fi
+
     # Try to find PowerShell (pwsh or powershell.exe)
     if command -v pwsh >/dev/null 2>&1; then
         exec pwsh -NoProfile -ExecutionPolicy Bypass -File "$POWERSHELL_SCRIPT"

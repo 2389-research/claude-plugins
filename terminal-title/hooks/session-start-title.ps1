@@ -1,8 +1,6 @@
 # ABOUTME: SessionStart hook wrapper that detects project name and sets terminal title (Windows PowerShell)
 # ABOUTME: Called automatically by Claude Code when session starts
 
-$ErrorActionPreference = "SilentlyContinue"
-
 # Get current working directory
 $CWD = Get-Location
 
@@ -13,10 +11,10 @@ $ProjectName = ""
 $PackageJsonPath = Join-Path $CWD "package.json"
 if (Test-Path $PackageJsonPath) {
     try {
-        $PackageJson = Get-Content $PackageJsonPath | ConvertFrom-Json
+        $PackageJson = Get-Content $PackageJsonPath -ErrorAction SilentlyContinue | ConvertFrom-Json
         if ($PackageJson.name) {
             # Convert kebab-case to Title Case
-            $ProjectName = ($PackageJson.name -split '-' | ForEach-Object {
+            $ProjectName = ($PackageJson.name -split '-' | Where-Object { $_ -and $_.Length -gt 0 } | ForEach-Object {
                 $_.Substring(0,1).ToUpper() + $_.Substring(1).ToLower()
             }) -join ' '
         }
@@ -35,7 +33,7 @@ if (-not $ProjectName) {
                 # Extract repo name from URL (e.g., github.com/user/repo.git -> repo)
                 $RepoName = [System.IO.Path]::GetFileNameWithoutExtension($GitRemote)
                 # Convert kebab-case to Title Case
-                $ProjectName = ($RepoName -split '-' | ForEach-Object {
+                $ProjectName = ($RepoName -split '-' | Where-Object { $_ -and $_.Length -gt 0 } | ForEach-Object {
                     $_.Substring(0,1).ToUpper() + $_.Substring(1).ToLower()
                 }) -join ' '
             }
@@ -50,7 +48,7 @@ if (-not $ProjectName) {
     $ReadmePath = Join-Path $CWD "README.md"
     if (Test-Path $ReadmePath) {
         try {
-            $FirstHeading = Get-Content $ReadmePath | Select-String -Pattern '^#' | Select-Object -First 1
+            $FirstHeading = Get-Content $ReadmePath -ErrorAction SilentlyContinue | Select-String -Pattern '^#' | Select-Object -First 1
             if ($FirstHeading) {
                 $ProjectName = $FirstHeading.Line -replace '^#+ ', ''
             }
@@ -64,7 +62,7 @@ if (-not $ProjectName) {
 if (-not $ProjectName) {
     $DirName = Split-Path -Leaf $CWD
     # Convert kebab-case or snake_case to Title Case
-    $ProjectName = ($DirName -replace '[-_]', ' ' -split ' ' | ForEach-Object {
+    $ProjectName = ($DirName -replace '[-_]', ' ' -split ' ' | Where-Object { $_ -and $_.Length -gt 0 } | ForEach-Object {
         $_.Substring(0,1).ToUpper() + $_.Substring(1).ToLower()
     }) -join ' '
 }

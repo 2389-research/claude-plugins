@@ -73,7 +73,6 @@ The `set_title.ps1` script:
 ### Session Start Hook
 
 The `session-start-title.ps1` script:
-- Logs to `$env:TEMP\claude-2389-session-start.log`
 - Detects project name from:
   - `package.json` (using `ConvertFrom-Json`)
   - Git remote URL (using `git` command)
@@ -152,17 +151,13 @@ pwsh -NoProfile -ExecutionPolicy Bypass -File skills/scripts/set_title.ps1 "Test
 
 # Test session start hook
 pwsh -NoProfile -ExecutionPolicy Bypass -File hooks/session-start-title.ps1
-
-# Check log file
-Get-Content $env:TEMP\claude-2389-session-start.log -Tail 20
 ```
 
 ### Expected Behavior
 
 1. Terminal title updates to: `[emoji] Project Name - Topic`
 2. No error messages in console
-3. Log file shows successful execution
-4. Claude session continues normally
+3. Claude session continues normally
 
 ## Backwards Compatibility
 
@@ -181,9 +176,6 @@ bash hooks/session-start-launcher.sh
 
 # Test set_title.sh directly
 bash skills/scripts/set_title.sh "Test" "Testing"
-
-# Check logs
-tail -20 /tmp/claude-2389-session-start.log
 ```
 
 ## Troubleshooting

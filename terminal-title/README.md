@@ -44,7 +44,7 @@ The plugin includes a session start hook that automatically invokes the terminal
 ## Example
 
 ```
-🔥 firebase-app > authentication setup
+💼 Firebase App - Authentication Setup
 ```
 
 ## TodoWrite Conventions
