@@ -2,16 +2,10 @@
 # ABOUTME: SessionStart hook wrapper that detects project name and sets terminal title
 # ABOUTME: Called automatically by Claude Code when session starts
 
-# Enable logging for debugging
-LOG_FILE="/tmp/claude-2389-session-start.log"
-exec 2>> "$LOG_FILE"
-echo "=== SessionStart hook fired at $(date) ===" >> "$LOG_FILE"
-
 set -e
 
 # Get current working directory
 CWD="${PWD}"
-echo "CWD: $CWD" >> "$LOG_FILE"
 
 # Intelligent project name detection (matching terminal-title skill logic)
 PROJECT_NAME=""
@@ -51,45 +45,21 @@ if [ -z "$PROJECT_NAME" ]; then
     PROJECT_NAME=$(echo "$DIR_NAME" | sed 's/[-_]/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2))}1')
 fi
 
-echo "Detected project name: $PROJECT_NAME" >> "$LOG_FILE"
-
 # Find the set_title.sh script (relative to this hook script)
 HOOK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PLUGIN_ROOT="$(dirname "$HOOK_DIR")"
 SET_TITLE_SCRIPT="${PLUGIN_ROOT}/skills/scripts/set_title.sh"
 
-echo "HOOK_DIR: $HOOK_DIR" >> "$LOG_FILE"
-echo "PLUGIN_ROOT: $PLUGIN_ROOT" >> "$LOG_FILE"
-echo "SET_TITLE_SCRIPT: $SET_TITLE_SCRIPT" >> "$LOG_FILE"
-
 # Call set_title.sh with detected project name and "Claude Code" as topic
 if [ -x "$SET_TITLE_SCRIPT" ]; then
-    echo "Executing: bash $SET_TITLE_SCRIPT '$PROJECT_NAME' 'Claude Code'" >> "$LOG_FILE"
-    if bash "$SET_TITLE_SCRIPT" "$PROJECT_NAME" "Claude Code" 2>> "$LOG_FILE"; then
-        echo "✓ set_title.sh succeeded" >> "$LOG_FILE"
-    else
-        EXIT_CODE=$?
-        echo "✗ set_title.sh failed with exit code $EXIT_CODE" >> "$LOG_FILE"
-    fi
+    bash "$SET_TITLE_SCRIPT" "$PROJECT_NAME" "Claude Code" 2>/dev/null || true
 else
-    echo "✗ SET_TITLE_SCRIPT not executable, trying fallback" >> "$LOG_FILE"
     # Fallback: try to find it in Claude's plugin directory
     SET_TITLE_SCRIPT="${HOME}/.claude/plugins/terminal-title/skills/scripts/set_title.sh"
-    echo "Fallback script: $SET_TITLE_SCRIPT" >> "$LOG_FILE"
     if [ -x "$SET_TITLE_SCRIPT" ]; then
-        echo "Executing fallback: bash $SET_TITLE_SCRIPT '$PROJECT_NAME' 'Claude Code'" >> "$LOG_FILE"
-        if bash "$SET_TITLE_SCRIPT" "$PROJECT_NAME" "Claude Code" 2>> "$LOG_FILE"; then
-            echo "✓ Fallback set_title.sh succeeded" >> "$LOG_FILE"
-        else
-            EXIT_CODE=$?
-            echo "✗ Fallback set_title.sh failed with exit code $EXIT_CODE" >> "$LOG_FILE"
-        fi
-    else
-        echo "✗ Fallback script not found or not executable" >> "$LOG_FILE"
+        bash "$SET_TITLE_SCRIPT" "$PROJECT_NAME" "Claude Code" 2>/dev/null || true
     fi
 fi
-
-echo "=== SessionStart hook completed at $(date) ===" >> "$LOG_FILE"
 
 # Output JSON with additionalContext for Claude Code to inject as system reminder
 # This is how command hooks inject prompts into the conversation context

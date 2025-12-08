@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/session-start-title.sh",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/session-start-launcher.sh",
             "timeout": 10
           }
         ]

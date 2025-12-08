@@ -43,8 +43,9 @@ This skill updates the terminal window title to show current context:
 
 **Required Permission:**
 
-This skill runs a bash script to update the terminal title. To prevent Claude from prompting for permission every time, add this to your `~/.claude/settings.json`:
+This skill runs scripts to update the terminal title. To prevent Claude from prompting for permission every time, add this to your `~/.claude/settings.json`:
 
+**For Unix/Linux/macOS:**
 ```json
 {
   "permissions": {
@@ -55,7 +56,20 @@ This skill runs a bash script to update the terminal title. To prevent Claude fr
 }
 ```
 
+**For Windows:**
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash(pwsh *skills/scripts/set_title.ps1:*)"
+    ]
+  }
+}
+```
+
 **Why this permission is needed:** The skill executes a script that sends terminal escape sequences silently in the background to update your window title without interrupting your workflow.
+
+**Cross-platform support:** The plugin includes both bash scripts (`.sh`) for Unix-like systems and PowerShell scripts (`.ps1`) for Windows. The SessionStart hook automatically detects your OS and uses the appropriate script.
 
 ## Project Detection Strategy
 
@@ -147,22 +161,41 @@ The topic should come from:
 - Current conversation context (what user is working on)
 - Default to "Claude Code" for session start
 
-**Step 3: Execute title update script**
+**Step 3: Detect operating system**
 
-Find the skill base directory (available in the skill loading message) and execute:
+Before executing the script, detect the operating system:
 
+```bash
+# Check if running on Windows (check for common Windows indicators)
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" || "$OSTYPE" == "cygwin" ]]; then
+    OS="windows"
+else
+    OS="unix"
+fi
+```
+
+**Step 4: Execute title update script (cross-platform)**
+
+Find the skill base directory (available in the skill loading message) and execute the appropriate script based on OS:
+
+**For Unix/Linux/macOS:**
 ```bash
 bash <skill-base-dir>/scripts/set_title.sh "Project Name" "Topic"
 ```
 
-The script handles:
-- Reading emoji from `$TERMINAL_TITLE_EMOJI` environment variable
+**For Windows:**
+```bash
+pwsh -NoProfile -ExecutionPolicy Bypass -File <skill-base-dir>/scripts/set_title.ps1 "Project Name" "Topic"
+```
+
+The scripts handle:
+- Reading emoji from `$TERMINAL_TITLE_EMOJI` (Unix) or `$env:TERMINAL_TITLE_EMOJI` (Windows)
 - Sanitizing inputs
 - Formatting and sending terminal escape sequences
 
 Execute this command silently using the Bash tool (pre-approved via permissions).
 
-**Step 4: Done**
+**Step 5: Done**
 
 Title updated silently. Continue responding to user without mentioning the title update unless they ask about it.
 
@@ -230,3 +263,22 @@ Title updated silently. Continue responding to user without mentioning the title
 3. Command: `bash <skill-base-dir>/scripts/set_title.sh "OneOnOne" "Firebase Config"`
 
 **Result:** Terminal title shows `💼 OneOnOne - Firebase Config` (script reads emoji from environment)
+
+---
+
+### Example 5: Windows User Session Start
+
+**Context:** Windows user starts Claude Code in `C:\Users\Nat\projects\my-app`
+
+**Environment:** `$env:TERMINAL_TITLE_EMOJI=💻` (Windows environment variable)
+
+**OS Detection:** Claude detects Windows via `$OSTYPE` check
+
+**Execution:**
+1. Project: "My App" (from directory name, humanized)
+2. Topic: "Claude Code" (session start default)
+3. Command: `pwsh -NoProfile -ExecutionPolicy Bypass -File <skill-base-dir>/scripts/set_title.ps1 "My App" "Claude Code"`
+
+**Result:** Terminal title shows `💻 My App - Claude Code` (PowerShell script reads emoji from `$env:TERMINAL_TITLE_EMOJI`)
+
+**Note:** The SessionStart hook automatically detected Windows and invoked the PowerShell version of the script instead of the bash version.

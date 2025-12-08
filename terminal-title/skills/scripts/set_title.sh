@@ -11,7 +11,8 @@ PROJECT="$1"
 TOPIC="$2"
 
 # Get emoji from environment, default to 🎉
-EMOJI="${TERMINAL_TITLE_EMOJI:-🎉}"
+# Sanitize to prevent ANSI escape sequence injection
+EMOJI=$(echo "${TERMINAL_TITLE_EMOJI:-🎉}" | tr -d '\000-\037')
 
 # Validate and sanitize inputs (remove control characters, limit length)
 PROJECT=$(echo "$PROJECT" | tr -d '\000-\037' | head -c 40)
