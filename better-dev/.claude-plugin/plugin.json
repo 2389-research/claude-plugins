@@ -1,6 +1,5 @@
 {
   "name": "better-dev",
   "description": "[meta] better development: CSS workflows, Firebase development, code quality, and real testing",
-  "version": "1.0.0",
-  "commands": []
+  "version": "1.0.0"
 }

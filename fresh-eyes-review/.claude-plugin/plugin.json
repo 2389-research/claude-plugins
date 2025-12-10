@@ -1,6 +1,5 @@
 {
   "name": "fresh-eyes-review",
   "description": "Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests",
-  "version": "1.0.0",
-  "commands": []
+  "version": "1.0.0"
 }
