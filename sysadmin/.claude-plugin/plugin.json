@@ -2,8 +2,5 @@
   "name": "sysadmin",
   "description": "[meta] system administration: structured Linux maintenance and diagnostics",
   "version": "1.0.0",
-  "dependencies": [
-    "remote-system-maintenance"
-  ],
   "commands": []
 }
