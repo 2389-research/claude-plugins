@@ -1,6 +1,8 @@
 # Test Kitchen
 
-Parallel exploration of implementation approaches. When you're uncertain between approaches, Test Kitchen implements multiple variants simultaneously and lets real tests determine the winner.
+Parallel implementation techniques for different scenarios:
+- **Omakase-off**: Explore multiple approaches when uncertain about WHAT to build
+- **Cookoff**: Race multiple agents when you have a plan and want to compare HOW they execute
 
 ## Installation
 
@@ -12,28 +14,43 @@ Parallel exploration of implementation approaches. When you're uncertain between
 
 ### Skills
 
-| Skill | Description |
-|-------|-------------|
-| `test-kitchen` | Orchestrator - routes to appropriate sub-skill |
-| `test-kitchen:omakase-off` | Agent-driven exploration - detects decision points during brainstorming |
-| `test-kitchen:cookoff` | User-driven competition - implements pre-defined plans (coming soon) |
+| Skill | When | Description |
+|-------|------|-------------|
+| `test-kitchen` | — | Orchestrator - routes to appropriate sub-skill |
+| `test-kitchen:omakase-off` | User uncertain about approach | Explores multiple approaches in parallel |
+| `test-kitchen:cookoff` | Plan exists, choosing execution style | Agents race to implement same plan (coming soon) |
 
-## Quick Example
+## Flow
 
-### Omakase-off (Agent Explores)
+```
+Implementation request arrives
+    ↓
+User uncertain about approach?
+    ├─ Yes → omakase-off (explore approaches)
+    └─ No → Regular brainstorming
+              ↓
+         Plan defined. Implementation style:
+              ├─ Local
+              ├─ Subagent
+              └─ Cookoff (agents compete)
+```
+
+## Quick Examples
+
+### Omakase-off (Uncertain Approach)
 
 ```
 User: "Build a notification system. Could use WebSockets or polling - not sure which."
 
-Claude: Using test-kitchen:omakase-off. I'll explore both approaches.
+Claude: You're uncertain about the approach. Using test-kitchen:omakase-off.
 
-[Brainstorming phase with slot detection]
-[Generates 2 implementation plans]
+[Brainstorming with slot detection]
+[Generates 2 variant plans]
 [Creates worktrees, dispatches parallel agents]
 [Runs scenario tests on both]
 [Presents comparison]
 
-Both variants passed. Results:
+Both variants passed:
 - variant-websocket: 0 issues, 380 lines, 10 tests
 - variant-polling: 1 minor issue, 420 lines, 12 tests
 
@@ -42,12 +59,29 @@ Recommendation: variant-websocket (cleaner, simpler)
 Pick winner: [1] websocket  [2] polling  [3] show me the code
 ```
 
-### Cookoff (User Compares) - Coming Soon
+### Cookoff (Execution Competition) - Coming Soon
 
 ```
-User: "I've written two auth plans in docs/plans/. Implement both and compare."
+User: "Here's my plan for the auth system. Implement it."
 
-Claude: Using test-kitchen:cookoff with your plans...
+Claude: Plan looks good. How would you like to implement?
+1. Local
+2. Subagent
+3. Cookoff
+
+User: "cookoff"
+
+Claude: Using test-kitchen:cookoff. Dispatching 3 agents...
+
+[All agents implement same plan]
+[Compare completion time, test results, code quality]
+
+Results:
+- Agent 1: 12 min, 15 tests, 0 issues
+- Agent 2: 8 min, 15 tests, 1 minor issue
+- Agent 3: 15 min, 14 tests, 0 issues
+
+Pick winner: [1] [2] [3]
 ```
 
 ## How It Works

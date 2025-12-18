@@ -1,93 +1,95 @@
 ---
 name: test-kitchen
-description: Use when user is uncertain between implementation approaches and wants to explore multiple options in parallel - routes to omakase-off (agent picks variants) or cookoff (fixed plans compete)
+description: Parallel implementation techniques - omakase-off for exploring uncertain approaches, cookoff for racing multiple agents on a defined plan
 ---
 
 # Test Kitchen
 
-Orchestrator for parallel implementation exploration. When users are uncertain between approaches, Test Kitchen implements multiple variants simultaneously and lets real tests determine the winner.
+Parallel implementation techniques for different scenarios.
 
 ## Sub-Skills
 
-| Skill | Trigger | Description |
-|-------|---------|-------------|
-| `test-kitchen:omakase-off` | User uncertain, wants agent to decide variants | Exploratory - agent detects decision points during brainstorming and creates variants |
-| `test-kitchen:cookoff` | User has specific plans to compare | Fixed competition - user provides N plans, agents race to implement them |
+| Skill | When | Description |
+|-------|------|-------------|
+| `test-kitchen:omakase-off` | User uncertain about WHAT to build | Explores multiple approaches in parallel |
+| `test-kitchen:cookoff` | User has a plan, choosing HOW to execute | Multiple agents race to implement same plan |
 
-## When to Use Test Kitchen
-
-**Trigger on implementation requests with uncertainty:**
-- "Build X, not sure whether to use A or B"
-- "Implement Y, could go either way on the approach"
-- "Create Z, I want to see options play out"
-
-**Route to omakase-off when:**
-- User expresses general uncertainty during brainstorming
-- User says "try both", "not sure", "either could work"
-- No pre-defined plans exist
-
-**Route to cookoff when:**
-- User has already written multiple implementation plans
-- User wants to compare specific approaches they've defined
-- Plans are fixed, not exploratory
-
-## Routing Logic
+## Flow
 
 ```
-User request arrives
+Implementation request arrives
     ↓
-Is this an implementation request with uncertainty?
-    ├─ No → Use regular brainstorming/implementation
-    └─ Yes → Test Kitchen
+User uncertain about approach?
+    ├─ Yes → test-kitchen:omakase-off
+    │         (explore multiple approaches)
+    │
+    └─ No → Regular brainstorming
               ↓
-         Does user have pre-defined plans to compare?
-              ├─ Yes → test-kitchen:cookoff
-              └─ No  → test-kitchen:omakase-off
+         Plan defined. Implementation style:
+              ├─ Local (implement in current context)
+              ├─ Subagent (single agent executes)
+              └─ test-kitchen:cookoff (agents compete)
 ```
 
 ## Quick Reference
 
-**Omakase-off** (like omakase sushi - chef's choice):
-- Agent drives variant creation
-- Slots detected during brainstorming
-- Agent picks meaningful combinations
+**Omakase-off** (chef's choice - exploring WHAT):
+- Triggered by uncertainty: "not sure", "try both", "either could work"
+- Agent detects decision points during brainstorming
+- Creates multiple variant implementations
+- Tests determine which approach wins
 - Best for: "I don't know which approach, help me explore"
 
-**Cookoff** (like a cooking competition):
-- User provides the plans
-- Agents compete to implement them
-- User-defined success criteria
-- Best for: "I have two ideas, let's see which works better"
+**Cookoff** (competition - comparing HOW):
+- Triggered after a plan is defined
+- One of several execution style options
+- Multiple agents implement the SAME plan
+- Compare execution quality/speed
+- Best for: "I have a plan, let's see which agent does it best"
 
 ## Example Invocations
 
-### Omakase-off Path
+### Omakase-off (Uncertain Approach)
 ```
-User: "Build a todo CLI app. Not sure about storage - JSON files or SQLite could both work."
+User: "Build a todo CLI app. Not sure about storage - JSON or SQLite."
 
-Claude: Using test-kitchen:omakase-off - I'll explore both storage approaches in parallel.
-[Proceeds with omakase-off workflow]
+Claude: You're uncertain about storage approach. Using test-kitchen:omakase-off
+to explore both in parallel.
+[Explores variants, tests determine winner]
 ```
 
-### Cookoff Path
+### Cookoff (Defined Plan, Execution Competition)
 ```
-User: "I've written two plans for the auth system in docs/plans/.
-One uses JWT, one uses sessions. Let's implement both and compare."
+User: "Here's my plan for the auth system. Implement it."
 
-Claude: Using test-kitchen:cookoff - I'll implement both plans in parallel.
-[Proceeds with cookoff workflow]
+Claude: Plan looks good. How would you like to implement?
+1. Local - I'll implement it here
+2. Subagent - dispatch a single agent
+3. Cookoff - multiple agents race to implement
+
+User: "3"
+
+Claude: Using test-kitchen:cookoff - dispatching 3 agents to implement your plan.
+[Agents compete, compare results]
 ```
+
+## Key Distinction
+
+| | Omakase-off | Cookoff |
+|-|-------------|---------|
+| **Question** | WHAT to build? | HOW to execute? |
+| **Input** | Uncertainty | Defined plan |
+| **Variants** | Different approaches | Same plan, different agents |
+| **Compares** | Which approach works | Which execution is best |
 
 ## Common Mistakes
 
-**Wrong routing:**
-- Using omakase-off when user has specific plans → Use cookoff
-- Using cookoff when user wants exploration → Use omakase-off
+**Using omakase-off when plan exists:**
+- User has a clear plan → offer cookoff as execution option, not omakase-off
 
-**Skipping Test Kitchen:**
-- Implementing single approach when user expressed uncertainty
-- Not detecting "try both" or "not sure" signals
+**Skipping omakase-off on uncertainty:**
+- User says "not sure" → trigger omakase-off, don't force a choice
 
-**Over-using Test Kitchen:**
-- Trivial decisions (file naming, config format) don't need parallel exploration
-- Only architectural differences warrant Test Kitchen
+**Confusing the two:**
+- Omakase-off = exploring approaches (multiple PLANS)
+- Cookoff = racing execution (multiple AGENTS, one plan)

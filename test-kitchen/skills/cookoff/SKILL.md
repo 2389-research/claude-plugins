@@ -1,69 +1,107 @@
 ---
 name: cookoff
-description: Use when user has pre-defined implementation plans they want to compare - implements fixed plans in parallel and compares results (PLACEHOLDER - not yet implemented)
+description: Use as an execution style after a plan is defined - multiple agents race to implement the SAME plan, comparing execution quality (PLACEHOLDER - not yet implemented)
 ---
 
 # Cookoff
 
 **STATUS: PLACEHOLDER - Not yet implemented**
 
-Fixed-plan parallel implementation competition. Unlike omakase-off where the agent discovers variants during brainstorming, cookoff takes user-provided plans and races agents to implement them.
+Execution competition where multiple agents race to implement the same plan. Unlike omakase-off which explores different APPROACHES, cookoff compares different EXECUTIONS of a single defined plan.
 
-**Like a cooking competition:** Contestants (agents) are given fixed recipes (plans) and compete to produce the best result.
+**Like a cooking competition:** All contestants get the same recipe, but compete on execution quality.
+
+## When to Use
+
+Cookoff is offered as an **execution style** after brainstorming produces a plan:
+
+```
+Claude: Plan looks good. How would you like to implement?
+1. Local - I'll implement it here
+2. Subagent - dispatch a single agent
+3. Cookoff - multiple agents race to implement
+
+User: "3"
+
+Claude: Using test-kitchen:cookoff - dispatching 3 agents to implement your plan.
+```
+
+## Key Distinction from Omakase-off
+
+| | Omakase-off | Cookoff |
+|-|-------------|---------|
+| **Trigger** | User uncertainty | Plan exists, choosing execution |
+| **Input** | Uncertain approach | Single defined plan |
+| **Agents do** | Different approaches | Same plan |
+| **Compares** | Which approach works | Which execution is best |
 
 ## Planned Features
 
 ### Input
-- User provides 2+ implementation plans (in docs/plans/ or specified locations)
-- Each plan is a complete specification
-- User defines success criteria
+- Single implementation plan (from brainstorming or user-provided)
+- Number of competing agents (default: 3)
+- Optional: custom success criteria
 
 ### Execution
-- One worktree per plan
-- One subagent per worktree
-- All subagents start simultaneously
+- One worktree per agent
+- All agents get the SAME plan
+- All agents start simultaneously
 - Progress tracked in real-time
 
 ### Evaluation
 - Same scenario tests run against all implementations
-- Fresh-eyes review on survivors
+- Fresh-eyes review on all completions
 - Comparison based on:
+  - Completion time
   - Test pass rate
   - Code quality (fresh-eyes findings)
-  - Performance metrics (if applicable)
-  - User-defined criteria
+  - Lines of code / complexity
 
 ### Output
-- Winner selected
+- Winner selected (or user picks from survivors)
 - Losers cleaned up
-- Result report generated
+- Result report with comparison metrics
 
-## When to Use (Future)
+## Example Flow
 
 ```
-User: "I've written two plans for the auth system:
-- docs/plans/auth-jwt.md
-- docs/plans/auth-session.md
+User: "Here's my plan for the notification system. Implement it."
 
-Let's implement both and see which works better."
+Claude: Plan looks good. How would you like to implement?
+1. Local
+2. Subagent
+3. Cookoff
 
-Claude: Using test-kitchen:cookoff with your two plans...
+User: "cookoff with 3 agents"
+
+Claude: Using test-kitchen:cookoff. Dispatching 3 agents...
+
+[Later]
+
+All 3 agents completed:
+- Agent 1: 12 min, 15 tests pass, 0 fresh-eyes issues, 380 lines
+- Agent 2: 8 min, 15 tests pass, 1 minor issue, 420 lines
+- Agent 3: 15 min, 14 tests pass (1 flaky), 0 issues, 350 lines
+
+Recommendation: Agent 2 (fastest, all tests pass, minor issue is trivial)
+
+Pick winner: [1] [2] [3]
 ```
 
 ## Development Notes
 
-This skill will share infrastructure with omakase-off:
+Shares infrastructure with omakase-off:
 - Same worktree management
 - Same parallel agent dispatch
-- Same evaluation pipeline
+- Same evaluation pipeline (scenario-testing, fresh-eyes)
 - Same cleanup process
 
-Main difference: No brainstorming/slot-detection phase - plans are provided upfront.
+Main difference: All agents get the same plan, no brainstorming phase.
 
 ## TODO
 
-- [ ] Define plan format requirements
-- [ ] Implement plan validation
-- [ ] Build execution orchestration
-- [ ] Create comparison/judge logic
-- [ ] Add user-defined success criteria support
+- [ ] Implement agent dispatch with same plan
+- [ ] Add timing/completion tracking
+- [ ] Build comparison metrics
+- [ ] Create winner selection logic
+- [ ] Handle partial completions (some agents fail)

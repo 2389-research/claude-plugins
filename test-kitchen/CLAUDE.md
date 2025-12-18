@@ -2,28 +2,33 @@
 
 ## Overview
 
-Test Kitchen enables parallel exploration of implementation approaches. When users are uncertain between approaches, it implements multiple variants simultaneously and lets real tests determine the winner.
+Test Kitchen provides parallel implementation techniques for different scenarios:
+- **Omakase-off**: When user is uncertain about WHAT to build → explore multiple approaches
+- **Cookoff**: When user has a plan and is choosing HOW to execute → agents race to implement
 
 ## Skills Included
 
 | Skill | Trigger | Status |
 |-------|---------|--------|
-| `test-kitchen` | Implementation requests with uncertainty | Orchestrator |
-| `test-kitchen:omakase-off` | User uncertain, wants agent to explore variants | Active |
-| `test-kitchen:cookoff` | User has specific plans to compare | Placeholder |
+| `test-kitchen` | Routes to appropriate sub-skill | Orchestrator |
+| `test-kitchen:omakase-off` | User uncertain about approach | Active |
+| `test-kitchen:cookoff` | Execution style choice after plan exists | Placeholder |
 
-## Routing Logic
+## Flow
 
 ```
 Implementation request arrives
     ↓
 User uncertain about approach?
-    ├─ No → Regular brainstorming
-    └─ Yes → Test Kitchen
+    ├─ Yes → test-kitchen:omakase-off
+    │         (explore multiple approaches)
+    │
+    └─ No → Regular brainstorming
               ↓
-         Has pre-defined plans?
-              ├─ Yes → cookoff (not yet implemented)
-              └─ No  → omakase-off
+         Plan defined. Implementation style:
+              ├─ Local (implement in current context)
+              ├─ Subagent (single agent executes)
+              └─ test-kitchen:cookoff (agents compete)
 ```
 
 ## Key Patterns
