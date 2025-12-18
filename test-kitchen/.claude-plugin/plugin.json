@@ -1,0 +1,5 @@
+{
+  "name": "test-kitchen",
+  "description": "Parallel exploration of implementation approaches - run multiple variants simultaneously and let tests determine the winner",
+  "version": "1.0.0"
+}

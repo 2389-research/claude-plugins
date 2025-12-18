@@ -156,6 +156,22 @@
             "strict": false
         },
         {
+            "name": "test-kitchen",
+            "source": "./test-kitchen",
+            "description": "Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner",
+            "version": "1.0.0",
+            "keywords": [
+                "parallel",
+                "exploration",
+                "variants",
+                "comparison",
+                "implementation",
+                "testing",
+                "worktrees"
+            ],
+            "strict": false
+        },
+        {
             "name": "agent-drugs",
             "source": {
                 "source": "url",
