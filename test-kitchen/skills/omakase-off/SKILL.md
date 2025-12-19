@@ -262,20 +262,31 @@ When multiple variants survive, the agent autonomously selects the winner using 
 
 | Score | Meaning | Concrete Indicators |
 |-------|---------|---------------------|
-| **5** | Exceeds requirements | All stated requirements met AND adds obvious value user didn't ask for but clearly needs (e.g., game has AI opponent, not just "works") |
-| **4** | Fully meets requirements | Every explicit requirement implemented and working correctly. No gaps. |
-| **3** | Meets core requirements | Primary use case works. Missing 1-2 secondary features or edge case handling. |
-| **2** | Partially meets | 50-80% of requirements work. Key features missing or broken. |
+| **5** | Exceeds requirements | All requirements met, deployment needs satisfied, AND adds obvious value user didn't ask for but clearly needs |
+| **4** | Fully meets requirements | Every explicit requirement implemented correctly. Deployment/distribution needs met. No gaps. |
+| **3** | Meets core requirements | Primary use case works. Missing 1-2 secondary features, edge cases, or has deployment friction. |
+| **2** | Partially meets | 50-80% of requirements work. Key features missing, broken, or deployment method doesn't match needs. |
 | **1** | Misses the point | Solves a different problem than requested. <50% of requirements addressed. |
 
 *Scoring checklist - count YES answers:*
+
+**Functional requirements:**
 - [ ] Does the primary use case work end-to-end?
 - [ ] Are all explicitly stated requirements implemented?
-- [ ] Would the user actually use this, or just demo it?
-- [ ] Does it handle the realistic scenarios, not just happy path?
-- [ ] Does it solve the real problem, not just the literal request?
+- [ ] Does it handle realistic scenarios, not just happy path?
 
-**5** = 5 yes, **4** = 4 yes, **3** = 3 yes, **2** = 2 yes, **1** = 0-1 yes
+**User needs (beyond literal requirements):**
+- [ ] Would the user actually use this, or just demo it?
+- [ ] Does it solve the real problem, not just the literal request?
+- [ ] Does deployment/distribution match user's stated needs? (e.g., "standalone" = no build step, "shareable" = single file, "production" = proper hosting)
+
+**Future considerations (when relevant):**
+- [ ] If user mentioned growth/scaling needs, does architecture support it?
+- [ ] If user mentioned team/collaboration, is it maintainable by others?
+
+**5** = 7-8 yes, **4** = 5-6 yes, **3** = 4 yes, **2** = 2-3 yes, **1** = 0-1 yes
+
+*Note:* Not all checklist items apply to every project. Score based on items that ARE relevant. A solo hobby project doesn't need "maintainable by team" but a startup MVP does.
 
 **Criterion 2: Justified Complexity**
 *Is every line of code earning its keep?*
