@@ -146,4 +146,4 @@ Test Kitchen orchestrates these skills (uses fallbacks if not installed):
 
 ## Origin
 
-Adapted from the slot-machine-development skill. The "Test Kitchen" name reflects the experimental nature - like a restaurant test kitchen where chefs try multiple approaches before putting a dish on the menu.
+The "Test Kitchen" name reflects the experimental nature - like a restaurant test kitchen where chefs try multiple approaches before putting a dish on the menu.
