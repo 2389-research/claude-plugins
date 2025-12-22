@@ -1,95 +1,126 @@
 ---
 name: test-kitchen
-description: Parallel implementation techniques - omakase-off for exploring uncertain approaches, cookoff for racing multiple agents on a defined plan
+description: Parallel implementation framework. Omakase-off triggers FIRST on build/create requests (wraps brainstorming). Cookoff triggers at design→implementation transition (wraps execution). Together they provide entry and exit gates for the Test Kitchen workflow.
 ---
 
 # Test Kitchen
 
-Parallel implementation techniques for different scenarios.
+Parallel implementation framework with two gate skills:
 
-## Sub-Skills
-
-| Skill | When | Description |
-|-------|------|-------------|
-| `test-kitchen:omakase-off` | User uncertain about WHAT to build | Explores multiple approaches in parallel |
-| `test-kitchen:cookoff` | User has a plan, choosing HOW to execute | Multiple agents race to implement same plan |
+| Skill | Gate | Trigger |
+|-------|------|---------|
+| `test-kitchen:omakase-off` | **Entry** | FIRST on any build/create/implement request |
+| `test-kitchen:cookoff` | **Exit** | At design→implementation transition |
 
 ## Flow
 
 ```
-Implementation request arrives
+"Build X" / "Create Y" / "Implement Z"
     ↓
-User uncertain about approach?
-    ├─ Yes → test-kitchen:omakase-off
-    │         (explore multiple approaches)
-    │
-    └─ No → Regular brainstorming
-              ↓
-         Plan defined. Implementation style:
-              ├─ Local (implement in current context)
-              ├─ Subagent (single agent executes)
-              └─ test-kitchen:cookoff (agents compete)
+┌─────────────────────────────────────┐
+│  OMAKASE-OFF (entry gate)           │
+│  Wraps brainstorming                │
+│                                     │
+│  Choice:                            │
+│  1. Brainstorm together             │
+│  2. Omakase (3-5 parallel designs)  │
+└─────────────────────────────────────┘
+    ↓
+[Brainstorming / Design phase]
+    ↓
+Design complete, "let's implement"
+    ↓
+┌─────────────────────────────────────┐
+│  COOKOFF (exit gate)                │
+│  Wraps implementation               │
+│                                     │
+│  Choice:                            │
+│  1. Cookoff (2-5 parallel agents)   │
+│  2. Single subagent                 │
+│  3. Local implementation            │
+└─────────────────────────────────────┘
+    ↓
+[Implementation]
 ```
 
-## Quick Reference
+## Key Insight
 
-**Omakase-off** (chef's choice - exploring WHAT):
-- Triggered by uncertainty: "not sure", "try both", "either could work"
-- Agent detects decision points during brainstorming
-- Creates multiple variant implementations
-- Tests determine which approach wins
-- Best for: "I don't know which approach, help me explore"
+**Skills need aggressive triggers to work.** They can't passively detect "uncertainty" or "readiness" - they must claim specific moments in the conversation flow.
 
-**Cookoff** (competition - comparing HOW):
-- Triggered after a plan is defined
-- One of several execution style options
-- Multiple agents implement the SAME plan
-- Compare execution quality/speed
-- Best for: "I have a plan, let's see which agent does it best"
+- **Omakase-off**: Claims the BUILD/CREATE moment (before brainstorming)
+- **Cookoff**: Claims the IMPLEMENT moment (after design)
 
-## Example Invocations
+## When Each Triggers
 
-### Omakase-off (Uncertain Approach)
-```
-User: "Build a todo CLI app. Not sure about storage - JSON or SQLite."
+### Omakase-off (Three Triggers)
 
-Claude: You're uncertain about storage approach. Using test-kitchen:omakase-off
-to explore both in parallel.
-[Explores variants, tests determine winner]
-```
+**Trigger 1: BEFORE brainstorming**
+- "I want to build...", "Create a...", "Implement...", "Add a feature..."
+- ANY signal to start building something
+- Offers choice: Brainstorm together OR Omakase (parallel designs)
 
-### Cookoff (Defined Plan, Execution Competition)
-```
-User: "Here's my plan for the auth system. Implement it."
+**Trigger 2: DURING brainstorming (slot detection)**
+- 2+ uncertain responses on architectural decisions
+- "not sure", "don't know", "either works", "you pick", "no preference"
+- Offers to explore detected slots in parallel
 
-Claude: Plan looks good. How would you like to implement?
-1. Local - I'll implement it here
-2. Subagent - dispatch a single agent
-3. Cookoff - multiple agents race to implement
+**Trigger 3: Explicitly requested**
+- "try both approaches", "explore both", "omakase"
+- "implement both variants", "let's see which is better"
 
-User: "3"
+### Cookoff
+- "Let's implement"
+- "Looks good, let's build"
+- "Ready to code"
+- Design doc just committed
+- ANY signal to move from design to code
 
-Claude: Using test-kitchen:cookoff - dispatching 3 agents to implement your plan.
-[Agents compete, compare results]
-```
+## Omakase Mode (Skip Brainstorming)
+
+If user picks "Omakase" at the entry gate:
+1. Quick context gathering (1-2 questions)
+2. Generate 3-5 best architectural approaches
+3. Implement ALL in parallel
+4. Tests pick the winner
+5. Skip detailed brainstorming entirely
+
+Best for: "I'm flexible, show me options in working code"
+
+## Cookoff Mode (Parallel Implementation)
+
+If user picks "Cookoff" at the exit gate:
+1. Each agent reads the same design doc
+2. Each agent creates their OWN implementation plan
+3. All implement in parallel
+4. Compare results, pick winner
+
+Best for: "I want to see different implementation approaches"
 
 ## Key Distinction
 
 | | Omakase-off | Cookoff |
 |-|-------------|---------|
-| **Question** | WHAT to build? | HOW to execute? |
-| **Input** | Uncertainty | Defined plan |
-| **Variants** | Different approaches | Same plan, different agents |
-| **Compares** | Which approach works | Which execution is best |
+| **Gate** | Entry (before/during brainstorming) | Exit (after design) |
+| **Question** | HOW to explore? | HOW to implement? |
+| **Parallel on** | Different DESIGNS | Same design, different PLANS |
+| **Triggers** | Build request, indecision detection, explicit | "let's implement" signal |
+| **Skips** | Brainstorming (optional via short-circuit) | Nothing - always after design |
 
-## Common Mistakes
+## Slot Detection (During Brainstorming)
 
-**Using omakase-off when plan exists:**
-- User has a clear plan → offer cookoff as execution option, not omakase-off
+When omakase-off delegates to brainstorming, it passively tracks architectural decisions where user shows uncertainty:
 
-**Skipping omakase-off on uncertainty:**
-- User says "not sure" → trigger omakase-off, don't force a choice
+**Detection signals:**
+- "not sure", "don't know", "either works", "both sound good"
+- "you pick", "whatever you think", "no preference"
+- User defers 2+ decisions in a row
 
-**Confusing the two:**
-- Omakase-off = exploring approaches (multiple PLANS)
-- Cookoff = racing execution (multiple AGENTS, one plan)
+**Slot classification:**
+| Type | Examples | Worth exploring? |
+|------|----------|------------------|
+| **Architectural** | Storage engine, framework, auth method | Yes - different code paths |
+| **Trivial** | File location, naming, config format | No - easy to change |
+
+**At end of brainstorming:**
+- If architectural slots exist → offer parallel exploration
+- If no slots → hand off to cookoff for implementation

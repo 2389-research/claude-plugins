@@ -1,15 +1,17 @@
 ---
 name: omakase-off
-description: Use when user is uncertain about implementation approach and wants agent to explore variants - detects decision points during brainstorming and implements multiple approaches in parallel
+description: ALWAYS invoke FIRST on ANY "build/create/implement/add feature" request. This skill WRAPS brainstorming - it decides the approach. Present choice BEFORE any brainstorming starts: (1) Brainstorm together step-by-step, OR (2) Omakase - I generate 3-5 best approaches, implement in parallel, tests pick winner. If user picks brainstorming, check if brainstorming skill exists - if yes use it, if no do brainstorming yourself (ask questions, propose options, validate). Also triggers DURING brainstorming on 2+ "not sure"/"don't know" responses. For same design competing implementations, use cookoff.
 ---
 
-# Omakase-off
+# Omakase-Off
 
-Exploratory parallel implementation where the agent detects decision points during brainstorming and creates meaningful variant combinations to implement simultaneously.
+Chef's choice exploration - when you're not sure WHAT to build, explore different approaches in parallel.
 
-**Like omakase sushi:** The chef (agent) chooses which variants to explore based on user uncertainty signals.
+**Part of Test Kitchen Development:**
+- `omakase-off` - Chef's choice exploration (different approaches/plans)
+- `cookoff` - Same recipe, multiple cooks compete (same plan, multiple implementations)
 
-**Core principle:** Ask first, then either hand off to regular brainstorming OR implement multiple approaches in parallel to let real code + tests determine the best solution.
+**Core principle:** Let indecision emerge naturally during brainstorming, then implement multiple approaches in parallel to let real code + tests determine the best solution.
 
 ## Skill Dependencies
 
@@ -35,16 +37,95 @@ This skill orchestrates other skills. Check what's installed and use fallbacks i
 
 ## When to Use
 
-Trigger on implementation requests with user uncertainty:
-- "Build a...", "Implement...", "Create a..."
-- User responds with "not sure", "try both", "either could work"
-- Any non-trivial feature where approach is unclear
+Omakase-off has TWO trigger points:
+
+### Trigger 1: BEFORE Brainstorming (Short-Circuit Option)
+
+When user requests "build X", "create Y", "implement Z" - BEFORE diving into detailed brainstorming, offer the short-circuit:
+
+```
+Before we brainstorm the details, would you like to:
+
+1. Brainstorm together - We'll explore requirements and design step by step
+2. Omakase (chef's choice) - I'll generate 3-5 best approaches, implement them
+   in parallel, and let tests pick the winner
+   → Best when: you're flexible on approach, want to see options in code
+
+Which approach?
+```
+
+**When to offer this:** On any substantial "build/create/implement" request before starting brainstorming.
+
+### Trigger 2: DURING Brainstorming (Indecision Detection)
+
+If user shows uncertainty during brainstorming:
+
+**Detection signals:**
+- 2+ uncertain responses in a row on architectural decisions
+- Phrases: "not sure", "don't know", "either works", "you pick", "no preference", "hmm"
+- User defers multiple decisions to you
+
+**When detected, offer omakase:**
+```
+You seem flexible on the approach. Would you like to:
+1. I'll pick what seems best and continue brainstorming
+2. Explore multiple approaches in parallel (omakase-off)
+   → I'll implement 2-3 variants and let tests decide
+```
+
+### Trigger 3: Explicitly Requested
+
+User directly asks:
+- "try both approaches", "explore both", "omakase"
+- "implement both variants", "let's see which is better"
+- "not sure which is better, try both"
 
 ## The Process
 
+### Phase 0: Entry Point (Short-Circuit vs Brainstorm)
+
+**When user requests "build/create/implement X":**
+
+Present the choice BEFORE starting detailed brainstorming:
+```
+Before we dive into the details, how would you like to approach this?
+
+1. Brainstorm together - We'll explore requirements and design step by step
+2. Omakase (chef's choice) - I'll generate 3-5 best approaches, implement
+   them in parallel, and let tests pick the winner
+   → Best when: you're flexible, want to see options in working code
+
+Which approach?
+```
+
+**If user picks Omakase (option 2):**
+1. Quick context gathering (1-2 essential questions only)
+2. Generate 3-5 distinct architectural approaches
+3. Jump directly to Phase 2 (Plan Generation) with those variants
+4. Skip detailed brainstorming entirely
+
+**If user picks Brainstorm (option 1):**
+Continue to Phase 1 below.
+
 ### Phase 1: Brainstorming with Passive Slot Detection
 
-**Start brainstorming normally** using `superpowers:brainstorming`. Don't ask upfront about parallel exploration - let it emerge naturally.
+**First, check if a brainstorming skill is available:**
+- Look for `superpowers:brainstorming` or similar skill in available skills
+- If available → invoke it and passively detect indecision during the flow
+- If NOT available → **do brainstorming yourself using fallback behavior:**
+  - Ask questions one at a time
+  - Propose 2-3 approaches for key decisions
+  - Validate incrementally with user
+  - Track architectural vs trivial decisions
+
+**Fallback brainstorming flow (when no brainstorming skill):**
+1. Read the codebase to understand context
+2. Ask focused questions about the feature (what, where, how)
+3. For each decision point, propose options and get user input
+4. Track decisions and note any indecision (potential slots)
+5. Build toward a design document
+
+**During brainstorming (whether using skill or fallback), passively detect indecision:**
 
 **Detect indecision signals** when user responds to options:
 - Explicit: "slot", "try both", "explore both"
@@ -91,7 +172,24 @@ Fixed decisions:
 
 ### Phase 1.5: End-of-Brainstorm Decision
 
-**After brainstorming completes, if slots were collected:**
+**If NO architectural slots were collected** (user was decisive):
+
+Hand off to cookoff for implementation. Present options:
+```
+Design complete. How would you like to implement?
+
+1. Cookoff (recommended) - N parallel agents, each creates own plan, pick best
+   → Complexity: [assess from design]
+   → Best for: medium-high complexity, want to compare implementations
+2. Single subagent - One agent plans and implements
+3. Local - Implement here in this session
+```
+
+If user picks cookoff, invoke cookoff skill and exit omakase-off.
+
+---
+
+**If slots WERE collected** (user showed indecision):
 
 ```
 I noticed some open decisions during our brainstorm:
@@ -105,9 +203,9 @@ Would you like to:
 Which approach?
 ```
 
-**If "Best guess":** Pick the most suitable option for each slot, proceed with single plan.
+**If "Best guess":** Pick the most suitable option for each slot, proceed with single plan (hand off to cookoff with the options above).
 
-**If "Explore in parallel":** Continue to Phase 2.
+**If "Explore in parallel":** Continue to Phase 2 (omakase-off's variant exploration).
 
 **Combination limits (max 5-6 implementations):**
 
@@ -138,13 +236,14 @@ For each variant combination:
 2. Store in structured directory:
 
 ```
-docs/plans/<feature>-<YYYYMMDD>/
-  plan.md                    # Original brainstorm design
-  result.md                  # Final report (written at end)
-  variant-<slug-1>/
-    plan.md                  # Implementation plan for this variant
-  variant-<slug-2>/
-    plan.md
+docs/plans/<feature>/
+  design.md                  # Shared context from brainstorming
+  omakase/
+    variant-<slug-1>/
+      plan.md                # Implementation plan for this variant
+    variant-<slug-2>/
+      plan.md
+    result.md                # Final report (written at end)
 ```
 
 ### Phase 3: Implementation
@@ -152,28 +251,34 @@ docs/plans/<feature>-<YYYYMMDD>/
 **Setup worktrees** (separate from plans directory):
 - Use `git-worktrees` dependency for each variant
 - Worktree location: `.worktrees/` or per project convention
-- Branch naming: `test-kitchen/<feature>/<variant-name>` (e.g., `test-kitchen/auth/jwt-redis`)
+- Branch naming: `<feature>/omakase/<variant-name>` (e.g., `auth/omakase/jwt-redis`)
 - All worktrees created before implementation starts
 
-**Parallel execution using `parallel-agents`:**
+**CRITICAL: Dispatch ALL variants in a SINGLE message**
 
-Each variant gets its own subagent. Use `parallel-agents` pattern:
+Use `parallel-agents` pattern. Send ONE message with multiple Task tool calls:
 
 ```
-Dispatch in parallel (single message with multiple Task tools):
+<single message>
+  Task(variant-json, run_in_background: true)
+  Task(variant-sqlite, run_in_background: true)
+</single message>
+```
 
-Task 1: "Implement variant-json in .worktrees/variant-json"
-  - Use `subagent-dev` to execute plan
-  - Follow `tdd` for each task
-  - Use `verification` before claiming done
-  - Report: what was built, test results, any issues
+Do NOT send separate messages for each variant.
 
-Task 2: "Implement variant-sqlite in .worktrees/variant-sqlite"
-  - Same instructions...
+**Subagent prompt template:**
+```
+Implement variant-<name> in .worktrees/variant-<name>
+- Read plan from docs/plans/<feature>/omakase/variant-<name>/plan.md
+- Use `subagent-dev` to execute plan
+- Follow `tdd` for each task
+- Use `verification` before claiming done
+- Report: what was built, test results, any issues
 ```
 
 **Each subagent workflow:**
-1. Read their variant's plan from `docs/plans/<feature>/variant-<name>/plan.md`
+1. Read their variant's plan from `docs/plans/<feature>/omakase/variant-<name>/plan.md`
 2. Execute tasks using `subagent-dev` (fresh context per task, review between)
 3. Follow `tdd` - write test first, watch fail, implement, pass
 4. Use `verification` - run tests, read output, THEN claim complete
@@ -277,12 +382,12 @@ Verification complete. Winner confirmed.
 **Losers:** Cleanup
 ```bash
 git worktree remove <worktree-path>
-git branch -D test-kitchen/<feature>/<variant>
+git branch -D <feature>/omakase/<variant>
 ```
 
 **Write result.md:**
 ```markdown
-# Test Kitchen Results: <feature>
+# Omakase-Off Results: <feature>
 
 ## Variants
 | Variant | Tests | Scenarios | Fresh-Eyes | Result |
@@ -300,9 +405,11 @@ Reason: Both passed, but variant-json was simpler (fewer lines, cleaner fresh-ey
 
 ## Cleanup
 Worktrees removed: 1
-Branches deleted: test-kitchen/todo/variant-sqlite
-Plans preserved: docs/plans/todo-20251217/
+Branches deleted: todo/omakase/variant-sqlite
+Plans preserved: docs/plans/<feature>/omakase/
 ```
+
+Save to: `docs/plans/<feature>/omakase/result.md`
 
 ## Skills Orchestrated
 
@@ -319,7 +426,7 @@ Uses dependencies defined above. Primary skill if installed, fallback otherwise.
 | `verification` | 3, 5 | Before claiming variant done; before declaring winner |
 | `code-review` | 3 | Review each variant after implementation |
 | `scenario-testing` | 4.1 | Run same scenarios against all variants |
-| `fresh-eyes` | 4.2 | Quality review on survivors - input for judge |
+| `fresh-eyes` | 4.2 | Quality review on survivors → input for judge |
 | `finish-branch` | 5 | Handle winner (merge/PR), cleanup losers |
 
 ## Common Mistakes
@@ -349,9 +456,17 @@ Uses dependencies defined above. Primary skill if installed, fallback otherwise.
 ```
 User: "I need to build a CLI todo app."
 
-Claude: I'm using test-kitchen:omakase-off. Let's figure out what you're building.
+Claude: I'm using omakase-off.
 
-Claude: What language would you like to use?
+Before we dive into the details, how would you like to approach this?
+
+1. Brainstorm together - We'll explore requirements and design step by step
+2. Omakase (chef's choice) - I'll generate 3-5 best approaches, implement
+   them in parallel, and let tests pick the winner
+
+User: "1"
+
+Claude: Great, let's brainstorm. What language would you like to use?
 
 User: "not sure"
 
