@@ -172,6 +172,23 @@
             "strict": false
         },
         {
+            "name": "xtool",
+            "source": "./xtool",
+            "description": "Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode",
+            "version": "1.0.0",
+            "keywords": [
+                "ios",
+                "xtool",
+                "swiftpm",
+                "swift",
+                "xcode-free",
+                "cross-platform",
+                "widgets",
+                "extensions"
+            ],
+            "strict": false
+        },
+        {
             "name": "agent-drugs",
             "source": {
                 "source": "url",

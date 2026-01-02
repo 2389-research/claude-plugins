@@ -1,0 +1,5 @@
+{
+  "name": "xtool",
+  "description": "Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode",
+  "version": "1.0.0"
+}
