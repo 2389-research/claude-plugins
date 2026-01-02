@@ -189,6 +189,22 @@
             "strict": false
         },
         {
+            "name": "worldview-synthesis",
+            "source": "./worldview-synthesis",
+            "description": "Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation",
+            "version": "1.0.0",
+            "keywords": [
+                "worldview",
+                "values",
+                "philosophy",
+                "beliefs",
+                "manifesto",
+                "mission",
+                "self-discovery"
+            ],
+            "strict": false
+        },
+        {
             "name": "agent-drugs",
             "source": {
                 "source": "url",
