@@ -13,6 +13,8 @@ Auto-detects when someone wants to:
 - Create annual review frameworks
 - Set up goal-setting systems
 - Implement executive coaching frameworks
+- Apply Bill Campbell / Trillion Dollar Coach principles
+- Develop their people or build better teams
 
 ## Key Patterns
 
@@ -20,12 +22,27 @@ Auto-detects when someone wants to:
 
 The core principle is clarity over productivity. Output should feel like an executive coach - calm, direct, insightful.
 
-### Four Required Frameworks
+### Five Required Frameworks
 
 1. **Dr. Anthony Gustin Annual Review** - Wins, lessons, relationships, energy patterns
 2. **Tim Ferriss Ideal Lifestyle Costing** - Dreamlines with costs, TMI calculation
 3. **Tony Robbins Vivid Vision** - Present-tense 3-year future description
 4. **Alex Lieberman Life Map** - 6 domains: Career, Relationships, Health, Meaning, Finances, Fun
+5. **Bill Campbell Coaching Principles** - People-first leadership from "Trillion Dollar Coach"
+
+### Campbell Core Principles
+
+| Principle | Description |
+|-----------|-------------|
+| It's The People | Top priority is well-being and success of your people |
+| Work The Team, Then The Problem | Ensure right team is in place before tackling problems |
+| Only Coach The Coachable | Look for honesty, humility, perseverance, openness to learning |
+| The Lovely Reset | Start meetings with personal check-ins |
+| Team First | Commit to the cause, not just personal success |
+
+**The Campbell Yardstick:** "I count up how many people I've helped become great leaders."
+
+**Four Characteristics to Seek:** Smart (far analogies), Hard Work, Integrity, Grit
 
 ### Review Cadences
 
@@ -40,8 +57,8 @@ The core principle is clarity over productivity. Output should feel like an exec
 
 ```
 ceo-personal-os/
-├── frameworks/          # 4 specific frameworks with credits
-├── interviews/          # Coach-style question scripts
+├── frameworks/          # 5 specific frameworks with credits
+├── interviews/          # Coach-style question scripts (including team/people)
 ├── reviews/             # Templates for each cadence
 ├── goals/               # 1/3/10 year horizons
 ├── uploads/             # Past reviews for pattern extraction
@@ -75,8 +92,10 @@ The `memory.md` file tracks:
 
 When building a CEO Personal OS:
 1. Use TodoWrite to track every folder/file
-2. Include all 4 frameworks with proper credits
-3. Generate coach-style interview questions
+2. Include all 5 frameworks with proper credits (Gustin, Ferriss, Robbins, Lieberman, Campbell)
+3. Generate coach-style interview questions (including Team & People reflection)
 4. Create templates in each review folder
 5. Initialize memory.md for pattern tracking
 6. Keep tone calm and direct throughout
+7. Include Campbell Yardstick question in quarterly reviews: "Who have I developed?"
+8. Add team/people reflection for executives who manage others

@@ -1,6 +1,6 @@
 ---
 name: ceo-personal-os
-description: Use when building a personal productivity or operating system for a CEO, founder, or executive - when user mentions annual reviews, personal OS, life planning, goal setting systems, or executive coaching frameworks
+description: Use when building a personal productivity or operating system for a CEO, founder, or executive - when user mentions annual reviews, personal OS, life planning, goal setting systems, executive coaching frameworks, or Bill Campbell / Trillion Dollar Coach principles
 ---
 
 # CEO Personal Operating System
@@ -17,6 +17,8 @@ Build a **reflection system**, not a task manager. This is a private, single-use
 - Building annual review or goal-setting system for an executive
 - Creating reflection frameworks for a CEO/founder
 - User mentions frameworks: Gustin, Ferriss Lifestyle Costing, Vivid Vision, Life Map
+- User mentions Bill Campbell, Trillion Dollar Coach, or coaching principles
+- User wants to develop their people or build better teams
 
 ## Required Structure
 
@@ -33,11 +35,13 @@ ceo-personal-os/
 │   ├── annual_review.md         # Gustin-style reflection
 │   ├── vivid_vision.md          # Robbins-style future visualization
 │   ├── ideal_life_costing.md    # Ferriss lifestyle design
-│   └── life_map.md              # Lieberman 6-domain model
+│   ├── life_map.md              # Lieberman 6-domain model
+│   └── campbell_coaching.md     # Bill Campbell people-first principles
 ├── interviews/
 │   ├── past_year_reflection.md  # Coach-style year review
 │   ├── identity_and_values.md   # Who am I becoming?
-│   └── future_self_interview.md # 10-year visualization
+│   ├── future_self_interview.md # 10-year visualization
+│   └── team_people_reflection.md # Campbell-style people development
 ├── reviews/
 │   ├── daily/                   # 5-min daily check-ins
 │   ├── weekly/                  # Weekly strategic reviews
@@ -101,6 +105,43 @@ Track these 6 domains:
 
 Rate each 1-10 quarterly. Identify imbalances.
 
+### 5. Bill Campbell Coaching Principles
+
+Credit: "Trillion Dollar Coach" by Eric Schmidt, Jonathan Rosenberg, Alan Eagle
+
+**Core Principles:**
+
+| Principle | Description |
+|-----------|-------------|
+| **It's The People** | Your top priority is the well-being and success of your people. Support, respect, trust. |
+| **Work The Team, Then The Problem** | When facing any problem, first ensure the right team is in place. |
+| **Only Coach The Coachable** | Look for honesty, humility, perseverance, and openness to learning. |
+| **The Lovely Reset** | Start meetings with personal check-ins (weekend, family). Creates better decisions. |
+| **Free-Form Listening** | Full attention, Socratic questions, no distractions. |
+| **Team First** | Commit to the cause, not just personal success. |
+
+**Four Characteristics to Seek in People:**
+1. **Smart** - Ability to make "far analogies" across domains
+2. **Hard Work** - Willingness to put in the effort
+3. **Integrity** - Honest with others and themselves
+4. **Grit** - Passion and perseverance to get back up
+
+**The Campbell Yardstick:**
+> "I count up how many people I've helped become great leaders. That's how I measure success."
+
+Include in quarterly reviews:
+- Who did I develop this quarter?
+- Who needs more support?
+- Is the right team in place for each challenge?
+- Am I creating psychological safety?
+
+**The "What Next?" Framework (Post-50):**
+- Be creative - your most creative years are ahead
+- Don't be a dilettante - have accountability in everything
+- Find people with vitality - often younger
+- Apply your unique gifts
+- Don't waste time worrying about the future
+
 ## Additional Frameworks to Include
 
 - **CEO Energy Management**: Track energy, not just time
@@ -136,6 +177,17 @@ Coach-style questions (non-judgmental, reflective):
 - "What did you have to give up to get here?"
 - "What do you wish you had started sooner?"
 - "What advice would future-you give present-you?"
+```
+
+```markdown
+## Team & People Reflection (Campbell-style)
+- "Who are you most proud of developing this year?"
+- "Who on your team needs more support right now?"
+- "Is the right team in place for your biggest challenge?"
+- "What keeps you up at night about your people?"
+- "Who have you helped become a great leader?"
+- "Are you creating psychological safety? How do you know?"
+- "Who do you need to have a hard conversation with?"
 ```
 
 ## Review Cadence Specifications
@@ -222,8 +274,8 @@ The README.md must explain:
 ## Completion Checklist
 
 - [ ] All folders and files created per structure
-- [ ] All 4 frameworks documented with credits
-- [ ] All 3 interview scripts with coaching questions
+- [ ] All 5 frameworks documented with credits (Gustin, Ferriss, Robbins, Lieberman, Campbell)
+- [ ] All 4 interview scripts with coaching questions (including Team & People)
 - [ ] All 4 review cadences with templates
 - [ ] All goal files (1/3/10 year) populated
 - [ ] memory.md initialized with pattern tracking structure
@@ -231,6 +283,7 @@ The README.md must explain:
 - [ ] README explains daily/weekly/quarterly/annual usage
 - [ ] Tone is calm, direct, insightful throughout
 - [ ] No generic productivity advice substituted for specified frameworks
+- [ ] Campbell Yardstick question in quarterly reviews ("Who have I developed?")
 
 ## Review Templates Required
 

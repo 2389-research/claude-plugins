@@ -114,7 +114,7 @@
         {
             "name": "ceo-personal-os",
             "source": "./ceo-personal-os",
-            "description": "Personal operating system for executives - reflection frameworks, goal systems, and coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman)",
+            "description": "Personal operating system for executives - reflection frameworks, goal systems, and coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell)",
             "version": "1.0.0",
             "keywords": [
                 "ceo",
@@ -122,8 +122,10 @@
                 "reflection",
                 "goals",
                 "annual-review",
-                "productivity",
-                "coaching"
+                "coaching",
+                "campbell",
+                "trillion-dollar-coach",
+                "people-first"
             ],
             "strict": false
         },

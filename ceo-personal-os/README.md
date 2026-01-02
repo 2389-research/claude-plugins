@@ -22,6 +22,7 @@ Personal operating system for executives - reflection frameworks, goal systems, 
 | Ideal Lifestyle Costing | Tim Ferriss | Design life by cost |
 | Vivid Vision | Tony Robbins | 3-year future visualization |
 | Life Map | Alex Lieberman | 6-domain life balance |
+| Coaching Principles | Bill Campbell | People-first leadership & team development |
 
 ## Quick Example
 
@@ -30,7 +31,7 @@ Start with: "Help me build a personal operating system"
 The skill generates a complete structure:
 ```
 ceo-personal-os/
-├── frameworks/          # 4 specific frameworks
+├── frameworks/          # 5 specific frameworks (including Campbell)
 ├── interviews/          # Coach-style question scripts
 ├── reviews/             # Daily/weekly/quarterly/annual
 ├── goals/               # 1/3/10 year horizons
@@ -57,7 +58,9 @@ ceo-personal-os/
 - "Help me with my annual review"
 - Building goal-setting systems for executives
 - Life planning and reflection frameworks
-- Mentions of Gustin, Ferriss, Robbins, or Lieberman frameworks
+- Mentions of Gustin, Ferriss, Robbins, Lieberman, or Campbell frameworks
+- "How do I develop my people?" or team-first leadership questions
+- Mentions of "Trillion Dollar Coach" or Bill Campbell
 
 ## Links
 
