@@ -112,6 +112,22 @@
             "strict": false
         },
         {
+            "name": "ceo-personal-os",
+            "source": "./ceo-personal-os",
+            "description": "Personal operating system for executives - reflection frameworks, goal systems, and coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman)",
+            "version": "1.0.0",
+            "keywords": [
+                "ceo",
+                "executive",
+                "reflection",
+                "goals",
+                "annual-review",
+                "productivity",
+                "coaching"
+            ],
+            "strict": false
+        },
+        {
             "name": "fresh-eyes-review",
             "source": "./fresh-eyes-review",
             "description": "Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests",
