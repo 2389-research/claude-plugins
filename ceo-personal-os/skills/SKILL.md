@@ -1,6 +1,6 @@
 ---
 name: ceo-personal-os
-description: Use when building a personal productivity or operating system for a CEO, founder, or executive - when user mentions annual reviews, personal OS, life planning, goal setting systems, executive coaching frameworks, Bill Campbell / Trillion Dollar Coach principles, or startup failure patterns / Why Startups Fail
+description: Use when building a personal productivity or operating system for a CEO, founder, or executive - when user mentions annual reviews, personal OS, life planning, goal setting systems, executive coaching frameworks, Bill Campbell / Trillion Dollar Coach, startup failure patterns, Good to Great / Level 5 Leadership, Buy Back Your Time, or E-Myth / work ON not IN your business
 ---
 
 # CEO Personal Operating System
@@ -21,6 +21,10 @@ Build a **reflection system**, not a task manager. This is a private, single-use
 - User wants to develop their people or build better teams
 - User mentions startup failure patterns, "Why Startups Fail", or Eisenmann
 - User is evaluating venture health or considering when to pivot/quit
+- User mentions Good to Great, Level 5 Leadership, Hedgehog Concept, or Jim Collins
+- User mentions Buy Back Your Time, Buyback Principle, or Dan Martell
+- User mentions E-Myth, working ON vs IN the business, or Michael Gerber
+- User is stuck doing technical work instead of strategic work
 
 ## Required Structure
 
@@ -39,13 +43,18 @@ ceo-personal-os/
 │   ├── ideal_life_costing.md    # Ferriss lifestyle design
 │   ├── life_map.md              # Lieberman 6-domain model
 │   ├── campbell_coaching.md     # Bill Campbell people-first principles
-│   └── startup_failure_patterns.md # Eisenmann failure pattern detection
+│   ├── startup_failure_patterns.md # Eisenmann failure pattern detection
+│   ├── good_to_great.md         # Collins Level 5 Leadership & Hedgehog
+│   ├── buyback_time.md          # Martell time reclamation system
+│   └── emyth_business.md        # Gerber work ON not IN your business
 ├── interviews/
 │   ├── past_year_reflection.md  # Coach-style year review
 │   ├── identity_and_values.md   # Who am I becoming?
 │   ├── future_self_interview.md # 10-year visualization
 │   ├── team_people_reflection.md # Campbell-style people development
-│   └── failure_pattern_detection.md # Eisenmann-style venture health check
+│   ├── failure_pattern_detection.md # Eisenmann-style venture health check
+│   ├── time_audit.md            # Martell-style time reclamation
+│   └── business_role_assessment.md # Gerber Entrepreneur/Manager/Technician
 ├── reviews/
 │   ├── daily/                   # 5-min daily check-ins
 │   ├── weekly/                  # Weekly strategic reviews
@@ -208,6 +217,179 @@ The hardest decision: When to quit vs. persevere. Warning signs:
 - Are we tracking toward our key metrics targets?
 - If we're struggling, is this a smart bet that hasn't paid off, or are we Running on Empty?
 
+### 7. Jim Collins Good to Great
+
+Credit: "Good to Great" by Jim Collins
+
+**Level 5 Leadership:**
+
+| Level | Description |
+|-------|-------------|
+| **Level 5** | Executive who builds enduring greatness through a blend of personal humility and professional will |
+| **Level 4** | Effective Leader - catalyzes commitment to and pursuit of a clear, compelling vision |
+| **Level 3** | Competent Manager - organizes people and resources toward efficient pursuit of objectives |
+| **Level 2** | Contributing Team Member - contributes to achievement of group objectives |
+| **Level 1** | Highly Capable Individual - makes productive contributions through talent and knowledge |
+
+**Level 5 Paradox:** Ambitious for the cause, not themselves. Ferociously determined yet humble.
+
+**First Who, Then What:**
+- Get the right people on the bus
+- Get the wrong people off the bus
+- Get the right people in the right seats
+- THEN figure out where to drive
+
+**The Hedgehog Concept (Three Circles):**
+
+What lies at the intersection of:
+1. **Passion** - What are you deeply passionate about?
+2. **Best At** - What can you be the best in the world at?
+3. **Economic Engine** - What drives your resource engine? (For non-profits: Time, Money, Brand)
+
+**Confront the Brutal Facts (Stockdale Paradox):**
+> "You must maintain unwavering faith that you can and will prevail in the end, regardless of the difficulties, AND at the same time have the discipline to confront the most brutal facts of your current reality."
+
+**The Flywheel:**
+- No single breakthrough moment
+- Consistent pushing in an intelligent direction
+- Momentum builds turn by turn
+- Results attract resources → stronger organization → better results → more resources
+
+**Culture of Discipline:**
+- Disciplined people (don't need hierarchy)
+- Disciplined thought (confront brutal facts)
+- Disciplined action (aligned to Hedgehog Concept)
+
+**Include in Quarterly Reviews:**
+- Am I operating at Level 5 (humble + determined)?
+- Do I have the right people on the bus?
+- Am I clear on my Hedgehog Concept?
+- Am I confronting brutal facts while maintaining faith?
+- Is the flywheel building momentum?
+
+### 8. Dan Martell Buy Back Your Time
+
+Credit: "Buy Back Your Time" by Dan Martell
+
+**The Buyback Principle:**
+> "Don't hire to grow your business. Hire to buy back your time."
+
+**The Buyback Loop (Audit-Transfer-Fill):**
+1. **Audit** - What tasks drain you that are easy/inexpensive to delegate?
+2. **Transfer** - Who can take these over (better suited, enjoys them)?
+3. **Fill** - What high-value work should you do instead?
+
+Repeat continuously to upgrade your time throughout your entrepreneurial journey.
+
+**The Pain Line:**
+
+The point where growth becomes impossible because:
+- More business growth = more pain
+- You'll subconsciously sabotage growth to avoid pain
+
+**Three Ways Entrepreneurs Self-Destruct at the Pain Line:**
+
+| Response | Description |
+|----------|-------------|
+| **Sell** | Desperate to exit, sell on bad terms |
+| **Sabotage** | Subconsciously make bad decisions to stay small |
+| **Stall** | Consciously decide not to grow (slow death) |
+
+**The DRIP Matrix:**
+
+| | Low $ Value | High $ Value |
+|---|---|---|
+| **Draining** | Delegate | Replace |
+| **Energizing** | Invest | Production |
+
+Focus on the **Production Quadrant**: High value + Energizing work.
+
+**Calculate Your Buyback Rate:**
+- Take your effective hourly rate
+- Anything below that rate should be delegated
+- Example: If you make $200/hr effective, delegate anything that can be done for $50/hr
+
+**The 5 Time Assassins:**
+1. The Staller (perfectionism)
+2. The Speed Demon (rushing without thinking)
+3. The Supervisor (micromanaging)
+4. The Saver (hoarding tasks)
+5. The Self-Medicator (vices to cope)
+
+**Perfect Week Design:**
+- Design your ideal week in advance
+- Block time for high-value activities
+- Protect creative/strategic time
+- Build in recovery
+
+**Include in Weekly Reviews:**
+- Am I doing $10/hr work when I'm worth $200/hr?
+- What can I audit-transfer-fill this week?
+- Am I hitting my Pain Line? How do I know?
+- Am I in my Production Quadrant enough?
+
+### 9. Michael Gerber E-Myth
+
+Credit: "The E-Myth Revisited" by Michael E. Gerber
+
+**The E-Myth (Entrepreneurial Myth):**
+> The fatal assumption: "If you understand the technical work of a business, you understand a business that does that technical work."
+
+This is FALSE. A great baker does not necessarily make a great bakery owner.
+
+**Three Personas in Every Business Owner:**
+
+| Persona | Focus | Wants |
+|---------|-------|-------|
+| **The Entrepreneur** | Future vision, dreams | Change, innovation |
+| **The Manager** | Order, systems, control | Predictability, planning |
+| **The Technician** | Present work, doing | Getting things done |
+
+Most small business owners are 10% Entrepreneur, 20% Manager, 70% Technician.
+
+**The Entrepreneurial Seizure:**
+
+The moment when a technician thinks: "Why am I working for this person? I could do this myself!"
+
+Then starts a business and immediately becomes enslaved by it—because they're still just a technician, now with 10 more jobs they don't know how to do.
+
+**Work ON Your Business, Not IN It:**
+
+| Working IN | Working ON |
+|------------|------------|
+| Doing the technical work | Building systems |
+| Reacting to problems | Designing processes |
+| Being indispensable | Creating replaceability |
+| Trading time for money | Building scalable value |
+
+**The Turn-Key Revolution (Franchise Prototype):**
+
+Build your business as if you were going to franchise it:
+- Systems run the business
+- People run the systems
+- Document everything
+- Make it work without you
+
+**Business Development Process:**
+1. **Innovation** - Continuous improvement
+2. **Quantification** - Measure everything important
+3. **Orchestration** - Eliminate discretion at operating level
+
+**The Three Phases of Business:**
+
+| Phase | Description | Problem |
+|-------|-------------|---------|
+| **Infancy** | Technician's phase, owner does everything | Burns out |
+| **Adolescence** | Gets help but abdicates management | Chaos when growth hits |
+| **Maturity** | Entrepreneurial perspective, systems-driven | Sustainable |
+
+**Include in Quarterly Reviews:**
+- Am I working ON or IN the business?
+- What's my Entrepreneur/Manager/Technician balance?
+- Could someone run this business from a manual?
+- What systems need to be built or documented?
+- Am I building a business or just creating a job?
+
 ## Additional Frameworks to Include
 
 - **CEO Energy Management**: Track energy, not just time
@@ -269,6 +451,43 @@ Coach-style questions (non-judgmental, reflective):
 - "If you shut down today, would that be a smart bet that didn't pay off, or a failure to face reality?"
 ```
 
+```markdown
+## Time Audit (Martell-style)
+- "What did you spend your time on this week? List the top 10 activities."
+- "For each activity: Is it draining or energizing? Low or high value?"
+- "What's your current Buyback Rate? What should it be?"
+- "What $10/hr tasks are you still doing?"
+- "What would you do with 10 extra hours per week?"
+- "Are you hitting your Pain Line? What are the symptoms?"
+- "What's the next thing you can audit-transfer-fill?"
+- "Are you in your Production Quadrant enough?"
+- "Which of the 5 Time Assassins is attacking you most?"
+```
+
+```markdown
+## Business Role Assessment (Gerber-style)
+- "What percentage of your time is spent as Entrepreneur/Manager/Technician?"
+- "Are you working ON your business or IN it this week?"
+- "Could someone run your business from a manual right now?"
+- "What systems desperately need to be documented?"
+- "Are you building a business or just creating a job for yourself?"
+- "If you were hit by a bus, what would break immediately?"
+- "What technical work are you still doing that someone else should do?"
+- "Are you enslaved by your business or freed by it?"
+- "What would need to change for this business to run without you?"
+```
+
+```markdown
+## Good to Great Assessment (Collins-style)
+- "Are you operating at Level 5 (humble yet fiercely determined)?"
+- "Do you have the right people on the bus? Wrong people off?"
+- "What is your Hedgehog Concept? (Passion + Best At + Economic Engine)"
+- "Are you confronting the brutal facts while maintaining faith?"
+- "Is your flywheel building momentum or stalling?"
+- "Where are you lacking disciplined people, thought, or action?"
+- "Are you 'telling time' or 'building a clock'?"
+```
+
 ## Review Cadence Specifications
 
 ### Daily Check-in (5 minutes max)
@@ -292,6 +511,9 @@ Coach-style questions (non-judgmental, reflective):
 - Course correction decisions
 - Campbell check: "Who have I developed?"
 - Eisenmann check: "Which failure patterns am I vulnerable to?"
+- Collins check: "Is the flywheel building momentum?"
+- Martell check: "Am I in my Production Quadrant?"
+- Gerber check: "Am I working ON or IN the business?"
 - Diamond-Square alignment review (for founders)
 
 ### Annual Review
@@ -356,8 +578,8 @@ The README.md must explain:
 ## Completion Checklist
 
 - [ ] All folders and files created per structure
-- [ ] All 6 frameworks documented with credits (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann)
-- [ ] All 5 interview scripts with coaching questions (including Team & People, Failure Pattern Detection)
+- [ ] All 9 frameworks documented with credits (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber)
+- [ ] All 8 interview scripts with coaching questions
 - [ ] All 4 review cadences with templates
 - [ ] All goal files (1/3/10 year) populated
 - [ ] memory.md initialized with pattern tracking structure
@@ -365,8 +587,11 @@ The README.md must explain:
 - [ ] README explains daily/weekly/quarterly/annual usage
 - [ ] Tone is calm, direct, insightful throughout
 - [ ] No generic productivity advice substituted for specified frameworks
-- [ ] Campbell Yardstick question in quarterly reviews ("Who have I developed?")
-- [ ] Eisenmann failure pattern check in quarterly reviews ("Which patterns are we vulnerable to?")
+- [ ] Campbell check in quarterly reviews ("Who have I developed?")
+- [ ] Eisenmann check in quarterly reviews ("Which patterns are we vulnerable to?")
+- [ ] Collins check in quarterly reviews ("Is the flywheel building momentum?")
+- [ ] Martell check in quarterly reviews ("Am I in my Production Quadrant?")
+- [ ] Gerber check in quarterly reviews ("Am I working ON or IN the business?")
 
 ## Review Templates Required
 

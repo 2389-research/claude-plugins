@@ -114,7 +114,7 @@
         {
             "name": "ceo-personal-os",
             "source": "./ceo-personal-os",
-            "description": "Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews, and startup failure pattern detection (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann)",
+            "description": "Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber)",
             "version": "1.0.0",
             "keywords": [
                 "ceo",
@@ -128,7 +128,19 @@
                 "people-first",
                 "eisenmann",
                 "startup-failure",
-                "why-startups-fail"
+                "why-startups-fail",
+                "collins",
+                "good-to-great",
+                "level-5-leadership",
+                "hedgehog-concept",
+                "flywheel",
+                "martell",
+                "buyback-time",
+                "delegation",
+                "gerber",
+                "emyth",
+                "work-on-business",
+                "franchise-prototype"
             ],
             "strict": false
         },

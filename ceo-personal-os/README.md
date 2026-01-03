@@ -24,6 +24,9 @@ Personal operating system for executives - reflection frameworks, goal systems, 
 | Life Map | Alex Lieberman | 6-domain life balance |
 | Coaching Principles | Bill Campbell | People-first leadership & team development |
 | Startup Failure Patterns | Tom Eisenmann | Detect failure patterns before they kill your venture |
+| Good to Great | Jim Collins | Level 5 Leadership, Hedgehog Concept, Flywheel |
+| Buy Back Your Time | Dan Martell | Reclaim time through delegation, Production Quadrant |
+| E-Myth | Michael Gerber | Work ON your business not IN it, build systems |
 
 ## Quick Example
 
@@ -32,8 +35,8 @@ Start with: "Help me build a personal operating system"
 The skill generates a complete structure:
 ```
 ceo-personal-os/
-├── frameworks/          # 6 specific frameworks (Campbell + Eisenmann)
-├── interviews/          # Coach-style question scripts
+├── frameworks/          # 9 specific frameworks
+├── interviews/          # 8 coach-style question scripts
 ├── reviews/             # Daily/weekly/quarterly/annual
 ├── goals/               # 1/3/10 year horizons
 ├── memory.md            # Pattern extraction
@@ -64,6 +67,10 @@ ceo-personal-os/
 - Mentions of "Trillion Dollar Coach" or Bill Campbell
 - "Why do startups fail?" or Eisenmann startup failure patterns
 - Evaluating venture health or deciding when to pivot/quit
+- Mentions of "Good to Great", Level 5 Leadership, or Hedgehog Concept
+- "How do I buy back my time?" or Dan Martell frameworks
+- "I'm stuck working IN instead of ON my business" or E-Myth concepts
+- Stuck doing technical work instead of strategic leadership
 
 ## Links
 

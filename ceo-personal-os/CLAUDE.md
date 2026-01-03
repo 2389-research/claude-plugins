@@ -17,6 +17,9 @@ Auto-detects when someone wants to:
 - Develop their people or build better teams
 - Understand why startups fail (Eisenmann patterns)
 - Evaluate venture health or decide when to pivot/quit
+- Apply Good to Great / Level 5 Leadership (Collins)
+- Buy back their time / hit Production Quadrant (Martell)
+- Work ON not IN their business / E-Myth (Gerber)
 
 ## Key Patterns
 
@@ -24,7 +27,7 @@ Auto-detects when someone wants to:
 
 The core principle is clarity over productivity. Output should feel like an executive coach - calm, direct, insightful.
 
-### Six Required Frameworks
+### Nine Required Frameworks
 
 1. **Dr. Anthony Gustin Annual Review** - Wins, lessons, relationships, energy patterns
 2. **Tim Ferriss Ideal Lifestyle Costing** - Dreamlines with costs, TMI calculation
@@ -32,6 +35,9 @@ The core principle is clarity over productivity. Output should feel like an exec
 4. **Alex Lieberman Life Map** - 6 domains: Career, Relationships, Health, Meaning, Finances, Fun
 5. **Bill Campbell Coaching Principles** - People-first leadership from "Trillion Dollar Coach"
 6. **Tom Eisenmann Startup Failure Patterns** - Six patterns that kill ventures from "Why Startups Fail"
+7. **Jim Collins Good to Great** - Level 5 Leadership, Hedgehog Concept, Flywheel, Stockdale Paradox
+8. **Dan Martell Buy Back Your Time** - Buyback Principle, DRIP Matrix, Pain Line, Production Quadrant
+9. **Michael Gerber E-Myth** - Work ON not IN, Entrepreneur/Manager/Technician, Franchise Prototype
 
 ### Campbell Core Principles
 
@@ -75,8 +81,8 @@ The core principle is clarity over productivity. Output should feel like an exec
 
 ```
 ceo-personal-os/
-├── frameworks/          # 6 specific frameworks with credits
-├── interviews/          # Coach-style question scripts (including team/people, failure patterns)
+├── frameworks/          # 9 specific frameworks with credits
+├── interviews/          # 8 coach-style question scripts
 ├── reviews/             # Templates for each cadence
 ├── goals/               # 1/3/10 year horizons
 ├── uploads/             # Past reviews for pattern extraction
