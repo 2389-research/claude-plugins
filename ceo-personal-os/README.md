@@ -37,7 +37,7 @@ The skill generates a complete structure:
 ```
 ceo-personal-os/
 ├── frameworks/          # 10 specific frameworks
-├── interviews/          # 9 coach-style question scripts
+├── interviews/          # 10 coach-style question scripts
 ├── reviews/             # Daily/weekly/quarterly/annual
 ├── goals/               # 1/3/10 year horizons
 ├── memory.md            # Pattern extraction

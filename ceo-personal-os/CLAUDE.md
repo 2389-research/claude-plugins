@@ -86,7 +86,7 @@ The core principle is clarity over productivity. Output should feel like an exec
 ```
 ceo-personal-os/
 ├── frameworks/          # 10 specific frameworks with credits
-├── interviews/          # 9 coach-style question scripts
+├── interviews/          # 10 coach-style question scripts
 ├── reviews/             # Templates for each cadence
 ├── goals/               # 1/3/10 year horizons
 ├── uploads/             # Past reviews for pattern extraction
@@ -130,3 +130,4 @@ When building a CEO Personal OS:
 9. Add team/people reflection for executives who manage others
 10. Add Diamond-Square alignment review for founder/CEOs
 11. Include Blank Customer Development check: "Am I searching or executing?"
+12. Include McWilliams stress patterns check: "What patterns showed up under pressure?"

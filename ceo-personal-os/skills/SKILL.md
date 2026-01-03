@@ -59,7 +59,8 @@ ceo-personal-os/
 │   ├── failure_pattern_detection.md # Eisenmann-style venture health check
 │   ├── time_audit.md            # Martell-style time reclamation
 │   ├── business_role_assessment.md # Gerber Entrepreneur/Manager/Technician
-│   └── customer_development_check.md # Blank Customer Development check
+│   ├── customer_development_check.md # Blank Customer Development check
+│   └── leadership_stress_patterns.md # McWilliams-informed self-awareness
 ├── reviews/
 │   ├── daily/                   # 5-min daily check-ins
 │   ├── weekly/                  # Weekly strategic reviews
@@ -618,6 +619,49 @@ Coach-style questions (non-judgmental, reflective):
 - "What did you learn from your last failure?"
 ```
 
+```markdown
+## Leadership Stress Patterns (McWilliams-informed)
+
+Credit: Adapted from "Psychoanalytic Diagnosis" by Nancy McWilliams
+
+**Purpose:** Surface unconscious patterns that emerge under pressure. Self-awareness improves how you lead and develop others.
+
+**Denial Check:**
+- "This quarter, what uncomfortable truth did I avoid looking at?"
+- "Where am I being optimistic in ways disconnected from evidence?"
+- "What data am I dismissing because it doesn't fit my narrative?"
+
+**Control Check:**
+- "Where did I micromanage instead of delegate?"
+- "Did I believe 'only I can do this right' about anything?"
+- "Am I trying to control outcomes that aren't controllable?"
+
+**Idealization/Devaluation Check:**
+- "Did I put anyone on a pedestal this quarter? Are they still there?"
+- "Who did I write off completely? Was that fair?"
+- "Am I having extreme swings in my judgment of people?"
+
+**Projection Check:**
+- "When I felt frustrated with someone, was I seeing my own issue in them?"
+- "Am I attributing motives to others that might actually be mine?"
+- "Where am I blaming the team for feelings I'm having?"
+
+**Splitting Check:**
+- "Am I using all-or-nothing thinking about any team, department, or person?"
+- "Where am I seeing 'us vs them' when it's really just 'us'?"
+- "What nuance am I missing by oversimplifying?"
+
+**Stress Response Check:**
+- "How is my body responding to stress? (sleep, appetite, health)"
+- "Am I working more hours but accomplishing less?"
+- "What am I doing to actually process stress vs. avoid it?"
+
+**Integration:**
+- "What pattern do I notice in my stress responses?"
+- "How are these patterns affecting my team?"
+- "What's one thing I could do differently next quarter?"
+```
+
 ## Review Cadence Specifications
 
 ### Daily Check-in (5 minutes max)
@@ -645,6 +689,7 @@ Coach-style questions (non-judgmental, reflective):
 - Martell check: "Am I in my Production Quadrant?"
 - Gerber check: "Am I working ON or IN the business?"
 - Blank check: "Am I searching or executing? Have I been outside the building?"
+- McWilliams check: "What stress patterns showed up this quarter?"
 - Diamond-Square alignment review (for founders)
 
 ### Annual Review
@@ -710,7 +755,7 @@ The README.md must explain:
 
 - [ ] All folders and files created per structure
 - [ ] All 10 frameworks documented with credits (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)
-- [ ] All 9 interview scripts with coaching questions
+- [ ] All 10 interview scripts with coaching questions (includes McWilliams-informed stress patterns)
 - [ ] All 4 review cadences with templates
 - [ ] All goal files (1/3/10 year) populated
 - [ ] memory.md initialized with pattern tracking structure
@@ -724,6 +769,7 @@ The README.md must explain:
 - [ ] Martell check in quarterly reviews ("Am I in my Production Quadrant?")
 - [ ] Gerber check in quarterly reviews ("Am I working ON or IN the business?")
 - [ ] Blank check in quarterly reviews ("Am I searching or executing?")
+- [ ] McWilliams check in quarterly reviews ("What stress patterns showed up?")
 
 ## Review Templates Required
 
