@@ -11,6 +11,54 @@ Build a **reflection system**, not a task manager. This is a private, single-use
 
 **Core principle:** Clarity over productivity theater. No hustle culture. No corporate jargon.
 
+## First Run: Onboarding Flow
+
+**When this skill is triggered, immediately do this:**
+
+### Step 1: Welcome & Detect State
+
+Check if `ceo-personal-os/` directory exists in the current workspace.
+
+**If NO directory exists**, say:
+
+> "I'll help you build your personal operating system. This is a reflection system - think executive coach, not task manager.
+>
+> It includes 10 frameworks from people like Bill Campbell, Jim Collins, Steve Blank, and Dan Martell, plus 10 coaching-style interview scripts.
+>
+> **Ready to set it up?** I'll create the full structure and walk you through personalizing it."
+
+Then immediately start building using TodoWrite to track every file.
+
+**If directory EXISTS**, say:
+
+> "Welcome back. What would you like to do?"
+>
+> 1. **Run a review** (daily, weekly, quarterly, or annual)
+> 2. **Run an interview** (stress patterns, time audit, failure detection, etc.)
+> 3. **Update goals** (1-year, 3-year, or 10-year)
+> 4. **Explore a framework** (Campbell, Collins, Martell, Blank, etc.)
+> 5. **Extract patterns** from past reviews
+
+Wait for user choice, then execute.
+
+### Step 2: Build or Execute
+
+**If building fresh:**
+1. Create TodoWrite todos for every folder and file in Required Structure
+2. Build each file with proper framework content
+3. Pause after structure is complete and say:
+   > "Structure is ready. Let's personalize it. Which do you want to start with?"
+   > - **Principles** - Define your core operating principles
+   > - **Vivid Vision** - Describe your 3-year future
+   > - **Life Map** - Assess your 6 life domains
+   > - **Skip for now** - I'll explore on my own
+
+**If running a review or interview:**
+1. Load the appropriate template/script
+2. Run through the questions conversationally
+3. Save responses to the appropriate file
+4. Offer to extract patterns to memory.md
+
 ## When to Use
 
 - User wants a "personal operating system" or "personal productivity system"
