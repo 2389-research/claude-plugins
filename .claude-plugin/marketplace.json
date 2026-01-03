@@ -114,7 +114,7 @@
         {
             "name": "ceo-personal-os",
             "source": "./ceo-personal-os",
-            "description": "Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber)",
+            "description": "Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)",
             "version": "1.0.0",
             "keywords": [
                 "ceo",
@@ -140,7 +140,15 @@
                 "gerber",
                 "emyth",
                 "work-on-business",
-                "franchise-prototype"
+                "franchise-prototype",
+                "blank",
+                "steve-blank",
+                "customer-development",
+                "lean-startup",
+                "mvp",
+                "pivot",
+                "product-market-fit",
+                "get-out-of-the-building"
             ],
             "strict": false
         },

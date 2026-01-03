@@ -20,6 +20,9 @@ Auto-detects when someone wants to:
 - Apply Good to Great / Level 5 Leadership (Collins)
 - Buy back their time / hit Production Quadrant (Martell)
 - Work ON not IN their business / E-Myth (Gerber)
+- Apply Customer Development / Lean Startup (Blank)
+- Understand search vs execute mode in startups
+- Get out of the building and talk to customers
 
 ## Key Patterns
 
@@ -27,7 +30,7 @@ Auto-detects when someone wants to:
 
 The core principle is clarity over productivity. Output should feel like an executive coach - calm, direct, insightful.
 
-### Nine Required Frameworks
+### Ten Required Frameworks
 
 1. **Dr. Anthony Gustin Annual Review** - Wins, lessons, relationships, energy patterns
 2. **Tim Ferriss Ideal Lifestyle Costing** - Dreamlines with costs, TMI calculation
@@ -38,6 +41,7 @@ The core principle is clarity over productivity. Output should feel like an exec
 7. **Jim Collins Good to Great** - Level 5 Leadership, Hedgehog Concept, Flywheel, Stockdale Paradox
 8. **Dan Martell Buy Back Your Time** - Buyback Principle, DRIP Matrix, Pain Line, Production Quadrant
 9. **Michael Gerber E-Myth** - Work ON not IN, Entrepreneur/Manager/Technician, Franchise Prototype
+10. **Steve Blank Customer Development** - Search vs Execute, Get Out of the Building, MVP, Pivot
 
 ### Campbell Core Principles
 
@@ -81,8 +85,8 @@ The core principle is clarity over productivity. Output should feel like an exec
 
 ```
 ceo-personal-os/
-├── frameworks/          # 9 specific frameworks with credits
-├── interviews/          # 8 coach-style question scripts
+├── frameworks/          # 10 specific frameworks with credits
+├── interviews/          # 9 coach-style question scripts
 ├── reviews/             # Templates for each cadence
 ├── goals/               # 1/3/10 year horizons
 ├── uploads/             # Past reviews for pattern extraction
@@ -116,7 +120,7 @@ The `memory.md` file tracks:
 
 When building a CEO Personal OS:
 1. Use TodoWrite to track every folder/file
-2. Include all 6 frameworks with proper credits (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann)
+2. Include all 10 frameworks with proper credits (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)
 3. Generate coach-style interview questions (including Team & People reflection, Failure Pattern Detection)
 4. Create templates in each review folder
 5. Initialize memory.md for pattern tracking
@@ -125,3 +129,4 @@ When building a CEO Personal OS:
 8. Include Eisenmann failure pattern check in quarterly reviews: "Which patterns am I vulnerable to?"
 9. Add team/people reflection for executives who manage others
 10. Add Diamond-Square alignment review for founder/CEOs
+11. Include Blank Customer Development check: "Am I searching or executing?"

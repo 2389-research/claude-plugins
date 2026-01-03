@@ -1,6 +1,6 @@
 ---
 name: ceo-personal-os
-description: Use when building a personal productivity or operating system for a CEO, founder, or executive - when user mentions annual reviews, personal OS, life planning, goal setting systems, executive coaching frameworks, Bill Campbell / Trillion Dollar Coach, startup failure patterns, Good to Great / Level 5 Leadership, Buy Back Your Time, or E-Myth / work ON not IN your business
+description: Use when building a personal productivity or operating system for a CEO, founder, or executive - when user mentions annual reviews, personal OS, life planning, goal setting systems, executive coaching frameworks, Bill Campbell / Trillion Dollar Coach, startup failure patterns, Good to Great / Level 5 Leadership, Buy Back Your Time, E-Myth / work ON not IN your business, or Customer Development / Steve Blank / get out of the building
 ---
 
 # CEO Personal Operating System
@@ -25,6 +25,9 @@ Build a **reflection system**, not a task manager. This is a private, single-use
 - User mentions Buy Back Your Time, Buyback Principle, or Dan Martell
 - User mentions E-Myth, working ON vs IN the business, or Michael Gerber
 - User is stuck doing technical work instead of strategic work
+- User mentions Customer Development, Steve Blank, or "get out of the building"
+- User mentions pivot, MVP, product-market fit, or business model canvas
+- User mentions earlyvangelists, customer validation, or search vs execute
 
 ## Required Structure
 
@@ -46,7 +49,8 @@ ceo-personal-os/
 │   ├── startup_failure_patterns.md # Eisenmann failure pattern detection
 │   ├── good_to_great.md         # Collins Level 5 Leadership & Hedgehog
 │   ├── buyback_time.md          # Martell time reclamation system
-│   └── emyth_business.md        # Gerber work ON not IN your business
+│   ├── emyth_business.md        # Gerber work ON not IN your business
+│   └── customer_development.md  # Blank Customer Development Model
 ├── interviews/
 │   ├── past_year_reflection.md  # Coach-style year review
 │   ├── identity_and_values.md   # Who am I becoming?
@@ -54,7 +58,8 @@ ceo-personal-os/
 │   ├── team_people_reflection.md # Campbell-style people development
 │   ├── failure_pattern_detection.md # Eisenmann-style venture health check
 │   ├── time_audit.md            # Martell-style time reclamation
-│   └── business_role_assessment.md # Gerber Entrepreneur/Manager/Technician
+│   ├── business_role_assessment.md # Gerber Entrepreneur/Manager/Technician
+│   └── customer_development_check.md # Blank Customer Development check
 ├── reviews/
 │   ├── daily/                   # 5-min daily check-ins
 │   ├── weekly/                  # Weekly strategic reviews
@@ -390,6 +395,116 @@ Build your business as if you were going to franchise it:
 - What systems need to be built or documented?
 - Am I building a business or just creating a job?
 
+### 10. Steve Blank Customer Development
+
+Credit: "The Startup Owner's Manual" by Steve Blank & Bob Dorf
+
+**Core Insight:**
+> "A startup is a temporary organization designed to search for a repeatable and scalable business model."
+
+**Startups ≠ Small Versions of Big Companies:**
+- Startups are SEARCHING for a business model
+- Existing companies are EXECUTING a known business model
+- Different rules apply to each
+
+**The Customer Development Model (4 Steps):**
+
+| Step | Phase | Description |
+|------|-------|-------------|
+| **1. Customer Discovery** | Search | Turn hypotheses into facts by talking to customers |
+| **2. Customer Validation** | Search | Prove repeatable, scalable business model exists |
+| **3. Customer Creation** | Execute | Build end-user demand, scale acquisition |
+| **4. Company Building** | Execute | Transition from startup to company |
+
+**The #1 Rule: Get Out of the Building**
+> "Facts live outside the building, where future customers live and work."
+
+Founders must do this personally—cannot be delegated to employees or consultants.
+
+**The 9 Deadly Sins of Product Introduction:**
+1. Assuming "I know what the customer wants"
+2. The "I know what features to build" flaw
+3. Focus on launch date over customer learning
+4. Emphasis on execution instead of hypothesis testing
+5. Business plans presume no trial and no errors
+6. Confusing job titles with what a startup needs
+7. Sales and marketing execute to a plan (no iteration)
+8. Presumption of success leads to premature scaling
+9. Management by crisis leads to a death spiral
+
+**Search vs Execute:**
+
+| Search Mode | Execute Mode |
+|-------------|--------------|
+| Hypotheses, testing, learning | Plans, forecasts, metrics |
+| Customer Development Team | Functional departments |
+| "Learning and discovery" culture | "Fear of failure" culture |
+| Pivot when hypotheses wrong | Fire people when plans fail |
+
+**Key Concepts:**
+
+| Concept | Definition |
+|---------|------------|
+| **Pivot** | Substantive change to one or more business model components |
+| **Iteration** | Minor adjustment to business model |
+| **MVP** | Minimum Viable Product - smallest feature set to learn from |
+| **Earlyvangelists** | Visionary customers who buy unfinished products |
+| **Product/Market Fit** | Business model matches customer segment needs |
+
+**The Business Model Canvas (9 Boxes):**
+1. Value Proposition
+2. Customer Segments
+3. Channels
+4. Customer Relationships
+5. Revenue Streams
+6. Key Resources
+7. Key Activities
+8. Key Partners
+9. Cost Structure
+
+**4 Market Types (Changes Everything):**
+
+| Market Type | Strategy |
+|-------------|----------|
+| **Existing Market** | Compete on features, faster/better/cheaper |
+| **New Market** | Create demand, educate customers |
+| **Re-segmented (Low-cost)** | "Good enough" at lower price |
+| **Re-segmented (Niche)** | Specialized for underserved segment |
+| **Clone** | Copy successful model from another country |
+
+**Startup Metrics That Matter:**
+- Cash burn rate
+- Months of cash left
+- Customer acquisition cost validated?
+- Hypotheses tested and validated?
+- Is the business model repeatable?
+- Is it scalable?
+
+**The Customer Development Manifesto (14 Rules):**
+1. No facts inside the building—get outside
+2. Pair Customer Development with Agile Development
+3. Failure is integral to the search
+4. Make continuous iterations and pivots
+5. No business plan survives first contact with customers
+6. Design experiments and test hypotheses
+7. Agree on market type—it changes everything
+8. Startup metrics differ from existing companies
+9. Fast decision-making, speed, and tempo
+10. It's all about passion
+11. Startup job titles are different
+12. Preserve cash until needed, then spend
+13. Communicate and share learning
+14. Success begins with buy-in
+
+**Include in Quarterly Reviews:**
+- Are we searching or executing? (Be honest)
+- What hypotheses have we tested this quarter?
+- How much time did founders spend outside the building?
+- Have we achieved product/market fit?
+- What did we learn from failures?
+- Are we pivoting based on data or gut feelings?
+- What market type are we in?
+
 ## Additional Frameworks to Include
 
 - **CEO Energy Management**: Track energy, not just time
@@ -488,6 +603,21 @@ Coach-style questions (non-judgmental, reflective):
 - "Are you 'telling time' or 'building a clock'?"
 ```
 
+```markdown
+## Customer Development Check (Blank-style)
+- "Are you in search mode or execute mode right now? Be honest."
+- "When was the last time you talked to a customer outside the building?"
+- "What hypotheses have you tested this month? What did you learn?"
+- "What's your MVP? Is it truly minimal?"
+- "Have you found earlyvangelists? Are they paying or just being polite?"
+- "Have you achieved product/market fit? How do you know?"
+- "What market type are you in? Are you sure?"
+- "What would cause you to pivot? Have you defined the triggers?"
+- "Are you committing the 9 Deadly Sins? Which ones?"
+- "Is your burn rate appropriate for search mode or are you spending like you're executing?"
+- "What did you learn from your last failure?"
+```
+
 ## Review Cadence Specifications
 
 ### Daily Check-in (5 minutes max)
@@ -514,6 +644,7 @@ Coach-style questions (non-judgmental, reflective):
 - Collins check: "Is the flywheel building momentum?"
 - Martell check: "Am I in my Production Quadrant?"
 - Gerber check: "Am I working ON or IN the business?"
+- Blank check: "Am I searching or executing? Have I been outside the building?"
 - Diamond-Square alignment review (for founders)
 
 ### Annual Review
@@ -578,8 +709,8 @@ The README.md must explain:
 ## Completion Checklist
 
 - [ ] All folders and files created per structure
-- [ ] All 9 frameworks documented with credits (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber)
-- [ ] All 8 interview scripts with coaching questions
+- [ ] All 10 frameworks documented with credits (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)
+- [ ] All 9 interview scripts with coaching questions
 - [ ] All 4 review cadences with templates
 - [ ] All goal files (1/3/10 year) populated
 - [ ] memory.md initialized with pattern tracking structure
@@ -592,6 +723,7 @@ The README.md must explain:
 - [ ] Collins check in quarterly reviews ("Is the flywheel building momentum?")
 - [ ] Martell check in quarterly reviews ("Am I in my Production Quadrant?")
 - [ ] Gerber check in quarterly reviews ("Am I working ON or IN the business?")
+- [ ] Blank check in quarterly reviews ("Am I searching or executing?")
 
 ## Review Templates Required
 

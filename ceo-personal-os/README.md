@@ -27,6 +27,7 @@ Personal operating system for executives - reflection frameworks, goal systems, 
 | Good to Great | Jim Collins | Level 5 Leadership, Hedgehog Concept, Flywheel |
 | Buy Back Your Time | Dan Martell | Reclaim time through delegation, Production Quadrant |
 | E-Myth | Michael Gerber | Work ON your business not IN it, build systems |
+| Customer Development | Steve Blank | Search vs Execute, Get Out of the Building, MVP |
 
 ## Quick Example
 
@@ -35,8 +36,8 @@ Start with: "Help me build a personal operating system"
 The skill generates a complete structure:
 ```
 ceo-personal-os/
-├── frameworks/          # 9 specific frameworks
-├── interviews/          # 8 coach-style question scripts
+├── frameworks/          # 10 specific frameworks
+├── interviews/          # 9 coach-style question scripts
 ├── reviews/             # Daily/weekly/quarterly/annual
 ├── goals/               # 1/3/10 year horizons
 ├── memory.md            # Pattern extraction
@@ -71,6 +72,9 @@ ceo-personal-os/
 - "How do I buy back my time?" or Dan Martell frameworks
 - "I'm stuck working IN instead of ON my business" or E-Myth concepts
 - Stuck doing technical work instead of strategic leadership
+- Mentions of Customer Development, Steve Blank, or "get out of the building"
+- Questions about MVP, pivot decisions, or product-market fit
+- "Are we searching or executing?" or early-stage startup strategy
 
 ## Links
 
