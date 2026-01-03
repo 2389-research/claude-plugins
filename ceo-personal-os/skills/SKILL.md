@@ -1,6 +1,6 @@
 ---
 name: ceo-personal-os
-description: Use when building a personal productivity or operating system for a CEO, founder, or executive - when user mentions annual reviews, personal OS, life planning, goal setting systems, executive coaching frameworks, or Bill Campbell / Trillion Dollar Coach principles
+description: Use when building a personal productivity or operating system for a CEO, founder, or executive - when user mentions annual reviews, personal OS, life planning, goal setting systems, executive coaching frameworks, Bill Campbell / Trillion Dollar Coach principles, or startup failure patterns / Why Startups Fail
 ---
 
 # CEO Personal Operating System
@@ -19,6 +19,8 @@ Build a **reflection system**, not a task manager. This is a private, single-use
 - User mentions frameworks: Gustin, Ferriss Lifestyle Costing, Vivid Vision, Life Map
 - User mentions Bill Campbell, Trillion Dollar Coach, or coaching principles
 - User wants to develop their people or build better teams
+- User mentions startup failure patterns, "Why Startups Fail", or Eisenmann
+- User is evaluating venture health or considering when to pivot/quit
 
 ## Required Structure
 
@@ -36,12 +38,14 @@ ceo-personal-os/
 │   ├── vivid_vision.md          # Robbins-style future visualization
 │   ├── ideal_life_costing.md    # Ferriss lifestyle design
 │   ├── life_map.md              # Lieberman 6-domain model
-│   └── campbell_coaching.md     # Bill Campbell people-first principles
+│   ├── campbell_coaching.md     # Bill Campbell people-first principles
+│   └── startup_failure_patterns.md # Eisenmann failure pattern detection
 ├── interviews/
 │   ├── past_year_reflection.md  # Coach-style year review
 │   ├── identity_and_values.md   # Who am I becoming?
 │   ├── future_self_interview.md # 10-year visualization
-│   └── team_people_reflection.md # Campbell-style people development
+│   ├── team_people_reflection.md # Campbell-style people development
+│   └── failure_pattern_detection.md # Eisenmann-style venture health check
 ├── reviews/
 │   ├── daily/                   # 5-min daily check-ins
 │   ├── weekly/                  # Weekly strategic reviews
@@ -142,6 +146,68 @@ Include in quarterly reviews:
 - Apply your unique gifts
 - Don't waste time worrying about the future
 
+### 6. Eisenmann Startup Failure Patterns
+
+Credit: "Why Startups Fail" by Tom Eisenmann (Harvard Business School)
+
+**The Six Failure Patterns:**
+
+| Pattern | Stage | Description |
+|---------|-------|-------------|
+| **Bad Bedfellows** | Early | Wrong team, investors, or partners sink the venture despite a good idea |
+| **False Starts** | Early | "Fail fast" taken too far—launching before researching customer needs |
+| **False Positives** | Early | Early adopter success misleads about mainstream market demand |
+| **Speed Traps** | Late | Hypergrowth leads to disaster as CAC rises and margins erode |
+| **Help Wanted** | Late | Financing risk + management gaps during rapid scaling |
+| **Cascading Miracles** | Late | Too many "do or die" things must go right—betting on improbable outcomes |
+
+**The Diamond-and-Square Framework:**
+
+Use this to assess venture health. All eight elements must align:
+
+*Diamond (Opportunity):*
+- **Customer Value Proposition** - Strong, unmet need + sustainable differentiation
+- **Technology & Operations** - Can you build and deliver it?
+- **Marketing** - Can you reach customers cost-effectively?
+- **Profit Formula** - Unit economics, LTV/CAC > 3, path to break-even
+
+*Square (Resources):*
+- **Founders** - Right skills, experience, temperament (not too headstrong or tentative)
+- **Team** - Balance of attitude and skill
+- **Investors** - Aligned interests, patient capital, value-add beyond money
+- **Partners** - Reliable strategic relationships
+
+**Four Types of Entrepreneurial Risk:**
+
+1. **Demand Risk** - Will customers actually want this?
+2. **Technological Risk** - Can we build what we envision?
+3. **Execution Risk** - Can we attract and manage the right people?
+4. **Financing Risk** - Can we raise capital when we need it?
+
+**Key Metrics to Monitor:**
+
+| Metric | Target | Warning Sign |
+|--------|--------|--------------|
+| Unit Economics | Positive gross profit per unit | Losing money on every transaction |
+| LTV/CAC Ratio | > 3.0 | Below 1.0 = doomed |
+| Cash Runway | 12-18 months | Less than 6 months |
+| Customer Acquisition Cost | Stable or declining | Rising faster than LTV |
+
+**Running on Empty Pattern:**
+
+The hardest decision: When to quit vs. persevere. Warning signs:
+- Burning capital investors will never recover
+- Team members investing time in doomed venture
+- Persisting past point where turnaround odds are minuscule
+- "Hope springs eternal" rationalization overriding data
+
+**Include in Quarterly Reviews:**
+- Which failure patterns might we be vulnerable to right now?
+- Is our Diamond-Square alignment strong?
+- What are our current risk levels across the four types?
+- Are we tracking toward our key metrics targets?
+- If we're struggling, is this a smart bet that hasn't paid off, or are we Running on Empty?
+
 ## Additional Frameworks to Include
 
 - **CEO Energy Management**: Track energy, not just time
@@ -190,6 +256,19 @@ Coach-style questions (non-judgmental, reflective):
 - "Who do you need to have a hard conversation with?"
 ```
 
+```markdown
+## Failure Pattern Detection (Eisenmann-style)
+- "Which of the six failure patterns might you be vulnerable to right now?"
+- "Is your Diamond (opportunity) and Square (resources) aligned?"
+- "Are you chasing false positives from early adopters?"
+- "Are you growing faster than your unit economics support?"
+- "Do you have the right senior team for this stage of growth?"
+- "How many 'miracles' need to happen for your vision to succeed?"
+- "Are you persisting past the point of reasonable hope?"
+- "What would make you decide to pull the plug?"
+- "If you shut down today, would that be a smart bet that didn't pay off, or a failure to face reality?"
+```
+
 ## Review Cadence Specifications
 
 ### Daily Check-in (5 minutes max)
@@ -211,6 +290,9 @@ Coach-style questions (non-judgmental, reflective):
 - Misalignment detection
 - Energy vs. output analysis
 - Course correction decisions
+- Campbell check: "Who have I developed?"
+- Eisenmann check: "Which failure patterns am I vulnerable to?"
+- Diamond-Square alignment review (for founders)
 
 ### Annual Review
 - Gustin-style full reflection
@@ -274,8 +356,8 @@ The README.md must explain:
 ## Completion Checklist
 
 - [ ] All folders and files created per structure
-- [ ] All 5 frameworks documented with credits (Gustin, Ferriss, Robbins, Lieberman, Campbell)
-- [ ] All 4 interview scripts with coaching questions (including Team & People)
+- [ ] All 6 frameworks documented with credits (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann)
+- [ ] All 5 interview scripts with coaching questions (including Team & People, Failure Pattern Detection)
 - [ ] All 4 review cadences with templates
 - [ ] All goal files (1/3/10 year) populated
 - [ ] memory.md initialized with pattern tracking structure
@@ -284,6 +366,7 @@ The README.md must explain:
 - [ ] Tone is calm, direct, insightful throughout
 - [ ] No generic productivity advice substituted for specified frameworks
 - [ ] Campbell Yardstick question in quarterly reviews ("Who have I developed?")
+- [ ] Eisenmann failure pattern check in quarterly reviews ("Which patterns are we vulnerable to?")
 
 ## Review Templates Required
 

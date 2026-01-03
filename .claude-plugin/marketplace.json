@@ -114,7 +114,7 @@
         {
             "name": "ceo-personal-os",
             "source": "./ceo-personal-os",
-            "description": "Personal operating system for executives - reflection frameworks, goal systems, and coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell)",
+            "description": "Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews, and startup failure pattern detection (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann)",
             "version": "1.0.0",
             "keywords": [
                 "ceo",
@@ -125,7 +125,10 @@
                 "coaching",
                 "campbell",
                 "trillion-dollar-coach",
-                "people-first"
+                "people-first",
+                "eisenmann",
+                "startup-failure",
+                "why-startups-fail"
             ],
             "strict": false
         },

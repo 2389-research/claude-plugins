@@ -15,6 +15,8 @@ Auto-detects when someone wants to:
 - Implement executive coaching frameworks
 - Apply Bill Campbell / Trillion Dollar Coach principles
 - Develop their people or build better teams
+- Understand why startups fail (Eisenmann patterns)
+- Evaluate venture health or decide when to pivot/quit
 
 ## Key Patterns
 
@@ -22,13 +24,14 @@ Auto-detects when someone wants to:
 
 The core principle is clarity over productivity. Output should feel like an executive coach - calm, direct, insightful.
 
-### Five Required Frameworks
+### Six Required Frameworks
 
 1. **Dr. Anthony Gustin Annual Review** - Wins, lessons, relationships, energy patterns
 2. **Tim Ferriss Ideal Lifestyle Costing** - Dreamlines with costs, TMI calculation
 3. **Tony Robbins Vivid Vision** - Present-tense 3-year future description
 4. **Alex Lieberman Life Map** - 6 domains: Career, Relationships, Health, Meaning, Finances, Fun
 5. **Bill Campbell Coaching Principles** - People-first leadership from "Trillion Dollar Coach"
+6. **Tom Eisenmann Startup Failure Patterns** - Six patterns that kill ventures from "Why Startups Fail"
 
 ### Campbell Core Principles
 
@@ -44,6 +47,21 @@ The core principle is clarity over productivity. Output should feel like an exec
 
 **Four Characteristics to Seek:** Smart (far analogies), Hard Work, Integrity, Grit
 
+### Eisenmann Failure Patterns
+
+| Pattern | Stage | Description |
+|---------|-------|-------------|
+| Bad Bedfellows | Early | Wrong team, investors, or partners |
+| False Starts | Early | Launching before researching customer needs |
+| False Positives | Early | Early adopter success misleads about mainstream |
+| Speed Traps | Late | Hypergrowth leads to rising CAC and eroding margins |
+| Help Wanted | Late | Financing risk + management gaps during scaling |
+| Cascading Miracles | Late | Too many "do or die" things must go right |
+
+**Diamond-and-Square Framework:** Assess alignment of Opportunity (CVP, Tech/Ops, Marketing, Profit Formula) and Resources (Founders, Team, Investors, Partners)
+
+**Key Metrics:** Unit Economics, LTV/CAC > 3, Cash Runway 12-18 months
+
 ### Review Cadences
 
 | Cadence | Time | Focus |
@@ -57,8 +75,8 @@ The core principle is clarity over productivity. Output should feel like an exec
 
 ```
 ceo-personal-os/
-├── frameworks/          # 5 specific frameworks with credits
-├── interviews/          # Coach-style question scripts (including team/people)
+├── frameworks/          # 6 specific frameworks with credits
+├── interviews/          # Coach-style question scripts (including team/people, failure patterns)
 ├── reviews/             # Templates for each cadence
 ├── goals/               # 1/3/10 year horizons
 ├── uploads/             # Past reviews for pattern extraction
@@ -92,10 +110,12 @@ The `memory.md` file tracks:
 
 When building a CEO Personal OS:
 1. Use TodoWrite to track every folder/file
-2. Include all 5 frameworks with proper credits (Gustin, Ferriss, Robbins, Lieberman, Campbell)
-3. Generate coach-style interview questions (including Team & People reflection)
+2. Include all 6 frameworks with proper credits (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann)
+3. Generate coach-style interview questions (including Team & People reflection, Failure Pattern Detection)
 4. Create templates in each review folder
 5. Initialize memory.md for pattern tracking
 6. Keep tone calm and direct throughout
 7. Include Campbell Yardstick question in quarterly reviews: "Who have I developed?"
-8. Add team/people reflection for executives who manage others
+8. Include Eisenmann failure pattern check in quarterly reviews: "Which patterns am I vulnerable to?"
+9. Add team/people reflection for executives who manage others
+10. Add Diamond-Square alignment review for founder/CEOs

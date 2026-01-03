@@ -23,6 +23,7 @@ Personal operating system for executives - reflection frameworks, goal systems, 
 | Vivid Vision | Tony Robbins | 3-year future visualization |
 | Life Map | Alex Lieberman | 6-domain life balance |
 | Coaching Principles | Bill Campbell | People-first leadership & team development |
+| Startup Failure Patterns | Tom Eisenmann | Detect failure patterns before they kill your venture |
 
 ## Quick Example
 
@@ -31,7 +32,7 @@ Start with: "Help me build a personal operating system"
 The skill generates a complete structure:
 ```
 ceo-personal-os/
-├── frameworks/          # 5 specific frameworks (including Campbell)
+├── frameworks/          # 6 specific frameworks (Campbell + Eisenmann)
 ├── interviews/          # Coach-style question scripts
 ├── reviews/             # Daily/weekly/quarterly/annual
 ├── goals/               # 1/3/10 year horizons
@@ -61,6 +62,8 @@ ceo-personal-os/
 - Mentions of Gustin, Ferriss, Robbins, Lieberman, or Campbell frameworks
 - "How do I develop my people?" or team-first leadership questions
 - Mentions of "Trillion Dollar Coach" or Bill Campbell
+- "Why do startups fail?" or Eisenmann startup failure patterns
+- Evaluating venture health or deciding when to pivot/quit
 
 ## Links
 
