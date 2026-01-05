@@ -336,31 +336,252 @@ Fresh-eyes complete for variant-json: [N] issues found.
 | Critical security issue in fresh-eyes | Eliminated (or fix first) |
 | Crashes/stalls | User can eliminate |
 | All fail | Report failures, ask user how to proceed |
-| One survives | Auto-select |
+| One survives | Auto-select as winner |
 
-**Step 4: Judge (comparing survivors)**
+**Step 3.5: Feasibility Check**
 
-If multiple survivors, compare using:
+Before scoring, check each survivor for fundamental scalability/feasibility issues that tests might miss:
 
-| Input | Source | Weight |
-|-------|--------|--------|
-| Scenario results | Step 1 | Pass/fail gate |
-| Fresh-eyes findings | Step 2 | Quality signal |
-| Code complexity | Line count, dependencies | Simplicity preference |
-| Test coverage | Test count, coverage % | Confidence signal |
+| Red Flag | How to Detect | Action |
+|----------|---------------|--------|
+| **O(n²) or worse on unbounded data** | Nested loops over collections that grow with users/data | Flag + estimate ceiling |
+| **Unbounded memory growth** | Caching without eviction, accumulating state in memory | Flag + estimate when OOM |
+| **Self-DDoS patterns** | Polling loops, retry without backoff, fan-out without limits | Flag as non-production |
+| **Missing pagination/limits** | Returns all records, no cursor, loads full dataset into memory | Flag + estimate data ceiling |
+| **Blocking operations in hot path** | Sync file I/O, unbounded network calls in request handler | Flag performance ceiling |
+| **No error recovery** | All state in memory, no persistence, crashes lose everything | Flag if durability required |
 
-**Present comparison to user:**
+**Feasibility output format:**
 ```
-Both variants passed scenarios. Fresh-eyes review:
-- variant-json: 0 issues, 450 lines, 12 tests
-- variant-sqlite: 1 minor issue (magic number), 520 lines, 15 tests
-
-Recommendation: variant-json (simpler, cleaner review)
-
-Pick winner: [1] json  [2] sqlite  [3] show me the code
+Feasibility Check:
+- variant-a: ✓ No issues identified
+- variant-b: ⚠️ O(n²) in processItems() - ceiling ~5k items before 1s+ latency
 ```
 
-**LLM Judge (future):** Automate the comparison above with structured scoring.
+**Important:** Feasibility flags don't auto-eliminate. Sometimes the simpler approach is fine for actual scale. But flags MUST be visible in the scorecard and factor into Robustness & Scalability scoring.
+
+**Step 4: Autonomous Judge (comparing survivors)**
+
+When multiple variants survive, the agent autonomously selects the winner using structured scoring.
+
+**Core principle:** Simplicity is only valuable when fitness is equal. A cleaner solution that doesn't solve the problem is not better.
+
+#### 4.1: Score Each Criterion (1-5)
+
+**Criterion 1: Fitness for Purpose**
+*Does it solve the actual problem the user asked for?*
+
+| Score | Meaning | Concrete Indicators |
+|-------|---------|---------------------|
+| **5** | Exceeds requirements | All requirements met, deployment needs satisfied, AND adds obvious value user didn't ask for but clearly needs |
+| **4** | Fully meets requirements | Every explicit requirement implemented correctly. Deployment/distribution needs met. No gaps. |
+| **3** | Meets core requirements | Primary use case works. Missing 1-2 secondary features, edge cases, or has deployment friction. |
+| **2** | Partially meets | 50-80% of requirements work. Key features missing, broken, or deployment method doesn't match needs. |
+| **1** | Misses the point | Solves a different problem than requested. <50% of requirements addressed. |
+
+*Scoring checklist - count YES answers:*
+
+**Functional requirements:**
+- [ ] Does the primary use case work end-to-end?
+- [ ] Are all explicitly stated requirements implemented?
+- [ ] Does it handle realistic scenarios, not just happy path?
+
+**User needs (beyond literal requirements):**
+- [ ] Would the user actually use this, or just demo it?
+- [ ] Does it solve the real problem, not just the literal request?
+- [ ] Does deployment/distribution match user's stated needs? (e.g., "standalone" = no build step, "shareable" = single file, "production" = proper hosting)
+
+**Future considerations (when relevant):**
+- [ ] If user mentioned growth/scaling needs, does architecture support it?
+- [ ] If user mentioned team/collaboration, is it maintainable by others?
+
+**5** = 7-8 yes, **4** = 5-6 yes, **3** = 4 yes, **2** = 2-3 yes, **1** = 0-1 yes
+
+*Note:* Not all checklist items apply to every project. Score based on items that ARE relevant. A solo hobby project doesn't need "maintainable by team" but a startup MVP does.
+
+**Criterion 2: Justified Complexity**
+*Is every line of code earning its keep?*
+
+| Score | Meaning | Concrete Indicators |
+|-------|---------|---------------------|
+| **5** | Minimal and complete | Every function/class has clear purpose. No dead code. No premature abstraction. |
+| **4** | Slight inefficiency | 1-2 small redundancies or one abstraction that could be simpler. <10% bloat. |
+| **3** | Some bloat | Noticeable unnecessary code. 10-25% could be removed without losing functionality. |
+| **2** | Significant bloat | Multiple unnecessary abstractions. 25-50% is overhead. |
+| **1** | Complexity theater | More abstraction than logic. Patterns for pattern's sake. >50% overhead. |
+
+*Complexity justification test - for each "extra" in the more complex variant:*
+1. Can you explain the value in ONE sentence? (If not → bloat)
+2. Would removing it noticeably degrade the user experience? (If not → bloat)
+3. Is it solving a problem that actually exists? (If not → premature)
+
+*Line count heuristic:*
+- Compare variants: `extra_lines = larger - smaller`
+- For each extra feature, estimate lines it requires
+- If `unexplained_lines > 20%` of extra → deduct points
+
+**Criterion 3: Readability**
+*Can a mid-level dev understand the core flow in 5 minutes?*
+
+| Score | Meaning | Concrete Indicators |
+|-------|---------|---------------------|
+| **5** | Self-documenting | Function names are verbs describing action. Variables reveal intent. No magic numbers. Structure mirrors logic. |
+| **4** | Clear with minor friction | 1-2 unclear names or one complex function. Core flow still obvious. |
+| **3** | Requires study | Must trace through code to understand. Some misleading names or hidden control flow. |
+| **2** | Confusing | Multiple misleading names. Unexpected side effects. Hard to follow execution order. |
+| **1** | Obfuscated | Cannot determine intent. Single-letter variables throughout. No structure. |
+
+*Readability checklist - count violations:*
+- [ ] Any single-letter variables outside of loop indices? (+1 violation)
+- [ ] Any functions over 50 lines? (+1 per function)
+- [ ] Nesting deeper than 3 levels? (+1 per instance)
+- [ ] Magic numbers without named constants? (+1 per instance)
+- [ ] Function names that don't describe what they do? (+1 per function)
+- [ ] Comments that explain WHAT not WHY? (+0.5 per instance)
+
+**5** = 0 violations, **4** = 1-2 violations, **3** = 3-4 violations, **2** = 5-7 violations, **1** = 8+ violations
+
+**Criterion 4: Robustness & Scalability**
+*How well does it handle the unexpected AND growth?*
+
+| Score | Meaning | Concrete Indicators |
+|-------|---------|---------------------|
+| **5** | Production-ready | All inputs validated. Errors handled gracefully with useful messages. No feasibility flags. Scales linearly or better. |
+| **4** | Solid | Most error paths covered. Minor feasibility concerns. Handles 10x expected load. |
+| **3** | Happy path works | Core functionality solid. Some edge cases crash or fail silently. Some scaling concerns. |
+| **2** | Fragile | Crashes on unexpected input. Silent failures. Known scaling ceiling <10x current needs. |
+| **1** | Time bomb | Obvious failure modes ignored. Will break at 2x load. Has critical feasibility flags. |
+
+*Robustness checklist - count YES answers:*
+- [ ] User/external input validated before use?
+- [ ] External calls (API, DB, file) have error handling?
+- [ ] Errors surfaced with useful messages (not swallowed)?
+- [ ] Null/undefined/empty cases handled?
+- [ ] Timeouts on async operations?
+- [ ] No unbounded loops or recursion?
+
+*Scalability checklist - count YES answers:*
+- [ ] Algorithm complexity O(n log n) or better for main operations?
+- [ ] Memory usage bounded (no unbounded caching/accumulation)?
+- [ ] Database queries indexed and paginated?
+- [ ] No blocking I/O in hot paths?
+- [ ] External calls have backoff/retry logic?
+- [ ] Can handle 10x current expected load?
+
+**5** = 11-12 yes + no feasibility flags
+**4** = 9-10 yes OR minor feasibility flag
+**3** = 7-8 yes
+**2** = 5-6 yes OR major feasibility flag
+**1** = <5 yes OR critical feasibility flag
+
+**Criterion 5: Maintainability**
+*How painful is the next change?*
+
+| Score | Meaning | Concrete Indicators |
+|-------|---------|---------------------|
+| **5** | Change-friendly | Single responsibility per function/module. Changes stay in 1-2 files. Clear interfaces. |
+| **4** | Manageable | Some coupling but dependencies explicit. Changes touch 2-4 files predictably. |
+| **3** | Requires care | Must trace dependencies. Changes ripple to 4-6 files. Some implicit coupling. |
+| **2** | Brittle | Touching one thing breaks another. Global state. Changes unpredictably affect distant code. |
+| **1** | Frozen | No one wants to touch it. Unclear what depends on what. Any change is risky. |
+
+*Maintainability checklist - count YES answers:*
+- [ ] Functions/modules have single responsibility?
+- [ ] Dependencies are explicit (imports, params) not implicit (globals, side effects)?
+- [ ] Business logic separated from infrastructure (DB, HTTP, UI)?
+- [ ] Adding a new feature would require changing ≤3 files?
+- [ ] Configuration externalized (not hardcoded)?
+- [ ] Tests exist that would catch regressions?
+
+**5** = 6 yes, **4** = 5 yes, **3** = 4 yes, **2** = 2-3 yes, **1** = 0-1 yes
+
+#### 4.2: Build Scorecard
+
+First, document feasibility findings:
+```
+## Feasibility Check
+| Variant | Status | Notes |
+|---------|--------|-------|
+| variant-a | ✓ OK | No issues |
+| variant-b | ⚠️ Flag | O(n²) in processItems() - ceiling ~5k items |
+```
+
+Then score each criterion using the checklists above:
+```
+## Scoring Worksheet
+
+### Variant A
+- Fitness: [checklist results] → Score: X
+- Complexity: [justification test results] → Score: X
+- Readability: [violation count] → Score: X
+- Robustness & Scale: [checklist + feasibility] → Score: X
+- Maintainability: [checklist results] → Score: X
+
+### Variant B
+[Same format]
+```
+
+Finally, build the comparison scorecard:
+```
+## Judge Scorecard
+| Criterion              | Variant A | Variant B | Δ (B-A) | Decisive? |
+|------------------------|-----------|-----------|---------|-----------|
+| Fitness for purpose    |           |           |         |           |
+| Justified complexity   |           |           |         |           |
+| Readability            |           |           |         |           |
+| Robustness & Scale     |           |           |         |           |
+| Maintainability        |           |           |         |           |
+| **TOTAL**              |    /25    |    /25    |         |           |
+```
+
+Mark any criterion with |Δ| ≥ 2 as "Decisive? = YES"
+
+#### 4.3: Decision Logic
+
+**Hard gates (automatic, no exceptions):**
+
+1. **Fitness Gate:** If Fitness for Purpose difference ≥ 2 → Higher fitness WINS
+   - Rationale: A solution that doesn't solve the problem is not a solution
+
+2. **Critical Flaw Gate:** If any criterion = 1 → ELIMINATED
+   - Rationale: A single critical flaw disqualifies regardless of other scores
+
+**Judgment zone (agent decides with explanation):**
+
+When no hard gate triggers, agent selects winner considering:
+- Total score difference (larger gap = stronger signal)
+- Which criteria matter most for THIS specific problem
+- Domain-specific factors (e.g., "MCTS is overkill for Connect 4's state space")
+- Practical trade-offs between the approaches
+
+**Required:** Explain the reasoning. Don't just state the winner - explain WHY.
+
+*Note:* Line count is a weak signal. Only use as tiebreaker if scores are genuinely
+identical and no other factor distinguishes the variants. A 5-10% line difference
+is not meaningful.
+
+#### 4.4: Announce Decision
+
+Format the decision clearly:
+
+```
+**Winner: variant-minimax** (Score: 23/25 vs 21/25)
+
+**Hard gates:**
+- Fitness Gate: Not triggered (both scored 5)
+- Critical Flaw Gate: Not triggered (no 1s)
+
+**Selection rationale:**
+Minimax selected over MCTS despite similar scores because:
+- Minimax with alpha-beta is ideal for Connect 4's game tree size (~4 million positions)
+- MCTS shines in larger state spaces (Go, complex strategy games)
+- Both provide challenging opponents, but minimax is the right tool for this job
+
+**Trade-offs acknowledged:**
+- MCTS has nicer win highlighting animation
+- MCTS provides more variety in play (probabilistic)
+- These don't outweigh algorithmic fit for the problem
+```
 
 ### Phase 5: Completion
 
@@ -389,24 +610,70 @@ git branch -D <feature>/omakase/<variant>
 ```markdown
 # Omakase-Off Results: <feature>
 
-## Variants
-| Variant | Tests | Scenarios | Fresh-Eyes | Result |
-|---------|-------|-----------|------------|--------|
-| variant-json | 12/12 | PASS | 0 issues | WINNER |
-| variant-sqlite | 15/15 | PASS | 1 minor | eliminated |
+## Variants Tested
+| Variant | Lines | Tests | Scenarios | Fresh-Eyes | Result |
+|---------|-------|-------|-----------|------------|--------|
+| variant-minimax | 508 | PASS | 7/7 | 0 issues | **WINNER** |
+| variant-random | 373 | PASS | 7/7 | 0 issues | eliminated |
 
-## Winner Selection
-Reason: Both passed, but variant-json was simpler (fewer lines, cleaner fresh-eyes)
+## Feasibility Check
+| Variant | Status | Notes |
+|---------|--------|-------|
+| variant-random | ✓ OK | No scalability concerns |
+| variant-minimax | ✓ OK | Minimax O(b^d) bounded by depth=5, acceptable |
 
-## Judge Inputs
-- Scenario results: Both passed
-- Fresh-eyes: json=clean, sqlite=1 minor issue
-- Complexity: json=450 lines, sqlite=520 lines
+## Scoring Worksheet
+
+### variant-random
+- Fitness: Primary works, but trivial opponent isn't engaging → **2/5**
+- Complexity: No bloat, minimal code → **5/5**
+- Readability: 0 violations, self-documenting → **5/5**
+- Robustness & Scale: 10/12 checklist items, no flags → **4/5**
+- Maintainability: 5/6 checklist items → **4/5**
+
+### variant-minimax
+- Fitness: All requirements + engaging AI + animations → **5/5**
+- Complexity: Extra 135 lines all justified (AI, UX) → **5/5**
+- Readability: 1-2 minor violations (algorithm complexity) → **4/5**
+- Robustness & Scale: 10/12 checklist items, no flags → **4/5**
+- Maintainability: 5/6 checklist items → **4/5**
+
+## Judge Scorecard
+
+| Criterion              | variant-random | variant-minimax | Δ | Decisive? |
+|------------------------|----------------|-----------------|---|-----------|
+| Fitness for purpose    | 2              | 5               | +3 | **YES** |
+| Justified complexity   | 5              | 5               | 0 | No |
+| Readability            | 5              | 4               | -1 | No |
+| Robustness & Scale     | 4              | 4               | 0 | No |
+| Maintainability        | 4              | 4               | 0 | No |
+| **TOTAL**              | **20**         | **22**          | +2 | |
+
+## Hard Gates
+| Gate | Result |
+|------|--------|
+| Fitness Gate (Δ ≥ 2) | **TRIGGERED** - variant-random (2) vs variant-minimax (5) |
+| Critical Flaw (any = 1) | Not triggered |
+
+## Winner Selection Rationale
+**variant-minimax** selected via Fitness Gate.
+
+The minimax variant scores 5 on fitness (exceeds requirements with engaging gameplay
+and polish) while random scores only 2 (technically functional but not a real game).
+
+**Why this decision is correct:**
+- A game needs a worthy opponent to be engaging
+- Random AI is a tech demo, not a product
+- The extra complexity (135 lines) directly serves user value
+
+**Trade-offs acknowledged:**
+- Random was slightly more readable (simpler algorithm)
+- This advantage is irrelevant when one variant doesn't solve the actual problem
 
 ## Cleanup
-Worktrees removed: 1
-Branches deleted: todo/omakase/variant-sqlite
-Plans preserved: docs/plans/<feature>/omakase/
+- Worktrees removed: `.worktrees/variant-random`
+- Branches deleted: `<feature>/omakase/variant-random`
+- Plans preserved: `docs/plans/<feature>/omakase/`
 ```
 
 Save to: `docs/plans/<feature>/omakase/result.md`
