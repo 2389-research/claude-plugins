@@ -28,21 +28,21 @@ Agentic binary reverse engineering for ELF binaries from embedded devices. The L
 
 ## Skills Included
 
-### Main Orchestrator: binary-re
+### Main Skill: binary-re
 
-Routes to phase-specific sub-skills based on context.
+Provides overall methodology, philosophy, and reference material for binary reverse engineering.
 
-### Sub-Skills
+### Phase-Specific Skills (Auto-Detect)
 
-| Skill | Purpose |
-|-------|---------|
-| `binary-re:triage` | Fast fingerprinting via rabin2 |
-| `binary-re:static-analysis` | r2 + Ghidra deep analysis |
-| `binary-re:dynamic-analysis` | QEMU/GDB/Frida runtime observation |
-| `binary-re:synthesis` | Report generation |
-| `binary-re:tool-setup` | Tool installation guides |
+| Skill | Purpose | Trigger Keywords |
+|-------|---------|------------------|
+| `binary-re-triage` | Fast fingerprinting via rabin2 | "what is this binary", "identify", "file type" |
+| `binary-re-static-analysis` | r2 + Ghidra deep analysis | "disassemble", "decompile", "functions" |
+| `binary-re-dynamic-analysis` | QEMU/GDB/Frida runtime observation | "run", "execute", "debug", "trace" |
+| `binary-re-synthesis` | Report generation | "summarize", "report", "document" |
+| `binary-re-tool-setup` | Tool installation guides | "install", "setup", "tool not found" |
 
-**Trigger keywords**: reverse engineering, binary, ELF, disassembly, ARM, embedded, firmware, radare2, r2, Ghidra, decompile
+**Note:** Each skill auto-detects based on keywords in your request. The runtime's semantic matching handles routing automatically.
 
 ## Episodic Memory Integration
 
@@ -157,12 +157,12 @@ User: "I have a binary from a security camera. ARM, probably BusyBox-based."
 
 Claude:
 1. Search episodic memory for previous analysis (none found)
-2. Invoke binary-re:triage
+2. Triage phase (binary-re-triage auto-detects)
    - Identify: ARM 32-bit, musl libc, libcurl+libssl
    - Record: [BINARY-RE:triage] camera_daemon (sha256: abc...)
    - Hypothesis: "Network client" (confidence: 0.6)
 
-3. Invoke binary-re:static-analysis
+3. Static analysis (binary-re-static-analysis auto-detects)
    - Find functions calling curl_easy_perform
    - Locate URL strings
    - Record: [BINARY-RE:static] ... FACT: URL "api.vendor.com"
@@ -171,11 +171,11 @@ Claude:
 4. Ask human: "Ready to run under QEMU with network blocked?"
    - Human approves
 
-5. Invoke binary-re:dynamic-analysis
+5. Dynamic analysis (binary-re-dynamic-analysis auto-detects)
    - Observe connect() attempts, file reads
    - Record: [BINARY-RE:dynamic] ... FACT: connects to 1.2.3.4:443
 
-6. Invoke binary-re:synthesis
+6. Synthesis (binary-re-synthesis auto-detects)
    - Generate structured report
    - Record: [BINARY-RE:synthesis] ... CONFIRMED: telemetry client
 

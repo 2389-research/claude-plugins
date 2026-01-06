@@ -1,6 +1,6 @@
 ---
-name: binary-re:static-analysis
-description: Deep static analysis via radare2 and Ghidra headless - function enumeration, cross-references, decompilation, control flow analysis
+name: binary-re-static-analysis
+description: Use when analyzing binary structure, disassembling code, or decompiling functions. Deep static analysis via radare2 (r2) and Ghidra headless - function enumeration, cross-references (xrefs), decompilation, control flow graphs. Keywords - "disassemble", "decompile", "what does this function do", "find functions", "analyze code", "r2", "ghidra", "pdg", "afl"
 ---
 
 # Static Analysis (Phases 2-3)
@@ -402,5 +402,5 @@ After static analysis:
 
 ## Next Steps
 
-→ `binary-re:dynamic-analysis` to verify hypotheses with runtime observation
-→ `binary-re:synthesis` if sufficient understanding reached
+→ `binary-re-dynamic-analysis` to verify hypotheses with runtime observation
+→ `binary-re-synthesis` if sufficient understanding reached

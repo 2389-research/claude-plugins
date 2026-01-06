@@ -1,6 +1,6 @@
 ---
-name: binary-re:triage
-description: Fast binary fingerprinting via rabin2 - architecture detection, ABI identification, dependency mapping, string extraction without full analysis
+name: binary-re-triage
+description: Use when first encountering an unknown binary, ELF file, executable, or firmware blob. Fast fingerprinting via rabin2 - architecture detection (ARM, x86, MIPS), ABI identification, dependency mapping, string extraction. Keywords - "what is this binary", "identify architecture", "check file type", "rabin2", "file analysis", "quick scan"
 ---
 
 # Binary Triage (Phase 1)
@@ -263,5 +263,5 @@ After triage, determine:
 
 ## Next Steps
 
-→ Proceed to `binary-re:static-analysis` for function enumeration
-→ Or `binary-re:dynamic-analysis` if behavior observation is priority
+→ Proceed to `binary-re-static-analysis` for function enumeration
+→ Or `binary-re-dynamic-analysis` if behavior observation is priority

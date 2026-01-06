@@ -1,23 +1,25 @@
 ---
 name: binary-re
-description: Use when reverse engineering ELF binaries, shared libraries, or kernel modules for ARM64, ARMv7, x86_64 - orchestrates phased analysis workflow with radare2, Ghidra, GDB, QEMU
+description: Use when reverse engineering ELF binaries, shared libraries, kernel modules, or firmware blobs for ARM64, ARMv7, x86_64, MIPS, RISC-V. Provides hypothesis-driven analysis workflow with radare2, Ghidra, GDB, QEMU. Keywords - "reverse engineering", "binary analysis", "ELF", "firmware", "malware", "disassembly"
 ---
 
-# Binary Reverse Engineering (Orchestrator)
+# Binary Reverse Engineering
 
 ## Purpose
 
-Main entry point for binary reverse engineering. Routes to appropriate sub-skills based on analysis phase and user needs.
+Comprehensive guide for binary reverse engineering. This skill provides the overall methodology, philosophy, and reference material. Related skills handle specific phases:
 
-## Sub-Skills
+## Related Skills
 
-| Skill | Purpose | When to Use |
-|-------|---------|-------------|
-| `binary-re:triage` | Fast fingerprinting | First contact with binary |
-| `binary-re:static-analysis` | r2 + Ghidra analysis | Understanding structure |
-| `binary-re:dynamic-analysis` | QEMU + GDB + Frida | Runtime observation |
-| `binary-re:synthesis` | Report generation | Documenting findings |
-| `binary-re:tool-setup` | Install tools | Missing dependencies |
+| Skill | Purpose | Trigger Keywords |
+|-------|---------|------------------|
+| `binary-re-triage` | Fast fingerprinting | "what is this binary", "identify", "file type" |
+| `binary-re-static-analysis` | r2 + Ghidra analysis | "disassemble", "decompile", "functions" |
+| `binary-re-dynamic-analysis` | QEMU + GDB + Frida | "run", "execute", "debug", "trace" |
+| `binary-re-synthesis` | Report generation | "summarize", "report", "document findings" |
+| `binary-re-tool-setup` | Install tools | "install", "setup", "tool not found" |
+
+**Note:** Each skill auto-detects based on keywords. You don't need to explicitly route - just ask what you need.
 
 ## Pre-Flight Verification
 
@@ -39,7 +41,7 @@ r2 -qc 'pdg?' - 2>/dev/null | grep -q Usage && echo "r2ghidra OK" || echo "r2ghi
 | Host Platform | Method | Setup Required |
 |---------------|--------|----------------|
 | Linux x86_64 | Native QEMU | `apt install qemu-user` |
-| macOS (any) | Docker + binfmt | See `binary-re:tool-setup` |
+| macOS (any) | Docker + binfmt | See `binary-re-tool-setup` skill |
 | Windows | WSL2 | Use Linux method inside WSL |
 
 **If dynamic tools unavailable:** Proceed with static-only analysis, note reduced confidence in synthesis phase.
@@ -199,7 +201,7 @@ DECISION: {choice} (rationale: {why})
 3. If previous analysis found:
    → "Found previous analysis from {date}. Resume or start fresh?"
 4. If resuming: Load facts/hypotheses, continue from last phase
-5. If fresh: Begin with binary-re:triage
+5. If fresh: Begin with triage phase
 ```
 
 ### Resuming Interrupted Analysis
@@ -226,63 +228,21 @@ Claude:
 2. Return matching artifacts and findings
 ```
 
-## Routing Logic
-
-### User mentions unknown binary → Start with `binary-re:triage`
-
-```
-"I have this binary from a router"
-"Can you analyze this ELF file"
-"What does this binary do"
-```
-
-### User needs tool setup → Route to `binary-re:tool-setup`
-
-```
-"r2 not found"
-"How do I install Ghidra"
-"Missing QEMU"
-```
-
-### User wants function analysis → Route to `binary-re:static-analysis`
-
-```
-"What does function at 0x8400 do"
-"Decompile main"
-"Find network functions"
-```
-
-### User wants runtime behavior → Route to `binary-re:dynamic-analysis`
-
-```
-"Run it and see what happens"
-"What syscalls does it make"
-"Set breakpoint at..."
-```
-
-### User needs report → Route to `binary-re:synthesis`
-
-```
-"Summarize what we found"
-"Generate report"
-"Document findings"
-```
-
 ## Standard Analysis Flow
 
 For typical unknown binary analysis:
 
 ```
-1. binary-re:triage
+1. Triage (binary-re-triage)
    └─ Architecture, ABI, dependencies, capabilities
 
-2. binary-re:static-analysis
+2. Static Analysis (binary-re-static-analysis)
    └─ Functions, strings, xrefs, decompilation
 
-3. binary-re:dynamic-analysis (if safe)
+3. Dynamic Analysis (binary-re-dynamic-analysis) - if safe
    └─ Syscalls, network, file access
 
-4. binary-re:synthesis
+4. Synthesis (binary-re-synthesis)
    └─ Structured report with evidence
 ```
 
@@ -329,7 +289,7 @@ qemu-arm -L /usr/arm-linux-gnueabihf -strace ./binary
 
 | Situation | Action |
 |-----------|--------|
-| Tool not found | Invoke `binary-re:tool-setup` |
+| Tool not found | Use `binary-re-tool-setup` skill |
 | Wrong architecture | Re-run triage, verify file output |
 | QEMU fails | Try Qiling, Unicorn, or on-device |
 | Analysis timeout | Reduce scope, use `aa` not `aaa` |

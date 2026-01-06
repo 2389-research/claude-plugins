@@ -19,7 +19,7 @@ User has a binary extracted from an IoT device (smart thermostat). They want to 
 
 ## Expected Skill Flow
 
-### Phase 1: Triage (binary-re:triage)
+### Phase 1: Triage (binary-re-triage)
 
 **Expected commands:**
 ```bash
@@ -38,7 +38,7 @@ rabin2 -q -j -zz thermostat_daemon | jq '.strings | length'
 **Expected hypothesis:**
 - H1: "Binary is a telemetry/reporting client" (confidence: 0.6)
 
-### Phase 2: Static Analysis (binary-re:static-analysis)
+### Phase 2: Static Analysis (binary-re-static-analysis)
 
 **Expected commands:**
 ```bash
@@ -56,7 +56,7 @@ r2 -q -c 'izj' thermostat_daemon | jq '.strings[] | select(.string | test("http|
 **Updated hypothesis:**
 - H1: "Binary sends temperature/humidity data to api.thermco.com" (confidence: 0.8)
 
-### Phase 3: Dynamic Analysis (binary-re:dynamic-analysis)
+### Phase 3: Dynamic Analysis (binary-re-dynamic-analysis)
 
 **Human approval gate:**
 - "I'm ready to run this under QEMU with syscall tracing. The sandbox will block network access. Proceed?"
@@ -76,7 +76,7 @@ qemu-arm -L ~/sysroots/musl-arm -strace ./thermostat_daemon 2>&1 | head -100
 - Network connection attempted (blocked by sandbox)
 - Logging to /var/log/thermostat.log
 
-### Phase 4: Synthesis (binary-re:synthesis)
+### Phase 4: Synthesis (binary-re-synthesis)
 
 **Expected report structure:**
 
@@ -120,7 +120,7 @@ Multiple evidence sources confirm telemetry behavior.
 
 | Scenario | Expected Behavior |
 |----------|-------------------|
-| Missing musl sysroot | Prompt for sysroot setup via binary-re:tool-setup |
+| Missing musl sysroot | Prompt for sysroot setup via binary-re-tool-setup |
 | QEMU unsupported syscall | Fall back to static-only analysis |
 | Stripped binary (no symbols) | Use address-based analysis |
 | Encrypted strings | Note as "obfuscated" in report |

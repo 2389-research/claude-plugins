@@ -19,7 +19,7 @@ User extracted a binary from router firmware dump. They want to understand if it
 
 ## Expected Skill Flow
 
-### Phase 1: Triage (binary-re:triage)
+### Phase 1: Triage (binary-re-triage)
 
 **Expected commands:**
 ```bash
@@ -39,7 +39,7 @@ rabin2 -q -j -zz router_mgmt | jq '.strings[] | select(.string | test("password|
 - H1: "Binary contains hardcoded credentials" (confidence: 0.5)
 - H2: "Binary implements network server" (confidence: 0.7)
 
-### Phase 2: Static Analysis (binary-re:static-analysis)
+### Phase 2: Static Analysis (binary-re-static-analysis)
 
 **Expected commands:**
 ```bash
@@ -59,13 +59,13 @@ r2 -q -c 'pdf @sym.check_password' router_mgmt
 - H1: "Binary has hardcoded backdoor password 'tplink123'" (confidence: 0.9)
 - H3: "Binary starts telnet server" (confidence: 0.85)
 
-### Phase 3: Dynamic Analysis (binary-re:dynamic-analysis)
+### Phase 3: Dynamic Analysis (binary-re-dynamic-analysis)
 
 **Human approval gate:**
 - "This binary appears to start a network server. Running it could expose services. Recommend static-only analysis. Proceed with dynamic anyway?"
 - (User declines, stays with static)
 
-### Phase 4: Synthesis (binary-re:synthesis)
+### Phase 4: Synthesis (binary-re-synthesis)
 
 **Expected report:**
 
