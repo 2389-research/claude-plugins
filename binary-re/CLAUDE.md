@@ -4,6 +4,46 @@
 
 Agentic binary reverse engineering for ELF binaries from embedded devices. The LLM drives analysis while humans provide context about the target platform, hardware, and suspected purpose.
 
+## CRITICAL: Skill Invocation Required
+
+**You MUST invoke the `binary-re` skill BEFORE taking any action** when:
+
+### The Core Pattern
+**User has a binary + wants to understand something about it**
+
+This covers ANY question about a binary's behavior, purpose, or internals:
+- "I have a binary that does X..."
+- "What does this binary do?"
+- "How does this work?"
+- "Can you analyze/figure out/understand this?"
+- "This executable [anything]..."
+
+### Why This Matters
+The skill provides:
+1. **Structured methodology** - Hypothesis-driven analysis prevents wasted effort
+2. **Tool selection** - Correct r2/Ghidra/QEMU invocation for the architecture
+3. **Human-in-the-loop gates** - Safety checks before execution
+4. **Episodic memory integration** - Findings persist across sessions
+
+### What NOT To Do
+❌ Run `file`, `strings`, `rabin2`, or `r2` commands before invoking the skill
+❌ Start analyzing without checking episodic memory for prior work
+❌ "Just quickly check" anything before invoking the skill
+❌ Skip triage phase and jump to static/dynamic analysis
+
+### Correct Behavior
+```
+User: "I have a binary here that checks this key and validates it.
+       Can we determine what it's checking?"
+
+Claude:
+1. Invoke binary-re skill (FIRST)
+2. Follow skill's triage → static → dynamic → synthesis flow
+3. Gate execution decisions through human approval
+```
+
+The skill handles ALL binary analysis scenarios - don't try to enumerate them.
+
 ## Architecture
 
 ```

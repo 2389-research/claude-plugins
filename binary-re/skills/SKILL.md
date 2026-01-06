@@ -1,6 +1,6 @@
 ---
 name: binary-re
-description: Use when reverse engineering ELF binaries, shared libraries, kernel modules, or firmware blobs for ARM64, ARMv7, x86_64, MIPS, RISC-V. Provides hypothesis-driven analysis workflow with radare2, Ghidra, GDB, QEMU. Keywords - "reverse engineering", "binary analysis", "ELF", "firmware", "malware", "disassembly"
+description: Use when user has a binary/executable and wants to understand what it does, how it works, or analyze its behavior. Triggers on "I have a binary", "this executable", "what does this binary do", "how does this work", "can you analyze", "figure out what", "reverse engineer", "disassemble", "decompile". Covers ELF, shared libraries, kernel modules, firmware for ARM64, ARMv7, x86_64, MIPS, RISC-V using radare2, Ghidra, GDB, QEMU.
 ---
 
 # Binary Reverse Engineering
