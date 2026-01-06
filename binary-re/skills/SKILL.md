@@ -1,6 +1,6 @@
 ---
 name: binary-re
-description: Use when user has a binary/executable and wants to understand what it does, how it works, or analyze its behavior. Triggers on "I have a binary", "this executable", "what does this binary do", "how does this work", "can you analyze", "figure out what", "reverse engineer", "disassemble", "decompile". Covers ELF, shared libraries, kernel modules, firmware for ARM64, ARMv7, x86_64, MIPS, RISC-V using radare2, Ghidra, GDB, QEMU.
+description: Use when user has a binary/executable/bytecode and wants to understand what it does, how it works, or analyze its behavior. Triggers on "I have a binary", "this executable", "what does this binary do", "how does this work", "can you analyze", "figure out what", "reverse engineer", "disassemble", "decompile", "pyc file", "python bytecode", "obfuscated python", "marshal". Covers ELF, shared libraries, kernel modules, firmware, Python bytecode for ARM64, ARMv7, x86_64, MIPS, RISC-V using radare2, Ghidra, GDB, QEMU, pycdc.
 ---
 
 # Binary Reverse Engineering
@@ -301,6 +301,7 @@ See companion docs:
 - `docs/r2-commands.md` - Complete r2 reference for LLMs
 - `docs/ghidra-headless.md` - Ghidra scripting guide
 - `docs/arch-adapters.md` - Per-architecture quirks
+- `docs/python-bytecode-re.md` - Python .pyc/marshal obfuscation patterns
 
 ## Integration
 
