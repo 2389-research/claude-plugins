@@ -13,6 +13,24 @@ Same design, multiple cooks compete. Each implementation team creates their own 
 
 **Key insight:** Don't share a pre-made implementation plan. Each agent generates their own plan from the design doc, ensuring genuine variation.
 
+## CRITICAL: First Steps (BEFORE ANYTHING ELSE)
+
+**STOP. Before reading further, create these todos NOW:**
+
+```
+TodoWrite([
+  { content: "Phase 1: Present implementation options", status: "in_progress", activeForm: "Presenting implementation options" },
+  { content: "Phase 2: Assess complexity and setup", status: "pending", activeForm: "Assessing complexity" },
+  { content: "Phase 3: Dispatch parallel agents", status: "pending", activeForm: "Dispatching parallel agents" },
+  { content: "Phase 4: Judge implementations with scoring framework", status: "pending", activeForm: "Judging implementations" },
+  { content: "Phase 5: Cleanup and finish", status: "pending", activeForm: "Cleaning up" }
+])
+```
+
+**Why this is mandatory:** Context compaction can happen mid-workflow. Without these todos, you will lose track of which phase you're in and skip critical steps like scoring and winner selection.
+
+**If you're resuming after compaction:** Check your todo list. If "Phase 4: Judge implementations" is pending, execute it NOW before doing anything else.
+
 ## Directory Structure
 
 ```
@@ -82,27 +100,6 @@ Before we start implementation, how would you like to proceed?
 - What implementation options another skill might present
 
 **The key insight:** We're not injecting into another skill's menu. We're recognizing a SITUATION (design→implementation) and ensuring cookoff is offered at that moment.
-
-## Phase Tracking (REQUIRED)
-
-**At cookoff start, create todos for all phases:**
-
-```
-TodoWrite([
-  { content: "Phase 1: Present implementation options", status: "in_progress", activeForm: "Presenting implementation options" },
-  { content: "Phase 2: Assess complexity and setup", status: "pending", activeForm: "Assessing complexity" },
-  { content: "Phase 3: Dispatch parallel agents", status: "pending", activeForm: "Dispatching parallel agents" },
-  { content: "Phase 4: Judge implementations", status: "pending", activeForm: "Judging implementations" },
-  { content: "Phase 5: Cleanup and finish", status: "pending", activeForm: "Cleaning up" }
-])
-```
-
-**Why this matters:**
-- Todos survive context compaction
-- After compaction, check todos to see where you are in the workflow
-- Prevents "forgetting" to run Phase 4 judging
-
-**Update todos as you progress** - mark each phase complete before starting the next.
 
 ## Phase 1: Implementation Options
 

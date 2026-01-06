@@ -13,6 +13,24 @@ Chef's choice exploration - when you're not sure WHAT to build, explore differen
 
 **Core principle:** Let indecision emerge naturally during brainstorming, then implement multiple approaches in parallel to let real code + tests determine the best solution.
 
+## CRITICAL: First Steps (BEFORE ANYTHING ELSE)
+
+**STOP. Before reading further, create these todos NOW:**
+
+```
+TodoWrite([
+  { content: "Phase 1: Brainstorm with slot detection", status: "in_progress", activeForm: "Brainstorming with slot detection" },
+  { content: "Phase 2: Generate variant plans", status: "pending", activeForm: "Generating variant plans" },
+  { content: "Phase 3: Implement variants in parallel", status: "pending", activeForm: "Implementing variants" },
+  { content: "Phase 4: Evaluate and judge with scoring framework", status: "pending", activeForm: "Evaluating and judging" },
+  { content: "Phase 5: Cleanup and finish", status: "pending", activeForm: "Cleaning up" }
+])
+```
+
+**Why this is mandatory:** Context compaction can happen mid-workflow. Without these todos, you will lose track of which phase you're in and skip critical steps like scoring and winner selection.
+
+**If you're resuming after compaction:** Check your todo list. If "Phase 4: Evaluate and judge" is pending, execute it NOW before doing anything else.
+
 ## Skill Dependencies
 
 This skill orchestrates other skills. Check what's installed and use fallbacks if needed.
@@ -34,27 +52,6 @@ This skill orchestrates other skills. Check what's installed and use fallbacks i
 **At skill start:** Check which dependencies are available. Announce: "Using [X] for brainstorming, [Y] for scenario testing..." so user knows which tools are active.
 
 **If primary not installed:** Use the fallback behavior described above. The fallback is the essential behavior - primary skills just formalize it.
-
-## Phase Tracking (REQUIRED)
-
-**At omakase-off start, create todos for all phases:**
-
-```
-TodoWrite([
-  { content: "Phase 1: Brainstorm with slot detection", status: "in_progress", activeForm: "Brainstorming with slot detection" },
-  { content: "Phase 2: Generate variant plans", status: "pending", activeForm: "Generating variant plans" },
-  { content: "Phase 3: Implement variants in parallel", status: "pending", activeForm: "Implementing variants" },
-  { content: "Phase 4: Evaluate and judge", status: "pending", activeForm: "Evaluating and judging" },
-  { content: "Phase 5: Cleanup and finish", status: "pending", activeForm: "Cleaning up" }
-])
-```
-
-**Why this matters:**
-- Todos survive context compaction
-- After compaction, check todos to see where you are in the workflow
-- Prevents "forgetting" to run Phase 4 judging
-
-**Update todos as you progress** - mark each phase complete before starting the next.
 
 ## When to Use
 
