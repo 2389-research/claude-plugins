@@ -246,6 +246,28 @@
             "strict": false
         },
         {
+            "name": "binary-re",
+            "source": "./binary-re",
+            "description": "Agentic binary reverse engineering for ELF binaries on ARM64, ARMv7, x86_64 - hypothesis-driven analysis with radare2, Ghidra, GDB, QEMU",
+            "version": "1.0.0",
+            "keywords": [
+                "reverse-engineering",
+                "binary",
+                "elf",
+                "arm",
+                "embedded",
+                "firmware",
+                "radare2",
+                "r2",
+                "ghidra",
+                "disassembly",
+                "decompile",
+                "qemu",
+                "gdb"
+            ],
+            "strict": false
+        },
+        {
             "name": "agent-drugs",
             "source": {
                 "source": "url",

@@ -1,0 +1,6 @@
+{
+  "name": "binary-re",
+  "description": "Agentic binary reverse engineering for ELF binaries on ARM64, ARMv7, x86_64 - structured analysis with radare2, Ghidra, GDB, and dynamic tracing",
+  "version": "1.0.0",
+  "commands": []
+}
