@@ -13,11 +13,11 @@ Comprehensive guide for binary reverse engineering. This skill provides the over
 
 | Skill | Purpose | Trigger Keywords |
 |-------|---------|------------------|
-| `binary-re-triage` | Fast fingerprinting | "what is this binary", "identify", "file type" |
-| `binary-re-static-analysis` | r2 + Ghidra analysis | "disassemble", "decompile", "functions" |
-| `binary-re-dynamic-analysis` | QEMU + GDB + Frida | "run", "execute", "debug", "trace" |
-| `binary-re-synthesis` | Report generation | "summarize", "report", "document findings" |
-| `binary-re-tool-setup` | Install tools | "install", "setup", "tool not found" |
+| `binary-re:triage` | Fast fingerprinting | "what is this binary", "identify", "file type" |
+| `binary-re:static-analysis` | r2 + Ghidra analysis | "disassemble", "decompile", "functions" |
+| `binary-re:dynamic-analysis` | QEMU + GDB + Frida | "run", "execute", "debug", "trace" |
+| `binary-re:synthesis` | Report generation | "summarize", "report", "document findings" |
+| `binary-re:tool-setup` | Install tools | "install", "setup", "tool not found" |
 
 **Note:** Each skill auto-detects based on keywords. You don't need to explicitly route - just ask what you need.
 

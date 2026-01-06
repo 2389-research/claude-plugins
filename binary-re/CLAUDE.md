@@ -76,11 +76,11 @@ Provides overall methodology, philosophy, and reference material for binary reve
 
 | Skill | Purpose | Trigger Keywords |
 |-------|---------|------------------|
-| `binary-re-triage` | Fast fingerprinting via rabin2 | "what is this binary", "identify", "file type" |
-| `binary-re-static-analysis` | r2 + Ghidra deep analysis | "disassemble", "decompile", "functions" |
-| `binary-re-dynamic-analysis` | QEMU/GDB/Frida runtime observation | "run", "execute", "debug", "trace" |
-| `binary-re-synthesis` | Report generation | "summarize", "report", "document" |
-| `binary-re-tool-setup` | Tool installation guides | "install", "setup", "tool not found" |
+| `binary-re:triage` | Fast fingerprinting via rabin2 | "what is this binary", "identify", "file type" |
+| `binary-re:static-analysis` | r2 + Ghidra deep analysis | "disassemble", "decompile", "functions" |
+| `binary-re:dynamic-analysis` | QEMU/GDB/Frida runtime observation | "run", "execute", "debug", "trace" |
+| `binary-re:synthesis` | Report generation | "summarize", "report", "document" |
+| `binary-re:tool-setup` | Tool installation guides | "install", "setup", "tool not found" |
 
 **Note:** Each skill auto-detects based on keywords in your request. The runtime's semantic matching handles routing automatically.
 
