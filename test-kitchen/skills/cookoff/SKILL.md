@@ -83,6 +83,27 @@ Before we start implementation, how would you like to proceed?
 
 **The key insight:** We're not injecting into another skill's menu. We're recognizing a SITUATION (design→implementation) and ensuring cookoff is offered at that moment.
 
+## Phase Tracking (REQUIRED)
+
+**At cookoff start, create todos for all phases:**
+
+```
+TodoWrite([
+  { content: "Phase 1: Present implementation options", status: "in_progress", activeForm: "Presenting implementation options" },
+  { content: "Phase 2: Assess complexity and setup", status: "pending", activeForm: "Assessing complexity" },
+  { content: "Phase 3: Dispatch parallel agents", status: "pending", activeForm: "Dispatching parallel agents" },
+  { content: "Phase 4: Judge implementations", status: "pending", activeForm: "Judging implementations" },
+  { content: "Phase 5: Cleanup and finish", status: "pending", activeForm: "Cleaning up" }
+])
+```
+
+**Why this matters:**
+- Todos survive context compaction
+- After compaction, check todos to see where you are in the workflow
+- Prevents "forgetting" to run Phase 4 judging
+
+**Update todos as you progress** - mark each phase complete before starting the next.
+
 ## Phase 1: Implementation Options
 
 **Present choices when user wants to implement:**
@@ -198,6 +219,19 @@ Cookoff status (design: auth-system):
 - impl-2: planning... → implementing 3/8 tasks
 - impl-3: planning... → implementing 6/8 tasks
 ```
+
+### Phase 3→4 Transition (MANDATORY)
+
+**CRITICAL: When all agents complete, BEFORE responding to user:**
+
+1. DO NOT just summarize results
+2. DO NOT ask user "what would you like to do?"
+3. IMMEDIATELY proceed to Phase 4 judging
+4. Present the winner WITH full judging rationale
+
+The user invoked cookoff expecting an autonomous winner selection. Stopping to ask breaks the workflow.
+
+**If context was compacted mid-workflow:** Check your todo list for pending phases. If "Phase 4: Judge implementations" is pending, execute it now.
 
 ## Phase 4: Judging
 

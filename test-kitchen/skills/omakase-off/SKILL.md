@@ -35,6 +35,27 @@ This skill orchestrates other skills. Check what's installed and use fallbacks i
 
 **If primary not installed:** Use the fallback behavior described above. The fallback is the essential behavior - primary skills just formalize it.
 
+## Phase Tracking (REQUIRED)
+
+**At omakase-off start, create todos for all phases:**
+
+```
+TodoWrite([
+  { content: "Phase 1: Brainstorm with slot detection", status: "in_progress", activeForm: "Brainstorming with slot detection" },
+  { content: "Phase 2: Generate variant plans", status: "pending", activeForm: "Generating variant plans" },
+  { content: "Phase 3: Implement variants in parallel", status: "pending", activeForm: "Implementing variants" },
+  { content: "Phase 4: Evaluate and judge", status: "pending", activeForm: "Evaluating and judging" },
+  { content: "Phase 5: Cleanup and finish", status: "pending", activeForm: "Cleaning up" }
+])
+```
+
+**Why this matters:**
+- Todos survive context compaction
+- After compaction, check todos to see where you are in the workflow
+- Prevents "forgetting" to run Phase 4 judging
+
+**Update todos as you progress** - mark each phase complete before starting the next.
+
 ## When to Use
 
 Omakase-off has TWO trigger points:
@@ -297,6 +318,19 @@ User can manually kill slow/stuck implementations.
 - Use `code-review` to review the variant's implementation
 - Fix any Critical/Important issues before proceeding to Phase 4
 - Note: each variant reviewed independently
+
+### Phase 3→4 Transition (MANDATORY)
+
+**CRITICAL: When all variants complete, BEFORE responding to user:**
+
+1. DO NOT just summarize implementation results
+2. DO NOT ask user "which one looks better?"
+3. IMMEDIATELY proceed to Phase 4 evaluation and judging
+4. Present the winner WITH full scoring rationale
+
+The user invoked omakase-off expecting an autonomous winner selection. Stopping to ask breaks the workflow.
+
+**If context was compacted mid-workflow:** Check your todo list for pending phases. If "Phase 4: Evaluate and judge" is pending, execute it now.
 
 ### Phase 4: Evaluation
 
