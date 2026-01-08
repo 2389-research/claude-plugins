@@ -100,7 +100,7 @@ async function solveMillionStepTask(task: ComplexTask, depth: number = 0) {
 
 ## Cost Comparison
 
-```
+```text
 Traditional approach:
 1000 steps × $0.01 = $10
 Error rate: 1% = 10 errors
@@ -125,7 +125,7 @@ A diagnostic orchestrator processes patient data through 1000+ validation steps 
 Each microagent specializes in one task (e.g., "parse blood pressure reading" or "detect drug interaction"). Voting consensus requires 80% agreement. Deterministic validation checks medical constraints (value ranges, drug interactions, contraindications).
 
 **Architecture:**
-```
+```text
 Diagnostic Orchestrator (Sonnet, Layer 1-4)
 ├─→ [Symptom Parsing] 100 microagents vote → consensus
 ├─→ [Lab Analysis] 50 microagents vote → consensus
