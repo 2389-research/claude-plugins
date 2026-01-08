@@ -1,0 +1,5 @@
+{
+  "name": "documentation-audit",
+  "version": "2.0.0",
+  "description": "Systematically verify documentation claims against codebase reality using two-pass extraction and pattern expansion. Runs in isolated context with Plan agent."
+}

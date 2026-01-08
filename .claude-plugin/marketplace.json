@@ -268,6 +268,23 @@
             "strict": false
         },
         {
+            "name": "documentation-audit",
+            "source": "./documentation-audit",
+            "description": "Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection",
+            "version": "2.0.0",
+            "keywords": [
+                "documentation",
+                "audit",
+                "verify",
+                "drift",
+                "accuracy",
+                "claims",
+                "markdown",
+                "docs"
+            ],
+            "strict": false
+        },
+        {
             "name": "agent-drugs",
             "source": {
                 "source": "url",
