@@ -154,13 +154,13 @@ For each variant that passed scenarios, use `fresh-eyes`.
 | All fail | Report failures, ask user how to proceed |
 | One survives | Auto-select |
 
-**Step 4: Invoke Judge Skill**
+### Step 4: Invoke Judge Skill
 
 **CRITICAL: Invoke `test-kitchen:judge` now.**
 
 The judge skill contains the full scoring framework with checklists. Invoking it fresh ensures the scoring format is followed exactly.
 
-```
+```text
 Invoke: test-kitchen:judge
 
 Context to provide:

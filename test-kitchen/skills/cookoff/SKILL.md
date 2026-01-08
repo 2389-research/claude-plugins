@@ -222,13 +222,13 @@ Checking: security, logic errors, edge cases
 Fresh-eyes complete: 1 minor issue
 ```
 
-**Step 4: Invoke Judge Skill**
+### Step 4: Invoke Judge Skill
 
 **CRITICAL: Invoke `test-kitchen:judge` now.**
 
 The judge skill contains the full scoring framework with checklists. Invoking it fresh ensures the scoring format is followed exactly.
 
-```
+```text
 Invoke: test-kitchen:judge
 
 Context to provide:
