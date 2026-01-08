@@ -1,6 +1,6 @@
 ---
 name: using-xtool
-description: Use when building iOS apps with xtool (Xcode-free iOS development), creating xtool projects, adding app extensions (widgets, share extensions), or configuring xtool.yml. Triggers on mentions of xtool, SwiftPM iOS apps, building iOS on Linux/Windows, or app extension setup.
+description: This skill should be used when building iOS apps with xtool (Xcode-free iOS development), creating xtool projects, adding app extensions, or configuring xtool.yml. Triggers on "xtool", "SwiftPM iOS", "iOS on Linux", "iOS on Windows", "Xcode-free", "app extension", "widget extension", "share extension". Covers project setup, app extensions, and deployment.
 ---
 
 # Using xtool

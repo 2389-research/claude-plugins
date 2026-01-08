@@ -1,6 +1,6 @@
 ---
 name: terminal-title
-description: MANDATORY at session start. REQUIRED when user topic shifts (from debugging to docs, from frontend to backend, etc). Updates terminal title with emoji + project + topic. SessionStart hook auto-invokes. Claude must also invoke on all topic changes.
+description: This skill should be used to update terminal window title with context. Triggers automatically at session start via hook. Also triggers on topic changes during conversation (debugging to docs, frontend to backend). Updates title with emoji + project + current topic.
 ---
 
 <!-- ABOUTME: Terminal title skill that automatically updates terminal window title -->

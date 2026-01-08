@@ -1,6 +1,6 @@
 ---
 name: test-kitchen
-description: Parallel implementation framework. Omakase-off triggers FIRST on build/create requests (wraps brainstorming). Cookoff triggers at design→implementation transition (wraps execution). Together they provide entry and exit gates for the Test Kitchen workflow.
+description: This skill should be used when implementing features with parallel exploration or competition. Triggers on "build", "create", "implement", "try both approaches", "compare implementations". Routes to omakase-off (entry gate for design exploration) or cookoff (exit gate for parallel implementation).
 ---
 
 # Test Kitchen

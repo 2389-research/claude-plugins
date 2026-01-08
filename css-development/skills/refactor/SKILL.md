@@ -1,6 +1,6 @@
 ---
 name: css-development:refactor
-description: Transform existing CSS (inline styles, utility classes in markup, scattered CSS) into semantic component patterns with dark mode support and tests
+description: This skill should be used when refactoring existing CSS from inline styles or utility classes to semantic patterns. Triggers on "refactor CSS", "extract styles", "consolidate CSS", "convert inline", "clean up styles", "migrate to semantic". Transforms to semantic classes with dark mode and tests.
 ---
 
 # CSS Development: Refactor

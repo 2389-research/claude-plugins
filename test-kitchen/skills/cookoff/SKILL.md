@@ -1,6 +1,6 @@
 ---
 name: cookoff
-description: MANDATORY implementation wrapper. ALWAYS invoke when moving from design→code. Present 3 options: (1) Cookoff - 2-5 parallel agents compete, each creates own plan, pick best, (2) Single subagent, (3) Local. Triggers: "let's build", "implement", "looks good", user picks implementation option, ANY signal to start coding after design. This skill MUST run before writing-plans/executing-plans at design boundaries. For exploring DIFFERENT designs, use omakase-off.
+description: This skill should be used when moving from design to implementation. Triggers on "let's build", "implement this", "looks good let's code", "ready to implement". Presents options for parallel agent competition (cookoff), single subagent, or local implementation. Each agent creates own plan from shared design for genuine variation.
 ---
 
 # Cookoff
