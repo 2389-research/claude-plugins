@@ -228,7 +228,7 @@ Fresh-eyes complete: 1 minor issue
 
 The judge skill contains the full scoring framework with checklists. Invoking it fresh ensures the scoring format is followed exactly.
 
-```text
+```
 Invoke: test-kitchen:judge
 
 Context to provide:

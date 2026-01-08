@@ -160,7 +160,7 @@ For each variant that passed scenarios, use `fresh-eyes`.
 
 The judge skill contains the full scoring framework with checklists. Invoking it fresh ensures the scoring format is followed exactly.
 
-```text
+```
 Invoke: test-kitchen:judge
 
 Context to provide:
