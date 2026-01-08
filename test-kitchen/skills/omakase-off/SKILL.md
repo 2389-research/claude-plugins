@@ -46,6 +46,7 @@ This skill orchestrates other skills. Check what's installed and use fallbacks i
 | `scenario-testing` | `scenario-testing:skills` (2389) | Create `.scratch/` E2E scripts, real dependencies, no mocks |
 | `verification` | `superpowers:verification-before-completion` | Run verification command, read output, THEN claim status |
 | `fresh-eyes` | `fresh-eyes-review:skills` (2389) | 2-5 min review for security, logic errors, edge cases |
+| `judge` | `test-kitchen:judge` | Scoring framework with checklists (MUST invoke at Phase 4) |
 | `code-review` | `superpowers:requesting-code-review` | Dispatch code-reviewer subagent with SHA range |
 | `finish-branch` | `superpowers:finishing-a-development-branch` | Verify tests, present options (merge/PR/keep/discard) |
 
@@ -391,228 +392,32 @@ Feasibility Check:
 
 **Important:** Feasibility flags don't auto-eliminate. Sometimes the simpler approach is fine for actual scale. But flags MUST be visible in the scorecard and factor into Robustness & Scalability scoring.
 
-**Step 4: Autonomous Judge (comparing survivors)**
+**Step 4: Invoke Judge Skill**
 
-When multiple variants survive, the agent autonomously selects the winner using structured scoring.
+**CRITICAL: Invoke `test-kitchen:judge` now.**
 
-**Core principle:** Simplicity is only valuable when fitness is equal. A cleaner solution that doesn't solve the problem is not better.
-
-#### 4.1: Score Each Criterion (1-5)
-
-**Criterion 1: Fitness for Purpose**
-*Does it solve the actual problem the user asked for?*
-
-| Score | Meaning | Concrete Indicators |
-|-------|---------|---------------------|
-| **5** | Exceeds requirements | All requirements met, deployment needs satisfied, AND adds obvious value user didn't ask for but clearly needs |
-| **4** | Fully meets requirements | Every explicit requirement implemented correctly. Deployment/distribution needs met. No gaps. |
-| **3** | Meets core requirements | Primary use case works. Missing 1-2 secondary features, edge cases, or has deployment friction. |
-| **2** | Partially meets | 50-80% of requirements work. Key features missing, broken, or deployment method doesn't match needs. |
-| **1** | Misses the point | Solves a different problem than requested. <50% of requirements addressed. |
-
-*Scoring checklist - count YES answers:*
-
-**Functional requirements:**
-- [ ] Does the primary use case work end-to-end?
-- [ ] Are all explicitly stated requirements implemented?
-- [ ] Does it handle realistic scenarios, not just happy path?
-
-**User needs (beyond literal requirements):**
-- [ ] Would the user actually use this, or just demo it?
-- [ ] Does it solve the real problem, not just the literal request?
-- [ ] Does deployment/distribution match user's stated needs? (e.g., "standalone" = no build step, "shareable" = single file, "production" = proper hosting)
-
-**Future considerations (when relevant):**
-- [ ] If user mentioned growth/scaling needs, does architecture support it?
-- [ ] If user mentioned team/collaboration, is it maintainable by others?
-
-**5** = 7-8 yes, **4** = 5-6 yes, **3** = 4 yes, **2** = 2-3 yes, **1** = 0-1 yes
-
-*Note:* Not all checklist items apply to every project. Score based on items that ARE relevant. A solo hobby project doesn't need "maintainable by team" but a startup MVP does.
-
-**Criterion 2: Justified Complexity**
-*Is every line of code earning its keep?*
-
-| Score | Meaning | Concrete Indicators |
-|-------|---------|---------------------|
-| **5** | Minimal and complete | Every function/class has clear purpose. No dead code. No premature abstraction. |
-| **4** | Slight inefficiency | 1-2 small redundancies or one abstraction that could be simpler. <10% bloat. |
-| **3** | Some bloat | Noticeable unnecessary code. 10-25% could be removed without losing functionality. |
-| **2** | Significant bloat | Multiple unnecessary abstractions. 25-50% is overhead. |
-| **1** | Complexity theater | More abstraction than logic. Patterns for pattern's sake. >50% overhead. |
-
-*Complexity justification test - for each "extra" in the more complex variant:*
-1. Can you explain the value in ONE sentence? (If not → bloat)
-2. Would removing it noticeably degrade the user experience? (If not → bloat)
-3. Is it solving a problem that actually exists? (If not → premature)
-
-*Line count heuristic:*
-- Compare variants: `extra_lines = larger - smaller`
-- For each extra feature, estimate lines it requires
-- If `unexplained_lines > 20%` of extra → deduct points
-
-**Criterion 3: Readability**
-*Can a mid-level dev understand the core flow in 5 minutes?*
-
-| Score | Meaning | Concrete Indicators |
-|-------|---------|---------------------|
-| **5** | Self-documenting | Function names are verbs describing action. Variables reveal intent. No magic numbers. Structure mirrors logic. |
-| **4** | Clear with minor friction | 1-2 unclear names or one complex function. Core flow still obvious. |
-| **3** | Requires study | Must trace through code to understand. Some misleading names or hidden control flow. |
-| **2** | Confusing | Multiple misleading names. Unexpected side effects. Hard to follow execution order. |
-| **1** | Obfuscated | Cannot determine intent. Single-letter variables throughout. No structure. |
-
-*Readability checklist - count violations:*
-- [ ] Any single-letter variables outside of loop indices? (+1 violation)
-- [ ] Any functions over 50 lines? (+1 per function)
-- [ ] Nesting deeper than 3 levels? (+1 per instance)
-- [ ] Magic numbers without named constants? (+1 per instance)
-- [ ] Function names that don't describe what they do? (+1 per function)
-- [ ] Comments that explain WHAT not WHY? (+0.5 per instance)
-
-**5** = 0 violations, **4** = 1-2 violations, **3** = 3-4 violations, **2** = 5-7 violations, **1** = 8+ violations
-
-**Criterion 4: Robustness & Scalability**
-*How well does it handle the unexpected AND growth?*
-
-| Score | Meaning | Concrete Indicators |
-|-------|---------|---------------------|
-| **5** | Production-ready | All inputs validated. Errors handled gracefully with useful messages. No feasibility flags. Scales linearly or better. |
-| **4** | Solid | Most error paths covered. Minor feasibility concerns. Handles 10x expected load. |
-| **3** | Happy path works | Core functionality solid. Some edge cases crash or fail silently. Some scaling concerns. |
-| **2** | Fragile | Crashes on unexpected input. Silent failures. Known scaling ceiling <10x current needs. |
-| **1** | Time bomb | Obvious failure modes ignored. Will break at 2x load. Has critical feasibility flags. |
-
-*Robustness checklist - count YES answers:*
-- [ ] User/external input validated before use?
-- [ ] External calls (API, DB, file) have error handling?
-- [ ] Errors surfaced with useful messages (not swallowed)?
-- [ ] Null/undefined/empty cases handled?
-- [ ] Timeouts on async operations?
-- [ ] No unbounded loops or recursion?
-
-*Scalability checklist - count YES answers:*
-- [ ] Algorithm complexity O(n log n) or better for main operations?
-- [ ] Memory usage bounded (no unbounded caching/accumulation)?
-- [ ] Database queries indexed and paginated?
-- [ ] No blocking I/O in hot paths?
-- [ ] External calls have backoff/retry logic?
-- [ ] Can handle 10x current expected load?
-
-**5** = 11-12 yes + no feasibility flags
-**4** = 9-10 yes OR minor feasibility flag
-**3** = 7-8 yes
-**2** = 5-6 yes OR major feasibility flag
-**1** = <5 yes OR critical feasibility flag
-
-**Criterion 5: Maintainability**
-*How painful is the next change?*
-
-| Score | Meaning | Concrete Indicators |
-|-------|---------|---------------------|
-| **5** | Change-friendly | Single responsibility per function/module. Changes stay in 1-2 files. Clear interfaces. |
-| **4** | Manageable | Some coupling but dependencies explicit. Changes touch 2-4 files predictably. |
-| **3** | Requires care | Must trace dependencies. Changes ripple to 4-6 files. Some implicit coupling. |
-| **2** | Brittle | Touching one thing breaks another. Global state. Changes unpredictably affect distant code. |
-| **1** | Frozen | No one wants to touch it. Unclear what depends on what. Any change is risky. |
-
-*Maintainability checklist - count YES answers:*
-- [ ] Functions/modules have single responsibility?
-- [ ] Dependencies are explicit (imports, params) not implicit (globals, side effects)?
-- [ ] Business logic separated from infrastructure (DB, HTTP, UI)?
-- [ ] Adding a new feature would require changing ≤3 files?
-- [ ] Configuration externalized (not hardcoded)?
-- [ ] Tests exist that would catch regressions?
-
-**5** = 6 yes, **4** = 5 yes, **3** = 4 yes, **2** = 2-3 yes, **1** = 0-1 yes
-
-#### 4.2: Build Scorecard
-
-First, document feasibility findings:
-```
-## Feasibility Check
-| Variant | Status | Notes |
-|---------|--------|-------|
-| variant-a | ✓ OK | No issues |
-| variant-b | ⚠️ Flag | O(n²) in processItems() - ceiling ~5k items |
-```
-
-Then score each criterion using the checklists above:
-```
-## Scoring Worksheet
-
-### Variant A
-- Fitness: [checklist results] → Score: X
-- Complexity: [justification test results] → Score: X
-- Readability: [violation count] → Score: X
-- Robustness & Scale: [checklist + feasibility] → Score: X
-- Maintainability: [checklist results] → Score: X
-
-### Variant B
-[Same format]
-```
-
-Finally, build the comparison scorecard:
-```
-## Judge Scorecard
-| Criterion              | Variant A | Variant B | Δ (B-A) | Decisive? |
-|------------------------|-----------|-----------|---------|-----------|
-| Fitness for purpose    |           |           |         |           |
-| Justified complexity   |           |           |         |           |
-| Readability            |           |           |         |           |
-| Robustness & Scale     |           |           |         |           |
-| Maintainability        |           |           |         |           |
-| **TOTAL**              |    /25    |    /25    |         |           |
-```
-
-Mark any criterion with |Δ| ≥ 2 as "Decisive? = YES"
-
-#### 4.3: Decision Logic
-
-**Hard gates (automatic, no exceptions):**
-
-1. **Fitness Gate:** If Fitness for Purpose difference ≥ 2 → Higher fitness WINS
-   - Rationale: A solution that doesn't solve the problem is not a solution
-
-2. **Critical Flaw Gate:** If any criterion = 1 → ELIMINATED
-   - Rationale: A single critical flaw disqualifies regardless of other scores
-
-**Judgment zone (agent decides with explanation):**
-
-When no hard gate triggers, agent selects winner considering:
-- Total score difference (larger gap = stronger signal)
-- Which criteria matter most for THIS specific problem
-- Domain-specific factors (e.g., "MCTS is overkill for Connect 4's state space")
-- Practical trade-offs between the approaches
-
-**Required:** Explain the reasoning. Don't just state the winner - explain WHY.
-
-*Note:* Line count is a weak signal. Only use as tiebreaker if scores are genuinely
-identical and no other factor distinguishes the variants. A 5-10% line difference
-is not meaningful.
-
-#### 4.4: Announce Decision
-
-Format the decision clearly:
+The judge skill contains the full scoring framework with checklists. Invoking it fresh ensures the scoring format is followed exactly.
 
 ```
-**Winner: variant-minimax** (Score: 23/25 vs 21/25)
+Invoke: test-kitchen:judge
 
-**Hard gates:**
-- Fitness Gate: Not triggered (both scored 5)
-- Critical Flaw Gate: Not triggered (no 1s)
-
-**Selection rationale:**
-Minimax selected over MCTS despite similar scores because:
-- Minimax with alpha-beta is ideal for Connect 4's game tree size (~4 million positions)
-- MCTS shines in larger state spaces (Go, complex strategy games)
-- Both provide challenging opponents, but minimax is the right tool for this job
-
-**Trade-offs acknowledged:**
-- MCTS has nicer win highlighting animation
-- MCTS provides more variety in play (probabilistic)
-- These don't outweigh algorithmic fit for the problem
+Context to provide:
+- Variants to judge: variant-a, variant-b (or however many)
+- Worktree locations: .worktrees/variant-<name>/
+- Test results from each variant
+- Fresh-eyes findings from Step 3
+- Feasibility flags from Step 3.5
 ```
+
+The judge skill will:
+1. Fill out the complete scoring worksheet for each variant
+2. Build the scorecard with integer scores (1-5, no half points)
+3. Check hard gates (Fitness Δ≥2, any score=1)
+4. Announce winner with rationale
+
+**Do not summarize or abbreviate the scoring.** The judge skill output should be the full worksheet.
+
+**Omakase-specific context:** In omakase, different variants represent different *approaches* to solving the problem. A Fitness gap (Δ≥2) means one approach genuinely solves the problem better - this is a legitimate win, not a design deviation.
 
 ### Phase 5: Completion
 
@@ -725,6 +530,7 @@ Uses dependencies defined above. Primary skill if installed, fallback otherwise.
 | `code-review` | 3 | Review each variant after implementation |
 | `scenario-testing` | 4.1 | Run same scenarios against all variants |
 | `fresh-eyes` | 4.2 | Quality review on survivors → input for judge |
+| `judge` | 4 | **INVOKE** for scoring framework (loads fresh, ensures format compliance) |
 | `finish-branch` | 5 | Handle winner (merge/PR), cleanup losers |
 
 ## Common Mistakes
