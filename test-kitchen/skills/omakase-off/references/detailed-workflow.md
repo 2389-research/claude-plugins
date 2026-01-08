@@ -15,6 +15,7 @@ This skill orchestrates other skills. Check what's installed and use fallbacks i
 | `scenario-testing` | `scenario-testing:skills` (2389) | Create `.scratch/` E2E scripts, real dependencies, no mocks |
 | `verification` | `superpowers:verification-before-completion` | Run verification command, read output, THEN claim status |
 | `fresh-eyes` | `fresh-eyes-review:skills` (2389) | 2-5 min review for security, logic errors, edge cases |
+| `judge` | `test-kitchen:judge` | Scoring framework with checklists (MUST invoke at Phase 4) |
 | `code-review` | `superpowers:requesting-code-review` | Dispatch code-reviewer subagent with SHA range |
 | `finish-branch` | `superpowers:finishing-a-development-branch` | Verify tests, present options (merge/PR/keep/discard) |
 
@@ -153,8 +154,32 @@ For each variant that passed scenarios, use `fresh-eyes`.
 | All fail | Report failures, ask user how to proceed |
 | One survives | Auto-select |
 
-**Step 4: Judge (comparing survivors)**
-Present comparison to user with metrics.
+**Step 4: Invoke Judge Skill**
+
+**CRITICAL: Invoke `test-kitchen:judge` now.**
+
+The judge skill contains the full scoring framework with checklists. Invoking it fresh ensures the scoring format is followed exactly.
+
+```
+Invoke: test-kitchen:judge
+
+Context to provide:
+- Variants to judge: variant-a, variant-b (or however many)
+- Worktree locations: .worktrees/variant-<name>/
+- Test results from each variant
+- Fresh-eyes findings from Step 2
+- Feasibility flags identified
+```
+
+The judge skill will:
+1. Fill out the complete scoring worksheet for each variant
+2. Build the scorecard with integer scores (1-5, no half points)
+3. Check hard gates (Fitness Δ≥2, any score=1)
+4. Announce winner with rationale
+
+**Do not summarize or abbreviate the scoring.** The judge skill output should be the full worksheet.
+
+**Omakase-specific context:** In omakase, different variants represent different *approaches* to solving the problem. A Fitness gap (Δ≥2) means one approach genuinely solves the problem better - this is a legitimate win, not a design deviation.
 
 ## Phase 5: Completion
 

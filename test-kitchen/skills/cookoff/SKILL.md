@@ -39,6 +39,7 @@ docs/plans/<feature>/
 | `tdd` | `superpowers:test-driven-development` | RED-GREEN-REFACTOR cycle |
 | `verification` | `superpowers:verification-before-completion` | Run command, read output, THEN claim status |
 | `fresh-eyes` | `fresh-eyes-review:skills` (2389) | 2-5 min review for security, logic, edge cases |
+| `judge` | `test-kitchen:judge` | Scoring framework with checklists (MUST invoke at Phase 4) |
 | `code-review` | `superpowers:requesting-code-review` | Dispatch code-reviewer subagent |
 | `scenario-testing` | `scenario-testing:skills` (2389) | `.scratch/` E2E scripts, real dependencies |
 | `finish-branch` | `superpowers:finishing-a-development-branch` | Verify tests, present options, cleanup |
@@ -221,30 +222,32 @@ Checking: security, logic errors, edge cases
 Fresh-eyes complete: 1 minor issue
 ```
 
-**Step 4: Compare survivors**
+**Step 4: Invoke Judge Skill**
 
-| Input | Source | Weight |
-|-------|--------|--------|
-| Fresh-eyes findings | Step 3 | High - quality signal |
-| Code complexity | Lines, dependencies | Medium - simpler is better |
-| Test coverage | Test count, coverage % | Medium - confidence signal |
-| Plan quality | Clarity, task breakdown | Medium - shows thinking |
-| Speed | Who finished first | Low - tiebreaker |
+**CRITICAL: Invoke `test-kitchen:judge` now.**
 
-**Present comparison:**
+The judge skill contains the full scoring framework with checklists. Invoking it fresh ensures the scoring format is followed exactly.
+
 ```
-All 3 implementations passed tests. Fresh-eyes results:
+Invoke: test-kitchen:judge
 
-| Impl | Tests | Fresh-Eyes | Lines | Plan approach |
-|------|-------|------------|-------|---------------|
-| impl-1 | 24/24 | 1 minor | 680 | Component-first |
-| impl-2 | 22/22 | 0 issues | 720 | Data-layer-first |
-| impl-3 | 26/26 | 2 minor | 590 | TDD-strict |
-
-Recommendation: impl-2 (clean fresh-eyes, solid architecture)
-
-Pick winner: [1] [2] [3] or [show diffs]
+Context to provide:
+- Implementations to judge: impl-1, impl-2, impl-3 (or however many)
+- Worktree locations: .worktrees/cookoff-impl-N/
+- Test results from each implementation
+- Fresh-eyes findings from Step 3
+- Feasibility flags identified
 ```
+
+The judge skill will:
+1. Fill out the complete scoring worksheet for each implementation
+2. Build the scorecard with integer scores (1-5, no half points)
+3. Check hard gates (Fitness Δ≥2, any score=1)
+4. Announce winner with rationale
+
+**Do not summarize or abbreviate the scoring.** The judge skill output should be the full worksheet.
+
+**Cookoff-specific context:** In cookoff, all implementations target the same design, so Fitness should be similar. A Fitness gap (Δ≥2) indicates one implementation deviated from or misunderstood the design - not a different approach choice.
 
 ## Phase 5: Completion
 
@@ -312,6 +315,7 @@ Save to: `docs/plans/<feature>/cookoff/result.md`
 | `verification` | 3, 5 | Before claiming done; before declaring winner |
 | `code-review` | 3 | Review each impl after completion |
 | `fresh-eyes` | 4 | Quality review → judge input |
+| `judge` | 4 | **INVOKE** for scoring framework (loads fresh, ensures format compliance) |
 | `scenario-testing` | 4 | Validate if scenarios defined |
 | `finish-branch` | 5 | Handle winner, cleanup losers |
 
