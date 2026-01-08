@@ -1,6 +1,6 @@
 ---
 name: remote-system-maintenance
-description: Use when performing system maintenance or diagnostics on remote Linux systems via tmux - provides structured checklists for Ubuntu/Debian cleanup (apt, journal, snap revisions), diagnostic procedures, and log file templates with quantification patterns
+description: This skill should be used when performing maintenance or diagnostics on remote Linux systems. Triggers on "remote server", "Linux maintenance", "Ubuntu cleanup", "Debian", "disk space", "apt cleanup", "journal vacuum", "snap cleanup", "system diagnostics". Provides structured three-phase checklists with quantification.
 ---
 
 # Remote System Maintenance

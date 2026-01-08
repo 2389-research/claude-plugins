@@ -1,6 +1,6 @@
 ---
 name: scenario-testing
-description: Use when writing tests, validating features, or tempted to use mocks - enforces scenario-driven end-to-end testing with real dependencies; mocks are lies that hide bugs; scenarios with real data are the only source of truth
+description: This skill should be used when writing tests, validating features, or needing to verify code works. Triggers on "write tests", "add test coverage", "validate feature", "integration test", "end-to-end", "e2e test", "mock", "unit test". Enforces scenario-driven testing with real dependencies in .scratch/ directory.
 ---
 
 # Scenario-Driven Testing for AI Code Generation

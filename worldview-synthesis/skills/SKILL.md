@@ -1,6 +1,6 @@
 ---
 name: worldview-synthesis
-description: Use when someone wants to articulate, explore, or document their personal worldview, values, or philosophy. Systematic interrogation that surfaces beliefs, identifies tensions, and generates narrative outputs.
+description: This skill should be used when someone wants to articulate, explore, or document their personal worldview, values, or philosophy. Triggers on "articulate my values", "figure out what I believe", "document my philosophy", "write a manifesto", "define my leadership philosophy", "explore my beliefs". Surfaces beliefs through systematic interrogation, identifies tensions, and generates narrative outputs.
 ---
 
 # Worldview Synthesis

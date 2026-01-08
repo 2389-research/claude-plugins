@@ -1,6 +1,6 @@
 ---
 name: binary-re
-description: Use when user has a binary/executable/bytecode and wants to understand what it does, how it works, or analyze its behavior. Triggers on "I have a binary", "this executable", "what does this binary do", "how does this work", "can you analyze", "figure out what", "reverse engineer", "disassemble", "decompile", "pyc file", "python bytecode", "obfuscated python", "marshal". Covers ELF, shared libraries, kernel modules, firmware, Python bytecode for ARM64, ARMv7, x86_64, MIPS, RISC-V using radare2, Ghidra, GDB, QEMU, pycdc.
+description: This skill should be used when analyzing binaries, executables, or bytecode to understand what they do or how they work. Triggers on "binary", "executable", "ELF", "what does this do", "reverse engineer", "disassemble", "decompile", "pyc file", "python bytecode", "analyze binary", "figure out", "marshal". Routes to sub-skills for triage, static analysis, dynamic analysis, synthesis, or tool setup.
 ---
 
 # Binary Reverse Engineering
