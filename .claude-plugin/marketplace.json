@@ -68,6 +68,22 @@
             "strict": false
         },
         {
+            "name": "landing-page-design",
+            "source": "./landing-page-design",
+            "description": "Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles",
+            "version": "1.0.0",
+            "keywords": [
+                "landing-page",
+                "marketing",
+                "design",
+                "conversion",
+                "hero",
+                "saas",
+                "homepage"
+            ],
+            "strict": false
+        },
+        {
             "name": "firebase-development",
             "source": "./firebase-development",
             "description": "Firebase project workflows including setup, features, debugging, and validation",
