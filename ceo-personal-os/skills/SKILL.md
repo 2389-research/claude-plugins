@@ -1,6 +1,6 @@
 ---
 name: ceo-personal-os
-description: This skill should be used when building a personal productivity or operating system for a CEO, founder, or executive. Triggers on "personal OS", "annual review", "life planning", "goal setting system", "Bill Campbell", "Trillion Dollar Coach", "startup failure patterns", "Good to Great", "Level 5 Leadership", "Buy Back Your Time", "E-Myth", "Customer Development", "Steve Blank".
+description: This skill should be used when building a personal productivity or operating system for a CEO, founder, or executive. Triggers on "personal OS", "annual review", "life planning", "goal setting system", "Bill Campbell", "Trillion Dollar Coach", "startup failure patterns", "Good to Great", "Level 5 Leadership", "Buy Back Your Time", "E-Myth", "Customer Development", "Steve Blank", "Small Is Beautiful", "Schumacher", "human-scale", "subsidiarity", "Buddhist economics", "permanence".
 ---
 
 # CEO Personal Operating System
@@ -18,7 +18,7 @@ Build a **reflection system**, not a task manager. This is a private, single-use
 - User wants a "personal operating system" or "personal productivity system"
 - Building annual review or goal-setting system for an executive
 - Creating reflection frameworks for a CEO/founder
-- User mentions any of the 10 frameworks (Campbell, Collins, Blank, Martell, Gerber, Eisenmann, etc.)
+- User mentions any of the 11 frameworks (Campbell, Collins, Blank, Martell, Gerber, Eisenmann, Schumacher, etc.)
 - User mentions search vs execute mode, pivot decisions, working ON vs IN business
 
 ## First Run: Onboarding Flow
@@ -28,7 +28,7 @@ Build a **reflection system**, not a task manager. This is a private, single-use
 Say:
 > "I'll help you build your personal operating system. This is a reflection system - think executive coach, not task manager.
 >
-> It includes 10 frameworks from people like Bill Campbell, Jim Collins, Steve Blank, and Dan Martell, plus 10 coaching-style interview scripts.
+> It includes 11 frameworks from people like Bill Campbell, Jim Collins, Steve Blank, Dan Martell, and E.F. Schumacher, plus 11 coaching-style interview scripts.
 >
 > **Ready to set it up?**"
 
@@ -67,7 +67,7 @@ ceo-personal-os/
 └── uploads/                     # Past reviews for analysis
 ```
 
-## The 10 Frameworks
+## The 11 Frameworks
 
 Build each from the reference files in `references/frameworks/`:
 
@@ -83,6 +83,7 @@ Build each from the reference files in `references/frameworks/`:
 | Martell Buy Back Your Time | `martell-buyback-time.md` | Time reclamation |
 | Gerber E-Myth | `gerber-emyth.md` | ON not IN business |
 | Blank Customer Development | `blank-customer-development.md` | Search vs execute |
+| Schumacher Human-Scale | `schumacher-human-scale.md` | Purpose, permanence, scale |
 
 ## Interview Scripts
 
@@ -96,6 +97,7 @@ Use coach-style questions from `references/interviews/interview-scripts.md`:
 - Business Role Assessment (Gerber-style)
 - Good to Great Assessment (Collins-style)
 - Customer Development Check (Blank-style)
+- Human-Scale Economics (Schumacher-style)
 - Leadership Stress Patterns (McWilliams-informed)
 
 ## Review Cadences
@@ -116,6 +118,7 @@ Include in every quarterly review:
 - Martell: "Am I in my Production Quadrant?"
 - Gerber: "Am I working ON or IN the business?"
 - Blank: "Am I searching or executing?"
+- Schumacher: "Am I building for permanence or extracting?"
 - McWilliams: "What stress patterns showed up?"
 
 ## Memory & Pattern Extraction

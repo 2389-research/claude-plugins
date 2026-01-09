@@ -23,6 +23,10 @@ Auto-detects when someone wants to:
 - Apply Customer Development / Lean Startup (Blank)
 - Understand search vs execute mode in startups
 - Get out of the building and talk to customers
+- Apply Small Is Beautiful / Human-Scale Economics (Schumacher)
+- Think about purpose, permanence, and scale
+- Examine work through Buddhist economics lens
+- Apply subsidiarity principles to organization design
 
 ## Key Patterns
 
@@ -30,7 +34,7 @@ Auto-detects when someone wants to:
 
 The core principle is clarity over productivity. Output should feel like an executive coach - calm, direct, insightful.
 
-### Ten Required Frameworks
+### Eleven Required Frameworks
 
 1. **Dr. Anthony Gustin Annual Review** - Wins, lessons, relationships, energy patterns
 2. **Tim Ferriss Ideal Lifestyle Costing** - Dreamlines with costs, TMI calculation
@@ -42,6 +46,7 @@ The core principle is clarity over productivity. Output should feel like an exec
 8. **Dan Martell Buy Back Your Time** - Buyback Principle, DRIP Matrix, Pain Line, Production Quadrant
 9. **Michael Gerber E-Myth** - Work ON not IN, Entrepreneur/Manager/Technician, Franchise Prototype
 10. **Steve Blank Customer Development** - Search vs Execute, Get Out of the Building, MVP, Pivot
+11. **E.F. Schumacher Human-Scale Economics** - Three Purposes of Work, Income vs Capital, Subsidiarity, Buddhist Economics, Permanence
 
 ### Campbell Core Principles
 
@@ -72,6 +77,22 @@ The core principle is clarity over productivity. Output should feel like an exec
 
 **Key Metrics:** Unit Economics, LTV/CAC > 3, Cash Runway 12-18 months
 
+### Schumacher Core Principles
+
+| Principle | Description |
+|-----------|-------------|
+| Three Purposes of Work | Production (useful goods), Perfection (develop capabilities), Liberation (serve others) |
+| Income vs Capital | Don't treat irreplaceable resources as if they were renewable |
+| Subsidiarity | Higher levels should not absorb functions lower levels can perform |
+| Human Scale | People need to identify with something small enough to comprehend |
+| Permanence | Build for permanence, not extraction |
+
+**Core Thesis:** Modern economics treats irreplaceable capital as renewable income—in natural resources, nature's tolerance margins, and human substance itself.
+
+**The Meta-Economics Question:** "What are we actually optimizing for? Have we examined our ends, or only our means?"
+
+**Buddhist Economics Lens:** Maximize satisfaction with minimum consumption. People over goods. Right livelihood as blessing, not labor as cost.
+
 ### Review Cadences
 
 | Cadence | Time | Focus |
@@ -85,8 +106,8 @@ The core principle is clarity over productivity. Output should feel like an exec
 
 ```
 ceo-personal-os/
-├── frameworks/          # 10 specific frameworks with credits
-├── interviews/          # 10 coach-style question scripts
+├── frameworks/          # 11 specific frameworks with credits
+├── interviews/          # 11 coach-style question scripts
 ├── reviews/             # Templates for each cadence
 ├── goals/               # 1/3/10 year horizons
 ├── uploads/             # Past reviews for pattern extraction
@@ -120,8 +141,8 @@ The `memory.md` file tracks:
 
 When building a CEO Personal OS:
 1. Use TodoWrite to track every folder/file
-2. Include all 10 frameworks with proper credits (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)
-3. Generate coach-style interview questions (including Team & People reflection, Failure Pattern Detection)
+2. Include all 11 frameworks with proper credits (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank, Schumacher)
+3. Generate coach-style interview questions (including Team & People reflection, Failure Pattern Detection, Human-Scale Economics)
 4. Create templates in each review folder
 5. Initialize memory.md for pattern tracking
 6. Keep tone calm and direct throughout
@@ -131,3 +152,5 @@ When building a CEO Personal OS:
 10. Add Diamond-Square alignment review for founder/CEOs
 11. Include Blank Customer Development check: "Am I searching or executing?"
 12. Include McWilliams stress patterns check: "What patterns showed up under pressure?"
+13. Include Schumacher permanence check: "Am I building for permanence or extracting?"
+14. Include Schumacher purpose check: "Does our work serve all three purposes (production, perfection, liberation)?"
