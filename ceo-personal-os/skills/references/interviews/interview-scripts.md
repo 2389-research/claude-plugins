@@ -95,6 +95,48 @@ Coach-style questions (non-judgmental, reflective)
 - "Is your burn rate appropriate for search mode or are you spending like you're executing?"
 - "What did you learn from your last failure?"
 
+## Human-Scale Economics (Schumacher-style)
+
+*Adapted from "Small Is Beautiful" and "Good Work" by E.F. Schumacher*
+
+**Purpose:** Surface whether your work and organization serve human flourishing or extract from it.
+
+**Three Purposes of Work Check:**
+- "Does your work produce something genuinely useful? Would the world miss it?"
+- "Does your work allow you and your team to develop your gifts and capabilities?"
+- "Does your work foster genuine connection and service, or isolation and extraction?"
+- "If your workers could choose any job tomorrow, would they choose yours? Why or why not?"
+
+**Income vs Capital Check:**
+- "What irreplaceable resources are you treating as if they're renewable?"
+- "What are you consuming that you cannot replace—in your business, your team, yourself?"
+- "If you accounted for true costs, would your business still make sense?"
+- "What 'capital' is being depleted: natural, human, relational, or institutional?"
+
+**Scale and Subsidiarity Check:**
+- "Is your organization on a human scale? Can people identify with it?"
+- "What functions have you absorbed that lower levels could perform?"
+- "Where has complexity exceeded human comprehension?"
+- "Do your people feel like cogs or like craftsmen?"
+
+**Technology and Work Check:**
+- "Does your technology serve workers or dominate them?"
+- "Can people enjoy themselves while working, or do they work solely for pay?"
+- "What 'mindless, repetitive boredom' exists in your organization?"
+- "Where are you 'destroying initiative and rotting brains'?"
+
+**Meta-Economics Check:**
+- "What are you actually optimizing for? Have you examined your ends?"
+- "Are you confusing means with ends anywhere?"
+- "Would your grandchildren be proud of what you're building?"
+- "Are you building for permanence or extracting for short-term gain?"
+
+**Buddhist Economics Lens:**
+- "Are you maximizing satisfaction with minimum consumption, or vice versa?"
+- "Where is 'bigger is better' thinking leading you astray?"
+- "What would 'sufficiency' look like for your organization?"
+- "Are you treating growth as a goal or as a means to something else?"
+
 ## Leadership Stress Patterns (McWilliams-informed)
 
 *Adapted from "Psychoanalytic Diagnosis" by Nancy McWilliams*
