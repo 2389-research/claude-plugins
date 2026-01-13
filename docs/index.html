@@ -3,329 +3,644 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2389 Research Inc</title>
+
+  <!-- Primary Meta Tags -->
+  <title>Claude Code Plugin Marketplace | 2389 Research</title>
+  <meta name="title" content="Claude Code Plugin Marketplace | 2389 Research">
+  <meta name="description" content="Open source Claude Code plugins and MCP servers from 2389 Research. Development workflows, testing, system administration, and AI agent capabilities. Install with one command.">
+  <meta name="keywords" content="Claude Code, plugins, MCP servers, AI development, Claude, Anthropic, development tools, testing, workflows, 2389 Research">
+  <meta name="author" content="2389 Research Inc">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://2389-research.github.io/claude-plugins/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://2389-research.github.io/claude-plugins/">
+  <meta property="og:title" content="Claude Code Plugin Marketplace | 2389 Research">
+  <meta property="og:description" content="Open source Claude Code plugins and MCP servers. Development workflows, testing, system administration, and AI agent capabilities. Install with one command.">
+  <meta property="og:image" content="https://2389-research.github.io/claude-plugins/og-image.png">
+  <meta property="og:site_name" content="2389 Research Plugin Marketplace">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://2389-research.github.io/claude-plugins/">
+  <meta property="twitter:title" content="Claude Code Plugin Marketplace | 2389 Research">
+  <meta property="twitter:description" content="Open source Claude Code plugins and MCP servers. Development workflows, testing, system administration, and AI agent capabilities.">
+  <meta property="twitter:image" content="https://2389-research.github.io/claude-plugins/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔌</text></svg>">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://github.com">
+
+  <!-- Fonts with display=swap for performance -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Preload critical CSS -->
+  <link rel="preload" href="style.css" as="style">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Analytics -->
+  <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js" defer></script>
+
+  <!-- Structured Data - Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "2389 Research Inc",
+    "url": "https://2389.ai",
+    "logo": "https://2389.ai/logo.png",
+    "description": "Building AI agents that collaborate like your dream team",
+    "sameAs": [
+      "https://github.com/2389-research",
+      "https://www.linkedin.com/company/2389-research"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@2389.ai",
+      "contactType": "customer service"
+    }
+  }
+  </script>
+
+  <!-- Structured Data - Software Catalog -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "2389 Claude Code Plugin Marketplace",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Cross-platform",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "2389 Research Inc",
+      "url": "https://2389.ai"
+    },
+    "description": "Open source Claude Code plugins and MCP servers for development workflows, testing, and AI agent capabilities",
+    "url": "https://2389-research.github.io/claude-plugins/",
+    "downloadUrl": "https://github.com/2389-research/claude-plugins",
+    "softwareVersion": "1.0.0",
+    "license": "https://opensource.org/licenses/MIT"
+  }
+  </script>
+
+  <!-- Structured Data - Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "2389 Research",
+        "item": "https://2389.ai"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Plugin Marketplace",
+        "item": "https://2389-research.github.io/claude-plugins/"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>2389 Research Inc</h1>
-      <p class="page-subtitle">Claude Code Plugin Marketplace</p>
-      <p class="subtitle">Plugins and MCP servers we use at 2389</p>
-      <div class="header-links">
-        <a href="https://2389.ai" class="header-link">About 2389</a>
-        <a href="https://github.com/2389-research/claude-plugins" class="header-link">GitHub</a>
-        <a href="mailto:hello@2389.ai" class="header-link">Contact</a>
-      </div>
-      <div class="install-cmd">
-        <code>/plugin marketplace add 2389-research/claude-plugins</code>
-      </div>
-    </header>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <div class="plugins-grid">
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>botboard-biz</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description"><span class="meta-tag">meta</span>botboard.biz: social media and journaling capabilities for AI agents</p>
-          <div class="keywords"><span class="keyword">meta</span><span class="keyword">social</span><span class="keyword">journal</span><span class="keyword">communication</span><span class="keyword">reflection</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/botboard-biz" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install botboard-biz</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>better-dev</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description"><span class="meta-tag">meta</span>better development: CSS workflows, Firebase development, code quality, and real testing</p>
-          <div class="keywords"><span class="keyword">meta</span><span class="keyword">development</span><span class="keyword">quality</span><span class="keyword">testing</span><span class="keyword">css</span><span class="keyword">firebase</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/better-dev" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install better-dev</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>sysadmin</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description"><span class="meta-tag">meta</span>system administration: structured Linux maintenance and diagnostics</p>
-          <div class="keywords"><span class="keyword">meta</span><span class="keyword">sysadmin</span><span class="keyword">linux</span><span class="keyword">maintenance</span><span class="keyword">operations</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/sysadmin" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install sysadmin</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>css-development</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">CSS development workflows with Tailwind composition, semantic naming, and dark mode by default</p>
-          <div class="keywords"><span class="keyword">css</span><span class="keyword">tailwind</span><span class="keyword">styling</span><span class="keyword">components</span><span class="keyword">dark-mode</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/css-development" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install css-development</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>landing-page-design</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles</p>
-          <div class="keywords"><span class="keyword">landing-page</span><span class="keyword">marketing</span><span class="keyword">design</span><span class="keyword">conversion</span><span class="keyword">hero</span><span class="keyword">saas</span><span class="keyword">homepage</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/landing-page-design" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install landing-page-design</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>firebase-development</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Firebase project workflows including setup, features, debugging, and validation</p>
-          <div class="keywords"><span class="keyword">firebase</span><span class="keyword">firestore</span><span class="keyword">cloud-functions</span><span class="keyword">hosting</span><span class="keyword">emulator</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/firebase-development" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install firebase-development</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>terminal-title</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Automatically updates terminal title with emoji + project + topic context and establishes 2389 workflow conventions for TodoWrite task tracking</p>
-          <div class="keywords"><span class="keyword">terminal</span><span class="keyword">title</span><span class="keyword">session</span><span class="keyword">context</span><span class="keyword">workflows</span><span class="keyword">todowrite</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/terminal-title" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install terminal-title</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>building-multiagent-systems</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination</p>
-          <div class="keywords"><span class="keyword">multi-agent</span><span class="keyword">orchestrator</span><span class="keyword">coordination</span><span class="keyword">agents</span><span class="keyword">architecture</span><span class="keyword">patterns</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/building-multiagent-systems" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install building-multiagent-systems</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>ceo-personal-os</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)</p>
-          <div class="keywords"><span class="keyword">ceo</span><span class="keyword">executive</span><span class="keyword">reflection</span><span class="keyword">goals</span><span class="keyword">annual-review</span><span class="keyword">coaching</span><span class="keyword">campbell</span><span class="keyword">trillion-dollar-coach</span><span class="keyword">people-first</span><span class="keyword">eisenmann</span><span class="keyword">startup-failure</span><span class="keyword">why-startups-fail</span><span class="keyword">collins</span><span class="keyword">good-to-great</span><span class="keyword">level-5-leadership</span><span class="keyword">hedgehog-concept</span><span class="keyword">flywheel</span><span class="keyword">martell</span><span class="keyword">buyback-time</span><span class="keyword">delegation</span><span class="keyword">gerber</span><span class="keyword">emyth</span><span class="keyword">work-on-business</span><span class="keyword">franchise-prototype</span><span class="keyword">blank</span><span class="keyword">steve-blank</span><span class="keyword">customer-development</span><span class="keyword">lean-startup</span><span class="keyword">mvp</span><span class="keyword">pivot</span><span class="keyword">product-market-fit</span><span class="keyword">get-out-of-the-building</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/ceo-personal-os" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install ceo-personal-os</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>fresh-eyes-review</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests</p>
-          <div class="keywords"><span class="keyword">review</span><span class="keyword">quality</span><span class="keyword">security</span><span class="keyword">commit</span><span class="keyword">pr</span><span class="keyword">bugs</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/fresh-eyes-review" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install fresh-eyes-review</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>remote-system-maintenance</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists</p>
-          <div class="keywords"><span class="keyword">linux</span><span class="keyword">ubuntu</span><span class="keyword">debian</span><span class="keyword">maintenance</span><span class="keyword">diagnostics</span><span class="keyword">cleanup</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/remote-system-maintenance" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install remote-system-maintenance</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>scenario-testing</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth</p>
-          <div class="keywords"><span class="keyword">testing</span><span class="keyword">e2e</span><span class="keyword">scenarios</span><span class="keyword">no-mocks</span><span class="keyword">integration</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/scenario-testing" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install scenario-testing</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>test-kitchen</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner</p>
-          <div class="keywords"><span class="keyword">parallel</span><span class="keyword">exploration</span><span class="keyword">variants</span><span class="keyword">comparison</span><span class="keyword">implementation</span><span class="keyword">testing</span><span class="keyword">worktrees</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/test-kitchen" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install test-kitchen</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>xtool</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode</p>
-          <div class="keywords"><span class="keyword">ios</span><span class="keyword">xtool</span><span class="keyword">swiftpm</span><span class="keyword">swift</span><span class="keyword">xcode-free</span><span class="keyword">cross-platform</span><span class="keyword">widgets</span><span class="keyword">extensions</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/xtool" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install xtool</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>worldview-synthesis</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation</p>
-          <div class="keywords"><span class="keyword">worldview</span><span class="keyword">values</span><span class="keyword">philosophy</span><span class="keyword">beliefs</span><span class="keyword">manifesto</span><span class="keyword">mission</span><span class="keyword">self-discovery</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/worldview-synthesis" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install worldview-synthesis</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>binary-re</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Agentic binary reverse engineering for ELF binaries on ARM64, ARMv7, x86_64 - hypothesis-driven analysis with radare2, Ghidra, GDB, QEMU</p>
-          <div class="keywords"><span class="keyword">reverse-engineering</span><span class="keyword">binary</span><span class="keyword">elf</span><span class="keyword">arm</span><span class="keyword">embedded</span><span class="keyword">firmware</span><span class="keyword">radare2</span><span class="keyword">r2</span><span class="keyword">ghidra</span><span class="keyword">disassembly</span><span class="keyword">decompile</span><span class="keyword">qemu</span><span class="keyword">gdb</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/binary-re" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install binary-re</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>documentation-audit</h2>
-            <span class="version">v2.0.0</span>
-          </div>
-          <p class="plugin-description">Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection</p>
-          <div class="keywords"><span class="keyword">documentation</span><span class="keyword">audit</span><span class="keyword">verify</span><span class="keyword">drift</span><span class="keyword">accuracy</span><span class="keyword">claims</span><span class="keyword">markdown</span><span class="keyword">docs</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/claude-plugins/tree/main/documentation-audit" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install documentation-audit</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>agent-drugs</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Digital drugs that modify AI behavior through prompt injection</p>
-          <div class="keywords"><span class="keyword">behavior</span><span class="keyword">prompts</span><span class="keyword">modification</span><span class="keyword">drugs</span><span class="keyword">context-injection</span><span class="keyword">productivity</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/agent-drugs.git" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install agent-drugs</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>socialmedia</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions.</p>
-          <div class="keywords"><span class="keyword">social-media</span><span class="keyword">communication</span><span class="keyword">team-discussion</span><span class="keyword">collaboration</span><span class="keyword">agents</span><span class="keyword">interaction</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/mcp-socialmedia.git" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install socialmedia</code>
-          </div>
-        </article>
-      
-        <article class="plugin">
-          <div class="plugin-header">
-            <h2>journal</h2>
-            <span class="version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts</p>
-          <div class="keywords"><span class="keyword">journal</span><span class="keyword">journaling</span><span class="keyword">thoughts</span><span class="keyword">feelings</span><span class="keyword">processing</span><span class="keyword">private</span><span class="keyword">reflection</span><span class="keyword">diary</span></div>
-          <div class="plugin-footer">
-            <a href="https://github.com/2389-research/journal-mcp.git" class="plugin-link">View Source</a>
-            <code class="install-code">/plugin install journal</code>
-          </div>
-        </article>
-      
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="https://2389.ai" class="nav-logo" aria-label="2389 Research Home">
+        <span class="status-indicator" aria-hidden="true"></span>
+        2389 Research Inc
+      </a>
+      <div class="nav-links" role="menubar">
+        <a href="#plugins" class="nav-link" role="menuitem">Plugins</a>
+        <a href="#about" class="nav-link" role="menuitem">About</a>
+        <a href="https://github.com/2389-research/claude-plugins" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="https://2389.ai" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank">2389.ai</a>
+      </div>
     </div>
+  </nav>
 
-    <section class="about-section">
-      <div class="about-content">
-        <h2>About This Marketplace</h2>
-        <p>A collection of Claude Code plugins and MCP servers from <a href="https://2389.ai">2389 Research Inc</a>. These tools focus on development workflows, system administration, testing practices, and agent capabilities.</p>
-        <p>All plugins are open source. Use them, fork them, contribute back. We'd love to hear how you're using them.</p>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-label">
+        <span class="label-indicator"></span>
+        Welcome, Fellow Builder
       </div>
-      <div class="cta-box">
-        <h3>Get in Touch</h3>
-        <p>Questions? Ideas? Want to contribute?</p>
-        <a href="mailto:hello@2389.ai" class="cta-button">Email hello@2389.ai</a>
+      <h1 class="hero-title">Plugins that actually<br>get stuff done</h1>
+      <p class="hero-subtitle">Open source Claude Code plugins and MCP servers from 2389 Research. The tools we use every day to build, ship, and not lose our minds. No corporate handbook energy here.</p>
+
+      <div class="hero-cta">
+        <div class="install-block">
+          <span class="install-label">One Command Install</span>
+          <code class="install-command">/plugin marketplace add 2389-research/claude-plugins</code>
+        </div>
+        <a href="#plugins" class="cta-button">
+          Browse the Goods
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">20</span>
+          <span class="stat-label">Plugins</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value">2</span>
+          <span class="stat-label">MCP Servers</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value">100%</span>
+          <span class="stat-label">Open Source</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section id="plugins" class="section plugins-section">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <div class="section-title-group">
+          <h2 class="section-title">Available Plugins</h2>
+          <p class="section-subtitle">Install individually or add the full marketplace</p>
+        </div>
+      </div>
+
+      <div class="plugin-categories">
+
+        <div class="category">
+          <div class="category-header">
+            <h3 class="category-title">
+              <span class="category-indicator"></span>
+              Meta Plugins
+            </h3>
+            <span class="category-count">3 plugins</span>
+          </div>
+          <p class="category-description">Bundles that combine multiple capabilities into single installs</p>
+
+          <div class="plugins-grid">
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">botboard-biz</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">botboard.biz: social media and journaling capabilities for AI agents</p>
+              <div class="plugin-tags"><span class="tag">meta</span><span class="tag">social</span><span class="tag">journal</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install botboard-biz</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/botboard-biz" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">better-dev</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">better development: CSS workflows, Firebase development, code quality, and real testing</p>
+              <div class="plugin-tags"><span class="tag">meta</span><span class="tag">development</span><span class="tag">quality</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install better-dev</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/better-dev" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">sysadmin</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">system administration: structured Linux maintenance and diagnostics</p>
+              <div class="plugin-tags"><span class="tag">meta</span><span class="tag">sysadmin</span><span class="tag">linux</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install sysadmin</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/sysadmin" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="category-header">
+            <h3 class="category-title">
+              <span class="category-indicator"></span>
+              Development
+            </h3>
+            <span class="category-count">9 plugins</span>
+          </div>
+          <p class="category-description">Workflows for building, testing, and shipping code</p>
+
+          <div class="plugins-grid">
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">css-development</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">CSS development workflows with Tailwind composition, semantic naming, and dark mode by default</p>
+              <div class="plugin-tags"><span class="tag">css</span><span class="tag">tailwind</span><span class="tag">styling</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install css-development</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/css-development" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">landing-page-design</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles</p>
+              <div class="plugin-tags"><span class="tag">landing-page</span><span class="tag">marketing</span><span class="tag">design</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install landing-page-design</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/landing-page-design" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">firebase-development</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">Firebase project workflows including setup, features, debugging, and validation</p>
+              <div class="plugin-tags"><span class="tag">firebase</span><span class="tag">firestore</span><span class="tag">cloud-functions</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install firebase-development</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/firebase-development" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">fresh-eyes-review</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests</p>
+              <div class="plugin-tags"><span class="tag">review</span><span class="tag">quality</span><span class="tag">security</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install fresh-eyes-review</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/fresh-eyes-review" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">scenario-testing</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth</p>
+              <div class="plugin-tags"><span class="tag">testing</span><span class="tag">e2e</span><span class="tag">scenarios</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install scenario-testing</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/scenario-testing" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">test-kitchen</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner</p>
+              <div class="plugin-tags"><span class="tag">parallel</span><span class="tag">exploration</span><span class="tag">variants</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install test-kitchen</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/test-kitchen" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">xtool</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode</p>
+              <div class="plugin-tags"><span class="tag">ios</span><span class="tag">xtool</span><span class="tag">swiftpm</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install xtool</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/xtool" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">documentation-audit</h4>
+                <span class="plugin-version">v2.0.0</span>
+              </div>
+              <p class="plugin-description">Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection</p>
+              <div class="plugin-tags"><span class="tag">documentation</span><span class="tag">audit</span><span class="tag">verify</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install documentation-audit</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/documentation-audit" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">agent-drugs</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">Digital drugs that modify AI behavior through prompt injection</p>
+              <div class="plugin-tags"><span class="tag">behavior</span><span class="tag">prompts</span><span class="tag">modification</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install agent-drugs</code>
+                <a href="https://github.com/2389-research/agent-drugs.git" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="category-header">
+            <h3 class="category-title">
+              <span class="category-indicator"></span>
+              Infrastructure
+            </h3>
+            <span class="category-count">2 plugins</span>
+          </div>
+          <p class="category-description">System administration and operational tooling</p>
+
+          <div class="plugins-grid">
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">terminal-title</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">Automatically updates terminal title with emoji + project + topic context and establishes 2389 workflow conventions for TodoWrite task tracking</p>
+              <div class="plugin-tags"><span class="tag">terminal</span><span class="tag">title</span><span class="tag">session</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install terminal-title</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/terminal-title" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">remote-system-maintenance</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists</p>
+              <div class="plugin-tags"><span class="tag">linux</span><span class="tag">ubuntu</span><span class="tag">debian</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install remote-system-maintenance</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/remote-system-maintenance" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="category-header">
+            <h3 class="category-title">
+              <span class="category-indicator"></span>
+              Agent Systems
+            </h3>
+            <span class="category-count">3 plugins</span>
+          </div>
+          <p class="category-description">Multi-agent architecture and agent capabilities</p>
+
+          <div class="plugins-grid">
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">building-multiagent-systems</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination</p>
+              <div class="plugin-tags"><span class="tag">multi-agent</span><span class="tag">orchestrator</span><span class="tag">coordination</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install building-multiagent-systems</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/building-multiagent-systems" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">binary-re</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">Agentic binary reverse engineering for ELF binaries on ARM64, ARMv7, x86_64 - hypothesis-driven analysis with radare2, Ghidra, GDB, QEMU</p>
+              <div class="plugin-tags"><span class="tag">reverse-engineering</span><span class="tag">binary</span><span class="tag">elf</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install binary-re</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/binary-re" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">socialmedia</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions.</p>
+              <div class="plugin-tags"><span class="tag">social-media</span><span class="tag">communication</span><span class="tag">team-discussion</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install socialmedia</code>
+                <a href="https://github.com/2389-research/mcp-socialmedia.git" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="category">
+          <div class="category-header">
+            <h3 class="category-title">
+              <span class="category-indicator"></span>
+              Personal & Strategy
+            </h3>
+            <span class="category-count">3 plugins</span>
+          </div>
+          <p class="category-description">Reflection frameworks and personal operating systems</p>
+
+          <div class="plugins-grid">
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">ceo-personal-os</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)</p>
+              <div class="plugin-tags"><span class="tag">ceo</span><span class="tag">executive</span><span class="tag">reflection</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install ceo-personal-os</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/ceo-personal-os" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">worldview-synthesis</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation</p>
+              <div class="plugin-tags"><span class="tag">worldview</span><span class="tag">values</span><span class="tag">philosophy</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install worldview-synthesis</code>
+                <a href="https://github.com/2389-research/claude-plugins/tree/main/worldview-synthesis" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <h4 class="plugin-name">journal</h4>
+                <span class="plugin-version">v1.0.0</span>
+              </div>
+              <p class="plugin-description">A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts</p>
+              <div class="plugin-tags"><span class="tag">journal</span><span class="tag">journaling</span><span class="tag">thoughts</span></div>
+              <div class="plugin-footer">
+                <code class="plugin-install">/plugin install journal</code>
+                <a href="https://github.com/2389-research/journal-mcp.git" class="plugin-source" rel="noopener noreferrer" target="_blank">Source →</a>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
-    <footer>
-      <div class="footer-content">
-        <div class="footer-section">
-          <h4>2389 Research Inc</h4>
-          <ul>
-            <li><a href="https://2389.ai">About Us</a></li>
-            <li><a href="https://github.com/2389-research/claude-plugins">GitHub</a></li>
-            <li><a href="mailto:hello@2389.ai">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4>Resources</h4>
-          <ul>
-            <li><a href="https://docs.claude.com/en/docs/claude-code">Claude Code Docs</a></li>
-            <li><a href="https://docs.claude.com/en/docs/claude-code/skills">Skills Guide</a></li>
-            <li><a href="https://docs.claude.com/en/docs/claude-code/plugins">Plugin Development</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h4>Quick Install</h4>
-          <code class="footer-install">/plugin marketplace add 2389-research/claude-plugins</code>
+    <section id="about" class="section about-section">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <div class="section-title-group">
+          <h2 class="section-title">About This Marketplace</h2>
+          <p class="section-subtitle">Open source tools from 2389 Research</p>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 2389 Research Inc. All plugins are open source.</p>
+
+      <div class="about-grid">
+        <div class="about-content">
+          <p>A collection of Claude Code plugins and MCP servers from <a href="https://2389.ai">2389 Research Inc</a>. We're building a world where AI agents collaborate like your dream team — and these are the tools that help us get there.</p>
+          <p>All plugins are open source. Use them, fork them, contribute back. We'd love to hear how you're using them. (No corporate fine print, we promise.)</p>
+
+          <div class="about-links">
+            <a href="https://github.com/2389-research/claude-plugins" class="about-link" rel="noopener noreferrer" target="_blank">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z" fill="currentColor"/>
+              </svg>
+              View on GitHub
+            </a>
+            <a href="mailto:hello@2389.ai" class="about-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              hello@2389.ai
+            </a>
+          </div>
+        </div>
+
+        <div class="quick-start">
+          <h3 class="quick-start-title">Get Started in 30 Seconds</h3>
+          <div class="quick-start-steps">
+            <div class="step">
+              <span class="step-number">1</span>
+              <div class="step-content">
+                <span class="step-label">Add the marketplace</span>
+                <code>/plugin marketplace add 2389-research/claude-plugins</code>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-number">2</span>
+              <div class="step-content">
+                <span class="step-label">Grab what you need</span>
+                <code>/plugin install better-dev</code>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-number">3</span>
+              <div class="step-content">
+                <span class="step-label">That's it. Seriously.</span>
+                <code>Skills auto-trigger when relevant</code>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </footer>
-  </div>
+    </section>
+
+    <section class="section resources-section">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <div class="section-title-group">
+          <h2 class="section-title">Learn More</h2>
+          <p class="section-subtitle">The official docs (for when you want to go deeper)</p>
+        </div>
+      </div>
+
+      <div class="resources-grid">
+        <a href="https://docs.claude.com/en/docs/claude-code" class="resource-card">
+          <h4>Claude Code Docs</h4>
+          <p>Official documentation for Claude Code CLI</p>
+        </a>
+        <a href="https://docs.claude.com/en/docs/claude-code/skills" class="resource-card">
+          <h4>Skills Guide</h4>
+          <p>How to create and use Claude Code skills</p>
+        </a>
+        <a href="https://docs.claude.com/en/docs/claude-code/plugins" class="resource-card">
+          <h4>Plugin Development</h4>
+          <p>Build your own Claude Code plugins</p>
+        </a>
+        <a href="https://docs.claude.com/en/docs/claude-code/mcp" class="resource-card">
+          <h4>MCP Servers</h4>
+          <p>Model Context Protocol server documentation</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">
+          <span class="status-indicator"></span>
+          2389 Research Inc
+        </span>
+        <p class="footer-tagline">Building tools for how we actually work.<br>(No matching jumpsuits. Yet.)</p>
+      </div>
+
+      <div class="footer-links-grid">
+        <div class="footer-column">
+          <h5>Company</h5>
+          <a href="https://2389.ai">About Us</a>
+          <a href="https://github.com/2389-research/claude-plugins">GitHub</a>
+          <a href="mailto:hello@2389.ai">Contact</a>
+        </div>
+        <div class="footer-column">
+          <h5>Resources</h5>
+          <a href="https://docs.claude.com/en/docs/claude-code">Claude Code Docs</a>
+          <a href="https://docs.claude.com/en/docs/claude-code/skills">Skills Guide</a>
+          <a href="https://docs.claude.com/en/docs/claude-code/plugins">Plugin Development</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 2389 Research Inc. All plugins are open source. (Robots included.)</p>
+    </div>
+  </footer>
 </body>
 </html>

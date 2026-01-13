@@ -1,0 +1,6 @@
+# Robots.txt for 2389 Claude Code Plugin Marketplace
+User-agent: *
+Allow: /
+
+Sitemap: https://2389-research.github.io/claude-plugins/sitemap.xml
+Crawl-delay: 1
