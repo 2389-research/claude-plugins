@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>terminal-title | 2389 Research</title>
+  <meta name="title" content="terminal-title | 2389 Research">
+  <meta name="description" content="Automatically updates terminal title with emoji + project + topic context and establishes 2389 workflow conventions for TodoWrite task tracking">
+  <meta name="keywords" content="Claude Code, plugins, MCP servers, AI development, Claude, Anthropic, development tools, 2389 Research">
+  <meta name="author" content="2389 Research Inc">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://2389-research.github.io/claude-plugins/plugins/terminal-title/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://2389-research.github.io/claude-plugins/plugins/terminal-title/">
+  <meta property="og:title" content="terminal-title | 2389 Research">
+  <meta property="og:description" content="Automatically updates terminal title with emoji + project + topic context and establishes 2389 workflow conventions for TodoWrite task tracking">
+  <meta property="og:image" content="https://2389-research.github.io/claude-plugins/og-image.png">
+  <meta property="og:site_name" content="2389 Research Plugin Marketplace">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://2389-research.github.io/claude-plugins/plugins/terminal-title/">
+  <meta property="twitter:title" content="terminal-title | 2389 Research">
+  <meta property="twitter:description" content="Automatically updates terminal title with emoji + project + topic context and establishes 2389 workflow conventions for TodoWrite task tracking">
+  <meta property="twitter:image" content="https://2389-research.github.io/claude-plugins/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔌</text></svg>">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://github.com">
+
+  <!-- Fonts with display=swap for performance -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../style.css">
+
+  <!-- Analytics -->
+  <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js" defer></script>
+</head>
+<body>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo" aria-label="2389 Research Plugin Marketplace">
+        <span class="status-indicator" aria-hidden="true"></span>
+        2389 Research Inc
+      </a>
+      <div class="nav-links" role="menubar">
+        <a href="../../#plugins" class="nav-link" role="menuitem">Plugins</a>
+        <a href="../../#about" class="nav-link" role="menuitem">About</a>
+        <a href="https://github.com/2389-research/claude-plugins" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="https://2389.ai" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank">2389.ai</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="plugin-hero">
+    <div class="plugin-hero-inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../">Marketplace</a>
+        <span class="breadcrumb-sep">→</span>
+        <a href="../../#plugins">Infrastructure</a>
+        <span class="breadcrumb-sep">→</span>
+        <span class="breadcrumb-current">terminal-title</span>
+      </nav>
+
+      <div class="plugin-hero-header">
+        <h1 class="plugin-hero-title">terminal-title</h1>
+        <span class="plugin-hero-version">v1.0.0</span>
+        
+      </div>
+
+      <p class="plugin-hero-description">Automatically updates terminal title with emoji + project + topic context and establishes 2389 workflow conventions for TodoWrite task tracking</p>
+
+      <div class="plugin-tags-large"><span class="tag">terminal</span><span class="tag">title</span><span class="tag">session</span><span class="tag">context</span><span class="tag">workflows</span><span class="tag">todowrite</span></div>
+
+      <div class="plugin-hero-actions">
+        <div class="install-block">
+          <span class="install-label">Install Command</span>
+          <code class="install-command">/plugin install terminal-title@2389-research</code>
+        </div>
+        <a href="https://github.com/2389-research/claude-plugins/tree/main/terminal-title" class="cta-button" rel="noopener noreferrer" target="_blank">
+          View Source
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    
+    <section class="section readme-section">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <div class="section-title-group">
+          <h2 class="section-title">Documentation</h2>
+          <p class="section-subtitle">Full plugin documentation and usage guide</p>
+        </div>
+      </div>
+
+      <div class="readme-content">
+        <h2>Terminal Title Plugin</h2></p><p>Automatically updates terminal title with emoji + project + topic context. <strong>Cross-platform support for Windows, macOS, and Linux.</strong> Also establishes 2389 workflow conventions for TodoWrite task tracking.</p><h3>Installation</h3><pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
+<p>/plugin install terminal-title@2389-research
+<p></code></pre></p><h4>Platform-Specific Setup</h4></p><p><strong>Windows users:</strong> Ensure PowerShell 7+ (<code>pwsh</code>) is installed and available in your PATH. The plugin automatically uses PowerShell scripts on Windows.</p><p><strong>Unix/Linux/macOS users:</strong> No additional setup required. The plugin uses bash scripts automatically.</p><h3>What This Plugin Provides</h3></p><p><strong>Skills provided:</strong><ul><li><code>terminal-title</code> – Automatically manages the terminal title based on project and topic context</li>
+<p></ul>
+<p><strong>Automatic terminal title management:</strong></p><ul><li><strong>Auto-invokes at session start</strong>: Sets initial title based on project context</li>
+<li><strong>Updates on topic changes</strong>: Reflects current work in terminal title</li>
+<li><strong>Emoji indicators</strong>: Visual cues for quick context switching</li>
+<p></ul>
+<p><strong>2389 workflow conventions:</strong></p><ul><li><strong>TodoWrite patterns</strong>: Granular 2-5 minute task tracking</li>
+<li><strong>Task lifecycle management</strong>: One task in-progress at a time</li>
+<li><strong>Shared conventions</strong>: Used across all 2389 plugins</li>
+<p></ul>
+<h3>How It Works</h3><p>The plugin includes a session start hook that automatically invokes the terminal-title skill. The skill:</p><p>1. <strong>Detects your operating system</strong> (Windows, macOS, Linux)
+<p>2. <strong>Detects current project</strong> from working directory, git repo, or package.json
+<p>3. <strong>Infers topic</strong> from recent files or conversation context
+<p>4. <strong>Selects appropriate emoji</strong> from environment variable or defaults to 🎉
+<p>5. <strong>Updates terminal title</strong> via platform-specific script:
+<p>   - Windows: PowerShell (<code>.ps1</code>)
+<p>   - Unix/Linux/macOS: Bash (<code>.sh</code>)</p><h3>Example</h3><pre><code class="language-text">🔥 firebase-app > authentication setup
+<p></code></pre></p><h3>TodoWrite Conventions</h3><p>This plugin establishes task tracking patterns used across all 2389 plugins:</p><pre><code class="language-javascript">{
+<p>  content: "Write the failing test",      // Imperative form
+<p>  status: "pending",                       // or "in_progress" or "completed"
+<p>  activeForm: "Writing the failing test"   // Present continuous form
+<p>}
+<p></code></pre><p><strong>Task lifecycle:</strong>
+<p>1. Create todos for all steps (2-5 minutes each)
+<p>2. Mark ONE task as in_progress
+<p>3. Complete the task
+<p>4. Mark as completed immediately
+<p>5. Move to next task</p><h3>Documentation</h3><ul><li><a href="docs/2025-11-14-terminal-title-skill-design.md" rel="noopener noreferrer">Design Document</a></li>
+<li><a href="docs/2025-11-14-terminal-title-implementation.md" rel="noopener noreferrer">Implementation Plan</a></li>
+<p></ul><p>
+      </div>
+    </section>
+    
+
+    <section class="section quick-install-section">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <div class="section-title-group">
+          <h2 class="section-title">Quick Install</h2>
+          <p class="section-subtitle">Get started in seconds</p>
+        </div>
+      </div>
+
+      <div class="quick-start">
+        <div class="quick-start-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+              <span class="step-label">Add the marketplace (if not already added)</span>
+              <code>/plugin marketplace add 2389-research/claude-plugins</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+              <span class="step-label">Install this plugin</span>
+              <code>/plugin install terminal-title</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+              <span class="step-label">You're good to go</span>
+              <code>Skills auto-trigger when relevant</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section back-section">
+      <a href="../../" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to Marketplace
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="../../" class="footer-logo">
+          <span class="status-indicator"></span>
+          2389 Research Inc
+        </a>
+        <p class="footer-tagline">Building tools for how we actually work.<br>(No matching jumpsuits. Yet.)</p>
+      </div>
+
+      <div class="footer-links-grid">
+        <div class="footer-column">
+          <h5>Company</h5>
+          <a href="https://2389.ai">About Us</a>
+          <a href="https://github.com/2389-research/claude-plugins">GitHub</a>
+          <a href="mailto:hello@2389.ai">Contact</a>
+        </div>
+        <div class="footer-column">
+          <h5>Resources</h5>
+          <a href="https://docs.claude.com/en/docs/claude-code">Claude Code Docs</a>
+          <a href="https://docs.claude.com/en/docs/claude-code/skills">Skills Guide</a>
+          <a href="https://docs.claude.com/en/docs/claude-code/plugins">Plugin Development</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 2389 Research Inc. All plugins are open source. (Robots included.)</p>
+    </div>
+  </footer>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "terminal-title",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "2389 Research Inc",
+    "url": "https://2389.ai"
+  },
+  "description": "Automatically updates terminal title with emoji + project + topic context and establishes 2389 workflow conventions for TodoWrite task tracking",
+  "url": "https://2389-research.github.io/claude-plugins/plugins/terminal-title/",
+  "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/terminal-title",
+  "softwareVersion": "1.0.0",
+  "license": "https://opensource.org/licenses/MIT"
+}
+  </script>
+</body>
+</html>

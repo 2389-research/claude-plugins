@@ -973,3 +973,333 @@ body {
   background: var(--accent-gold-dim);
   color: var(--text-primary);
 }
+
+/* ============================================
+   Plugin Detail Pages
+   ============================================ */
+
+/* Plugin name as link on main page */
+.plugin-name-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.plugin-name-link:hover .plugin-name {
+  color: var(--accent-blue);
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.breadcrumb a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--accent-gold);
+}
+
+.breadcrumb-sep {
+  color: var(--text-muted);
+}
+
+.breadcrumb-current {
+  color: var(--text-primary);
+}
+
+/* Plugin Hero */
+.plugin-hero {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+  border-bottom: 1px solid var(--border);
+}
+
+.plugin-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.plugin-hero-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md);
+}
+
+.plugin-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+}
+
+.plugin-hero-version {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--accent-gold);
+  background: var(--accent-gold-dim);
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--radius-md);
+}
+
+.plugin-external-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--accent-blue);
+  background: var(--accent-blue-dim);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.plugin-hero-description {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+  max-width: 700px;
+}
+
+.plugin-tags-large {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: var(--space-lg);
+}
+
+.plugin-tags-large .tag {
+  font-size: 0.75rem;
+  padding: 0.375rem 0.75rem;
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.plugin-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.plugin-hero-actions .install-block {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+/* README Content Styling */
+.readme-section {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  margin-bottom: var(--space-lg);
+}
+
+.readme-content {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.readme-content h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: var(--space-xl) 0 var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border);
+  letter-spacing: -0.02em;
+}
+
+.readme-content h2:first-child {
+  margin-top: 0;
+}
+
+.readme-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: var(--space-lg) 0 var(--space-sm);
+  letter-spacing: -0.01em;
+}
+
+.readme-content h4 {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: var(--space-md) 0 var(--space-xs);
+}
+
+.readme-content p {
+  margin-bottom: var(--space-md);
+}
+
+.readme-content a {
+  color: var(--accent-gold);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.readme-content a:hover {
+  color: var(--accent-gold-hover);
+  text-decoration: underline;
+}
+
+.readme-content ul {
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-lg);
+}
+
+.readme-content li {
+  margin-bottom: 0.5rem;
+}
+
+.readme-content code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--bg-elevated);
+  color: var(--accent-gold);
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.readme-content pre {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  overflow-x: auto;
+}
+
+.readme-content pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.readme-content strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.readme-content em {
+  font-style: italic;
+}
+
+/* Quick Install Section on plugin page */
+.quick-install-section {
+  background: transparent;
+}
+
+.quick-install-section .quick-start {
+  max-width: 600px;
+}
+
+/* Back Link */
+.back-section {
+  padding-top: 0;
+  padding-bottom: var(--space-xl);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--accent-gold);
+}
+
+.back-link svg {
+  transition: transform 0.2s ease;
+}
+
+.back-link:hover svg {
+  transform: translateX(-4px);
+}
+
+/* Footer logo as link */
+.footer-logo {
+  text-decoration: none;
+}
+
+/* ============================================
+   Plugin Page Responsive
+   ============================================ */
+@media (max-width: 768px) {
+  .plugin-hero {
+    padding: var(--space-lg) var(--space-sm);
+  }
+
+  .plugin-hero-title {
+    font-size: 1.75rem;
+  }
+
+  .plugin-hero-description {
+    font-size: 1.0625rem;
+  }
+
+  .plugin-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .plugin-hero-actions .install-block {
+    min-width: auto;
+    max-width: none;
+  }
+
+  .plugin-hero-actions .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .readme-content h2 {
+    font-size: 1.25rem;
+  }
+
+  .readme-content h3 {
+    font-size: 1.125rem;
+  }
+
+  .readme-content pre {
+    padding: var(--space-sm);
+  }
+
+  .breadcrumb {
+    font-size: 0.75rem;
+  }
+}
