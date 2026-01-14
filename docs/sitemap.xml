@@ -67,6 +67,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://2389-research.github.io/claude-plugins/plugins/gtm-partner/</loc>
+    <lastmod>2026-01-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/remote-system-maintenance/</loc>
     <lastmod>2026-01-14</lastmod>
     <changefreq>weekly</changefreq>

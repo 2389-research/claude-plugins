@@ -128,11 +128,6 @@
 <li><strong>Emulator-first development</strong>: Always test locally before deploying</li>
 <li><strong>Modern tooling</strong>: TypeScript, vitest, biome</li>
 <p></ul>
-<h3>Reference Codebases</h3><p>Patterns are based on:
-<ul><li><strong>oneonone</strong>: <code>/Users/dylanr/work/2389/oneonone</code> (Express API, custom API keys)</li>
-<li><strong>bot-socialmedia</strong>: <code>/Users/dylanr/work/2389/bot-socialmedia-server</code> (Domain-grouped, Firebase Auth)</li>
-<li><strong>meme-rodeo</strong>: <code>/Users/dylanr/work/2389/meme-rodeo</code> (Individual functions, entitlements)</li>
-<p></ul>
 <h3>Quick Example</h3><pre><code class="language-typescript">// Cloud Function with domain grouping
 <p>export const users = {
 <p>  onCreate: onDocumentCreated('users/{userId}', async (event) => {
@@ -142,8 +137,6 @@
 <p>    // Implementation
 <p>  })
 <p>};
-<p></code></pre></p><h3>Optional: Install Workflows Plugin</h3><p>For enhanced integration with 2389 conventions:
-<pre><code class="language-bash">/plugin install workflows@2389-research
 <p></code></pre></p><h3>Documentation</h3><ul><li><a href="docs/plans/2025-01-14-firebase-skills-design.md" rel="noopener noreferrer">Design Document</a></li>
 <li><a href="docs/plans/2025-01-14-firebase-skills-implementation.md" rel="noopener noreferrer">Implementation Plan</a></li>
 <li>Examples:</li>
