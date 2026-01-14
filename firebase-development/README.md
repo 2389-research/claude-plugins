@@ -30,13 +30,6 @@ This plugin supports:
 - **Emulator-first development**: Always test locally before deploying
 - **Modern tooling**: TypeScript, vitest, biome
 
-## Reference Codebases
-
-Patterns are based on:
-- **oneonone**: `/Users/dylanr/work/2389/oneonone` (Express API, custom API keys)
-- **bot-socialmedia**: `/Users/dylanr/work/2389/bot-socialmedia-server` (Domain-grouped, Firebase Auth)
-- **meme-rodeo**: `/Users/dylanr/work/2389/meme-rodeo` (Individual functions, entitlements)
-
 ## Quick Example
 
 ```typescript
@@ -49,13 +42,6 @@ export const users = {
     // Implementation
   })
 };
-```
-
-## Optional: Install Workflows Plugin
-
-For enhanced integration with 2389 conventions:
-```bash
-/plugin install workflows@2389-research
 ```
 
 ## Documentation

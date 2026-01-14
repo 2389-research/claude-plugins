@@ -7,29 +7,41 @@ Guide for maintaining and extending the CSS and Firebase development skills.
 ```
 .
 ├── css-development/                  # CSS skill system
-│   ├── SKILL.md                     # Main orchestrator skill
-│   ├── create-component/            # Sub-skill for creation
-│   │   └── SKILL.md
-│   ├── validate/                    # Sub-skill for validation
-│   │   └── SKILL.md
-│   └── refactor/                    # Sub-skill for refactoring
-│       └── SKILL.md
+│   ├── .claude-plugin/
+│   │   └── plugin.json
+│   ├── skills/
+│   │   ├── SKILL.md                 # Main orchestrator skill
+│   │   ├── create-component/        # Sub-skill for creation
+│   │   │   └── SKILL.md
+│   │   ├── validate/                # Sub-skill for validation
+│   │   │   └── SKILL.md
+│   │   └── refactor/                # Sub-skill for refactoring
+│   │       └── SKILL.md
+│   ├── docs/
+│   ├── tests/integration/
+│   ├── CLAUDE.md
+│   └── README.md
 ├── firebase-development/             # Firebase skill system
-│   ├── SKILL.md                     # Main orchestrator skill
-│   ├── project-setup/               # Sub-skill for setup
-│   │   └── SKILL.md
-│   ├── add-feature/                 # Sub-skill for features
-│   │   └── SKILL.md
-│   ├── debug/                       # Sub-skill for debugging
-│   │   └── SKILL.md
-│   └── validate/                    # Sub-skill for validation
-│       └── SKILL.md
+│   ├── .claude-plugin/
+│   │   └── plugin.json
+│   ├── skills/
+│   │   ├── SKILL.md                 # Main orchestrator skill
+│   │   ├── project-setup/           # Sub-skill for setup
+│   │   │   └── SKILL.md
+│   │   ├── add-feature/             # Sub-skill for features
+│   │   │   └── SKILL.md
+│   │   ├── debug/                   # Sub-skill for debugging
+│   │   │   └── SKILL.md
+│   │   └── validate/                # Sub-skill for validation
+│   │       └── SKILL.md
+│   ├── docs/
+│   ├── tests/integration/
+│   ├── CLAUDE.md
+│   └── README.md
 ├── docs/
 │   ├── plans/                       # Design and implementation plans
 │   ├── examples/                    # Usage examples
 │   └── DEVELOPMENT.md               # This file
-├── tests/
-│   └── integration/                 # Manual test scenarios
 └── README.md                        # User-facing documentation
 ```
 
@@ -125,7 +137,7 @@ All sub-skills reference these patterns, so updates propagate automatically.
 
 ### CSS Development Skills
 
-Reference codebase: `/Users/dylanr/work/2389/oneonone/hosting`
+Reference patterns: See the skill documentation in `css-development/skills/SKILL.md`
 
 **Pattern centralization:** All CSS patterns are documented in the main `css-development/SKILL.md` file. Sub-skills reference these patterns rather than duplicating them.
 
@@ -137,10 +149,12 @@ Reference codebase: `/Users/dylanr/work/2389/oneonone/hosting`
 
 ### Firebase Development Skills
 
-Reference codebases:
-- **oneonone** (`/Users/dylanr/work/2389/oneonone`): Express API, custom API keys, server-write-only
-- **bot-socialmedia** (`/Users/dylanr/work/2389/bot-socialmedia-server`): Domain-grouped functions, Firebase Auth + roles
-- **meme-rodeo** (`/Users/dylanr/work/2389/meme-rodeo`): Individual function files, Firebase Auth + entitlements
+Reference patterns: See the skill documentation in `firebase-development/skills/SKILL.md`
+
+**Supported architecture patterns:**
+- Express API with custom API keys
+- Domain-grouped functions with Firebase Auth
+- Individual function files with entitlements
 
 **Pattern centralization:** All Firebase patterns are documented in the main `firebase-development/SKILL.md` file (1323 lines). Sub-skills reference these patterns with `@firebase-development/pattern-name` syntax.
 
@@ -153,7 +167,7 @@ Reference codebases:
 - Emulator-first development workflow
 - Modern tooling (TypeScript, vitest, biome, ABOUTME comments)
 
-**Design document:** See `docs/plans/2025-01-14-firebase-skills-design.md` for comprehensive pattern documentation extracted from the three reference projects.
+**Design document:** See `firebase-development/docs/plans/2025-01-14-firebase-skills-design.md` for comprehensive pattern documentation.
 
 ## Common Modifications
 
@@ -375,16 +389,13 @@ Focus on:
 
 ### CSS Development
 - **Tailwind CSS Documentation:** https://tailwindcss.com/docs
-- **Reference Codebase:** `/Users/dylanr/work/2389/oneonone/hosting`
+- **Patterns:** See `css-development/skills/SKILL.md`
 - **Integration Tests:** `tests/integration/skill-routing.test.md`
 - **Usage Examples:** `docs/examples/css-development-examples.md`
 
 ### Firebase Development
 - **Firebase Documentation:** https://firebase.google.com/docs
 - **Firebase Emulator Suite:** https://firebase.google.com/docs/emulator-suite
-- **Reference Codebases:**
-  - oneonone: `/Users/dylanr/work/2389/oneonone`
-  - bot-socialmedia: `/Users/dylanr/work/2389/bot-socialmedia-server`
-  - meme-rodeo: `/Users/dylanr/work/2389/meme-rodeo`
-- **Design Document:** `docs/plans/2025-01-14-firebase-skills-design.md`
+- **Patterns:** See `firebase-development/skills/SKILL.md`
+- **Design Document:** `firebase-development/docs/plans/2025-01-14-firebase-skills-design.md`
 - **Integration Tests:** `tests/integration/firebase-*.md` (when created)

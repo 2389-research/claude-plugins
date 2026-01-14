@@ -58,16 +58,6 @@ Every component must include dark mode variants:
 }
 ```
 
-## Reference Codebase
-
-Patterns are based on: `/Users/dylanr/work/2389/oneonone/hosting`
-
-This codebase demonstrates:
-- Semantic class naming throughout
-- Tailwind composition patterns
-- Comprehensive dark mode coverage
-- Component organization
-
 ## Development Workflow
 
 1. **Auto-detection**: Skills auto-detect when CSS work is mentioned
@@ -86,11 +76,9 @@ Tests are located in `tests/integration/`:
 - [Implementation Plan](docs/plans/2025-11-13-css-development-skill-implementation.md)
 - [Examples](docs/examples/css-development-examples.md)
 
-## Integration with Workflows Plugin
+## TodoWrite Integration
 
-The workflows plugin provides:
-- TodoWrite conventions for task tracking
-- Terminal title update patterns
-- Meta-skill usage guidance
-
-To install: `/plugin install workflows@2389-research`
+This plugin uses TodoWrite conventions (also provided by terminal-title plugin):
+- Granular task tracking (2-5 minutes per task)
+- One task in_progress at a time
+- Mark tasks complete immediately after finishing

@@ -184,6 +184,22 @@
             "strict": false
         },
         {
+            "name": "gtm-partner",
+            "source": "./gtm-partner",
+            "description": "Strategic go-to-market partner - recommends channels, validates strategy, generates only assets that matter. Not a content factory.",
+            "version": "1.0.0",
+            "keywords": [
+                "gtm",
+                "go-to-market",
+                "launch",
+                "marketing",
+                "strategy",
+                "pricing",
+                "outreach"
+            ],
+            "strict": false
+        },
+        {
             "name": "remote-system-maintenance",
             "source": "./remote-system-maintenance",
             "description": "Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists",

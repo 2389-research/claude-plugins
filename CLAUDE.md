@@ -14,7 +14,7 @@ These are the plugins and MCP servers we use at 2389.
 
 ## Monorepo Structure
 
-The repository contains four independent plugins, each in its own directory:
+The repository contains multiple independent plugins, each in its own directory. Here are three representative examples:
 
 ```
 claude-plugins/
@@ -36,7 +36,7 @@ claude-plugins/
 │   ├── tests/
 │   ├── CLAUDE.md
 │   └── README.md
-├── terminal-title/             # Terminal title management plugin
+├── terminal-title/             # Terminal title + TodoWrite conventions
 │   ├── .claude-plugin/
 │   │   └── plugin.json
 │   ├── hooks/
@@ -44,12 +44,6 @@ claude-plugins/
 │   ├── skills/
 │   ├── docs/
 │   ├── tests/
-│   ├── CLAUDE.md
-│   └── README.md
-├── workflows/                  # 2389 workflow conventions plugin
-│   ├── .claude-plugin/
-│   │   └── plugin.json
-│   ├── skills/
 │   ├── CLAUDE.md
 │   └── README.md
 ├── docs/
@@ -99,10 +93,9 @@ Each plugin is self-contained with:
 
 | Plugin | Description | Documentation |
 |--------|-------------|---------------|
-| [css-development](/Users/harper/Public/src/2389/claude-plugins/css-development/) | CSS development workflows with Tailwind composition, semantic naming, and dark mode by default | [CLAUDE.md](/Users/harper/Public/src/2389/claude-plugins/css-development/CLAUDE.md) |
-| [firebase-development](/Users/harper/Public/src/2389/claude-plugins/firebase-development/) | Firebase project workflows including setup, features, debugging, and validation | [CLAUDE.md](/Users/harper/Public/src/2389/claude-plugins/firebase-development/CLAUDE.md) |
-| [terminal-title](/Users/harper/Public/src/2389/claude-plugins/terminal-title/) | Automatically updates terminal title with emoji + project + topic context | [CLAUDE.md](/Users/harper/Public/src/2389/claude-plugins/terminal-title/CLAUDE.md) |
-| [workflows](/Users/harper/Public/src/2389/claude-plugins/workflows/) | 2389 workflow conventions including terminal title updates and TodoWrite patterns | [CLAUDE.md](/Users/harper/Public/src/2389/claude-plugins/workflows/CLAUDE.md) |
+| [css-development](css-development/) | CSS development workflows with Tailwind composition, semantic naming, and dark mode by default | [CLAUDE.md](css-development/CLAUDE.md) |
+| [firebase-development](firebase-development/) | Firebase project workflows including setup, features, debugging, and validation | [CLAUDE.md](firebase-development/CLAUDE.md) |
+| [terminal-title](terminal-title/) | Automatically updates terminal title with emoji + project + topic context, plus TodoWrite conventions | [CLAUDE.md](terminal-title/CLAUDE.md) |
 
 ## Installation
 
@@ -118,7 +111,6 @@ Each plugin is self-contained with:
 /plugin install css-development@2389-research
 /plugin install firebase-development@2389-research
 /plugin install terminal-title@2389-research
-/plugin install workflows@2389-research
 ```
 
 Users can install only the plugins they need.
@@ -237,8 +229,8 @@ npm run generate
 ### Step 7: Test and Commit
 
 ```bash
-# Test locally
-/plugin install /Users/harper/Public/src/2389/claude-plugins/new-plugin
+# Test locally (use absolute path to your local clone)
+/plugin install ./new-plugin
 
 # Commit changes
 git add new-plugin/ .claude-plugin/marketplace.json docs/index.html
@@ -305,11 +297,12 @@ Skills create granular TodoWrite checklists with each task taking 2-5 minutes:
 
 ### File Paths
 
-Always use absolute paths in documentation and skill instructions:
+Use clear, specific paths in documentation and skill instructions:
 
 ```
-✅ /Users/dylanr/work/2389/oneonone/hosting/styles/components.css
-❌ styles/components.css
+✅ hosting/styles/components.css (relative to project root)
+✅ ./styles/components.css (explicit relative path)
+❌ components.css (ambiguous)
 ```
 
 ### Skill Routing
@@ -377,7 +370,7 @@ Run integration test scenarios from `plugin-name/tests/integration/`.
 ### Installing Plugin Locally
 
 ```bash
-/plugin install /Users/harper/Public/src/2389/claude-plugins/plugin-name
+/plugin install ./plugin-name
 ```
 
 ### Uninstalling Plugin
@@ -500,7 +493,7 @@ These are referenced by URL in marketplace.json:
 
 - **GitHub:** https://github.com/2389-research/claude-plugins
 - **Marketplace Site:** https://2389-research.github.io/claude-plugins
-- **Development Guide:** [docs/DEVELOPMENT.md](/Users/harper/Public/src/2389/claude-plugins/docs/DEVELOPMENT.md)
+- **Development Guide:** [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)
 
 ## Contributing
 

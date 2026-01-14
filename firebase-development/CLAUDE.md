@@ -84,32 +84,6 @@ Always develop locally with emulators before deploying:
 firebase emulators:start
 ```
 
-## Reference Codebases
-
-### oneonone
-Path: `/Users/dylanr/work/2389/oneonone`
-
-- Express API architecture
-- Custom API key authentication
-- Server-write-only security model
-- Single hosting configuration
-
-### bot-socialmedia
-Path: `/Users/dylanr/work/2389/bot-socialmedia-server`
-
-- Domain-grouped functions
-- Firebase Auth integration
-- Client-write with validation rules
-- Complex security rules
-
-### meme-rodeo
-Path: `/Users/dylanr/work/2389/meme-rodeo`
-
-- Individual function files
-- Entitlements system
-- User permissions
-- Fine-grained access control
-
 ## Development Workflow
 
 1. **Auto-detection**: Skills auto-detect when Firebase work is mentioned
@@ -135,11 +109,9 @@ Tests are located in `tests/integration/`:
 - [Firestore Rules Patterns](docs/examples/firestore-rules-patterns.md)
 - [Multi-Hosting Setup](docs/examples/multi-hosting-setup.md)
 
-## Integration with Workflows Plugin
+## TodoWrite Integration
 
-The workflows plugin provides:
-- TodoWrite conventions for task tracking
-- Terminal title update patterns
-- Meta-skill usage guidance
-
-To install: `/plugin install workflows@2389-research`
+This plugin uses TodoWrite conventions (also provided by terminal-title plugin):
+- Granular task tracking (2-5 minutes per task)
+- One task in_progress at a time
+- Mark tasks complete immediately after finishing

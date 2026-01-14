@@ -17,7 +17,6 @@ Install plugins individually:
 /plugin install css-development@2389-research
 /plugin install firebase-development@2389-research
 /plugin install terminal-title@2389-research
-/plugin install workflows@2389-research
 ```
 
 ## Available Plugins
@@ -26,8 +25,7 @@ Install plugins individually:
 |--------|-------------|---------------|
 | [css-development](css-development/) | CSS development workflows with Tailwind composition, semantic naming, and dark mode by default | [README](css-development/README.md) |
 | [firebase-development](firebase-development/) | Firebase project workflows including setup, features, debugging, and validation | [README](firebase-development/README.md) |
-| [terminal-title](terminal-title/) | Automatically updates terminal title with emoji + project + topic context | [README](terminal-title/README.md) |
-| [workflows](workflows/) | 2389 workflow conventions including terminal title updates and TodoWrite patterns | [README](workflows/README.md) |
+| [terminal-title](terminal-title/) | Automatically updates terminal title with emoji + project + topic context, plus TodoWrite conventions | [README](terminal-title/README.md) |
 
 ## External MCP Servers
 
@@ -75,6 +73,6 @@ We'd love to hear from you!
 
 ## Resources
 
-- **Claude Code Documentation:** https://code.claude.com/docs
-- **Skills Guide:** https://code.claude.com/docs/en/skills
-- **Plugin Development:** https://code.claude.com/docs/en/plugins
+- **Claude Code Documentation:** https://docs.claude.com/en/docs/claude-code
+- **Skills Guide:** https://docs.claude.com/en/docs/claude-code/skills
+- **Plugin Development:** https://docs.claude.com/en/docs/claude-code/plugins

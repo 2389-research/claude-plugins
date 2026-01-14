@@ -27,10 +27,6 @@ This plugin enforces:
 - **Dark mode by default**: Every component includes `dark:` variants
 - **Test coverage**: Static analysis + component rendering tests
 
-## Reference Codebase
-
-Patterns are based on: `/Users/dylanr/work/2389/oneonone/hosting`
-
 ## Quick Example
 
 ```css
@@ -45,13 +41,6 @@ Patterns are based on: `/Users/dylanr/work/2389/oneonone/hosting`
 .user-profile__name {
   @apply text-lg font-semibold text-gray-900 dark:text-gray-100;
 }
-```
-
-## Optional: Install Workflows Plugin
-
-For enhanced integration with 2389 conventions:
-```bash
-/plugin install workflows@2389-research
 ```
 
 ## Documentation

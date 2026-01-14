@@ -5,7 +5,7 @@ Meta-plugin for system administration workflows on Linux systems.
 ## Installation
 
 ```bash
-/plugin install meta-sysadmin@2389-research
+/plugin install sysadmin@2389-research
 ```
 
 This will automatically install:
@@ -51,6 +51,6 @@ Potential future inclusions:
 
 ## Documentation
 
-See [remote-system-maintenance plugin](/Users/harper/Public/src/2389/claude-plugins/remote-system-maintenance/) for complete maintenance procedures.
+See [remote-system-maintenance plugin](../remote-system-maintenance/) for complete maintenance procedures.
 
 

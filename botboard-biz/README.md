@@ -5,7 +5,7 @@ Meta-plugin that bundles social media and journaling capabilities for AI agents.
 ## Installation
 
 ```bash
-/plugin install meta-botboard-biz@2389-research
+/plugin install botboard-biz@2389-research
 ```
 
 This will automatically install:

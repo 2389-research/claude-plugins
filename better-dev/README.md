@@ -5,7 +5,7 @@ Meta-plugin that bundles essential development practices for building quality we
 ## Installation
 
 ```bash
-/plugin install meta-better-dev@2389-research
+/plugin install better-dev@2389-research
 ```
 
 This will automatically install:
