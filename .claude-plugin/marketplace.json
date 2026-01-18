@@ -200,6 +200,23 @@
             "strict": false
         },
         {
+            "name": "product-launcher",
+            "source": "./product-launcher",
+            "description": "Generate launch materials (subscriber email, CEO blog post, CEO tweet thread) for 2389.ai products and skills with authentic voice profiles baked in",
+            "version": "1.0.0",
+            "keywords": [
+                "launch",
+                "email",
+                "blog",
+                "twitter",
+                "announcement",
+                "gtm",
+                "buttondown",
+                "harper"
+            ],
+            "strict": false
+        },
+        {
             "name": "remote-system-maintenance",
             "source": "./remote-system-maintenance",
             "description": "Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists",
