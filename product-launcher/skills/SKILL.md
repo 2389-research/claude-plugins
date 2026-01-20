@@ -296,6 +296,80 @@ Please retweet if [casual framing]
 
 ---
 
+## Push to Slack (Team Review)
+
+After generating materials, when the user says **"push to slack"**, share the outputs with the team for workshopping.
+
+### Requirements
+
+- `slack-mcp` server must be configured with `SLACK_BOT_TOKEN`
+- Users must exist in the 2389 Slack workspace
+
+### Workflow
+
+**Step 1: Create channel**
+```
+slack_create_channel(
+  name: "gtm-[product-name]",
+  is_private: true,
+  description: "GTM materials for [Product] launch"
+)
+```
+
+**Step 2: Invite team**
+```
+slack_invite_to_channel(
+  channel_id: "[from step 1]",
+  users: ["harper@2389.ai", "dylan@2389.ai"]
+)
+```
+
+**Step 3: Post summary (and pin it)**
+```
+slack_post_message(
+  channel_id: "[channel_id]",
+  text: "*GTM Materials: [Product]*\n\nProduct: [name]\nURL: [url]\nStatus: Ready for review\n\nMaterials below 👇"
+)
+slack_pin_message(channel_id: "[channel_id]", message_ts: "[from above]")
+```
+
+**Step 4: Post each output as separate message**
+```
+slack_post_message(channel_id, "*📧 Email*\n\n*Subject:* [subject]\n\n[email body]")
+slack_post_message(channel_id, "*📝 Blog Post*\n\n[full blog post]")
+slack_post_message(channel_id, "*🐦 Tweet Thread*\n\n[all tweets formatted]")
+```
+
+**Step 5: Confirm to user**
+```
+"Created #gtm-[product] and added Harper and Dylan. Materials posted for review."
+```
+
+### Message Formatting for Slack
+
+Convert markdown to Slack format:
+- `**bold**` → `*bold*`
+- `# Header` → `*Header*`
+- Code blocks stay the same
+- Keep line breaks for readability
+
+### Default Team
+
+Always invite:
+- `harper@2389.ai` (Harper Reed)
+- `dylan@2389.ai` (Dylan Richard)
+
+User can specify additional people: "push to slack and add sophie@2389.ai"
+
+### Iteration Flow
+
+After posting, team can:
+1. Comment in threads on each output
+2. User can update materials and post again: "post updated email to slack"
+3. Use `slack_post_thread` to reply to specific messages
+
+---
+
 ## Example: Jeff.ceo Launch
 
 ### Email

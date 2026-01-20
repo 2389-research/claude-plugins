@@ -130,7 +130,38 @@ User: "/product-launcher" or "Let's write launch materials for [product]"
 → CEO tweet thread (all tweets)
 
 [Output - ready to publish]
+
+[Optional: Push to Slack]
+→ User says "push to slack"
+→ Create #gtm-[product] channel
+→ Invite Harper + Dylan
+→ Post materials for team review
 ```
+
+## Slack Integration
+
+When user says **"push to slack"** after generating materials:
+
+### What happens:
+1. Creates private channel `#gtm-[product-name]`
+2. Invites Harper and Dylan (default team)
+3. Posts pinned summary with product info
+4. Posts each output as separate message (for threaded comments)
+5. Confirms completion
+
+### Commands:
+- `"push to slack"` — create channel, invite defaults, post all
+- `"push to slack and add sophie@2389.ai"` — include additional people
+- `"post updated email to slack"` — update a single output
+
+### Requirements:
+- `slack-mcp` server must be installed and configured
+- `SLACK_BOT_TOKEN` environment variable set
+
+### Slack Message Formatting:
+- `**bold**` → `*bold*`
+- `# Header` → `*Header*`
+- Code blocks stay the same
 
 ## Output Format
 
