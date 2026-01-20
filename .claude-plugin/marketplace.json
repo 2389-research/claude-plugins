@@ -217,6 +217,22 @@
             "strict": false
         },
         {
+            "name": "slack-mcp",
+            "source": "./slack-mcp",
+            "description": "Slack workspace integration MCP server - create channels, invite users, post messages, manage threads for team collaboration",
+            "version": "1.0.0",
+            "keywords": [
+                "slack",
+                "mcp",
+                "messaging",
+                "channels",
+                "collaboration",
+                "team",
+                "communication"
+            ],
+            "strict": true
+        },
+        {
             "name": "remote-system-maintenance",
             "source": "./remote-system-maintenance",
             "description": "Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists",
