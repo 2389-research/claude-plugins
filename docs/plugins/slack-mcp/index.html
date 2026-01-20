@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>slack-mcp | 2389 Research</title>
+  <meta name="title" content="slack-mcp | 2389 Research">
+  <meta name="description" content="Slack workspace integration MCP server - create channels, invite users, post messages, manage threads for team collaboration">
+  <meta name="keywords" content="Claude Code, plugins, MCP servers, AI development, Claude, Anthropic, development tools, 2389 Research">
+  <meta name="author" content="2389 Research Inc">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://2389-research.github.io/claude-plugins/plugins/slack-mcp/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://2389-research.github.io/claude-plugins/plugins/slack-mcp/">
+  <meta property="og:title" content="slack-mcp | 2389 Research">
+  <meta property="og:description" content="Slack workspace integration MCP server - create channels, invite users, post messages, manage threads for team collaboration">
+  <meta property="og:image" content="https://2389-research.github.io/claude-plugins/og-image.png">
+  <meta property="og:site_name" content="2389 Research Plugin Marketplace">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://2389-research.github.io/claude-plugins/plugins/slack-mcp/">
+  <meta property="twitter:title" content="slack-mcp | 2389 Research">
+  <meta property="twitter:description" content="Slack workspace integration MCP server - create channels, invite users, post messages, manage threads for team collaboration">
+  <meta property="twitter:image" content="https://2389-research.github.io/claude-plugins/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔌</text></svg>">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://github.com">
+
+  <!-- Fonts with display=swap for performance -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../style.css">
+
+  <!-- Analytics -->
+  <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js" defer></script>
+</head>
+<body>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo" aria-label="2389 Research Plugin Marketplace">
+        <span class="status-indicator" aria-hidden="true"></span>
+        2389 Research Inc
+      </a>
+      <div class="nav-links" role="menubar">
+        <a href="../../#plugins" class="nav-link" role="menuitem">Plugins</a>
+        <a href="../../#about" class="nav-link" role="menuitem">About</a>
+        <a href="https://github.com/2389-research/claude-plugins" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a href="https://2389.ai" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank">2389.ai</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="plugin-hero">
+    <div class="plugin-hero-inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../">Marketplace</a>
+        <span class="breadcrumb-sep">→</span>
+        <a href="../../#plugins">Development</a>
+        <span class="breadcrumb-sep">→</span>
+        <span class="breadcrumb-current">slack-mcp</span>
+      </nav>
+
+      <div class="plugin-hero-header">
+        <h1 class="plugin-hero-title">slack-mcp</h1>
+        <span class="plugin-hero-version">v1.0.0</span>
+        
+      </div>
+
+      <p class="plugin-hero-description">Slack workspace integration MCP server - create channels, invite users, post messages, manage threads for team collaboration</p>
+
+      <div class="plugin-tags-large"><span class="tag">slack</span><span class="tag">mcp</span><span class="tag">messaging</span><span class="tag">channels</span><span class="tag">collaboration</span><span class="tag">team</span><span class="tag">communication</span></div>
+
+      <div class="plugin-hero-actions">
+        <div class="install-block">
+          <span class="install-label">Install Command</span>
+          <code class="install-command">/plugin install slack-mcp@2389-research</code>
+        </div>
+        <a href="https://github.com/2389-research/claude-plugins/tree/main/slack-mcp" class="cta-button" rel="noopener noreferrer" target="_blank">
+          View Source
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    
+    <section class="section readme-section">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <div class="section-title-group">
+          <h2 class="section-title">Documentation</h2>
+          <p class="section-subtitle">Full plugin documentation and usage guide</p>
+        </div>
+      </div>
+
+      <div class="readme-content">
+        <h2>Slack MCP Server</h2></p><p>MCP server for Slack workspace integration. Create channels, invite users, post messages, and manage threads.</p><h3>Features</h3><ul><li>Create public or private channels</li>
+<li>Invite users by email or user ID</li>
+<li>Post messages with markdown formatting</li>
+<li>Reply in threads</li>
+<li>Pin messages</li>
+<li>List workspace users</li>
+<p></ul>
+<h3>Setup</h3></p><h4>1. Create Slack App</h4><p>1. Go to <a href="https://api.slack.com/apps" rel="noopener noreferrer">api.slack.com/apps</a>
+<p>2. Click "Create New App" → "From scratch"
+<p>3. Name it (e.g., "Claude MCP") and select your workspace</p><h4>2. Add OAuth Scopes</h4><p>Under "OAuth & Permissions", add these Bot Token Scopes:</p><pre><code class="language-">channels:manage        # create public channels
+<p>groups:write           # create private channels
+<p>channels:read          # list channels
+<p>groups:read            # read private channels
+<p>chat:write             # post messages
+<p>pins:write             # pin messages
+<p>users:read             # list users
+<p>users:read.email       # lookup users by email
+<p></code></pre></p><h4>3. Install to Workspace</h4></p><p>Click "Install to Workspace" and authorize the app.</p><h4>4. Get Bot Token</h4></p><p>Copy the "Bot User OAuth Token" (starts with <code>xoxb-</code>).</p><h4>5. Configure Environment</h4><pre><code class="language-bash">export SLACK_BOT_TOKEN="xoxb-your-token-here"
+<p></code></pre><p>Or add to your Claude config:</p><pre><code class="language-json">{
+<p>  "mcpServers": {
+<p>    "slack": {
+<p>      "command": "node",
+<p>      "args": ["/path/to/slack-mcp/dist/index.js"],
+<p>      "env": {
+<p>        "SLACK_BOT_TOKEN": "xoxb-your-token-here"
+<p>      }
+<p>    }
+<p>  }
+<p>}
+<p></code></pre></p><h4>6. Build and Run</h4><pre><code class="language-bash">npm install
+<p>npm run build
+<p>npm start
+<p></code></pre></p><h3>Tools</h3></p><h4>slack_create_channel</h4><p>Create a new Slack channel.</p><pre><code class="language-json">{
+<p>  "name": "gtm-jeff",
+<p>  "is_private": true,
+<p>  "description": "GTM materials for Jeff launch"
+<p>}
+<p></code></pre></p><h4>slack_invite_to_channel</h4><p>Invite users by email or user ID.</p><pre><code class="language-json">{
+<p>  "channel_id": "C123ABC",
+<p>  "users": ["harper@2389.ai", "dylan@2389.ai"]
+<p>}
+<p></code></pre></p><h4>slack_post_message</h4><p>Post a message to a channel.</p><pre><code class="language-json">{
+<p>  "channel_id": "C123ABC",
+<p>  "text": "## Email\n\n<strong>Subject:</strong> meet jeff..."
+<p>}
+<p></code></pre></p><h4>slack_post_thread</h4><p>Reply to a message in a thread.</p><pre><code class="language-json">{
+<p>  "channel_id": "C123ABC",
+<p>  "thread_ts": "1234567890.123456",
+<p>  "text": "Updated the subject line"
+<p>}
+<p></code></pre></p><h4>slack_pin_message</h4><p>Pin a message to a channel.</p><pre><code class="language-json">{
+<p>  "channel_id": "C123ABC",
+<p>  "message_ts": "1234567890.123456"
+<p>}
+<p></code></pre></p><h4>slack_list_users</h4><p>List all users in the workspace.</p><pre><code class="language-json">{}
+<p></code></pre></p><h3>Usage with Product Launcher</h3><p>After generating GTM materials, say "push to slack":</p><p>1. Creates <code>#gtm-[product]</code> private channel
+<p>2. Invites Harper and Dylan
+<p>3. Posts each output (email, blog, tweets) as separate messages
+<p>4. Pins the summary message</p><h3>License</h3><p>MIT
+<p>
+      </div>
+    </section>
+    
+
+    <section class="section quick-install-section">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <div class="section-title-group">
+          <h2 class="section-title">Quick Install</h2>
+          <p class="section-subtitle">Get started in seconds</p>
+        </div>
+      </div>
+
+      <div class="quick-start">
+        <div class="quick-start-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+              <span class="step-label">Add the marketplace (if not already added)</span>
+              <code>/plugin marketplace add 2389-research/claude-plugins</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+              <span class="step-label">Install this plugin</span>
+              <code>/plugin install slack-mcp</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+              <span class="step-label">You're good to go</span>
+              <code>Skills auto-trigger when relevant</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section back-section">
+      <a href="../../" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to Marketplace
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="../../" class="footer-logo">
+          <span class="status-indicator"></span>
+          2389 Research Inc
+        </a>
+        <p class="footer-tagline">Building tools for how we actually work.<br>(No matching jumpsuits. Yet.)</p>
+      </div>
+
+      <div class="footer-links-grid">
+        <div class="footer-column">
+          <h5>Company</h5>
+          <a href="https://2389.ai">About Us</a>
+          <a href="https://github.com/2389-research/claude-plugins">GitHub</a>
+          <a href="mailto:hello@2389.ai">Contact</a>
+        </div>
+        <div class="footer-column">
+          <h5>Resources</h5>
+          <a href="https://docs.claude.com/en/docs/claude-code">Claude Code Docs</a>
+          <a href="https://docs.claude.com/en/docs/claude-code/skills">Skills Guide</a>
+          <a href="https://docs.claude.com/en/docs/claude-code/plugins">Plugin Development</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 2389 Research Inc. All plugins are open source. (Robots included.)</p>
+    </div>
+  </footer>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "slack-mcp",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "2389 Research Inc",
+    "url": "https://2389.ai"
+  },
+  "description": "Slack workspace integration MCP server - create channels, invite users, post messages, manage threads for team collaboration",
+  "url": "https://2389-research.github.io/claude-plugins/plugins/slack-mcp/",
+  "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/slack-mcp",
+  "softwareVersion": "1.0.0",
+  "license": "https://opensource.org/licenses/MIT"
+}
+  </script>
+</body>
+</html>
