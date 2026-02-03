@@ -404,6 +404,22 @@
                 "diary"
             ],
             "strict": true
+        },
+        {
+            "name": "hosted-llm-codegen",
+            "source": "./hosted-llm-codegen",
+            "description": "Offload code generation to hosted LLM (Cerebras) - saves ~60% tokens on algorithmic tasks with Docker-sandboxed file writing",
+            "version": "1.0.0",
+            "keywords": [
+                "codegen",
+                "llm",
+                "cerebras",
+                "mcp",
+                "token-efficient",
+                "code-generation",
+                "docker"
+            ],
+            "strict": true
         }
     ]
 }
