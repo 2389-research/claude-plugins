@@ -350,6 +350,24 @@
             "strict": false
         },
         {
+            "name": "qbp",
+            "source": "./qbp",
+            "description": "Quaker Business Practice - decision-making skills seeking unity through discernment rather than consensus through debate",
+            "version": "1.0.0",
+            "keywords": [
+                "decision-making",
+                "discernment",
+                "quaker",
+                "unity",
+                "consensus",
+                "ethics",
+                "deliberation",
+                "multi-agent",
+                "clearness-committee"
+            ],
+            "strict": false
+        },
+        {
             "name": "agent-drugs",
             "source": {
                 "source": "url",
