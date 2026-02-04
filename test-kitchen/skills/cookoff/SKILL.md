@@ -43,6 +43,7 @@ docs/plans/<feature>/
 | `code-review` | `superpowers:requesting-code-review` | Dispatch code-reviewer subagent |
 | `scenario-testing` | `scenario-testing:skills` (2389) | `.scratch/` E2E scripts, real dependencies |
 | `finish-branch` | `superpowers:finishing-a-development-branch` | Verify tests, present options, cleanup |
+| `codegen` | `hosted-llm-codegen` | Claude direct code generation |
 
 ## When to Use
 
@@ -318,6 +319,28 @@ Save to: `docs/plans/<feature>/cookoff/result.md`
 | `judge` | 4 | **INVOKE** for scoring framework (loads fresh, ensures format compliance) |
 | `scenario-testing` | 4 | Validate if scenarios defined |
 | `finish-branch` | 5 | Handle winner, cleanup losers |
+| `codegen` | 3 | First-pass code generation via hosted LLM (if available) |
+
+## Code Generation Strategy
+
+When writing code during implementation, check if `hosted-llm-codegen` is available:
+
+```
+mcp__hosted-llm-codegen__check_status
+```
+
+**If available and appropriate, use it for first-pass generation:**
+- Algorithmic code (rate limiters, parsers, state machines)
+- Multiple file generation (3+ files)
+- Boilerplate-heavy implementations
+
+**Use Claude direct for:**
+- CRUD/storage operations
+- Single file changes
+- Multi-file coordination with complex dependencies
+- Speed-critical fixes
+
+**The pattern:** Hosted LLM generates first pass (~80-95% correct), Claude makes surgical fixes (1-4 lines). See `hosted-llm-codegen` skill for contract prompt format and tradeoffs.
 
 ## Common Mistakes
 
