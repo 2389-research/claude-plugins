@@ -127,6 +127,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://2389-research.github.io/claude-plugins/plugins/qbp/</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/agent-drugs/</loc>
     <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
