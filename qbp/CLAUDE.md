@@ -1,32 +1,46 @@
 # Quaker Business Practice Plugin
 
-This plugin provides decision-making skills emulating Quaker business practices.
+## Overview
 
-## When to Use
+Decision-making skills emulating Quaker business practices - seeking unity through discernment rather than consensus through debate.
 
-Invoke `qbp` skills when:
+## Skills Included
+
+### Main Skill: qbp
+
+Routes to specific sub-skills based on context:
+- User has stake/perspective → `qbp:gathered`
+- Needs parallel deep analysis → `qbp:clearness`
+- Weighty question → `qbp:discernment`
+
+### Sub-Skills
+
+- **qbp:discernment** - Internal deliberation with multiple voices for weighty questions
+- **qbp:clearness** - Multi-agent committee for parallel deep analysis
+- **qbp:gathered** - Participatory discernment where user joins the process
+
+**When to invoke:**
 - Facing weighty decisions with ethical implications
 - Multiple valid approaches exist and trade-offs matter
 - User has a stake or perspective (not just a question)
 - Complex analysis would benefit from multiple specialized perspectives
 - Quick answers would paper over real tensions
 
-## The Skills
+## Patterns
 
-- **qbp:discernment** - Internal deliberation with multiple voices
-- **qbp:clearness** - Multi-agent committee for parallel deep analysis
-- **qbp:gathered** - Participatory discernment where user joins the process
+### Core Philosophy
 
-## Core Philosophy
-
-These skills implement Quaker business practice principles:
 - **Unity over consensus** - Seek genuine alignment, not vote-counting
 - **Discernment over debate** - Listen for truth, don't argue positions
 - **Silence is valuable** - Pausing between voices lets insights emerge
 - **Tensions named, not hidden** - If unity doesn't emerge, say so clearly
 
-## Quick Routing
+### Quaker Principles Applied
 
-1. User has a stake/perspective → `qbp:gathered`
-2. Needs parallel deep analysis → `qbp:clearness`
-3. Weighty question → `qbp:discernment`
+| Principle | Implementation |
+|-----------|----------------|
+| Sense of the meeting | Clerk discerns where unity lies |
+| Speaking once | Each voice/agent speaks once, then listens |
+| Standing aside | "I disagree but won't block" |
+| Blocking | Rare - only for core principle violations |
+| Way opens | Recognize when clarity emerges vs. forcing |

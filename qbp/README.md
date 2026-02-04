@@ -2,7 +2,36 @@
 
 Decision-making skills for Claude that emulate Quaker business practices - seeking unity through discernment rather than consensus through debate.
 
-## Skills
+## Installation
+
+```bash
+/plugin marketplace add 2389-research/claude-plugins
+/plugin install qbp@2389-research
+```
+
+## Skills Provided
+
+- **qbp** - Main router skill
+- **qbp:discernment** - Internal voices seeking clarity
+- **qbp:clearness** - Multi-agent committee for deep analysis
+- **qbp:gathered** - Participatory discernment with user
+
+## Quick Example
+
+```
+User: "Should we open-source our internal tool? I've been thinking about this for weeks."
+
+Claude (with qbp:gathered): "You've been sitting with this for weeks - you have
+a perspective, not just a question. Want to discern this together?
+
+Here are the ground rules: You speak once. You don't have to speak.
+Don't react, discern. This is slow, and that's the point.
+
+I'd suggest these perspectives alongside yours: Community Builder,
+Business Strategist, Developer Culture voice. Anyone to add?"
+```
+
+## Skills Detail
 
 ### qbp:discernment
 
@@ -47,17 +76,11 @@ These skills are grounded in actual Quaker business practice:
 | Blocking | Rare - only for violations of core principles |
 | Way opens | Recognize when clarity emerges vs. forcing decision |
 
-## Installation
-
-This plugin is part of the claude-plugins collection. Install via the standard plugin installation process.
-
 ## Development
 
 Skills were developed using TDD for documentation:
 1. Baseline tests (pressure scenarios without skill)
-2. Document failures
-3. Write skill addressing failures
-4. Test with skill
+2. Document failures (how Claude responds without guidance)
+3. Write skill addressing specific failures
+4. Test with skill (verify improvement)
 5. Iterate until solid
-
-Design document: `docs/plans/2026-02-03-qbp-skillset-design.md` (in source repo)

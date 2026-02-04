@@ -155,6 +155,6 @@ The difference: Process is visible. Tensions are named. The user understands WHY
 
 ## Shared Resources
 
-For underlying principles, see: `qbp/shared/principles.md`
-For vocabulary, see: `qbp/shared/vocabulary.md`
-For clerk synthesis patterns, see: `qbp/shared/clerk-patterns.md`
+For underlying principles, see: `skills/shared/principles.md`
+For vocabulary, see: `skills/shared/vocabulary.md`
+For clerk synthesis patterns, see: `skills/shared/clerk-patterns.md`
