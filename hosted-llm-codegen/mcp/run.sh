@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 # Wrapper script to run the MCP server via Docker
 # Claude Code calls this script, which runs the Docker container
 # with the appropriate volume mounts.

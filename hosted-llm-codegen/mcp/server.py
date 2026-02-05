@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# ABOUTME: MCP Server for hosted LLM code generation via Cerebras API.
+# ABOUTME: Provides tools for generating code and writing files directly to disk.
 """
 MCP Server for hosted LLM code generation via Cerebras.
 
@@ -312,7 +314,7 @@ async def main():
     if not CEREBRAS_API_KEY:
         print("Warning: CEREBRAS_API_KEY not set", file=sys.stderr)
 
-    print(f"hosted-llm-codegen MCP server starting", file=sys.stderr)
+    print("hosted-llm-codegen MCP server starting", file=sys.stderr)
     print(f"  URL: {CEREBRAS_URL}", file=sys.stderr)
     print(f"  Model: {CEREBRAS_MODEL}", file=sys.stderr)
 
