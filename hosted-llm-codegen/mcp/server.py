@@ -141,7 +141,12 @@ def parse_and_write_files(response_text: str, output_dir: str) -> dict:
         if not content:
             continue
 
-        file_path = output_path / filename
+        # Security: prevent path traversal attacks from LLM-generated filenames
+        file_path = (output_path / filename).resolve()
+        if not str(file_path).startswith(str(output_path.resolve()) + os.sep):
+            errors.append({"filename": filename, "error": "Path traversal rejected"})
+            continue
+
         file_path.parent.mkdir(parents=True, exist_ok=True)
 
         try:
