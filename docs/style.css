@@ -25,6 +25,10 @@
   --accent-gold-dim: rgba(232, 197, 71, 0.15);
   --accent-gold-glow: rgba(232, 197, 71, 0.4);
 
+  /* Generic accent aliases for components */
+  --accent: var(--accent-gold);
+  --accent-rgb: 232, 197, 71;
+
   /* Accent — Tech blue */
   --accent-blue: #6b8cce;
   --accent-blue-dim: rgba(107, 140, 206, 0.15);
@@ -1210,6 +1214,77 @@ body {
 
 .readme-content em {
   font-style: italic;
+}
+
+.readme-content .readme-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  font-size: 0.875rem;
+}
+
+.readme-content .readme-table th,
+.readme-content .readme-table td {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.readme-content .readme-table th {
+  color: var(--text-primary);
+  font-weight: 600;
+  background: rgba(var(--accent-rgb), 0.05);
+  border-bottom: 2px solid var(--border);
+}
+
+.readme-content .readme-table td {
+  color: var(--text-secondary);
+}
+
+.readme-content .readme-table tr:hover td {
+  background: rgba(var(--accent-rgb), 0.02);
+}
+
+.readme-content ol {
+  list-style: decimal;
+  padding-left: var(--space-lg);
+  margin: var(--space-sm) 0;
+}
+
+.readme-content ol li {
+  margin-bottom: var(--space-xs);
+  color: var(--text-secondary);
+}
+
+.readme-content blockquote {
+  border-left: 3px solid var(--accent);
+  margin: var(--space-md) 0;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(var(--accent-rgb), 0.05);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.readme-content .task-item {
+  list-style: none;
+  margin-left: calc(-1 * var(--space-md));
+}
+
+.readme-content .task-item input[type="checkbox"] {
+  margin-right: var(--space-xs);
+  accent-color: var(--accent);
+}
+
+.readme-content .task-done {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.readme-content .broken-link {
+  color: var(--text-secondary);
+  text-decoration: line-through;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 /* Quick Install Section on plugin page */
