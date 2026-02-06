@@ -406,18 +406,20 @@
             "strict": true
         },
         {
-            "name": "hosted-llm-codegen",
-            "source": "./hosted-llm-codegen",
-            "description": "Offload code generation to hosted LLM (Cerebras) - saves ~60% tokens on algorithmic tasks with Docker-sandboxed file writing",
+            "name": "speed-run",
+            "source": "./speed-run",
+            "description": "Token-efficient code generation pipeline - parallel implementation with hosted LLM (Cerebras) for ~60% token savings. Includes MCP server.",
             "version": "1.0.0",
             "keywords": [
                 "codegen",
-                "llm",
+                "speed-run",
+                "parallel",
+                "hosted-llm",
                 "cerebras",
-                "mcp",
                 "token-efficient",
-                "code-generation",
-                "docker"
+                "turbo",
+                "race",
+                "mcp"
             ],
             "strict": true
         }

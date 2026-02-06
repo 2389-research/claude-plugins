@@ -1,0 +1,16 @@
+{
+  "name": "speed-run",
+  "description": "Token-efficient code generation pipeline using hosted LLM (Cerebras). Parallel implementation with turbo-powered code gen.",
+  "version": "1.0.0",
+  "keywords": [
+    "codegen",
+    "speed-run",
+    "parallel",
+    "hosted-llm",
+    "cerebras",
+    "token-efficient",
+    "turbo",
+    "race"
+  ],
+  "strict": true
+}

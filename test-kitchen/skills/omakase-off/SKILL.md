@@ -109,27 +109,6 @@ Only architectural decisions become slots for parallel exploration.
 | `scenario-testing` | Run same scenarios against all variants |
 | `fresh-eyes` | Quality review on survivors → input for judge |
 | `finish-branch` | Handle winner (merge/PR), cleanup losers |
-| `codegen` | First-pass code generation via hosted LLM (if available) |
-
-## Code Generation Strategy
-
-When implementing variants, check if `hosted-llm-codegen` is available:
-
-```
-mcp__hosted-llm-codegen__check_status
-```
-
-**If available, use it for first-pass generation of each variant:**
-- Write contract prompt (DATA CONTRACT + API CONTRACT + RULES)
-- Call `mcp__hosted-llm-codegen__generate_and_write_files`
-- Run tests, make surgical fixes with Claude Edit tool
-
-**Benefits for omakase:**
-- Generate 3-5 variants in seconds instead of minutes
-- ~60% token savings on algorithmic code
-- Claude focuses on architecture decisions, not typing boilerplate
-
-See `hosted-llm-codegen` skill for contract prompt format and when to use Claude direct instead.
 
 ## Example Flow
 
