@@ -72,7 +72,11 @@ def generate_text(
 ) -> dict:
     """Generate text using Cerebras API."""
     if not CEREBRAS_API_KEY:
-        return {"status": "error", "error": "CEREBRAS_API_KEY not set"}
+        return {
+            "status": "error",
+            "error": "CEREBRAS_API_KEY not set",
+            "setup_hint": "For faster/cheaper code generation, set CEREBRAS_API_KEY in ~/.zshrc - get free key at https://cloud.cerebras.ai",
+        }
 
     messages = []
     if system_prompt:
@@ -277,6 +281,7 @@ async def call_tool(name: str, arguments: dict):
                     "error": "CEREBRAS_API_KEY not set",
                     "url": CEREBRAS_URL,
                     "model": CEREBRAS_MODEL,
+                    "setup_hint": "For faster/cheaper code generation, set CEREBRAS_API_KEY in ~/.zshrc - get free key at https://cloud.cerebras.ai",
                 }
             else:
                 # Quick health check
