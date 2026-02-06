@@ -171,12 +171,12 @@ Fresh-eyes review of variant-postgres (N files)...
 
 ### Step 4: Invoke Judge Skill
 
-**CRITICAL: Invoke `test-kitchen:judge` now.**
+**CRITICAL: Invoke `speed-run:judge` now.**
 
 The judge skill contains the full scoring framework with checklists. Invoking it fresh ensures the scoring format is followed exactly.
 
 ```text
-Invoke: test-kitchen:judge
+Invoke: speed-run:judge
 
 Context to provide:
 - Variants to judge: variant-sqlite, variant-postgres, variant-redis
@@ -184,13 +184,15 @@ Context to provide:
 - Test results from each variant
 - Scenario test results
 - Fresh-eyes findings
+- Speed-run metrics: hosted LLM calls, fix cycles, generation time per variant
 ```
 
 The judge skill will:
 1. Fill out the complete scoring worksheet for each variant
-2. Build the scorecard with integer scores (1-5, no half points)
-3. Check hard gates (Fitness Δ≥2, any score=1)
-4. Announce winner with rationale
+2. Fill out the Speed-Run Metrics table
+3. Build the scorecard with integer scores (1-5, no half points)
+4. Check hard gates (Fitness Δ≥2, any score=1)
+5. Announce winner with rationale (including token efficiency)
 
 **Do not summarize or abbreviate the scoring.** The judge skill output should be the full worksheet.
 
@@ -237,7 +239,7 @@ Save to: `docs/plans/<feature>/speed-run/any-percent/result.md`
 | `parallel-agents` | Dispatch all variant agents in parallel |
 | `scenario-testing` | Run same scenarios against all variants |
 | `fresh-eyes` | Quality review on survivors |
-| `judge` | `test-kitchen:judge` - scoring framework |
+| `judge` | `speed-run:judge` - scoring framework (bundled) |
 | `finish-branch` | Handle winner, cleanup losers |
 
 ## Common Mistakes

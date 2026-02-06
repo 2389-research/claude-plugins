@@ -38,7 +38,7 @@ docs/plans/<feature>/
 | `tdd` | `superpowers:test-driven-development` | RED-GREEN-REFACTOR cycle |
 | `verification` | `superpowers:verification-before-completion` | Run command, read output, THEN claim status |
 | `fresh-eyes` | `fresh-eyes-review:skills` (2389) | 2-5 min review for security, logic, edge cases |
-| `judge` | `test-kitchen:judge` | Scoring framework with checklists (MUST invoke at Phase 4) |
+| `judge` | `speed-run:judge` | Scoring framework with checklists (MUST invoke at Phase 4) |
 | `scenario-testing` | `scenario-testing:skills` (2389) | `.scratch/` E2E scripts, real dependencies |
 | `finish-branch` | `superpowers:finishing-a-development-branch` | Verify tests, present options, cleanup |
 
@@ -166,25 +166,27 @@ Fresh-eyes complete: 1 minor issue
 
 ### Step 4: Invoke Judge Skill
 
-**CRITICAL: Invoke `test-kitchen:judge` now.**
+**CRITICAL: Invoke `speed-run:judge` now.**
 
 The judge skill contains the full scoring framework with checklists. Invoking it fresh ensures the scoring format is followed exactly.
 
 ```text
-Invoke: test-kitchen:judge
+Invoke: speed-run:judge
 
 Context to provide:
 - Implementations to judge: runner-1, runner-2, runner-3
 - Worktree locations: .worktrees/speed-run-runner-N/
 - Test results from each runner
 - Fresh-eyes findings from Step 3
+- Speed-run metrics: hosted LLM calls, fix cycles, generation time per runner
 ```
 
 The judge skill will:
 1. Fill out the complete scoring worksheet for each runner
-2. Build the scorecard with integer scores (1-5, no half points)
-3. Check hard gates (Fitness Δ≥2, any score=1)
-4. Announce winner with rationale
+2. Fill out the Speed-Run Metrics table
+3. Build the scorecard with integer scores (1-5, no half points)
+4. Check hard gates (Fitness Δ≥2, any score=1)
+5. Announce winner with rationale (including token efficiency)
 
 **Do not summarize or abbreviate the scoring.** The judge skill output should be the full worksheet.
 

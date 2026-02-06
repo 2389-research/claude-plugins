@@ -66,7 +66,7 @@ Check: mcp__speed-run__check_status
 
 | Dependency | Usage |
 |------------|-------|
-| `test-kitchen:judge` | Scoring framework for race/any% |
+| `speed-run:judge` | Scoring framework for race/any% (bundled) |
 | `superpowers:dispatching-parallel-agents` | Parallel dispatch for race/any% |
 | `superpowers:using-git-worktrees` | Isolated workspaces for race/any% |
 | `superpowers:verification-before-completion` | Verify before claiming done |

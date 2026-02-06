@@ -131,11 +131,16 @@ def parse_and_write_files(response_text: str, output_dir: str) -> dict:
     errors = []
     total_lines = 0
 
-    # Try to match ```code blocks first
-    pattern = r'### FILE:\s*(\S+)\s*\n```(?:\w+)?\n(.*?)```'
+    # Primary: XML-style <FILE path="...">...</FILE> tags (backtick-safe)
+    pattern = r'<FILE\s+path="([^"]+)">\n?(.*?)</FILE>'
     matches = re.findall(pattern, response_text, re.DOTALL)
 
-    # Fallback to raw content between FILE markers
+    # Fallback 1: Legacy ### FILE: with ```code blocks
+    if not matches:
+        pattern = r'### FILE:\s*(\S+)\s*\n```(?:\w+)?\n(.*?)```'
+        matches = re.findall(pattern, response_text, re.DOTALL)
+
+    # Fallback 2: Raw content between FILE markers
     if not matches:
         pattern = r'### FILE:\s*(\S+)\s*\n(.*?)(?=### FILE:|$)'
         matches = re.findall(pattern, response_text, re.DOTALL)
@@ -144,6 +149,9 @@ def parse_and_write_files(response_text: str, output_dir: str) -> dict:
         content = content.strip()
         if not content:
             continue
+
+        # Replace backtick placeholder with actual triple backticks
+        content = content.replace("TRIPLE_BACKTICK", "```")
 
         # Security: prevent path traversal attacks from LLM-generated filenames
         file_path = (output_path / filename).resolve()
@@ -182,22 +190,24 @@ def generate_and_write(
     """Generate code and write files to disk."""
     enhanced_prompt = f"""{prompt}
 
-Output each file using this EXACT format:
+Output each file using this EXACT format (XML tags, NOT backticks):
 
-### FILE: filename.py
-```python
+<FILE path="filename.py">
 [code here]
-```
+</FILE>
 
-### FILE: another_file.py
-```python
+<FILE path="another_file.py">
 [code here]
-```"""
+</FILE>
+
+IMPORTANT RULES:
+1. Use <FILE path="..."> and </FILE> tags to delimit files. Do NOT use triple backticks for file output.
+2. If your code needs to contain literal triple backticks (e.g. markdown parsers), write TRIPLE_BACKTICK as a placeholder instead. It will be auto-replaced after extraction."""
 
     if not system_prompt:
-        system_prompt = "You are a senior developer. Output clean, production-ready code. No explanations, just code. Follow the exact file format specified."
+        system_prompt = 'You are a senior developer. Output clean, production-ready code. No explanations, just code. Use <FILE path="filename"> and </FILE> XML tags to wrap each file. If code needs literal triple backticks, write TRIPLE_BACKTICK as a placeholder.'
 
-    result = generate_text(enhanced_prompt, system_prompt, max_tokens=4096)
+    result = generate_text(enhanced_prompt, system_prompt, max_tokens=16384)
 
     if result["status"] != "ok":
         return result
