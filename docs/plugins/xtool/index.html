@@ -113,31 +113,34 @@
       </div>
 
       <div class="readme-content">
-        <h2>xtool Plugin</h2></p><p>Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode.</p><h3>Installation</h3><pre><code class="language-bash">/plugin install xtool@2389-research
-<p></code></pre></p><h3>What This Plugin Provides</h3></p><h4>Skills</h4><ul><li><strong>using-xtool</strong> - Complete guide for xtool iOS development including project creation, app extensions (widgets, share extensions), and configuration</li>
-<p></ul>
-<h3>Quick Example</h3><p>Create a new iOS app:
+        <h2>xtool Plugin</h2>
+<p>Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode.</p>
+<h3>Installation</h3>
+<pre><code class="language-bash">/plugin install xtool@2389-research
+</code></pre>
+<h3>What This Plugin Provides</h3>
+<h4>Skills</h4>
+<ul><li><strong>using-xtool</strong> - Complete guide for xtool iOS development including project creation, app extensions (widgets, share extensions), and configuration</li></ul>
+<h3>Quick Example</h3>
+<p>Create a new iOS app:</p>
 <pre><code class="language-bash">xtool new MyApp
-<p>cd MyApp
-<p>xtool dev
-<p></code></pre><p>Add a widget extension:
-<p>1. Add product + target to <code>Package.swift</code>
-<p>2. Configure in <code>xtool.yml</code> under <code>extensions:</code>
-<p>3. Create <code>Sources/MyWidget/Widget.swift</code>
-<p>4. Create <code>MyWidget-Info.plist</code> with <code>NSExtensionPointIdentifier</code>
-<p>5. Run <code>xtool dev</code></p><h3>When This Skill Applies</h3><p>The skill auto-triggers on:
-<ul><li>Mentions of <code>xtool</code></li>
-<li>SwiftPM iOS app development</li>
-<li>Building iOS apps on Linux/Windows</li>
-<li>App extension setup (widgets, share extensions)</li>
-<p></ul>
-<h3>Key Differentiator</h3><p>xtool is NOT XcodeGen or Tuist:</p><p>| xtool Uses | NOT These |
-<p>|------------|-----------|
-<p>| <code>xtool.yml</code> | <code>project.yml</code>, <code>Project.swift</code> |
-<p>| <code>Package.swift</code> (SwiftPM) | Xcode project files |
-<p>| <code>xtool dev</code> | <code>xtool build</code>, <code>xtool run</code> |</p><h3>Links</h3><ul><li><a href="https://github.com/nickyramone/xtool" rel="noopener noreferrer">xtool GitHub</a></li>
-<li><a href="./CLAUDE.md" rel="noopener noreferrer">Plugin CLAUDE.md</a> - Development instructions</li>
-<p></ul>
+cd MyApp
+xtool dev
+</code></pre>
+<p>Add a widget extension:</p>
+<ol><li>Add product + target to <code>Package.swift</code></li>
+<li>Configure in <code>xtool.yml</code> under <code>extensions:</code></li>
+<li>Create <code>Sources/MyWidget/Widget.swift</code></li>
+<li>Create <code>MyWidget-Info.plist</code> with <code>NSExtensionPointIdentifier</code></li>
+<li>Run <code>xtool dev</code></li></ol>
+<h3>When This Skill Applies</h3>
+<p>The skill auto-triggers on:</p>
+<ul><li>Mentions of <code>xtool</code></li><li>SwiftPM iOS app development</li><li>Building iOS apps on Linux/Windows</li><li>App extension setup (widgets, share extensions)</li></ul>
+<h3>Key Differentiator</h3>
+<p>xtool is NOT XcodeGen or Tuist:</p>
+<table class="readme-table"><thead><tr><th>xtool Uses</th><th>NOT These</th></tr></thead><tbody><tr><td><code>xtool.yml</code></td><td><code>project.yml</code>, <code>Project.swift</code></td></tr><tr><td><code>Package.swift</code> (SwiftPM)</td><td>Xcode project files</td></tr><tr><td><code>xtool dev</code></td><td><code>xtool build</code>, <code>xtool run</code></td></tr></tbody></table>
+<h3>Links</h3>
+<ul><li><a href="https://github.com/nickyramone/xtool" rel="noopener noreferrer">xtool GitHub</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/xtool/CLAUDE.md" rel="noopener noreferrer" target="_blank">Plugin CLAUDE.md</a> - Development instructions</li></ul>
       </div>
     </section>
     

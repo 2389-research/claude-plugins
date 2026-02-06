@@ -113,26 +113,24 @@
       </div>
 
       <div class="readme-content">
-        <h2>Documentation Audit Plugin</h2></p><p>Systematically verify documentation claims against codebase reality.</p><h3>Problem</h3></p><p>Documentation drifts from code. Claims about defaults, file paths, behaviors, and configurations become stale as code evolves. Users following outdated docs encounter errors.</p><h3>Solution</h3><p>Two-pass audit approach:</p><p>1. <strong>Pass 1: Direct Extraction</strong> - Extract and verify claims from each doc
-<p>2. <strong>Pass 2A: Pattern Expansion</strong> - Find similar issues based on discovered patterns
-<p>3. <strong>Pass 2B: Gap Detection</strong> - Compare codebase inventory vs documented items</p><h3>Usage</h3><p>Invoke the skill when:
-<ul><li>Before releases</li>
-<li>After major refactors</li>
-<li>When users report docs don't match behavior</li>
-<li>Periodic hygiene (quarterly)</li>
-<p></ul>
-<h3>Output</h3><p>Generates <code>docs/audits/AUDIT_REPORT.md</code> with:
-<ul><li>Executive summary (claims verified, false claims found)</li>
-<li>False claims table with line numbers and fixes</li>
-<li>Pattern analysis (common root causes)</li>
-<li>Human review queue for behavioral claims</li>
-<p></ul>
-<h3>Example Results</h3><p>From a real audit:
-<ul><li>12 documents scanned</li>
-<li>~180 claims verified</li>
-<li>31 false claims found (17%)</li>
-<li>Patterns: dead scripts (9), wrong intervals (4), wrong service names (3)</li>
-<p></ul>
+        <h2>Documentation Audit Plugin</h2>
+<p>Systematically verify documentation claims against codebase reality.</p>
+<h3>Problem</h3>
+<p>Documentation drifts from code. Claims about defaults, file paths, behaviors, and configurations become stale as code evolves. Users following outdated docs encounter errors.</p>
+<h3>Solution</h3>
+<p>Two-pass audit approach:</p>
+<ol><li><strong>Pass 1: Direct Extraction</strong> - Extract and verify claims from each doc</li>
+<li><strong>Pass 2A: Pattern Expansion</strong> - Find similar issues based on discovered patterns</li>
+<li><strong>Pass 2B: Gap Detection</strong> - Compare codebase inventory vs documented items</li></ol>
+<h3>Usage</h3>
+<p>Invoke the skill when:</p>
+<ul><li>Before releases</li><li>After major refactors</li><li>When users report docs don't match behavior</li><li>Periodic hygiene (quarterly)</li></ul>
+<h3>Output</h3>
+<p>Generates <code>docs/audits/AUDIT_REPORT.md</code> with:</p>
+<ul><li>Executive summary (claims verified, false claims found)</li><li>False claims table with line numbers and fixes</li><li>Pattern analysis (common root causes)</li><li>Human review queue for behavioral claims</li></ul>
+<h3>Example Results</h3>
+<p>From a real audit:</p>
+<ul><li>12 documents scanned</li><li>~180 claims verified</li><li>31 false claims found (17%)</li><li>Patterns: dead scripts (9), wrong intervals (4), wrong service names (3)</li></ul>
       </div>
     </section>
     

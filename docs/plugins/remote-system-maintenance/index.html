@@ -113,66 +113,81 @@
       </div>
 
       <div class="readme-content">
-        <h2>Remote System Maintenance</h2></p><p>Structured procedures for diagnosing and maintaining remote Linux systems via SSH/tmux.</p><h3>Installation</h3><pre><code class="language-bash">/plugin install remote-system-maintenance@2389-research
-<p></code></pre></p><h3>What This Plugin Provides</h3></p><p>Structured guidance for system diagnostics and maintenance on remote Linux systems, with emphasis on Ubuntu/Debian platforms.</p><h4>Key Features</h4><ul><li><strong>Three-phase diagnostic approach</strong>: baseline diagnostics, log review, package assessment</li>
-<li><strong>Seven-stage cleanup sequence</strong>: apt, journal, snap revisions, and more</li>
-<li><strong>Documentation templates</strong>: structured logs with quantified results</li>
-<li><strong>Real-world metrics</strong>: expect 2+ GB recovery in comprehensive sessions</li>
-<p></ul>
-<h3>When to Use</h3><ul><li>Performing system maintenance on remote Linux servers</li>
-<li>Recovering disk space on Ubuntu/Debian systems</li>
-<li>Running diagnostics on remote systems</li>
-<li>Cleaning up package caches, journals, or snap revisions</li>
-<p></ul>
-<h3>Quick Example</h3><pre><code class="language-bash"># Phase 1: Initial diagnostics
-<p>hostname && df -h && free -h && uptime
-<p>ps aux | head -20
-<p>ps aux | awk '$8 ~ /Z/ {print}'  # Zombie detection</p><h2>Phase 2: Log review</h2>
-<p>journalctl -p err -n 50
-<p>journalctl --disk-usage</p><h2>Phase 3: Cleanup sequence</h2>
-<p>apt update && apt upgrade -y
-<p>apt autoremove -y && apt clean
-<p>journalctl --vacuum-time=7d</p><h2>Snap cleanup (biggest wins!)</h2>
-<p>snap list --all | awk '/disabled/{print $1, $3}'
-<p>snap remove package-name --revision=123</p><h2>Document: hostname, before/after disk, MB freed per category</h2>
-<p></code></pre></p><h3>Three-Phase Approach</h3></p><h4>Phase 1: Initial Diagnostics</h4><p>Capture baseline system state:
-<ul><li>Hostname and system identification</li>
-<li>Resource utilization (disk, memory, CPU)</li>
-<li>Process status and load</li>
-<li>Zombie process detection</li>
-<p></ul>
-<h4>Phase 2: System Log Review</h4><p>Examine system health indicators:
-<ul><li>Recent error messages in system logs</li>
-<li>Journal disk consumption analysis</li>
-<li>Critical service status</li>
-<li>Authentication and security events</li>
-<p></ul>
-<h4>Phase 3: Package Assessment</h4><p>Identify maintenance opportunities:
-<ul><li>Upgradable packages</li>
-<li>Orphaned configurations</li>
-<li>Unused dependencies</li>
-<li>Package cache size</li>
-<p></ul>
-<h3>Ubuntu/Debian Cleanup Sequence</h3><p>Execute these seven stages in order:</p><p>1. <strong>Package Cache Refresh</strong> - <code>apt update</code>
-<p>2. <strong>System Upgrades</strong> - <code>apt upgrade</code>
-<p>3. <strong>Orphan Removal</strong> - <code>apt autoremove</code>
-<p>4. <strong>Cache Purging</strong> - <code>apt clean</code>
-<p>5. <strong>Journal Pruning</strong> - <code>journalctl --vacuum-time=7d</code>
-<p>6. <strong>Snap Revision Cleanup</strong> - Remove disabled snap revisions
-<p>7. <strong>Temporary Directory Assessment</strong> - Review <code>/tmp</code> and <code>/var/tmp</code></p><h3>Snap Revision Cleanup</h3><p>Snap keeps old revisions by default. Big space savings here:</p><pre><code class="language-bash"># List all disabled snap revisions
-<p>snap list --all | awk '/disabled/{print $1, $3}'</p><h2>Remove specific revision</h2>
-<p>snap remove <package-name> --revision=<revision-number>
-<p></code></pre></p><p><strong>Important</strong>: Requires explicit removal by revision number.</p><h3>Expected Results</h3><p>Real-world recovery examples:
-<ul><li><strong>Journal vacuuming</strong>: 300-600 MB</li>
-<li><strong>Snap revision cleanup</strong>: 500 MB to 2 GB (!)</li>
-<li><strong>Package cache purging</strong>: 100-500 MB</li>
-<li><strong>Total potential</strong>: 2+ GB in comprehensive sessions</li>
-<p></ul>
-<h3>Documentation Requirements</h3><p>All maintenance sessions must generate structured logs:</p><p>1. <strong>System Identification</strong>: hostname, OS version, kernel, operator
-<p>2. <strong>Resource States</strong>: initial/final disk/memory/CPU usage
-<p>3. <strong>Actions Taken</strong>: commands executed, MB/GB freed per category
-<p>4. <strong>Follow-up Recommendations</strong>: remaining issues, future needs</p><h3>Time Commitment</h3></p><p>Typical maintenance session: <strong>15-30 minutes</strong> including diagnostics, cleanup, and documentation.</p><h3>Documentation</h3></p><p>See <a href="skills/SKILL.md" rel="noopener noreferrer">skills/SKILL.md</a> for complete maintenance procedures.</p><h3>Philosophy</h3><p>Structure ad-hoc operational work with checklists and documentation. Quantify everything.
-<p>
+        <h2>Remote System Maintenance</h2>
+<p>Structured procedures for diagnosing and maintaining remote Linux systems via SSH/tmux.</p>
+<h3>Installation</h3>
+<pre><code class="language-bash">/plugin install remote-system-maintenance@2389-research
+</code></pre>
+<h3>What This Plugin Provides</h3>
+<p>Structured guidance for system diagnostics and maintenance on remote Linux systems, with emphasis on Ubuntu/Debian platforms.</p>
+<h4>Key Features</h4>
+<ul><li><strong>Three-phase diagnostic approach</strong>: baseline diagnostics, log review, package assessment</li><li><strong>Seven-stage cleanup sequence</strong>: apt, journal, snap revisions, and more</li><li><strong>Documentation templates</strong>: structured logs with quantified results</li><li><strong>Real-world metrics</strong>: expect 2+ GB recovery in comprehensive sessions</li></ul>
+<h3>When to Use</h3>
+<ul><li>Performing system maintenance on remote Linux servers</li><li>Recovering disk space on Ubuntu/Debian systems</li><li>Running diagnostics on remote systems</li><li>Cleaning up package caches, journals, or snap revisions</li></ul>
+<h3>Quick Example</h3>
+<pre><code class="language-bash"># Phase 1: Initial diagnostics
+hostname &amp;&amp; df -h &amp;&amp; free -h &amp;&amp; uptime
+ps aux | head -20
+ps aux | awk '$8 ~ /Z/ {print}'  # Zombie detection
+
+# Phase 2: Log review
+journalctl -p err -n 50
+journalctl --disk-usage
+
+# Phase 3: Cleanup sequence
+apt update &amp;&amp; apt upgrade -y
+apt autoremove -y &amp;&amp; apt clean
+journalctl --vacuum-time=7d
+
+# Snap cleanup (biggest wins!)
+snap list --all | awk '/disabled/{print $1, $3}'
+snap remove package-name --revision=123
+
+# Document: hostname, before/after disk, MB freed per category
+</code></pre>
+<h3>Three-Phase Approach</h3>
+<h4>Phase 1: Initial Diagnostics</h4>
+<p>Capture baseline system state:</p>
+<ul><li>Hostname and system identification</li><li>Resource utilization (disk, memory, CPU)</li><li>Process status and load</li><li>Zombie process detection</li></ul>
+<h4>Phase 2: System Log Review</h4>
+<p>Examine system health indicators:</p>
+<ul><li>Recent error messages in system logs</li><li>Journal disk consumption analysis</li><li>Critical service status</li><li>Authentication and security events</li></ul>
+<h4>Phase 3: Package Assessment</h4>
+<p>Identify maintenance opportunities:</p>
+<ul><li>Upgradable packages</li><li>Orphaned configurations</li><li>Unused dependencies</li><li>Package cache size</li></ul>
+<h3>Ubuntu/Debian Cleanup Sequence</h3>
+<p>Execute these seven stages in order:</p>
+<ol><li><strong>Package Cache Refresh</strong> - <code>apt update</code></li>
+<li><strong>System Upgrades</strong> - <code>apt upgrade</code></li>
+<li><strong>Orphan Removal</strong> - <code>apt autoremove</code></li>
+<li><strong>Cache Purging</strong> - <code>apt clean</code></li>
+<li><strong>Journal Pruning</strong> - <code>journalctl --vacuum-time=7d</code></li>
+<li><strong>Snap Revision Cleanup</strong> - Remove disabled snap revisions</li>
+<li><strong>Temporary Directory Assessment</strong> - Review <code>/tmp</code> and <code>/var/tmp</code></li></ol>
+<h3>Snap Revision Cleanup</h3>
+<p>Snap keeps old revisions by default. Big space savings here:</p>
+<pre><code class="language-bash"># List all disabled snap revisions
+snap list --all | awk '/disabled/{print $1, $3}'
+
+# Remove specific revision
+snap remove &lt;package-name&gt; --revision=&lt;revision-number&gt;
+</code></pre>
+<p><strong>Important</strong>: Requires explicit removal by revision number.</p>
+<h3>Expected Results</h3>
+<p>Real-world recovery examples:</p>
+<ul><li><strong>Journal vacuuming</strong>: 300-600 MB</li><li><strong>Snap revision cleanup</strong>: 500 MB to 2 GB (!)</li><li><strong>Package cache purging</strong>: 100-500 MB</li><li><strong>Total potential</strong>: 2+ GB in comprehensive sessions</li></ul>
+<h3>Documentation Requirements</h3>
+<p>All maintenance sessions must generate structured logs:</p>
+<ol><li><strong>System Identification</strong>: hostname, OS version, kernel, operator</li>
+<li><strong>Resource States</strong>: initial/final disk/memory/CPU usage</li>
+<li><strong>Actions Taken</strong>: commands executed, MB/GB freed per category</li>
+<li><strong>Follow-up Recommendations</strong>: remaining issues, future needs</li></ol>
+<h3>Time Commitment</h3>
+<p>Typical maintenance session: <strong>15-30 minutes</strong> including diagnostics, cleanup, and documentation.</p>
+<h3>Documentation</h3>
+<p>See <a href="https://github.com/2389-research/claude-plugins/blob/main/remote-system-maintenance/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a> for complete maintenance procedures.</p>
+<h3>Philosophy</h3>
+<p>Structure ad-hoc operational work with checklists and documentation. Quantify everything.</p>
       </div>
     </section>
     

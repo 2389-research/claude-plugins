@@ -113,66 +113,101 @@
       </div>
 
       <div class="readme-content">
-        <h2>Slack MCP Server</h2></p><p>MCP server for Slack workspace integration. Create channels, invite users, post messages, and manage threads.</p><h3>Features</h3><ul><li>Create public or private channels</li>
-<li>Invite users by email or user ID</li>
-<li>Post messages with markdown formatting</li>
-<li>Reply in threads</li>
-<li>Pin messages</li>
-<li>List workspace users</li>
-<p></ul>
-<h3>Setup</h3></p><h4>1. Create Slack App</h4><p>1. Go to <a href="https://api.slack.com/apps" rel="noopener noreferrer">api.slack.com/apps</a>
-<p>2. Click "Create New App" → "From scratch"
-<p>3. Name it (e.g., "Claude MCP") and select your workspace</p><h4>2. Add OAuth Scopes</h4><p>Under "OAuth & Permissions", add these Bot Token Scopes:</p><pre><code class="language-">channels:manage        # create public channels
-<p>groups:write           # create private channels
-<p>channels:read          # list channels
-<p>groups:read            # read private channels
-<p>chat:write             # post messages
-<p>pins:write             # pin messages
-<p>users:read             # list users
-<p>users:read.email       # lookup users by email
-<p></code></pre></p><h4>3. Install to Workspace</h4></p><p>Click "Install to Workspace" and authorize the app.</p><h4>4. Get Bot Token</h4></p><p>Copy the "Bot User OAuth Token" (starts with <code>xoxb-</code>).</p><h4>5. Configure Environment</h4><pre><code class="language-bash">export SLACK_BOT_TOKEN="xoxb-your-token-here"
-<p></code></pre><p>Or add to your Claude config:</p><pre><code class="language-json">{
-<p>  "mcpServers": {
-<p>    "slack": {
-<p>      "command": "node",
-<p>      "args": ["/path/to/slack-mcp/dist/index.js"],
-<p>      "env": {
-<p>        "SLACK_BOT_TOKEN": "xoxb-your-token-here"
-<p>      }
-<p>    }
-<p>  }
-<p>}
-<p></code></pre></p><h4>6. Build and Run</h4><pre><code class="language-bash">npm install
-<p>npm run build
-<p>npm start
-<p></code></pre></p><h3>Tools</h3></p><h4>slack_create_channel</h4><p>Create a new Slack channel.</p><pre><code class="language-json">{
-<p>  "name": "gtm-jeff",
-<p>  "is_private": true,
-<p>  "description": "GTM materials for Jeff launch"
-<p>}
-<p></code></pre></p><h4>slack_invite_to_channel</h4><p>Invite users by email or user ID.</p><pre><code class="language-json">{
-<p>  "channel_id": "C123ABC",
-<p>  "users": ["harper@2389.ai", "dylan@2389.ai"]
-<p>}
-<p></code></pre></p><h4>slack_post_message</h4><p>Post a message to a channel.</p><pre><code class="language-json">{
-<p>  "channel_id": "C123ABC",
-<p>  "text": "## Email\n\n<strong>Subject:</strong> meet jeff..."
-<p>}
-<p></code></pre></p><h4>slack_post_thread</h4><p>Reply to a message in a thread.</p><pre><code class="language-json">{
-<p>  "channel_id": "C123ABC",
-<p>  "thread_ts": "1234567890.123456",
-<p>  "text": "Updated the subject line"
-<p>}
-<p></code></pre></p><h4>slack_pin_message</h4><p>Pin a message to a channel.</p><pre><code class="language-json">{
-<p>  "channel_id": "C123ABC",
-<p>  "message_ts": "1234567890.123456"
-<p>}
-<p></code></pre></p><h4>slack_list_users</h4><p>List all users in the workspace.</p><pre><code class="language-json">{}
-<p></code></pre></p><h3>Usage with Product Launcher</h3><p>After generating GTM materials, say "push to slack":</p><p>1. Creates <code>#gtm-[product]</code> private channel
-<p>2. Invites Harper and Dylan
-<p>3. Posts each output (email, blog, tweets) as separate messages
-<p>4. Pins the summary message</p><h3>License</h3><p>MIT
-<p>
+        <h2>Slack MCP Server</h2>
+<p>MCP server for Slack workspace integration. Create channels, invite users, post messages, and manage threads.</p>
+<h3>Features</h3>
+<ul><li>Create public or private channels</li><li>Invite users by email or user ID</li><li>Post messages with markdown formatting</li><li>Reply in threads</li><li>Pin messages</li><li>List workspace users</li></ul>
+<h3>Setup</h3>
+<h4>1. Create Slack App</h4>
+<ol><li>Go to <a href="https://api.slack.com/apps" rel="noopener noreferrer">api.slack.com/apps</a></li>
+<li>Click "Create New App" → "From scratch"</li>
+<li>Name it (e.g., "Claude MCP") and select your workspace</li></ol>
+<h4>2. Add OAuth Scopes</h4>
+<p>Under "OAuth & Permissions", add these Bot Token Scopes:</p>
+<pre><code class="language-">channels:manage        # create public channels
+groups:write           # create private channels
+channels:read          # list channels
+groups:read            # read private channels
+chat:write             # post messages
+pins:write             # pin messages
+users:read             # list users
+users:read.email       # lookup users by email
+</code></pre>
+<h4>3. Install to Workspace</h4>
+<p>Click "Install to Workspace" and authorize the app.</p>
+<h4>4. Get Bot Token</h4>
+<p>Copy the "Bot User OAuth Token" (starts with <code>xoxb-</code>).</p>
+<h4>5. Configure Environment</h4>
+<pre><code class="language-bash">export SLACK_BOT_TOKEN="xoxb-your-token-here"
+</code></pre>
+<p>Or add to your Claude config:</p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "slack": {
+      "command": "node",
+      "args": ["/path/to/slack-mcp/dist/index.js"],
+      "env": {
+        "SLACK_BOT_TOKEN": "xoxb-your-token-here"
+      }
+    }
+  }
+}
+</code></pre>
+<h4>6. Build and Run</h4>
+<pre><code class="language-bash">npm install
+npm run build
+npm start
+</code></pre>
+<h3>Tools</h3>
+<h4>slack_create_channel</h4>
+<p>Create a new Slack channel.</p>
+<pre><code class="language-json">{
+  "name": "gtm-jeff",
+  "is_private": true,
+  "description": "GTM materials for Jeff launch"
+}
+</code></pre>
+<h4>slack_invite_to_channel</h4>
+<p>Invite users by email or user ID.</p>
+<pre><code class="language-json">{
+  "channel_id": "C123ABC",
+  "users": ["harper@2389.ai", "dylan@2389.ai"]
+}
+</code></pre>
+<h4>slack_post_message</h4>
+<p>Post a message to a channel.</p>
+<pre><code class="language-json">{
+  "channel_id": "C123ABC",
+  "text": "## Email\n\n**Subject:** meet jeff..."
+}
+</code></pre>
+<h4>slack_post_thread</h4>
+<p>Reply to a message in a thread.</p>
+<pre><code class="language-json">{
+  "channel_id": "C123ABC",
+  "thread_ts": "1234567890.123456",
+  "text": "Updated the subject line"
+}
+</code></pre>
+<h4>slack_pin_message</h4>
+<p>Pin a message to a channel.</p>
+<pre><code class="language-json">{
+  "channel_id": "C123ABC",
+  "message_ts": "1234567890.123456"
+}
+</code></pre>
+<h4>slack_list_users</h4>
+<p>List all users in the workspace.</p>
+<pre><code class="language-json">{}
+</code></pre>
+<h3>Usage with Product Launcher</h3>
+<p>After generating GTM materials, say "push to slack":</p>
+<ol><li>Creates <code>#gtm-[product]</code> private channel</li>
+<li>Invites Harper and Dylan</li>
+<li>Posts each output (email, blog, tweets) as separate messages</li>
+<li>Pins the summary message</li></ol>
+<h3>License</h3>
+<p>MIT</p>
       </div>
     </section>
     

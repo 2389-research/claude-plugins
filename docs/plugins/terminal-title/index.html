@@ -113,38 +113,50 @@
       </div>
 
       <div class="readme-content">
-        <h2>Terminal Title Plugin</h2></p><p>Automatically updates terminal title with emoji + project + topic context. <strong>Cross-platform support for Windows, macOS, and Linux.</strong> Also establishes 2389 workflow conventions for TodoWrite task tracking.</p><h3>Installation</h3><pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
-<p>/plugin install terminal-title@2389-research
-<p></code></pre></p><h4>Platform-Specific Setup</h4></p><p><strong>Windows users:</strong> Ensure PowerShell 7+ (<code>pwsh</code>) is installed and available in your PATH. The plugin automatically uses PowerShell scripts on Windows.</p><p><strong>Unix/Linux/macOS users:</strong> No additional setup required. The plugin uses bash scripts automatically.</p><h3>What This Plugin Provides</h3></p><p><strong>Skills provided:</strong><ul><li><code>terminal-title</code> – Automatically manages the terminal title based on project and topic context</li>
-<p></ul>
-<p><strong>Automatic terminal title management:</strong></p><ul><li><strong>Auto-invokes at session start</strong>: Sets initial title based on project context</li>
-<li><strong>Updates on topic changes</strong>: Reflects current work in terminal title</li>
-<li><strong>Emoji indicators</strong>: Visual cues for quick context switching</li>
-<p></ul>
-<p><strong>2389 workflow conventions:</strong></p><ul><li><strong>TodoWrite patterns</strong>: Granular 2-5 minute task tracking</li>
-<li><strong>Task lifecycle management</strong>: One task in-progress at a time</li>
-<li><strong>Shared conventions</strong>: Used across all 2389 plugins</li>
-<p></ul>
-<h3>How It Works</h3><p>The plugin includes a session start hook that automatically invokes the terminal-title skill. The skill:</p><p>1. <strong>Detects your operating system</strong> (Windows, macOS, Linux)
-<p>2. <strong>Detects current project</strong> from working directory, git repo, or package.json
-<p>3. <strong>Infers topic</strong> from recent files or conversation context
-<p>4. <strong>Selects appropriate emoji</strong> from environment variable or defaults to 🎉
-<p>5. <strong>Updates terminal title</strong> via platform-specific script:
-<p>   - Windows: PowerShell (<code>.ps1</code>)
-<p>   - Unix/Linux/macOS: Bash (<code>.sh</code>)</p><h3>Example</h3><pre><code class="language-text">🔥 firebase-app > authentication setup
-<p></code></pre></p><h3>TodoWrite Conventions</h3><p>This plugin establishes task tracking patterns used across all 2389 plugins:</p><pre><code class="language-javascript">{
-<p>  content: "Write the failing test",      // Imperative form
-<p>  status: "pending",                       // or "in_progress" or "completed"
-<p>  activeForm: "Writing the failing test"   // Present continuous form
-<p>}
-<p></code></pre><p><strong>Task lifecycle:</strong>
-<p>1. Create todos for all steps (2-5 minutes each)
-<p>2. Mark ONE task as in_progress
-<p>3. Complete the task
-<p>4. Mark as completed immediately
-<p>5. Move to next task</p><h3>Documentation</h3><ul><li><a href="docs/2025-11-14-terminal-title-skill-design.md" rel="noopener noreferrer">Design Document</a></li>
-<li><a href="docs/2025-11-14-terminal-title-implementation.md" rel="noopener noreferrer">Implementation Plan</a></li>
-<p></ul><p>
+        <h2>Terminal Title Plugin</h2>
+<p>Automatically updates terminal title with emoji + project + topic context. <strong>Cross-platform support for Windows, macOS, and Linux.</strong> Also establishes 2389 workflow conventions for TodoWrite task tracking.</p>
+<h3>Installation</h3>
+<pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
+/plugin install terminal-title@2389-research
+</code></pre>
+<h4>Platform-Specific Setup</h4>
+<p><strong>Windows users:</strong> Ensure PowerShell 7+ (<code>pwsh</code>) is installed and available in your PATH. The plugin automatically uses PowerShell scripts on Windows.</p>
+<p><strong>Unix/Linux/macOS users:</strong> No additional setup required. The plugin uses bash scripts automatically.</p>
+<h3>What This Plugin Provides</h3>
+<p><strong>Skills provided:</strong></p>
+<ul><li><code>terminal-title</code> – Automatically manages the terminal title based on project and topic context</li></ul>
+<p><strong>Automatic terminal title management:</strong></p>
+<ul><li><strong>Auto-invokes at session start</strong>: Sets initial title based on project context</li><li><strong>Updates on topic changes</strong>: Reflects current work in terminal title</li><li><strong>Emoji indicators</strong>: Visual cues for quick context switching</li></ul>
+<p><strong>2389 workflow conventions:</strong></p>
+<ul><li><strong>TodoWrite patterns</strong>: Granular 2-5 minute task tracking</li><li><strong>Task lifecycle management</strong>: One task in-progress at a time</li><li><strong>Shared conventions</strong>: Used across all 2389 plugins</li></ul>
+<h3>How It Works</h3>
+<p>The plugin includes a session start hook that automatically invokes the terminal-title skill. The skill:</p>
+<ol><li><strong>Detects your operating system</strong> (Windows, macOS, Linux)</li>
+<li><strong>Detects current project</strong> from working directory, git repo, or package.json</li>
+<li><strong>Infers topic</strong> from recent files or conversation context</li>
+<li><strong>Selects appropriate emoji</strong> from environment variable or defaults to 🎉</li>
+<li><strong>Updates terminal title</strong> via platform-specific script:</li></ol>
+<ul><li>Windows: PowerShell (<code>.ps1</code>)</li><li>Unix/Linux/macOS: Bash (<code>.sh</code>)</li></ul>
+<h3>Example</h3>
+<pre><code class="language-text">🔥 firebase-app &gt; authentication setup
+</code></pre>
+<h3>TodoWrite Conventions</h3>
+<p>This plugin establishes task tracking patterns used across all 2389 plugins:</p>
+<pre><code class="language-javascript">{
+  content: "Write the failing test",      // Imperative form
+  status: "pending",                       // or "in_progress" or "completed"
+  activeForm: "Writing the failing test"   // Present continuous form
+}
+</code></pre>
+<p><strong>Task lifecycle:</strong></p>
+<ol><li>Create todos for all steps (2-5 minutes each)</li>
+<li>Mark ONE task as in_progress</li>
+<li>Complete the task</li>
+<li>Mark as completed immediately</li>
+<li>Move to next task</li></ol>
+<h3>Documentation</h3>
+<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/terminal-title/docs/2025-11-14-terminal-title-skill-design.md" rel="noopener noreferrer" target="_blank">Design Document</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/terminal-title/docs/2025-11-14-terminal-title-implementation.md" rel="noopener noreferrer" target="_blank">Implementation Plan</a></li></ul>
+
       </div>
     </section>
     

@@ -113,29 +113,34 @@
       </div>
 
       <div class="readme-content">
-        <h2>CSS Development Plugin</h2></p><p>CSS development workflows with Tailwind composition, semantic naming, and dark mode by default.</p><h3>Installation</h3><pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
-<p>/plugin install css-development@2389-research
-<p></code></pre></p><h3>What This Plugin Provides</h3><p>Skills for CSS development following 2389 patterns:</p><ul><li><strong>css-development</strong> - Main orchestrator skill that routes to specific sub-skills</li>
-<li><strong>css-development:create-component</strong> - Create new styled components</li>
-<li><strong>css-development:validate</strong> - Validate CSS against patterns</li>
-<li><strong>css-development:refactor</strong> - Refactor existing CSS</li>
-<p></ul>
-<h3>Patterns</h3><p>This plugin enforces:</p><ul><li><strong>Semantic class naming</strong>: <code>.user-profile</code>, <code>.nav-menu</code> (not <code>.container-1</code>, <code>.box-blue</code>)</li>
-<li><strong>Tailwind composition</strong>: Use <code>@apply</code> to compose utilities into semantic classes</li>
-<li><strong>Dark mode by default</strong>: Every component includes <code>dark:</code> variants</li>
-<li><strong>Test coverage</strong>: Static analysis + component rendering tests</li>
-<p></ul>
-<h3>Quick Example</h3><pre><code class="language-css">.user-profile {
-<p>  @apply flex items-center space-x-4 p-4 bg-white dark:bg-gray-800;
-<p>}</p><p>.user-profile__avatar {
-<p>  @apply w-12 h-12 rounded-full;
-<p>}</p><p>.user-profile__name {
-<p>  @apply text-lg font-semibold text-gray-900 dark:text-gray-100;
-<p>}
-<p></code></pre></p><h3>Documentation</h3><ul><li><a href="docs/plans/2025-11-13-css-development-skill-design.md" rel="noopener noreferrer">Design Document</a></li>
-<li><a href="docs/plans/2025-11-13-css-development-skill-implementation.md" rel="noopener noreferrer">Implementation Plan</a></li>
-<li><a href="docs/examples/css-development-examples.md" rel="noopener noreferrer">Examples</a></li>
-<p></ul><p>
+        <h2>CSS Development Plugin</h2>
+<p>CSS development workflows with Tailwind composition, semantic naming, and dark mode by default.</p>
+<h3>Installation</h3>
+<pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
+/plugin install css-development@2389-research
+</code></pre>
+<h3>What This Plugin Provides</h3>
+<p>Skills for CSS development following 2389 patterns:</p>
+<ul><li><strong>css-development</strong> - Main orchestrator skill that routes to specific sub-skills</li><li><strong>css-development:create-component</strong> - Create new styled components</li><li><strong>css-development:validate</strong> - Validate CSS against patterns</li><li><strong>css-development:refactor</strong> - Refactor existing CSS</li></ul>
+<h3>Patterns</h3>
+<p>This plugin enforces:</p>
+<ul><li><strong>Semantic class naming</strong>: <code>.user-profile</code>, <code>.nav-menu</code> (not <code>.container-1</code>, <code>.box-blue</code>)</li><li><strong>Tailwind composition</strong>: Use <code>@apply</code> to compose utilities into semantic classes</li><li><strong>Dark mode by default</strong>: Every component includes <code>dark:</code> variants</li><li><strong>Test coverage</strong>: Static analysis + component rendering tests</li></ul>
+<h3>Quick Example</h3>
+<pre><code class="language-css">.user-profile {
+  @apply flex items-center space-x-4 p-4 bg-white dark:bg-gray-800;
+}
+
+.user-profile__avatar {
+  @apply w-12 h-12 rounded-full;
+}
+
+.user-profile__name {
+  @apply text-lg font-semibold text-gray-900 dark:text-gray-100;
+}
+</code></pre>
+<h3>Documentation</h3>
+<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/css-development/docs/plans/2025-11-13-css-development-skill-design.md" rel="noopener noreferrer" target="_blank">Design Document</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/css-development/docs/plans/2025-11-13-css-development-skill-implementation.md" rel="noopener noreferrer" target="_blank">Implementation Plan</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/css-development/docs/examples/css-development-examples.md" rel="noopener noreferrer" target="_blank">Examples</a></li></ul>
+
       </div>
     </section>
     

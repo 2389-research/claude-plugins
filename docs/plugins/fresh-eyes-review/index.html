@@ -113,38 +113,52 @@
       </div>
 
       <div class="readme-content">
-        <h2>Fresh-Eyes Review</h2></p><p>Mandatory final sanity check before git commit or PR creation. The last line of defense before code ships.</p><h3>Installation</h3><pre><code class="language-bash">/plugin install fresh-eyes-review@2389-research
-<p></code></pre></p><h3>What This Plugin Provides</h3></p><p>A disciplined review process that catches security vulnerabilities, logic errors, edge cases, and business logic bugs that slip through despite passing tests.</p><h4>Core Principle</h4></p><p><strong>"NO COMMIT WITHOUT FRESH-EYES REVIEW FIRST"</strong></p><p>This final quality gate executes <em>after</em> implementation, <em>after</em> tests pass, but <em>before</em> shipping code.</p><h3>When to Use</h3><ul><li><strong>ALWAYS</strong> before git commit</li>
-<li><strong>ALWAYS</strong> before creating pull request</li>
-<li><strong>ALWAYS</strong> before declaring work complete</li>
-<li>After all tests pass but before shipping</li>
-<p></ul>
-<h3>What It Catches</h3><p>The skill systematically checks for:</p><ul><li><strong>Security vulnerabilities</strong>: SQL injection, XSS, path traversal, command injection</li>
-<li><strong>Logic errors</strong>: off-by-one boundaries, race conditions, null handling</li>
-<li><strong>Business rule bugs</strong>: calculations not matching requirements</li>
-<li><strong>Input validation</strong>: missing type, range, or format checks</li>
-<li><strong>Performance issues</strong>: N+1 queries, unbounded loops</li>
-<p></ul>
-<h3>Quick Example</h3><pre><code class="language-bash"># Before committing code:
-<h2>1. Announce: "Starting fresh-eyes review of 3 files. This will take 2-5 minutes."</h2>
-<h2>2. Review systematically for security, logic, business rules, validation, performance</h2>
-<h2>3. Fix issues immediately and re-run tests</h2>
-<h2>4. Announce: "Fresh-eyes complete. 2 issues found and fixed."</h2>
-<p></code></pre></p><h3>The Process</h3></p><p><strong>Step 1 - Announce Commitment</strong></p><p>Explicitly declare: "Starting fresh-eyes review of [N] files. This will take 2-5 minutes."</p><p><strong>Step 2 - Systematic Checklist</strong></p><p>Review all touched files for the five categories above.</p><p><strong>Step 3 - Fix Immediately</strong></p><p>Address findings before declaring completion. Re-run tests after corrections.</p><p><strong>Step 4 - Declare Results</strong></p><p>Mandatory announcement: "Fresh-eyes complete. [N] issues found and fixed."</p><h3>Time Commitment</h3><p>Expected duration: <strong>2-5 minutes</strong> depending on file count.</p><ul><li>Faster completion suggests insufficient depth</li>
-<li>Excessive time indicates scope creep</li>
-<p></ul>
-<h3>Why This Matters</h3></p><p>The skill emphasizes that <strong>"100% test coverage and passing scenarios" can coexist with "critical bugs"</strong> waiting to be discovered.</p><h4>Key Distinctions</h4><ul><li><strong>Testing</strong> validates expected behavior under controlled conditions</li>
-<li><strong>Code review</strong> examines patterns and quality during implementation</li>
-<li><strong>Fresh-eyes</strong> catches unexpected issues through deliberate re-reading</li>
-<p></ul>
-<h3>Resistance Patterns to Reject</h3><p>Don't rationalize away the review with:</p><ul><li>"Tests are comprehensive"</li>
-<li>"I'm confident it's correct"</li>
-<li>"Partner is waiting"</li>
-<li>"Production is blocked"</li>
-<li>"Senior dev already approved"</li>
-<p></ul>
-<p><strong>These circumstances represent precisely when critical bugs escape into production.</strong></p><h3>Documentation</h3></p><p>See <a href="skills/SKILL.md" rel="noopener noreferrer">skills/SKILL.md</a> for complete fresh-eyes review protocol.</p><h3>Philosophy</h3><p>Quality over speed. The 2-5 minutes spent here prevent hours of debugging production issues.
-<p>
+        <h2>Fresh-Eyes Review</h2>
+<p>Mandatory final sanity check before git commit or PR creation. The last line of defense before code ships.</p>
+<h3>Installation</h3>
+<pre><code class="language-bash">/plugin install fresh-eyes-review@2389-research
+</code></pre>
+<h3>What This Plugin Provides</h3>
+<p>A disciplined review process that catches security vulnerabilities, logic errors, edge cases, and business logic bugs that slip through despite passing tests.</p>
+<h4>Core Principle</h4>
+<p><strong>"NO COMMIT WITHOUT FRESH-EYES REVIEW FIRST"</strong></p>
+<p>This final quality gate executes <em>after</em> implementation, <em>after</em> tests pass, but <em>before</em> shipping code.</p>
+<h3>When to Use</h3>
+<ul><li><strong>ALWAYS</strong> before git commit</li><li><strong>ALWAYS</strong> before creating pull request</li><li><strong>ALWAYS</strong> before declaring work complete</li><li>After all tests pass but before shipping</li></ul>
+<h3>What It Catches</h3>
+<p>The skill systematically checks for:</p>
+<ul><li><strong>Security vulnerabilities</strong>: SQL injection, XSS, path traversal, command injection</li><li><strong>Logic errors</strong>: off-by-one boundaries, race conditions, null handling</li><li><strong>Business rule bugs</strong>: calculations not matching requirements</li><li><strong>Input validation</strong>: missing type, range, or format checks</li><li><strong>Performance issues</strong>: N+1 queries, unbounded loops</li></ul>
+<h3>Quick Example</h3>
+<pre><code class="language-bash"># Before committing code:
+# 1. Announce: "Starting fresh-eyes review of 3 files. This will take 2-5 minutes."
+# 2. Review systematically for security, logic, business rules, validation, performance
+# 3. Fix issues immediately and re-run tests
+# 4. Announce: "Fresh-eyes complete. 2 issues found and fixed."
+</code></pre>
+<h3>The Process</h3>
+<p><strong>Step 1 - Announce Commitment</strong></p>
+<p>Explicitly declare: "Starting fresh-eyes review of [N] files. This will take 2-5 minutes."</p>
+<p><strong>Step 2 - Systematic Checklist</strong></p>
+<p>Review all touched files for the five categories above.</p>
+<p><strong>Step 3 - Fix Immediately</strong></p>
+<p>Address findings before declaring completion. Re-run tests after corrections.</p>
+<p><strong>Step 4 - Declare Results</strong></p>
+<p>Mandatory announcement: "Fresh-eyes complete. [N] issues found and fixed."</p>
+<h3>Time Commitment</h3>
+<p>Expected duration: <strong>2-5 minutes</strong> depending on file count.</p>
+<ul><li>Faster completion suggests insufficient depth</li><li>Excessive time indicates scope creep</li></ul>
+<h3>Why This Matters</h3>
+<p>The skill emphasizes that <strong>"100% test coverage and passing scenarios" can coexist with "critical bugs"</strong> waiting to be discovered.</p>
+<h4>Key Distinctions</h4>
+<ul><li><strong>Testing</strong> validates expected behavior under controlled conditions</li><li><strong>Code review</strong> examines patterns and quality during implementation</li><li><strong>Fresh-eyes</strong> catches unexpected issues through deliberate re-reading</li></ul>
+<h3>Resistance Patterns to Reject</h3>
+<p>Don't rationalize away the review with:</p>
+<ul><li>"Tests are comprehensive"</li><li>"I'm confident it's correct"</li><li>"Partner is waiting"</li><li>"Production is blocked"</li><li>"Senior dev already approved"</li></ul>
+<p><strong>These circumstances represent precisely when critical bugs escape into production.</strong></p>
+<h3>Documentation</h3>
+<p>See <a href="https://github.com/2389-research/claude-plugins/blob/main/fresh-eyes-review/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a> for complete fresh-eyes review protocol.</p>
+<h3>Philosophy</h3>
+<p>Quality over speed. The 2-5 minutes spent here prevent hours of debugging production issues.</p>
       </div>
     </section>
     
