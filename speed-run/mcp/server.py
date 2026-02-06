@@ -35,7 +35,7 @@ CONTAINER_WORKSPACE = "/workspace"
 IN_DOCKER = os.path.exists("/.dockerenv") or os.environ.get("IN_DOCKER") == "1"
 
 # Create server
-server = Server("hosted-llm-codegen")
+server = Server("speed-run")
 
 
 def translate_path(path: str) -> str:
@@ -324,7 +324,7 @@ async def main():
     if not CEREBRAS_API_KEY:
         print("Warning: CEREBRAS_API_KEY not set", file=sys.stderr)
 
-    print("hosted-llm-codegen MCP server starting", file=sys.stderr)
+    print("speed-run MCP server starting", file=sys.stderr)
     print(f"  URL: {CEREBRAS_URL}", file=sys.stderr)
     print(f"  Model: {CEREBRAS_MODEL}", file=sys.stderr)
 

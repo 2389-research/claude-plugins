@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  hosted-llm-codegen:
+  speed-run:
     build: .
-    image: hosted-llm-codegen:latest
+    image: speed-run:latest
     stdin_open: true
     environment:
       - CEREBRAS_API_KEY=${CEREBRAS_API_KEY}

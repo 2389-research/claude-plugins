@@ -12,5 +12,5 @@
     "turbo",
     "race"
   ],
-  "strict": true
+  "strict": false
 }

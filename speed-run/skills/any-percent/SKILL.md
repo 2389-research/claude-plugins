@@ -131,7 +131,7 @@ Other variants are being implemented in parallel with different approaches.
    - Focus on what makes this approach unique
 2. For each implementation task, use hosted LLM for first-pass code generation:
    - Write a contract prompt (DATA CONTRACT + API CONTRACT + ALGORITHM + RULES)
-   - Call: mcp__hosted-llm-codegen__generate_and_write_files
+   - Call: mcp__speed-run__generate_and_write_files
    - Run tests
    - Fix failures with Claude Edit tool (surgical 1-4 line fixes)
    - Re-test until passing
@@ -139,7 +139,7 @@ Other variants are being implemented in parallel with different approaches.
 4. Use verification before claiming done
 
 **Code generation rules:**
-- Use mcp__hosted-llm-codegen__generate_and_write_files for algorithmic code
+- Use mcp__speed-run__generate_and_write_files for algorithmic code
 - Use Claude direct ONLY for surgical fixes and multi-file coordination
 - Write contract prompts with exact data models, routes, and algorithm steps
 
@@ -169,9 +169,11 @@ Fresh-eyes review of variant-sqlite (N files)...
 Fresh-eyes review of variant-postgres (N files)...
 ```
 
-**Step 4: Invoke judge**
+### Step 4: Invoke Judge Skill
 
 **CRITICAL: Invoke `test-kitchen:judge` now.**
+
+The judge skill contains the full scoring framework with checklists. Invoking it fresh ensures the scoring format is followed exactly.
 
 ```text
 Invoke: test-kitchen:judge
@@ -183,6 +185,16 @@ Context to provide:
 - Scenario test results
 - Fresh-eyes findings
 ```
+
+The judge skill will:
+1. Fill out the complete scoring worksheet for each variant
+2. Build the scorecard with integer scores (1-5, no half points)
+3. Check hard gates (Fitness Δ≥2, any score=1)
+4. Announce winner with rationale
+
+**Do not summarize or abbreviate the scoring.** The judge skill output should be the full worksheet.
+
+**Any%-specific context:** In any%, variants explore different architectural approaches, so Fitness differences are expected and valid. A Fitness gap here reflects different design trade-offs, not deviation from a shared design. Weight Craft and Spark higher when approaches are fundamentally different.
 
 ## Phase 5: Completion
 

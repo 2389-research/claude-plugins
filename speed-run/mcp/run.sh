@@ -12,9 +12,9 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 WORKSPACE="${1:-$(pwd)}"
 
 # Build if image doesn't exist
-if ! docker image inspect hosted-llm-codegen:latest >/dev/null 2>&1; then
-    echo "Building hosted-llm-codegen image..." >&2
-    docker build -t hosted-llm-codegen:latest "$SCRIPT_DIR" >&2
+if ! docker image inspect speed-run:latest >/dev/null 2>&1; then
+    echo "Building speed-run image..." >&2
+    docker build -t speed-run:latest "$SCRIPT_DIR" >&2
 fi
 
 # Run container with stdio
@@ -28,4 +28,4 @@ exec docker run -i --rm \
     -e HOST_WORKSPACE="${WORKSPACE}" \
     -e IN_DOCKER=1 \
     -v "${WORKSPACE}:/workspace" \
-    hosted-llm-codegen:latest
+    speed-run:latest

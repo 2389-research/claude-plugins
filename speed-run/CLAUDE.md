@@ -41,7 +41,7 @@ Restart Claude Code after setting the key.
 User invokes "speed-run"
     |
     v
-Check: mcp__hosted-llm-codegen__check_status
+Check: mcp__speed-run__check_status
     |
     +-- No API key --> Show setup instructions, STOP
     |

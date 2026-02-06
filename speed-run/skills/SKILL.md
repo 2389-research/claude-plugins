@@ -14,7 +14,7 @@ Token-efficient code generation pipeline. Uses hosted LLM (Cerebras) for fast, c
 **ALWAYS run this first:**
 
 ```
-mcp__hosted-llm-codegen__check_status
+mcp__speed-run__check_status
 ```
 
 **If status is error / key not set:**

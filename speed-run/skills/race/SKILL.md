@@ -111,7 +111,7 @@ Each runner creates their own implementation plan - your approach may differ fro
    - Don't try to guess what other runners will do
 3. For each implementation task, use hosted LLM for first-pass code generation:
    - Write a contract prompt (DATA CONTRACT + API CONTRACT + ALGORITHM + RULES)
-   - Call: mcp__hosted-llm-codegen__generate_and_write_files
+   - Call: mcp__speed-run__generate_and_write_files
    - Run tests
    - Fix failures with Claude Edit tool (surgical 1-4 line fixes)
    - Re-test until passing
@@ -119,8 +119,8 @@ Each runner creates their own implementation plan - your approach may differ fro
 5. Use verification before claiming done
 
 **Code generation rules:**
-- Use mcp__hosted-llm-codegen__generate_and_write_files for algorithmic code
-- Use mcp__hosted-llm-codegen__generate for text/docs generation
+- Use mcp__speed-run__generate_and_write_files for algorithmic code
+- Use mcp__speed-run__generate for text/docs generation
 - Use Claude direct ONLY for surgical fixes and multi-file coordination
 - Write contract prompts with exact data models, routes, and algorithm steps
 
@@ -168,7 +168,7 @@ Fresh-eyes complete: 1 minor issue
 
 **CRITICAL: Invoke `test-kitchen:judge` now.**
 
-The judge skill contains the full scoring framework with checklists.
+The judge skill contains the full scoring framework with checklists. Invoking it fresh ensures the scoring format is followed exactly.
 
 ```text
 Invoke: test-kitchen:judge
@@ -179,6 +179,16 @@ Context to provide:
 - Test results from each runner
 - Fresh-eyes findings from Step 3
 ```
+
+The judge skill will:
+1. Fill out the complete scoring worksheet for each runner
+2. Build the scorecard with integer scores (1-5, no half points)
+3. Check hard gates (Fitness Δ≥2, any score=1)
+4. Announce winner with rationale
+
+**Do not summarize or abbreviate the scoring.** The judge skill output should be the full worksheet.
+
+**Race-specific context:** In race, all runners target the same design, so Fitness should be similar. A Fitness gap (Δ≥2) indicates one runner deviated from or misunderstood the design - not a different approach choice.
 
 ## Phase 4: Completion
 

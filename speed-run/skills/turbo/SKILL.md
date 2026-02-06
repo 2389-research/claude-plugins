@@ -79,7 +79,7 @@ POST /reset -> dict           # Reset state (for testing)
 ### Step 2: Generate Code
 
 ```
-mcp__hosted-llm-codegen__generate_and_write_files
+mcp__speed-run__generate_and_write_files
   prompt: [contract prompt]
   output_dir: [target directory]
 ```

@@ -421,7 +421,7 @@
                 "race",
                 "mcp"
             ],
-            "strict": true
+            "strict": false
         }
     ]
 }
