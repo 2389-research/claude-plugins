@@ -65,6 +65,21 @@ The MCP server will auto-start when needed.
 | `generate_and_write_files` | Generate code and write to disk, returns only metadata |
 | `check_status` | Verify Cerebras API connectivity |
 
+## File Output Format
+
+The hosted-llm-codegen MCP server expects generated code in **`### FILE:` format** (primary):
+
+```text
+### FILE: src/main.py
+```python
+[code here]
+```
+```
+
+A fallback also supports raw content between `### FILE:` markers without fenced code blocks.
+
+**Note:** The `speed-run` plugin uses XML-style `<FILE path="...">` tags as its primary format instead. The two plugins' parsers are not interchangeable.
+
 ## How It Works
 
 ```

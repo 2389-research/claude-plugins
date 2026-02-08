@@ -62,6 +62,24 @@ Check: mcp__speed-run__check_status
 | First-pass quality | ~100% | 80-95% (Claude fixes the rest) |
 | Best for | Any task | Algorithmic code, boilerplate, multi-variant |
 
+## File Output Format
+
+The speed-run MCP server expects generated code in **XML-style tags** (primary format):
+
+```text
+<FILE path="src/main.py">
+[code here]
+</FILE>
+```
+
+If generated code contains literal triple backticks, use `TRIPLE_BACKTICK` as a placeholder — it's auto-replaced after extraction.
+
+Two legacy fallback formats are also supported but **not recommended**:
+- `### FILE: path` with fenced code blocks
+- `### FILE: path` with raw content
+
+**Note:** The `hosted-llm-codegen` plugin uses the legacy `### FILE:` format as its primary. The two plugins are not interchangeable — prompts generated for one may not parse correctly with the other.
+
 ## Skill Dependencies
 
 | Dependency | Usage |
