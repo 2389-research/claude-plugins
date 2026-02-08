@@ -1,6 +1,6 @@
 ---
 name: speed-run
-description: Token-efficient code generation pipeline using hosted LLM. Triggers on "speed-run", "fast build", "turbo build", "use hosted LLM", "use cerebras". Routes to turbo (direct codegen), race (parallel competition), or any% (parallel exploration).
+description: Token-efficient code generation pipeline using hosted LLM. Triggers on "speed-run", "fast build", "turbo build", "use hosted LLM", "use cerebras". Routes to turbo (direct codegen), showdown (parallel competition), or any% (parallel exploration).
 ---
 
 # Speed-Run
@@ -48,7 +48,7 @@ How would you like to proceed?
 
 1. Turbo - Direct code generation (single task, fast)
    → Best for: one feature, algorithmic code, boilerplate
-2. Race - Parallel competition (same design, multiple runners)
+2. Showdown - Parallel competition (same design, multiple runners)
    → Best for: medium-high complexity, want best implementation
 3. Any% - Parallel exploration (different approaches)
    → Best for: unsure of architecture, want to compare designs
@@ -56,7 +56,7 @@ How would you like to proceed?
 
 **Routing:**
 - Option 1: Invoke `speed-run:turbo`
-- Option 2: Invoke `speed-run:race`
+- Option 2: Invoke `speed-run:showdown`
 - Option 3: Invoke `speed-run:any-percent`
 
 ## Skill Dependencies
@@ -64,7 +64,7 @@ How would you like to proceed?
 | Subskill | Description |
 |----------|-------------|
 | `speed-run:turbo` | Direct hosted codegen via contract prompts |
-| `speed-run:race` | Parallel same-design competition via hosted LLM |
+| `speed-run:showdown` | Parallel same-design competition via hosted LLM |
 | `speed-run:any-percent` | Parallel approach exploration via hosted LLM |
 
 ## When to Use Speed-Run vs Test Kitchen
@@ -73,7 +73,7 @@ How would you like to proceed?
 |-----------|-----|
 | Want token savings on code generation | Speed-run |
 | Generating algorithmic code (parsers, state machines) | Speed-run:turbo |
-| Want parallel competition with fast generation | Speed-run:race |
+| Want parallel competition with fast generation | Speed-run:showdown |
 | Want to explore approaches with fast generation | Speed-run:any% |
 | No API key / don't want external LLM | Test Kitchen |
 | CRUD / simple operations | Test Kitchen (Claude direct is cheaper) |

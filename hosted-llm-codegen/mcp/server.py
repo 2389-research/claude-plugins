@@ -38,13 +38,21 @@ IN_DOCKER = os.path.exists("/.dockerenv") or os.environ.get("IN_DOCKER") == "1"
 server = Server("hosted-llm-codegen")
 
 
+def _normalize(p: str) -> str:
+    """Normalize a path for boundary-safe comparison."""
+    return os.path.normpath(os.path.abspath(p))
+
+
 def translate_path(path: str) -> str:
     """Translate host path to container path when running in Docker."""
     if not IN_DOCKER or not HOST_WORKSPACE:
         return path
 
-    # If path starts with host workspace, translate to container workspace
-    if path.startswith(HOST_WORKSPACE):
+    norm_host = _normalize(HOST_WORKSPACE)
+    norm_path = _normalize(path)
+
+    # Boundary-aware: match exact dir or dir + separator
+    if norm_path == norm_host or norm_path.startswith(norm_host + os.sep):
         return path.replace(HOST_WORKSPACE, CONTAINER_WORKSPACE, 1)
 
     # If it's a relative path, prepend container workspace
@@ -59,13 +67,16 @@ def translate_path_back(path: str) -> str:
     if not IN_DOCKER or not HOST_WORKSPACE:
         return path
 
-    if path.startswith(CONTAINER_WORKSPACE):
+    norm_container = _normalize(CONTAINER_WORKSPACE)
+    norm_path = _normalize(path)
+
+    if norm_path == norm_container or norm_path.startswith(norm_container + os.sep):
         return path.replace(CONTAINER_WORKSPACE, HOST_WORKSPACE, 1)
 
     return path
 
 
-def generate_text(
+async def generate_text(
     prompt: str,
     system_prompt: str | None = None,
     max_tokens: int = 4096,
@@ -86,8 +97,8 @@ def generate_text(
     start_time = time.time()
 
     try:
-        with httpx.Client(timeout=GENERATION_TIMEOUT) as client:
-            response = client.post(
+        async with httpx.AsyncClient(timeout=GENERATION_TIMEOUT) as client:
+            response = await client.post(
                 f"{CEREBRAS_URL}/chat/completions",
                 headers={
                     "Authorization": f"Bearer {CEREBRAS_API_KEY}",
@@ -103,7 +114,15 @@ def generate_text(
             response.raise_for_status()
             data = response.json()
 
-            content = data["choices"][0]["message"]["content"]
+            choices = data.get("choices")
+            if not choices or not isinstance(choices, list) or len(choices) == 0:
+                return {"status": "error", "error": f"Unexpected API response: no choices returned. Raw: {json.dumps(data)[:500]}"}
+
+            message = choices[0].get("message", {})
+            content = message.get("content")
+            if content is None:
+                return {"status": "error", "error": f"Unexpected API response: no content in message. Raw: {json.dumps(data)[:500]}"}
+
             duration_ms = int((time.time() - start_time) * 1000)
 
             return {
@@ -140,21 +159,28 @@ def parse_and_write_files(response_text: str, output_dir: str) -> dict:
         pattern = r'### FILE:\s*(\S+)\s*\n(.*?)(?=### FILE:|$)'
         matches = re.findall(pattern, response_text, re.DOTALL)
 
+    resolved_output = output_path.resolve()
+
     for filename, content in matches:
         content = content.strip()
         if not content:
             continue
 
-        # Security: prevent path traversal attacks from LLM-generated filenames
+        # Security: reject absolute paths and traversal attempts
+        if os.path.isabs(filename) or ".." in filename.split("/"):
+            errors.append({"filename": filename, "error": "Path traversal rejected"})
+            continue
+
+        # Security: verify resolved path is inside output directory
         file_path = (output_path / filename).resolve()
-        if not str(file_path).startswith(str(output_path.resolve()) + os.sep):
+        if not (file_path == resolved_output or str(file_path).startswith(str(resolved_output) + os.sep)):
             errors.append({"filename": filename, "error": "Path traversal rejected"})
             continue
 
         file_path.parent.mkdir(parents=True, exist_ok=True)
 
         try:
-            file_path.write_text(content)
+            file_path.write_text(content, encoding="utf-8")
             line_count = len(content.splitlines())
             # Report host path back to Claude
             files_written.append({
@@ -174,7 +200,7 @@ def parse_and_write_files(response_text: str, output_dir: str) -> dict:
     }
 
 
-def generate_and_write(
+async def generate_and_write(
     prompt: str,
     output_dir: str,
     system_prompt: str | None = None
@@ -197,7 +223,7 @@ Output each file using this EXACT format:
     if not system_prompt:
         system_prompt = "You are a senior developer. Output clean, production-ready code. No explanations, just code. Follow the exact file format specified."
 
-    result = generate_text(enhanced_prompt, system_prompt, max_tokens=4096)
+    result = await generate_text(enhanced_prompt, system_prompt, max_tokens=4096)
 
     if result["status"] != "ok":
         return result
@@ -263,13 +289,13 @@ async def call_tool(name: str, arguments: dict):
     """Handle tool calls."""
     try:
         if name == "generate":
-            result = generate_text(
+            result = await generate_text(
                 prompt=arguments["prompt"],
                 system_prompt=arguments.get("system_prompt"),
                 max_tokens=arguments.get("max_tokens", 4096),
             )
         elif name == "generate_and_write_files":
-            result = generate_and_write(
+            result = await generate_and_write(
                 prompt=arguments["prompt"],
                 output_dir=arguments["output_dir"],
                 system_prompt=arguments.get("system_prompt"),
@@ -286,13 +312,16 @@ async def call_tool(name: str, arguments: dict):
             else:
                 # Quick health check
                 try:
-                    with httpx.Client(timeout=10) as client:
-                        response = client.get(
+                    async with httpx.AsyncClient(timeout=10) as client:
+                        response = await client.get(
                             f"{CEREBRAS_URL}/models",
                             headers={"Authorization": f"Bearer {CEREBRAS_API_KEY}"},
                         )
                         if response.status_code == 200:
-                            models = [m["id"] for m in response.json().get("data", [])]
+                            models = [
+                                mid for m in response.json().get("data", [])
+                                if (mid := m.get("id"))
+                            ]
                             result = {
                                 "status": "ok",
                                 "url": CEREBRAS_URL,

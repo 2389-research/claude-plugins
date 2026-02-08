@@ -1,6 +1,6 @@
 {
   "name": "speed-run",
-  "description": "Token-efficient code generation pipeline using hosted LLM (Cerebras). Parallel implementation with turbo-powered code gen.",
+  "description": "Token-efficient code generation pipeline using hosted LLM (Cerebras). Requires CEREBRAS_API_KEY — get a free key at https://cloud.cerebras.ai",
   "version": "1.0.0",
   "keywords": [
     "codegen",
@@ -10,7 +10,7 @@
     "cerebras",
     "token-efficient",
     "turbo",
-    "race"
+    "showdown"
   ],
   "strict": false
 }

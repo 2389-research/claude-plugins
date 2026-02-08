@@ -1,13 +1,13 @@
 ---
-name: race
+name: showdown
 description: Same design, multiple parallel runners compete using hosted LLM for code generation. Each runner creates own plan, generates code via Cerebras, pick the best. Part of speed-run pipeline.
 ---
 
-# Race
+# Showdown
 
 Same design, multiple runners compete. Each runner creates their own implementation plan from the shared design, then generates code via hosted LLM. Natural variation emerges from independent planning decisions.
 
-**Announce:** "I'm using speed-run:race for parallel competition via hosted LLM."
+**Announce:** "I'm using speed-run:showdown for parallel competition via hosted LLM."
 
 **Key insight:** Don't share a pre-made implementation plan. Each runner generates their own plan from the design doc, ensuring genuine variation.
 
@@ -17,14 +17,14 @@ Same design, multiple runners compete. Each runner creates their own implementat
 docs/plans/<feature>/
   design.md                    # Input: from brainstorming
   speed-run/
-    race/
+    showdown/
       runner-1/
         plan.md                # Runner 1's implementation plan
       runner-2/
         plan.md                # Runner 2's implementation plan
       runner-3/
         plan.md                # Runner 3's implementation plan
-      result.md                # Race results and winner
+      result.md                # Showdown results and winner
 ```
 
 ## Skill Dependencies
@@ -95,18 +95,18 @@ Use `parallel-agents` pattern. Send ONE message with multiple Task tool calls:
 **Runner prompt (each gets same instructions with their runner number):**
 
 ```
-You are runner N of M in a speed-run race.
+You are runner N of M in a speed-run showdown.
 Other runners are implementing the same design in parallel.
 Each runner creates their own implementation plan - your approach may differ from others.
 
 **Your working directory:** /path/to/.worktrees/speed-run-runner-N
 **Design doc:** docs/plans/<feature>/design.md
-**Your plan location:** docs/plans/<feature>/speed-run/race/runner-N/plan.md
+**Your plan location:** docs/plans/<feature>/speed-run/showdown/runner-N/plan.md
 
 **Your workflow:**
 1. Read the design doc thoroughly
 2. Use writing-plans skill to create YOUR implementation plan
-   - Save to: docs/plans/<feature>/speed-run/race/runner-N/plan.md
+   - Save to: docs/plans/<feature>/speed-run/showdown/runner-N/plan.md
    - Make your own architectural decisions
    - Don't try to guess what other runners will do
 3. For each implementation task, use hosted LLM for first-pass code generation:
@@ -136,7 +136,7 @@ Each runner creates their own implementation plan - your approach may differ fro
 
 **Monitor progress:**
 ```
-Race status (design: auth-system):
+Showdown status (design: auth-system):
 - runner-1: planning... -> generating via Cerebras -> fixing 2/3 -> tests passing
 - runner-2: planning... -> generating via Cerebras -> tests passing
 - runner-3: planning... -> generating via Cerebras -> fixing 1/2 -> tests passing
@@ -190,7 +190,7 @@ The judge skill will:
 
 **Do not summarize or abbreviate the scoring.** The judge skill output should be the full worksheet.
 
-**Race-specific context:** In race, all runners target the same design, so Fitness should be similar. A Fitness gap (Δ≥2) indicates one runner deviated from or misunderstood the design - not a different approach choice.
+**Showdown-specific context:** In showdown, all runners target the same design, so Fitness should be similar. A Fitness gap (Δ≥2) indicates one runner deviated from or misunderstood the design - not a different approach choice.
 
 ## Phase 4: Completion
 
@@ -216,7 +216,7 @@ git branch -D <feature>/speed-run/runner-3
 
 **Write result.md:**
 ```markdown
-# Race Results: <feature>
+# Showdown Results: <feature>
 
 ## Design
 docs/plans/<feature>/design.md
@@ -229,9 +229,9 @@ docs/plans/<feature>/design.md
 | runner-3 | TDD-strict | 26/26 | 2 minor | 590 | 5 | 3 | eliminated |
 
 ## Plans Generated
-- runner-1: docs/plans/<feature>/speed-run/race/runner-1/plan.md
-- runner-2: docs/plans/<feature>/speed-run/race/runner-2/plan.md
-- runner-3: docs/plans/<feature>/speed-run/race/runner-3/plan.md
+- runner-1: docs/plans/<feature>/speed-run/showdown/runner-1/plan.md
+- runner-2: docs/plans/<feature>/speed-run/showdown/runner-2/plan.md
+- runner-3: docs/plans/<feature>/speed-run/showdown/runner-3/plan.md
 
 ## Winner Selection
 Reason: Clean fresh-eyes review, solid data-layer-first architecture, fewest fix cycles
@@ -240,7 +240,7 @@ Reason: Clean fresh-eyes review, solid data-layer-first architecture, fewest fix
 Estimated savings vs Claude direct: ~60% on code generation
 ```
 
-Save to: `docs/plans/<feature>/speed-run/race/result.md`
+Save to: `docs/plans/<feature>/speed-run/showdown/result.md`
 
 ## Common Mistakes
 

@@ -32,7 +32,7 @@ Restart Claude Code after setting the key.
 |-------|-------------|------|
 | `speed-run` | Router - checks API key, presents options | Entry point |
 | `speed-run:turbo` | Direct hosted codegen | Single task, write contract, generate |
-| `speed-run:race` | Same design, parallel runners via hosted LLM | Competition between implementations |
+| `speed-run:showdown` | Same design, parallel runners via hosted LLM | Competition between implementations |
 | `speed-run:any-percent` | Explore approaches via hosted LLM | Multiple architectural approaches |
 
 ## Flow
@@ -47,7 +47,7 @@ Check: mcp__speed-run__check_status
     |
     +-- OK --> Present options:
                 1. Turbo    - direct codegen (single task)
-                2. Race     - parallel competition (same design)
+                2. Showdown - parallel competition (same design)
                 3. Any%     - parallel exploration (different approaches)
 ```
 
@@ -66,8 +66,8 @@ Check: mcp__speed-run__check_status
 
 | Dependency | Usage |
 |------------|-------|
-| `speed-run:judge` | Scoring framework for race/any% (bundled) |
-| `superpowers:dispatching-parallel-agents` | Parallel dispatch for race/any% |
-| `superpowers:using-git-worktrees` | Isolated workspaces for race/any% |
+| `speed-run:judge` | Scoring framework for showdown/any% (bundled) |
+| `superpowers:dispatching-parallel-agents` | Parallel dispatch for showdown/any% |
+| `superpowers:using-git-worktrees` | Isolated workspaces for showdown/any% |
 | `superpowers:verification-before-completion` | Verify before claiming done |
 | `fresh-eyes-review:skills` | Quality gate before comparison |

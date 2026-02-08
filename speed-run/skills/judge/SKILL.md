@@ -1,6 +1,6 @@
 ---
 name: judge
-description: Scoring framework for speed-run race and any-percent. Invoked at Phase 4 to evaluate implementations using 5-criteria scoring. Do not invoke directly - called by race/any-percent.
+description: Scoring framework for speed-run showdown and any-percent. Invoked at Phase 4 to evaluate implementations using 5-criteria scoring. Do not invoke directly - called by showdown/any-percent.
 ---
 
 # Speed-Run Judge
@@ -8,7 +8,7 @@ description: Scoring framework for speed-run race and any-percent. Invoked at Ph
 Score implementations using the 5-criteria framework. Fill out ALL sections exactly as shown.
 
 **Terminology:** This skill uses "impl" but works for both:
-- Race: runner-1, runner-2, runner-3 (same design, different implementations)
+- Showdown: runner-1, runner-2, runner-3 (same design, different implementations)
 - Any%: variant-a, variant-b (different approaches/designs)
 
 ## REQUIRED OUTPUT FORMAT
@@ -159,7 +159,7 @@ The Fitness Gate triggers the same way in both contexts, but means different thi
 
 | Context | What Fitness Δ ≥ 2 Means |
 |---------|--------------------------|
-| **Race** | One runner *deviated from or misunderstood the design*. All runners should have similar Fitness since they're implementing the same spec. A large gap is a red flag. |
+| **Showdown** | One runner *deviated from or misunderstood the design*. All runners should have similar Fitness since they're implementing the same spec. A large gap is a red flag. |
 | **Any%** | One approach *genuinely solves the problem better*. Different approaches can legitimately have different Fitness. A large gap means one approach is clearly superior. |
 
 In both cases, higher Fitness wins. The interpretation just explains *why* the gap exists.

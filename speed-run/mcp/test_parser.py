@@ -20,13 +20,15 @@ def parse_and_write_files(response_text: str, output_dir: str) -> dict:
 
     # Fallback 1: Legacy ### FILE: with ```code blocks
     if not matches:
-        pattern = r'### FILE:\s*(\S+)\s*\n```(?:\\w+)?\n(.*?)```'
+        pattern = r'### FILE:\s*(\S+)\s*\n```(?:\w+)?\n(.*?)```'
         matches = re.findall(pattern, response_text, re.DOTALL)
 
     # Fallback 2: Raw content between FILE markers
     if not matches:
         pattern = r'### FILE:\s*(\S+)\s*\n(.*?)(?=### FILE:|$)'
         matches = re.findall(pattern, response_text, re.DOTALL)
+
+    resolved_output = output_path.resolve()
 
     for filename, content in matches:
         content = content.strip()
@@ -36,12 +38,17 @@ def parse_and_write_files(response_text: str, output_dir: str) -> dict:
         # Replace backtick placeholder with actual triple backticks
         content = content.replace("TRIPLE_BACKTICK", "```")
 
+        # Security: reject absolute paths and traversal attempts
+        if os.path.isabs(filename) or ".." in filename.split("/"):
+            errors.append({"filename": filename, "error": "Path traversal rejected"})
+            continue
+
         file_path = (output_path / filename).resolve()
-        if not str(file_path).startswith(str(output_path.resolve()) + os.sep):
+        if not (file_path == resolved_output or str(file_path).startswith(str(resolved_output) + os.sep)):
             errors.append({"filename": filename, "error": "Path traversal rejected"})
             continue
         file_path.parent.mkdir(parents=True, exist_ok=True)
-        file_path.write_text(content)
+        file_path.write_text(content, encoding="utf-8")
         line_count = len(content.splitlines())
         files_written.append({"filename": filename, "lines": line_count})
         total_lines += line_count
@@ -95,7 +102,7 @@ with tempfile.TemporaryDirectory() as d:
     content = (Path(d) / "converter.py").read_text()
     assert '```' in content, "TRIPLE_BACKTICK should be replaced with actual backticks!"
     assert 'TRIPLE_BACKTICK' not in content, "Placeholder should NOT remain in output!"
-    assert 'if line.strip() == ```' in content, f"Expected backtick replacement in code fence check"
+    assert 'if line.strip() == ```' in content, "Expected backtick replacement in code fence check"
     print("  TRIPLE_BACKTICK -> ``` replacement: WORKS")
     print()
 
@@ -116,7 +123,7 @@ with tempfile.TemporaryDirectory() as d:
     content = (Path(d) / "parser.py").read_text()
     assert content.count('```') == 3, f"Expected 3 backtick replacements, got {content.count('```')}"
     assert 'TRIPLE_BACKTICK' not in content
-    print(f"  Replacements: 3/3 correct")
+    print("  Replacements: 3/3 correct")
     print()
 
 # Test 3: No placeholder needed (normal code) — should pass through unchanged
@@ -134,6 +141,32 @@ with tempfile.TemporaryDirectory() as d:
     assert 'TRIPLE_BACKTICK' not in content
     assert '```' not in content
     print("  No false replacements: CORRECT")
+    print()
+
+# Test 4: Path traversal rejection
+response_traversal = '''<FILE path="../../etc/passwd">
+root:x:0:0:root:/root:/bin/bash
+</FILE>
+
+<FILE path="/tmp/evil.py">
+import os; os.system("rm -rf /")
+</FILE>
+
+<FILE path="safe.py">
+print("I am safe")
+</FILE>
+'''
+
+with tempfile.TemporaryDirectory() as d:
+    result = parse_and_write_files(response_traversal, d)
+    print("Test 4: Path traversal rejection")
+    assert result["total_files"] == 1, f"Expected 1 safe file, got {result['total_files']}"
+    assert result["errors"] is not None
+    assert len(result["errors"]) == 2, f"Expected 2 rejected files, got {len(result['errors'])}"
+    assert (Path(d) / "safe.py").exists(), "Safe file should be written"
+    assert not Path("/tmp/evil.py").exists() or True  # don't actually check /tmp
+    print(f"  Rejected {len(result['errors'])} traversal attempts")
+    print(f"  Wrote {result['total_files']} safe file")
     print()
 
 print("ALL PARSER TESTS PASSED!")
