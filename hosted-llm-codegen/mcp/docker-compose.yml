@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  hosted-llm-codegen:
+    build: .
+    image: hosted-llm-codegen:latest
+    stdin_open: true
+    environment:
+      - CEREBRAS_API_KEY=${CEREBRAS_API_KEY}
+      - CEREBRAS_MODEL=${CEREBRAS_MODEL:-gpt-oss-120b}
+    volumes:
+      # Mount workspace for file writing
+      - ${WORKSPACE:-/tmp}:/workspace
