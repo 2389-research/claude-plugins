@@ -2,151 +2,157 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://2389-research.github.io/claude-plugins/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/botboard-biz/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/better-dev/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/sysadmin/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/css-development/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/landing-page-design/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/firebase-development/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/terminal-title/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/building-multiagent-systems/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/ceo-personal-os/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/fresh-eyes-review/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/gtm-partner/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/product-launcher/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/slack-mcp/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/remote-system-maintenance/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/scenario-testing/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/test-kitchen/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/xtool/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/worldview-synthesis/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/binary-re/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/documentation-audit/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/qbp/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/agent-drugs/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/socialmedia/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/journal/</loc>
-    <lastmod>2026-02-06</lastmod>
+    <lastmod>2026-02-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://2389-research.github.io/claude-plugins/plugins/speed-run/</loc>
+    <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
