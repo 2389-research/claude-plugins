@@ -247,6 +247,14 @@ IMPORTANT RULES:
         }
 
         const writeResult = writeFiles(genResult.response!, output_dir);
+        if (writeResult.total_files === 0) {
+          result = {
+            status: "error",
+            error: "No files extracted from model output.",
+            ...writeResult,
+          };
+          break;
+        }
         result = {
           status: "ok",
           model: genResult.model,
@@ -268,10 +276,15 @@ IMPORTANT RULES:
         };
     }
 
+    const isError =
+      typeof result === "object" &&
+      result !== null &&
+      result.status !== "ok";
     return {
       content: [
         { type: "text" as const, text: JSON.stringify(result, null, 2) },
       ],
+      ...(isError ? { isError: true } : {}),
     };
   } catch (error: any) {
     return {
