@@ -113,18 +113,18 @@
       </div>
 
       <div class="readme-content">
-        <h2>Building Multi-Agent Systems</h2>
-<p>Architecture patterns for multi-agent systems where AI agents coordinate to accomplish complex tasks using tools.</p>
+        <h2>Building multi-agent systems</h2>
+<p>Architecture patterns for multi-agent systems where AI agents coordinate using tools.</p>
 <h3>Installation</h3>
 <pre><code class="language-bash">/plugin install building-multiagent-systems@2389-research
 </code></pre>
-<h3>What This Plugin Provides</h3>
-<p>Comprehensive guidance for designing and implementing multi-agent systems with proper coordination, lifecycle management, and production hardening. Based on patterns from real production systems.</p>
-<h4>Key Concepts</h4>
-<ul><li><strong>Four-layer architecture</strong>: Reasoning, orchestration, tool bus, deterministic adapters - foundation for every agent</li><li><strong>Schema-first tools</strong>: Typed contracts for tools enable sub-agent discovery and validation</li><li><strong>Deterministic boundary</strong>: Clear separation between LLM reasoning and testable execution</li><li><strong>Seven coordination patterns</strong>: fan-out/fan-in, sequential pipeline, recursive delegation, work-stealing queue, map-reduce, peer collaboration, MAKER (million-step zero-error)</li><li><strong>Foundational patterns</strong>: event-sourcing, hierarchical IDs, agent state machines</li><li><strong>Tool coordination</strong>: permission inheritance, locking, rate limiting, caching</li><li><strong>Agent collaboration</strong>: subagent spawning, tool inheritance, sub-agent as tool pattern</li><li><strong>Lifecycle management</strong>: cascading stop, orphan detection, heartbeat monitoring</li><li><strong>Self-modification safety</strong>: When and how sub-agents can modify themselves or each other</li><li><strong>Production hardening</strong>: checkpointing, monitoring, cost tracking across agent hierarchies</li></ul>
-<h3>When to Use</h3>
+<h3>What this plugin does</h3>
+<p>Guides you through designing and implementing multi-agent systems -- coordination, lifecycle management, production hardening. Based on patterns from real production systems.</p>
+<h4>Concepts covered</h4>
+<ul><li>Four-layer architecture -- reasoning, orchestration, tool bus, deterministic adapters</li><li>Schema-first tools -- typed contracts that let sub-agents discover and validate tools</li><li>Deterministic boundary -- separating LLM reasoning from testable execution</li><li>Seven coordination patterns -- fan-out/fan-in, sequential pipeline, recursive delegation, work-stealing queue, map-reduce, peer collaboration, MAKER (million-step zero-error)</li><li>Foundational patterns -- event-sourcing, hierarchical IDs, agent state machines</li><li>Tool coordination -- permission inheritance, locking, rate limiting, caching</li><li>Agent collaboration -- subagent spawning, tool inheritance, sub-agent as tool</li><li>Lifecycle management -- cascading stop, orphan detection, heartbeat monitoring</li><li>Self-modification safety -- when and how sub-agents can modify themselves or each other</li><li>Production hardening -- checkpointing, monitoring, cost tracking across agent hierarchies</li></ul>
+<h3>When to use</h3>
 <ul><li>Designing systems where multiple AI agents coordinate</li><li>Implementing orchestrators that spawn sub-agents</li><li>Building parallel or sequential agent workflows</li><li>Coordinating shared resources across agents</li><li>Managing agent lifecycle and state</li></ul>
-<h3>Quick Example</h3>
+<h3>Quick example</h3>
 <pre><code class="language-typescript">// Four-layer architecture for each agent
 const parentAgent = new Agent({
   model: 'sonnet',  // Layer 1: Reasoning
@@ -158,20 +158,20 @@ async function cleanup() {
   await this.stop();
 }
 </code></pre>
-<h3>Discovery Questions</h3>
+<h3>Discovery questions</h3>
 <p>Before architecting, the skill asks:</p>
-<ol><li><strong>Starting Point</strong> - Greenfield, adding to existing, or fixing current?</li>
-<li><strong>Primary Use Case</strong> - Parallel work, pipeline, delegation, collaboration, queue?</li>
-<li><strong>Scale Expectations</strong> - Small (2-5), medium (10-50), large (100+)?</li>
-<li><strong>State Requirements</strong> - Stateless, session-based, or persistent?</li>
-<li><strong>Tool Coordination</strong> - Independent, shared read-only, write coordination, rate-limited?</li>
-<li><strong>Existing Constraints</strong> - Language, framework, performance, compliance?</li></ol>
-<h3>Common Pitfalls Avoided</h3>
-<ul><li><strong>Missing four-layer architecture</strong> → untestable, unsafe agents</li><li><strong>LLM calls in tools</strong> → non-deterministic, untestable execution</li><li><strong>No schema-first design</strong> → sub-agents can't discover tools</li><li><strong>Missing cascading stop</strong> → orphaned agents consuming resources</li><li><strong>No permission inheritance</strong> → sub-agents escalate privileges</li><li><strong>No timeouts</strong> → indefinite hangs</li><li><strong>Unbounded concurrency</strong> → resource exhaustion</li><li><strong>Ignoring cost tracking</strong> → budget surprises across agent hierarchy</li><li><strong>No partial-failure handling</strong> → cascading failures</li><li><strong>Unpersisted state</strong> → unrecoverable workflows</li><li><strong>Uncoordinated tool access</strong> → race conditions</li><li><strong>Wrong model selection</strong> → cost inefficiency</li><li><strong>Self-modification without safety protocol</strong> → agents break themselves</li></ul>
+<ol><li>Starting point -- greenfield, adding to existing, or fixing current?</li>
+<li>Primary use case -- parallel work, pipeline, delegation, collaboration, queue?</li>
+<li>Scale expectations -- small (2-5), medium (10-50), large (100+)?</li>
+<li>State requirements -- stateless, session-based, or persistent?</li>
+<li>Tool coordination -- independent, shared read-only, write coordination, rate-limited?</li>
+<li>Existing constraints -- language, framework, performance, compliance?</li></ol>
+<h3>Common pitfalls</h3>
+<ul><li>Missing four-layer architecture -> untestable, unsafe agents</li><li>LLM calls in tools -> non-deterministic, untestable execution</li><li>No schema-first design -> sub-agents can't discover tools</li><li>Missing cascading stop -> orphaned agents consuming resources</li><li>No permission inheritance -> sub-agents escalate privileges</li><li>No timeouts -> indefinite hangs</li><li>Unbounded concurrency -> resource exhaustion</li><li>Ignoring cost tracking -> budget surprises across agent hierarchy</li><li>No partial-failure handling -> cascading failures</li><li>Unpersisted state -> unrecoverable workflows</li><li>Uncoordinated tool access -> race conditions</li><li>Wrong model selection -> cost inefficiency</li><li>Self-modification without safety protocol -> agents break themselves</li></ul>
 <h3>Documentation</h3>
-<p>See <a href="https://github.com/2389-research/claude-plugins/blob/main/building-multiagent-systems/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a> for complete architecture patterns and implementation guidance.</p>
+<p>See <a href="https://github.com/2389-research/claude-plugins/blob/main/building-multiagent-systems/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a> for the complete architecture patterns and implementation guidance.</p>
 <h3>Philosophy</h3>
-<p>Production-ready patterns over improvisation. Every pattern addresses real failure modes from production systems.</p>
+<p>Production-ready patterns over improvisation. Every pattern here addresses a real failure mode from a production system.</p>
       </div>
     </section>
     

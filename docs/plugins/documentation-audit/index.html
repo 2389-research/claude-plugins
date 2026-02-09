@@ -118,17 +118,17 @@
 <h3>Problem</h3>
 <p>Documentation drifts from code. Claims about defaults, file paths, behaviors, and configurations become stale as code evolves. Users following outdated docs encounter errors.</p>
 <h3>Solution</h3>
-<p>Two-pass audit approach:</p>
-<ol><li><strong>Pass 1: Direct Extraction</strong> - Extract and verify claims from each doc</li>
-<li><strong>Pass 2A: Pattern Expansion</strong> - Find similar issues based on discovered patterns</li>
-<li><strong>Pass 2B: Gap Detection</strong> - Compare codebase inventory vs documented items</li></ol>
+<p>A two-pass audit approach:</p>
+<ol><li>Direct extraction -- pull claims from each doc and verify them against code</li>
+<li>Pattern expansion -- find similar issues based on patterns discovered in pass 1</li>
+<li>Gap detection -- compare the actual codebase inventory against what's documented</li></ol>
 <h3>Usage</h3>
 <p>Invoke the skill when:</p>
 <ul><li>Before releases</li><li>After major refactors</li><li>When users report docs don't match behavior</li><li>Periodic hygiene (quarterly)</li></ul>
 <h3>Output</h3>
-<p>Generates <code>docs/audits/AUDIT_REPORT.md</code> with:</p>
-<ul><li>Executive summary (claims verified, false claims found)</li><li>False claims table with line numbers and fixes</li><li>Pattern analysis (common root causes)</li><li>Human review queue for behavioral claims</li></ul>
-<h3>Example Results</h3>
+<p>Generates <code>docs/audits/AUDIT_REPORT.md</code> containing:</p>
+<ul><li>Executive summary -- how many claims verified, how many false</li><li>False claims table with line numbers and suggested fixes</li><li>Pattern analysis of common root causes</li><li>Human review queue for behavioral claims that can't be auto-verified</li></ul>
+<h3>Example results</h3>
 <p>From a real audit:</p>
 <ul><li>12 documents scanned</li><li>~180 claims verified</li><li>31 false claims found (17%)</li><li>Patterns: dead scripts (9), wrong intervals (4), wrong service names (3)</li></ul>
       </div>

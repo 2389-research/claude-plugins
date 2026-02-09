@@ -7,7 +7,7 @@
   <!-- Primary Meta Tags -->
   <title>better-dev | 2389 Research</title>
   <meta name="title" content="better-dev | 2389 Research">
-  <meta name="description" content="better development: CSS workflows, Firebase development, code quality, and real testing">
+  <meta name="description" content="better development: CSS workflows, Firebase development, code quality, real testing, parallel exploration, documentation verification, and token-efficient codegen">
   <meta name="keywords" content="Claude Code, plugins, MCP servers, AI development, Claude, Anthropic, development tools, 2389 Research">
   <meta name="author" content="2389 Research Inc">
   <meta name="robots" content="index, follow">
@@ -19,7 +19,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://2389-research.github.io/claude-plugins/plugins/better-dev/">
   <meta property="og:title" content="better-dev | 2389 Research">
-  <meta property="og:description" content="better development: CSS workflows, Firebase development, code quality, and real testing">
+  <meta property="og:description" content="better development: CSS workflows, Firebase development, code quality, real testing, parallel exploration, documentation verification, and token-efficient codegen">
   <meta property="og:image" content="https://2389-research.github.io/claude-plugins/og-image.png">
   <meta property="og:site_name" content="2389 Research Plugin Marketplace">
 
@@ -27,7 +27,7 @@
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://2389-research.github.io/claude-plugins/plugins/better-dev/">
   <meta property="twitter:title" content="better-dev | 2389 Research">
-  <meta property="twitter:description" content="better development: CSS workflows, Firebase development, code quality, and real testing">
+  <meta property="twitter:description" content="better development: CSS workflows, Firebase development, code quality, real testing, parallel exploration, documentation verification, and token-efficient codegen">
   <meta property="twitter:image" content="https://2389-research.github.io/claude-plugins/og-image.png">
 
   <!-- Favicon -->
@@ -82,9 +82,9 @@
         
       </div>
 
-      <p class="plugin-hero-description">better development: CSS workflows, Firebase development, code quality, and real testing</p>
+      <p class="plugin-hero-description">better development: CSS workflows, Firebase development, code quality, real testing, parallel exploration, documentation verification, and token-efficient codegen</p>
 
-      <div class="plugin-tags-large"><span class="tag">meta</span><span class="tag">development</span><span class="tag">quality</span><span class="tag">testing</span><span class="tag">css</span><span class="tag">firebase</span></div>
+      <div class="plugin-tags-large"><span class="tag">meta</span><span class="tag">development</span><span class="tag">quality</span><span class="tag">testing</span><span class="tag">css</span><span class="tag">firebase</span><span class="tag">parallel</span><span class="tag">documentation</span><span class="tag">codegen</span></div>
 
       <div class="plugin-hero-actions">
         <div class="install-block">
@@ -114,30 +114,31 @@
 
       <div class="readme-content">
         <h2>[meta] Better Dev</h2>
-<p>Meta-plugin that bundles essential development practices for building quality web applications.</p>
+<p>Meta-plugin that bundles development practices for building quality applications.</p>
 <h3>Installation</h3>
 <pre><code class="language-bash">/plugin install better-dev@2389-research
 </code></pre>
 <p>This will automatically install:</p>
-<ul><li><strong>css-development</strong> - CSS workflows with Tailwind composition and semantic naming</li><li><strong>firebase-development</strong> - Firebase project workflows and validation</li><li><strong>fresh-eyes-review</strong> - Final quality gate before commits/PRs</li><li><strong>scenario-testing</strong> - End-to-end testing with real dependencies (no mocks)</li></ul>
-<h3>What This Provides</h3>
-<h4>CSS Development</h4>
-<ul><li>Tailwind composition patterns</li><li>Semantic component naming</li><li>Dark mode by default</li><li>Accessibility-first approach</li></ul>
-<h4>Firebase Development</h4>
-<ul><li>Project setup and initialization</li><li>Feature implementation (Auth, Firestore, Functions, Hosting)</li><li>Debugging and troubleshooting</li><li>Security rules validation</li></ul>
-<h4>Fresh-Eyes Review</h4>
-<ul><li>Mandatory pre-commit quality gate</li><li>Catches security vulnerabilities (SQL injection, XSS, path traversal)</li><li>Finds logic errors and edge cases</li><li>Validates business rules</li></ul>
-<h4>Scenario Testing</h4>
-<ul><li>End-to-end testing with real dependencies</li><li>No mocks allowed</li><li>Validates features actually work</li><li>Real data = truth</li></ul>
-<h3>Why Bundle These?</h3>
-<p>Together these plugins create a complete quality-focused development workflow:</p>
-<ol><li><strong>Build</strong> - CSS and Firebase tools for implementation</li>
-<li><strong>Test</strong> - Scenario testing proves it works</li>
-<li><strong>Ship</strong> - Fresh-eyes review catches bugs before commit</li></ol>
-<p>Quality at every stage.</p>
+<ul><li><code>css-development</code> -- CSS workflows with Tailwind composition and semantic naming</li><li><code>firebase-development</code> -- Firebase project workflows and validation</li><li><code>fresh-eyes-review</code> -- quality gate before commits/PRs</li><li><code>scenario-testing</code> -- end-to-end testing with real dependencies (no mocks)</li><li><code>test-kitchen</code> -- parallel exploration of implementation approaches</li><li><code>documentation-audit</code> -- verify documentation claims against codebase reality</li><li><code>speed-run</code> -- token-efficient code generation with hosted LLM</li></ul>
+<h3>What this provides</h3>
+<h4>CSS development</h4>
+<p>Tailwind composition patterns, semantic component naming, dark mode by default, accessibility-first approach.</p>
+<h4>Firebase development</h4>
+<p>Project setup and initialization, feature implementation (Auth, Firestore, Functions, Hosting), debugging, and security rules validation.</p>
+<h4>Fresh-eyes review</h4>
+<p>Mandatory pre-commit quality gate. Catches security vulnerabilities (SQL injection, XSS, path traversal), logic errors, edge cases, and business rule violations.</p>
+<h4>Scenario testing</h4>
+<p>End-to-end testing with real dependencies. No mocks allowed. Real data is the source of truth.</p>
+<h4>Test kitchen</h4>
+<p>Parallel exploration of implementation approaches. Implements multiple variants simultaneously and lets tests determine the winner.</p>
+<h4>Documentation audit</h4>
+<p>Two-pass extraction with pattern expansion. Verifies documentation claims against codebase reality and catches drift before it causes confusion.</p>
+<h4>Speed run</h4>
+<p>Token-efficient code generation pipeline using a hosted LLM (Cerebras). ~60% token savings on code generation.</p>
+<h3>Why bundle these?</h3>
+<p>They form a workflow: explore with test-kitchen, build with CSS/Firebase/speed-run, test with scenario-testing against real dependencies, review with fresh-eyes before commit, verify docs with documentation-audit, then ship.</p>
 <h3>Philosophy</h3>
-<ul><li>Simple, maintainable code over clever solutions</li><li>Real validation over false confidence (no mocks!)</li><li>Final quality gates prevent production bugs</li><li>Dark mode and accessibility by default</li></ul>
-
+<ul><li>Simple, maintainable code over clever solutions</li><li>Real validation over false confidence (no mocks!)</li><li>Quality gates before every commit</li><li>Dark mode and accessibility by default</li></ul>
       </div>
     </section>
     
@@ -237,7 +238,7 @@
     "name": "2389 Research Inc",
     "url": "https://2389.ai"
   },
-  "description": "better development: CSS workflows, Firebase development, code quality, and real testing",
+  "description": "better development: CSS workflows, Firebase development, code quality, real testing, parallel exploration, documentation verification, and token-efficient codegen",
   "url": "https://2389-research.github.io/claude-plugins/plugins/better-dev/",
   "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/better-dev",
   "softwareVersion": "1.0.0",

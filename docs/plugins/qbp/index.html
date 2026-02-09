@@ -113,15 +113,15 @@
       </div>
 
       <div class="readme-content">
-        <h2>Quaker Business Practice (QBP) Plugin</h2>
-<p>Decision-making skills for Claude that emulate Quaker business practices - seeking unity through discernment rather than consensus through debate.</p>
+        <h2>Quaker Business Practice (QBP) plugin</h2>
+<p>Decision-making skills for Claude that follow Quaker business practices -- seeking unity through discernment rather than consensus through debate.</p>
 <h3>Installation</h3>
 <pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
 /plugin install qbp@2389-research
 </code></pre>
-<h3>Skills Provided</h3>
-<ul><li><strong>qbp</strong> - Main router skill</li><li><strong>qbp:discernment</strong> - Internal voices seeking clarity</li><li><strong>qbp:clearness</strong> - Multi-agent committee for deep analysis</li><li><strong>qbp:gathered</strong> - Participatory discernment with user</li></ul>
-<h3>Quick Example</h3>
+<h3>Skills</h3>
+<ul><li><code>qbp</code> -- main router skill</li><li><code>qbp:discernment</code> -- internal voices seeking clarity</li><li><code>qbp:clearness</code> -- multi-agent committee for deep analysis</li><li><code>qbp:gathered</code> -- participatory discernment with user</li></ul>
+<h3>Quick example</h3>
 <pre><code class="language-">User: "Should we open-source our internal tool? I've been thinking about this for weeks."
 
 Claude (with qbp:gathered): "You've been sitting with this for weeks - you have
@@ -133,22 +133,19 @@ Don't react, discern. This is slow, and that's the point.
 I'd suggest these perspectives alongside yours: Community Builder,
 Business Strategist, Developer Culture voice. Anyone to add?"
 </code></pre>
-<h3>Skills Detail</h3>
+<h3>Skills in detail</h3>
 <h4>qbp:discernment</h4>
 <p>Internal deliberation where Claude convenes multiple perspectives (voices) to discern the right path forward. Use for weighty questions, ethical decisions, and trade-offs.</p>
-<p><strong>What it does:</strong></p>
-<ul><li>Identifies context-relevant perspectives</li><li>Each voice speaks once to the matter</li><li>Clerk role synthesizes toward unity</li><li>Surfaces tensions rather than papering over them</li></ul>
+<p>It identifies context-relevant perspectives, has each voice speak once to the matter, then a clerk role synthesizes toward unity. Tensions get surfaced, not papered over.</p>
 <h4>qbp:clearness</h4>
 <p>Multi-agent committee that spawns specialized agents for parallel deep analysis. Use for code reviews, architecture decisions, and research requiring depth.</p>
-<p><strong>What it does:</strong></p>
-<ul><li>Proposes committee composition (user confirms)</li><li>Spawns agents with specific perspectives</li><li>Agents do real parallel analysis</li><li>Clerk synthesizes findings toward unity</li></ul>
+<p>The skill proposes committee composition (user confirms), spawns agents with specific perspectives, runs real parallel analysis, and has a clerk synthesize findings toward unity.</p>
 <h4>qbp:gathered</h4>
-<p>Participatory discernment where the user joins alongside agent voices. Use when user has a stake or perspective, not just a question.</p>
-<p><strong>What it does:</strong></p>
-<ul><li>Recognizes when user has stake/perspective</li><li>Teaches Quaker discipline (speak once, silence is meaningful, slow is the point)</li><li>Sequential agent voices with check-ins</li><li>User's contribution shapes the synthesis</li></ul>
-<h3>Quaker Principles</h3>
+<p>Participatory discernment where the user joins alongside agent voices. Use when the user has a stake or perspective, not just a question.</p>
+<p>It recognizes when the user has stake/perspective, teaches Quaker discipline (speak once, silence is meaningful, slow is the point), runs sequential agent voices with check-ins, and lets the user's contribution shape the synthesis.</p>
+<h3>Quaker principles</h3>
 <p>These skills are grounded in actual Quaker business practice:</p>
-<table class="readme-table"><thead><tr><th>Principle</th><th>Meaning</th></tr></thead><tbody><tr><td>Sense of the meeting</td><td>Discern where unity lies, don't count votes</td></tr><tr><td>Speaking once</td><td>Each perspective speaks once, then listens</td></tr><tr><td>Silence</td><td>Space between voices lets insights emerge</td></tr><tr><td>Standing aside</td><td>Disagree but don't block ("I wouldn't, but I won't stop you")</td></tr><tr><td>Blocking</td><td>Rare - only for violations of core principles</td></tr><tr><td>Way opens</td><td>Recognize when clarity emerges vs. forcing decision</td></tr></tbody></table>
+<table class="readme-table"><thead><tr><th>Principle</th><th>Meaning</th></tr></thead><tbody><tr><td>Sense of the meeting</td><td>Discern where unity lies, don't count votes</td></tr><tr><td>Speaking once</td><td>Each perspective speaks once, then listens</td></tr><tr><td>Silence</td><td>Space between voices lets insights emerge</td></tr><tr><td>Standing aside</td><td>Disagree but don't block ("I wouldn't, but I won't stop you")</td></tr><tr><td>Blocking</td><td>Rare -- only for violations of core principles</td></tr><tr><td>Way opens</td><td>Recognize when clarity emerges vs. forcing decision</td></tr></tbody></table>
 <h3>Development</h3>
 <p>Skills were developed using TDD for documentation:</p>
 <ol><li>Baseline tests (pressure scenarios without skill)</li>

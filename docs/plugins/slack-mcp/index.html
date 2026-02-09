@@ -113,16 +113,14 @@
       </div>
 
       <div class="readme-content">
-        <h2>Slack MCP Server</h2>
-<p>MCP server for Slack workspace integration. Create channels, invite users, post messages, and manage threads.</p>
-<h3>Features</h3>
-<ul><li>Create public or private channels</li><li>Invite users by email or user ID</li><li>Post messages with markdown formatting</li><li>Reply in threads</li><li>Pin messages</li><li>List workspace users</li></ul>
+        <h2>Slack MCP server</h2>
+<p>MCP server for Slack workspace integration. Handles channel creation, user invites, message posting, and thread management.</p>
 <h3>Setup</h3>
-<h4>1. Create Slack App</h4>
+<h4>1. Create a Slack app</h4>
 <ol><li>Go to <a href="https://api.slack.com/apps" rel="noopener noreferrer">api.slack.com/apps</a></li>
 <li>Click "Create New App" → "From scratch"</li>
 <li>Name it (e.g., "Claude MCP") and select your workspace</li></ol>
-<h4>2. Add OAuth Scopes</h4>
+<h4>2. Add OAuth scopes</h4>
 <p>Under "OAuth & Permissions", add these Bot Token Scopes:</p>
 <pre><code class="language-">channels:manage        # create public channels
 groups:write           # create private channels
@@ -133,11 +131,11 @@ pins:write             # pin messages
 users:read             # list users
 users:read.email       # lookup users by email
 </code></pre>
-<h4>3. Install to Workspace</h4>
+<h4>3. Install to workspace</h4>
 <p>Click "Install to Workspace" and authorize the app.</p>
-<h4>4. Get Bot Token</h4>
+<h4>4. Get bot token</h4>
 <p>Copy the "Bot User OAuth Token" (starts with <code>xoxb-</code>).</p>
-<h4>5. Configure Environment</h4>
+<h4>5. Configure environment</h4>
 <pre><code class="language-bash">export SLACK_BOT_TOKEN="xoxb-your-token-here"
 </code></pre>
 <p>Or add to your Claude config:</p>
@@ -153,7 +151,7 @@ users:read.email       # lookup users by email
   }
 }
 </code></pre>
-<h4>6. Build and Run</h4>
+<h4>6. Build and run</h4>
 <pre><code class="language-bash">npm install
 npm run build
 npm start
@@ -200,7 +198,7 @@ npm start
 <p>List all users in the workspace.</p>
 <pre><code class="language-json">{}
 </code></pre>
-<h3>Usage with Product Launcher</h3>
+<h3>Usage with product launcher</h3>
 <p>After generating GTM materials, say "push to slack":</p>
 <ol><li>Creates <code>#gtm-[product]</code> private channel</li>
 <li>Invites Harper and Dylan</li>

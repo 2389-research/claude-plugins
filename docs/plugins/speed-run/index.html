@@ -107,14 +107,53 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">About This Plugin</h2>
-          <p class="section-subtitle">What this plugin provides</p>
+          <h2 class="section-title">Documentation</h2>
+          <p class="section-subtitle">Full plugin documentation and usage guide</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <p>Token-efficient code generation pipeline - parallel implementation with hosted LLM (Cerebras) for ~60% token savings. Includes MCP server.</p>
-        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/claude-plugins/tree/main/speed-run" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
+        <h2>Speed-Run</h2>
+<p>Offloads code generation to Cerebras (~2000 tokens/sec), then Claude handles architecture and fixes. About 60% fewer tokens, 20x faster generation per file.</p>
+<h3>Installation</h3>
+<pre><code class="language-bash">/plugin install speed-run@2389-research
+</code></pre>
+<p>You need a free Cerebras API key from https://cloud.cerebras.ai. Add it to <code>~/.claude/settings.json</code>:</p>
+<pre><code class="language-json">{
+  "env": {
+    "CEREBRAS_API_KEY": "your-key-here"
+  }
+}
+</code></pre>
+<h3>What you get</h3>
+<ul><li>Turbo -- direct Cerebras code generation for single tasks</li><li>Showdown -- multiple runners implement the same spec in parallel, judge picks the winner</li><li>Any-percent -- multiple approaches to the same problem in parallel, judge evaluates tradeoffs</li><li>Judge -- scoring framework for comparing implementations (5 criteria, 25 points max)</li><li>MCP server -- Cerebras API integration with file parsing and disk writing</li></ul>
+<h3>Quick example</h3>
+<pre><code class="language-">You: "speed-run this authentication middleware"
+
+Claude: Checks API key, routes to turbo.
+        Writes contract prompt, calls Cerebras, gets code in ~0.5s.
+        Runs tests, fixes any failures.
+        Done.
+</code></pre>
+<p>For bigger tasks:</p>
+<pre><code class="language-">You: "speed-run showdown: implement the caching layer"
+
+Claude: Writes shared design doc.
+        Dispatches 3 runners in parallel (each uses Cerebras).
+        All runners: generate, test, fix.
+        Judge scores all three.
+        Winner kept, losers cleaned up.
+</code></pre>
+<h3>How it works</h3>
+<ol><li>Claude decides the architecture and writes a structured contract prompt</li>
+<li>Cerebras generates the code at ~2000 tokens/sec</li>
+<li>Claude runs tests and fixes anything Cerebras got wrong</li>
+<li>Same quality, fewer tokens, less wall clock time</li></ol>
+<p>Most code is pattern-following. Cerebras is fast at that. The parts that require actual thinking still go through Claude.</p>
+<h3>When to use it</h3>
+<table class="readme-table"><thead><tr><th>Scenario</th><th>Speed-run?</th></tr></thead><tbody><tr><td>Algorithmic code, data transforms</td><td>Yes, turbo</td></tr><tr><td>Boilerplate, scaffolding</td><td>Yes, turbo</td></tr><tr><td>Comparing multiple implementations</td><td>Yes, showdown</td></tr><tr><td>Exploring different architectures</td><td>Yes, any-percent</td></tr><tr><td>Complex business logic that needs reasoning</td><td>No, use Claude directly</td></tr><tr><td>One-liner fixes</td><td>No, overkill</td></tr></tbody></table>
+<h3>Docs</h3>
+<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/speed-run/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> -- architecture, skill details, config, common mistakes</li><li><a href="skills/" rel="noopener noreferrer">skills/</a> -- individual skill definitions</li><li><a href="mcp/" rel="noopener noreferrer">mcp/</a> -- MCP server source</li></ul>
       </div>
     </section>
     

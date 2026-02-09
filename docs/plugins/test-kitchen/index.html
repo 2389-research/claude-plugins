@@ -147,9 +147,9 @@ Design complete, "let's implement"
     ↓
 [Implementation]
 </code></pre>
-<h3>Quick Examples</h3>
-<h4>Entry Gate: Omakase-off</h4>
-<p><strong>Trigger 1: On build/create request</strong></p>
+<h3>Quick examples</h3>
+<h4>Entry gate: omakase-off</h4>
+<p>When you make a build/create request:</p>
 <pre><code class="language-">User: "Build a notification system"
 
 Claude: I'm using test-kitchen:omakase-off.
@@ -161,10 +161,10 @@ How would you like to explore this?
 
 Which approach?
 </code></pre>
-<p><strong>Option 1 (Brainstorm):</strong> Proceeds to brainstorming skill (or fallback brainstorming), with passive slot detection</p>
-<p><strong>Option 2 (Omakase):</strong></p>
+<p>Option 1 (Brainstorm) proceeds to brainstorming skill (or fallback brainstorming), with passive slot detection.</p>
+<p>Option 2 (Omakase) does the following:</p>
 <ul><li>Quick context gathering (1-2 questions)</li><li>Generate 3-5 architectural approaches</li><li>Implement ALL in parallel via git worktrees</li><li>Run same scenario tests on each</li><li>Fresh-eyes review survivors</li><li>Present comparison, user picks winner</li></ul>
-<p><strong>Trigger 2: During brainstorming (slot detection)</strong></p>
+<p>During brainstorming, slot detection can also trigger it:</p>
 <pre><code class="language-">Claude: What storage approach would you prefer?
 User: "not sure, either could work"
 
@@ -180,7 +180,7 @@ You seem flexible on the approach. Would you like to:
 2. Explore multiple approaches in parallel (omakase-off)
    → I'll implement 2-3 variants and let tests decide
 </code></pre>
-<h4>Exit Gate: Cookoff</h4>
+<h4>Exit gate: cookoff</h4>
 <pre><code class="language-">User: "Looks good, let's implement"
 
 Claude: I'm using test-kitchen:cookoff.
@@ -194,19 +194,19 @@ How would you like to implement this design?
 
 Which approach?
 </code></pre>
-<p><strong>Option 1 (Cookoff):</strong></p>
+<p>Option 1 (Cookoff):</p>
 <ul><li>Each agent reads the same design doc</li><li>Each agent creates their OWN implementation plan</li><li>All implement in parallel</li><li>Fresh-eyes review, compare results</li><li>User picks winner</li></ul>
-<p><strong>Option 2/3:</strong> Single agent or local implementation proceeds normally</p>
-<h3>Key Insight</h3>
-<p><strong>Skills need aggressive triggers to work.</strong> They can't passively detect "uncertainty" or "readiness" - they must claim specific moments in the conversation flow.</p>
-<ul><li><strong>Omakase-off</strong>: Claims the BUILD/CREATE moment (before brainstorming)</li><li><strong>Cookoff</strong>: Claims the IMPLEMENT moment (after design)</li></ul>
+<p>Options 2/3 -- single agent or local implementation proceeds normally.</p>
+<h3>Why aggressive triggers</h3>
+<p>Skills can't passively detect "uncertainty" or "readiness" -- they must claim specific moments in the conversation flow.</p>
+<ul><li>Omakase-off claims the BUILD/CREATE moment (before brainstorming)</li><li>Cookoff claims the IMPLEMENT moment (after design)</li></ul>
 <h3>Dependencies</h3>
-<p>Test Kitchen orchestrates these skills (uses fallbacks if not installed):</p>
+<p>Test Kitchen orchestrates these skills (falls back gracefully if not installed):</p>
 <ul><li><code>superpowers:brainstorming</code></li><li><code>superpowers:writing-plans</code></li><li><code>superpowers:executing-plans</code></li><li><code>superpowers:using-git-worktrees</code></li><li><code>superpowers:dispatching-parallel-agents</code></li><li><code>superpowers:test-driven-development</code></li><li><code>superpowers:verification-before-completion</code></li><li><code>scenario-testing:skills</code></li><li><code>fresh-eyes-review:skills</code></li><li><code>superpowers:finishing-a-development-branch</code></li></ul>
 <h3>Documentation</h3>
-<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/test-kitchen/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> - Full plugin instructions</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/test-kitchen/skills/omakase-off/SKILL.md" rel="noopener noreferrer" target="_blank">Omakase-off Skill</a> - Entry gate (wraps brainstorming)</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/test-kitchen/skills/cookoff/SKILL.md" rel="noopener noreferrer" target="_blank">Cookoff Skill</a> - Exit gate (wraps implementation)</li></ul>
+<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/test-kitchen/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> -- full plugin instructions</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/test-kitchen/skills/omakase-off/SKILL.md" rel="noopener noreferrer" target="_blank">Omakase-off skill</a> -- entry gate (wraps brainstorming)</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/test-kitchen/skills/cookoff/SKILL.md" rel="noopener noreferrer" target="_blank">Cookoff skill</a> -- exit gate (wraps implementation)</li></ul>
 <h3>Origin</h3>
-<p>The "Test Kitchen" name reflects the experimental nature - like a restaurant test kitchen where chefs try multiple approaches before putting a dish on the menu.</p>
+<p>Named after a restaurant test kitchen, where chefs try multiple approaches before putting a dish on the menu.</p>
       </div>
     </section>
     

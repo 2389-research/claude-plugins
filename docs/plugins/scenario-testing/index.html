@@ -113,23 +113,23 @@
       </div>
 
       <div class="readme-content">
-        <h2>Scenario Testing</h2>
-<p>End-to-end testing with real dependencies. No mocks allowed - scenarios with real data are the only source of truth.</p>
+        <h2>Scenario testing</h2>
+<p>End-to-end testing with real dependencies. No mocks allowed.</p>
 <h3>Installation</h3>
 <pre><code class="language-bash">/plugin install scenario-testing@2389-research
 </code></pre>
-<h3>What This Plugin Provides</h3>
-<p>Enforces scenario-driven testing where features are validated by exercising real systems with real dependencies. Mocks create false confidence - only real scenarios prove code works.</p>
-<h4>Core Principle</h4>
+<h3>What this plugin does</h3>
+<p>Enforces scenario-driven testing where features are validated against real systems with real dependencies. Mocks create false confidence. Only real scenarios prove code works.</p>
+<h4>Core principle</h4>
 <p><strong>"NO FEATURE IS VALIDATED UNTIL A SCENARIO PASSES WITH REAL DEPENDENCIES"</strong></p>
-<h3>When to Use</h3>
+<h3>When to use</h3>
 <ul><li>Writing tests for new features</li><li>Validating that code actually works</li><li>When tempted to use mocks</li><li>Before declaring work complete</li><li>After fixing bugs</li></ul>
-<h3>The Truth Hierarchy</h3>
-<ol><li><strong>Scenario tests</strong> (real system, real data) = <strong>TRUTH</strong></li>
-<li><strong>Unit tests</strong> (isolated) = human comfort only</li>
-<li><strong>Mocks</strong> = lies hiding bugs</li></ol>
-<p>As the principle states: "A test that uses mocks is not testing your system. It's testing your assumptions about how dependencies behave."</p>
-<h3>Quick Example</h3>
+<h3>The truth hierarchy</h3>
+<ol><li>Scenario tests (real system, real data) = <strong>truth</strong></li>
+<li>Unit tests (isolated) = human comfort only</li>
+<li>Mocks = lies hiding bugs</li></ol>
+<p>A test that uses mocks is not testing your system. It's testing your assumptions about how dependencies behave.</p>
+<h3>Quick example</h3>
 <pre><code class="language-python"># .scratch/test-user-registration.py - NOT COMMITTED, gitignored
 # Uses real database, real auth service (test mode)
 
@@ -154,39 +154,37 @@ def test_user_registration_scenario():
 
 # After scenario passes, extract pattern to scenarios.jsonl (IS COMMITTED)
 </code></pre>
-<h3>Required Practices</h3>
-<h4>1. Write Scenarios in <code>.scratch/</code></h4>
-<ul><li>Use any language appropriate to the task</li><li>Exercise the real system end-to-end</li><li><strong>Zero mocks allowed</strong></li><li>Must be in <code>.gitignore</code> (never commit)</li></ul>
-<h4>2. Promote Patterns to <code>scenarios.jsonl</code></h4>
-<ul><li>Extract recurring scenarios as documented specifications</li><li>One JSON line per scenario</li><li>Include: name, description, given/when/then, validates</li><li><strong>This file IS committed</strong></li></ul>
-<h4>3. Use Real Dependencies</h4>
+<h3>Required practices</h3>
+<h4>1. Write scenarios in <code>.scratch/</code></h4>
+<ul><li>Use any language appropriate to the task</li><li>Exercise the real system end-to-end</li><li>Zero mocks allowed</li><li>Must be in <code>.gitignore</code> (never commit)</li></ul>
+<h4>2. Promote patterns to <code>scenarios.jsonl</code></h4>
+<ul><li>Extract recurring scenarios as documented specifications</li><li>One JSON line per scenario</li><li>Include: name, description, given/when/then, validates</li><li>This file IS committed</li></ul>
+<h4>3. Use real dependencies</h4>
 <p>External APIs must hit actual services (sandbox/test mode acceptable). Mocking any dependency invalidates the scenario.</p>
-<h4>4. Independence Requirement</h4>
-<p>Each scenario must run standalone without depending on prior executions. This enables:</p>
-<ul><li>Parallel execution</li><li>Prevents hidden ordering dependencies</li><li>Reliable CI/CD integration</li></ul>
-<h3>What Makes a Scenario Invalid</h3>
+<h4>4. Independence requirement</h4>
+<p>Each scenario must run standalone without depending on prior executions. This means you get parallel execution, no hidden ordering dependencies, and reliable CI/CD integration.</p>
+<h3>What makes a scenario invalid</h3>
 <p>A scenario is invalid if it:</p>
 <ul><li>Contains any mocks whatsoever</li><li>Uses fake data instead of real storage</li><li>Depends on another scenario running first</li><li>Was never actually executed to verify it passes</li></ul>
-<h3>Common Violations to Avoid</h3>
+<h3>Common violations to avoid</h3>
 <p>Reject these rationalizations:</p>
-<ul><li><strong>"Just a quick unit test..."</strong> - Unit tests don't validate features</li><li><strong>"Too simple for end-to-end..."</strong> - Integration breaks simple things</li><li><strong>"I'll mock for speed..."</strong> - Speed doesn't matter if tests lie</li><li><strong>"I don't have API credentials..."</strong> - Ask your human partner for real ones</li></ul>
-<h3>Definition of Done</h3>
+<ul><li>"Just a quick unit test..." -- unit tests don't validate features</li><li>"Too simple for end-to-end..." -- integration breaks simple things</li><li>"I'll mock for speed..." -- speed doesn't matter if tests lie</li><li>"I don't have API credentials..." -- ask your human partner for real ones</li></ul>
+<h3>Definition of done</h3>
 <p>A feature is complete only when:</p>
-<ol><li>✅ A scenario in <code>.scratch/</code> passes with zero mocks</li>
-<li>✅ Real dependencies are exercised</li>
-<li>✅ <code>.scratch/</code> remains in <code>.gitignore</code></li>
-<li>✅ Robust patterns extracted to <code>scenarios.jsonl</code></li></ol>
-<h3>Example Workflow</h3>
-<ol><li><strong>Write scenario</strong> - Create <code>.scratch/test-user-registration.py</code></li>
-<li><strong>Use real dependencies</strong> - Hit real database, real auth service (test mode)</li>
-<li><strong>Run and verify</strong> - Execute scenario, confirm it passes</li>
-<li><strong>Extract pattern</strong> - Document in <code>scenarios.jsonl</code></li>
-<li><strong>Keep .scratch ignored</strong> - Never commit scratch scenarios</li></ol>
-<h3>Why This Matters</h3>
-<ul><li><strong>Unit tests</strong> verify isolated logic</li><li><strong>Integration tests</strong> verify components work together</li><li><strong>Scenario tests</strong> verify the system actually works</li></ul>
-<p>Only scenario tests prove your feature delivers value to users.</p>
+<ol><li>A scenario in <code>.scratch/</code> passes with zero mocks</li>
+<li>Real dependencies are exercised</li>
+<li><code>.scratch/</code> remains in <code>.gitignore</code></li>
+<li>Patterns extracted to <code>scenarios.jsonl</code></li></ol>
+<h3>Example workflow</h3>
+<ol><li>Write scenario -- create <code>.scratch/test-user-registration.py</code></li>
+<li>Use real dependencies -- hit real database, real auth service (test mode)</li>
+<li>Run and verify -- execute scenario, confirm it passes</li>
+<li>Extract pattern -- document in <code>scenarios.jsonl</code></li>
+<li>Keep .scratch ignored -- never commit scratch scenarios</li></ol>
+<h3>Why bother</h3>
+<p>Unit tests verify isolated logic. Integration tests verify components work together. Scenario tests verify the system actually works. Only scenarios prove your feature delivers value to users.</p>
 <h3>Documentation</h3>
-<p>See <a href="https://github.com/2389-research/claude-plugins/blob/main/scenario-testing/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a> for complete scenario testing protocol.</p>
+<p>See <a href="https://github.com/2389-research/claude-plugins/blob/main/scenario-testing/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a> for the complete scenario testing protocol.</p>
 <h3>Philosophy</h3>
 <p>Real validation over false confidence. Mocks test assumptions, not reality.</p>
       </div>

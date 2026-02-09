@@ -114,16 +114,16 @@
 
       <div class="readme-content">
         <h2>Binary Reverse Engineering Plugin</h2>
-<p>Agentic workflow for reverse engineering ELF binaries from embedded devices using radare2, Ghidra, GDB, and QEMU.</p>
+<p>Reverse engineer ELF binaries from embedded devices using radare2, Ghidra, GDB, and QEMU.</p>
 <h3>Installation</h3>
 <pre><code class="language-bash">/plugin install binary-re@2389-research
 </code></pre>
-<h3>What This Plugin Provides</h3>
+<h3>What this plugin provides</h3>
 <h4>Skills</h4>
-<ul><li><strong>binary-re</strong> - Structured RE workflow with hypothesis-driven analysis</li></ul>
+<ul><li><code>binary-re</code> -- structured RE workflow with hypothesis-driven analysis</li></ul>
 <h4>Capabilities</h4>
-<ul><li>Cross-architecture static analysis (ARM64, ARMv7, x86_64, MIPS)</li><li>Dynamic tracing via QEMU user-mode emulation</li><li>GDB integration for fine-grained debugging</li><li>Ghidra headless decompilation</li><li>Human-in-the-loop for risky operations</li></ul>
-<h3>Quick Example</h3>
+<ul><li>Cross-architecture static analysis (ARM64, ARMv7, x86_64, MIPS)</li><li>Dynamic tracing via QEMU user-mode emulation</li><li>GDB integration for debugging</li><li>Ghidra headless decompilation</li><li>Human-in-the-loop gates for risky operations</li></ul>
+<h3>Quick example</h3>
 <pre><code class="language-">User: "Analyze this binary from an IoT device - ARM, Linux-based"
 
 Claude: [Triggers binary-re skill]
@@ -151,7 +151,7 @@ Evidence: curl+ssl imports, telemetry URL string
 Do you want me to proceed with static analysis of network-related
 functions, or should we try dynamic analysis under QEMU first?
 </code></pre>
-<h3>Tool Requirements</h3>
+<h3>Tool requirements</h3>
 <pre><code class="language-bash"># Required
 sudo apt install radare2 qemu-user gdb-multiarch
 
@@ -162,19 +162,17 @@ pip install frida-tools
 # ARM sysroots
 sudo apt install libc6-armhf-cross libc6-arm64-cross
 </code></pre>
-<h3>Use Cases</h3>
-<ul><li><strong>Firmware Analysis</strong> - Understand device behavior without source</li><li><strong>Protocol Reverse Engineering</strong> - Map network communications</li><li><strong>Security Research</strong> - Find vulnerabilities in embedded systems</li><li><strong>Hardware Hacking</strong> - Analyze robot/IoT device internals</li></ul>
+<h3>Use cases</h3>
+<ul><li>Firmware analysis -- understand device behavior without source</li><li>Protocol reverse engineering -- map network communications</li><li>Security research -- find vulnerabilities in embedded systems</li><li>Hardware hacking -- analyze robot/IoT device internals</li></ul>
 <h3>Philosophy</h3>
-<p><strong>The LLM drives analysis; the human provides context.</strong></p>
-<p>You tell Claude:</p>
-<ul><li>What platform/device the binary came from</li><li>What hardware/chips are involved</li><li>What the binary is theorized to do</li><li>Any constraints (no network, isolated test env)</li></ul>
-<p>Claude executes:</p>
-<ul><li>Tool invocations with structured output</li><li>Hypothesis formation from evidence</li><li>Experiment design to test theories</li><li>Synthesis into actionable knowledge</li></ul>
-<h3>Human-in-the-Loop</h3>
+<p>The LLM drives analysis; the human provides context.</p>
+<p>You tell Claude what platform/device the binary came from, what hardware is involved, what the binary is theorized to do, and any constraints (no network, isolated test env, etc).</p>
+<p>Claude runs the tools, forms hypotheses from evidence, designs experiments to test theories, and synthesizes findings into something actionable.</p>
+<h3>Human-in-the-loop</h3>
 <p>The skill asks for confirmation before:</p>
 <ul><li>Executing binaries (even sandboxed)</li><li>Network-capable dynamic analysis</li><li>Operations requiring device access</li><li>Major changes in analysis direction</li></ul>
 <h3>Documentation</h3>
-<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/binary-re/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> - Detailed skill reference</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/binary-re/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a> - Full workflow documentation</li></ul>
+<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/binary-re/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> -- detailed skill reference</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/binary-re/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a> -- full workflow documentation</li></ul>
 <h3>License</h3>
 <p>MIT</p>
       </div>
