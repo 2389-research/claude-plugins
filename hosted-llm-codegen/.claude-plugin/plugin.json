@@ -1,0 +1,5 @@
+{
+  "name": "hosted-llm-codegen",
+  "description": "Use hosted LLM (Cerebras) via MCP for code generation. Saves ~60% tokens on algorithmic tasks.",
+  "version": "1.0.0"
+}

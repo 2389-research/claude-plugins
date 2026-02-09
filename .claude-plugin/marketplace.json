@@ -422,6 +422,24 @@
                 "diary"
             ],
             "strict": true
+        },
+        {
+            "name": "speed-run",
+            "source": "./speed-run",
+            "description": "Token-efficient code generation pipeline - parallel implementation with hosted LLM (Cerebras) for ~60% token savings. Includes MCP server.",
+            "version": "1.0.0",
+            "keywords": [
+                "codegen",
+                "speed-run",
+                "parallel",
+                "hosted-llm",
+                "cerebras",
+                "token-efficient",
+                "turbo",
+                "race",
+                "mcp"
+            ],
+            "strict": false
         }
     ]
 }
