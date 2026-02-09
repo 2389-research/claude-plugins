@@ -1,3 +1,6 @@
+// ABOUTME: Cerebras API client for the speed-run MCP server.
+// ABOUTME: Handles generation and status checks with structured results.
+
 export interface GenerateResult {
   status: "ok" | "error";
   response?: string;
@@ -64,10 +67,10 @@ export class CerebrasClient {
 
     const startTime = Date.now();
 
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), this.timeoutMs);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), this.timeoutMs);
 
+    try {
       const response = await fetch(`${this.baseUrl}/chat/completions`, {
         method: "POST",
         headers: {
@@ -82,8 +85,6 @@ export class CerebrasClient {
         }),
         signal: controller.signal,
       });
-
-      clearTimeout(timeoutId);
 
       if (!response.ok) {
         const text = await response.text();
@@ -124,6 +125,8 @@ export class CerebrasClient {
         };
       }
       return { status: "error", error: error.message || String(error) };
+    } finally {
+      clearTimeout(timeoutId);
     }
   }
 
@@ -139,16 +142,14 @@ export class CerebrasClient {
       };
     }
 
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
 
+    try {
       const response = await fetch(`${this.baseUrl}/models`, {
         headers: { Authorization: `Bearer ${this.apiKey}` },
         signal: controller.signal,
       });
-
-      clearTimeout(timeoutId);
 
       if (response.ok) {
         const data = await response.json();
@@ -174,6 +175,8 @@ export class CerebrasClient {
         error: error.message || String(error),
         url: this.baseUrl,
       };
+    } finally {
+      clearTimeout(timeoutId);
     }
   }
 }

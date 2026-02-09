@@ -28,11 +28,11 @@ Restart Claude Code after setting the key.
 
 ### MCP Server Setup
 
-The MCP server is a Node/TypeScript project in `mcp/`. If `mcp__speed-run__*` tools aren't available:
+The MCP server is a Node/TypeScript project in `./mcp/`. If `mcp__speed-run__*` tools aren't available:
 
 1. Build the server:
 ```bash
-cd mcp && npm install && npm run build
+cd ./mcp && npm install && npm run build
 ```
 
 2. Register the server:

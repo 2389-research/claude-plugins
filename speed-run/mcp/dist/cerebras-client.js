@@ -1,3 +1,5 @@
+// ABOUTME: Cerebras API client for the speed-run MCP server.
+// ABOUTME: Handles generation and status checks with structured results.
 export class CerebrasClient {
     apiKey;
     baseUrl;
@@ -32,9 +34,9 @@ export class CerebrasClient {
         }
         messages.push({ role: "user", content: prompt });
         const startTime = Date.now();
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), this.timeoutMs);
         try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), this.timeoutMs);
             const response = await fetch(`${this.baseUrl}/chat/completions`, {
                 method: "POST",
                 headers: {
@@ -49,7 +51,6 @@ export class CerebrasClient {
                 }),
                 signal: controller.signal,
             });
-            clearTimeout(timeoutId);
             if (!response.ok) {
                 const text = await response.text();
                 return { status: "error", error: `HTTP ${response.status}: ${text}` };
@@ -88,6 +89,9 @@ export class CerebrasClient {
             }
             return { status: "error", error: error.message || String(error) };
         }
+        finally {
+            clearTimeout(timeoutId);
+        }
     }
     async checkStatus() {
         if (!this.apiKey) {
@@ -99,14 +103,13 @@ export class CerebrasClient {
                 setup_hint: 'Set CEREBRAS_API_KEY either in ~/.claude/settings.json under "env" or export in ~/.zshrc - get free key at https://cloud.cerebras.ai',
             };
         }
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
         try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 10000);
             const response = await fetch(`${this.baseUrl}/models`, {
                 headers: { Authorization: `Bearer ${this.apiKey}` },
                 signal: controller.signal,
             });
-            clearTimeout(timeoutId);
             if (response.ok) {
                 const data = await response.json();
                 const models = (data.data || [])
@@ -131,6 +134,9 @@ export class CerebrasClient {
                 error: error.message || String(error),
                 url: this.baseUrl,
             };
+        }
+        finally {
+            clearTimeout(timeoutId);
         }
     }
 }

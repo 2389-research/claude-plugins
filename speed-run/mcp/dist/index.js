@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// ABOUTME: Speed-run MCP server entry point.
+// ABOUTME: Exposes generation and file-writing tools over stdio.
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema, } from "@modelcontextprotocol/sdk/types.js";
