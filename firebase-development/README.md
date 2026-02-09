@@ -1,4 +1,4 @@
-# Firebase Development Plugin
+# Firebase development plugin
 
 Firebase project workflows including setup, features, debugging, and validation.
 
@@ -9,28 +9,23 @@ Firebase project workflows including setup, features, debugging, and validation.
 /plugin install firebase-development@2389-research
 ```
 
-## What This Plugin Provides
+## What this plugin provides
 
 Skills for Firebase development following 2389 patterns:
 
-- **firebase-development** - Main orchestrator skill that routes to specific sub-skills
-- **firebase-development:project-setup** - Initialize new Firebase projects
-- **firebase-development:add-feature** - Add features to existing projects
-- **firebase-development:debug** - Debug Firebase issues
-- **firebase-development:validate** - Validate project structure
+- `firebase-development` -- main orchestrator skill that routes to specific sub-skills
+- `firebase-development:project-setup` -- initialize new Firebase projects
+- `firebase-development:add-feature` -- add features to existing projects
+- `firebase-development:debug` -- debug Firebase issues
+- `firebase-development:validate` -- validate project structure
 
 ## Patterns
 
-This plugin supports:
+This plugin supports multi-hosting (multiple sites or single), authentication via custom API keys or Firebase Auth or both, Cloud Functions organized as Express apps or domain-grouped or individual files, and server-write-only vs client-write security models.
 
-- **Multi-hosting setup**: Multiple sites or single hosting
-- **Authentication**: Custom API keys, Firebase Auth, or both
-- **Cloud Functions**: Express, domain-grouped, or individual files
-- **Security models**: Server-write-only vs client-write with validation
-- **Emulator-first development**: Always test locally before deploying
-- **Modern tooling**: TypeScript, vitest, biome
+Development is emulator-first -- always test locally before deploying. Tooling is TypeScript, vitest, and biome.
 
-## Quick Example
+## Quick example
 
 ```typescript
 // Cloud Function with domain grouping

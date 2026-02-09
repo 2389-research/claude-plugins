@@ -8,13 +8,13 @@ Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, an
 /plugin install xtool@2389-research
 ```
 
-## What This Plugin Provides
+## What this plugin provides
 
 ### Skills
 
-- **using-xtool** - Complete guide for xtool iOS development including project creation, app extensions (widgets, share extensions), and configuration
+- `using-xtool` -- guide for xtool iOS development including project creation, app extensions (widgets, share extensions), and configuration
 
-## Quick Example
+## Quick example
 
 Create a new iOS app:
 ```bash
@@ -30,7 +30,7 @@ Add a widget extension:
 4. Create `MyWidget-Info.plist` with `NSExtensionPointIdentifier`
 5. Run `xtool dev`
 
-## When This Skill Applies
+## When this skill applies
 
 The skill auto-triggers on:
 - Mentions of `xtool`
@@ -38,9 +38,7 @@ The skill auto-triggers on:
 - Building iOS apps on Linux/Windows
 - App extension setup (widgets, share extensions)
 
-## Key Differentiator
-
-xtool is NOT XcodeGen or Tuist:
+## How xtool differs from XcodeGen/Tuist
 
 | xtool Uses | NOT These |
 |------------|-----------|
@@ -51,4 +49,4 @@ xtool is NOT XcodeGen or Tuist:
 ## Links
 
 - [xtool GitHub](https://github.com/nickyramone/xtool)
-- [Plugin CLAUDE.md](./CLAUDE.md) - Development instructions
+- [Plugin CLAUDE.md](./CLAUDE.md) -- development instructions

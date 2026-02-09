@@ -44,11 +44,11 @@ Design complete, "let's implement"
 [Implementation]
 ```
 
-## Quick Examples
+## Quick examples
 
-### Entry Gate: Omakase-off
+### Entry gate: omakase-off
 
-**Trigger 1: On build/create request**
+When you make a build/create request:
 ```
 User: "Build a notification system"
 
@@ -62,9 +62,9 @@ How would you like to explore this?
 Which approach?
 ```
 
-**Option 1 (Brainstorm):** Proceeds to brainstorming skill (or fallback brainstorming), with passive slot detection
+Option 1 (Brainstorm) proceeds to brainstorming skill (or fallback brainstorming), with passive slot detection.
 
-**Option 2 (Omakase):**
+Option 2 (Omakase) does the following:
 - Quick context gathering (1-2 questions)
 - Generate 3-5 architectural approaches
 - Implement ALL in parallel via git worktrees
@@ -72,7 +72,7 @@ Which approach?
 - Fresh-eyes review survivors
 - Present comparison, user picks winner
 
-**Trigger 2: During brainstorming (slot detection)**
+During brainstorming, slot detection can also trigger it:
 ```
 Claude: What storage approach would you prefer?
 User: "not sure, either could work"
@@ -90,7 +90,7 @@ You seem flexible on the approach. Would you like to:
    → I'll implement 2-3 variants and let tests decide
 ```
 
-### Exit Gate: Cookoff
+### Exit gate: cookoff
 
 ```
 User: "Looks good, let's implement"
@@ -107,25 +107,25 @@ How would you like to implement this design?
 Which approach?
 ```
 
-**Option 1 (Cookoff):**
+Option 1 (Cookoff):
 - Each agent reads the same design doc
 - Each agent creates their OWN implementation plan
 - All implement in parallel
 - Fresh-eyes review, compare results
 - User picks winner
 
-**Option 2/3:** Single agent or local implementation proceeds normally
+Options 2/3 -- single agent or local implementation proceeds normally.
 
-## Key Insight
+## Why aggressive triggers
 
-**Skills need aggressive triggers to work.** They can't passively detect "uncertainty" or "readiness" - they must claim specific moments in the conversation flow.
+Skills can't passively detect "uncertainty" or "readiness" -- they must claim specific moments in the conversation flow.
 
-- **Omakase-off**: Claims the BUILD/CREATE moment (before brainstorming)
-- **Cookoff**: Claims the IMPLEMENT moment (after design)
+- Omakase-off claims the BUILD/CREATE moment (before brainstorming)
+- Cookoff claims the IMPLEMENT moment (after design)
 
 ## Dependencies
 
-Test Kitchen orchestrates these skills (uses fallbacks if not installed):
+Test Kitchen orchestrates these skills (falls back gracefully if not installed):
 
 - `superpowers:brainstorming`
 - `superpowers:writing-plans`
@@ -140,10 +140,10 @@ Test Kitchen orchestrates these skills (uses fallbacks if not installed):
 
 ## Documentation
 
-- [CLAUDE.md](./CLAUDE.md) - Full plugin instructions
-- [Omakase-off Skill](./skills/omakase-off/SKILL.md) - Entry gate (wraps brainstorming)
-- [Cookoff Skill](./skills/cookoff/SKILL.md) - Exit gate (wraps implementation)
+- [CLAUDE.md](./CLAUDE.md) -- full plugin instructions
+- [Omakase-off skill](./skills/omakase-off/SKILL.md) -- entry gate (wraps brainstorming)
+- [Cookoff skill](./skills/cookoff/SKILL.md) -- exit gate (wraps implementation)
 
 ## Origin
 
-The "Test Kitchen" name reflects the experimental nature - like a restaurant test kitchen where chefs try multiple approaches before putting a dish on the menu.
+Named after a restaurant test kitchen, where chefs try multiple approaches before putting a dish on the menu.

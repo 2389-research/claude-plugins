@@ -1,4 +1,4 @@
-# Remote System Maintenance
+# Remote system maintenance
 
 Structured procedures for diagnosing and maintaining remote Linux systems via SSH/tmux.
 
@@ -8,25 +8,18 @@ Structured procedures for diagnosing and maintaining remote Linux systems via SS
 /plugin install remote-system-maintenance@2389-research
 ```
 
-## What This Plugin Provides
+## What this plugin does
 
-Structured guidance for system diagnostics and maintenance on remote Linux systems, with emphasis on Ubuntu/Debian platforms.
+Walks you through system diagnostics and cleanup on remote Linux boxes, focused on Ubuntu/Debian. Three diagnostic phases, a seven-stage cleanup sequence, and documentation templates so you actually record what you did. Expect to recover 2+ GB in a thorough session.
 
-### Key Features
-
-- **Three-phase diagnostic approach**: baseline diagnostics, log review, package assessment
-- **Seven-stage cleanup sequence**: apt, journal, snap revisions, and more
-- **Documentation templates**: structured logs with quantified results
-- **Real-world metrics**: expect 2+ GB recovery in comprehensive sessions
-
-## When to Use
+## When to use
 
 - Performing system maintenance on remote Linux servers
 - Recovering disk space on Ubuntu/Debian systems
 - Running diagnostics on remote systems
 - Cleaning up package caches, journals, or snap revisions
 
-## Quick Example
+## Quick example
 
 ```bash
 # Phase 1: Initial diagnostics
@@ -50,9 +43,9 @@ snap remove package-name --revision=123
 # Document: hostname, before/after disk, MB freed per category
 ```
 
-## Three-Phase Approach
+## Three-phase approach
 
-### Phase 1: Initial Diagnostics
+### Phase 1: Initial diagnostics
 
 Capture baseline system state:
 - Hostname and system identification
@@ -60,37 +53,37 @@ Capture baseline system state:
 - Process status and load
 - Zombie process detection
 
-### Phase 2: System Log Review
+### Phase 2: System log review
 
-Examine system health indicators:
+Examine system health:
 - Recent error messages in system logs
-- Journal disk consumption analysis
+- Journal disk consumption
 - Critical service status
 - Authentication and security events
 
-### Phase 3: Package Assessment
+### Phase 3: Package assessment
 
-Identify maintenance opportunities:
+Find maintenance opportunities:
 - Upgradable packages
 - Orphaned configurations
 - Unused dependencies
 - Package cache size
 
-## Ubuntu/Debian Cleanup Sequence
+## Ubuntu/Debian cleanup sequence
 
-Execute these seven stages in order:
+Run these seven stages in order:
 
-1. **Package Cache Refresh** - `apt update`
-2. **System Upgrades** - `apt upgrade`
-3. **Orphan Removal** - `apt autoremove`
-4. **Cache Purging** - `apt clean`
-5. **Journal Pruning** - `journalctl --vacuum-time=7d`
-6. **Snap Revision Cleanup** - Remove disabled snap revisions
-7. **Temporary Directory Assessment** - Review `/tmp` and `/var/tmp`
+1. Package cache refresh -- `apt update`
+2. System upgrades -- `apt upgrade`
+3. Orphan removal -- `apt autoremove`
+4. Cache purge -- `apt clean`
+5. Journal pruning -- `journalctl --vacuum-time=7d`
+6. Snap revision cleanup -- remove disabled snap revisions
+7. Temporary directory check -- review `/tmp` and `/var/tmp`
 
-## Snap Revision Cleanup
+## Snap revision cleanup
 
-Snap keeps old revisions by default. Big space savings here:
+Snap keeps old revisions by default. This is where the big wins are:
 
 ```bash
 # List all disabled snap revisions
@@ -100,32 +93,32 @@ snap list --all | awk '/disabled/{print $1, $3}'
 snap remove <package-name> --revision=<revision-number>
 ```
 
-**Important**: Requires explicit removal by revision number.
+You have to remove each revision by number explicitly.
 
-## Expected Results
+## Expected results
 
-Real-world recovery examples:
-- **Journal vacuuming**: 300-600 MB
-- **Snap revision cleanup**: 500 MB to 2 GB (!)
-- **Package cache purging**: 100-500 MB
-- **Total potential**: 2+ GB in comprehensive sessions
+Typical recovery per category:
+- Journal vacuuming: 300-600 MB
+- Snap revision cleanup: 500 MB to 2 GB
+- Package cache purge: 100-500 MB
+- Total: 2+ GB in a comprehensive session
 
-## Documentation Requirements
+## Documentation requirements
 
-All maintenance sessions must generate structured logs:
+Every maintenance session should produce a structured log covering:
 
-1. **System Identification**: hostname, OS version, kernel, operator
-2. **Resource States**: initial/final disk/memory/CPU usage
-3. **Actions Taken**: commands executed, MB/GB freed per category
-4. **Follow-up Recommendations**: remaining issues, future needs
+1. System identification -- hostname, OS version, kernel, operator
+2. Resource states -- initial and final disk/memory/CPU usage
+3. Actions taken -- commands executed, MB/GB freed per category
+4. Follow-up recommendations -- remaining issues, future needs
 
-## Time Commitment
+## Time commitment
 
-Typical maintenance session: **15-30 minutes** including diagnostics, cleanup, and documentation.
+A typical maintenance session takes **15-30 minutes** including diagnostics, cleanup, and documentation.
 
 ## Documentation
 
-See [skills/SKILL.md](skills/SKILL.md) for complete maintenance procedures.
+See [skills/SKILL.md](skills/SKILL.md) for the complete maintenance procedures.
 
 ## Philosophy
 

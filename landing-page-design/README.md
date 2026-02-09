@@ -1,6 +1,6 @@
 # Landing Page Design Plugin
 
-Create high-converting, visually distinctive landing pages that stand out in an AI-saturated world.
+Build landing pages that don't look like every other AI-generated page.
 
 ## Installation
 
@@ -8,13 +8,13 @@ Create high-converting, visually distinctive landing pages that stand out in an 
 /plugin install landing-page-design@2389-research
 ```
 
-## What This Plugin Provides
+## What this plugin provides
 
-### Main Skill: `landing-page-design`
+### Main skill: `landing-page-design`
 
-A comprehensive workflow for building landing pages worth $50-100. The skill enforces unique design direction through the **Vibe Discovery** process, preventing the generic "AI-slop" look.
+A workflow for building landing pages worth $50-100. Forces unique design direction through the Vibe Discovery process so you don't end up with generic AI-slop.
 
-## Quick Example
+## Quick example
 
 ```
 User: "Build a landing page for my productivity app"
@@ -29,59 +29,49 @@ Q4: What should this page NEVER be mistaken for?
 [After answers, Claude creates a unique Vibe Spec and builds a distinctive page]
 ```
 
-## The Problem This Solves
+## The problem this solves
 
-AI-generated landing pages converge on the same patterns:
-- Purple gradients
-- Inter/Roboto fonts
-- Lucide icons
-- Generic bento grids
-- Same animations everywhere
+AI-generated landing pages converge on the same patterns: purple gradients, Inter/Roboto, Lucide icons, generic bento grids, the same animations everywhere. This plugin forces a unique aesthetic direction for every project.
 
-This plugin forces Claude to create a **unique aesthetic direction** for every project.
+## How it works
 
-## Key Features
+### Vibe discovery
+4 context questions generate a unique direction. Colors, typography, and layout are invented from scratch (not looked up from a template). Anti-convergence rules prevent generic output, and a freshness check runs before any coding starts.
 
-### Vibe Discovery Process
-- 4 context questions that generate unique direction
-- Color/typography/layout invention (not lookup)
-- Anti-convergence rules to prevent generic output
-- Freshness check before coding
+### The 50% rule
+Half your effort goes to the hero section. It's the social media preview and the first impression. Everything else flows from the hero.
 
-### The 50% Rule
-Half your effort goes to the hero section. It's the social media preview, the first impression, the hook.
+### Anti-AI-slop principles
+- Fonts -- kill Inter/Roboto. Use Newsreader, Playfair Display, Clash Display, etc.
+- Icons -- avoid Lucide. Use Iconify Solar, Heroicons, Phosphor.
+- Colors -- no purple gradients. Derive from real-world references.
+- Layouts -- break the grid. Overlapping elements, diagonal sections, asymmetry.
 
-### Anti-AI-Slop Principles
-- **Fonts**: Kill Inter/Roboto. Use Newsreader, Playfair Display, Clash Display, etc.
-- **Icons**: Avoid Lucide. Use Iconify Solar, Heroicons, Phosphor.
-- **Colors**: No purple gradients. Derive from real-world references.
-- **Layouts**: Break the grid. Overlapping elements, diagonal sections, asymmetry.
-
-### Animation Vocabulary
+### Animation vocabulary
 Full animation system for entrances, continuous effects, interactions, and decorative elements.
 
-## Section Composition
+## Section composition
 
-1. **Hero** - The make-or-break element (50% of effort)
-2. **Features/Benefits** - Bento grids, alternating rows, icon grids
-3. **Social Proof** - Logo marquee, testimonials, stats
-4. **How It Works** - Numbered steps, timeline, flowchart
-5. **Pricing** - Tier comparison with recommended highlight
-6. **Final CTA** - Repeat value prop, single focused action
-7. **Footer** - Navigation, social, legal
+1. Hero -- the make-or-break element (50% of effort)
+2. Features/Benefits -- bento grids, alternating rows, icon grids
+3. Social proof -- logo marquee, testimonials, stats
+4. How it works -- numbered steps, timeline, flowchart
+5. Pricing -- tier comparison with recommended highlight
+6. Final CTA -- repeat value prop, single focused action
+7. Footer -- navigation, social, legal
 
 ## Resources
 
-- [superhero.design](https://superhero.design) - Hero section gallery
-- [H1 Gallery](https://h1gallery.com) - Headline inspiration
-- [Iconify](https://iconify.design) - Unified icon API
-- [Google Fonts](https://fonts.google.com) - Typography
-- [Fontshare](https://fontshare.com) - Free quality fonts
+- [superhero.design](https://superhero.design) -- hero section gallery
+- [H1 Gallery](https://h1gallery.com) -- headline inspiration
+- [Iconify](https://iconify.design) -- unified icon API
+- [Google Fonts](https://fonts.google.com) -- typography
+- [Fontshare](https://fontshare.com) -- free quality fonts
 
 ## Documentation
 
-- [CLAUDE.md](./CLAUDE.md) - Full plugin instructions for Claude
-- [skills/SKILL.md](./skills/SKILL.md) - Complete skill reference
+- [CLAUDE.md](./CLAUDE.md) -- full plugin instructions for Claude
+- [skills/SKILL.md](./skills/SKILL.md) -- skill reference
 
 ## License
 

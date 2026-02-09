@@ -1,6 +1,6 @@
-# Terminal Title Plugin
+# Terminal title
 
-Automatically updates terminal title with emoji + project + topic context. **Cross-platform support for Windows, macOS, and Linux.** Also establishes 2389 workflow conventions for TodoWrite task tracking.
+Automatically updates your terminal title with emoji + project + topic context. Works on Windows, macOS, and Linux. Also establishes 2389 workflow conventions for TodoWrite task tracking.
 
 ## Installation
 
@@ -9,41 +9,29 @@ Automatically updates terminal title with emoji + project + topic context. **Cro
 /plugin install terminal-title@2389-research
 ```
 
-### Platform-Specific Setup
+### Platform-specific setup
 
-**Windows users:** Ensure PowerShell 7+ (`pwsh`) is installed and available in your PATH. The plugin automatically uses PowerShell scripts on Windows.
+Windows users need PowerShell 7+ (`pwsh`) installed and on PATH. The plugin picks it up automatically.
 
-**Unix/Linux/macOS users:** No additional setup required. The plugin uses bash scripts automatically.
+Unix/Linux/macOS users don't need to do anything extra.
 
-## What This Plugin Provides
+## What this plugin does
 
-**Skills provided:**
+One skill: `terminal-title` -- manages your terminal title based on project and topic context.
 
-- `terminal-title` – Automatically manages the terminal title based on project and topic context
+The title updates automatically at session start, and again whenever the topic changes. An emoji prefix gives you a quick visual cue when switching between terminal windows.
 
-**Automatic terminal title management:**
+The plugin also defines the TodoWrite conventions that all 2389 plugins share: granular 2-5 minute tasks, one in-progress at a time.
 
-- **Auto-invokes at session start**: Sets initial title based on project context
-- **Updates on topic changes**: Reflects current work in terminal title
-- **Emoji indicators**: Visual cues for quick context switching
+## How it works
 
-**2389 workflow conventions:**
+A session start hook fires the terminal-title skill, which:
 
-- **TodoWrite patterns**: Granular 2-5 minute task tracking
-- **Task lifecycle management**: One task in-progress at a time
-- **Shared conventions**: Used across all 2389 plugins
-
-## How It Works
-
-The plugin includes a session start hook that automatically invokes the terminal-title skill. The skill:
-
-1. **Detects your operating system** (Windows, macOS, Linux)
-2. **Detects current project** from working directory, git repo, or package.json
-3. **Infers topic** from recent files or conversation context
-4. **Selects appropriate emoji** from environment variable or defaults to 🎉
-5. **Updates terminal title** via platform-specific script:
-   - Windows: PowerShell (`.ps1`)
-   - Unix/Linux/macOS: Bash (`.sh`)
+1. Detects your OS (Windows, macOS, Linux)
+2. Figures out the current project from the working directory, git repo, or package.json
+3. Infers the topic from recent files or conversation context
+4. Picks an emoji from an environment variable (or defaults to a party popper)
+5. Updates the terminal title via a platform-specific script (`.ps1` on Windows, `.sh` everywhere else)
 
 ## Example
 
@@ -51,9 +39,9 @@ The plugin includes a session start hook that automatically invokes the terminal
 🔥 firebase-app > authentication setup
 ```
 
-## TodoWrite Conventions
+## TodoWrite conventions
 
-This plugin establishes task tracking patterns used across all 2389 plugins:
+This plugin establishes the task tracking patterns used across all 2389 plugins:
 
 ```javascript
 {
@@ -63,7 +51,7 @@ This plugin establishes task tracking patterns used across all 2389 plugins:
 }
 ```
 
-**Task lifecycle:**
+Task lifecycle:
 1. Create todos for all steps (2-5 minutes each)
 2. Mark ONE task as in_progress
 3. Complete the task
@@ -72,7 +60,7 @@ This plugin establishes task tracking patterns used across all 2389 plugins:
 
 ## Documentation
 
-- [Design Document](docs/2025-11-14-terminal-title-skill-design.md)
-- [Implementation Plan](docs/2025-11-14-terminal-title-implementation.md)
+- [Design document](docs/2025-11-14-terminal-title-skill-design.md)
+- [Implementation plan](docs/2025-11-14-terminal-title-implementation.md)
 
 

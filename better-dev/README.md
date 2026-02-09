@@ -1,6 +1,6 @@
 # [meta] Better Dev
 
-Meta-plugin that bundles essential development practices for building quality web applications.
+Meta-plugin that bundles development practices for building quality applications.
 
 ## Installation
 
@@ -9,56 +9,51 @@ Meta-plugin that bundles essential development practices for building quality we
 ```
 
 This will automatically install:
-- **css-development** - CSS workflows with Tailwind composition and semantic naming
-- **firebase-development** - Firebase project workflows and validation
-- **fresh-eyes-review** - Final quality gate before commits/PRs
-- **scenario-testing** - End-to-end testing with real dependencies (no mocks)
+- `css-development` -- CSS workflows with Tailwind composition and semantic naming
+- `firebase-development` -- Firebase project workflows and validation
+- `fresh-eyes-review` -- quality gate before commits/PRs
+- `scenario-testing` -- end-to-end testing with real dependencies (no mocks)
+- `test-kitchen` -- parallel exploration of implementation approaches
+- `documentation-audit` -- verify documentation claims against codebase reality
+- `speed-run` -- token-efficient code generation with hosted LLM
 
-## What This Provides
+## What this provides
 
-### CSS Development
+### CSS development
 
-- Tailwind composition patterns
-- Semantic component naming
-- Dark mode by default
-- Accessibility-first approach
+Tailwind composition patterns, semantic component naming, dark mode by default, accessibility-first approach.
 
-### Firebase Development
+### Firebase development
 
-- Project setup and initialization
-- Feature implementation (Auth, Firestore, Functions, Hosting)
-- Debugging and troubleshooting
-- Security rules validation
+Project setup and initialization, feature implementation (Auth, Firestore, Functions, Hosting), debugging, and security rules validation.
 
-### Fresh-Eyes Review
+### Fresh-eyes review
 
-- Mandatory pre-commit quality gate
-- Catches security vulnerabilities (SQL injection, XSS, path traversal)
-- Finds logic errors and edge cases
-- Validates business rules
+Mandatory pre-commit quality gate. Catches security vulnerabilities (SQL injection, XSS, path traversal), logic errors, edge cases, and business rule violations.
 
-### Scenario Testing
+### Scenario testing
 
-- End-to-end testing with real dependencies
-- No mocks allowed
-- Validates features actually work
-- Real data = truth
+End-to-end testing with real dependencies. No mocks allowed. Real data is the source of truth.
 
-## Why Bundle These?
+### Test kitchen
 
-Together these plugins create a complete quality-focused development workflow:
+Parallel exploration of implementation approaches. Implements multiple variants simultaneously and lets tests determine the winner.
 
-1. **Build** - CSS and Firebase tools for implementation
-2. **Test** - Scenario testing proves it works
-3. **Ship** - Fresh-eyes review catches bugs before commit
+### Documentation audit
 
-Quality at every stage.
+Two-pass extraction with pattern expansion. Verifies documentation claims against codebase reality and catches drift before it causes confusion.
+
+### Speed run
+
+Token-efficient code generation pipeline using a hosted LLM (Cerebras). ~60% token savings on code generation.
+
+## Why bundle these?
+
+They form a workflow: explore with test-kitchen, build with CSS/Firebase/speed-run, test with scenario-testing against real dependencies, review with fresh-eyes before commit, verify docs with documentation-audit, then ship.
 
 ## Philosophy
 
 - Simple, maintainable code over clever solutions
 - Real validation over false confidence (no mocks!)
-- Final quality gates prevent production bugs
+- Quality gates before every commit
 - Dark mode and accessibility by default
-
-

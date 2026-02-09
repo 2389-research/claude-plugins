@@ -1,6 +1,6 @@
 # CEO Personal OS Plugin
 
-Personal operating system for executives - reflection frameworks, goal systems, and coaching-style reviews. Build a reflection system, not a task manager.
+Reflection frameworks, goal systems, and coaching-style reviews for executives. This builds a reflection system, not a task manager.
 
 ## Installation
 
@@ -8,13 +8,13 @@ Personal operating system for executives - reflection frameworks, goal systems, 
 /plugin install ceo-personal-os@2389-research
 ```
 
-## What This Plugin Provides
+## What this plugin provides
 
 ### Skills
 
-- **ceo-personal-os** - Complete methodology for building an executive reflection system with specific frameworks and review cadences
+- `ceo-personal-os` -- methodology for building an executive reflection system with specific frameworks and review cadences
 
-### Frameworks Included
+### Frameworks included
 
 | Framework | Credit | Purpose |
 |-----------|--------|---------|
@@ -29,7 +29,7 @@ Personal operating system for executives - reflection frameworks, goal systems, 
 | E-Myth | Michael Gerber | Work ON your business not IN it, build systems |
 | Customer Development | Steve Blank | Search vs Execute, Get Out of the Building, MVP |
 
-## Quick Example
+## Quick example
 
 Start with: "Help me build a personal operating system"
 
@@ -44,11 +44,11 @@ ceo-personal-os/
 └── principles.md        # Core operating principles
 ```
 
-## Core Principle
+## Core principle
 
-**Clarity over productivity theater.** No hustle culture. No corporate jargon. Output feels like an executive coach, chief of staff, and accountability partner - calm, direct, insightful.
+Clarity over productivity theater. No hustle culture. No corporate jargon. The output should feel like talking to an executive coach who is calm, direct, and asks good questions.
 
-## Review Cadences
+## Review cadences
 
 | Cadence | Time | Focus |
 |---------|------|-------|
@@ -57,7 +57,7 @@ ceo-personal-os/
 | Quarterly | 2-3 hours | Goal alignment check |
 | Annual | 4-6 hours | Full Gustin-style reflection |
 
-## When This Skill Applies
+## When this skill applies
 
 - "I want a personal operating system"
 - "Help me with my annual review"
@@ -78,4 +78,4 @@ ceo-personal-os/
 
 ## Links
 
-- [Plugin CLAUDE.md](./CLAUDE.md) - Development instructions
+- [Plugin CLAUDE.md](./CLAUDE.md) -- development instructions

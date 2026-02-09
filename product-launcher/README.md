@@ -1,20 +1,17 @@
-# Product Launcher
+# Product launcher
 
-Generate launch materials for 2389.ai products and skills with authentic voice profiles.
+Generate launch materials for 2389.ai products and skills with voice profiles derived from real communications.
 
-## What It Does
+## What it does
 
 Takes a product and generates ready-to-publish GTM materials:
-- **Subscriber email** - Buttondown announcement (~300 subscribers)
-- **CEO blog post** - harper.blog style, full post ready to publish
-- **CEO tweet thread** - @harper voice, thread format
+- Subscriber email -- Buttondown announcement (~300 subscribers)
+- CEO blog post -- harper.blog style, full post ready to publish
+- CEO tweet thread -- @harper voice, thread format
 
 ## Philosophy
 
-Voice profiles are baked in, not templated. Each output matches the actual tone and style of past 2389 communications:
-- Emails match the casual, direct Buttondown style
-- Blog posts match Harper's narrative, technically-credible voice
-- Tweets match @harper's punchy, self-aware thread style
+Voice profiles are baked in, not templated. Each output matches the actual tone and style of past 2389 communications. Emails match the casual, direct Buttondown style. Blog posts match Harper's narrative, technically-credible voice. Tweets match @harper's punchy, self-aware thread style.
 
 ## Usage
 
@@ -27,7 +24,7 @@ Or naturally:
 - "Draft the email and blog post for this launch"
 - "Create the tweet thread for announcing this"
 
-## Required Inputs
+## Required inputs
 
 The skill will gather:
 - Product name
@@ -47,25 +44,25 @@ All three outputs generated in one pass:
 - Body: casual opener, short paragraphs, :) at CTA
 - Sign-off: "Talk soon, [Signer] and the 2389 Team"
 
-### CEO Blog Post
+### CEO blog post
 - Title: casual, sometimes provocative
-- Structure: origin story → what it does → how I use it → try it
+- Structure: origin story, what it does, how I use it, try it
 - Tone: 50% personal narrative, 50% technical substance
 - Length: 1,500-3,000 words
 - Honest about limitations
 
-### CEO Tweet Thread
+### CEO tweet thread
 - Hook tweet with provocation
 - Build tension over 2-3 tweets
 - Results/examples
 - CTAs to product and blog
 - Casual retweet ask at end
 
-## Pending Components
+## Pending
 
-- **Company blog post (2389.ai/blog)** - On hold pending new voice direction (shifting away from scientific style)
+Company blog post (2389.ai/blog) is on hold pending new voice direction (shifting away from scientific style).
 
-## Voice Sources
+## Voice sources
 
 Profiles derived from:
 - Past Buttondown emails (BotBoard announcements)

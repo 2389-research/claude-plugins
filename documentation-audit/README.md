@@ -8,11 +8,11 @@ Documentation drifts from code. Claims about defaults, file paths, behaviors, an
 
 ## Solution
 
-Two-pass audit approach:
+A two-pass audit approach:
 
-1. **Pass 1: Direct Extraction** - Extract and verify claims from each doc
-2. **Pass 2A: Pattern Expansion** - Find similar issues based on discovered patterns
-3. **Pass 2B: Gap Detection** - Compare codebase inventory vs documented items
+1. Direct extraction -- pull claims from each doc and verify them against code
+2. Pattern expansion -- find similar issues based on patterns discovered in pass 1
+3. Gap detection -- compare the actual codebase inventory against what's documented
 
 ## Usage
 
@@ -24,13 +24,13 @@ Invoke the skill when:
 
 ## Output
 
-Generates `docs/audits/AUDIT_REPORT.md` with:
-- Executive summary (claims verified, false claims found)
-- False claims table with line numbers and fixes
-- Pattern analysis (common root causes)
-- Human review queue for behavioral claims
+Generates `docs/audits/AUDIT_REPORT.md` containing:
+- Executive summary -- how many claims verified, how many false
+- False claims table with line numbers and suggested fixes
+- Pattern analysis of common root causes
+- Human review queue for behavioral claims that can't be auto-verified
 
-## Example Results
+## Example results
 
 From a real audit:
 - 12 documents scanned

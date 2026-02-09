@@ -1,4 +1,4 @@
-# Hosted LLM Code Generation
+# Hosted LLM code generation
 
 Offload code generation to a hosted LLM (Cerebras), saving ~60% tokens on algorithmic tasks.
 
@@ -21,31 +21,19 @@ claude mcp add --transport stdio \
 ln -s /path/to/hosted-llm-codegen/skills ~/.claude/skills/hosted-llm-codegen
 ```
 
-## What This Plugin Provides
+## What this plugin provides
 
-1. **Skill** (`hosted-llm-codegen`) - Instructions for when/how to use hosted LLM code generation
-2. **MCP Server** - Dockerized service that calls Cerebras API and writes files directly
+Two pieces:
+1. A skill (`hosted-llm-codegen`) with instructions for when and how to use hosted LLM code generation
+2. An MCP server -- a Dockerized service that calls the Cerebras API and writes files directly
 
-## Skills Included
+## When to use
 
-| Skill | Description |
-|-------|-------------|
-| `hosted-llm-codegen` | Contract-based code generation via Cerebras API |
+Use the hosted LLM for algorithmic code (rate limiters, parsers, state machines), generating multiple variants (3+), token-constrained sessions, and bulk boilerplate.
 
-## When to Use
+Use Claude directly for CRUD/storage operations, single implementations, and multi-file coordination.
 
-**Use hosted LLM for:**
-- Algorithmic code (rate limiters, parsers, state machines)
-- Generating multiple variants (3+)
-- Token-constrained sessions
-- Bulk boilerplate generation
-
-**Use Claude direct for:**
-- CRUD/storage operations
-- Single implementations
-- Multi-file coordination
-
-## MCP Tools
+## MCP tools
 
 | Tool | Description |
 |------|-------------|
@@ -53,7 +41,7 @@ ln -s /path/to/hosted-llm-codegen/skills ~/.claude/skills/hosted-llm-codegen
 | `generate_and_write_files` | Generate code and write to disk, returns only metadata |
 | `check_status` | Verify Cerebras API connectivity |
 
-## Quick Example
+## Quick example
 
 ```text
 1. Check MCP: mcp__hosted-llm-codegen__check_status
@@ -64,6 +52,6 @@ ln -s /path/to/hosted-llm-codegen/skills ~/.claude/skills/hosted-llm-codegen
 
 ## Documentation
 
-- [CLAUDE.md](CLAUDE.md) - Detailed setup instructions
-- [skills/SKILL.md](skills/SKILL.md) - Complete skill documentation
-- [TODO.md](TODO.md) - Future installation automation plans
+- [CLAUDE.md](CLAUDE.md) -- detailed setup instructions
+- [skills/SKILL.md](skills/SKILL.md) -- skill documentation
+- [TODO.md](TODO.md) -- future installation automation plans

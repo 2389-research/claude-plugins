@@ -2,26 +2,22 @@
 
 Strategic go-to-market consultant for validated business ideas.
 
-## What It Does
+## What it does
 
-Transforms a validated idea into actionable GTM strategy with:
+Takes a validated idea and turns it into a GTM strategy:
 - Channel recommendations based on audience and budget
 - Verified naming options (domain availability checked)
-- Pricing strategy tailored to your specific audience
+- Pricing strategy for your specific audience
 - Outreach templates ready to copy-paste
 - Blog post outlines in authentic voice
 
 ## Philosophy
 
-1. **Understand** before recommending
-2. **Recommend** before generating
-3. **Generate** only what's approved
+Understand before recommending. Recommend before generating. Generate only what's approved. This is a strategic partner, not a content factory.
 
-This is a strategic partner, not a content factory.
+## The flow
 
-## The Flow
-
-### Phase 1: Gather Context
+### Phase 1: Gather context
 One question at a time, confirms:
 - Target audience
 - Value proposition
@@ -31,13 +27,13 @@ One question at a time, confirms:
 - Budget
 - Existing assets
 
-### Phase 2: Recommend Channels
-Presents 2-4 channels with rationale, explains what NOT to recommend and why.
+### Phase 2: Recommend channels
+Presents 2-4 channels with rationale. Also explains what it's NOT recommending and why.
 
-### Phase 2.5: Context Summary (Mandatory)
+### Phase 2.5: Context summary (mandatory)
 Creates a checkpoint webpage with all decisions before generating assets. Includes verified naming options with domain availability.
 
-### Phase 3: Generate Assets
+### Phase 3: Generate assets
 Only generates what was approved:
 - Product brief
 - Naming + domains
@@ -47,43 +43,29 @@ Only generates what was approved:
 - Blog post outline
 
 ### Phase 4: Deliver
-Consolidates everything into `GTM-STRATEGY.html` with actionable next steps.
+Consolidates everything into `GTM-STRATEGY.html` with next steps.
 
-## Key Features
+## Details
 
-### Pricing Analysis Framework
-Never defaults to generic "$20-30/mo". Analyzes:
-- Who pays and how (individual vs company, annual vs monthly)
-- What they already pay for similar tools
-- Value delivered (quantified)
-- Multiple business models with trade-offs
+### Pricing analysis
+Never defaults to generic "$20-30/mo". Analyzes who pays and how (individual vs company, annual vs monthly), what they already pay for similar tools, value delivered (quantified), and multiple business models with trade-offs.
 
-### Milestone Clarity
-Shows the reasoning chain:
-- Goal → Optimizing For → Approach → Success Metric
-- Different asks have different relationship costs
-- Escalation path: Feedback → Quote → Mention → Write-up
+### Milestone clarity
+Shows the reasoning chain: Goal, Optimizing For, Approach, Success Metric. Different asks have different relationship costs. Escalation path: Feedback, Quote, Mention, Write-up.
 
-### Network Leverage
-For 2389 products, factors in existing network:
-- Who do we know close to this problem?
-- Warm intros before cold outreach
-- Specific asks for each person
+### Network leverage
+For 2389 products, factors in the existing network. Who do we know close to this problem? Warm intros before cold outreach, with specific asks for each person.
 
-### Harper Writing Style
-Long-form copy (outreach, blogs) uses authentic voice:
-- Conversational, not corporate
-- Opens with personal narrative
-- No marketing speak
-- Self-deprecating humor allowed
+### Harper writing style
+Long-form copy (outreach, blogs) uses authentic voice -- conversational, not corporate. Opens with personal narrative. No marketing speak. Self-deprecating humor allowed.
 
-## Output Files
+## Output files
 
 Generated to `.scratch/gtm-assets/`:
-- `CONTEXT-SUMMARY.html` - Decision checkpoint
-- `GTM-STRATEGY.html` - Final strategy with all assets
-- `outreach-templates.md` - Ready-to-send DM templates
-- `harper-blog-outline.md` - Blog structure
+- `CONTEXT-SUMMARY.html` -- decision checkpoint
+- `GTM-STRATEGY.html` -- final strategy with all assets
+- `outreach-templates.md` -- ready-to-send DM templates
+- `harper-blog-outline.md` -- blog structure
 
 ## Usage
 
@@ -104,6 +86,6 @@ Or naturally:
 
 ## Integration
 
-- Uses `frontend-design` skill for landing pages (when no existing design system)
+- Uses `frontend-design` skill for landing pages when there's no existing design system
 - Reads from idea-validator output when available
 - Respects existing CSS/design systems

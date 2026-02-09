@@ -1,6 +1,6 @@
 # Worldview Synthesis Plugin
 
-Systematic worldview articulation - surface beliefs, identify tensions, and generate narrative outputs for personal philosophy documentation.
+Surface your beliefs, identify the tensions between them, and generate narrative outputs for personal philosophy documentation.
 
 ## Installation
 
@@ -8,41 +8,41 @@ Systematic worldview articulation - surface beliefs, identify tensions, and gene
 /plugin install worldview-synthesis@2389-research
 ```
 
-## What This Plugin Provides
+## What this plugin provides
 
 ### Skills
 
-- **worldview-synthesis** - Complete methodology for articulating personal philosophy through structured interrogation, tension mapping, and narrative generation
+- `worldview-synthesis` -- methodology for articulating personal philosophy through structured interrogation, tension mapping, and narrative generation
 
-### Reference Materials
+### Reference materials
 
-- **interrogation-questions.md** - 6 rounds of ready-to-use questions covering mortality, body, relationships, emotion, work, ethics, society, and future
+- `interrogation-questions.md` -- 6 rounds of ready-to-use questions covering mortality, body, relationships, emotion, work, ethics, society, and future
 
-## Quick Example
+## Quick example
 
 Start with: "Help me articulate my worldview"
 
 The skill guides you through:
-1. **Bootstrap** - Create project structure for beliefs and narratives
-2. **Seed** - Extract ideas from your influences (books, people, experiences)
-3. **Interrogate** - 4-6 rounds of multi-choice questions across 20 domains
-4. **Capture Tensions** - Name contradictions, don't resolve them
-5. **Generate Narratives** - Mission → Thesis → Synopsis → Full Narrative
-6. **Iterate** - A worldview is living, update as you evolve
+1. Bootstrap -- create project structure for beliefs and narratives
+2. Seed -- extract ideas from your influences (books, people, experiences)
+3. Interrogate -- 4-6 rounds of multi-choice questions across 20 domains
+4. Capture tensions -- name contradictions, don't resolve them
+5. Generate narratives -- mission, thesis, synopsis, full narrative
+6. Iterate -- a worldview is living, update as you evolve
 
-## Core Principle
+## Core principle
 
-A worldview isn't a list of opinions—it's a graph of beliefs with tensions. The goal is to surface what you already believe, name the contradictions, and synthesize into something you can share.
+A worldview isn't a list of opinions. It's a graph of beliefs with tensions. The goal is to surface what you already believe, name the contradictions, and synthesize into something you can share.
 
-## Output Examples
+## Output examples
 
-**Mission (~100 words):**
+Mission (~100 words):
 ```
 Put people first. Prepare for what's coming. Fight anyway.
 Find the cracks. Leave no trace.
 ```
 
-**Idea Node:**
+Idea node:
 ```yaml
 - id: strategic-ruthlessness
   claim: "Sometimes you have to crush opponents"
@@ -50,13 +50,13 @@ Find the cracks. Leave no trace.
   tensions: [collaboration-over-competition]
 ```
 
-**Tension:**
+Tension:
 ```yaml
 - id: collaboration-vs-ruthlessness
   status: embraced  # Live in the paradox
 ```
 
-## When This Skill Applies
+## When this skill applies
 
 - "I want to articulate my values"
 - "Help me figure out what I believe"
@@ -66,4 +66,4 @@ Find the cracks. Leave no trace.
 
 ## Links
 
-- [Plugin CLAUDE.md](./CLAUDE.md) - Development instructions
+- [Plugin CLAUDE.md](./CLAUDE.md) -- development instructions

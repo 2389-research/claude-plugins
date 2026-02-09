@@ -1,6 +1,6 @@
-# Building Multi-Agent Systems
+# Building multi-agent systems
 
-Architecture patterns for multi-agent systems where AI agents coordinate to accomplish complex tasks using tools.
+Architecture patterns for multi-agent systems where AI agents coordinate using tools.
 
 ## Installation
 
@@ -8,24 +8,24 @@ Architecture patterns for multi-agent systems where AI agents coordinate to acco
 /plugin install building-multiagent-systems@2389-research
 ```
 
-## What This Plugin Provides
+## What this plugin does
 
-Comprehensive guidance for designing and implementing multi-agent systems with proper coordination, lifecycle management, and production hardening. Based on patterns from real production systems.
+Guides you through designing and implementing multi-agent systems -- coordination, lifecycle management, production hardening. Based on patterns from real production systems.
 
-### Key Concepts
+### Concepts covered
 
-- **Four-layer architecture**: Reasoning, orchestration, tool bus, deterministic adapters - foundation for every agent
-- **Schema-first tools**: Typed contracts for tools enable sub-agent discovery and validation
-- **Deterministic boundary**: Clear separation between LLM reasoning and testable execution
-- **Seven coordination patterns**: fan-out/fan-in, sequential pipeline, recursive delegation, work-stealing queue, map-reduce, peer collaboration, MAKER (million-step zero-error)
-- **Foundational patterns**: event-sourcing, hierarchical IDs, agent state machines
-- **Tool coordination**: permission inheritance, locking, rate limiting, caching
-- **Agent collaboration**: subagent spawning, tool inheritance, sub-agent as tool pattern
-- **Lifecycle management**: cascading stop, orphan detection, heartbeat monitoring
-- **Self-modification safety**: When and how sub-agents can modify themselves or each other
-- **Production hardening**: checkpointing, monitoring, cost tracking across agent hierarchies
+- Four-layer architecture -- reasoning, orchestration, tool bus, deterministic adapters
+- Schema-first tools -- typed contracts that let sub-agents discover and validate tools
+- Deterministic boundary -- separating LLM reasoning from testable execution
+- Seven coordination patterns -- fan-out/fan-in, sequential pipeline, recursive delegation, work-stealing queue, map-reduce, peer collaboration, MAKER (million-step zero-error)
+- Foundational patterns -- event-sourcing, hierarchical IDs, agent state machines
+- Tool coordination -- permission inheritance, locking, rate limiting, caching
+- Agent collaboration -- subagent spawning, tool inheritance, sub-agent as tool
+- Lifecycle management -- cascading stop, orphan detection, heartbeat monitoring
+- Self-modification safety -- when and how sub-agents can modify themselves or each other
+- Production hardening -- checkpointing, monitoring, cost tracking across agent hierarchies
 
-## When to Use
+## When to use
 
 - Designing systems where multiple AI agents coordinate
 - Implementing orchestrators that spawn sub-agents
@@ -33,7 +33,7 @@ Comprehensive guidance for designing and implementing multi-agent systems with p
 - Coordinating shared resources across agents
 - Managing agent lifecycle and state
 
-## Quick Example
+## Quick example
 
 ```typescript
 // Four-layer architecture for each agent
@@ -70,37 +70,37 @@ async function cleanup() {
 }
 ```
 
-## Discovery Questions
+## Discovery questions
 
 Before architecting, the skill asks:
 
-1. **Starting Point** - Greenfield, adding to existing, or fixing current?
-2. **Primary Use Case** - Parallel work, pipeline, delegation, collaboration, queue?
-3. **Scale Expectations** - Small (2-5), medium (10-50), large (100+)?
-4. **State Requirements** - Stateless, session-based, or persistent?
-5. **Tool Coordination** - Independent, shared read-only, write coordination, rate-limited?
-6. **Existing Constraints** - Language, framework, performance, compliance?
+1. Starting point -- greenfield, adding to existing, or fixing current?
+2. Primary use case -- parallel work, pipeline, delegation, collaboration, queue?
+3. Scale expectations -- small (2-5), medium (10-50), large (100+)?
+4. State requirements -- stateless, session-based, or persistent?
+5. Tool coordination -- independent, shared read-only, write coordination, rate-limited?
+6. Existing constraints -- language, framework, performance, compliance?
 
-## Common Pitfalls Avoided
+## Common pitfalls
 
-- **Missing four-layer architecture** → untestable, unsafe agents
-- **LLM calls in tools** → non-deterministic, untestable execution
-- **No schema-first design** → sub-agents can't discover tools
-- **Missing cascading stop** → orphaned agents consuming resources
-- **No permission inheritance** → sub-agents escalate privileges
-- **No timeouts** → indefinite hangs
-- **Unbounded concurrency** → resource exhaustion
-- **Ignoring cost tracking** → budget surprises across agent hierarchy
-- **No partial-failure handling** → cascading failures
-- **Unpersisted state** → unrecoverable workflows
-- **Uncoordinated tool access** → race conditions
-- **Wrong model selection** → cost inefficiency
-- **Self-modification without safety protocol** → agents break themselves
+- Missing four-layer architecture -> untestable, unsafe agents
+- LLM calls in tools -> non-deterministic, untestable execution
+- No schema-first design -> sub-agents can't discover tools
+- Missing cascading stop -> orphaned agents consuming resources
+- No permission inheritance -> sub-agents escalate privileges
+- No timeouts -> indefinite hangs
+- Unbounded concurrency -> resource exhaustion
+- Ignoring cost tracking -> budget surprises across agent hierarchy
+- No partial-failure handling -> cascading failures
+- Unpersisted state -> unrecoverable workflows
+- Uncoordinated tool access -> race conditions
+- Wrong model selection -> cost inefficiency
+- Self-modification without safety protocol -> agents break themselves
 
 ## Documentation
 
-See [skills/SKILL.md](skills/SKILL.md) for complete architecture patterns and implementation guidance.
+See [skills/SKILL.md](skills/SKILL.md) for the complete architecture patterns and implementation guidance.
 
 ## Philosophy
 
-Production-ready patterns over improvisation. Every pattern addresses real failure modes from production systems.
+Production-ready patterns over improvisation. Every pattern here addresses a real failure mode from a production system.

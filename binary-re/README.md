@@ -1,6 +1,6 @@
 # Binary Reverse Engineering Plugin
 
-Agentic workflow for reverse engineering ELF binaries from embedded devices using radare2, Ghidra, GDB, and QEMU.
+Reverse engineer ELF binaries from embedded devices using radare2, Ghidra, GDB, and QEMU.
 
 ## Installation
 
@@ -8,21 +8,21 @@ Agentic workflow for reverse engineering ELF binaries from embedded devices usin
 /plugin install binary-re@2389-research
 ```
 
-## What This Plugin Provides
+## What this plugin provides
 
 ### Skills
 
-- **binary-re** - Structured RE workflow with hypothesis-driven analysis
+- `binary-re` -- structured RE workflow with hypothesis-driven analysis
 
 ### Capabilities
 
 - Cross-architecture static analysis (ARM64, ARMv7, x86_64, MIPS)
 - Dynamic tracing via QEMU user-mode emulation
-- GDB integration for fine-grained debugging
+- GDB integration for debugging
 - Ghidra headless decompilation
-- Human-in-the-loop for risky operations
+- Human-in-the-loop gates for risky operations
 
-## Quick Example
+## Quick example
 
 ```
 User: "Analyze this binary from an IoT device - ARM, Linux-based"
@@ -53,7 +53,7 @@ Do you want me to proceed with static analysis of network-related
 functions, or should we try dynamic analysis under QEMU first?
 ```
 
-## Tool Requirements
+## Tool requirements
 
 ```bash
 # Required
@@ -67,30 +67,22 @@ pip install frida-tools
 sudo apt install libc6-armhf-cross libc6-arm64-cross
 ```
 
-## Use Cases
+## Use cases
 
-- **Firmware Analysis** - Understand device behavior without source
-- **Protocol Reverse Engineering** - Map network communications
-- **Security Research** - Find vulnerabilities in embedded systems
-- **Hardware Hacking** - Analyze robot/IoT device internals
+- Firmware analysis -- understand device behavior without source
+- Protocol reverse engineering -- map network communications
+- Security research -- find vulnerabilities in embedded systems
+- Hardware hacking -- analyze robot/IoT device internals
 
 ## Philosophy
 
-**The LLM drives analysis; the human provides context.**
+The LLM drives analysis; the human provides context.
 
-You tell Claude:
-- What platform/device the binary came from
-- What hardware/chips are involved
-- What the binary is theorized to do
-- Any constraints (no network, isolated test env)
+You tell Claude what platform/device the binary came from, what hardware is involved, what the binary is theorized to do, and any constraints (no network, isolated test env, etc).
 
-Claude executes:
-- Tool invocations with structured output
-- Hypothesis formation from evidence
-- Experiment design to test theories
-- Synthesis into actionable knowledge
+Claude runs the tools, forms hypotheses from evidence, designs experiments to test theories, and synthesizes findings into something actionable.
 
-## Human-in-the-Loop
+## Human-in-the-loop
 
 The skill asks for confirmation before:
 - Executing binaries (even sandboxed)
@@ -100,8 +92,8 @@ The skill asks for confirmation before:
 
 ## Documentation
 
-- [CLAUDE.md](./CLAUDE.md) - Detailed skill reference
-- [skills/SKILL.md](./skills/SKILL.md) - Full workflow documentation
+- [CLAUDE.md](./CLAUDE.md) -- detailed skill reference
+- [skills/SKILL.md](./skills/SKILL.md) -- full workflow documentation
 
 ## License
 

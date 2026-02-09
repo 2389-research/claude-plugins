@@ -1,25 +1,16 @@
-# Slack MCP Server
+# Slack MCP server
 
-MCP server for Slack workspace integration. Create channels, invite users, post messages, and manage threads.
-
-## Features
-
-- Create public or private channels
-- Invite users by email or user ID
-- Post messages with markdown formatting
-- Reply in threads
-- Pin messages
-- List workspace users
+MCP server for Slack workspace integration. Handles channel creation, user invites, message posting, and thread management.
 
 ## Setup
 
-### 1. Create Slack App
+### 1. Create a Slack app
 
 1. Go to [api.slack.com/apps](https://api.slack.com/apps)
 2. Click "Create New App" → "From scratch"
 3. Name it (e.g., "Claude MCP") and select your workspace
 
-### 2. Add OAuth Scopes
+### 2. Add OAuth scopes
 
 Under "OAuth & Permissions", add these Bot Token Scopes:
 
@@ -34,15 +25,15 @@ users:read             # list users
 users:read.email       # lookup users by email
 ```
 
-### 3. Install to Workspace
+### 3. Install to workspace
 
 Click "Install to Workspace" and authorize the app.
 
-### 4. Get Bot Token
+### 4. Get bot token
 
 Copy the "Bot User OAuth Token" (starts with `xoxb-`).
 
-### 5. Configure Environment
+### 5. Configure environment
 
 ```bash
 export SLACK_BOT_TOKEN="xoxb-your-token-here"
@@ -64,7 +55,7 @@ Or add to your Claude config:
 }
 ```
 
-### 6. Build and Run
+### 6. Build and run
 
 ```bash
 npm install
@@ -139,7 +130,7 @@ List all users in the workspace.
 {}
 ```
 
-## Usage with Product Launcher
+## Usage with product launcher
 
 After generating GTM materials, say "push to slack":
 
