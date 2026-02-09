@@ -27,7 +27,7 @@
         {
             "name": "better-dev",
             "source": "./better-dev",
-            "description": "[meta] better development: CSS workflows, Firebase development, code quality, and real testing",
+            "description": "[meta] better development: CSS workflows, Firebase development, code quality, real testing, parallel exploration, documentation verification, and token-efficient codegen",
             "version": "1.0.0",
             "keywords": [
                 "meta",
@@ -35,7 +35,10 @@
                 "quality",
                 "testing",
                 "css",
-                "firebase"
+                "firebase",
+                "parallel",
+                "documentation",
+                "codegen"
             ],
             "strict": false
         },
@@ -68,6 +71,20 @@
             "strict": false
         },
         {
+            "name": "firebase-development",
+            "source": "./firebase-development",
+            "description": "Firebase project workflows including setup, features, debugging, and validation",
+            "version": "1.0.0",
+            "keywords": [
+                "firebase",
+                "firestore",
+                "cloud-functions",
+                "hosting",
+                "emulator"
+            ],
+            "strict": false
+        },
+        {
             "name": "landing-page-design",
             "source": "./landing-page-design",
             "description": "Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles",
@@ -84,31 +101,19 @@
             "strict": false
         },
         {
-            "name": "firebase-development",
-            "source": "./firebase-development",
-            "description": "Firebase project workflows including setup, features, debugging, and validation",
+            "name": "xtool",
+            "source": "./xtool",
+            "description": "Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode",
             "version": "1.0.0",
             "keywords": [
-                "firebase",
-                "firestore",
-                "cloud-functions",
-                "hosting",
-                "emulator"
-            ],
-            "strict": false
-        },
-        {
-            "name": "terminal-title",
-            "source": "./terminal-title",
-            "description": "Automatically updates terminal title with emoji + project + topic context and establishes 2389 workflow conventions for TodoWrite task tracking",
-            "version": "1.0.0",
-            "keywords": [
-                "terminal",
-                "title",
-                "session",
-                "context",
-                "workflows",
-                "todowrite"
+                "ios",
+                "xtool",
+                "swiftpm",
+                "swift",
+                "xcode-free",
+                "cross-platform",
+                "widgets",
+                "extensions"
             ],
             "strict": false
         },
@@ -124,6 +129,86 @@
                 "agents",
                 "architecture",
                 "patterns"
+            ],
+            "strict": false
+        },
+        {
+            "name": "speed-run",
+            "source": "./speed-run",
+            "description": "Token-efficient code generation pipeline - parallel implementation with hosted LLM (Cerebras) for ~60% token savings. Includes MCP server.",
+            "version": "1.0.0",
+            "keywords": [
+                "codegen",
+                "speed-run",
+                "parallel",
+                "hosted-llm",
+                "cerebras",
+                "token-efficient",
+                "turbo",
+                "race",
+                "mcp"
+            ],
+            "strict": false
+        },
+        {
+            "name": "test-kitchen",
+            "source": "./test-kitchen",
+            "description": "Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner",
+            "version": "1.0.0",
+            "keywords": [
+                "parallel",
+                "exploration",
+                "variants",
+                "comparison",
+                "implementation",
+                "testing",
+                "worktrees"
+            ],
+            "strict": false
+        },
+        {
+            "name": "scenario-testing",
+            "source": "./scenario-testing",
+            "description": "End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth",
+            "version": "1.0.0",
+            "keywords": [
+                "testing",
+                "e2e",
+                "scenarios",
+                "no-mocks",
+                "integration"
+            ],
+            "strict": false
+        },
+        {
+            "name": "fresh-eyes-review",
+            "source": "./fresh-eyes-review",
+            "description": "Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests",
+            "version": "1.0.0",
+            "keywords": [
+                "review",
+                "quality",
+                "security",
+                "commit",
+                "pr",
+                "bugs"
+            ],
+            "strict": false
+        },
+        {
+            "name": "documentation-audit",
+            "source": "./documentation-audit",
+            "description": "Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection",
+            "version": "2.0.0",
+            "keywords": [
+                "documentation",
+                "audit",
+                "verify",
+                "drift",
+                "accuracy",
+                "claims",
+                "markdown",
+                "docs"
             ],
             "strict": false
         },
@@ -169,21 +254,6 @@
             "strict": false
         },
         {
-            "name": "fresh-eyes-review",
-            "source": "./fresh-eyes-review",
-            "description": "Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests",
-            "version": "1.0.0",
-            "keywords": [
-                "review",
-                "quality",
-                "security",
-                "commit",
-                "pr",
-                "bugs"
-            ],
-            "strict": false
-        },
-        {
             "name": "gtm-partner",
             "source": "./gtm-partner",
             "description": "Strategic go-to-market partner - recommends channels, validates strategy, generates only assets that matter. Not a content factory.",
@@ -213,6 +283,55 @@
                 "gtm",
                 "buttondown",
                 "harper"
+            ],
+            "strict": false
+        },
+        {
+            "name": "worldview-synthesis",
+            "source": "./worldview-synthesis",
+            "description": "Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation",
+            "version": "1.0.0",
+            "keywords": [
+                "worldview",
+                "values",
+                "philosophy",
+                "beliefs",
+                "manifesto",
+                "mission",
+                "self-discovery"
+            ],
+            "strict": false
+        },
+        {
+            "name": "qbp",
+            "source": "./qbp",
+            "description": "Quaker Business Practice - decision-making skills seeking unity through discernment rather than consensus through debate",
+            "version": "1.0.0",
+            "keywords": [
+                "decision-making",
+                "discernment",
+                "quaker",
+                "unity",
+                "consensus",
+                "ethics",
+                "deliberation",
+                "multi-agent",
+                "clearness-committee"
+            ],
+            "strict": false
+        },
+        {
+            "name": "terminal-title",
+            "source": "./terminal-title",
+            "description": "Automatically updates terminal title with emoji + project + topic context and establishes 2389 workflow conventions for TodoWrite task tracking",
+            "version": "1.0.0",
+            "keywords": [
+                "terminal",
+                "title",
+                "session",
+                "context",
+                "workflows",
+                "todowrite"
             ],
             "strict": false
         },
@@ -248,69 +367,6 @@
             "strict": false
         },
         {
-            "name": "scenario-testing",
-            "source": "./scenario-testing",
-            "description": "End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth",
-            "version": "1.0.0",
-            "keywords": [
-                "testing",
-                "e2e",
-                "scenarios",
-                "no-mocks",
-                "integration"
-            ],
-            "strict": false
-        },
-        {
-            "name": "test-kitchen",
-            "source": "./test-kitchen",
-            "description": "Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner",
-            "version": "1.0.0",
-            "keywords": [
-                "parallel",
-                "exploration",
-                "variants",
-                "comparison",
-                "implementation",
-                "testing",
-                "worktrees"
-            ],
-            "strict": false
-        },
-        {
-            "name": "xtool",
-            "source": "./xtool",
-            "description": "Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode",
-            "version": "1.0.0",
-            "keywords": [
-                "ios",
-                "xtool",
-                "swiftpm",
-                "swift",
-                "xcode-free",
-                "cross-platform",
-                "widgets",
-                "extensions"
-            ],
-            "strict": false
-        },
-        {
-            "name": "worldview-synthesis",
-            "source": "./worldview-synthesis",
-            "description": "Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation",
-            "version": "1.0.0",
-            "keywords": [
-                "worldview",
-                "values",
-                "philosophy",
-                "beliefs",
-                "manifesto",
-                "mission",
-                "self-discovery"
-            ],
-            "strict": false
-        },
-        {
             "name": "binary-re",
             "source": "./binary-re",
             "description": "Agentic binary reverse engineering for ELF binaries on ARM64, ARMv7, x86_64 - hypothesis-driven analysis with radare2, Ghidra, GDB, QEMU",
@@ -329,41 +385,6 @@
                 "decompile",
                 "qemu",
                 "gdb"
-            ],
-            "strict": false
-        },
-        {
-            "name": "documentation-audit",
-            "source": "./documentation-audit",
-            "description": "Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection",
-            "version": "2.0.0",
-            "keywords": [
-                "documentation",
-                "audit",
-                "verify",
-                "drift",
-                "accuracy",
-                "claims",
-                "markdown",
-                "docs"
-            ],
-            "strict": false
-        },
-        {
-            "name": "qbp",
-            "source": "./qbp",
-            "description": "Quaker Business Practice - decision-making skills seeking unity through discernment rather than consensus through debate",
-            "version": "1.0.0",
-            "keywords": [
-                "decision-making",
-                "discernment",
-                "quaker",
-                "unity",
-                "consensus",
-                "ethics",
-                "deliberation",
-                "multi-agent",
-                "clearness-committee"
             ],
             "strict": false
         },
@@ -422,24 +443,6 @@
                 "diary"
             ],
             "strict": true
-        },
-        {
-            "name": "speed-run",
-            "source": "./speed-run",
-            "description": "Token-efficient code generation pipeline - parallel implementation with hosted LLM (Cerebras) for ~60% token savings. Includes MCP server.",
-            "version": "1.0.0",
-            "keywords": [
-                "codegen",
-                "speed-run",
-                "parallel",
-                "hosted-llm",
-                "cerebras",
-                "token-efficient",
-                "turbo",
-                "race",
-                "mcp"
-            ],
-            "strict": false
         }
     ]
 }

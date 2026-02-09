@@ -2,7 +2,7 @@
 
 ## Overview
 
-This meta-plugin bundles essential development practices for building quality web applications with CSS, Firebase, and rigorous testing.
+This meta-plugin bundles essential development practices for building quality applications with CSS, Firebase, rigorous testing, parallel exploration, documentation verification, and token-efficient code generation.
 
 ## Plugins Included
 
@@ -46,14 +46,46 @@ End-to-end testing with real dependencies:
 
 **When to use**: Writing tests, validating features, before declaring work complete
 
+### test-kitchen
+
+Parallel exploration of implementation approaches:
+- Implements multiple variants simultaneously
+- Lets tests determine the winner
+- Compares approaches side-by-side
+- Uses worktrees for isolation
+
+**When to use**: Multiple valid approaches exist, want to compare implementations empirically
+
+### documentation-audit
+
+Documentation accuracy verification:
+- Two-pass extraction with pattern expansion
+- Verifies claims against codebase reality
+- Detects documentation drift
+- Comprehensive coverage checking
+
+**When to use**: After significant changes, before releases, when docs might be stale
+
+### speed-run
+
+Token-efficient code generation pipeline:
+- Parallel implementation with hosted LLM (Cerebras)
+- ~60% token savings on code generation
+- Includes MCP server for integration
+- Turbo mode for rapid prototyping
+
+**When to use**: Generating boilerplate, rapid prototyping, token-conscious codegen
+
 ## Development Workflow
 
 This bundle creates a quality-focused workflow:
 
-1. **Implement** → Use css-development or firebase-development
-2. **Test** → Use scenario-testing with real dependencies
-3. **Review** → Use fresh-eyes-review before commit
-4. **Ship** → Commit with confidence
+1. **Explore** → Use test-kitchen to try multiple approaches
+2. **Implement** → Use css-development, firebase-development, or speed-run
+3. **Test** → Use scenario-testing with real dependencies
+4. **Review** → Use fresh-eyes-review before commit
+5. **Verify docs** → Use documentation-audit to catch drift
+6. **Ship** → Commit with confidence
 
 ## Philosophy
 
@@ -67,7 +99,10 @@ This bundle creates a quality-focused workflow:
 These plugins complement each other:
 - **firebase-development** → **scenario-testing** (test Firebase with real Firestore/Auth)
 - **css-development** → **scenario-testing** (visual regression testing)
+- **test-kitchen** → **scenario-testing** (winning variant gets real tests)
+- **speed-run** → **fresh-eyes-review** (generated code still needs review)
 - **All plugins** → **fresh-eyes-review** (review before shipping)
+- **All plugins** → **documentation-audit** (keep docs in sync)
 
 ## Notes
 
