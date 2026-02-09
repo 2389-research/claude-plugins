@@ -1,6 +1,12 @@
 # Speed-Run
 
-Offloads code generation to Cerebras (~2000 tokens/sec), then Claude handles architecture and fixes. About 60% fewer tokens, 20x faster generation per file.
+Token-efficient code generation pipeline. Uses hosted LLM (Cerebras) for fast, cheap first-pass generation with Claude handling architecture and surgical fixes.
+
+| Skill | Description | Best For |
+|-------|-------------|----------|
+| `speed-run:turbo` | Direct hosted codegen | Single task, algorithmic code, boilerplate |
+| `speed-run:showdown` | Same design, parallel runners compete | Medium-high complexity, want best implementation |
+| `speed-run:any-percent` | Different approaches explored in parallel | Unsure of architecture, want to compare designs |
 
 ## Installation
 
@@ -8,8 +14,12 @@ Offloads code generation to Cerebras (~2000 tokens/sec), then Claude handles arc
 /plugin install speed-run@2389-research
 ```
 
-You need a free Cerebras API key from https://cloud.cerebras.ai. Add it to `~/.claude/settings.json`:
+### Prerequisites
 
+Speed-run requires a Cerebras API key for hosted code generation. Free tier includes ~1M tokens/day.
+
+1. Get a key at [cloud.cerebras.ai](https://cloud.cerebras.ai)
+2. Add to `~/.claude/settings.json`:
 ```json
 {
   "env": {
@@ -17,46 +27,76 @@ You need a free Cerebras API key from https://cloud.cerebras.ai. Add it to `~/.c
   }
 }
 ```
+3. Restart Claude Code
 
-## What you get
+## Flow
 
-- Turbo -- direct Cerebras code generation for single tasks
-- Showdown -- multiple runners implement the same spec in parallel, judge picks the winner
-- Any-percent -- multiple approaches to the same problem in parallel, judge evaluates tradeoffs
-- Judge -- scoring framework for comparing implementations (5 criteria, 25 points max)
-- MCP server -- Cerebras API integration with file parsing and disk writing
-
-## Quick example
-
-```
-You: "speed-run this authentication middleware"
-
-Claude: Checks API key, routes to turbo.
-        Writes contract prompt, calls Cerebras, gets code in ~0.5s.
-        Runs tests, fixes any failures.
-        Done.
+```text
+User: "speed-run" / "turbo build" / "fast build"
+    ↓
+Check: Cerebras API key
+    ↓
+┌─────────────────────────────────────────┐
+│  Route Selection                        │
+│                                         │
+│  1. Turbo     - Direct codegen          │
+│  2. Showdown  - Parallel competition    │
+│  3. Any%      - Parallel exploration    │
+└─────────────────────────────────────────┘
 ```
 
-For bigger tasks:
+## Quick Examples
 
+### Turbo (Direct Code Generation)
+
+```text
+User: "Use speed-run to build a rate limiter"
+
+Claude writes a contract prompt:
+  - DATA CONTRACT (exact models, types)
+  - API CONTRACT (exact routes, responses)
+  - ALGORITHM (step-by-step logic)
+  - RULES (framework, storage, error handling)
+
+Cerebras generates code → written to disk (~0.5s)
+Claude runs tests → surgical fixes if needed (1-4 lines)
 ```
-You: "speed-run showdown: implement the caching layer"
 
-Claude: Writes shared design doc.
-        Dispatches 3 runners in parallel (each uses Cerebras).
-        All runners: generate, test, fix.
-        Judge scores all three.
-        Winner kept, losers cleaned up.
+The contract prompt pattern is like speccing a ticket for a junior dev — explicit inputs, outputs, types, and behavior. That specificity is what makes hosted LLMs reliable at 80-95% first-pass accuracy.
+
+### Showdown (Parallel Competition)
+
+```text
+User: "Use showdown for the auth system"
+
+Claude assesses complexity → spawns 3 runners
+Each runner:
+  1. Reads the shared design doc
+  2. Creates their OWN implementation plan
+  3. Generates code via Cerebras
+  4. Runs tests, fixes failures
+
+All runners dispatched in parallel.
+Fresh-eyes review → judge scores all → winner selected.
 ```
 
-## How it works
+Key insight: each runner creates their own plan from the design doc. No shared implementation plan means genuine variation emerges naturally.
 
-1. Claude decides the architecture and writes a structured contract prompt
-2. Cerebras generates the code at ~2000 tokens/sec
-3. Claude runs tests and fixes anything Cerebras got wrong
-4. Same quality, fewer tokens, less wall clock time
+### Any% (Parallel Exploration)
 
-Most code is pattern-following. Cerebras is fast at that. The parts that require actual thinking still go through Claude.
+```text
+User: "Not sure whether to use SQLite or Postgres, try both"
+
+Claude generates 2-3 architectural approaches
+Each variant:
+  1. Gets its own worktree and branch
+  2. Creates implementation plan for its approach
+  3. Generates code via Cerebras
+  4. Runs tests
+
+Same scenario tests run against all variants.
+Fresh-eyes review → judge scores all → winner selected.
+```
 
 ## When to use it
 
@@ -69,8 +109,51 @@ Most code is pattern-following. Cerebras is fast at that. The parts that require
 | Complex business logic that needs reasoning | No, use Claude directly |
 | One-liner fixes | No, overkill |
 
-## Docs
+## How It Compares to Test Kitchen
 
-- [CLAUDE.md](CLAUDE.md) -- architecture, skill details, config, common mistakes
-- [skills/](skills/) -- individual skill definitions
-- [mcp/](mcp/) -- MCP server source
+Speed-run mirrors test-kitchen's parallel patterns but shifts code generation to a hosted LLM:
+
+| | Test Kitchen | Speed-Run |
+|---|---|---|
+| Code generation | Claude writes everything | Cerebras generates, Claude fixes |
+| Token cost | Standard | ~60-70% savings |
+| Generation speed | ~10s per file | ~0.5s per file |
+| First-pass quality | ~100% | 80-95% |
+| External dependency | None | Cerebras API key |
+
+The most direct comparison: test-kitchen's **cookoff** vs speed-run's **showdown** — same concept (multiple agents implement the same design), different execution strategy.
+
+## Available Models
+
+| Model | Speed | Notes |
+|-------|-------|-------|
+| `gpt-oss-120b` | ~3000 t/s | **Default** — best value, clean output |
+| `llama-3.3-70b` | ~2100 t/s | Reliable fallback |
+| `qwen-3-32b` | ~2600 t/s | Has verbose `<think>` tags |
+| `llama3.1-8b` | ~2200 t/s | Cheapest, may need more fixes |
+
+## Dependencies
+
+Speed-run orchestrates these skills (uses fallbacks if not installed):
+
+- `superpowers:dispatching-parallel-agents`
+- `superpowers:using-git-worktrees`
+- `superpowers:writing-plans`
+- `superpowers:executing-plans`
+- `superpowers:test-driven-development`
+- `superpowers:verification-before-completion`
+- `fresh-eyes-review:skills`
+- `scenario-testing:skills`
+- `superpowers:finishing-a-development-branch`
+
+## Documentation
+
+- [CLAUDE.md](CLAUDE.md) — Architecture, skill details, config, common mistakes
+- [Turbo Skill](./skills/turbo/SKILL.md) — Direct hosted codegen
+- [Showdown Skill](./skills/showdown/SKILL.md) — Parallel competition
+- [Any% Skill](./skills/any-percent/SKILL.md) — Parallel exploration
+- [Judge Skill](./skills/judge/SKILL.md) — Scoring framework
+
+## Origin
+
+Speed-run was born from test-kitchen's token cost problem. Running 3-5 parallel Claude agents generates a lot of expensive output tokens. By shifting first-pass code generation to Cerebras (~3000 tokens/second), we keep the same parallel exploration patterns at a fraction of the cost — Claude focuses on what it's best at: architecture, orchestration, and surgical fixes.
