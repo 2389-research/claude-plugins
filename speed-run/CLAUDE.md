@@ -1,16 +1,45 @@
 # Speed-Run Plugin
 
-Token-efficient code generation pipeline. Uses hosted LLM (Cerebras) for fast, cheap first-pass code generation with Claude handling architecture decisions and surgical fixes.
+## Overview
+
+Speed-run offloads first-pass code generation to Cerebras (~2000 tokens/sec), then Claude handles architecture decisions and surgical fixes. Same quality code, ~60% fewer Claude tokens, 20x faster generation per file.
+
+Most code is pattern-following, not reasoning. Cerebras handles the patterns; Claude handles the thinking.
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────┐
+│  speed-run (orchestrator skill)             │
+│  Checks API key → routes to sub-skill       │
+├──────────┬──────────┬───────────────────────┤
+│  turbo   │ showdown │  any-percent          │
+│  1 task  │ N runners│  N approaches         │
+│  direct  │ same spec│  different specs      │
+└────┬─────┴────┬─────┴────┬──────────────────┘
+     │          │          │
+     v          v          v
+┌─────────────────────────────────────────────┐
+│  MCP Server (@2389/speed-run-mcp)           │
+│  ┌───────────┬──────────────┬─────────────┐ │
+│  │ generate  │ generate_and │ check_status│ │
+│  │           │ _write_files │             │ │
+│  └─────┬─────┴──────┬───────┴─────────────┘ │
+│        │            │                        │
+│        v            v                        │
+│  Cerebras API (llama-4-scout-17b-16e-instruct)│
+└─────────────────────────────────────────────┘
+```
 
 ## Prerequisites
 
-### Setup: CEREBRAS_API_KEY
+### CEREBRAS_API_KEY
 
-Get a free API key at: https://cloud.cerebras.ai
+Get a free key at https://cloud.cerebras.ai
 
-Then set it using **either** method:
+Set it using **either** method:
 
-**Option A (recommended for Claude Code):** Add to `~/.claude/settings.json`:
+**Option A (recommended):** Add to `~/.claude/settings.json`:
 ```json
 {
   "env": {
@@ -24,84 +53,150 @@ Then set it using **either** method:
 export CEREBRAS_API_KEY="your-key-here"
 ```
 
-Restart Claude Code after setting the key.
+Restart Claude Code after setting the key. The plugin checks on session start via a hook and warns if the key is missing.
 
-### MCP Server Setup
+### MCP Server
 
-The MCP server is a Node/TypeScript project in `./mcp/`. If `mcp__speed-run__*` tools aren't available:
+The MCP server auto-registers via `.mcp.json` when the plugin is installed. If `mcp__speed-run__*` tools aren't available, build manually:
 
-1. Build the server:
 ```bash
 cd ./mcp && npm install && npm run build
 ```
 
-2. Register the server:
-```bash
-claude mcp add speed-run -- node /path/to/speed-run/mcp/dist/index.js
-```
-
-3. Restart Claude Code.
-
 ## Skills
 
-| Skill | Description | When |
-|-------|-------------|------|
-| `speed-run` | Router - checks API key, presents options | Entry point |
-| `speed-run:turbo` | Direct hosted codegen | Single task, write contract, generate |
-| `speed-run:showdown` | Same design, parallel runners via hosted LLM | Competition between implementations |
-| `speed-run:any-percent` | Explore approaches via hosted LLM | Multiple architectural approaches |
+### Routing
 
-## Flow
+| Skill | Trigger | What it does |
+|-------|---------|-------------|
+| `speed-run` | "speed-run", "turbo", "fast codegen", "cerebras" | Orchestrator. Checks API key, presents options. |
+| `speed-run:turbo` | Single task, straightforward codegen | Direct generation. One contract prompt, one output. |
+| `speed-run:showdown` | Multiple implementations of the same spec | Parallel competition. N runners implement the same design, judge picks the winner. |
+| `speed-run:any-percent` | Multiple architectural approaches | Parallel exploration. N variants try different approaches, judge evaluates tradeoffs. |
+| `speed-run:judge` | Called by showdown/any-percent | Scoring framework. 5 criteria, 25 points max, hard gates on critical flaws. |
 
+### Turbo (Direct Codegen)
+
+The simplest path. Use when you have one task and want fast generation.
+
+**Flow:**
+1. Write a contract prompt (DATA CONTRACT, API CONTRACT, ALGORITHM, RULES)
+2. Call `mcp__speed-run__generate_and_write_files` with the prompt
+3. Run tests
+4. If tests fail, Claude fixes surgically (don't regenerate the whole thing)
+5. Re-test until green
+
+**Best for:** Algorithmic code, boilerplate, data transformations, multi-file scaffolding.
+
+**Not great for:** Novel architecture decisions, complex business logic, anything requiring deep reasoning about tradeoffs.
+
+### Showdown (Parallel Competition)
+
+Same design doc, multiple runners implement it independently. The judge scores all variants and picks a winner.
+
+**Flow:**
+1. Assess complexity → decide runner count (2-5)
+2. Write a shared design document
+3. Dispatch all runners in a single message (parallel agents)
+4. Each runner: hosted LLM generates → tests → Claude fixes
+5. Judge scores all variants (fitness, complexity, readability, robustness, maintainability)
+6. Winner gets promoted, losers get cleaned up
+
+**Critical:** Dispatch all runners in a single message. Sequential dispatch defeats the purpose.
+
+### Any-Percent (Parallel Exploration)
+
+Different architectural approaches to the same problem. Unlike showdown, each variant uses a different strategy.
+
+**Flow:**
+1. Gather context about the problem
+2. Identify 2-5 distinct approaches (e.g., "event-driven vs polling vs hybrid")
+3. Write a plan document defining each approach
+4. Dispatch all variants in a single message
+5. Each variant: hosted LLM generates → tests → Claude fixes
+6. Judge evaluates tradeoffs across approaches
+7. Winner gets promoted
+
+**Best for:** When you genuinely don't know which approach is right and want to let the code speak.
+
+### Judge (Scoring Framework)
+
+Evaluates implementations across 5 criteria, each scored 1-5:
+
+| Criterion | What it measures |
+|-----------|-----------------|
+| Fitness for Purpose | Does it actually do what was asked? (8 checkboxes) |
+| Justified Complexity | Is the complexity earned? (line count analysis) |
+| Readability | Can someone else understand it? (violation counting) |
+| Robustness & Scale | Will it hold up? (12-item checklist) |
+| Maintainability | Can it evolve? (6-item checklist) |
+
+**Hard gates:** Fitness delta >= 2 between variants, or any score of 1, triggers automatic disqualification.
+
+## MCP tools
+
+| Tool | Purpose |
+|------|---------|
+| `mcp__speed-run__generate` | Send a prompt to Cerebras, get raw text back |
+| `mcp__speed-run__generate_and_write_files` | Send a prompt, parse file blocks from response, write to disk |
+| `mcp__speed-run__check_status` | Verify API key is set and Cerebras is reachable |
+
+### File output format
+
+The MCP server parses generated code from XML-style tags:
+
+```text
+<FILE path="src/main.py">
+def hello():
+    print("hello world")
+</FILE>
 ```
-User invokes "speed-run"
-    |
-    v
-Check: mcp__speed-run__check_status
-    |
-    +-- No API key --> Show setup instructions, STOP
-    |
-    +-- OK --> Present options:
-                1. Turbo    - direct codegen (single task)
-                2. Showdown - parallel competition (same design)
-                3. Any%     - parallel exploration (different approaches)
-```
 
-## How It Differs From Test Kitchen
+Two legacy fallback formats (`### FILE: path` with fenced blocks, or raw content) are supported but not recommended.
+
+If generated code contains literal triple backticks, use `TRIPLE_BACKTICK` as a placeholder - the server auto-replaces after extraction.
+
+## Speed-run vs test kitchen
 
 | Aspect | Test Kitchen | Speed-Run |
 |--------|-------------|-----------|
 | Code generation | Claude direct | Hosted LLM (Cerebras) |
 | API key required | No | Yes (CEREBRAS_API_KEY) |
-| Token cost | Standard | ~60% savings on algorithmic code |
+| Token cost | Standard Claude pricing | ~60% savings on generation |
 | Generation speed | ~10s per file | ~0.5s per file |
-| First-pass quality | ~100% | 80-95% (Claude fixes the rest) |
+| First-pass quality | ~100% correct | 80-95% (Claude fixes the rest) |
+| Fix strategy | Rarely needed | Surgical fixes by Claude |
 | Best for | Any task | Algorithmic code, boilerplate, multi-variant |
 
-## File Output Format
+Use test-kitchen when first-pass quality matters most. Use speed-run when you want speed and token savings and don't mind a fix cycle.
 
-The speed-run MCP server expects generated code in **XML-style tags** (primary format):
+## Skill dependencies
 
-```text
-<FILE path="src/main.py">
-[code here]
-</FILE>
-```
+| Dependency | Used By | Purpose |
+|------------|---------|---------|
+| `speed-run:judge` | showdown, any-percent | Scoring framework (bundled) |
+| `superpowers:dispatching-parallel-agents` | showdown, any-percent | Parallel dispatch |
+| `superpowers:using-git-worktrees` | showdown, any-percent | Isolated workspaces |
+| `superpowers:verification-before-completion` | all | Verify before claiming done |
+| `fresh-eyes-review:skills` | showdown, any-percent | Quality gate before comparison |
 
-If generated code contains literal triple backticks, use `TRIPLE_BACKTICK` as a placeholder — it's auto-replaced after extraction.
+## Common mistakes
 
-Two legacy fallback formats are also supported but **not recommended**:
-- `### FILE: path` with fenced code blocks
-- `### FILE: path` with raw content
+Don't re-prompt Cerebras when tests fail. Claude should read the error and fix it surgically. Cerebras already did the structural work -- regenerating from scratch wastes the effort.
 
-**Note:** The `hosted-llm-codegen` plugin uses the legacy `### FILE:` format as its primary. The two plugins are not interchangeable — prompts generated for one may not parse correctly with the other.
+Showdown and any-percent must dispatch all runners in a single message. Running them one at a time defeats the whole point of parallelism.
 
-## Skill Dependencies
+Turbo needs structured contract prompts (DATA CONTRACT, API CONTRACT, etc). If you send it a vague prompt, you get vague code back.
 
-| Dependency | Usage |
-|------------|-------|
-| `speed-run:judge` | Scoring framework for showdown/any% (bundled) |
-| `superpowers:dispatching-parallel-agents` | Parallel dispatch for showdown/any% |
-| `superpowers:using-git-worktrees` | Isolated workspaces for showdown/any% |
-| `superpowers:verification-before-completion` | Verify before claiming done |
-| `fresh-eyes-review:skills` | Quality gate before comparison |
+Don't use speed-run for tasks that require actual reasoning about architecture or tradeoffs. Cerebras is fast at following patterns, not at thinking. Use Claude directly for those.
+
+If tools aren't working, you probably forgot the API key. The session-start hook warns on launch, but `mcp__speed-run__check_status` will confirm.
+
+## Configuration
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `CEREBRAS_API_KEY` | (required) | API key from https://cloud.cerebras.ai |
+| `CEREBRAS_MODEL` | `llama-4-scout-17b-16e-instruct` | Model to use |
+| `CEREBRAS_URL` | `https://api.cerebras.ai/v1` | API endpoint |
+| `GENERATION_TIMEOUT` | `30000` | Timeout in ms |
