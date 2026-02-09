@@ -26,6 +26,22 @@ export CEREBRAS_API_KEY="your-key-here"
 
 Restart Claude Code after setting the key.
 
+### MCP Server Setup
+
+The MCP server is a Node/TypeScript project in `./mcp/`. If `mcp__speed-run__*` tools aren't available:
+
+1. Build the server:
+```bash
+cd ./mcp && npm install && npm run build
+```
+
+2. Register the server:
+```bash
+claude mcp add speed-run -- node /path/to/speed-run/mcp/dist/index.js
+```
+
+3. Restart Claude Code.
+
 ## Skills
 
 | Skill | Description | When |
