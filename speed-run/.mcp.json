@@ -1,0 +1,9 @@
+{
+  "speed-run": {
+    "command": "node",
+    "args": ["${CLAUDE_PLUGIN_ROOT}/mcp/dist/index.js"],
+    "env": {
+      "CEREBRAS_API_KEY": "${CEREBRAS_API_KEY}"
+    }
+  }
+}
