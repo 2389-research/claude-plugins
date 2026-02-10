@@ -25,12 +25,12 @@ marketplace.plugins.forEach(plugin => {
 
   if (plugin.description.startsWith('[meta]') || keywords.includes('meta')) {
     categories.meta.plugins.push(plugin);
+  } else if (keywords.includes('linux') || keywords.includes('sysadmin') || keywords.includes('terminal') || keywords.includes('reverse-engineering') || keywords.includes('maintenance')) {
+    categories.infrastructure.plugins.push(plugin);
   } else if (keywords.includes('multi-agent') || keywords.includes('agents') || keywords.includes('social') || desc.includes('agent')) {
     categories.agents.plugins.push(plugin);
   } else if (keywords.includes('ceo') || keywords.includes('executive') || keywords.includes('worldview') || keywords.includes('journal') || keywords.includes('reflection')) {
     categories.personal.plugins.push(plugin);
-  } else if (keywords.includes('linux') || keywords.includes('sysadmin') || keywords.includes('terminal') || keywords.includes('reverse-engineering') || keywords.includes('maintenance')) {
-    categories.infrastructure.plugins.push(plugin);
   } else {
     categories.development.plugins.push(plugin);
   }
@@ -43,12 +43,12 @@ function getCategoryForPlugin(plugin) {
 
   if (plugin.description.startsWith('[meta]') || keywords.includes('meta')) {
     return categories.meta;
+  } else if (keywords.includes('linux') || keywords.includes('sysadmin') || keywords.includes('terminal') || keywords.includes('reverse-engineering') || keywords.includes('maintenance')) {
+    return categories.infrastructure;
   } else if (keywords.includes('multi-agent') || keywords.includes('agents') || keywords.includes('social') || desc.includes('agent')) {
     return categories.agents;
   } else if (keywords.includes('ceo') || keywords.includes('executive') || keywords.includes('worldview') || keywords.includes('journal') || keywords.includes('reflection')) {
     return categories.personal;
-  } else if (keywords.includes('linux') || keywords.includes('sysadmin') || keywords.includes('terminal') || keywords.includes('reverse-engineering') || keywords.includes('maintenance')) {
-    return categories.infrastructure;
   } else {
     return categories.development;
   }
