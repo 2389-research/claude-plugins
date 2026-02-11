@@ -1,0 +1,5 @@
+{
+  "name": "prbuddy",
+  "description": "PR health assistant - monitors CI, triages review comments, fixes issues with prevention. Triggers on 'PR', 'CI', 'checks', 'review comments', 'workflow failed'.",
+  "version": "1.0.0"
+}
