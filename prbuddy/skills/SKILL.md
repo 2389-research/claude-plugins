@@ -76,7 +76,7 @@ If no PR found for current branch, ask user:
 ### Step 2: Check CI Status
 
 ```bash
-gh pr checks --json name,state,bucket,conclusion,link
+gh pr checks --json name,state,bucket,link
 ```
 
 **If any checks failed:** Route to `prbuddy:ci`

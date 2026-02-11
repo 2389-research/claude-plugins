@@ -25,7 +25,7 @@ Check CI at these moments (not continuously):
 ### Step 1: Get CI Status
 
 ```bash
-gh pr checks --json name,state,bucket,conclusion,link,workflow
+gh pr checks --json name,state,bucket,link,workflow
 ```
 
 **Status interpretation:**
