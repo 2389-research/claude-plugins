@@ -63,7 +63,13 @@ Check again:
 ### Step 3: Identify Failed Runs
 
 ```bash
-gh run list --branch $(git branch --show-current) --json databaseId,name,status,conclusion --limit 10
+# Get branch name (with fallback for detached HEAD)
+BRANCH=$(git branch --show-current)
+if [ -z "$BRANCH" ]; then
+  BRANCH=$(gh pr view --json headRefName -q .headRefName)
+fi
+
+gh run list --branch "$BRANCH" --json databaseId,name,status,conclusion --limit 10
 ```
 
 Filter for `conclusion: "failure"`.
@@ -85,6 +91,24 @@ Analyze the logs to identify:
 2. **Error message** - The actual error
 3. **Root cause** - Why it happened
 4. **Affected files** - Which code needs fixing
+
+#### Flaky Test vs Real Failure
+
+Before fixing, determine if this is a flaky test or real failure:
+
+**Signs of flaky test (consider rerun):**
+- Same test passed on previous commits
+- Error involves timing, network, or race conditions
+- "Timeout" or "connection refused" errors
+- Test passes locally but fails in CI
+
+**Signs of real failure (fix required):**
+- New test that never passed
+- Error directly relates to changed code
+- Assertion failure on business logic
+- Type/syntax errors
+
+**If flaky:** Try `gh run rerun <id> --failed` first. If it fails again, investigate further.
 
 ### Step 6: Consult PAL (if non-trivial)
 

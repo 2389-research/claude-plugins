@@ -20,13 +20,19 @@ gh extension install agynio/gh-pr-review
 
 ## Workflow
 
-### Step 1: Get PR Context
+### Step 1: Get PR Context and Repo Info
 
 ```bash
+# Get repo slug for -R flag
+REPO=$(gh repo view --json nameWithOwner -q .nameWithOwner)
+
+# Get PR details
 gh pr view --json number,title,body,closingIssuesReferences
 ```
 
 Extract:
+- **Repo slug** (`$REPO`) for commands requiring `-R`
+- **PR number** for thread operations
 - **PR goals** from title and body
 - **Linked issues** from `closingIssuesReferences`
 
@@ -35,7 +41,7 @@ These define what's "critical" vs "nitpick".
 ### Step 2: Fetch Review Threads
 
 ```bash
-gh pr-review threads list --unresolved --not_outdated -R <owner/repo> <pr-number>
+gh pr-review threads list --unresolved --not_outdated -R $REPO <pr-number>
 ```
 
 This returns unresolved, non-outdated review threads.
@@ -111,13 +117,15 @@ Changes:
 
 Prevention added:
 - [systematic change]" \
-  -R <owner/repo> <pr-number>
+  -R $REPO <pr-number>
 ```
 
-#### 4g: Resolve Thread
+#### 4g: Resolve Thread (Optional)
+
+**Note:** Some teams prefer only reviewers resolve their own threads. Ask the user before resolving, or skip this step if team norms require reviewer resolution.
 
 ```bash
-gh pr-review threads resolve --thread-id <thread-id> -R <owner/repo> <pr-number>
+gh pr-review threads resolve --thread-id <thread-id> -R $REPO <pr-number>
 ```
 
 ### Step 5: Handle Nitpick Comments
@@ -127,7 +135,7 @@ For each nitpick comment:
 #### 5a: Search for Duplicates
 
 ```bash
-gh search issues --repo <owner/repo> "<search terms from comment>"
+gh search issues --repo $REPO "<search terms from comment>"
 ```
 
 Check if similar issue already exists.
@@ -185,13 +193,15 @@ gh pr-review comments reply \
   --body "Good catch! This is outside the scope of this PR (focused on [PR goal]).
 
 Created issue #<number> to track this." \
-  -R <owner/repo> <pr-number>
+  -R $REPO <pr-number>
 ```
 
-#### 5d: Resolve Thread
+#### 5d: Resolve Thread (Optional)
+
+**Note:** Some teams prefer only reviewers resolve their own threads. Ask the user before resolving, or skip this step if team norms require reviewer resolution.
 
 ```bash
-gh pr-review threads resolve --thread-id <thread-id> -R <owner/repo> <pr-number>
+gh pr-review threads resolve --thread-id <thread-id> -R $REPO <pr-number>
 ```
 
 ### Step 6: Push Changes

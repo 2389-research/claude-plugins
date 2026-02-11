@@ -30,6 +30,13 @@ gh auth status
 
 If not authenticated, run `gh auth login`.
 
+**Required token scopes:**
+- `repo` - Full control of private repositories (for PR operations)
+- `read:org` - Read org membership (for issue creation in org repos)
+- `workflow` - Update GitHub Action workflows (for CI operations)
+
+To check scopes: `gh auth status` shows granted scopes.
+
 ### Required: gh-pr-review Extension
 
 This extension is required for review comment handling:
@@ -155,3 +162,20 @@ Run: gh auth login
 
 Then retry: /prbuddy
 ```
+
+### Fork-Based PRs
+
+This skill assumes write access to the PR branch. For fork-based PRs:
+- You may not have push access to the source branch
+- Protected branch rules may prevent direct pushes
+- Consider creating a fix branch and opening a separate PR
+
+**Workaround:** Ask the user to push changes manually or grant write access.
+
+### Dry-Run Mode
+
+To preview changes without committing, tell the agent:
+- "Show me what you would fix, but don't commit"
+- "Dry-run mode" or "preview only"
+
+The agent will analyze and report proposed fixes without making changes.

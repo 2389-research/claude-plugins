@@ -27,6 +27,8 @@ Must be installed and authenticated:
 gh auth status
 ```
 
+**Required scopes:** `repo`, `read:org`, `workflow`
+
 ### gh-pr-review Extension
 
 Required for review comment handling:
@@ -39,12 +41,13 @@ gh extension install agynio/gh-pr-review
 
 **"Fix the acute issue AND prevent the class of error from recurring."**
 
-Every fix should include a "prevention delta":
-1. Linter rules / pre-commit hooks (strongest)
-2. Type system constraints
-3. CI checks
-4. Tests
-5. CLAUDE.md guidance (weakest)
+Every fix should include a "prevention delta" (prefer higher):
+1. **Linter rule** - Add ESLint/Prettier/etc. rule (strongest)
+2. **Pre-commit hook** - Add check to `.pre-commit-config.yaml`
+3. **CI check** - Add earlier/faster check
+4. **Type system** - Stricter TypeScript config
+5. **Test** - Add test for this case
+6. **Documentation** - Update CLAUDE.md if agent guidance (weakest)
 
 ## Checkpoint Discipline
 

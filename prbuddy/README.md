@@ -74,12 +74,13 @@ Found 3 unresolved threads:
 
 **"Fix the acute issue AND prevent the class of error from recurring."**
 
-Every fix includes systematic prevention:
-- Linter rules
-- Pre-commit hooks
-- Type constraints
-- Tests
-- Documentation
+Every fix includes systematic prevention (prefer higher):
+1. **Linter rule** - ESLint/Prettier/etc. (strongest)
+2. **Pre-commit hook** - `.pre-commit-config.yaml`
+3. **CI check** - Earlier/faster check
+4. **Type system** - Stricter TypeScript config
+5. **Test** - Add test for this case
+6. **Documentation** - CLAUDE.md guidance (weakest)
 
 ## Checkpoint Discipline
 
