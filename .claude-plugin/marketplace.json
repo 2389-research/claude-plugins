@@ -389,6 +389,23 @@
             "strict": false
         },
         {
+            "name": "prbuddy",
+            "source": "./prbuddy",
+            "description": "PR health assistant - monitors CI, triages review comments, fixes issues with systematic prevention. Uses gh CLI and gh-pr-review extension.",
+            "version": "1.0.0",
+            "keywords": [
+                "pr",
+                "pull-request",
+                "ci",
+                "workflow",
+                "review",
+                "comments",
+                "github",
+                "gh"
+            ],
+            "strict": false
+        },
+        {
             "name": "agent-drugs",
             "source": {
                 "source": "url",
