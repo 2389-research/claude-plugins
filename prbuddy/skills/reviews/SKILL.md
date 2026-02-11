@@ -26,13 +26,16 @@ gh extension install agynio/gh-pr-review
 # Get repo slug for -R flag
 REPO=$(gh repo view --json nameWithOwner -q .nameWithOwner)
 
+# Get PR number
+PR_NUM=$(gh pr view --json number -q .number)
+
 # Get PR details
 gh pr view --json number,title,body,closingIssuesReferences
 ```
 
 Extract:
 - **Repo slug** (`$REPO`) for commands requiring `-R`
-- **PR number** for thread operations
+- **PR number** (`$PR_NUM`) for thread operations
 - **PR goals** from title and body
 - **Linked issues** from `closingIssuesReferences`
 
@@ -41,7 +44,7 @@ These define what's "critical" vs "nitpick".
 ### Step 2: Fetch Review Threads
 
 ```bash
-gh pr-review threads list --unresolved --not_outdated -R $REPO <pr-number>
+gh pr-review threads list --unresolved --not_outdated -R $REPO $PR_NUM
 ```
 
 This returns unresolved, non-outdated review threads.
@@ -90,10 +93,12 @@ Make the code changes.
 
 What systematic change would prevent this class of issue?
 
-- Linter rule?
-- Type constraint?
-- Test case?
-- Documentation?
+1. **Linter rule** - Add ESLint/Prettier/etc. rule (strongest)
+2. **Pre-commit hook** - Add check to `.pre-commit-config.yaml`
+3. **CI check** - Add earlier/faster check
+4. **Type system** - Stricter TypeScript config
+5. **Test** - Add test for this case
+6. **Documentation** - Update CLAUDE.md if agent guidance (weakest)
 
 #### 4e: Commit
 
@@ -117,7 +122,7 @@ Changes:
 
 Prevention added:
 - [systematic change]" \
-  -R $REPO <pr-number>
+  -R $REPO $PR_NUM
 ```
 
 #### 4g: Resolve Thread (Optional)
@@ -125,7 +130,7 @@ Prevention added:
 **Note:** Some teams prefer only reviewers resolve their own threads. Ask the user before resolving, or skip this step if team norms require reviewer resolution.
 
 ```bash
-gh pr-review threads resolve --thread-id <thread-id> -R $REPO <pr-number>
+gh pr-review threads resolve --thread-id <thread-id> -R $REPO $PR_NUM
 ```
 
 ### Step 5: Handle Nitpick Comments
@@ -145,23 +150,23 @@ Check if similar issue already exists.
 Determine appropriate labels:
 
 ```bash
-gh label list --json name,description
+gh label list -R $REPO --json name,description
 ```
 
 If needed label doesn't exist:
 
 ```bash
-gh label create "from-review" --color "c5def5" --description "Created from PR review comment"
+gh label create "from-review" --color "c5def5" --description "Created from PR review comment" -R $REPO
 ```
 
 Create the issue:
 
 ```bash
-gh issue create \
+gh issue create -R $REPO \
   --title "<concise title>" \
   --body "## Context
 
-From PR #<number> review by @<reviewer>.
+From PR #$PR_NUM review by @<reviewer>.
 
 ## Original Comment
 
@@ -173,7 +178,7 @@ From PR #<number> review by @<reviewer>.
 
 ## Related
 
-- PR: #<number>
+- PR: #$PR_NUM
 - File: <path>
 - Line: <line number>" \
   --label "from-review,<type-label>"
@@ -193,7 +198,7 @@ gh pr-review comments reply \
   --body "Good catch! This is outside the scope of this PR (focused on [PR goal]).
 
 Created issue #<number> to track this." \
-  -R $REPO <pr-number>
+  -R $REPO $PR_NUM
 ```
 
 #### 5d: Resolve Thread (Optional)
@@ -201,7 +206,7 @@ Created issue #<number> to track this." \
 **Note:** Some teams prefer only reviewers resolve their own threads. Ask the user before resolving, or skip this step if team norms require reviewer resolution.
 
 ```bash
-gh pr-review threads resolve --thread-id <thread-id> -R $REPO <pr-number>
+gh pr-review threads resolve --thread-id <thread-id> -R $REPO $PR_NUM
 ```
 
 ### Step 6: Push Changes
@@ -230,13 +235,13 @@ All threads resolved. Changes pushed.
 
 | Task | Command |
 |------|---------|
-| List threads | `gh pr-review threads list --unresolved --not_outdated -R owner/repo <pr>` |
-| Reply | `gh pr-review comments reply --thread-id <id> --body <msg> -R owner/repo <pr>` |
-| Resolve | `gh pr-review threads resolve --thread-id <id> -R owner/repo <pr>` |
-| Search issues | `gh search issues --repo owner/repo "<terms>"` |
-| Create issue | `gh issue create --title --body --label` |
-| List labels | `gh label list --json name` |
-| Create label | `gh label create <name> --color <hex> --description <desc>` |
+| List threads | `gh pr-review threads list --unresolved --not_outdated -R $REPO $PR_NUM` |
+| Reply | `gh pr-review comments reply --thread-id <id> --body <msg> -R $REPO $PR_NUM` |
+| Resolve | `gh pr-review threads resolve --thread-id <id> -R $REPO $PR_NUM` |
+| Search issues | `gh search issues --repo $REPO "<terms>"` |
+| Create issue | `gh issue create -R $REPO --title --body --label` |
+| List labels | `gh label list -R $REPO --json name` |
+| Create label | `gh label create <name> --color <hex> --description <desc> -R $REPO` |
 
 ## Triage Decision Tree
 
