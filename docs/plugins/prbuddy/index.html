@@ -164,13 +164,18 @@ Found 3 unresolved threads:
 </code></pre>
 <h3>Philosophy</h3>
 <p><strong>"Fix the acute issue AND prevent the class of error from recurring."</strong></p>
-<p>Every fix includes systematic prevention:</p>
-<ul><li>Linter rules</li><li>Pre-commit hooks</li><li>Type constraints</li><li>Tests</li><li>Documentation</li></ul>
+<p>Every fix includes systematic prevention (prefer higher):</p>
+<ol><li><strong>Linter rule</strong> - ESLint/Prettier/etc. (strongest)</li>
+<li><strong>Pre-commit hook</strong> - <code>.pre-commit-config.yaml</code></li>
+<li><strong>CI check</strong> - Earlier/faster check</li>
+<li><strong>Type system</strong> - Stricter TypeScript config</li>
+<li><strong>Test</strong> - Add test for this case</li>
+<li><strong>Documentation</strong> - CLAUDE.md guidance (weakest)</li></ol>
 <h3>Checkpoint Discipline</h3>
 <p>Check CI at key moments (not continuously):</p>
 <ul><li>After push settles</li><li>Before requesting review</li><li>Before declaring done</li><li>Before merge</li></ul>
 <h3>Links</h3>
-<ul><li><span class="broken-link" title="Link target not found: docs/plans/2026-02-11-prbuddy-design.md">Design Document</span></li><li><a href="https://github.com/agynio/gh-pr-review" rel="noopener noreferrer">gh-pr-review extension</a></li></ul>
+<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/prbuddy/docs/plans/2026-02-11-prbuddy-design.md" rel="noopener noreferrer" target="_blank">Design Document</a></li><li><a href="https://github.com/agynio/gh-pr-review" rel="noopener noreferrer">gh-pr-review extension</a></li></ul>
       </div>
     </section>
     
