@@ -389,6 +389,25 @@
             "strict": false
         },
         {
+            "name": "git-repo-prep",
+            "source": "./git-repo-prep",
+            "description": "Prepare codebases for public/open-source release and audit them for openness - full lifecycle prep or standalone review",
+            "version": "1.0.0",
+            "keywords": [
+                "open-source",
+                "public-release",
+                "secrets-audit",
+                "license",
+                "readme",
+                "contributing",
+                "gitignore",
+                "ci-cd",
+                "openness",
+                "repo-prep"
+            ],
+            "strict": false
+        },
+        {
             "name": "prbuddy",
             "source": "./prbuddy",
             "description": "PR health assistant - monitors CI, triages review comments, fixes issues with systematic prevention. Uses gh CLI and gh-pr-review extension.",
