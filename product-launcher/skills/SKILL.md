@@ -9,7 +9,7 @@ Two skills for shipping products:
 
 | Skill | Purpose | Trigger |
 |-------|---------|---------|
-| `product-launcher:product-page-builder` | Generate product page for 2389.ai | "product page", "add to site", "write up for the site" |
+| `product-launcher:product-page-builder` | Generate product page for 2389.ai | "product page", "add to site", "write up for the site", "create product entry" |
 | `product-launcher:launch-materials` | Generate email + blog + tweets | "launch", "announce", "GTM", "tweet thread" |
 
 ## Routing

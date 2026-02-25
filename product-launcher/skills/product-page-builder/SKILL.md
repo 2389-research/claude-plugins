@@ -1,6 +1,7 @@
 ---
 name: product-launcher:product-page-builder
 description: Use when creating or updating a product page for the 2389.ai website. Triggers on "product page", "add to site", "write up for the site", "create product entry".
+license: MIT
 ---
 
 # Product Page Builder
