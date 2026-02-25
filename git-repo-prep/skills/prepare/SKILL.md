@@ -9,7 +9,7 @@ Announce: "I'm using git-repo-prep:prepare to walk through open-source preparati
 
 ## Setup
 
-Create tasks for all 9 phases using TaskCreate:
+Create a TodoWrite checklist for all 9 phases:
 
 1. Discovery
 2. Secrets & Personal Info Audit
@@ -169,7 +169,7 @@ Check current `.gitignore` against ecosystem best practices:
 | Node.js | `node_modules/`, `.env`, `dist/`, `coverage/` |
 | Python | `__pycache__/`, `*.pyc`, `.env`, `*.egg-info/`, `dist/`, `.venv/` |
 | Rust | `target/`, `.env` |
-| Go | vendor/ (if not vendoring), `.env` |
+| Go | `vendor/` (if not vendoring), `.env` |
 | General | `.env`, `.env.*`, `*.log`, `.DS_Store`, `*.pem`, `*.key` |
 
 **Always check:**

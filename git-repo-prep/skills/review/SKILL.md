@@ -7,6 +7,21 @@ description: Use when auditing a codebase for openness, checking for secrets, mi
 
 Announce: "I'm using git-repo-prep:review to audit this repo for openness."
 
+## Setup
+
+Create a TodoWrite checklist for all audit categories:
+
+1. Secrets scan
+2. Personal info scan
+3. License check
+4. Documentation check
+5. Gitignore check
+6. CI/CD check
+7. Metadata check
+8. Present findings and summary
+
+Mark each task in_progress before starting, completed immediately after.
+
 ## Scope
 
 This is an **openness audit**, not a code quality review. Stay focused on what matters for making the repo public. Do NOT comment on error handling, architecture, performance, code style, test coverage quality, or design patterns.
