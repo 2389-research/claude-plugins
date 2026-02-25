@@ -21,7 +21,17 @@ If neither exists, ask the user for the path. Store it as `SITE_REPO` for the se
 
 ## Phase 1: Gather Context
 
-If a README exists in the current directory, read it and pre-fill as much as possible. Confirm with the user — don't interrogate.
+Look for context in this order:
+
+1. README.md in the current directory
+2. CLAUDE.md in the current directory
+3. README.md or CLAUDE.md in the primary sub-directory
+4. docs/ folder
+5. If nothing found, ask the user to describe the product
+
+If the repo contains multiple sub-projects, identify the primary deliverable. If unclear, ask the user which component the product page should focus on.
+
+Pre-fill as much as possible from what you find. Confirm with the user — don't interrogate.
 
 **Required:**
 
@@ -39,6 +49,8 @@ If a README exists in the current directory, read it and pre-fill as much as pos
 
 **Optional:** Requirements/dependencies, architecture notes, known limitations.
 
+Present the pre-filled fields as a table. Ask the user to confirm or correct before proceeding.
+
 ## Phase 2: Generate
 
 Produce the full `index.md` in one pass.
@@ -55,6 +67,7 @@ github: "https://github.com/2389-research/repo"
 demo: "https://url-if-exists"
 weight: N
 image_prompt: "..."
+draft: true|false  # Optional. Default: omit (page is published).
 ```
 
 ### Image prompt rules
@@ -132,8 +145,10 @@ Full sweep against known AI writing patterns. Fix every match before presenting.
 
 ## Phase 4: Output
 
+Before saving, check if `{SITE_REPO}/content/products/{slug}/index.md` already exists. If it does, read the existing page. Preserve `image_prompt`, `weight`, and `date` from the existing page unless the user says otherwise. Note differences for the user.
+
 1. Save to `{SITE_REPO}/content/products/{slug}/index.md`
-2. Run `hugo` in the site repo to verify build
+2. Run `hugo` in the site repo to verify build. If the build fails, check for frontmatter YAML errors first.
 3. Present the file path and confirm success
 
 ## What This Skill Does NOT Do
