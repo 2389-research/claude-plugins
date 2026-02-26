@@ -1,6 +1,6 @@
 # Clerk Patterns: Synthesis and Discernment
 
-How the clerk role works across all QBP skills.
+How the clerk role works across all deliberation skills.
 
 ## The Clerk's Job
 

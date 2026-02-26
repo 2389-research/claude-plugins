@@ -1,23 +1,25 @@
-# Quaker Business Practice Plugin
+# Deliberation Plugin
 
 ## Overview
 
-Decision-making skills emulating Quaker business practices - seeking unity through discernment rather than consensus through debate.
+Decision-making through deliberation — seeking unity through discernment rather than consensus through debate.
+
+*Inspired by Quaker business practice, adapted for AI-assisted decision-making.*
 
 ## Skills Included
 
-### Main Skill: qbp
+### Main Skill: deliberation
 
 Routes to specific sub-skills based on context:
-- User has stake/perspective → `qbp:gathered`
-- Needs parallel deep analysis → `qbp:clearness`
-- Weighty question → `qbp:discernment`
+- User has stake/perspective → `deliberation:gathered`
+- Needs parallel deep analysis → `deliberation:clearness`
+- Weighty question → `deliberation:discernment`
 
 ### Sub-Skills
 
-- **qbp:discernment** - Internal deliberation with multiple voices for weighty questions
-- **qbp:clearness** - Multi-agent committee for parallel deep analysis
-- **qbp:gathered** - Participatory discernment where user joins the process
+- **deliberation:discernment** - Internal deliberation with multiple voices for weighty questions
+- **deliberation:clearness** - Multi-agent committee for parallel deep analysis
+- **deliberation:gathered** - Participatory discernment where user joins the process
 
 **When to invoke:**
 - Facing weighty decisions with ethical implications
@@ -35,7 +37,7 @@ Routes to specific sub-skills based on context:
 - **Silence is valuable** - Pausing between voices lets insights emerge
 - **Tensions named, not hidden** - If unity doesn't emerge, say so clearly
 
-### Quaker Principles Applied
+### Principles Applied
 
 | Principle | Implementation |
 |-----------|----------------|

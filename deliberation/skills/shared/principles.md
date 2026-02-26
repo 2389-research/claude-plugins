@@ -1,6 +1,6 @@
-# Quaker Business Practice: Core Principles
+# Core Principles
 
-These principles underlie all QBP skills. They are not negotiable shortcuts - they are the practice.
+These principles underlie all deliberation skills. They are not negotiable shortcuts - they are the practice.
 
 ## The Six Principles
 
@@ -42,12 +42,12 @@ Sometimes clarity emerges naturally - "way opens." Sometimes it doesn't, and for
 
 ## The Anti-Principles
 
-Things that look like Quaker practice but aren't:
+Things that look like deliberation but aren't:
 
 | Looks like | Actually is | Why it fails |
 |------------|-------------|--------------|
 | Everyone gets a turn | Speaking only if led | Forced contribution ≠ discernment |
-| Consensus | Unity | Consensus is political; unity is spiritual |
+| Consensus | Unity | Consensus is political; unity is organic |
 | Compromise | Integration | Compromise loses truth; integration honors it |
 | Voting then accepting | Standing aside | Vote-losers aren't standing aside; they're outvoted |
 | Quick agreement | Rushing past difficulty | Premature unity is fake unity |
@@ -56,8 +56,8 @@ Things that look like Quaker practice but aren't:
 ## Applying These Principles
 
 These principles apply whether participants are:
-- Internal voices (qbp:discernment)
-- Spawned agents (qbp:clearness)
-- Agents + user together (qbp:gathered)
+- Internal voices (deliberation:discernment)
+- Spawned agents (deliberation:clearness)
+- Agents + user together (deliberation:gathered)
 
 The implementation differs. The principles don't.

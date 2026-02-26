@@ -1,6 +1,6 @@
-# Quaker Business Practice: Vocabulary
+# Deliberation: Vocabulary
 
-Shared terminology across all QBP skills. Use these terms consistently.
+Shared terminology across all deliberation skills. Use these terms consistently.
 
 ## Roles
 
