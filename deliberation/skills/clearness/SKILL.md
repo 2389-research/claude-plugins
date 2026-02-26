@@ -1,9 +1,9 @@
 ---
-name: qbp:clearness
+name: deliberation:clearness
 description: Use when a question needs parallel deep analysis from multiple perspectives - code reviews, architecture decisions, research synthesis - spawn specialized agents as a clearness committee rather than doing everything in one context
 ---
 
-# QBP: Clearness Committee
+# Deliberation: Clearness Committee
 
 ## Overview
 
@@ -83,7 +83,7 @@ Each agent receives:
 - What lens they're bringing
 - What specifically to focus on
 
-**Quaker process instructions:**
+**Process instructions:**
 > "You are participating in a clearness committee. Do your analysis thoroughly from the [X] perspective. Take the time you need. When ready, share what you're led to share - your genuine observations, concerns, and insights.
 >
 > If after your analysis you find you have nothing significant to add, say so explicitly - that silence is meaningful. Don't pad your response."

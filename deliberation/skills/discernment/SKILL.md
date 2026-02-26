@@ -1,9 +1,9 @@
 ---
-name: qbp:discernment
+name: deliberation:discernment
 description: Use when facing questions with ethical weight, multiple valid approaches, significant trade-offs, or potential for harm - before answering, convene internal voices to discern rather than conclude
 ---
 
-# QBP: Discernment
+# Deliberation: Discernment
 
 ## Overview
 

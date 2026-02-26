@@ -1,9 +1,9 @@
 ---
-name: qbp:gathered
-description: Use when user has a stake or perspective in a decision and wants to participate in discernment rather than receive advice - facilitates user alongside agent voices with Quaker discipline teaching
+name: deliberation:gathered
+description: Use when user has a stake or perspective in a decision and wants to participate in discernment rather than receive advice - facilitates user alongside agent voices with participatory discipline teaching
 ---
 
-# QBP: Gathered
+# Deliberation: Gathered
 
 ## Overview
 

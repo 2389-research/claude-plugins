@@ -1,27 +1,29 @@
-# Quaker Business Practice (QBP) plugin
+# Deliberation
 
-Decision-making skills for Claude that follow Quaker business practices -- seeking unity through discernment rather than consensus through debate.
+Decision-making skills for Claude — seeking unity through discernment rather than consensus through debate.
+
+*Inspired by Quaker business practice, adapted for AI-assisted decision-making.*
 
 ## Installation
 
 ```bash
 /plugin marketplace add 2389-research/claude-plugins
-/plugin install qbp@2389-research
+/plugin install deliberation@2389-research
 ```
 
 ## Skills
 
-- `qbp` -- main router skill
-- `qbp:discernment` -- internal voices seeking clarity
-- `qbp:clearness` -- multi-agent committee for deep analysis
-- `qbp:gathered` -- participatory discernment with user
+- `deliberation` -- main router skill
+- `deliberation:discernment` -- internal voices seeking clarity
+- `deliberation:clearness` -- multi-agent committee for deep analysis
+- `deliberation:gathered` -- participatory discernment with user
 
 ## Quick example
 
 ```
 User: "Should we open-source our internal tool? I've been thinking about this for weeks."
 
-Claude (with qbp:gathered): "You've been sitting with this for weeks - you have
+Claude (with deliberation:gathered): "You've been sitting with this for weeks - you have
 a perspective, not just a question. Want to discern this together?
 
 Here are the ground rules: You speak once. You don't have to speak.
@@ -33,27 +35,27 @@ Business Strategist, Developer Culture voice. Anyone to add?"
 
 ## Skills in detail
 
-### qbp:discernment
+### deliberation:discernment
 
 Internal deliberation where Claude convenes multiple perspectives (voices) to discern the right path forward. Use for weighty questions, ethical decisions, and trade-offs.
 
 It identifies context-relevant perspectives, has each voice speak once to the matter, then a clerk role synthesizes toward unity. Tensions get surfaced, not papered over.
 
-### qbp:clearness
+### deliberation:clearness
 
 Multi-agent committee that spawns specialized agents for parallel deep analysis. Use for code reviews, architecture decisions, and research requiring depth.
 
 The skill proposes committee composition (user confirms), spawns agents with specific perspectives, runs real parallel analysis, and has a clerk synthesize findings toward unity.
 
-### qbp:gathered
+### deliberation:gathered
 
 Participatory discernment where the user joins alongside agent voices. Use when the user has a stake or perspective, not just a question.
 
-It recognizes when the user has stake/perspective, teaches Quaker discipline (speak once, silence is meaningful, slow is the point), runs sequential agent voices with check-ins, and lets the user's contribution shape the synthesis.
+It recognizes when the user has stake/perspective, teaches the discipline (speak once, silence is meaningful, slow is the point), runs sequential agent voices with check-ins, and lets the user's contribution shape the synthesis.
 
-## Quaker principles
+## Principles
 
-These skills are grounded in actual Quaker business practice:
+These skills draw on contemplative decision-making traditions:
 
 | Principle | Meaning |
 |-----------|---------|
