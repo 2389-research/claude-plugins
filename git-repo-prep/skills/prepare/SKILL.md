@@ -25,6 +25,7 @@ Create a TodoWrite checklist for all 9 phases:
 
 Every phase follows this loop:
 
+0. Mark this phase's task **in_progress**
 1. Scan/audit current state for this phase
 2. Present findings to user
 3. Propose specific changes

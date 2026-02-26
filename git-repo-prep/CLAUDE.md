@@ -42,6 +42,9 @@ Routes to specific sub-skills based on context:
 | `pyproject.toml` | Python |
 | `Cargo.toml` | Rust |
 | `go.mod` | Go |
+| `*.csproj` / `*.sln` | .NET |
+| `Gemfile` | Ruby |
+| `pom.xml` / `build.gradle` | Java/Kotlin |
 
 Core checklist is universal. Ecosystem-specific hints (files field, classifiers, engine requirements) added when a known stack is detected.
 
@@ -54,4 +57,4 @@ Skills were developed using TDD for documentation:
 4. Test with skill (verify improvement)
 5. Close loopholes (severity drift, missing categories)
 
-Test scenarios and results are in the development repo at `~/work/2389/skills-dev/git-repo-prep/tests/`.
+Test scenarios and results are in the companion development repo (`skills-dev/git-repo-prep/tests/`).

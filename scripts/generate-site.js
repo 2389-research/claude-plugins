@@ -944,10 +944,10 @@ marketplace.plugins.forEach(plugin => {
 
 // Generate sitemap with all pages
 // Use git commit dates so the sitemap only changes when content actually changes
-const { execSync } = require('child_process');
-function getLastModDate(path) {
+const { execFileSync } = require('child_process');
+function getLastModDate(targetPath) {
   try {
-    return execSync(`git log -1 --format=%cs -- "${path}"`, { encoding: 'utf8' }).trim();
+    return execFileSync('git', ['log', '-1', '--format=%cs', '--', targetPath], { encoding: 'utf8' }).trim();
   } catch {
     return '2026-01-13'; // fallback: repo creation date
   }
