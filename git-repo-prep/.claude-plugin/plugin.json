@@ -1,0 +1,5 @@
+{
+  "name": "git-repo-prep",
+  "description": "Prepares codebases for public/open-source release and audits them for openness with full lifecycle prep or standalone review",
+  "version": "1.0.0"
+}
