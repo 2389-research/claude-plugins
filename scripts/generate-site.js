@@ -943,16 +943,30 @@ marketplace.plugins.forEach(plugin => {
 });
 
 // Generate sitemap with all pages
+// Use git commit dates so the sitemap only changes when content actually changes
+const { execSync } = require('child_process');
+function getLastModDate(path) {
+  try {
+    return execSync(`git log -1 --format=%cs -- "${path}"`, { encoding: 'utf8' }).trim();
+  } catch {
+    return '2026-01-13'; // fallback: repo creation date
+  }
+}
+
 const sitemapUrls = [
-  { loc: '', priority: '1.0' },
-  ...marketplace.plugins.map(p => ({ loc: `plugins/${p.name}/`, priority: '0.8' }))
+  { loc: '', priority: '1.0', lastmod: getLastModDate('.claude-plugin/marketplace.json') },
+  ...marketplace.plugins.map(p => {
+    const dir = typeof p.source === 'string' ? p.source : null;
+    const lastmod = dir ? getLastModDate(dir) : getLastModDate('.claude-plugin/marketplace.json');
+    return { loc: `plugins/${p.name}/`, priority: '0.8', lastmod };
+  })
 ];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${sitemapUrls.map(url => `  <url>
     <loc>https://2389-research.github.io/claude-plugins/${url.loc}</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <lastmod>${url.lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${url.priority}</priority>
   </url>`).join('\n')}
