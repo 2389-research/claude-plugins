@@ -371,7 +371,9 @@ function cleanDescription(desc) {
 }
 
 // Common HTML head
-function generateHead(title, description, canonicalPath) {
+function generateHead(title, description, canonicalPath, extraKeywords) {
+  const baseKeywords = ['Claude Code', 'plugins', 'MCP servers', 'AI development', 'Claude', 'Anthropic', 'development tools', '2389 Research'];
+  const allKeywords = extraKeywords ? [...new Set([...extraKeywords, ...baseKeywords])] : baseKeywords;
   return `<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -380,7 +382,7 @@ function generateHead(title, description, canonicalPath) {
   <title>${title} | 2389 Research</title>
   <meta name="title" content="${title} | 2389 Research">
   <meta name="description" content="${description}">
-  <meta name="keywords" content="Claude Code, plugins, MCP servers, AI development, Claude, Anthropic, development tools, 2389 Research">
+  <meta name="keywords" content="${allKeywords.join(', ')}">
   <meta name="author" content="2389 Research Inc">
   <meta name="robots" content="index, follow">
 
@@ -392,7 +394,7 @@ function generateHead(title, description, canonicalPath) {
   <meta property="og:url" content="https://2389-research.github.io/claude-plugins/${canonicalPath}">
   <meta property="og:title" content="${title} | 2389 Research">
   <meta property="og:description" content="${description}">
-  <meta property="og:image" content="https://2389-research.github.io/claude-plugins/og-image.png">
+  <meta property="og:image" content="https://2389-research.github.io/claude-plugins/${canonicalPath}og-image.png">
   <meta property="og:site_name" content="2389 Research Plugin Marketplace">
 
   <!-- Twitter -->
@@ -400,7 +402,7 @@ function generateHead(title, description, canonicalPath) {
   <meta property="twitter:url" content="https://2389-research.github.io/claude-plugins/${canonicalPath}">
   <meta property="twitter:title" content="${title} | 2389 Research">
   <meta property="twitter:description" content="${description}">
-  <meta property="twitter:image" content="https://2389-research.github.io/claude-plugins/og-image.png">
+  <meta property="twitter:image" content="https://2389-research.github.io/claude-plugins/${canonicalPath}og-image.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔌</text></svg>">
@@ -522,6 +524,47 @@ ${cat.plugins.map(generatePluginCard).join('\n')}
     ).join('\n');
 }
 
+// Generate related plugins section for internal linking
+function generateRelatedPlugins(plugin, category) {
+  const related = category.plugins.filter(p => p.name !== plugin.name).slice(0, 3);
+  if (related.length === 0) return '';
+
+  return `
+    <section class="section related-section">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <div class="section-title-group">
+          <h2 class="section-title">Related Plugins</h2>
+          <p class="section-subtitle">More from ${category.title}</p>
+        </div>
+      </div>
+
+      <div class="plugins-grid">
+${related.map(p => {
+  const desc = cleanDescription(p.description);
+  const tags = (p.keywords || []).slice(0, 3).map(k =>
+    `<span class="tag">${k}</span>`
+  ).join('');
+  return `
+        <article class="plugin-card">
+          <div class="plugin-card-header">
+            <a href="../${p.name}/" class="plugin-name-link">
+              <h4 class="plugin-name">${p.name}</h4>
+            </a>
+            <span class="plugin-version">v${p.version || '1.0.0'}</span>
+          </div>
+          <p class="plugin-description">${desc}</p>
+          <div class="plugin-tags">${tags}</div>
+          <div class="plugin-footer">
+            <code class="plugin-install">/plugin install ${p.name}</code>
+            <a href="../${p.name}/" class="plugin-source">Details →</a>
+          </div>
+        </article>`;
+}).join('\n')}
+      </div>
+    </section>`;
+}
+
 // Generate individual plugin page
 function generatePluginPage(plugin) {
   const description = cleanDescription(plugin.description);
@@ -562,9 +605,12 @@ function generatePluginPage(plugin) {
     "license": "https://opensource.org/licenses/MIT"
   };
 
+  // Build a descriptive title from the plugin name and category
+  const pluginTitle = `${plugin.name} — ${category.title} Plugin for Claude Code`;
+
   return `<!DOCTYPE html>
 <html lang="en">
-${generateHead(plugin.name, description, `plugins/${plugin.name}/`)}
+${generateHead(pluginTitle, description, `plugins/${plugin.name}/`, plugin.keywords)}
 <body>
   <div class="grid-overlay" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -674,6 +720,8 @@ ${generateHead(plugin.name, description, `plugins/${plugin.name}/`)}
       </div>
     </section>
 
+    ${generateRelatedPlugins(plugin, category)}
+
     <section class="section back-section">
       <a href="../../" class="back-link">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -686,9 +734,37 @@ ${generateHead(plugin.name, description, `plugins/${plugin.name}/`)}
 
   ${generateFooter(true)}
 
-  <!-- Structured Data -->
+  <!-- Structured Data - Plugin -->
   <script type="application/ld+json">
   ${JSON.stringify(structuredData, null, 2)}
+  </script>
+
+  <!-- Structured Data - Breadcrumbs -->
+  <script type="application/ld+json">
+  ${JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "2389 Research",
+        "item": "https://2389.ai"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Plugin Marketplace",
+        "item": "https://2389-research.github.io/claude-plugins/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": plugin.name,
+        "item": `https://2389-research.github.io/claude-plugins/plugins/${plugin.name}/`
+      }
+    ]
+  }, null, 2)}
   </script>
 </body>
 </html>`;
@@ -926,6 +1002,23 @@ ${generateCategorySections()}
       }
     ]
   }
+  </script>
+
+  <!-- Structured Data - Plugin Catalog (ItemList) -->
+  <script type="application/ld+json">
+  ${JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Claude Code Plugins",
+    "description": "Open source Claude Code plugins and MCP servers from 2389 Research",
+    "numberOfItems": marketplace.plugins.length,
+    "itemListElement": marketplace.plugins.map((p, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": p.name,
+      "url": `https://2389-research.github.io/claude-plugins/plugins/${p.name}/`
+    }))
+  }, null, 2)}
   </script>
 </body>
 </html>`;

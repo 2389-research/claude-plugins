@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "description": "Curated plugins for Claude Code",
   "scripts": {
-    "generate": "node scripts/generate-site.js"
+    "generate": "node scripts/generate-site.js && node scripts/generate-og-images.js",
+    "generate:site": "node scripts/generate-site.js",
+    "generate:og": "node scripts/generate-og-images.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/2389-research/claude-plugins.git"
   },
   "author": "2389 Research",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
 }

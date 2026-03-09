@@ -1287,6 +1287,15 @@ body {
   opacity: 0.6;
 }
 
+/* Related Plugins Section on plugin page */
+.related-section {
+  background: transparent;
+}
+
+.related-section .plugins-grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
 /* Quick Install Section on plugin page */
 .quick-install-section {
   background: transparent;
