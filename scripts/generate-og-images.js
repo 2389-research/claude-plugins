@@ -71,22 +71,12 @@ function generatePluginSvg(plugin) {
   const name = escapeXml(plugin.name);
   const category = escapeXml(getCategoryTitle(plugin));
   const description = cleanDescription(plugin.description);
-  const descLines = wrapText(description, 55);
-  const tags = (plugin.keywords || []).slice(0, 4);
+  const descLines = wrapText(description, 45);
   const version = plugin.version || '1.0.0';
-
-  // Tag badges
-  const tagsSvg = tags.map((tag, i) => {
-    const x = 80 + i * 140;
-    const tagText = escapeXml(tag);
-    return `
-      <rect x="${x}" y="430" width="120" height="28" rx="4" fill="rgba(107, 140, 206, 0.15)" stroke="#3a3a5c" stroke-width="1"/>
-      <text x="${x + 60}" y="449" font-family="monospace" font-size="12" fill="#a0a0b8" text-anchor="middle">${tagText}</text>`;
-  }).join('');
 
   // Description lines
   const descSvg = descLines.map((line, i) => {
-    return `<text x="80" y="${330 + i * 30}" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="20" fill="#a0a0b8">${escapeXml(line)}</text>`;
+    return `<text x="80" y="${340 + i * 40}" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="28" fill="#a0a0b8">${escapeXml(line)}</text>`;
   }).join('\n      ');
 
   return `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
@@ -108,36 +98,33 @@ function generatePluginSvg(plugin) {
     <rect x="0" y="0" width="1200" height="4" fill="#e8c547"/>
 
     <!-- Category badge -->
-    <rect x="80" y="80" width="${category.length * 10 + 24}" height="30" rx="4" fill="rgba(232, 197, 71, 0.15)"/>
-    <text x="92" y="100" font-family="monospace" font-size="13" fill="#e8c547" letter-spacing="0.5">${category}</text>
+    <rect x="80" y="80" width="${category.length * 13 + 32}" height="38" rx="6" fill="rgba(232, 197, 71, 0.15)"/>
+    <text x="96" y="106" font-family="monospace" font-size="18" fill="#e8c547" letter-spacing="0.5">${category}</text>
 
     <!-- Plugin name -->
-    <text x="80" y="200" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="56" font-weight="bold" fill="#f5f5f7" letter-spacing="-1">${name}</text>
+    <text x="80" y="210" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="72" font-weight="bold" fill="#f5f5f7" letter-spacing="-2">${name}</text>
 
     <!-- Version -->
-    <text x="${85 + name.length * 33}" y="200" font-family="monospace" font-size="18" fill="#e8c547" opacity="0.8">v${escapeXml(version)}</text>
+    <text x="80" y="260" font-family="monospace" font-size="24" fill="#e8c547" opacity="0.8">v${escapeXml(version)}</text>
 
     <!-- Divider line -->
-    <rect x="80" y="230" width="200" height="2" fill="#3a3a5c" rx="1"/>
+    <rect x="80" y="280" width="200" height="2" fill="#3a3a5c" rx="1"/>
 
     <!-- Description -->
     ${descSvg}
-
-    <!-- Tags -->
-    ${tagsSvg}
 
     <!-- Bottom bar -->
     <rect x="0" y="520" width="1200" height="110" fill="#242442"/>
     <rect x="0" y="520" width="1200" height="1" fill="#3a3a5c"/>
 
     <!-- Status indicator dot -->
-    <circle cx="96" cy="568" r="5" fill="#e8c547"/>
+    <circle cx="96" cy="572" r="6" fill="#e8c547"/>
 
     <!-- Branding -->
-    <text x="112" y="574" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="18" font-weight="600" fill="#f5f5f7">2389 Research Inc</text>
+    <text x="116" y="580" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="24" font-weight="600" fill="#f5f5f7">2389 Research Inc</text>
 
     <!-- Install command -->
-    <text x="1120" y="574" font-family="monospace" font-size="14" fill="#a0a0b8" text-anchor="end">/plugin install ${name}</text>
+    <text x="1120" y="580" font-family="monospace" font-size="20" fill="#a0a0b8" text-anchor="end">/plugin install ${name}</text>
   </svg>`;
 }
 
@@ -165,38 +152,38 @@ function generateMarketplaceSvg() {
     <rect x="0" y="0" width="1200" height="4" fill="#e8c547"/>
 
     <!-- Label -->
-    <circle cx="88" cy="125" r="4" fill="#e8c547"/>
-    <text x="100" y="130" font-family="monospace" font-size="13" fill="#a0a0b8" letter-spacing="1.5">WELCOME, FELLOW BUILDER</text>
+    <circle cx="88" cy="110" r="5" fill="#e8c547"/>
+    <text x="104" y="116" font-family="monospace" font-size="18" fill="#a0a0b8" letter-spacing="1.5">WELCOME, FELLOW BUILDER</text>
 
     <!-- Title -->
-    <text x="80" y="230" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="60" font-weight="bold" fill="#f5f5f7" letter-spacing="-1.5">Plugins that actually</text>
-    <text x="80" y="300" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="60" font-weight="bold" fill="#f5f5f7" letter-spacing="-1.5">get stuff done</text>
+    <text x="80" y="220" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="76" font-weight="bold" fill="#f5f5f7" letter-spacing="-2">Plugins that actually</text>
+    <text x="80" y="305" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="76" font-weight="bold" fill="#f5f5f7" letter-spacing="-2">get stuff done</text>
 
     <!-- Subtitle -->
-    <text x="80" y="360" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="20" fill="#a0a0b8">Open source Claude Code plugins and MCP servers from 2389 Research.</text>
-    <text x="80" y="390" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="20" fill="#a0a0b8">The tools we use every day to build, ship, and not lose our minds.</text>
+    <text x="80" y="370" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="26" fill="#a0a0b8">Open source Claude Code plugins and MCP servers from 2389 Research.</text>
+    <text x="80" y="405" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="26" fill="#a0a0b8">The tools we use every day to build, ship, and not lose our minds.</text>
 
     <!-- Stats -->
-    <text x="80" y="460" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="36" font-weight="bold" fill="#f5f5f7">${pluginCount}</text>
-    <text x="${85 + String(pluginCount).length * 22}" y="460" font-family="monospace" font-size="13" fill="#a0a0b8" letter-spacing="0.5">PLUGINS</text>
+    <text x="80" y="480" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="48" font-weight="bold" fill="#f5f5f7">${pluginCount}</text>
+    <text x="${90 + String(pluginCount).length * 28}" y="480" font-family="monospace" font-size="18" fill="#a0a0b8" letter-spacing="0.5">PLUGINS</text>
 
-    <rect x="220" y="435" width="1" height="35" fill="#3a3a5c"/>
+    <rect x="260" y="450" width="1" height="40" fill="#3a3a5c"/>
 
-    <text x="245" y="460" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="36" font-weight="bold" fill="#f5f5f7">100%</text>
-    <text x="355" y="460" font-family="monospace" font-size="13" fill="#a0a0b8" letter-spacing="0.5">OPEN SOURCE</text>
+    <text x="290" y="480" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="48" font-weight="bold" fill="#f5f5f7">100%</text>
+    <text x="440" y="480" font-family="monospace" font-size="18" fill="#a0a0b8" letter-spacing="0.5">OPEN SOURCE</text>
 
     <!-- Bottom bar -->
     <rect x="0" y="520" width="1200" height="110" fill="#242442"/>
     <rect x="0" y="520" width="1200" height="1" fill="#3a3a5c"/>
 
     <!-- Status indicator dot -->
-    <circle cx="96" cy="568" r="5" fill="#e8c547"/>
+    <circle cx="96" cy="572" r="6" fill="#e8c547"/>
 
     <!-- Branding -->
-    <text x="112" y="574" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="18" font-weight="600" fill="#f5f5f7">2389 Research Inc</text>
+    <text x="116" y="580" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="24" font-weight="600" fill="#f5f5f7">2389 Research Inc</text>
 
     <!-- URL -->
-    <text x="1120" y="574" font-family="monospace" font-size="14" fill="#a0a0b8" text-anchor="end">2389-research.github.io/claude-plugins</text>
+    <text x="1120" y="580" font-family="monospace" font-size="20" fill="#a0a0b8" text-anchor="end">2389-research.github.io/claude-plugins</text>
   </svg>`;
 }
 
