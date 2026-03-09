@@ -435,7 +435,8 @@
                 "transcript",
                 "granola",
                 "knowledge-graph",
-                "vault"
+                "vault",
+                "reflection"
             ],
             "strict": false
         },
