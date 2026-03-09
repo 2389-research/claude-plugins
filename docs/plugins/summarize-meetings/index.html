@@ -114,31 +114,23 @@
 
       <div class="readme-content">
         <h2>Summarize Meetings</h2>
-<p>Batch-process meeting transcripts from an Obsidian vault into structured summaries with knowledge graph updates.</p>
+<p>Turn a pile of Granola transcripts into an Obsidian knowledge graph. Processes meetings in monthly batches, extracts the stuff that matters, and wires it all together with wiki-links.</p>
 <h3>Installation</h3>
 <pre><code class="language-bash">/plugin install summarize-meetings@2389-research
 </code></pre>
-<h3>What this plugin does</h3>
-<p>Processes meeting transcripts (primarily from Granola) and generates:</p>
-<ul><li><strong>Structured summary files</strong> with YAML frontmatter, narrative summaries, and extraction categories</li><li><strong>People notes</strong> — creates or enriches person stubs with meeting context</li><li><strong>Concept notes</strong> — captures reusable insights and mental models</li><li><strong>Project stubs</strong> — documents mentioned projects</li><li><strong>Knowledge graph connections</strong> — wiki-links between all entities</li></ul>
-<h3>Quick example</h3>
-<pre><code class="language-">User: "Summarize my January meetings"
-
-1. Scans Meetings/transcripts/ for January files
-2. Triages — skips empty stubs, scheduling fragments
-3. Dispatches parallel agents (10-15 per wave)
-4. Each agent reads transcript, extracts structured data, writes summary
-5. Compiles monthly report table
-6. Posts social media update
+<h3>What it does</h3>
+<p>Point this at a month of meeting transcripts and it will:</p>
+<ul><li>Read each transcript, skip the junk (empty stubs, scheduling fragments, recording setup chats)</li><li>Dispatch 10-15 parallel agents to process the real meetings</li><li>Write a summary file for each meeting with YAML frontmatter and a narrative recap</li><li>Create or update People notes in <code>People/</code> (checks for existing entries and aliases first)</li><li>Pull out concepts worth their own atomic note in <code>Concepts/</code></li><li>Stub out any projects mentioned that don't already exist</li><li>Report back with a table of what got processed and what got skipped</li></ul>
+<h3>What gets extracted</h3>
+<p>From each meeting, agents pull out seven categories: people, action items, project ideas, blog ideas, knowledge graph connections, concepts, and general ideas. The summary file includes all of these plus a 2-4 paragraph narrative that reads like a real meeting recap — what happened, what mattered, what the vibe was.</p>
+<h3>Triage</h3>
+<p>Not everything in <code>Meetings/transcripts/</code> is worth a summary. The skill skips files that are empty stubs, have fewer than 20 words of real content, are garbled recordings, or are medical appointments and kid-related content. Sparse but real notes (like bullet points from a fundraising call) still get processed.</p>
+<h3>How it works</h3>
+<pre><code class="language-">Scan month → Triage → Dispatch agents in waves → Compile report → Post update
 </code></pre>
-<h3>Extraction categories</h3>
-<p>Each meeting summary extracts:</p>
-<table class="readme-table"><thead><tr><th>Category</th><th>What gets captured</th></tr></thead><tbody><tr><td>People</td><td>Full names, roles, companies, relationships</td></tr><tr><td>Action Items</td><td>Tasks with owners and due dates</td></tr><tr><td>Project Ideas</td><td>Products, tools, ventures discussed</td></tr><tr><td>Blog Ideas</td><td>Topics worth writing about publicly</td></tr><tr><td>Knowledge Graph</td><td>Entity relationships as wiki-links</td></tr><tr><td>Concepts</td><td>Mental models, frameworks, reusable insights</td></tr><tr><td>Ideas</td><td>General brainstorms and what-ifs</td></tr></tbody></table>
-<h3>Triage rules</h3>
-<p>Files are automatically skipped when they contain:</p>
-<ul><li>Empty stubs or template-only content</li><li>Fewer than 20 words of real content</li><li>Garbled/corrupted recordings</li><li>Scheduling-only logistics</li><li>Medical/personal appointments</li><li>Recording setup conversations</li></ul>
+<p>Agents run in parallel (waves of 10-15) and each one handles a single transcript end-to-end. Large files (50K+) get chunked automatically.</p>
 <h3>Documentation</h3>
-<p>See <a href="https://github.com/2389-research/claude-plugins/blob/main/summarize-meetings/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a> for the complete processing workflow and templates.</p>
+<p>The full workflow, templates, and extraction rules are in <a href="https://github.com/2389-research/claude-plugins/blob/main/summarize-meetings/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a>.</p>
       </div>
     </section>
     
