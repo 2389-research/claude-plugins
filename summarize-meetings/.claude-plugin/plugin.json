@@ -1,0 +1,5 @@
+{
+  "name": "summarize-meetings",
+  "description": "Process meeting transcripts from Obsidian vault - extract people, action items, concepts, and build knowledge graph",
+  "version": "1.0.0"
+}

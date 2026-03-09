@@ -424,6 +424,22 @@
             "strict": false
         },
         {
+            "name": "summarize-meetings",
+            "source": "./summarize-meetings",
+            "description": "Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction",
+            "version": "1.0.0",
+            "keywords": [
+                "meeting",
+                "summary",
+                "obsidian",
+                "transcript",
+                "granola",
+                "knowledge-graph",
+                "vault"
+            ],
+            "strict": false
+        },
+        {
             "name": "agent-drugs",
             "source": {
                 "source": "url",
