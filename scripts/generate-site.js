@@ -9,6 +9,8 @@ const marketplace = JSON.parse(
   fs.readFileSync('.claude-plugin/marketplace.json', 'utf8')
 );
 
+const INTERNAL_MARKETPLACE_COMMAND = '/plugin marketplace add 2389-research/claude-plugins';
+
 // Group plugins by category
 const categories = {
   meta: { title: 'Meta Plugins', description: 'Bundles that combine multiple capabilities into single installs', plugins: [] },
@@ -502,6 +504,61 @@ function generatePluginCard(plugin) {
             </article>`;
 }
 
+function getPluginInstallCommand(plugin, isExternal, scoped = false) {
+  return `/plugin install ${plugin.name}${!isExternal && scoped ? '@2389-research' : ''}`;
+}
+
+function generatePluginPageInstallSnippet(plugin, isExternal) {
+  if (isExternal) {
+    return getPluginInstallCommand(plugin, isExternal);
+  }
+
+  return `${INTERNAL_MARKETPLACE_COMMAND}\n${getPluginInstallCommand(plugin, isExternal, true)}`;
+}
+
+function generateQuickInstallSteps(plugin, isExternal) {
+  if (isExternal) {
+    return `
+          <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+              <span class="step-label">Install this plugin</span>
+              <code>${getPluginInstallCommand(plugin, isExternal)}</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+              <span class="step-label">You're good to go</span>
+              <code>Capabilities auto-trigger when relevant</code>
+            </div>
+          </div>`;
+  }
+
+  return `
+          <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+              <span class="step-label">Add the marketplace (if not already added)</span>
+              <code>${INTERNAL_MARKETPLACE_COMMAND}</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+              <span class="step-label">Install this plugin</span>
+              <code>${getPluginInstallCommand(plugin, isExternal, true)}</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+              <span class="step-label">You're good to go</span>
+              <code>Skills auto-trigger when relevant</code>
+            </div>
+          </div>`;
+}
+
 // Generate category sections
 function generateCategorySections() {
   return Object.values(categories)
@@ -639,8 +696,8 @@ ${generateHead(pluginTitle, description, `plugins/${plugin.name}/`, plugin.keywo
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Command</span>
-          <code class="install-command">/plugin install ${plugin.name}${isExternal ? '' : '@2389-research'}</code>
+          <span class="install-label">${isExternal ? 'Install Command' : 'Install Commands'}</span>
+          <code class="install-command">${generatePluginPageInstallSnippet(plugin, isExternal)}</code>
         </div>
         <a href="${sourceUrl}" class="cta-button" rel="noopener noreferrer" target="_blank">
           View Source
@@ -695,27 +752,7 @@ ${generateHead(pluginTitle, description, `plugins/${plugin.name}/`, plugin.keywo
 
       <div class="quick-start">
         <div class="quick-start-steps">
-          <div class="step">
-            <span class="step-number">1</span>
-            <div class="step-content">
-              <span class="step-label">Add the marketplace (if not already added)</span>
-              <code>/plugin marketplace add 2389-research/claude-plugins</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code>/plugin install ${plugin.name}</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
-            <div class="step-content">
-              <span class="step-label">You're good to go</span>
-              <code>Skills auto-trigger when relevant</code>
-            </div>
-          </div>
+${generateQuickInstallSteps(plugin, isExternal)}
         </div>
       </div>
     </section>
@@ -800,7 +837,7 @@ ${generateHead('Claude Code Plugin Marketplace', 'Open source Claude Code plugin
       <div class="hero-cta">
         <div class="install-block">
           <span class="install-label">One Command Install</span>
-          <code class="install-command">/plugin marketplace add 2389-research/claude-plugins</code>
+          <code class="install-command">${INTERNAL_MARKETPLACE_COMMAND}</code>
         </div>
         <a href="#plugins" class="cta-button">
           Browse the Goods

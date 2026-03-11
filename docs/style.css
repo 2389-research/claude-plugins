@@ -351,6 +351,7 @@ body {
   color: var(--accent-gold);
   user-select: all;
   cursor: pointer;
+  white-space: pre-wrap;
 }
 
 .cta-button {
@@ -1107,7 +1108,7 @@ body {
 .plugin-hero-actions .install-block {
   flex: 1;
   min-width: 300px;
-  max-width: 500px;
+  max-width: 680px;
 }
 
 /* README Content Styling */
