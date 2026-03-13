@@ -339,15 +339,14 @@
         {
             "name": "terminal-title",
             "source": "./terminal-title",
-            "description": "Automatically updates terminal title with emoji + project + topic context and establishes 2389 workflow conventions for TodoWrite task tracking",
+            "description": "Automatically updates terminal title with emoji + project + topic context for quick visual cues when switching terminals",
             "version": "1.0.0",
             "keywords": [
                 "terminal",
                 "title",
                 "session",
                 "context",
-                "workflows",
-                "todowrite"
+                "emoji"
             ],
             "strict": false
         },

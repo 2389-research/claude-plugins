@@ -2,18 +2,33 @@
 
 ## Overview
 
-This plugin automatically updates the terminal title with emoji + project + topic context to provide visual cues when switching between terminal windows. It also establishes 2389 workflow conventions for TodoWrite task tracking.
+This plugin automatically updates the terminal title with emoji + project + topic context to provide visual cues when switching between terminal windows.
 
 ## Skills Included
 
 ### terminal-title
 
 Auto-invoked skill that:
-1. Detects current project from working directory
-2. Infers topic from recent files or conversation context
-3. Selects appropriate emoji based on project type
-4. Updates terminal title via shell script
-5. Enforces topic change detection throughout conversation
+1. Detects current project from working directory, git repo, or package.json
+2. Infers topic from conversation context
+3. Reads emoji from `$TERMINAL_TITLE_EMOJI` environment variable (defaults to 🎉)
+4. Updates terminal title via platform-specific shell script
+5. Detects topic changes throughout the conversation and updates title accordingly
+
+## Environment Variables
+
+- `TERMINAL_TITLE_EMOJI` -- emoji prefix for the title. User sets this in their shell profile to distinguish contexts (e.g. 💼 for work, 🎉 for personal). Defaults to 🎉 if not set.
+- `CLAUDE_CODE_DISABLE_TERMINAL_TITLE` -- set to `1` to disable automatic terminal title updates.
+
+## Title Format
+
+```
+$EMOJI ProjectName - Topic
+```
+
+Examples:
+- `💼 OneOnOne - Firebase Config`
+- `🎉 dotfiles - zsh config`
 
 ## Hook Configuration
 
@@ -35,67 +50,32 @@ This ensures the terminal title is set automatically when Claude Code starts.
 
 ### Project Detection
 
-Determines project from:
-- Working directory name
-- Git repository name
-- Project-specific files (package.json, pyproject.toml, etc.)
+Determines project name using Claude's understanding of context:
+- Git repository name or remote URL
+- package.json name field
+- README.md first heading
+- Working directory basename (fallback)
 
 ### Topic Inference
 
 Infers topic from:
-- Recent git commits
-- Modified files in working directory
-- Conversation context
+- Current conversation context (what user is working on)
+- Defaults to "Claude Code" at session start
 
-### Emoji Selection
+### Shell Scripts
 
-Maps project types to emojis:
-- 🔥 Firebase projects
-- ⚛️  React projects
-- 🐍 Python projects
-- 📦 Node.js projects
-- 🎨 CSS/design work
-- 🔧 General development
+Cross-platform scripts in `skills/scripts/`:
+- `set_title.sh` -- Unix/Linux/macOS (bash)
+- `set_title.ps1` -- Windows (PowerShell)
 
-### Shell Script
-
-Uses `scripts/set_title.sh` to update terminal title:
-
-```bash
-#!/bin/bash
-echo -ne "\033]0;$1\007"
-```
+Both read `$TERMINAL_TITLE_EMOJI` from the environment, sanitize inputs, and send terminal escape sequences.
 
 ## Development Workflow
 
 1. **Session start**: Hook auto-invokes skill
 2. **Context detection**: Analyzes project and topic
 3. **Title update**: Calls shell script with formatted title
-4. **Runtime updates**: Responds to topic changes during session
-
-## TodoWrite Conventions
-
-Tasks should be granular (2-5 minutes each):
-
-```javascript
-{
-  content: "Write the failing test",      // Imperative form
-  status: "pending",                       // or "in_progress" or "completed"
-  activeForm: "Writing the failing test"   // Present continuous form
-}
-```
-
-**Task lifecycle:**
-1. Create todos for all steps
-2. Mark ONE task as in_progress
-3. Complete the task
-4. Mark as completed
-5. Move to next task
-
-**Never:**
-- Batch complete multiple tasks
-- Have multiple tasks in_progress
-- Skip marking tasks completed
+4. **Runtime updates**: Detects topic changes during conversation and re-invokes
 
 ## Testing
 
@@ -106,13 +86,3 @@ Tests are located in `tests/integration/`:
 
 - [Design Document](docs/2025-11-14-terminal-title-skill-design.md)
 - [Implementation Plan](docs/2025-11-14-terminal-title-implementation.md)
-
-## Integration with Other Plugins
-
-This plugin establishes conventions used across all 2389 plugins:
-
-- **css-development**: Uses TodoWrite conventions for task tracking
-- **firebase-development**: Uses TodoWrite conventions for task tracking
-- **building-multiagent-systems**: Uses TodoWrite for implementation checklists
-- **fresh-eyes-review**: Uses TodoWrite for review checklists
-- **scenario-testing**: Uses TodoWrite for test scenario workflows
