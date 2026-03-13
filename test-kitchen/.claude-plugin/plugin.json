@@ -1,6 +1,6 @@
 {
   "name": "test-kitchen",
-  "description": "Parallel exploration of implementation approaches and iterative artifact refinement - run multiple variants simultaneously, let tests determine the winner, or hone a single artifact over multiple rounds",
-  "version": "1.1.0",
+  "description": "Parallel exploration of implementation approaches - run multiple variants simultaneously and let tests determine the winner",
+  "version": "1.0.0",
   "commands": []
 }
