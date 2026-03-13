@@ -63,9 +63,9 @@ Trigger when user wants iterative refinement of an artifact:
 
 **Announce:** "I'm using the simmer skill to set up iterative refinement."
 
-**Create TodoWrite tasks:**
-1. Load simmer-setup subskill — identify artifact and elicit criteria
-2. Run refinement loop (N iterations)
+**Track progress** (TodoWrite if available, otherwise inline):
+1. Setup — identify artifact and elicit criteria
+2. Refinement loop (N iterations)
 3. Output best version with score trajectory
 
 ### Phase 1: Setup
@@ -73,6 +73,8 @@ Trigger when user wants iterative refinement of an artifact:
 **Invoke `test-kitchen:simmer:simmer-setup`.**
 
 Do not attempt to identify the artifact or ask about criteria yourself — that is the setup subskill's job.
+
+**Shortcut:** If the user (or calling system) has already provided artifact, criteria (each with at least one sentence describing what a high score looks like), iteration count, and mode, skip the setup subskill entirely. Construct the setup brief directly and proceed to Phase 2.
 
 Setup returns a brief:
 ```
@@ -83,18 +85,30 @@ CRITERIA:
   - [criterion 3]: [what better looks like]
 ITERATIONS: [N]
 MODE: [seedless | from-file | from-paste]
+OUTPUT_DIR: [path, default: docs/simmer]
 ```
 
 ### Phase 2: Refinement Loop
 
 Create directory for artifacts:
 ```bash
-mkdir -p docs/simmer
+mkdir -p {OUTPUT_DIR}
 ```
 
-**Iteration 1 (seed):**
-- If seedless: dispatch generator subagent to produce initial candidate from description + criteria
-- If from-file or from-paste: the seed IS the starting artifact — skip generator, go straight to judge
+**Iteration counting:**
+
+"N iterations" means N generate-judge-reflect cycles AFTER the initial seed judgment. The seed judgment is iteration 0 (not counted toward N). So `ITERATIONS: 3` means:
+- Iteration 0: Judge the seed (no generator)
+- Iteration 1: Generate → Judge → Reflect
+- Iteration 2: Generate → Judge → Reflect
+- Iteration 3: Generate → Judge → Reflect
+- Total: 3 generation passes + 1 seed judgment = 4 judge rounds
+
+For seedless mode: iteration 1 generates the initial candidate AND judges it. `ITERATIONS: 3` means 3 generation passes total.
+
+**Iteration 0 (seed):**
+- If seedless: dispatch generator subagent to produce initial candidate from description + criteria, then judge it
+- If from-file or from-paste: the seed IS the starting artifact — judge it directly (no generator)
 
 **Each iteration:**
 
@@ -118,7 +132,7 @@ CURRENT CANDIDATE:
 JUDGE FEEDBACK (ASI from previous round):
 [ASI text, or "First iteration — generate initial candidate" if seedless iteration 1]
 
-Write your improved candidate to: docs/simmer/iteration-[N]-candidate.md
+Write your improved candidate to: {OUTPUT_DIR}/iteration-[N]-candidate.md
 (or appropriate extension matching artifact type)
 
 Report: what specifically changed and why (2-3 sentences).
@@ -141,7 +155,13 @@ CRITERIA:
 CANDIDATE:
 [full text of candidate just produced by generator]
 
-Score this candidate. Do NOT look at or consider any previous scores.
+SEED CALIBRATION:
+[full text of original seed artifact]
+SEED SCORES:
+[iteration 0 scores — omit this block on iteration 0]
+
+Score this candidate against the criteria using the seed as a calibration reference.
+Do NOT look at or consider any intermediate iteration scores.
 ```
 
 **Step 3: Reflect (inline, load subskill)**
@@ -150,11 +170,13 @@ Invoke `test-kitchen:simmer:simmer-reflect`.
 
 Provide: full score history across all iterations so far, current iteration number, max iterations, judge output from this round.
 
+**Handling regression:** If reflect reports that this iteration scored lower than best-so-far, the NEXT generator receives the best candidate (not the latest regressed one). The generator prompt should note: "Starting from the best version (iteration N), not the latest (which regressed)."
+
 ### Phase 3: Output
 
 After all iterations complete:
 
-1. Write best-scoring candidate to `docs/simmer/result.md`
+1. Write best-scoring candidate to `{OUTPUT_DIR}/result.md`
 2. Display full trajectory table
 3. Summarize what changed from start to finish (2-3 sentences)
 4. Offer: "N iterations complete. Run 3 more?"
@@ -164,13 +186,27 @@ If user continues: carry forward best candidate as new seed, reset iteration cou
 ## Directory Structure
 
 ```
-docs/simmer/
-  iteration-1-candidate.md     # Each candidate version
+{OUTPUT_DIR}/
+  iteration-0-candidate.md     # Seed (or seedless first generation)
+  iteration-1-candidate.md     # Each improved candidate
   iteration-2-candidate.md
   iteration-3-candidate.md
   trajectory.md                # Running score table
   result.md                    # Final best output
 ```
+
+`{OUTPUT_DIR}` defaults to `docs/simmer`. Override via setup brief's `OUTPUT_DIR` field.
+
+## Single-Agent Mode
+
+If you cannot dispatch separate subagents (e.g., nested Claude sessions are blocked, or you're running in a constrained environment), execute all roles sequentially.
+
+**Context discipline is aspirational in single-agent mode.** You will see prior scores. Mitigate anchoring by: (a) writing your judge scores BEFORE reading your previous trajectory, and (b) scoring against the criterion descriptions and seed reference, not against your memory of prior scores.
+
+**Per-iteration checklist (single-agent):**
+1. **GENERATOR**: Re-read the simmer-generator subskill instructions. Read ASI + current best candidate. Write improved version to `{OUTPUT_DIR}/iteration-N-candidate.md`.
+2. **JUDGE**: Re-read the simmer-judge subskill instructions. Score against criteria + seed reference. Write scores in required format.
+3. **REFLECT**: Update `{OUTPUT_DIR}/trajectory.md`. Note best-so-far. If regression, flag it and use best candidate as input to next iteration. Skip the formal "output to orchestrator" block — just update the file and continue.
 
 ## Context Discipline
 
@@ -179,11 +215,11 @@ docs/simmer/
 | Subskill | Receives | Does NOT receive |
 |----------|----------|------------------|
 | Generator | Current candidate, criteria, ASI from last judge | Score history, previous candidates |
-| Judge | Current candidate, criteria, iteration number | Previous scores, previous candidates, ASI |
+| Judge | Current candidate, criteria, iteration number, seed + seed scores | Intermediate scores, intermediate candidates, ASI |
 | Reflect | Full score history, all iteration summaries | Candidate content (just scores + summaries) |
 
 The generator improves based on specific feedback, not scores.
-The judge scores fresh each round, avoiding anchoring to previous scores.
+The judge scores against criteria definitions and the seed as a fixed calibration reference — no intermediate scores.
 The reflect subskill is the only one that sees the full trajectory.
 
 ## Skill Dependencies
@@ -228,7 +264,7 @@ Setup identifies: pitch email, suggests criteria
 User accepts: value prop clarity, tone match, call to action strength
 Iterations: 3
 
-[Iteration 1: Judge scores seed]
+[Iteration 0: Judge scores seed — no generation]
   value prop clarity: 4/10
   tone match: 5/10
   call to action: 3/10
@@ -236,7 +272,7 @@ Iterations: 3
   ASI: "The email never says what specific problem is solved —
         'helps companies save time on reporting' is too vague"
 
-[Iteration 2: Generator addresses ASI, judge scores]
+[Iteration 1: Generator addresses ASI, judge scores]
   value prop clarity: 7/10
   tone match: 5/10
   call to action: 4/10
@@ -244,21 +280,30 @@ Iterations: 3
   ASI: "The CTA asks for a 30-min call — too high friction for a
         cold email. Offer something smaller."
 
-[Iteration 3: Generator addresses ASI, judge scores]
+[Iteration 2: Generator addresses ASI, judge scores]
   value prop clarity: 7/10
   tone match: 6/10
-  call to action: 7/10
-  Composite: 6.7/10
+  call to action: 6/10
+  Composite: 6.3/10
+  ASI: "CTA improved but still generic — offer a specific asset
+        (e.g., '2-min video of how Acme Corp cut reporting 60%')"
+
+[Iteration 3: Generator addresses ASI, judge scores]
+  value prop clarity: 7/10
+  tone match: 7/10
+  call to action: 8/10
+  Composite: 7.3/10
 
 Trajectory:
 | Iter | Value Prop | Tone | CTA | Composite | Key Change |
 |------|-----------|------|-----|-----------|------------|
-| 1    | 4         | 5    | 3   | 4.0       | seed       |
-| 2    | 7         | 5    | 4   | 5.3       | specific problem statement |
-| 3    | 7         | 6    | 7   | 6.7       | low-friction CTA |
+| 0    | 4         | 5    | 3   | 4.0       | seed       |
+| 1    | 7         | 5    | 4   | 5.3       | specific problem statement |
+| 2    | 7         | 6    | 6   | 6.3       | lower-friction CTA |
+| 3    | 7         | 7    | 8   | 7.3       | specific asset in CTA |
 
-Best candidate: iteration 3 (6.7/10)
-Written to: docs/simmer/result.md
+Best candidate: iteration 3 (7.3/10)
+Written to: {OUTPUT_DIR}/result.md
 
 3 iterations complete. Run 3 more?
 ```

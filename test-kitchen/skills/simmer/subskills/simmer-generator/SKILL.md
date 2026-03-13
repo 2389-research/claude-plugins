@@ -34,11 +34,12 @@ If ASI says "First iteration — generate initial candidate":
 1. **Read the ASI carefully.** The judge identified the single highest-leverage fix. Address that specifically.
 2. **Do not try to fix everything at once.** Focused improvement compounds better than scattered edits. Address the ASI. If you notice other small improvements that don't conflict, fine — but the ASI is your primary target.
 3. **Preserve what works.** Don't regress on aspects that aren't mentioned in the ASI. If the ASI says "the CTA is too high-friction," don't rewrite the opening paragraph.
-4. **Produce the full improved artifact.** Not a diff, not instructions — the complete text. Write it to the file path specified by the orchestrator.
+4. **Respect the artifact's natural scope.** Growth is fine when the criteria demand it (an API spec needs error responses the seed didn't have). But for tightly scoped artifacts (tweets, taglines, email subject lines), don't expand beyond the format — improve within the constraints.
+5. **Produce the full improved artifact.** Not a diff, not instructions — the complete text. Write it to the file path specified by the orchestrator.
 
 ## Output
 
-1. Write the full improved artifact to: `docs/simmer/iteration-[N]-candidate.md` (or the extension specified by the orchestrator)
+1. Write the full improved artifact to: `{OUTPUT_DIR}/iteration-[N]-candidate.md` (or the extension specified by the orchestrator)
 2. Report what specifically changed and why, in 2-3 sentences. This becomes part of the trajectory record.
 
 Example report:

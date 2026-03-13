@@ -16,8 +16,21 @@ Score the candidate against each criterion. Identify the single most important t
 - **Current candidate**: the full artifact text
 - **Criteria rubric**: 2-3 criteria with descriptions of what 10/10 looks like
 - **Iteration number**: which round this is
+- **Seed calibration** (iteration 1+): the original seed artifact and its iteration-0 scores
 
-You do NOT receive previous scores or previous candidates. This is intentional — judge fresh each round to avoid anchoring.
+You do NOT receive intermediate iteration scores or intermediate candidates. You receive only the seed as a fixed calibration reference.
+
+## Calibration
+
+On iteration 0, you score the seed — these scores become the calibration baseline.
+
+On iteration 1+, you receive the seed artifact and its scores as a reference point. This gives you two anchors:
+- **Floor reference**: the seed and what it scored (concrete example)
+- **Ceiling definition**: the criterion descriptions of what 10/10 looks like
+
+Score the current candidate on its own merits using these two anchors. You CAN score below the seed if the candidate regressed. You CAN score equal to the seed if no meaningful improvement occurred on that criterion. The seed is a reference, not a floor.
+
+Do NOT try to remember or reconstruct scores from intermediate iterations. Score against the criterion descriptions and the seed reference only.
 
 ## Scoring
 
@@ -77,9 +90,13 @@ ASI (single most important fix):
 - Problem: "Improve the tone" gives generator nothing to work with
 - Fix: "The third sentence reads as condescending because of 'obviously' — reframe as an invitation"
 
-**Anchoring to an imagined previous score**
-- Problem: You don't have previous scores — if you guess, you bias your judgment
-- Fix: Score against the criteria descriptions, not against what you think it scored before
+**Anchoring to imagined intermediate scores**
+- Problem: You don't have intermediate iteration scores — if you guess, you bias your judgment
+- Fix: Score against the criterion descriptions and seed reference only
+
+**Treating seed scores as a floor**
+- Problem: Judge never scores below the seed, even when candidate regressed
+- Fix: The seed is a calibration reference, not a minimum — score honestly
 
 **Scoring non-integers or using half points**
 - Problem: False precision, inconsistent parsing

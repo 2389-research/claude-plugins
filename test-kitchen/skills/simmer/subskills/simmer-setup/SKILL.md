@@ -81,7 +81,10 @@ CRITERIA:
   - [criterion 3]: [what a 10/10 looks like]
 ITERATIONS: [N]
 MODE: [seedless | from-file | from-paste]
+OUTPUT_DIR: [path, default: docs/simmer]
 ```
+
+The `OUTPUT_DIR` defaults to `docs/simmer`. Override if the user specifies a different location or if running in a test/scratch context.
 
 Return this brief to the orchestrator. Do not proceed to generation or judging — that is the orchestrator's job.
 
