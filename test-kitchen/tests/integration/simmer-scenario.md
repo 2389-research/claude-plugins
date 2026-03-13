@@ -325,7 +325,7 @@ Files created:
 
 **Expected behavior:**
 1. Best candidate carried forward as new seed
-2. Iteration counter resets (new iterations 4, 5, 6)
+2. Iteration counter continues (new iterations 4, 5, 6)
 3. Trajectory table continues (appends, doesn't restart)
 4. New candidates written to iteration-4, 5, 6 files
 

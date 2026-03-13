@@ -43,6 +43,19 @@ Design complete, "let's implement"
 └─────────────────────────────────────┘
     ↓
 [Implementation]
+
+
+"Simmer this" / "Refine this" / "Hone this"
+    ↓
+┌─────────────────────────────────────┐
+│  SIMMER (iterative refinement)      │
+│  Any artifact, not just code        │
+│                                     │
+│  Setup → (Generate → Judge →        │
+│           Reflect) × N              │
+└─────────────────────────────────────┘
+    ↓
+[Best candidate output]
 ```
 
 ## Quick examples

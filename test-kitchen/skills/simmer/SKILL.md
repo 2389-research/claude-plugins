@@ -182,7 +182,7 @@ After all iterations complete:
 3. Summarize what changed from start to finish (2-3 sentences)
 4. Offer: "N iterations complete. Run 3 more?"
 
-If user continues: carry forward best candidate as new seed, reset iteration counter, run 3 more.
+If user continues: carry forward best candidate as new seed, continue iteration numbering (e.g., iterations 4, 5, 6), run 3 more.
 
 ## Directory Structure
 
