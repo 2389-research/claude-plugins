@@ -40,7 +40,7 @@ Update `{OUTPUT_DIR}/trajectory.md` with the running score table.
 Best candidate: iteration 2 (composite: 6.7/10)
 ```
 
-The "Key Change" column uses the generator's 2-3 sentence report, condensed to a few words. For iteration 0 (the seed), Key Change is always "seed".
+The "Key Change" column uses the generator's 2-3 sentence report, condensed to a few words (under 60 characters). For iteration 0 (the seed), Key Change is always "seed".
 
 ### 2. Track Best Candidate
 

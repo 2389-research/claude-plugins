@@ -65,6 +65,8 @@ After scoring, identify the **single most important thing to fix next** — the 
 
 The ASI can reference any aspect of the artifact. For text artifacts it's a text instruction. If the artifact produces renderable output (SVG, code that generates images, etc.) the ASI can request the generator produce rendered output for evaluation.
 
+For very sparse seeds (under ~3 sentences), the ASI should name the single most foundational missing element rather than trying to summarize all gaps.
+
 ## Required Output Format
 
 ```

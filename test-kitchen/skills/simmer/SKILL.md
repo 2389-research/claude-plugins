@@ -107,6 +107,7 @@ mkdir -p {OUTPUT_DIR}
 For seedless mode: iteration 1 generates the initial candidate AND judges it. `ITERATIONS: 3` means 3 generation passes total.
 
 **Iteration 0 (seed):**
+- Write the seed artifact to `{OUTPUT_DIR}/iteration-0-candidate.md`
 - If seedless: dispatch generator subagent to produce initial candidate from description + criteria, then judge it
 - If from-file or from-paste: the seed IS the starting artifact — judge it directly (no generator)
 
@@ -204,8 +205,8 @@ If you cannot dispatch separate subagents (e.g., nested Claude sessions are bloc
 **Context discipline is aspirational in single-agent mode.** You will see prior scores. Mitigate anchoring by: (a) writing your judge scores BEFORE reading your previous trajectory, and (b) scoring against the criterion descriptions and seed reference, not against your memory of prior scores.
 
 **Per-iteration checklist (single-agent):**
-1. **GENERATOR**: Re-read the simmer-generator subskill instructions. Read ASI + current best candidate. Write improved version to `{OUTPUT_DIR}/iteration-N-candidate.md`.
-2. **JUDGE**: Re-read the simmer-judge subskill instructions. Score against criteria + seed reference. Write scores in required format.
+1. **GENERATOR**: Review the simmer-generator constraints (especially what context you receive and do NOT receive). Read ASI + current best candidate. Write improved version to `{OUTPUT_DIR}/iteration-N-candidate.md`.
+2. **JUDGE**: Review the simmer-judge constraints (especially scoring rules, seed calibration, and ASI format). Score against criteria + seed reference. Write scores in required format.
 3. **REFLECT**: Update `{OUTPUT_DIR}/trajectory.md`. Note best-so-far. If regression, flag it and use best candidate as input to next iteration. Skip the formal "output to orchestrator" block — just update the file and continue.
 
 ## Context Discipline
@@ -227,7 +228,6 @@ The reflect subskill is the only one that sees the full trajectory.
 | Dependency | Usage |
 |------------|-------|
 | `parallel-agents` | `superpowers:dispatching-parallel-agents` — fallback: dispatch sequentially |
-| `verification` | `superpowers:verification-before-completion` — verify final result |
 
 ## Common Mistakes
 
