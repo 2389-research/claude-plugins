@@ -536,7 +536,7 @@ When simmer dispatches the generator subagent, verify the prompt includes:
 ```
 You are the generator in a simmer refinement loop.
 
-Invoke the skill: test-kitchen:simmer:simmer-generator
+Invoke the skill: simmer:simmer-generator
 
 ITERATION: [N]
 CRITERIA:
@@ -564,7 +564,7 @@ When simmer dispatches the judge subagent, verify the prompt includes:
 ```
 You are the judge in a simmer refinement loop.
 
-Invoke the skill: test-kitchen:simmer:simmer-judge
+Invoke the skill: simmer:simmer-judge
 
 ITERATION: [N]
 CRITERIA:

@@ -1,0 +1,6 @@
+{
+  "name": "simmer",
+  "description": "Iterative artifact refinement - hone any artifact over multiple rounds using criteria-driven judge feedback and focused single-fix improvements",
+  "version": "1.0.0",
+  "commands": []
+}

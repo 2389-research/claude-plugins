@@ -12,9 +12,9 @@ description: >
 
 Iterative refinement loop — take a single artifact and hone it repeatedly against user-defined criteria until it's as good as it can get.
 
-**Part of Test Kitchen Development:**
-- `omakase-off` — don't know what you want → parallel designs → react → pick
-- `cookoff` — know what you want, it's code → parallel implementations → fixed criteria → steal the best
+**Related skills (test-kitchen family):**
+- `test-kitchen:omakase-off` — don't know what you want → parallel designs → react → pick
+- `test-kitchen:cookoff` — know what you want, it's code → parallel implementations → fixed criteria → steal the best
 - `simmer` — know what you want, it's anything → single artifact → user-defined criteria → iterate until good
 
 ## Flow
@@ -70,7 +70,7 @@ Trigger when user wants iterative refinement of an artifact:
 
 ### Phase 1: Setup
 
-**Invoke `test-kitchen:simmer:simmer-setup`.**
+**Invoke `simmer:simmer-setup`.**
 
 Do not attempt to identify the artifact or ask about criteria yourself — that is the setup subskill's job.
 
@@ -115,13 +115,13 @@ For seedless mode: iteration 1 generates the initial candidate AND judges it. `I
 
 **Step 1: Generator (subagent)**
 
-Invoke `test-kitchen:simmer:simmer-generator` as a subagent.
+Invoke `simmer:simmer-generator` as a subagent.
 
 Subagent prompt:
 ```
 You are the generator in a simmer refinement loop.
 
-Invoke the skill: test-kitchen:simmer:simmer-generator
+Invoke the skill: simmer:simmer-generator
 
 ITERATION: [N]
 CRITERIA:
@@ -141,13 +141,13 @@ Report: what specifically changed and why (2-3 sentences).
 
 **Step 2: Judge (subagent)**
 
-Invoke `test-kitchen:simmer:simmer-judge` as a subagent.
+Invoke `simmer:simmer-judge` as a subagent.
 
 Subagent prompt:
 ```
 You are the judge in a simmer refinement loop.
 
-Invoke the skill: test-kitchen:simmer:simmer-judge
+Invoke the skill: simmer:simmer-judge
 
 ITERATION: [N]
 CRITERIA:
@@ -167,7 +167,7 @@ Do NOT look at or consider any intermediate iteration scores.
 
 **Step 3: Reflect (inline, load subskill)**
 
-Invoke `test-kitchen:simmer:simmer-reflect`.
+Invoke `simmer:simmer-reflect`.
 
 Provide: full score history across all iterations so far, current iteration number, max iterations, judge output from this round.
 

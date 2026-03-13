@@ -67,6 +67,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://2389-research.github.io/claude-plugins/plugins/simmer/</loc>
+    <lastmod></lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/scenario-testing/</loc>
     <lastmod>2026-02-09</lastmod>
     <changefreq>weekly</changefreq>
