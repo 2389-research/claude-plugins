@@ -2,12 +2,13 @@
 
 ## Overview
 
-Test Kitchen provides two gate skills for parallel implementation:
+Test Kitchen provides three skills for parallel implementation and iterative refinement:
 
 | Skill | Gate | When |
 |-------|------|------|
 | `test-kitchen:omakase-off` | **Entry** | FIRST on any build/create/implement request |
 | `test-kitchen:cookoff` | **Exit** | At design→implementation transition |
+| `test-kitchen:simmer` | **Refinement** | "simmer this", "refine this", "hone this", iterate on any artifact |
 
 ## Skills Included
 
@@ -15,6 +16,7 @@ Test Kitchen provides two gate skills for parallel implementation:
 |-------|----------|-------------|
 | `test-kitchen:omakase-off` | (1) FIRST on build/create, (2) During brainstorming on indecision, (3) Explicit request | Wraps brainstorming, offers parallel design exploration |
 | `test-kitchen:cookoff` | At "let's implement" moments | Wraps implementation, offers parallel execution |
+| `test-kitchen:simmer` | "simmer this", "refine this", "hone this", "iterate on this" | Iterative refinement loop for any artifact type |
 
 ## Flow
 
@@ -55,8 +57,9 @@ Skills can't passively detect "uncertainty" or "readiness" - they must claim spe
 
 - **Omakase-off**: Claims the BUILD/CREATE moment (before brainstorming)
 - **Cookoff**: Claims the IMPLEMENT moment (after design)
+- **Simmer**: Claims the REFINE/ITERATE moment (any artifact, any time)
 
-Both skills present choices to the user, allowing them to opt into parallel execution or continue with standard workflows.
+All three skills present choices to the user, allowing them to opt into parallel execution, iterative refinement, or standard workflows.
 
 ## Omakase-off (Entry Gate)
 
@@ -151,6 +154,29 @@ How would you like to implement this design?
 
 **Don't share a pre-made implementation plan.** Each agent generates their own plan from the design doc, ensuring genuine variation in implementation approaches.
 
+## Simmer (Iterative Refinement)
+
+**Triggers:** "Simmer this", "refine this", "hone this", "iterate on this", "make this better", ANY request to iteratively improve an artifact
+
+Simmer works on any artifact Claude can read and produce — documents, prompts, specs, emails, creative writing, API designs.
+
+**Flow:**
+1. **Setup** — identify artifact, elicit 2-3 criteria, set iteration count (default 3)
+2. **Loop** — each iteration dispatches generator subagent (improve based on ASI) then judge subagent (score + produce ASI)
+3. **Reflect** — record trajectory, track best candidate, pass ASI forward
+4. **Output** — write best candidate to `docs/simmer/result.md`, show trajectory
+
+**Context discipline:**
+- Generator receives: current candidate + criteria + ASI (no scores)
+- Judge receives: current candidate + criteria (no previous scores)
+- Reflect receives: full score history (no candidate content)
+
+**Subskills:**
+- `test-kitchen:simmer:simmer-setup` — identify artifact, elicit criteria
+- `test-kitchen:simmer:simmer-generator` — produce improved candidate
+- `test-kitchen:simmer:simmer-judge` — score candidate, produce ASI
+- `test-kitchen:simmer:simmer-reflect` — record trajectory, track best
+
 ## Directory Structure
 
 ```
@@ -176,6 +202,14 @@ docs/plans/<feature>/
 .worktrees/
   variant-<slug>/              # Omakase variant worktree
   cookoff-impl-N/              # Cookoff implementation worktree
+
+# Simmer creates:
+docs/simmer/
+  iteration-1-candidate.md     # Each candidate version
+  iteration-2-candidate.md
+  iteration-3-candidate.md
+  trajectory.md                # Running score table
+  result.md                    # Final best output
 ```
 
 ## Branch Naming
