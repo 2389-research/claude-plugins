@@ -153,8 +153,8 @@
         {
             "name": "test-kitchen",
             "source": "./test-kitchen",
-            "description": "Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner",
-            "version": "1.0.0",
+            "description": "Parallel exploration of implementation approaches and iterative artifact refinement - implements multiple variants simultaneously, lets tests determine the winner, or hones a single artifact over multiple rounds",
+            "version": "1.1.0",
             "keywords": [
                 "parallel",
                 "exploration",
@@ -162,7 +162,12 @@
                 "comparison",
                 "implementation",
                 "testing",
-                "worktrees"
+                "worktrees",
+                "simmer",
+                "refinement",
+                "iteration",
+                "criteria",
+                "scoring"
             ],
             "strict": false
         },

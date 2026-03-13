@@ -1,11 +1,12 @@
 # Test Kitchen
 
-Parallel implementation framework with two gate skills:
+Parallel implementation and iterative refinement framework:
 
 | Skill | Gate | Trigger |
 |-------|------|---------|
 | `test-kitchen:omakase-off` | **Entry** | FIRST on any build/create/implement request |
 | `test-kitchen:cookoff` | **Exit** | At design→implementation transition |
+| `test-kitchen:simmer` | **Refinement** | "simmer this", "refine this", "hone this", iterate on any artifact |
 
 ## Installation
 
@@ -42,6 +43,19 @@ Design complete, "let's implement"
 └─────────────────────────────────────┘
     ↓
 [Implementation]
+
+
+"Simmer this" / "Refine this" / "Hone this"
+    ↓
+┌─────────────────────────────────────┐
+│  SIMMER (iterative refinement)      │
+│  Any artifact, not just code        │
+│                                     │
+│  Setup → (Generate → Judge →        │
+│           Reflect) × N              │
+└─────────────────────────────────────┘
+    ↓
+[Best candidate output]
 ```
 
 ## Quick examples
@@ -116,12 +130,49 @@ Option 1 (Cookoff):
 
 Options 2/3 -- single agent or local implementation proceeds normally.
 
+### Refinement: simmer
+
+```
+User: "Simmer this" [pastes a pitch email]
+
+Claude: I'm using test-kitchen:simmer to set up iterative refinement.
+
+What does "better" mean for this? I'd suggest these criteria:
+
+1. Value prop clarity — reader knows exactly what problem is solved
+2. Tone match — confident without being pushy
+3. Call to action strength — specific and low-friction
+
+Accept, modify, or define your own?
+
+User: "Those work"
+
+[Iteration 0: Judge scores seed — 4.0/10]
+[Iteration 1: Generator fixes value prop → 5.3/10]
+[Iteration 2: Generator fixes CTA → 6.3/10]
+[Iteration 3: Generator fixes tone → 7.3/10]
+
+Trajectory:
+| Iter | Value Prop | Tone | CTA | Composite | Key Change |
+|------|-----------|------|-----|-----------|------------|
+| 0    | 4         | 5    | 3   | 4.0       | seed       |
+| 1    | 7         | 5    | 4   | 5.3       | specific problem statement |
+| 2    | 7         | 6    | 6   | 6.3       | low-friction CTA |
+| 3    | 7         | 7    | 8   | 7.3       | peer-sharing tone |
+
+Best candidate: iteration 3 (7.3/10)
+3 iterations complete. Run 3 more?
+```
+
+Simmer works on any artifact type — documents, prompts, specs, emails, creative writing, API designs. Each iteration targets the single most important improvement (ASI) identified by the judge, so improvements compound rather than scatter.
+
 ## Why aggressive triggers
 
 Skills can't passively detect "uncertainty" or "readiness" -- they must claim specific moments in the conversation flow.
 
 - Omakase-off claims the BUILD/CREATE moment (before brainstorming)
 - Cookoff claims the IMPLEMENT moment (after design)
+- Simmer claims the REFINE/ITERATE moment (any artifact, any time)
 
 ## Dependencies
 
@@ -143,6 +194,7 @@ Test Kitchen orchestrates these skills (falls back gracefully if not installed):
 - [CLAUDE.md](./CLAUDE.md) -- full plugin instructions
 - [Omakase-off skill](./skills/omakase-off/SKILL.md) -- entry gate (wraps brainstorming)
 - [Cookoff skill](./skills/cookoff/SKILL.md) -- exit gate (wraps implementation)
+- [Simmer skill](./skills/simmer/SKILL.md) -- iterative refinement (any artifact)
 
 ## Origin
 

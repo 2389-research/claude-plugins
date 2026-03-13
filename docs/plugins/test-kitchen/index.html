@@ -7,8 +7,8 @@
   <!-- Primary Meta Tags -->
   <title>test-kitchen — Development Plugin for Claude Code | 2389 Research</title>
   <meta name="title" content="test-kitchen — Development Plugin for Claude Code | 2389 Research">
-  <meta name="description" content="Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner">
-  <meta name="keywords" content="parallel, exploration, variants, comparison, implementation, testing, worktrees, Claude Code, plugins, MCP servers, AI development, Claude, Anthropic, development tools, 2389 Research">
+  <meta name="description" content="Parallel exploration of implementation approaches and iterative artifact refinement - implements multiple variants simultaneously, lets tests determine the winner, or hones a single artifact over multiple rounds">
+  <meta name="keywords" content="parallel, exploration, variants, comparison, implementation, testing, worktrees, simmer, refinement, iteration, criteria, scoring, Claude Code, plugins, MCP servers, AI development, Claude, Anthropic, development tools, 2389 Research">
   <meta name="author" content="2389 Research Inc">
   <meta name="robots" content="index, follow">
 
@@ -19,7 +19,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://2389-research.github.io/claude-plugins/plugins/test-kitchen/">
   <meta property="og:title" content="test-kitchen — Development Plugin for Claude Code | 2389 Research">
-  <meta property="og:description" content="Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner">
+  <meta property="og:description" content="Parallel exploration of implementation approaches and iterative artifact refinement - implements multiple variants simultaneously, lets tests determine the winner, or hones a single artifact over multiple rounds">
   <meta property="og:image" content="https://2389-research.github.io/claude-plugins/plugins/test-kitchen/og-image.png">
   <meta property="og:site_name" content="2389 Research Plugin Marketplace">
 
@@ -27,7 +27,7 @@
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://2389-research.github.io/claude-plugins/plugins/test-kitchen/">
   <meta property="twitter:title" content="test-kitchen — Development Plugin for Claude Code | 2389 Research">
-  <meta property="twitter:description" content="Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner">
+  <meta property="twitter:description" content="Parallel exploration of implementation approaches and iterative artifact refinement - implements multiple variants simultaneously, lets tests determine the winner, or hones a single artifact over multiple rounds">
   <meta property="twitter:image" content="https://2389-research.github.io/claude-plugins/plugins/test-kitchen/og-image.png">
 
   <!-- Favicon -->
@@ -78,13 +78,13 @@
 
       <div class="plugin-hero-header">
         <h1 class="plugin-hero-title">test-kitchen</h1>
-        <span class="plugin-hero-version">v1.0.0</span>
+        <span class="plugin-hero-version">v1.1.0</span>
         
       </div>
 
-      <p class="plugin-hero-description">Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner</p>
+      <p class="plugin-hero-description">Parallel exploration of implementation approaches and iterative artifact refinement - implements multiple variants simultaneously, lets tests determine the winner, or hones a single artifact over multiple rounds</p>
 
-      <div class="plugin-tags-large"><span class="tag">parallel</span><span class="tag">exploration</span><span class="tag">variants</span><span class="tag">comparison</span><span class="tag">implementation</span><span class="tag">testing</span><span class="tag">worktrees</span></div>
+      <div class="plugin-tags-large"><span class="tag">parallel</span><span class="tag">exploration</span><span class="tag">variants</span><span class="tag">comparison</span><span class="tag">implementation</span><span class="tag">testing</span><span class="tag">worktrees</span><span class="tag">simmer</span><span class="tag">refinement</span><span class="tag">iteration</span><span class="tag">criteria</span><span class="tag">scoring</span></div>
 
       <div class="plugin-hero-actions">
         <div class="install-block">
@@ -115,8 +115,8 @@
 
       <div class="readme-content">
         <h2>Test Kitchen</h2>
-<p>Parallel implementation framework with two gate skills:</p>
-<table class="readme-table"><thead><tr><th>Skill</th><th>Gate</th><th>Trigger</th></tr></thead><tbody><tr><td><code>test-kitchen:omakase-off</code></td><td><strong>Entry</strong></td><td>FIRST on any build/create/implement request</td></tr><tr><td><code>test-kitchen:cookoff</code></td><td><strong>Exit</strong></td><td>At design→implementation transition</td></tr></tbody></table>
+<p>Parallel implementation and iterative refinement framework:</p>
+<table class="readme-table"><thead><tr><th>Skill</th><th>Gate</th><th>Trigger</th></tr></thead><tbody><tr><td><code>test-kitchen:omakase-off</code></td><td><strong>Entry</strong></td><td>FIRST on any build/create/implement request</td></tr><tr><td><code>test-kitchen:cookoff</code></td><td><strong>Exit</strong></td><td>At design→implementation transition</td></tr><tr><td><code>test-kitchen:simmer</code></td><td><strong>Refinement</strong></td><td>"simmer this", "refine this", "hone this", iterate on any artifact</td></tr></tbody></table>
 <h3>Installation</h3>
 <pre><code class="language-bash">/plugin install test-kitchen@2389-research
 </code></pre>
@@ -147,6 +147,19 @@ Design complete, "let's implement"
 └─────────────────────────────────────┘
     ↓
 [Implementation]
+
+
+"Simmer this" / "Refine this" / "Hone this"
+    ↓
+┌─────────────────────────────────────┐
+│  SIMMER (iterative refinement)      │
+│  Any artifact, not just code        │
+│                                     │
+│  Setup → (Generate → Judge →        │
+│           Reflect) × N              │
+└─────────────────────────────────────┘
+    ↓
+[Best candidate output]
 </code></pre>
 <h3>Quick examples</h3>
 <h4>Entry gate: omakase-off</h4>
@@ -198,14 +211,46 @@ Which approach?
 <p>Option 1 (Cookoff):</p>
 <ul><li>Each agent reads the same design doc</li><li>Each agent creates their OWN implementation plan</li><li>All implement in parallel</li><li>Fresh-eyes review, compare results</li><li>User picks winner</li></ul>
 <p>Options 2/3 -- single agent or local implementation proceeds normally.</p>
+<h4>Refinement: simmer</h4>
+<pre><code class="language-">User: "Simmer this" [pastes a pitch email]
+
+Claude: I'm using test-kitchen:simmer to set up iterative refinement.
+
+What does "better" mean for this? I'd suggest these criteria:
+
+1. Value prop clarity — reader knows exactly what problem is solved
+2. Tone match — confident without being pushy
+3. Call to action strength — specific and low-friction
+
+Accept, modify, or define your own?
+
+User: "Those work"
+
+[Iteration 0: Judge scores seed — 4.0/10]
+[Iteration 1: Generator fixes value prop → 5.3/10]
+[Iteration 2: Generator fixes CTA → 6.3/10]
+[Iteration 3: Generator fixes tone → 7.3/10]
+
+Trajectory:
+| Iter | Value Prop | Tone | CTA | Composite | Key Change |
+|------|-----------|------|-----|-----------|------------|
+| 0    | 4         | 5    | 3   | 4.0       | seed       |
+| 1    | 7         | 5    | 4   | 5.3       | specific problem statement |
+| 2    | 7         | 6    | 6   | 6.3       | low-friction CTA |
+| 3    | 7         | 7    | 8   | 7.3       | peer-sharing tone |
+
+Best candidate: iteration 3 (7.3/10)
+3 iterations complete. Run 3 more?
+</code></pre>
+<p>Simmer works on any artifact type — documents, prompts, specs, emails, creative writing, API designs. Each iteration targets the single most important improvement (ASI) identified by the judge, so improvements compound rather than scatter.</p>
 <h3>Why aggressive triggers</h3>
 <p>Skills can't passively detect "uncertainty" or "readiness" -- they must claim specific moments in the conversation flow.</p>
-<ul><li>Omakase-off claims the BUILD/CREATE moment (before brainstorming)</li><li>Cookoff claims the IMPLEMENT moment (after design)</li></ul>
+<ul><li>Omakase-off claims the BUILD/CREATE moment (before brainstorming)</li><li>Cookoff claims the IMPLEMENT moment (after design)</li><li>Simmer claims the REFINE/ITERATE moment (any artifact, any time)</li></ul>
 <h3>Dependencies</h3>
 <p>Test Kitchen orchestrates these skills (falls back gracefully if not installed):</p>
 <ul><li><code>superpowers:brainstorming</code></li><li><code>superpowers:writing-plans</code></li><li><code>superpowers:executing-plans</code></li><li><code>superpowers:using-git-worktrees</code></li><li><code>superpowers:dispatching-parallel-agents</code></li><li><code>superpowers:test-driven-development</code></li><li><code>superpowers:verification-before-completion</code></li><li><code>scenario-testing:skills</code></li><li><code>fresh-eyes-review:skills</code></li><li><code>superpowers:finishing-a-development-branch</code></li></ul>
 <h3>Documentation</h3>
-<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/test-kitchen/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> -- full plugin instructions</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/test-kitchen/skills/omakase-off/SKILL.md" rel="noopener noreferrer" target="_blank">Omakase-off skill</a> -- entry gate (wraps brainstorming)</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/test-kitchen/skills/cookoff/SKILL.md" rel="noopener noreferrer" target="_blank">Cookoff skill</a> -- exit gate (wraps implementation)</li></ul>
+<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/test-kitchen/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> -- full plugin instructions</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/test-kitchen/skills/omakase-off/SKILL.md" rel="noopener noreferrer" target="_blank">Omakase-off skill</a> -- entry gate (wraps brainstorming)</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/test-kitchen/skills/cookoff/SKILL.md" rel="noopener noreferrer" target="_blank">Cookoff skill</a> -- exit gate (wraps implementation)</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/test-kitchen/skills/simmer/SKILL.md" rel="noopener noreferrer" target="_blank">Simmer skill</a> -- iterative refinement (any artifact)</li></ul>
 <h3>Origin</h3>
 <p>Named after a restaurant test kitchen, where chefs try multiple approaches before putting a dish on the menu.</p>
       </div>
@@ -367,10 +412,10 @@ Which approach?
     "name": "2389 Research Inc",
     "url": "https://2389.ai"
   },
-  "description": "Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner",
+  "description": "Parallel exploration of implementation approaches and iterative artifact refinement - implements multiple variants simultaneously, lets tests determine the winner, or hones a single artifact over multiple rounds",
   "url": "https://2389-research.github.io/claude-plugins/plugins/test-kitchen/",
   "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/test-kitchen",
-  "softwareVersion": "1.0.0",
+  "softwareVersion": "1.1.0",
   "license": "https://opensource.org/licenses/MIT"
 }
   </script>

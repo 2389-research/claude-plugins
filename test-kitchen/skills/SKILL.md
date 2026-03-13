@@ -5,12 +5,13 @@ description: This skill should be used when implementing features with parallel 
 
 # Test Kitchen
 
-Parallel implementation framework with two gate skills:
+Parallel implementation framework with three skills:
 
 | Skill | Gate | Trigger |
 |-------|------|---------|
 | `test-kitchen:omakase-off` | **Entry** | FIRST on any build/create/implement request |
 | `test-kitchen:cookoff` | **Exit** | At design→implementation transition |
+| `test-kitchen:simmer` | **Refinement** | "simmer this", "refine this", "hone this", iterate on any artifact |
 
 ## Flow
 
@@ -41,6 +42,19 @@ Design complete, "let's implement"
 └─────────────────────────────────────┘
     ↓
 [Implementation]
+
+
+"Simmer this" / "Refine this" / "Hone this"
+    ↓
+┌─────────────────────────────────────┐
+│  SIMMER (iterative refinement)      │
+│  Any artifact, not just code        │
+│                                     │
+│  Setup → (Generate → Judge →        │
+│           Reflect) × N              │
+└─────────────────────────────────────┘
+    ↓
+[Best candidate output]
 ```
 
 ## Key Insight
@@ -49,6 +63,7 @@ Design complete, "let's implement"
 
 - **Omakase-off**: Claims the BUILD/CREATE moment (before brainstorming)
 - **Cookoff**: Claims the IMPLEMENT moment (after design)
+- **Simmer**: Claims the REFINE/ITERATE moment (any artifact, any time)
 
 ## When Each Triggers
 
@@ -74,6 +89,12 @@ Design complete, "let's implement"
 - "Ready to code"
 - Design doc just committed
 - ANY signal to move from design to code
+
+### Simmer
+- "Simmer this", "refine this", "hone this", "iterate on this"
+- "Make this better", "improve this over a few rounds"
+- "Polish this", "tighten this up"
+- ANY request to iteratively improve an artifact (document, prompt, spec, email, etc.)
 
 ## Omakase Mode (Skip Brainstorming)
 
