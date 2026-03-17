@@ -25,17 +25,37 @@ fi
 
 # Set the terminal title using ANSI escape sequences
 # Format: "emoji ProjectName - Topic   " (3 spaces compensate for Bash tool truncation)
-#
-# Dual-path approach:
-# 1. Hook context: Write to /dev/tty (stdout is captured by hook logging)
-# 2. Skill context: Write to stdout (Bash tool passes it through to terminal)
-#
-# Try /dev/tty first (suppress all errors), fall back to stdout if unavailable
-{
-    if printf '\033]0;%s %s - %s   \007' "$EMOJI" "$PROJECT" "$TOPIC" > /dev/tty 2>&1; then
-        exit 0  # Success via /dev/tty (hook context)
-    fi
-} 2>/dev/null
+TITLE_SEQ=$(printf '\033]0;%s %s - %s   \007' "$EMOJI" "$PROJECT" "$TOPIC")
 
-# If we reach here, /dev/tty failed - use stdout (Bash tool context)
-printf '\033]0;%s %s - %s   \007' "$EMOJI" "$PROJECT" "$TOPIC"
+# Find a writable TTY. The Bash tool runs without /dev/tty, so we walk up the
+# process tree to find the parent Claude process's TTY device.
+find_tty() {
+    # Try /dev/tty first (works in hook context and direct shell)
+    # Use a test write — [ -w ] can return true even when the device isn't configured
+    if (printf '' > /dev/tty) 2>/dev/null; then
+        echo "/dev/tty"
+        return 0
+    fi
+
+    # Walk up process tree to find a parent with a real TTY
+    local pid=$$
+    while [ "$pid" -gt 1 ] 2>/dev/null; do
+        local tty_name
+        tty_name=$(ps -o tty= -p "$pid" 2>/dev/null | tr -d ' ')
+        if [ -n "$tty_name" ] && [ "$tty_name" != "??" ] && [ -w "/dev/$tty_name" ]; then
+            echo "/dev/$tty_name"
+            return 0
+        fi
+        pid=$(ps -o ppid= -p "$pid" 2>/dev/null | tr -d ' ')
+    done
+
+    return 1
+}
+
+TTY_DEVICE=$(find_tty)
+if [ -n "$TTY_DEVICE" ]; then
+    printf '%s' "$TITLE_SEQ" > "$TTY_DEVICE"
+elif [ -t 1 ]; then
+    # Last resort: stdout only when it is an actual terminal
+    printf '%s' "$TITLE_SEQ"
+fi

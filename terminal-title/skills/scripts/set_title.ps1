@@ -38,13 +38,23 @@ if ([string]::IsNullOrWhiteSpace($ProjectName) -or [string]::IsNullOrWhiteSpace(
     exit 0
 }
 
-# Set the terminal title using ANSI escape sequences
+# Set the terminal title
 # Format: "emoji ProjectName - Topic   " (3 spaces compensate for truncation)
 $Title = "$Emoji $ProjectName - $Topic   "
 
-# For Windows Terminal, PowerShell, and CMD support
-# Use Write-Host with -NoNewline to send escape sequence
-$EscapeSequence = "`e]0;$Title`a"
-Write-Host $EscapeSequence -NoNewline
+# Try multiple approaches — the Bash tool may capture stdout/Write-Host output,
+# so we need to reach the terminal directly.
+try {
+    # Direct console title set (most reliable on Windows)
+    $Host.UI.RawUI.WindowTitle = $Title
+} catch {
+    # Fallback: ANSI escape sequence via console output stream
+    try {
+        [Console]::Write("`e]0;$Title`a")
+    } catch {
+        # Last resort: Write-Host (may not reach terminal from Bash tool)
+        Write-Host "`e]0;$Title`a" -NoNewline
+    }
+}
 
 exit 0
