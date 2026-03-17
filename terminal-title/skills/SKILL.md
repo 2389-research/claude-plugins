@@ -1,6 +1,6 @@
 ---
 name: terminal-title
-description: Use when session starts or conversation topic materially shifts - e.g. user switches from debugging to docs, asks about unrelated subject, or begins work on a different component
+description: MANDATORY at session start. REQUIRED when user topic shifts (debugging to docs, frontend to backend, new subject, different component). Claude MUST invoke on all topic changes.
 ---
 
 <!-- ABOUTME: Terminal title skill that automatically updates terminal window title -->
@@ -12,15 +12,18 @@ Updates terminal window title to: `$TERMINAL_TITLE_EMOJI ProjectName - Topic`
 
 ## When to Invoke
 
+**You MUST actively monitor conversation flow and invoke this skill whenever the topic materially shifts. Do not wait for explicit permission.**
+
 **DO invoke:**
 - Session start (default topic: "Claude Code")
-- User switches domains: debugging → docs, frontend → backend
-- User starts working on different module/component
-- User asks about unrelated topic after sustained discussion
+- "let's talk about X" / "can you tell me about Y" → invoke immediately
+- User switches domains: debugging → docs, frontend → backend, feature → tests
+- User starts working on different module/component after sustained discussion
+- User asks about completely unrelated topic
 
 **Do NOT invoke:**
-- Follow-up questions on same topic
-- Small refinements ("make it blue")
+- Follow-up questions on same topic ("add a comment to that function")
+- Small refinements to current work ("make it blue")
 - Clarifications about current task
 
 ## Workflow
