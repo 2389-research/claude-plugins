@@ -10,10 +10,6 @@ description: Use when session starts or conversation topic materially shifts - e
 
 Updates terminal window title to: `$TERMINAL_TITLE_EMOJI ProjectName - Topic`
 
-## Pre-flight Check
-
-If `$CLAUDE_CODE_DISABLE_TERMINAL_TITLE` is `1`, do nothing and stop.
-
 ## When to Invoke
 
 **DO invoke:**

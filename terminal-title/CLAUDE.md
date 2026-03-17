@@ -18,7 +18,7 @@ Auto-invoked skill that:
 ## Environment Variables
 
 - `TERMINAL_TITLE_EMOJI` -- emoji prefix for the title. User sets this in their shell profile to distinguish contexts (e.g. 💼 for work, 🎉 for personal). Defaults to 🎉 if not set.
-- `CLAUDE_CODE_DISABLE_TERMINAL_TITLE` -- set to `1` to disable automatic terminal title updates.
+- `CLAUDE_CODE_DISABLE_TERMINAL_TITLE` -- set to `1` to disable Claude Code's *built-in* terminal title updater. Required so it doesn't conflict with this plugin.
 
 ## Title Format
 
