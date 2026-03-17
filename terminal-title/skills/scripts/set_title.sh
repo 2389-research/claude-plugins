@@ -55,7 +55,7 @@ find_tty() {
 TTY_DEVICE=$(find_tty)
 if [ -n "$TTY_DEVICE" ]; then
     printf '%s' "$TITLE_SEQ" > "$TTY_DEVICE"
-else
-    # Last resort: stdout (may not reach terminal but won't break anything)
+elif [ -t 1 ]; then
+    # Last resort: stdout only when it is an actual terminal
     printf '%s' "$TITLE_SEQ"
 fi
