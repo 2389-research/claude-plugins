@@ -5,28 +5,32 @@ description: >
   or asks to improve a specific artifact over multiple rounds. Runs an iterative
   refinement loop using subagent judge feedback against user-defined criteria.
   Works on any artifact type: documents, prompts, specs, emails, creative writing,
-  API designs, anything Claude can read and produce.
+  API designs, pipelines, codebases — anything Claude can read and produce.
+  v2 supports multi-file workspace targets, runnable evaluators, and open-ended
+  optimization (model selection, pipeline topology, prompt tuning).
 ---
 
 # Simmer
 
-Iterative refinement loop — take a single artifact and hone it repeatedly against user-defined criteria until it's as good as it can get.
+Iterative refinement loop — take an artifact (single file or workspace) and hone it repeatedly against user-defined criteria until it's as good as it can get.
 
 **Related skills (test-kitchen family):**
 - `test-kitchen:omakase-off` — don't know what you want → parallel designs → react → pick
 - `test-kitchen:cookoff` — know what you want, it's code → parallel implementations → fixed criteria → steal the best
-- `simmer` — know what you want, it's anything → single artifact → user-defined criteria → iterate until good
+- `simmer` — know what you want, it's anything → user-defined criteria → iterate until good
 
 ## Flow
 
 ```
-"Simmer this" / "Refine this" / "Hone this"
+"Simmer this" / "Refine this" / "Optimize this pipeline"
     ↓
 ┌─────────────────────────────────────┐
 │  SETUP (identify + criteria)        │
 │  Load simmer-setup subskill         │
 │                                     │
-│  Output: artifact, rubric, N iters  │
+│  Output: artifact, rubric, N iters, │
+│  evaluator (optional),              │
+│  background (optional)              │
 └─────────────────────────────────────┘
     ↓
 ┌─────────────────────────────────────┐
@@ -34,11 +38,14 @@ Iterative refinement loop — take a single artifact and hone it repeatedly agai
 │                                     │
 │  Each iteration:                    │
 │  1. Dispatch generator subagent     │
-│  2. Dispatch judge subagent         │
-│  3. Load reflect subskill           │
+│  2. Run evaluator (if present)      │
+│  3. Dispatch judge subagent         │
+│  4. Load reflect subskill           │
 │                                     │
 │  Generator gets: candidate + ASI    │
+│           + background              │
 │  Judge gets: candidate + rubric     │
+│       + evaluator output (if any)   │
 │  Reflect gets: full score history   │
 └─────────────────────────────────────┘
     ↓
@@ -51,11 +58,13 @@ Iterative refinement loop — take a single artifact and hone it repeatedly agai
 
 ## When to Use
 
-Trigger when user wants iterative refinement of an artifact:
+Trigger when user wants iterative refinement of any kind:
 - "Simmer this", "refine this", "hone this", "iterate on this"
 - "Make this better", "improve this over a few rounds"
 - "Polish this", "tighten this up"
-- Any request to iteratively improve a non-code artifact
+- "Optimize this pipeline", "find the best model for this task"
+- "Tune this configuration", "improve these prompts against this test suite"
+- Any request to iteratively improve an artifact or workspace
 
 **Not simmer:** If the artifact is code and the user wants parallel implementations, use cookoff instead.
 
@@ -64,7 +73,7 @@ Trigger when user wants iterative refinement of an artifact:
 **Announce:** "I'm using the simmer skill to set up iterative refinement."
 
 **Track progress** (TodoWrite if available, otherwise inline):
-1. Setup — identify artifact and elicit criteria
+1. Setup — identify artifact, elicit criteria, determine evaluation method
 2. Refinement loop (N iterations)
 3. Output best version with score trajectory
 
@@ -74,25 +83,39 @@ Trigger when user wants iterative refinement of an artifact:
 
 Do not attempt to identify the artifact or ask about criteria yourself — that is the setup subskill's job.
 
-**Shortcut:** If the user (or calling system) has already provided artifact, criteria (each with at least one sentence describing what a high score looks like), iteration count, and mode, skip the setup subskill entirely. Construct the setup brief directly and proceed to Phase 2.
+**Shortcut:** If the user (or calling system) has already provided artifact, criteria (each with at least one sentence describing what a high score looks like), iteration count, mode, and optionally evaluator/background, skip the setup subskill entirely. Construct the setup brief directly and proceed to Phase 2.
 
 Setup returns a brief:
 ```
-ARTIFACT: [content or file path]
+ARTIFACT: [content, file path, or directory path]
+ARTIFACT_TYPE: [single-file | workspace]
 CRITERIA:
   - [criterion 1]: [what better looks like]
   - [criterion 2]: [what better looks like]
   - [criterion 3]: [what better looks like]
+PRIMARY: [criterion name — omit if equally weighted]
+EVALUATOR: [command to run — omit for judge-only mode]
+BACKGROUND: [constraints, available resources, domain knowledge — omit if not needed]
+OUTPUT_CONTRACT: [valid output format description — omit for text/creative]
+VALIDATION_COMMAND: [quick check command — omit if no cheap validation exists]
+SEARCH_SPACE: [what's in scope to explore — omit if unconstrained]
 ITERATIONS: [N]
-MODE: [seedless | from-file | from-paste]
+MODE: [seedless | from-file | from-paste | from-workspace]
 OUTPUT_DIR: [path, default: docs/simmer]
 ```
 
 ### Phase 2: Refinement Loop
 
-Create directory for artifacts:
+**For single-file mode:**
 ```bash
 mkdir -p {OUTPUT_DIR}
+```
+
+**For workspace mode:**
+```bash
+# Create initial commit to snapshot the seed state
+cd {ARTIFACT}
+git add -A && git commit -m "simmer: iteration 0 — seed state"
 ```
 
 **Iteration counting:**
@@ -107,9 +130,16 @@ mkdir -p {OUTPUT_DIR}
 For seedless mode: iteration 1 generates the initial candidate AND judges it. `ITERATIONS: 3` means 3 generation passes total.
 
 **Iteration 0 (seed):**
+
+*Single-file mode:*
 - Write the seed artifact to `{OUTPUT_DIR}/iteration-0-candidate.md`
 - If seedless: dispatch generator subagent to produce initial candidate from description + criteria, then judge it
 - If from-file or from-paste: the seed IS the starting artifact — judge it directly (no generator)
+
+*Workspace mode:*
+- The seed is the current state of the workspace directory
+- If from-workspace: judge the current state directly (no generator)
+- If seedless: dispatch generator to scaffold the initial workspace, then judge it
 
 **Each iteration:**
 
@@ -117,13 +147,14 @@ For seedless mode: iteration 1 generates the initial candidate AND judges it. `I
 
 Invoke `simmer:simmer-generator` as a subagent.
 
-Subagent prompt:
+*Single-file subagent prompt:*
 ```
 You are the generator in a simmer refinement loop.
 
 Invoke the skill: simmer:simmer-generator
 
 ITERATION: [N]
+ARTIFACT_TYPE: single-file
 CRITERIA:
 [rubric from setup]
 
@@ -139,25 +170,77 @@ Write your improved candidate to: {OUTPUT_DIR}/iteration-[N]-candidate.md
 Report: what specifically changed and why (2-3 sentences).
 ```
 
-**Step 2: Judge (subagent)**
+*Workspace subagent prompt:*
+```
+You are the generator in a simmer refinement loop.
+
+Invoke the skill: simmer:simmer-generator
+
+ITERATION: [N]
+ARTIFACT_TYPE: workspace
+WORKSPACE: [directory path]
+CRITERIA:
+[rubric from setup]
+
+BACKGROUND:
+[constraints, available resources, domain knowledge from setup]
+
+OUTPUT_CONTRACT:
+[valid output format — omit if not specified in setup]
+
+VALIDATION_COMMAND:
+[quick check command — omit if not specified in setup]
+
+SEARCH_SPACE:
+[what's in scope to explore — omit if not specified in setup]
+
+JUDGE FEEDBACK (ASI from previous round):
+[ASI text — may describe coordinated changes across multiple files]
+
+EXPLORATION STATUS:
+[from reflect: what's been tried vs untried — omit on iteration 1 or if no search space]
+
+Make your changes directly in the workspace directory.
+You may edit multiple files in a single iteration when the ASI calls for coordinated changes.
+If making infrastructure changes, run VALIDATION_COMMAND (if available) before reporting success.
+
+Report: what specifically changed and why (2-3 sentences).
+```
+
+**Step 2: Run Evaluator (if present)**
+
+If the setup brief includes an `EVALUATOR` command:
+```bash
+cd {ARTIFACT}  # for workspace mode
+{EVALUATOR}
+```
+
+Capture stdout and stderr. This output will be passed to the judge.
+
+**Timeouts:** Set generous timeouts for evaluator commands. If the evaluator involves LLM inference, network calls, or large data processing, allow 10-60 minutes per run. The orchestrator should not timeout before the evaluator completes.
+
+If no evaluator, skip this step.
+
+**Step 3: Judge (subagent)**
 
 Invoke `simmer:simmer-judge` as a subagent.
 
-Subagent prompt:
+*Without evaluator:*
 ```
 You are the judge in a simmer refinement loop.
 
 Invoke the skill: simmer:simmer-judge
 
 ITERATION: [N]
+ARTIFACT_TYPE: [single-file | workspace]
 CRITERIA:
 [rubric from setup]
 
 CANDIDATE:
-[full text of candidate just produced by generator]
+[full text of candidate, or key files from workspace]
 
 SEED CALIBRATION:
-[full text of original seed artifact]
+[full text of original seed artifact, or key seed files]
 SEED SCORES:
 [iteration 0 scores — omit this block on iteration 0]
 
@@ -165,19 +248,79 @@ Score this candidate against the criteria using the seed as a calibration refere
 Do NOT look at or consider any intermediate iteration scores.
 ```
 
-**Step 3: Reflect (inline, load subskill)**
+*With evaluator:*
+```
+You are the judge in a simmer refinement loop.
+
+Invoke the skill: simmer:simmer-judge
+
+ITERATION: [N]
+ARTIFACT_TYPE: [single-file | workspace]
+CRITERIA:
+[rubric from setup]
+
+CANDIDATE:
+[full text of candidate, or key files from workspace]
+
+EVALUATOR OUTPUT:
+[stdout and stderr from the evaluator command]
+
+SEED CALIBRATION:
+[full text of original seed artifact, or key seed files]
+SEED SCORES:
+[iteration 0 scores — omit this block on iteration 0]
+
+OUTPUT_CONTRACT:
+[valid output format — omit if not specified in setup]
+
+SEARCH_SPACE:
+[what's in scope to explore — omit if not specified in setup]
+
+PREVIOUS ASI:
+[the ASI from the previous judge round — omit on iteration 0]
+
+ITERATION HISTORY:
+[condensed trajectory: iteration number, scores, config, key change for each
+ prior iteration — omit on iteration 0]
+
+EXPLORATION STATUS:
+[from reflect: what's been tried vs untried in the search space — omit on
+ iteration 0 or if no search space specified]
+
+Interpret the evaluator output alongside the criteria.
+Check evaluator output against the output contract if specified.
+Score this candidate using the seed as a calibration reference.
+Use the iteration history, previous ASI, and exploration status to inform
+your ASI — analyze what's been tried, what worked, what didn't, and propose
+an evidence-based direction. You may research approaches if the current
+path is stuck.
+```
+
+**Step 4: Reflect (inline, load subskill)**
 
 Invoke `simmer:simmer-reflect`.
 
 Provide: full score history across all iterations so far, current iteration number, max iterations, judge output from this round.
 
-**Handling regression:** If reflect reports that this iteration scored lower than best-so-far, the NEXT generator receives the best candidate (not the latest regressed one). The generator prompt should note: "Starting from the best version (iteration N), not the latest (which regressed)."
+**Handling regression:** If reflect reports that this iteration scored lower than best-so-far:
+- *Single-file:* the NEXT generator receives the best candidate file (not the latest regressed one)
+- *Workspace:* selectively restore workspace files from the best iteration's commit: `git checkout <best-commit> -- <workspace-files>`. Do NOT revert trajectory.md or other tracking files in `{OUTPUT_DIR}`.
+- The generator prompt should note: "Starting from the best version (iteration N), not the latest (which regressed)."
+
+**Plateau detection:** If the best-so-far score (primary criterion if set, otherwise composite) has not improved for 3 consecutive iterations — including regressions that were rolled back — offer the user early termination: "Best score has not improved for 3 iterations (best: N.N/10 at iteration M). Continue or stop?" This catches both flat plateaus and oscillation around a ceiling. Especially important when evaluator runs are expensive (minutes to hours per iteration).
 
 ### Phase 3: Output
 
 After all iterations complete:
 
+*Single-file mode:*
 1. Write best-scoring candidate to `{OUTPUT_DIR}/result.md`
+2. Display full trajectory table
+3. Summarize what changed from start to finish (2-3 sentences)
+4. Offer: "N iterations complete. Run 3 more?"
+
+*Workspace mode:*
+1. Ensure workspace is on the best iteration's state
 2. Display full trajectory table
 3. Summarize what changed from start to finish (2-3 sentences)
 4. Offer: "N iterations complete. Run 3 more?"
@@ -186,6 +329,7 @@ If user continues: carry forward best candidate as new seed, continue iteration 
 
 ## Directory Structure
 
+**Single-file mode:**
 ```
 {OUTPUT_DIR}/
   iteration-0-candidate.md     # Seed (or seedless first generation)
@@ -196,18 +340,33 @@ If user continues: carry forward best candidate as new seed, continue iteration 
   result.md                    # Final best output
 ```
 
+**Workspace mode:**
+```
+{WORKSPACE}/                    # The target directory
+  [project files]               # Modified in place by generator
+
+{OUTPUT_DIR}/                   # Tracking files (can be inside or outside workspace)
+  trajectory.md                 # Running score table
+```
+
+Iterations are tracked via git commits in workspace mode rather than separate candidate files.
+
 `{OUTPUT_DIR}` defaults to `docs/simmer`. Override via setup brief's `OUTPUT_DIR` field.
 
 ## Single-Agent Mode
 
 If you cannot dispatch separate subagents (e.g., nested Claude sessions are blocked, or you're running in a constrained environment), execute all roles sequentially.
 
-**Context discipline is aspirational in single-agent mode.** You will see prior scores. Mitigate anchoring by: (a) writing your judge scores BEFORE reading your previous trajectory, and (b) scoring against the criterion descriptions and seed reference, not against your memory of prior scores.
+**Context discipline is aspirational in single-agent mode.** You will see prior scores and evaluator output. Mitigate bias by:
+- (a) Writing your judge scores BEFORE reading your previous trajectory
+- (b) Scoring against the criterion descriptions and seed reference, not against your memory of prior scores
+- (c) In the generator step, work from the ASI text only — do not reference raw evaluator metrics or output. If the ASI is well-written (specific, citing concrete failures), it already contains the signal you need.
 
 **Per-iteration checklist (single-agent):**
-1. **GENERATOR**: Review the simmer-generator constraints (especially what context you receive and do NOT receive). Read ASI + current best candidate. Write improved version to `{OUTPUT_DIR}/iteration-N-candidate.md`.
-2. **JUDGE**: Review the simmer-judge constraints (especially scoring rules, seed calibration, and ASI format). Score against criteria + seed reference. Write scores in required format.
-3. **REFLECT**: Update `{OUTPUT_DIR}/trajectory.md`. Note best-so-far. If regression, flag it and use best candidate as input to next iteration. Skip the formal "output to orchestrator" block — just update the file and continue.
+1. **GENERATOR**: Review the simmer-generator constraints (especially what context you receive and do NOT receive). Read ASI + current best candidate + background. Write improved version.
+2. **RUN EVALUATOR**: If evaluator command exists, run it and capture output.
+3. **JUDGE**: Review the simmer-judge constraints (especially scoring rules, seed calibration, and ASI format). Score against criteria + seed reference + evaluator output (if any). Write scores in required format.
+4. **REFLECT**: Update `{OUTPUT_DIR}/trajectory.md`. Note best-so-far. If regression, flag it and roll back to best candidate. Skip the formal "output to orchestrator" block — just update the file and continue.
 
 ## Context Discipline
 
@@ -215,12 +374,13 @@ If you cannot dispatch separate subagents (e.g., nested Claude sessions are bloc
 
 | Subskill | Receives | Does NOT receive |
 |----------|----------|------------------|
-| Generator | Current candidate, criteria, ASI from last judge | Score history, previous candidates |
-| Judge | Current candidate, criteria, iteration number, seed + seed scores | Intermediate scores, intermediate candidates, ASI |
-| Reflect | Full score history, all iteration summaries | Candidate content (just scores + summaries) |
+| Generator | Current candidate, criteria, ASI from last judge, background, exploration status | Score history, previous candidates, evaluator output |
+| Judge (text/creative) | Current candidate, criteria, iteration number, seed + seed scores | Intermediate scores, intermediate candidates, previous ASI, trajectory |
+| Judge (code/pipeline) | Current candidate, criteria, iteration number, seed + seed scores, evaluator output, previous ASI, iteration history, search space, exploration status | Full candidate history |
+| Reflect | Full score history, all iteration summaries, search space | Candidate content (just scores + summaries) |
 
-The generator improves based on specific feedback, not scores.
-The judge scores against criteria definitions and the seed as a fixed calibration reference — no intermediate scores.
+The generator improves based on specific feedback (ASI) and available resources (background), not scores.
+The judge scores against criteria definitions, evaluator output, and the seed as a fixed calibration reference — no intermediate scores.
 The reflect subskill is the only one that sees the full trajectory.
 
 ## Skill Dependencies
@@ -233,15 +393,19 @@ The reflect subskill is the only one that sees the full trajectory.
 
 **Giving the generator score history**
 - Problem: Generator optimizes for scores instead of addressing the specific ASI
-- Fix: Generator only sees current candidate + ASI + criteria
+- Fix: Generator only sees current candidate + ASI + criteria + background
 
 **Giving the judge previous scores**
 - Problem: Anchoring — judge calibrates relative to prior scores instead of fresh
-- Fix: Judge only sees current candidate + criteria
+- Fix: Judge only sees current candidate + criteria + evaluator output
 
-**Trying to fix everything at once**
+**Trying to fix everything at once (single-file mode)**
 - Problem: Generator makes scattered edits, regression on some criteria
-- Fix: ASI is a SINGLE most important fix — focused improvement compounds
+- Fix: ASI is a single focused fix — focused improvement compounds
+
+**Treating ASI as always single-edit (workspace mode)**
+- Problem: Generator makes one tiny change when the ASI calls for a coordinated move
+- Fix: In workspace mode, ASI describes a single *direction* which may involve coordinated changes across files
 
 **Sharing candidate history with the judge**
 - Problem: Judge compares to previous versions instead of scoring against criteria
@@ -251,7 +415,19 @@ The reflect subskill is the only one that sees the full trajectory.
 - Problem: Last iteration may not be the best
 - Fix: Reflect tracks best-scoring candidate across all iterations
 
-## Example Flow
+**Not rolling back on regression (workspace mode)**
+- Problem: Generator builds on a regressed state instead of the best state
+- Fix: Selectively restore workspace files: `git checkout <best-commit> -- <files>`. Do NOT revert trajectory.md.
+
+**Dual-writing embedded artifacts**
+- Problem: Artifact is embedded in a larger system (prompt inside a script, config inside YAML) requiring updates in two places
+- Fix: Design evaluators to read from the canonical candidate file rather than requiring dual writes. Pass the artifact path as input to the evaluator script.
+
+**Reverting trajectory on git rollback (workspace mode)**
+- Problem: `git checkout <commit>` reverts ALL files including trajectory.md tracking
+- Fix: Always use selective checkout: `git checkout <commit> -- file1 file2`. Keep trajectory.md and other tracking files outside the rollback scope.
+
+## Example Flow: Single-File (v1 behavior)
 
 ```
 User: "Simmer this" [pastes a pitch email]
@@ -264,35 +440,10 @@ Setup identifies: pitch email, suggests criteria
 User accepts: value prop clarity, tone match, call to action strength
 Iterations: 3
 
-[Iteration 0: Judge scores seed — no generation]
-  value prop clarity: 4/10
-  tone match: 5/10
-  call to action: 3/10
-  Composite: 4.0/10
-  ASI: "The email never says what specific problem is solved —
-        'helps companies save time on reporting' is too vague"
-
-[Iteration 1: Generator addresses ASI, judge scores]
-  value prop clarity: 7/10
-  tone match: 5/10
-  call to action: 4/10
-  Composite: 5.3/10
-  ASI: "The CTA asks for a 30-min call — too high friction for a
-        cold email. Offer something smaller."
-
-[Iteration 2: Generator addresses ASI, judge scores]
-  value prop clarity: 7/10
-  tone match: 6/10
-  call to action: 6/10
-  Composite: 6.3/10
-  ASI: "CTA improved but still generic — offer a specific asset
-        (e.g., '2-min video of how Acme Corp cut reporting 60%')"
-
-[Iteration 3: Generator addresses ASI, judge scores]
-  value prop clarity: 7/10
-  tone match: 7/10
-  call to action: 8/10
-  Composite: 7.3/10
+[Iteration 0: Judge scores seed — 4.0/10]
+[Iteration 1: Generator fixes value prop → 5.3/10]
+[Iteration 2: Generator fixes CTA → 6.3/10]
+[Iteration 3: Generator fixes tone → 7.3/10]
 
 Trajectory:
 | Iter | Value Prop | Tone | CTA | Composite | Key Change |
@@ -303,7 +454,47 @@ Trajectory:
 | 3    | 7         | 7    | 8   | 7.3       | specific asset in CTA |
 
 Best candidate: iteration 3 (7.3/10)
-Written to: {OUTPUT_DIR}/result.md
-
 3 iterations complete. Run 3 more?
+```
+
+## Example Flow: Workspace with Evaluator
+
+```
+User: "Simmer this pipeline — find the best model and prompt setup"
+
+Claude: I'm using the simmer skill to set up iterative refinement.
+
+[Invokes simmer-setup]
+
+Setup identifies: workspace at ./pipeline/
+Evaluator: python evaluate.py --input output.json
+Background: "Available models: claude-sonnet, gpt-4o-mini, llama-8b, llama-70b.
+            Topologies: single-call, multi-step chain, parallel fan-out.
+            Budget: <$0.01/call, <2s latency."
+Criteria: accuracy, cost efficiency, latency
+Iterations: 5
+
+[Iteration 0: Run evaluator on seed, judge scores — 3.7/10]
+  accuracy: 6/10, cost: 2/10, latency: 3/10
+  ASI: "Using claude-sonnet for a simple extraction task. The model is
+       overkill — accuracy is fine but cost is 5x over budget. Switch to
+       gpt-4o-mini which handles extraction well at 1/10th the cost."
+
+[Iteration 1: Generator swaps model + adjusts prompt → 5.3/10]
+  accuracy: 5/10, cost: 8/10, latency: 7/10
+  ASI: "Cost and latency are great now but accuracy dropped on multi-step
+       reasoning tasks (cases 7, 12). Split into two calls — extraction
+       on mini, reasoning on sonnet — to get accuracy back without
+       blowing the budget."
+
+[Iteration 2: Generator restructures to 2-step chain → 7.0/10]
+  accuracy: 7/10, cost: 7/10, latency: 7/10
+  ASI: "Architecture is solid. The extraction prompt is too generic —
+       add 3 few-shot examples from the test cases to anchor the format."
+
+[Iteration 3: Generator adds few-shot examples → 7.7/10]
+  ...
+
+Best candidate: iteration 3 (7.7/10)
+5 iterations complete. Run 3 more?
 ```

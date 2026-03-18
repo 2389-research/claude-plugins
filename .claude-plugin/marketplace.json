@@ -169,8 +169,8 @@
         {
             "name": "simmer",
             "source": "./simmer",
-            "description": "Iterative artifact refinement - hone any artifact over multiple rounds using criteria-driven judge feedback and focused single-fix improvements",
-            "version": "1.0.0",
+            "description": "Iterative artifact refinement - hone any artifact or workspace over multiple rounds using criteria-driven judge feedback, runnable evaluators, and focused directional improvements",
+            "version": "2.0.0",
             "keywords": [
                 "refinement",
                 "iteration",
@@ -179,7 +179,11 @@
                 "judge",
                 "generator",
                 "artifact",
-                "improvement"
+                "improvement",
+                "workspace",
+                "evaluator",
+                "pipeline",
+                "optimization"
             ],
             "strict": false
         },
