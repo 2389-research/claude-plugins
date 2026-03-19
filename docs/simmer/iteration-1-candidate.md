@@ -13,8 +13,8 @@ Iterative artifact refinement — take any artifact or workspace and hone it ove
 One skill (`simmer`) with four subskills that run the refinement loop:
 
 - **Setup** — identify the artifact (file or workspace), elicit 2-3 quality criteria, determine evaluation method
-- **Generator** — produce an improved version based on the judge's ASI (Actionable Side Information — the single highest-leverage fix)
-- **Judge** — score the candidate 1-10 per criterion, produce the ASI
+- **Generator** — produce an improved version based on the judge's feedback (ASI)
+- **Judge** — score the candidate 1-10 per criterion, identify the highest-leverage direction
 - **Reflect** — record the trajectory, track the best candidate across iterations
 
 ## Trigger Phrases
@@ -71,25 +71,28 @@ Best candidate: iteration 3 (7.3/10)
 ```
 User: "Simmer this pipeline — find the best setup for this task"
 
-Claude inspects the workspace, finds evaluate.sh and config.json,
-and proposes criteria + evaluation method:
+Claude: I'm using the simmer skill to set up iterative refinement.
 
-  Evaluator: ./evaluate.sh
-  Criteria: accuracy, cost efficiency, latency
-  Search space: models, prompt text, pipeline topology
-
-User: "Looks good, coverage is the priority. 5 iterations."
+What are we refining? → A workspace at ./pipeline/
+Evaluator: python evaluate.py --input output.json
+Background: Available models: claude-sonnet, gpt-4o-mini, llama-8b.
+            Budget: <$0.01/call, <2s latency.
+Search space: models, prompt text, pipeline topology (single-call vs chain)
+Output contract: JSON with 'entities' array, each element has 'name' + 'type'
+Validation: ./validate.sh — runs 1 video, checks JSON schema (~1 min)
+Criteria: accuracy, cost efficiency, latency
 
 [Iteration 0: Run evaluator on seed, judge scores — 3.7/10]
 [Iteration 1: Generator swaps to cheaper model → 5.3/10]
 [Iteration 2: Generator splits into 2-step chain → 7.0/10]
 [Iteration 3: Generator adds few-shot examples → 7.7/10]
-...
 
-Best candidate: iteration 4 (8.1/10)
+Best candidate: iteration 3 (7.7/10)
 ```
 
 ## Works On Anything
+
+Single files, multi-file workspaces, pipelines, configurations — anything Claude can read and improve.
 
 | Artifact type | Suggested criteria |
 |---|---|
@@ -111,24 +114,25 @@ Best candidate: iteration 4 (8.1/10)
 
 No format contract on evaluator output. The judge reads whatever your script produces — test results, metrics, error logs, anything.
 
-## Defaults and Safety
+## Version Features at a Glance
 
-**Default iteration count:** 3 rounds per batch. After each batch, simmer asks whether to continue. You can request a specific count ("simmer this for 10 rounds") or stop early at any prompt.
+| Feature | v1 | v2 | v3 |
+|---------|----|----|-----|
+| Single-file refinement | yes | yes | yes |
+| Judge-only evaluation | yes | yes | yes |
+| Workspace (multi-file) targets | — | yes | yes |
+| Runnable/hybrid evaluators | — | yes | yes |
+| Background constraints for generator | — | yes | yes |
+| Output contracts (format validation) | — | — | yes |
+| Validation commands (cheap pre-check) | — | — | yes |
+| Search space (explicit exploration bounds) | — | — | yes |
+| Exploration tracking (tried vs untried) | — | — | yes |
 
-**Regression safety:** The reflect subskill tracks the best candidate seen so far. If a new iteration scores lower than the current best, the best-so-far is preserved — the loop never loses progress. At the end, `result.md` always contains the highest-scoring candidate, not just the latest one.
+**v3 additions explained:**
 
-## Advanced Features
-
-| Feature | When you need it |
-|---------|-----------------|
-| **Workspace targets** | Refining a multi-file directory — iterations tracked as git commits so you can diff any two rounds |
-| **Runnable evaluators** | Your artifact has a test script — point simmer at it (`python evaluate.py`) and the judge interprets output |
-| **Background constraints** | The generator needs to know what's available (models, budget, latency targets) to make realistic choices |
-| **Output contracts** | Valid output has a defined shape (e.g., JSON schema) — violations score 1/10, forcing format fixes first |
-| **Validation commands** | A cheap pre-check (`./validate.sh`) catches broken pipelines in seconds before the full evaluator runs |
-| **Search space tracking** | Explicit bounds on what to explore — reflect tracks tried vs. untried regions so the judge steers toward gaps |
-
-See the [v2 design spec](./docs/specs/2026-03-16-simmer-v2-design.md) for full details on each feature.
+- **Output contract** — tells the generator what valid output looks like (e.g., "JSON with 'entities' array"). Contract violations score 1/10 across all criteria, so the generator fixes format before optimizing quality.
+- **Validation command** — a cheap check the generator runs after infrastructure changes (model swap, topology change) before the full evaluator runs. Catches broken pipelines in seconds instead of minutes.
+- **Search space** — explicit bounds on what the generator can explore (which models, which topologies, which prompt files). The reflect subskill tracks what has been tried vs. untried, so the judge can steer toward unexplored regions.
 
 ## Output Directory Structure
 
@@ -140,7 +144,7 @@ docs/simmer/
   iteration-2-candidate.md
   iteration-3-candidate.md
   trajectory.md                # Running score table
-  result.md                    # Final best candidate (highest score, not necessarily latest)
+  result.md                    # Final best candidate
 ```
 
 **Workspace mode:**
@@ -154,13 +158,15 @@ docs/simmer/                   # Tracking files (separate from workspace)
 
 Workspace iterations are tracked as git commits rather than separate files.
 
-## How It Works
+## Key Design Principles
 
-- **Focused improvement** — each iteration targets one direction (the ASI), not everything at once. Compound gains over scattered edits.
-- **Context isolation** — generator doesn't see scores, judge doesn't see previous scores. Each role gets only the context it needs to avoid bias.
-- **The generator is the search strategy** — in workspace mode, the generator decides what to change (swap a model, restructure a pipeline, tune a prompt). The ASI guides direction, the generator executes.
+**Focused improvement compounds.** Each iteration targets the highest-leverage direction (ASI), not everything at once.
 
-See the [design spec](./docs/specs/2026-03-16-simmer-v2-design.md) for the full architecture.
+**Context isolation prevents bias.** Generator doesn't see scores. Judge doesn't see intermediate scores. Each role gets only the context it needs.
+
+**Seed calibration grounds scoring.** The judge receives the seed + its scores as a fixed reference point on every iteration, compressing score variance across runs.
+
+**The generator is the search strategy.** In workspace mode with background constraints, the generator decides what to change — swap a model, restructure a pipeline, tune a prompt. The ASI guides the direction, the generator executes the move.
 
 ## Related Skills
 
