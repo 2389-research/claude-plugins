@@ -128,7 +128,7 @@ No format contract on evaluator output. The judge reads whatever your script pro
 | **Validation commands** | A cheap pre-check (`./validate.sh`) catches broken pipelines in seconds before the full evaluator runs |
 | **Search space tracking** | Explicit bounds on what to explore — reflect tracks tried vs. untried regions so the judge steers toward gaps |
 
-See the [v2 design spec](./docs/specs/2026-03-16-simmer-v2-design.md) for full details on each feature.
+See the [v2 design spec](../../simmer/docs/specs/2026-03-16-simmer-v2-design.md) for full details on each feature.
 
 ## Output Directory Structure
 
@@ -160,7 +160,7 @@ Workspace iterations are tracked as git commits rather than separate files.
 - **Context isolation** — generator doesn't see scores, judge doesn't see previous scores. Each role gets only the context it needs to avoid bias.
 - **The generator is the search strategy** — in workspace mode, the generator decides what to change (swap a model, restructure a pipeline, tune a prompt). The ASI guides direction, the generator executes.
 
-See the [design spec](./docs/specs/2026-03-16-simmer-v2-design.md) for the full architecture.
+See the [design spec](../../simmer/docs/specs/2026-03-16-simmer-v2-design.md) for the full architecture.
 
 ## Related Skills
 
@@ -171,7 +171,7 @@ Part of the test-kitchen family, but independently installable:
 
 ## Documentation
 
-- [CLAUDE.md](./CLAUDE.md) — full plugin instructions
-- [Simmer skill](./skills/SKILL.md) — orchestrator
-- [v2 Design](./docs/specs/2026-03-16-simmer-v2-design.md) — design spec
-- [Integration tests](./tests/integration/simmer-scenario.md) — test scenarios
+- [CLAUDE.md](../../simmer/CLAUDE.md) — full plugin instructions
+- [Simmer skill](../../simmer/skills/SKILL.md) — orchestrator
+- [v2 Design](../../simmer/docs/specs/2026-03-16-simmer-v2-design.md) — design spec
+- [Integration tests](../../simmer/tests/integration/simmer-scenario.md) — test scenarios
