@@ -7,8 +7,8 @@
   <!-- Primary Meta Tags -->
   <title>simmer — Development Plugin for Claude Code | 2389 Research</title>
   <meta name="title" content="simmer — Development Plugin for Claude Code | 2389 Research">
-  <meta name="description" content="Iterative artifact refinement - hone any artifact over multiple rounds using criteria-driven judge feedback and focused single-fix improvements">
-  <meta name="keywords" content="refinement, iteration, criteria, scoring, judge, generator, artifact, improvement, Claude Code, plugins, MCP servers, AI development, Claude, Anthropic, development tools, 2389 Research">
+  <meta name="description" content="Iterative artifact refinement - hone any artifact or workspace over multiple rounds using criteria-driven judge feedback, runnable evaluators, and focused directional improvements">
+  <meta name="keywords" content="refinement, iteration, criteria, scoring, judge, generator, artifact, improvement, workspace, evaluator, pipeline, optimization, Claude Code, plugins, MCP servers, AI development, Claude, Anthropic, development tools, 2389 Research">
   <meta name="author" content="2389 Research Inc">
   <meta name="robots" content="index, follow">
 
@@ -19,7 +19,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://2389-research.github.io/claude-plugins/plugins/simmer/">
   <meta property="og:title" content="simmer — Development Plugin for Claude Code | 2389 Research">
-  <meta property="og:description" content="Iterative artifact refinement - hone any artifact over multiple rounds using criteria-driven judge feedback and focused single-fix improvements">
+  <meta property="og:description" content="Iterative artifact refinement - hone any artifact or workspace over multiple rounds using criteria-driven judge feedback, runnable evaluators, and focused directional improvements">
   <meta property="og:image" content="https://2389-research.github.io/claude-plugins/plugins/simmer/og-image.png">
   <meta property="og:site_name" content="2389 Research Plugin Marketplace">
 
@@ -27,7 +27,7 @@
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://2389-research.github.io/claude-plugins/plugins/simmer/">
   <meta property="twitter:title" content="simmer — Development Plugin for Claude Code | 2389 Research">
-  <meta property="twitter:description" content="Iterative artifact refinement - hone any artifact over multiple rounds using criteria-driven judge feedback and focused single-fix improvements">
+  <meta property="twitter:description" content="Iterative artifact refinement - hone any artifact or workspace over multiple rounds using criteria-driven judge feedback, runnable evaluators, and focused directional improvements">
   <meta property="twitter:image" content="https://2389-research.github.io/claude-plugins/plugins/simmer/og-image.png">
 
   <!-- Favicon -->
@@ -78,13 +78,13 @@
 
       <div class="plugin-hero-header">
         <h1 class="plugin-hero-title">simmer</h1>
-        <span class="plugin-hero-version">v1.0.0</span>
+        <span class="plugin-hero-version">v2.0.0</span>
         
       </div>
 
-      <p class="plugin-hero-description">Iterative artifact refinement - hone any artifact over multiple rounds using criteria-driven judge feedback and focused single-fix improvements</p>
+      <p class="plugin-hero-description">Iterative artifact refinement - hone any artifact or workspace over multiple rounds using criteria-driven judge feedback, runnable evaluators, and focused directional improvements</p>
 
-      <div class="plugin-tags-large"><span class="tag">refinement</span><span class="tag">iteration</span><span class="tag">criteria</span><span class="tag">scoring</span><span class="tag">judge</span><span class="tag">generator</span><span class="tag">artifact</span><span class="tag">improvement</span></div>
+      <div class="plugin-tags-large"><span class="tag">refinement</span><span class="tag">iteration</span><span class="tag">criteria</span><span class="tag">scoring</span><span class="tag">judge</span><span class="tag">generator</span><span class="tag">artifact</span><span class="tag">improvement</span><span class="tag">workspace</span><span class="tag">evaluator</span><span class="tag">pipeline</span><span class="tag">optimization</span></div>
 
       <div class="plugin-hero-actions">
         <div class="install-block">
@@ -115,14 +115,21 @@
 
       <div class="readme-content">
         <h2>Simmer</h2>
-<p>Iterative artifact refinement — take any artifact and hone it over multiple rounds using criteria-driven judge feedback.</p>
+<p>Iterative artifact refinement — take any artifact or workspace and hone it over multiple rounds using criteria-driven feedback.</p>
 <h3>Installation</h3>
 <pre><code class="language-bash">/plugin install simmer@2389-research
 </code></pre>
 <h3>What This Plugin Provides</h3>
 <p>One skill (<code>simmer</code>) with four subskills that run the refinement loop:</p>
-<ul><li><strong>Setup</strong> — identify the artifact, elicit 2-3 quality criteria from the user</li><li><strong>Generator</strong> — produce an improved version based on the judge's feedback (ASI)</li><li><strong>Judge</strong> — score the candidate 1-10 per criterion, identify the single most important fix</li><li><strong>Reflect</strong> — record the trajectory, track the best candidate across iterations</li></ul>
-<h3>Quick Example</h3>
+<ul><li><strong>Setup</strong> — identify the artifact (file or workspace), elicit 2-3 quality criteria, determine evaluation method</li><li><strong>Generator</strong> — produce an improved version based on the judge's ASI (Actionable Side Information — the single highest-leverage fix)</li><li><strong>Judge</strong> — score the candidate 1-10 per criterion, produce the ASI</li><li><strong>Reflect</strong> — record the trajectory, track the best candidate across iterations</li></ul>
+<h3>Trigger Phrases</h3>
+<p>Say any of these to start a simmer loop:</p>
+<blockquote>"simmer this", "refine this", "hone this", "iterate on this", "make this better", "improve this over a few rounds", "polish this", "tighten this up", "optimize this pipeline", "find the best model for this task", "tune this configuration"</blockquote>
+<p>Any request to <strong>iteratively improve</strong> an artifact triggers simmer.</p>
+<h3>When to Use Simmer vs. Cookoff vs. Omakase-Off</h3>
+<table class="readme-table"><thead><tr><th>Situation</th><th>Use</th><th>Why</th></tr></thead><tbody><tr><td>You have an artifact and want it better</td><td><strong>simmer</strong></td><td>Iterative refinement against criteria</td></tr><tr><td>You want parallel code implementations competing</td><td><strong>cookoff</strong></td><td>Parallel generation + fixed criteria + pick winner</td></tr><tr><td>You don't know what you want yet</td><td><strong>omakase-off</strong></td><td>Parallel designs + react + discover preference</td></tr></tbody></table>
+<strong>Rule of thumb:</strong> Simmer = serial iteration. Cookoff/omakase-off = parallel exploration.
+<h3>Quick Example: Single File</h3>
 <pre><code class="language-">User: "Simmer this" [pastes a pitch email]
 
 Claude: I'm using the simmer skill to set up iterative refinement.
@@ -150,18 +157,63 @@ Trajectory:
 Best candidate: iteration 3 (7.3/10)
 3 iterations complete. Run 3 more?
 </code></pre>
-<h3>Works On Any Artifact</h3>
-<p>Documents, prompts, specs, emails, creative writing, API designs, adventure hooks — anything Claude can read and produce.</p>
-<table class="readme-table"><thead><tr><th>Artifact type</th><th>Suggested criteria</th></tr></thead><tbody><tr><td>Document / spec</td><td>clarity, completeness, actionability</td></tr><tr><td>Creative writing</td><td>narrative tension, specificity, voice consistency</td></tr><tr><td>Email / comms</td><td>value prop clarity, tone match, call to action strength</td></tr><tr><td>Prompt / instructions</td><td>instruction precision, output predictability, edge case coverage</td></tr><tr><td>API design</td><td>contract completeness, developer ergonomics, consistency</td></tr></tbody></table>
-<h3>Key Design Principles</h3>
-<p><strong>Focused improvement compounds.</strong> Each iteration targets the single most important fix (ASI), not everything at once.</p>
-<p><strong>Context isolation prevents bias.</strong> Generator doesn't see scores. Judge doesn't see intermediate scores. Each role gets only the context it needs.</p>
-<p><strong>Seed calibration grounds scoring.</strong> The judge receives the seed + its scores as a fixed reference point on every iteration, compressing score variance across runs.</p>
+<h3>Quick Example: Workspace with Evaluator</h3>
+<pre><code class="language-">User: "Simmer this pipeline — find the best setup for this task"
+
+Claude inspects the workspace, finds evaluate.sh and config.json,
+and proposes criteria + evaluation method:
+
+  Evaluator: ./evaluate.sh
+  Criteria: accuracy, cost efficiency, latency
+  Search space: models, prompt text, pipeline topology
+
+User: "Looks good, coverage is the priority. 5 iterations."
+
+[Iteration 0: Run evaluator on seed, judge scores — 3.7/10]
+[Iteration 1: Generator swaps to cheaper model → 5.3/10]
+[Iteration 2: Generator splits into 2-step chain → 7.0/10]
+[Iteration 3: Generator adds few-shot examples → 7.7/10]
+...
+
+Best candidate: iteration 4 (8.1/10)
+</code></pre>
+<h3>Works On Anything</h3>
+<table class="readme-table"><thead><tr><th>Artifact type</th><th>Suggested criteria</th></tr></thead><tbody><tr><td>Document / spec</td><td>clarity, completeness, actionability</td></tr><tr><td>Creative writing</td><td>narrative tension, specificity, voice consistency</td></tr><tr><td>Email / comms</td><td>value prop clarity, tone match, call to action strength</td></tr><tr><td>Prompt / instructions</td><td>instruction precision, output predictability, edge case coverage</td></tr><tr><td>API design</td><td>contract completeness, developer ergonomics, consistency</td></tr><tr><td>Pipeline / workflow</td><td>coverage, efficiency, noise</td></tr><tr><td>Configuration / infra</td><td>correctness, resource efficiency, maintainability</td></tr></tbody></table>
+<h3>Evaluation Modes</h3>
+<table class="readme-table"><thead><tr><th>Mode</th><th>When to use</th></tr></thead><tbody><tr><td><strong>Judge-only</strong> (default)</td><td>Text artifacts — judge scores against criteria</td></tr><tr><td><strong>Runnable</strong></td><td>Code/pipelines — judge interprets script output</td></tr><tr><td><strong>Hybrid</strong></td><td>Both — run script AND judge results against criteria</td></tr></tbody></table>
+No format contract on evaluator output. The judge reads whatever your script produces — test results, metrics, error logs, anything.
+<h3>Defaults and Safety</h3>
+<p><strong>Default iteration count:</strong> 3 rounds per batch. After each batch, simmer asks whether to continue. You can request a specific count ("simmer this for 10 rounds") or stop early at any prompt.</p>
+<p><strong>Regression safety:</strong> The reflect subskill tracks the best candidate seen so far. If a new iteration scores lower than the current best, the best-so-far is preserved — the loop never loses progress. At the end, <code>result.md</code> always contains the highest-scoring candidate, not just the latest one.</p>
+<h3>Advanced Features</h3>
+<table class="readme-table"><thead><tr><th>Feature</th><th>When you need it</th></tr></thead><tbody><tr><td><strong>Workspace targets</strong></td><td>Refining a multi-file directory — iterations tracked as git commits so you can diff any two rounds</td></tr><tr><td><strong>Runnable evaluators</strong></td><td>Your artifact has a test script — point simmer at it (<code>python evaluate.py</code>) and the judge interprets output</td></tr><tr><td><strong>Background constraints</strong></td><td>The generator needs to know what's available (models, budget, latency targets) to make realistic choices</td></tr><tr><td><strong>Output contracts</strong></td><td>Valid output has a defined shape (e.g., JSON schema) — violations score 1/10, forcing format fixes first</td></tr><tr><td><strong>Validation commands</strong></td><td>A cheap pre-check (<code>./validate.sh</code>) catches broken pipelines in seconds before the full evaluator runs</td></tr><tr><td><strong>Search space tracking</strong></td><td>Explicit bounds on what to explore — reflect tracks tried vs. untried regions so the judge steers toward gaps</td></tr></tbody></table>
+See the <a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/docs/specs/2026-03-16-simmer-v2-design.md" rel="noopener noreferrer" target="_blank">v2 design spec</a> for full details on each feature.
+<h3>Output Directory Structure</h3>
+<p><strong>Single-file mode</strong> (default output dir: <code>docs/simmer</code>):</p>
+<pre><code class="language-">docs/simmer/
+  iteration-0-candidate.md     # Seed (original artifact)
+  iteration-1-candidate.md     # Each improved candidate
+  iteration-2-candidate.md
+  iteration-3-candidate.md
+  trajectory.md                # Running score table
+  result.md                    # Final best candidate (highest score, not necessarily latest)
+</code></pre>
+<p><strong>Workspace mode:</strong></p>
+<pre><code class="language-">./pipeline/                    # Target directory (modified in place)
+  [project files]              # Tracked via git commits per iteration
+
+docs/simmer/                   # Tracking files (separate from workspace)
+  trajectory.md                # Running score table
+</code></pre>
+<p>Workspace iterations are tracked as git commits rather than separate files.</p>
+<h3>How It Works</h3>
+<ul><li><strong>Focused improvement</strong> — each iteration targets one direction (the ASI), not everything at once. Compound gains over scattered edits.</li><li><strong>Context isolation</strong> — generator doesn't see scores, judge doesn't see previous scores. Each role gets only the context it needs to avoid bias.</li><li><strong>The generator is the search strategy</strong> — in workspace mode, the generator decides what to change (swap a model, restructure a pipeline, tune a prompt). The ASI guides direction, the generator executes.</li></ul>
+<p>See the <a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/docs/specs/2026-03-16-simmer-v2-design.md" rel="noopener noreferrer" target="_blank">design spec</a> for the full architecture.</p>
 <h3>Related Skills</h3>
 <p>Part of the test-kitchen family, but independently installable:</p>
 <ul><li><code>test-kitchen:omakase-off</code> — parallel design exploration</li><li><code>test-kitchen:cookoff</code> — parallel implementation competition</li><li><code>simmer</code> — iterative refinement</li></ul>
 <h3>Documentation</h3>
-<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> — full plugin instructions</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/skills/SKILL.md" rel="noopener noreferrer" target="_blank">Simmer skill</a> — orchestrator</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/tests/integration/simmer-scenario.md" rel="noopener noreferrer" target="_blank">Integration tests</a> — 21 test scenarios</li></ul>
+<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> — full plugin instructions</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/skills/SKILL.md" rel="noopener noreferrer" target="_blank">Simmer skill</a> — orchestrator</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/docs/specs/2026-03-16-simmer-v2-design.md" rel="noopener noreferrer" target="_blank">v2 Design</a> — design spec</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/tests/integration/simmer-scenario.md" rel="noopener noreferrer" target="_blank">Integration tests</a> — test scenarios</li></ul>
       </div>
     </section>
     
@@ -321,10 +373,10 @@ Best candidate: iteration 3 (7.3/10)
     "name": "2389 Research Inc",
     "url": "https://2389.ai"
   },
-  "description": "Iterative artifact refinement - hone any artifact over multiple rounds using criteria-driven judge feedback and focused single-fix improvements",
+  "description": "Iterative artifact refinement - hone any artifact or workspace over multiple rounds using criteria-driven judge feedback, runnable evaluators, and focused directional improvements",
   "url": "https://2389-research.github.io/claude-plugins/plugins/simmer/",
   "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/simmer",
-  "softwareVersion": "1.0.0",
+  "softwareVersion": "2.0.0",
   "license": "https://opensource.org/licenses/MIT"
 }
   </script>
