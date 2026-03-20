@@ -408,6 +408,25 @@
             "strict": false
         },
         {
+            "name": "review-squad",
+            "source": "./review-squad",
+            "description": "Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks",
+            "version": "1.0.0",
+            "keywords": [
+                "review",
+                "audit",
+                "launch",
+                "personas",
+                "smoke-test",
+                "first-impressions",
+                "nitpick",
+                "multi-agent",
+                "browser",
+                "ux"
+            ],
+            "strict": false
+        },
+        {
             "name": "git-repo-prep",
             "source": "./git-repo-prep",
             "description": "Prepare codebases for public/open-source release and audit them for openness - full lifecycle prep or standalone review",
