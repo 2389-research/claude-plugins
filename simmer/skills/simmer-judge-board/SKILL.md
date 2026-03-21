@@ -50,7 +50,7 @@ If `SEARCH_SPACE` is defined, it further constrains what's in scope. A workspace
 
 **Every ASI the panel produces must be actionable within these bounds.** If the panel concludes "the model is the bottleneck" but the artifact is single-file (can't swap models), the ASI should say "prompt changes alone won't break through this ceiling — recommend switching to workspace mode or early termination" rather than suggesting a model swap the generator can't execute.
 
-**Judges are encouraged to inspect the problem.** They can read files (pipeline code, evaluator scripts, config files, prior candidates) to understand the full execution context. A judge who only reads the evaluator output is like a reviewer who only reads test results without looking at the code. Understanding the pipeline, the model's capabilities, and the constraints leads to better-calibrated ASI.
+**Judges must read the relevant artifacts before scoring.** Read the candidate, the evaluator script, config files, and prior candidates. Understand how the system works and why the scores are what they are. Research approaches if you see failure patterns you don't know how to fix. The ASI should come from understanding, not from reading metrics and guessing.
 
 ## The Three Phases
 
@@ -95,10 +95,15 @@ If you conclude the bottleneck is outside those bounds (e.g., "model
 is too weak" on a single-file artifact), say so — the clerk will
 recommend early termination or mode change rather than a wasted iteration.
 
-You are encouraged to read files (pipeline code, evaluator scripts,
-config, prior candidates) to understand the full problem context.
-A judge who only reads the evaluator output misses important context
-about what changes are feasible.
+Before scoring and writing your ASI, read the relevant code and
+artifacts — the candidate, the evaluator script, config files, prior
+candidates if available. Understand how the system works, not just
+what the scores say. Then research if needed — if you see a pattern
+in the failures, look up how similar problems are solved.
+
+A good reviewer reads the code, understands the scores in context,
+and reasons about improvements from that understanding. A bad
+reviewer looks at metrics and guesses.
 
 Invoke the skill: simmer:simmer-judge
 
