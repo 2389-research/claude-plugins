@@ -99,6 +99,8 @@ BACKGROUND: [constraints, available resources, domain knowledge — omit if not 
 OUTPUT_CONTRACT: [valid output format description — omit for text/creative]
 VALIDATION_COMMAND: [quick check command — omit if no cheap validation exists]
 SEARCH_SPACE: [what's in scope to explore — omit if unconstrained]
+JUDGE_BOARD: [true | false — default false, opt-in for multi-judge deliberation]
+JUDGE_PANEL: [optional custom judge definitions — omit to use defaults for problem class]
 ITERATIONS: [N]
 MODE: [seedless | from-file | from-paste | from-workspace]
 OUTPUT_DIR: [path, default: docs/simmer]
@@ -221,9 +223,11 @@ Capture stdout and stderr. This output will be passed to the judge.
 
 If no evaluator, skip this step.
 
-**Step 3: Judge (subagent)**
+**Step 3: Judge (subagent or judge board)**
 
-Invoke `simmer:simmer-judge` as a subagent.
+**If `JUDGE_BOARD: true`:** Invoke `simmer:simmer-judge-board` instead of the single judge. Pass it all the same context below, plus `JUDGE_PANEL` if specified in the setup brief. The board dispatches multiple judges, runs deliberation, and returns output in the exact same format as a single judge. The rest of the loop (reflect, generator) is unchanged.
+
+**Otherwise:** Invoke `simmer:simmer-judge` as a subagent.
 
 *Without evaluator:*
 ```
@@ -377,10 +381,12 @@ If you cannot dispatch separate subagents (e.g., nested Claude sessions are bloc
 | Generator | Current candidate, criteria, ASI from last judge, background, exploration status | Score history, previous candidates, evaluator output |
 | Judge (text/creative) | Current candidate, criteria, iteration number, seed + seed scores | Intermediate scores, intermediate candidates, previous ASI, trajectory |
 | Judge (code/pipeline) | Current candidate, criteria, iteration number, seed + seed scores, evaluator output, previous ASI, iteration history, search space, exploration status | Full candidate history |
+| Judge Board | Same as single judge per problem class, plus: other panelists' scores during deliberation | Other panelists' ASI candidates (withheld until synthesis) |
 | Reflect | Full score history, all iteration summaries, search space | Candidate content (just scores + summaries) |
 
 The generator improves based on specific feedback (ASI) and available resources (background), not scores.
 The judge scores against criteria definitions, evaluator output, and the seed as a fixed calibration reference — no intermediate scores.
+The judge board preserves these same rules per panelist — deliberation adds within-iteration cross-judge visibility only, no new cross-iteration information.
 The reflect subskill is the only one that sees the full trajectory.
 
 ## Skill Dependencies

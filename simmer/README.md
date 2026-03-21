@@ -111,6 +111,21 @@ Best candidate: iteration 4 (8.1/10)
 
 No format contract on evaluator output. The judge reads whatever your script produces — test results, metrics, error logs, anything.
 
+## Judge Board (Opt-In)
+
+For complex artifacts or when hitting a plateau, enable a multi-judge panel:
+
+```
+"Simmer this with a judge board"
+```
+
+Three judges with different lenses score independently, then see each other's reasoning and challenge/concede in one deliberation round. A clerk synthesizes consensus scores + single ASI. The rest of the loop is unchanged.
+
+Default lenses per problem class (or define your own):
+- **Text/creative:** Craft, Reader, Domain
+- **Code/testable:** Correctness, Architecture, Efficiency
+- **Pipeline/engineering:** Metrics, Strategy, Integration
+
 ## Defaults and Safety
 
 **Default iteration count:** 3 rounds per batch. After each batch, simmer asks whether to continue. You can request a specific count ("simmer this for 10 rounds") or stop early at any prompt.
