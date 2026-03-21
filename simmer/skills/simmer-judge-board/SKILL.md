@@ -32,8 +32,23 @@ The board receives the same context the single judge would receive (passed throu
 Plus board-specific context:
 - **JUDGE_PANEL** (optional): custom judge definitions from setup brief
 - **Problem class**: text/creative, code/testable, or pipeline/engineering
+- **ARTIFACT_TYPE**: single-file or workspace — this determines what the generator can change
+- **SEARCH_SPACE** (if defined): explicit bounds on what's in scope to explore (models, topologies, prompt files, config parameters)
 - **BACKGROUND**: constraints, available resources, execution environment (model size, infrastructure, budget). Judges need this to calibrate their ASI to what the executor can actually do — suggesting a 20-rule correction table for a 9b model is different from suggesting it for a 70b model.
 - **Previous deliberation summary** (iteration 2+): what the panel agreed on, disagreed on, and concluded last round. Judges should build on prior panel conclusions rather than reasoning from scratch each iteration. If the panel concluded "complexity is hurting, keep it simple," the next panel should factor that in.
+
+### Mutation Bounds
+
+**Judges must understand what the generator can actually change.** The ASI is worthless if it suggests something outside the generator's scope.
+
+| Artifact Type | Generator Can Change | Generator Cannot Change |
+|---------------|---------------------|------------------------|
+| **single-file** | The text content of the artifact (prompt, document, config file) | Model selection, code, infrastructure, pipeline topology, add new files |
+| **workspace** | Any files in the workspace directory — code, config, prompts, scripts, add new files | Things outside the workspace, external infrastructure not in the search space |
+
+If `SEARCH_SPACE` is defined, it further constrains what's in scope. A workspace with `SEARCH_SPACE: Models: qwen3.5:4b, qwen3.5:9b. Prompt changes: unlimited.` means the generator can swap between those two models and edit prompts, but can't add new pipeline stages or change the evaluator.
+
+**Every ASI the panel produces must be actionable within these bounds.** If the panel concludes "the model is the bottleneck" but the artifact is single-file (can't swap models), the ASI should say "prompt changes alone won't break through this ceiling — recommend switching to workspace mode or early termination" rather than suggesting a model swap the generator can't execute.
 
 **Judges are encouraged to inspect the problem.** They can read files (pipeline code, evaluator scripts, config files, prior candidates) to understand the full execution context. A judge who only reads the evaluator output is like a reviewer who only reads test results without looking at the code. Understanding the pipeline, the model's capabilities, and the constraints leads to better-calibrated ASI.
 
@@ -53,6 +68,15 @@ score from your specific lens — the other judges cover other angles.
 YOUR LENS: [name]
 [lens description — what to focus on, what perspective you bring]
 
+ARTIFACT_TYPE: [single-file | workspace]
+SEARCH_SPACE: [what's in scope to change — omit if unconstrained]
+
+WHAT THE GENERATOR CAN CHANGE:
+[single-file: only the text content of this file. Cannot swap models,
+add code, or change infrastructure.
+OR workspace: any files in the workspace. Can edit code, config, prompts,
+add files. Bounded by search space if defined.]
+
 BACKGROUND:
 [constraints, model size, infrastructure, available resources — everything
 the generator knows about the execution environment]
@@ -65,6 +89,11 @@ Score honestly from this lens. Your unique perspective is why you're
 on this board. Don't try to be comprehensive — go deep on your angle.
 Your scores and reasoning will be shared with the other judges for
 deliberation, so be specific about what you see.
+
+Your ASI candidate must be actionable within the generator's bounds.
+If you conclude the bottleneck is outside those bounds (e.g., "model
+is too weak" on a single-file artifact), say so — the clerk will
+recommend early termination or mode change rather than a wasted iteration.
 
 You are encouraged to read files (pipeline code, evaluator scripts,
 config, prior candidates) to understand the full problem context.
