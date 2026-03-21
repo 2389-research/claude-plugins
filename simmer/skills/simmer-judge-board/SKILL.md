@@ -32,6 +32,10 @@ The board receives the same context the single judge would receive (passed throu
 Plus board-specific context:
 - **JUDGE_PANEL** (optional): custom judge definitions from setup brief
 - **Problem class**: text/creative, code/testable, or pipeline/engineering
+- **BACKGROUND**: constraints, available resources, execution environment (model size, infrastructure, budget). Judges need this to calibrate their ASI to what the executor can actually do — suggesting a 20-rule correction table for a 9b model is different from suggesting it for a 70b model.
+- **Previous deliberation summary** (iteration 2+): what the panel agreed on, disagreed on, and concluded last round. Judges should build on prior panel conclusions rather than reasoning from scratch each iteration. If the panel concluded "complexity is hurting, keep it simple," the next panel should factor that in.
+
+**Judges are encouraged to inspect the problem.** They can read files (pipeline code, evaluator scripts, config files, prior candidates) to understand the full execution context. A judge who only reads the evaluator output is like a reviewer who only reads test results without looking at the code. Understanding the pipeline, the model's capabilities, and the constraints leads to better-calibrated ASI.
 
 ## The Three Phases
 
@@ -49,10 +53,23 @@ score from your specific lens — the other judges cover other angles.
 YOUR LENS: [name]
 [lens description — what to focus on, what perspective you bring]
 
+BACKGROUND:
+[constraints, model size, infrastructure, available resources — everything
+the generator knows about the execution environment]
+
+PREVIOUS PANEL DELIBERATION:
+[summary of what last round's panel agreed on, disagreed on, and concluded
+— omit on iteration 0]
+
 Score honestly from this lens. Your unique perspective is why you're
 on this board. Don't try to be comprehensive — go deep on your angle.
 Your scores and reasoning will be shared with the other judges for
 deliberation, so be specific about what you see.
+
+You are encouraged to read files (pipeline code, evaluator scripts,
+config, prior candidates) to understand the full problem context.
+A judge who only reads the evaluator output misses important context
+about what changes are feasible.
 
 Invoke the skill: simmer:simmer-judge
 
@@ -118,15 +135,25 @@ Compute composite as the average, one decimal place.
 
 **Step 2: Synthesize ASI.**
 
-Read all three judges' independent ASI candidates + the deliberation highlights (challenges, concessions, tensions).
+Read all three judges' independent ASI candidates + the deliberation highlights (challenges, concessions, tensions). Then **distill** — don't select.
 
-Pick the single strongest-evidence ASI:
-- If two or three judges' ASIs point the same direction, use the most specific version
-- If all three point different directions, pick the one that addresses the weakest criterion (or primary criterion if set)
-- If a deliberation challenge revealed a blind spot, factor that into the selection
-- Do NOT blend or merge multiple ASIs — pick one coherent direction
+The board's value is in its analysis. The ASI's value is in its focus. Don't let the breadth of the analysis dilute the focus of the ASI.
 
-**Step 3: Output.**
+1. **Identify the single highest-leverage move.** Not the most thorough analysis — the one change that would move scores the most. If all three judges point at different things, pick the one that addresses the primary criterion's biggest bottleneck. If you find yourself writing "also" or listing multiple changes, you're diluting. Pick one.
+
+2. **Check alignment with panel conclusions.** If the deliberation concluded "current approach has hit a ceiling," the ASI must propose a structural change (different model, topology, post-processing) — not more of the same approach. If no structural change is possible in the current mode, recommend early termination with a specific next step the user can take.
+
+3. **Check generator feasibility.** In single-file mode, the generator can only edit text. Don't propose code changes, model swaps, or architecture changes unless the artifact type is workspace. Filter for what the generator can actually do in the current mode.
+
+4. **Keep it focused.** The ASI is ONE direction with ONE primary change. The generator should know exactly what to do. A compound ASI ("fix the correction table AND expand the taxonomy AND add self-check") will overwhelm the generator, especially with smaller models. The single judge's strength was focus — the board must match that.
+
+**Step 3: Deliberation summary (for next iteration's panel).**
+
+Write a 2-3 sentence summary of what the panel agreed on, what they disagreed on, and what they concluded. This gets passed to the next iteration's panel as PREVIOUS PANEL DELIBERATION. Focus on actionable conclusions, not score details.
+
+Example: "Panel agreed that the 9b model can't handle long prompts — all three regressions correlated with prompt length increases. Metrics judge noted 15 near-miss entities that need code-side normalization rather than prompt rules. Strategy judge argued for simpler prompt + Python post-processing, which the panel endorsed."
+
+**Step 4: Output.**
 
 Produce the standard judge output format:
 ```
@@ -223,6 +250,14 @@ The board preserves simmer's context discipline exactly:
 No new cross-iteration information is introduced. The board multiplies perspectives within a single iteration, not across iterations.
 
 ## Common Mistakes
+
+**Compound ASI overwhelming the generator**
+- Problem: Each judge's ASI candidate is multi-faceted. The clerk picks one but it still lists 3-4 changes. Generator tries all of them, artifact bloats, scores regress.
+- Fix: The clerk distills, not selects. Read all three ASI candidates and produce ONE focused move. If you're writing "also" or listing changes, you're diluting. The board's analysis is broad — the ASI must be narrow.
+
+**Ignoring mode constraints in ASI**
+- Problem: Board correctly identifies "model swap needed" or "add post-processing" but the artifact is single-file — generator can only edit text.
+- Fix: Check artifact type. Single-file ASI must be prompt-level changes only. Structural recommendations (model swap, code changes) are only actionable in workspace mode.
 
 **Blending ASIs**
 - Problem: Clerk merges three ASIs into one that tries to address everything
