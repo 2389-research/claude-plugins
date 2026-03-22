@@ -254,7 +254,13 @@ Select `JUDGE_MODE` based on problem complexity. **Do not ask the user** — inf
 | code/testable (any) | `board` |
 | pipeline/engineering (any) | `board` |
 
-**User overrides:** If the user said "with a single judge," use `single`. If they said "with a judge board" or "with a panel," use `board`. User intent always wins.
+**User overrides:** If the user said "with a single judge," use `single`. If they said "with a judge board" or "with a panel," use `board`. User intent wins — but check for mismatches:
+
+**Complexity mismatch nudge:** If the user requested single judge but the artifact is complex (workspace, evaluator present, 3 criteria, code/pipeline), nudge once:
+
+> "This is a [workspace/pipeline/complex] artifact with [N criteria / an evaluator / multiple files] — a judge board would give you better diagnosis here. Want to use the board instead, or stick with single judge?"
+
+One question, one time. If they say single, respect it and move on.
 
 **If `USE_AGENCY: true`**, always use `board` — Agency composition only applies to the board path.
 

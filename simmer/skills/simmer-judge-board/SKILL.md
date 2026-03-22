@@ -363,8 +363,22 @@ IF agency_status succeeds:
 ELSE:
     Use manual profiles from default panels (or JUDGE_PANEL if specified)
     Skip evaluation submission
-    Log: "Agency unavailable — using manual judge profiles"
+    Tell the user what happened and how to fix it
 ```
+
+**When Agency is unavailable and the user requested it**, explain clearly:
+
+> "Agency MCP isn't running — I'll use manual judge profiles for this run. You'll still get the judge board with deliberation, just without task-matched composition.
+>
+> To enable Agency for future runs:
+> ```
+> pipx install agency-engine
+> agency init
+> agency serve
+> ```
+> Then add it to your Claude Code MCP settings. See the [Agency docs](https://github.com/agentbureau/agency) for details."
+
+**When Agency is unavailable and the user didn't request it**, say nothing — just use manual profiles silently. Don't advertise Agency to users who haven't asked for it.
 
 The board works identically in both paths. Agency adds better composition and cross-run learning, but isn't required.
 
