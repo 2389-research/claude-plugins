@@ -198,6 +198,147 @@ Then synthesize a vibe from those three answers.
 
 ---
 
+## MANDATORY: Copy Strategy (Do This With Vibe Discovery)
+
+**Run this IN PARALLEL with Vibe Discovery.** Vibe Discovery gives you the look. Copy Strategy gives you the words. Both must be done before any code.
+
+### The Conversion Equation
+
+Every copy decision flows from this:
+
+```
+Purchase Rate = Desire - (Labor + Confusion)
+```
+
+- **Increase desire** → communicate value clearly and specifically
+- **Decrease labor** → brevity, scannable structure, obvious next actions
+- **Decrease confusion** → say exactly what it is, make buttons unmissable
+
+If you're stuck on a copy decision, ask: "Does this increase desire or decrease labor/confusion?"
+
+### Step 1: Objection Discovery
+
+Before writing a single headline, identify the buying objections. Ask the user:
+
+**"What almost stopped your customers from buying?"**
+**"Why haven't non-customers bought yet?"**
+
+Common objection categories:
+- "I don't have the skills/time for this"
+- "This won't work for my specific situation"
+- "It's too expensive for what I get"
+- "I don't trust this enough yet"
+- "I don't understand what this actually does"
+
+Write down the top 3 objections. These drive your headline hook, feature copy, and CTA framing.
+
+### Step 2: Headline Formula
+
+Every hero headline follows: **Value Prop + Hook**
+
+The **value prop** must pass this litmus test:
+> If a visitor sees ONLY the headline and nothing else, will they know exactly what you sell?
+
+❌ "Improve your workflow" (corporate fluff — workflow for what?)
+❌ "The future of productivity" (says nothing concrete)
+✅ "Groceries delivered in 1 hour" (specific, concrete, clear)
+✅ "Design websites visually — no code required" (what it does + key objection handled)
+
+The **hook** is one of two types:
+
+**Type A — Bold, specific claim** (triggers curiosity):
+- "Cut deploy time from 4 hours to 12 minutes"
+- "10,000 teams shipped faster last month"
+
+**Type B — Objection addressed** (removes the #1 buying barrier):
+- "No credit card required" (handles trust objection)
+- "Works with your existing tools" (handles switching-cost objection)
+- "Set up in 5 minutes" (handles effort objection)
+
+Use your top objection from Step 1 to pick the hook type.
+
+### Step 3: Subheadline Rules
+
+The subheadline does exactly two things:
+1. Explains **what** the product is (if the headline was benefit-focused)
+2. Explains **how** the bold claim is possible (if the headline made a claim)
+
+Max: 1-2 sentences. Keep it breezy. If you need three sentences, your headline isn't doing enough work.
+
+### Step 4: Feature Copy Structure
+
+Each feature gets exactly three elements:
+
+| Element | Rules |
+|---------|-------|
+| **Feature header** | Short value prop only. Be blunt. ❌ "Empower your team" ✅ "Real-time collaboration" |
+| **Feature paragraph** | Concise description + address ONE critical objection. Link to details if needed — no walls of text. |
+| **Feature image** | Show the product IN ACTION. For software: GIFs > screenshots > abstract art. For physical goods: use cases + build quality close-ups. |
+
+Every feature should tie back to the hero's dominant value prop. Features aren't random — they're evidence for the claim you made above the fold.
+
+### Step 5: CTA Copy
+
+CTAs must **continue the hero's narrative**, not be generic.
+
+❌ "Get started" / "Request demo" / "Sign up" (lazy, context-free)
+✅ "Find food near me" (continues a delivery narrative)
+✅ "Start designing" (continues a design tool narrative)
+✅ "See your savings" (continues a financial narrative)
+
+The CTA button text should feel like the natural next sentence after reading the headline.
+
+### Step 6: Social Proof Strategy
+
+**If you have notable customers/press:**
+- Display logos in a marquee — creates FOMO ("everyone already knows about this")
+- Highlight impressive metrics (customer count, revenue processed, etc.)
+
+**If you DON'T have notable social proof yet (cold start):**
+- Offer free access to 3-5 recognizable companies, then display their logos
+- Use specific testimonials with real names and photos (even from beta users)
+- Show aggregate stats ("Used by 500+ teams" beats an empty logo bar)
+- Consider "As seen in" with any press mentions, podcasts, or newsletters
+
+Don't fake it. An empty social proof section is worse than no section at all.
+
+### Step 7: Multi-Audience Routing
+
+If your product serves distinct personas (e.g., individuals vs. teams, developers vs. designers):
+
+Add a **"choose your own adventure"** element near the top of the page that routes visitors to relevant sections. Examples:
+- Toggle tabs: "For Developers" / "For Designers"
+- Split hero: "I'm a [role A]" / "I'm a [role B]"
+- Segmented landing pages linked from the hero
+
+Don't force everyone through the same funnel if they have different needs.
+
+### Copy Strategy Spec
+
+Write this out alongside your Vibe Spec:
+
+```
+TOP 3 OBJECTIONS:
+1. [objection] → addressed in: [headline/feature/CTA]
+2. [objection] → addressed in: [headline/feature/CTA]
+3. [objection] → addressed in: [headline/feature/CTA]
+
+HEADLINE:
+- Value prop: [what you sell, concretely]
+- Hook type: [bold claim / objection addressed]
+- Full headline: [the actual text]
+- Litmus test: Would someone know what we sell from this alone? [yes/no]
+
+SUBHEADLINE: [1-2 sentences — what it is + how the claim works]
+
+CTA TEXT: [narrative continuation of headline]
+
+AUDIENCE: [single / multi-persona]
+- If multi: [how we route them]
+```
+
+---
+
 ## The 50% Rule
 **Spend 50% of your time on the hero section.** It's the cover image for social media, the first impression, the hook. Everything else flows from getting the hero right.
 
@@ -205,10 +346,10 @@ Then synthesize a vibe from those three answers.
 
 ### 1. Hero Section (Primary Focus)
 The make-or-break element. Must contain:
-- **Headline**: Sharp, benefit-driven hook (reference H1 Gallery for inspiration)
-- **Subheadline**: Supporting context, 1-2 sentences max
-- **CTA Button(s)**: Primary action + optional secondary
-- **Social Proof**: Logo marquee, testimonials, or trust badges
+- **Headline**: Value Prop + Hook from your Copy Strategy Spec (see above). Must pass the litmus test — if someone sees ONLY this, do they know what you sell?
+- **Subheadline**: Explains what it is + how the claim works. 1-2 sentences max, keep it breezy.
+- **CTA Button(s)**: Narrative continuation of headline (not "Get Started" — see CTA Copy rules above). Optional secondary CTA.
+- **Social Proof**: Logo marquee, testimonials, or trust badges. If cold-starting, see Social Proof Strategy above.
 - **Visual Element**: Product shot, illustration, or animated background
 
 **Hero Variations**:
@@ -218,7 +359,9 @@ The make-or-break element. Must contain:
 - Asymmetric with decorative elements
 
 ### 2. Features/Benefits Section
-Show what the product does. Options:
+Show what the product does. Each feature needs three elements: **header** (short value prop, no "Empower/Revolutionize"), **paragraph** (concise + address ONE objection), **image** (product in action, not abstract art). Every feature should reference the hero's dominant value prop.
+
+Layout options:
 - **Bento Grid**: Cards in asymmetric layout (popularized by Apple)
 - **Alternating Rows**: Image + text, flipping sides
 - **Icon Grid**: Simple icons with short descriptions
@@ -245,10 +388,10 @@ Step-by-step explanation:
 
 ### 6. CTA Section
 Final conversion push:
-- Repeat value proposition
-- Strong headline
-- Single focused action
-- Urgency elements (if authentic)
+- Repeat value proposition (callback to hero headline)
+- Strong headline that re-frames the original hook
+- Single focused action — same narrative CTA from hero, not a different one
+- Urgency elements (if authentic — never manufactured)
 
 ### 7. Footer
 - Navigation links
@@ -339,11 +482,12 @@ Bold alternatives:
 
 ## Implementation Workflow
 
-### Phase 1: Research & Collect
-1. Gather 5-10 hero screenshots as wireframes
-2. Identify section patterns needed
-3. Choose icon set and font pairing
-4. Define color palette
+### Phase 1: Discovery & Strategy
+1. Run Vibe Discovery (aesthetic direction) and Copy Strategy (words/conversion) in parallel
+2. Write both specs before touching code
+3. Gather 5-10 hero screenshots as wireframes
+4. Identify section patterns needed
+5. Choose icon set and font pairing
 
 ### Phase 2: Hero Development
 1. Generate hero from best reference screenshot
@@ -424,7 +568,30 @@ Don't modify the existing animations.
 
 ### Conversion Optimization
 - [ ] Clear value proposition above fold
-- [ ] Single primary CTA visible
-- [ ] Social proof present
+- [ ] Headline passes litmus test (would someone know what you sell from headline alone?)
+- [ ] Single primary CTA visible — uses narrative continuation, not "Get Started"
+- [ ] Top 3 objections addressed somewhere on page (headline, features, or CTA)
+- [ ] Social proof present (or intentionally omitted — never faked)
 - [ ] Logical information hierarchy
 - [ ] No friction to main action
+- [ ] Feature copy ties back to hero's value prop (not random feature dump)
+
+### User Testing Framework (Post-Build)
+
+Before shipping, get feedback from **two types of reviewers**:
+
+**Type A — Non-market people** (test comprehension):
+- Can they explain what you sell after 5 seconds?
+- What questions remain unanswered?
+
+**Type B — Market-aware people** (test differentiation):
+- How does this compare to competitors they know?
+- What would make them switch?
+
+**Ask these 6 questions:**
+1. **Conversion**: Would you sign up right now? What's stopping you?
+2. **Interest**: Rate 1-10. What would you rewrite?
+3. **Clarity**: What's confusing? What questions do you still have?
+4. **Expansion**: What deserves more detail?
+5. **Brevity**: If you had to cut 50%, what goes?
+6. **Disbelief**: What triggered skepticism?

@@ -23,20 +23,38 @@ AI-generated landing pages tend to converge on the same patterns:
 
 This skill forces UNIQUE design direction for every project through the **Vibe Discovery** process.
 
-### The Vibe Discovery Mandate
+### The Discovery Mandate
 
-**BEFORE any code, you MUST:**
+**BEFORE any code, you MUST run TWO parallel processes:**
+
+**Vibe Discovery (aesthetic):**
 1. Ask the 4 context questions
 2. Synthesize a unique aesthetic direction
 3. Write out a Vibe Spec
 4. Pass the Freshness Check
 
-No shortcuts. No "I'll figure out the style as I go."
+**Copy Strategy (words/conversion):**
+1. Discover top 3 buying objections
+2. Write headline using Value Prop + Hook formula
+3. Pass the litmus test (would someone know what you sell from headline alone?)
+4. Define CTA as narrative continuation of headline
+5. Write out a Copy Strategy Spec
+
+No shortcuts. No "I'll figure out the style/copy as I go."
 
 ## Key Patterns
 
+### The Conversion Equation
+`Purchase Rate = Desire - (Labor + Confusion)`. Every copy decision should increase desire or decrease labor/confusion.
+
 ### The 50% Rule
 Spend half your time on the hero section. It's the social media preview, the first impression, the hook. Everything else flows from the hero.
+
+### Headline Litmus Test
+If a visitor sees ONLY the headline and nothing else, will they know exactly what you sell? If not, rewrite it.
+
+### CTA Narrative Rule
+CTAs continue the hero's story. "Find food near me" not "Get started." "Start designing" not "Request demo."
 
 ### Anti-Convergence Rules
 1. **No hex code memory** - Generate colors fresh from reference
@@ -112,9 +130,11 @@ Before considering a landing page complete:
 - [ ] Fast initial load
 
 **Conversion:**
-- [ ] Clear value prop above fold
-- [ ] Primary CTA visible
-- [ ] Social proof present
+- [ ] Headline passes litmus test (someone knows what you sell from headline alone)
+- [ ] Primary CTA uses narrative continuation (not "Get Started")
+- [ ] Top 3 objections addressed on page
+- [ ] Social proof present (or intentionally omitted, never faked)
+- [ ] Feature copy ties back to hero value prop
 - [ ] Logical hierarchy
 - [ ] No friction to action
 
@@ -135,9 +155,11 @@ Before considering a landing page complete:
 
 When this skill triggers:
 
-1. **Start with Vibe Discovery** - Ask the 4 questions
-2. **Create Vibe Spec** - Write it out before any code
-3. **Pass Freshness Check** - Verify uniqueness
-4. **Build hero first** - 50% of effort here
-5. **Add sections incrementally** - One at a time
-6. **Polish and validate** - Run through all checklists
+1. **Run Vibe Discovery + Copy Strategy in parallel** - Aesthetic questions + objection discovery
+2. **Write both specs** - Vibe Spec + Copy Strategy Spec before any code
+3. **Pass Freshness Check** - Verify visual uniqueness
+4. **Pass Litmus Test** - Verify headline clarity
+5. **Build hero first** - 50% of effort here (both design AND copy)
+6. **Add sections incrementally** - One at a time, each feature ties to hero value prop
+7. **Polish and validate** - Run through all checklists
+8. **User test** - 6-question feedback framework with both reviewer types
