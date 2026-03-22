@@ -17,7 +17,7 @@ Simmer is an iterative refinement skill. It takes any artifact — a single file
 | `simmer:simmer-setup` | Identify artifact (file or workspace), elicit criteria, determine evaluation method, produce setup brief |
 | `simmer:simmer-generator` | Produce improved candidate from current + ASI feedback + background context |
 | `simmer:simmer-judge` | Score candidate 1-10 per criterion (with optional evaluator output), produce ASI |
-| `simmer:simmer-judge-board` | Multi-judge panel with deliberation — drop-in replacement for simmer-judge when JUDGE_BOARD enabled |
+| `simmer:simmer-judge-board` | Multi-judge panel with deliberation — drop-in replacement for simmer-judge when JUDGE_MODE is board |
 | `simmer:simmer-reflect` | Record trajectory, track best-so-far, pass ASI forward |
 
 ## Flow
@@ -46,6 +46,8 @@ Output best candidate + trajectory
 **Pluggable evaluation:** Three modes — judge-only (default, subjective criteria), runnable (script/command output), or hybrid (both). No format contract on evaluator output — the judge interprets whatever the evaluator produces.
 
 **Regression handling:** Reflect tracks best-so-far. If an iteration regresses, next generator receives the best candidate, not the regressed one. In workspace mode, this means git checkout to the best iteration's commit.
+
+**Agency integration (opt-in):** When `USE_AGENCY: true` and the Agency MCP server is available, judges are composed from task-matched primitives for strategic analysis, and the generator is composed for execution craft (formatting, model-aware writing, structural editing — not strategy). The board decides *what* to change; the Agency-composed generator is better at *how* to implement it. Evaluation scores feed back into Agency so primitives evolve across runs. Falls back to manual profiles / standard prompts if Agency is unavailable.
 
 ## Artifact Modes
 

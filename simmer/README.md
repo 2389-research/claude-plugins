@@ -111,20 +111,31 @@ Best candidate: iteration 4 (8.1/10)
 
 No format contract on evaluator output. The judge reads whatever your script produces — test results, metrics, error logs, anything.
 
-## Judge Board (Opt-In)
+## Judge Board
 
-For complex artifacts or when hitting a plateau, enable a multi-judge panel:
+Simmer auto-selects between a single judge and a multi-judge board based on complexity:
 
-```
-"Simmer this with a judge board"
-```
+- **Simple** (short email, tweet, ≤2 criteria) → single judge, fast
+- **Complex** (3 criteria, long artifact, code, pipelines) → judge board with deliberation
 
-Three judges with different lenses score independently, then see each other's reasoning and challenge/concede in one deliberation round. A clerk synthesizes consensus scores + single ASI. The rest of the loop is unchanged.
+The board dispatches three judges with different lenses, runs one deliberation round, and synthesizes consensus scores + single ASI. If a single-judge run hits a plateau (3 iterations without improvement), simmer offers to upgrade to the board mid-run.
 
 Default lenses per problem class (or define your own):
 - **Text/creative:** Craft, Reader, Domain
 - **Code/testable:** Correctness, Architecture, Efficiency
 - **Pipeline/engineering:** Metrics, Strategy, Integration
+
+## Agency Composition (Opt-In)
+
+If the [Agency](https://github.com/agentbureau/agency) MCP server is running, say:
+
+```
+"Simmer this with agency"
+```
+
+Agency composes task-matched judges from evolved primitives instead of manual profiles. Judges come in understanding your specific problem domain. Evaluation scores feed back into Agency so future runs get better judges automatically.
+
+Agency composes judges only — the generator stays standard. Testing showed Agency judges + standard generator produces the best results.
 
 ## Defaults and Safety
 
