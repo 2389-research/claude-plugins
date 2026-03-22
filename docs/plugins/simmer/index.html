@@ -182,6 +182,13 @@ Best candidate: iteration 4 (8.1/10)
 <h3>Evaluation Modes</h3>
 <table class="readme-table"><thead><tr><th>Mode</th><th>When to use</th></tr></thead><tbody><tr><td><strong>Judge-only</strong> (default)</td><td>Text artifacts — judge scores against criteria</td></tr><tr><td><strong>Runnable</strong></td><td>Code/pipelines — judge interprets script output</td></tr><tr><td><strong>Hybrid</strong></td><td>Both — run script AND judge results against criteria</td></tr></tbody></table>
 No format contract on evaluator output. The judge reads whatever your script produces — test results, metrics, error logs, anything.
+<h3>Judge Board (Opt-In)</h3>
+<p>For complex artifacts or when hitting a plateau, enable a multi-judge panel:</p>
+<pre><code class="language-">"Simmer this with a judge board"
+</code></pre>
+<p>Three judges with different lenses score independently, then see each other's reasoning and challenge/concede in one deliberation round. A clerk synthesizes consensus scores + single ASI. The rest of the loop is unchanged.</p>
+<p>Default lenses per problem class (or define your own):</p>
+<ul><li><strong>Text/creative:</strong> Craft, Reader, Domain</li><li><strong>Code/testable:</strong> Correctness, Architecture, Efficiency</li><li><strong>Pipeline/engineering:</strong> Metrics, Strategy, Integration</li></ul>
 <h3>Defaults and Safety</h3>
 <p><strong>Default iteration count:</strong> 3 rounds per batch. After each batch, simmer asks whether to continue. You can request a specific count ("simmer this for 10 rounds") or stop early at any prompt.</p>
 <p><strong>Regression safety:</strong> The reflect subskill tracks the best candidate seen so far. If a new iteration scores lower than the current best, the best-so-far is preserved — the loop never loses progress. At the end, <code>result.md</code> always contains the highest-scoring candidate, not just the latest one.</p>
