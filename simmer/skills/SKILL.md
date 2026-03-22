@@ -2,12 +2,13 @@
 name: simmer
 description: >
   Use when user says "simmer this", "refine this", "hone this", "iterate on this",
-  or asks to improve a specific artifact over multiple rounds. Runs an iterative
-  refinement loop using subagent judge feedback against user-defined criteria.
-  Works on any artifact type: documents, prompts, specs, emails, creative writing,
-  API designs, pipelines, codebases — anything Claude can read and produce.
-  v2 supports multi-file workspace targets, runnable evaluators, and open-ended
-  optimization (model selection, pipeline topology, prompt tuning).
+  or asks to improve a specific artifact over multiple rounds. "simmer this with
+  agency" enables Agency MCP composition for task-matched judges. Runs an iterative
+  refinement loop using a judge board (multi-judge deliberation panel) against
+  user-defined criteria. Works on any artifact type: documents, prompts, specs,
+  emails, creative writing, API designs, pipelines, codebases — anything Claude
+  can read and produce. Supports multi-file workspace targets, runnable evaluators,
+  and open-ended optimization (model selection, pipeline topology, prompt tuning).
 ---
 
 # Simmer
@@ -66,6 +67,12 @@ Trigger when user wants iterative refinement of any kind:
 - "Tune this configuration", "improve these prompts against this test suite"
 - Any request to iteratively improve an artifact or workspace
 
+**"with agency"** — if the user says "simmer this with agency" or "use agency," set `USE_AGENCY: true`. This composes judges from Agency primitives instead of manual profiles. Requires Agency MCP server running.
+
+**"single judge"** — if the user says "simmer this with a single judge" or the artifact is very simple, set `JUDGE_BOARD: false`. Uses the original single-judge mode.
+
+**Default behavior:** Judge board enabled, Agency off. Board provides multi-perspective deliberation with manual profiles. Agency adds task-matched composition when explicitly requested.
+
 **Not simmer:** If the artifact is code and the user wants parallel implementations, use cookoff instead.
 
 ## Orchestration
@@ -99,9 +106,9 @@ BACKGROUND: [constraints, available resources, domain knowledge — omit if not 
 OUTPUT_CONTRACT: [valid output format description — omit for text/creative]
 VALIDATION_COMMAND: [quick check command — omit if no cheap validation exists]
 SEARCH_SPACE: [what's in scope to explore — omit if unconstrained]
-JUDGE_BOARD: [true | false — default false, opt-in for multi-judge deliberation]
+JUDGE_BOARD: [true | false — default true. Multi-judge deliberation panel. Set false for simple artifacts where single judge suffices]
 JUDGE_PANEL: [optional custom judge definitions — omit to use defaults for problem class]
-USE_AGENCY: [true | false — default false, use Agency MCP for judge composition]
+USE_AGENCY: [true | false — default false. When true AND Agency MCP is available, compose judges from task-matched primitives. Trigger: "simmer this with agency"]
 AGENCY_GENERATOR: [true | false — default false, experimental: Agency-composed generator for execution craft]
 ITERATIONS: [N]
 MODE: [seedless | from-file | from-paste | from-workspace]
