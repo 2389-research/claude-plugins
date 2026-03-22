@@ -101,7 +101,8 @@ VALIDATION_COMMAND: [quick check command — omit if no cheap validation exists]
 SEARCH_SPACE: [what's in scope to explore — omit if unconstrained]
 JUDGE_BOARD: [true | false — default false, opt-in for multi-judge deliberation]
 JUDGE_PANEL: [optional custom judge definitions — omit to use defaults for problem class]
-USE_AGENCY: [true | false — default false, use Agency MCP for agent composition]
+USE_AGENCY: [true | false — default false, use Agency MCP for judge composition]
+AGENCY_GENERATOR: [true | false — default false, experimental: Agency-composed generator for execution craft]
 ITERATIONS: [N]
 MODE: [seedless | from-file | from-paste | from-workspace]
 OUTPUT_DIR: [path, default: docs/simmer]
@@ -148,7 +149,9 @@ For seedless mode: iteration 1 generates the initial candidate AND judges it. `I
 
 **Step 1: Generator (subagent)**
 
-**If `USE_AGENCY: true` and Agency MCP is available:** Compose the generator via Agency for **execution craft**, not strategy. The board decides *what* to change (via ASI). The generator's Agency composition should make it better at *how* to implement changes — formatting, model-aware writing, structural editing.
+**If `AGENCY_GENERATOR: true` and Agency MCP is available (experimental):** Compose the generator via Agency for **execution craft**, not strategy. The board decides *what* to change (via ASI). The generator's Agency composition should make it better at *how* to implement changes — formatting, model-aware writing, structural editing.
+
+**Note:** Testing showed Agency-composed generators can conflict with the board's ASI when given strategic primitives. This flag is separate from `USE_AGENCY` (which only composes judges) because generator composition needs further validation. Use `USE_AGENCY: true` for proven results; add `AGENCY_GENERATOR: true` only for experimentation.
 
 **CRITICAL: The generator must not strategize.** Testing showed that Agency-composed generators with strategic primitives ("diagnose before editing") override the ASI with their own analysis, breaking simmer's core design. The generator's task description must frame it as an executor, not a strategist.
 
