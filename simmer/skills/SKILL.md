@@ -148,58 +148,41 @@ For seedless mode: iteration 1 generates the initial candidate AND judges it. `I
 
 **Step 1: Generator (subagent)**
 
-**If `USE_AGENCY: true` and Agency MCP is available:** Before dispatching the generator, compose it via Agency. The generator's composition should be informed by the full problem context — not just "improve this artifact" but what the judges learned about the problem.
+**If `USE_AGENCY: true` and Agency MCP is available:** Compose the generator via Agency for **execution craft**, not strategy. The board decides *what* to change (via ASI). The generator's Agency composition should make it better at *how* to implement changes — formatting, model-aware writing, structural editing.
 
-**Build the description from these sources (in order of importance):**
+**CRITICAL: The generator must not strategize.** Testing showed that Agency-composed generators with strategic primitives ("diagnose before editing") override the ASI with their own analysis, breaking simmer's core design. The generator's task description must frame it as an executor, not a strategist.
 
-1. **ASI from last judge round** — the specific direction to pursue
-2. **Panel deliberation summary** (if judge board enabled) — what the panel agreed on, what constraints they identified (e.g., "9b model can't handle conditional logic, use lookup tables and examples instead of rules")
-3. **Artifact description** — what the artifact is, what it does
-4. **Background constraints** — model size, infrastructure, what's mutable
-5. **Artifact type + mutation bounds** — single-file (text only) or workspace (code/config/files)
-6. **Criteria** — what "better" means
-
-**Example description for agency_assign:**
-```
-Improve an LLM extraction prompt for entity extraction from video
-transcripts. Model: qwen3.5:9b (small — complexity hurts output).
-Single-file mode — can only change the prompt text, not code or
-infrastructure.
-
-The judge panel's findings from the last round:
-- The 9b model follows lookup tables and worked examples well but
-  fails at abstract rules and conditional logic
-- Corrections table is working — don't remove it
-- Brand inference needs an explicit checklist, not implicit reasoning
-- Keep prompt growth disciplined — each addition must earn its place
-
-ASI direction: [the specific ASI from the judge]
-
-Criteria: coverage (primary), noise, specificity, conceptual depth.
-```
-
+**Build the description focused on execution craft:**
 ```
 Call: agency_assign {
   tasks: [{
     external_id: "simmer-generator-iter-N",
-    description: "[built as above]",
-    skills: ["prompt-engineering", "optimization", "structured-extraction"],
+    description: "Execute a specific edit to [artifact type description].
+      You will receive one precise direction (ASI) to implement. Your
+      job is faithful, skilled execution of that direction — not
+      diagnosis or strategy. [Execution context: e.g., 'The artifact
+      is a prompt for qwen3.5:9b. The model responds well to lookup
+      tables, worked examples, and binary checklists. It struggles
+      with abstract rules and conditional logic. Single-file mode —
+      can only change text content.']",
+    skills: ["technical-writing", "structured-editing", "prompt-engineering"],
     deliverables: ["improved-artifact"]
   }]
 }
 ```
 
-Include the `rendered_prompt` from the response in the generator's subagent prompt as `AGENCY COMPOSITION:` context (same pattern as judge board). The rendered prompt provides task-matched capabilities; the standard generator prompt provides simmer-specific context (candidate, ASI, criteria).
+The description tells Agency to select primitives for **skilled execution** — formatting, model-aware prompt construction, structured editing — not strategic reasoning. The board handles strategy; the generator handles craft.
 
-**After the iteration completes and scores are in**, submit evaluation via `agency_submit_evaluation` with the composite score so generator primitives evolve. Include the ASI quality and whether the generation regressed:
+Include the `rendered_prompt` in the generator's subagent prompt as `AGENCY COMPOSITION:` context. The rendered prompt teaches *how* to write well for this context; the ASI tells *what* to change.
 
+**After the iteration completes**, submit evaluation so execution primitives evolve:
 ```
 Call: agency_submit_evaluation {
   agency_task_id: "[from assign]",
   callback_jwt: "[from agency_evaluator]",
-  output: "Generator iteration N: composite [X.X]/10. [Improved/Regressed]
-    from [prev score]. Key change: [what the generator did]. ASI was
-    [followed/partially followed/ignored].",
+  output: "Generator executed ASI: [summary]. Result: [improved/regressed].
+    Execution quality: [how well the ASI was implemented — clean edit,
+    preserved existing structure, appropriate formatting for the target].",
   score: [composite * 10],
   task_completed: true,
   score_type: "rubric"

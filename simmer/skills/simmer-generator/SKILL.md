@@ -19,10 +19,10 @@ Produce an improved version of the artifact. This is targeted improvement based 
 - **Iteration number**: which round this is
 - **Artifact type**: single-file or workspace
 - **Background** (optional): constraints, available resources, domain knowledge
-- **Agency composition** (optional): if the orchestrator composed you via Agency, you'll receive a `AGENCY COMPOSITION:` block with role components, desired outcomes, and trade-off configs selected for this specific task. Use these as operating guidance — they reflect what Agency determined you need for this problem. They supplement the ASI, not replace it.
-- **Panel deliberation summary** (optional, if judge board enabled): what the judge panel agreed on, disagreed on, and concluded last round. This is strategic context — if the panel said "the 9b model can't handle conditional logic, use lookup tables instead," factor that into how you execute the ASI.
+- **Agency composition** (optional): if the orchestrator composed you via Agency, you'll receive an `AGENCY COMPOSITION:` block with execution-focused primitives — how to write well for this context (formatting, model-aware construction, structural editing). Use these to execute the ASI more skillfully, not to override or reinterpret the ASI. The board decides *what* to change; you decide *how* to implement it.
+- **Panel deliberation summary** (optional, if judge board enabled): what the judge panel concluded last round. Use this for execution context only — if the panel said "the 9b model responds well to lookup tables," use that to inform how you format your changes. Do NOT use it to decide what to change — that's the ASI's job.
 
-You do NOT receive score history or previous candidates. This is intentional — work from the ASI, not from scores. The Agency composition and panel summary give you problem understanding without score anchoring.
+You do NOT receive score history or previous candidates. This is intentional — work from the ASI, not from scores. **Do NOT diagnose or strategize.** If the ASI says "add a correction table," implement it skillfully even if something similar failed before. The board has deliberated about previous failures and is suggesting a different approach — trust the ASI.
 
 ## What To Do
 
