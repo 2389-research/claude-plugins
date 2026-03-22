@@ -17,7 +17,7 @@ Simmer is an iterative refinement skill. It takes any artifact — a single file
 | `simmer:simmer-setup` | Identify artifact (file or workspace), elicit criteria, determine evaluation method, produce setup brief |
 | `simmer:simmer-generator` | Produce improved candidate from current + ASI feedback + background context |
 | `simmer:simmer-judge` | Score candidate 1-10 per criterion (with optional evaluator output), produce ASI |
-| `simmer:simmer-judge-board` | Multi-judge panel with deliberation — drop-in replacement for simmer-judge when JUDGE_BOARD enabled |
+| `simmer:simmer-judge-board` | Multi-judge panel with deliberation — drop-in replacement for simmer-judge when JUDGE_MODE is board |
 | `simmer:simmer-reflect` | Record trajectory, track best-so-far, pass ASI forward |
 
 ## Flow
