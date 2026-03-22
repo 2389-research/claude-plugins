@@ -367,6 +367,20 @@ Invoke `simmer:simmer-reflect`.
 
 Provide: full score history across all iterations so far, current iteration number, max iterations, judge output from this round.
 
+**After reflect completes, display the updated trajectory table to the user.** Show the full table so far — the user should see scores accumulate row by row as the loop runs. This is especially important during long evaluator runs where the user otherwise sees nothing for 10-15 minutes per iteration.
+
+```
+Iteration 2 complete.
+
+| Iter | Value Prop | Tone | CTA | Composite | Key Change |
+|------|-----------|------|-----|-----------|------------|
+| 0    | 4         | 5    | 3   | 4.0       | seed       |
+| 1    | 7         | 5    | 4   | 5.3       | specific problem statement |
+| 2    | 7         | 6    | 6   | 6.3       | low-friction CTA |
+
+Best so far: iteration 2 (6.3/10). 1 iteration remaining.
+```
+
 **Handling regression:** If reflect reports that this iteration scored lower than best-so-far:
 - *Single-file:* the NEXT generator receives the best candidate file (not the latest regressed one)
 - *Workspace:* selectively restore workspace files from the best iteration's commit: `git checkout <best-commit> -- <workspace-files>`. Do NOT revert trajectory.md or other tracking files in `{OUTPUT_DIR}`.
