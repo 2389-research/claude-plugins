@@ -245,21 +245,128 @@ JUDGE_PANEL:
 
 Custom panels override the defaults entirely. Minimum 2 judges, maximum 5. Default is 3.
 
-## Agency Integration (Future)
+## Agency Integration
 
-When Agency is available, the board can request dynamically composed judges instead of using manual profiles:
+When the Agency MCP server is available, the board composes judges dynamically instead of using manual profiles. Agency selects primitives (role components, desired outcomes, trade-off configs) matched to each judge's task description, producing agents with task-specific capabilities.
+
+**The board's three-phase workflow stays the same.** Agency only changes how judges are composed, not how they interact.
+
+### Detecting Agency
+
+Before composing, check if Agency is available:
 
 ```
-judges = agency_assign([
-    {"task": "[task description emphasizing lens A]", "role": "judge"},
-    {"task": "[task description emphasizing lens B]", "role": "judge"},
-    {"task": "[task description emphasizing lens C]", "role": "judge"}
-])
+Call: agency_status
+If: returns successfully → use Agency composition
+If: fails or times out → fall back to manual profiles
 ```
 
-Agency selects primitives (role components, desired outcomes, trade-off configs) matched to each lens description. The composed judges have task-specific capabilities rather than generic profiles.
+### Composing the Judge Panel
 
-The board's three-phase workflow stays the same — Agency only changes how the judges are composed, not how they interact.
+Call `agency_assign` with one task per judge. Pack the lens focus, artifact context, and constraints into the description — this is the only field that influences primitive selection.
+
+```
+Call: agency_assign {
+  tasks: [
+    {
+      external_id: "simmer-judge-metrics-iter-N",
+      description: "Judge an LLM extraction prompt for entity extraction
+        from miniature painting video transcripts. Model: qwen3.5:9b.
+        Evaluator output includes per-video coverage %, precision %,
+        parse error counts. Focus your analysis on: evaluator output
+        patterns, failure clustering, near-miss vs systematic gaps.
+        This is a single-file artifact — the generator can only change
+        the prompt text, not code or infrastructure.",
+      skills: ["evaluation", "prompt-engineering", "data-analysis"],
+      deliverables: ["scoring-report", "improvement-direction"]
+    },
+    {
+      external_id: "simmer-judge-strategy-iter-N",
+      description: "Judge an LLM extraction prompt optimization strategy.
+        The prompt runs on qwen3.5:9b via Ollama for entity extraction.
+        Previous iterations have tried: [summary from iteration history].
+        Focus on: whether the current approach is stuck, what's been
+        tried vs untried, whether prompt complexity is hurting the small
+        model. Single-file mode — only prompt text changes are possible.",
+      skills: ["strategy", "prompt-engineering", "optimization"],
+      deliverables: ["scoring-report", "improvement-direction"]
+    },
+    {
+      external_id: "simmer-judge-integration-iter-N",
+      description: "Judge the output quality of an LLM extraction prompt.
+        Output contract: JSON with 'entities' array, each with 'name'
+        and 'type'. Focus on: output format compliance, entity naming
+        precision, type assignment accuracy, downstream usability for
+        RAG search. Model: qwen3.5:9b, single-file mode.",
+      skills: ["evaluation", "data-quality", "integration"],
+      deliverables: ["scoring-report", "improvement-direction"]
+    }
+  ]
+}
+```
+
+**Building the descriptions:** The board constructs each description from:
+- The artifact description and problem class from the setup brief
+- The lens focus from the default panel (or custom panel)
+- Relevant constraints: model size, artifact type, search space
+- Iteration context: what's been tried (from iteration history, if available)
+
+Agency returns a `rendered_prompt` per agent — use it as the judge's system context alongside the standard panelist prompt template. The rendered prompt replaces the generic lens description.
+
+### Using the Rendered Prompt
+
+Each judge's panelist prompt becomes:
+
+```
+You are one of three judges on a simmer judge board.
+
+AGENCY COMPOSITION:
+[rendered_prompt from agency_assign — contains role components,
+desired outcomes, and trade-off configuration selected for this
+specific judging task]
+
+[... rest of standard panelist prompt: artifact type, mutation bounds,
+background, previous deliberation, instructions to read code, etc.]
+```
+
+The rendered prompt provides the judge's specialized capabilities. The standard panelist prompt provides simmer-specific context (mutation bounds, deliberation protocol, scoring format).
+
+### Submitting Evaluations
+
+After synthesis, submit the panel's consensus evaluation back to Agency so primitives evolve:
+
+```
+For each judge:
+  Call: agency_evaluator { agency_task_id: "[from assign response]" }
+  → returns evaluator_prompt, callback_jwt
+
+  Call: agency_submit_evaluation {
+    agency_task_id: "[from assign response]",
+    callback_jwt: "[from evaluator response]",
+    output: "Judge [lens] scored: [scores]. Key contribution to
+      deliberation: [what this judge uniquely surfaced]. Panel
+      consensus composite: [N.N]/10.",
+    score: [composite * 10, as 0-100 integer],
+    task_completed: true,
+    score_type: "rubric"
+  }
+```
+
+This closes the feedback loop. Agency learns which primitive compositions produce good judges for this type of task. Future simmer runs on similar artifacts get better-composed judges.
+
+### Graceful Degradation
+
+```
+IF agency_status succeeds:
+    Compose judges via agency_assign
+    After synthesis, submit evaluations via agency_submit_evaluation
+ELSE:
+    Use manual profiles from default panels (or JUDGE_PANEL if specified)
+    Skip evaluation submission
+    Log: "Agency unavailable — using manual judge profiles"
+```
+
+The board works identically in both paths. Agency adds better composition and cross-run learning, but isn't required.
 
 ## Context Discipline
 

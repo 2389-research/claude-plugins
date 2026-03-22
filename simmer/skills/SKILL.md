@@ -101,6 +101,7 @@ VALIDATION_COMMAND: [quick check command — omit if no cheap validation exists]
 SEARCH_SPACE: [what's in scope to explore — omit if unconstrained]
 JUDGE_BOARD: [true | false — default false, opt-in for multi-judge deliberation]
 JUDGE_PANEL: [optional custom judge definitions — omit to use defaults for problem class]
+USE_AGENCY: [true | false — default false, use Agency MCP for agent composition]
 ITERATIONS: [N]
 MODE: [seedless | from-file | from-paste | from-workspace]
 OUTPUT_DIR: [path, default: docs/simmer]
@@ -147,7 +148,28 @@ For seedless mode: iteration 1 generates the initial candidate AND judges it. `I
 
 **Step 1: Generator (subagent)**
 
-Invoke `simmer:simmer-generator` as a subagent.
+**If `USE_AGENCY: true` and Agency MCP is available:** Before dispatching the generator, compose it via Agency. Call `agency_assign` with a task description built from the artifact, criteria, ASI, background, and — if using a judge board — the previous panel's deliberation summary. The panel's conclusions should inform the generator's composition: if the panel concluded "complexity is hurting this small model," Agency should compose a generator with primitives for constrained optimization rather than expansive generation.
+
+```
+Call: agency_assign {
+  tasks: [{
+    external_id: "simmer-generator-iter-N",
+    description: "[Built from: artifact description, criteria, current ASI,
+      model constraints from background, panel conclusions from deliberation
+      summary. Example: 'Improve an LLM extraction prompt for qwen3.5:9b.
+      The judge panel concluded that prompt complexity is hurting the model
+      and recommended a simpler structure with code-side normalization.
+      Focus: simplify the prompt while preserving coverage. Single-file
+      mode — can only change prompt text.']",
+    skills: ["prompt-engineering", "optimization"],
+    deliverables: ["improved-artifact"]
+  }]
+}
+```
+
+Include the `rendered_prompt` from the response in the generator's subagent prompt as `AGENCY COMPOSITION:` context (same pattern as judge board). After the iteration completes and scores are in, submit evaluation via `agency_submit_evaluation` with the composite score so generator primitives evolve.
+
+**Otherwise:** Invoke `simmer:simmer-generator` as a subagent with the standard prompt.
 
 *Single-file subagent prompt:*
 ```

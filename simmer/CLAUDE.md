@@ -47,6 +47,8 @@ Output best candidate + trajectory
 
 **Regression handling:** Reflect tracks best-so-far. If an iteration regresses, next generator receives the best candidate, not the regressed one. In workspace mode, this means git checkout to the best iteration's commit.
 
+**Agency integration (opt-in):** When `USE_AGENCY: true` and the Agency MCP server is available, both the judge board and generator are composed from task-matched primitives instead of generic prompts. The judge board's deliberation conclusions shape the generator's composition — the panel's understanding of the problem informs what kind of generator Agency builds. Evaluation scores feed back into Agency so primitives evolve across runs. Falls back to manual profiles / standard prompts if Agency is unavailable.
+
 ## Artifact Modes
 
 | Mode | Artifact Type | Tracking |
