@@ -148,26 +148,63 @@ For seedless mode: iteration 1 generates the initial candidate AND judges it. `I
 
 **Step 1: Generator (subagent)**
 
-**If `USE_AGENCY: true` and Agency MCP is available:** Before dispatching the generator, compose it via Agency. Call `agency_assign` with a task description built from the artifact, criteria, ASI, background, and — if using a judge board — the previous panel's deliberation summary. The panel's conclusions should inform the generator's composition: if the panel concluded "complexity is hurting this small model," Agency should compose a generator with primitives for constrained optimization rather than expansive generation.
+**If `USE_AGENCY: true` and Agency MCP is available:** Before dispatching the generator, compose it via Agency. The generator's composition should be informed by the full problem context — not just "improve this artifact" but what the judges learned about the problem.
+
+**Build the description from these sources (in order of importance):**
+
+1. **ASI from last judge round** — the specific direction to pursue
+2. **Panel deliberation summary** (if judge board enabled) — what the panel agreed on, what constraints they identified (e.g., "9b model can't handle conditional logic, use lookup tables and examples instead of rules")
+3. **Artifact description** — what the artifact is, what it does
+4. **Background constraints** — model size, infrastructure, what's mutable
+5. **Artifact type + mutation bounds** — single-file (text only) or workspace (code/config/files)
+6. **Criteria** — what "better" means
+
+**Example description for agency_assign:**
+```
+Improve an LLM extraction prompt for entity extraction from video
+transcripts. Model: qwen3.5:9b (small — complexity hurts output).
+Single-file mode — can only change the prompt text, not code or
+infrastructure.
+
+The judge panel's findings from the last round:
+- The 9b model follows lookup tables and worked examples well but
+  fails at abstract rules and conditional logic
+- Corrections table is working — don't remove it
+- Brand inference needs an explicit checklist, not implicit reasoning
+- Keep prompt growth disciplined — each addition must earn its place
+
+ASI direction: [the specific ASI from the judge]
+
+Criteria: coverage (primary), noise, specificity, conceptual depth.
+```
 
 ```
 Call: agency_assign {
   tasks: [{
     external_id: "simmer-generator-iter-N",
-    description: "[Built from: artifact description, criteria, current ASI,
-      model constraints from background, panel conclusions from deliberation
-      summary. Example: 'Improve an LLM extraction prompt for qwen3.5:9b.
-      The judge panel concluded that prompt complexity is hurting the model
-      and recommended a simpler structure with code-side normalization.
-      Focus: simplify the prompt while preserving coverage. Single-file
-      mode — can only change prompt text.']",
-    skills: ["prompt-engineering", "optimization"],
+    description: "[built as above]",
+    skills: ["prompt-engineering", "optimization", "structured-extraction"],
     deliverables: ["improved-artifact"]
   }]
 }
 ```
 
-Include the `rendered_prompt` from the response in the generator's subagent prompt as `AGENCY COMPOSITION:` context (same pattern as judge board). After the iteration completes and scores are in, submit evaluation via `agency_submit_evaluation` with the composite score so generator primitives evolve.
+Include the `rendered_prompt` from the response in the generator's subagent prompt as `AGENCY COMPOSITION:` context (same pattern as judge board). The rendered prompt provides task-matched capabilities; the standard generator prompt provides simmer-specific context (candidate, ASI, criteria).
+
+**After the iteration completes and scores are in**, submit evaluation via `agency_submit_evaluation` with the composite score so generator primitives evolve. Include the ASI quality and whether the generation regressed:
+
+```
+Call: agency_submit_evaluation {
+  agency_task_id: "[from assign]",
+  callback_jwt: "[from agency_evaluator]",
+  output: "Generator iteration N: composite [X.X]/10. [Improved/Regressed]
+    from [prev score]. Key change: [what the generator did]. ASI was
+    [followed/partially followed/ignored].",
+  score: [composite * 10],
+  task_completed: true,
+  score_type: "rubric"
+}
+```
 
 **Otherwise:** Invoke `simmer:simmer-generator` as a subagent with the standard prompt.
 

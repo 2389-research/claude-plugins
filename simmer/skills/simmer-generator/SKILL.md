@@ -18,9 +18,11 @@ Produce an improved version of the artifact. This is targeted improvement based 
 - **ASI**: the highest-leverage direction to pursue (from previous judge round)
 - **Iteration number**: which round this is
 - **Artifact type**: single-file or workspace
-- **Background** (workspace mode, optional): constraints, available resources, domain knowledge
+- **Background** (optional): constraints, available resources, domain knowledge
+- **Agency composition** (optional): if the orchestrator composed you via Agency, you'll receive a `AGENCY COMPOSITION:` block with role components, desired outcomes, and trade-off configs selected for this specific task. Use these as operating guidance — they reflect what Agency determined you need for this problem. They supplement the ASI, not replace it.
+- **Panel deliberation summary** (optional, if judge board enabled): what the judge panel agreed on, disagreed on, and concluded last round. This is strategic context — if the panel said "the 9b model can't handle conditional logic, use lookup tables instead," factor that into how you execute the ASI.
 
-You do NOT receive score history or previous candidates. This is intentional — work from the ASI, not from scores.
+You do NOT receive score history or previous candidates. This is intentional — work from the ASI, not from scores. The Agency composition and panel summary give you problem understanding without score anchoring.
 
 ## What To Do
 
