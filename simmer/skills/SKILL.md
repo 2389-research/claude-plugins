@@ -374,7 +374,7 @@ Provide: full score history across all iterations so far, current iteration numb
 
 **Plateau detection:** If the best-so-far score (primary criterion if set, otherwise composite) has not improved for 3 consecutive iterations — including regressions that were rolled back:
 
-- **If currently using single judge (`JUDGE_MODE: single`):** Offer upgrade: "Best score has not improved for 3 iterations (best: N.N/10 at iteration M). Switch to judge board for deeper diagnosis, or stop?" If the user accepts the upgrade, switch to `JUDGE_MODE: board` for the remaining iterations. The board's multi-perspective deliberation often surfaces blind spots the single judge missed.
+- **If currently using single judge (`JUDGE_MODE: single`):** Offer upgrade: "Best score has not improved for 3 iterations (best: N.N/10 at iteration M). Switch to judge board for deeper diagnosis, or stop?" If the user accepts the upgrade, switch to `JUDGE_MODE: board` and add 2 iterations to the remaining count (the board typically needs 2-3 iterations to surface and act on new insights). The board's multi-perspective deliberation often surfaces blind spots the single judge missed.
 
 - **If already using board:** Offer early termination: "Best score has not improved for 3 iterations with the judge board (best: N.N/10 at iteration M). Continue or stop?"
 
