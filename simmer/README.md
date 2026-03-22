@@ -111,16 +111,19 @@ Best candidate: iteration 4 (8.1/10)
 
 No format contract on evaluator output. The judge reads whatever your script produces — test results, metrics, error logs, anything.
 
-## Judge Board (Default)
+## Judge Board
 
-Every simmer run uses a multi-judge panel by default. Three judges with different lenses score independently, then see each other's reasoning and challenge/concede in one deliberation round. A clerk synthesizes consensus scores + single ASI.
+Simmer auto-selects between a single judge and a multi-judge board based on complexity:
+
+- **Simple** (short email, tweet, ≤2 criteria) → single judge, fast
+- **Complex** (3 criteria, long artifact, code, pipelines) → judge board with deliberation
+
+The board dispatches three judges with different lenses, runs one deliberation round, and synthesizes consensus scores + single ASI. If a single-judge run hits a plateau (3 iterations without improvement), simmer offers to upgrade to the board mid-run.
 
 Default lenses per problem class (or define your own):
 - **Text/creative:** Craft, Reader, Domain
 - **Code/testable:** Correctness, Architecture, Efficiency
 - **Pipeline/engineering:** Metrics, Strategy, Integration
-
-For simple artifacts where the overhead isn't worth it, say `"simmer this with a single judge"` to use the original single-judge mode.
 
 ## Agency Composition (Opt-In)
 

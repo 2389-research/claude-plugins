@@ -5,7 +5,7 @@ description: >
   lenses, runs one deliberation round where they challenge each other's scores,
   then synthesizes consensus scores + single ASI. Drop-in replacement for
   simmer-judge that produces identical output format. Do not invoke directly —
-  dispatched by the simmer orchestrator when JUDGE_BOARD is enabled.
+  dispatched by the simmer orchestrator when JUDGE_MODE is board.
 ---
 
 # Simmer Judge Board

@@ -234,12 +234,29 @@ BACKGROUND: [constraints and resources — omit if not provided]
 OUTPUT_CONTRACT: [valid output format description — omit for text/creative]
 VALIDATION_COMMAND: [quick check command — omit if no cheap validation exists]
 SEARCH_SPACE: [what's in scope to explore — omit if unconstrained]
+JUDGE_MODE: [single | board — auto-select, see below]
+USE_AGENCY: [true | false — true only if user said "with agency"]
 ITERATIONS: [N]
 MODE: [seedless | from-file | from-paste | from-workspace]
 OUTPUT_DIR: [path, default: docs/simmer]
 ```
 
 Default iteration count is 3. Override if user specified ("simmer this, 10 rounds"). Don't ask about iteration count — 3 is the default.
+
+### Judge Mode Auto-Selection
+
+Select `JUDGE_MODE` based on problem complexity. **Do not ask the user** — infer from the artifact and criteria.
+
+| Condition | JUDGE_MODE |
+|-----------|-----------|
+| text/creative AND ≤2 criteria AND short artifact (email, tweet, tagline, single paragraph) | `single` |
+| text/creative AND 3 criteria or longer/complex artifact | `board` |
+| code/testable (any) | `board` |
+| pipeline/engineering (any) | `board` |
+
+**User overrides:** If the user said "with a single judge," use `single`. If they said "with a judge board" or "with a panel," use `board`. User intent always wins.
+
+**If `USE_AGENCY: true`**, always use `board` — Agency composition only applies to the board path.
 
 The `OUTPUT_DIR` defaults to `docs/simmer`. Override if the user specifies a different location or if running in a test/scratch context.
 

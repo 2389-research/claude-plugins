@@ -67,11 +67,20 @@ Trigger when user wants iterative refinement of any kind:
 - "Tune this configuration", "improve these prompts against this test suite"
 - Any request to iteratively improve an artifact or workspace
 
-**"with agency"** — if the user says "simmer this with agency" or "use agency," set `USE_AGENCY: true`. This composes judges from Agency primitives instead of manual profiles. Requires Agency MCP server running.
+**"with agency"** — if the user says "simmer this with agency" or "use agency," set `USE_AGENCY: true`. Composes judges from Agency primitives. Requires Agency MCP server running.
 
-**"single judge"** — if the user says "simmer this with a single judge" or the artifact is very simple, set `JUDGE_BOARD: false`. Uses the original single-judge mode.
+**Judge mode is auto-selected by setup** based on problem complexity:
 
-**Default behavior:** Judge board enabled, Agency off. Board provides multi-perspective deliberation with manual profiles. Agency adds task-matched composition when explicitly requested.
+| Condition | JUDGE_MODE |
+|-----------|-----------|
+| text/creative, ≤2 criteria, short artifact (email, tweet, tagline) | `single` |
+| text/creative, 3 criteria or long/complex artifact | `board` |
+| code/testable (any) | `board` |
+| pipeline/engineering (any) | `board` |
+| User says "with a single judge" | `single` (override) |
+| User says "with a judge board" or "with a panel" | `board` (override) |
+
+**Plateau upgrade:** If the loop started with a single judge and detects a plateau (3 iterations without improvement), offer: "Scores have plateaued. Switch to judge board for deeper diagnosis?" If the user accepts, switch to `JUDGE_MODE: board` for remaining iterations.
 
 **Not simmer:** If the artifact is code and the user wants parallel implementations, use cookoff instead.
 
@@ -106,7 +115,7 @@ BACKGROUND: [constraints, available resources, domain knowledge — omit if not 
 OUTPUT_CONTRACT: [valid output format description — omit for text/creative]
 VALIDATION_COMMAND: [quick check command — omit if no cheap validation exists]
 SEARCH_SPACE: [what's in scope to explore — omit if unconstrained]
-JUDGE_BOARD: [true | false — default true. Multi-judge deliberation panel. Set false for simple artifacts where single judge suffices]
+JUDGE_MODE: [single | board — auto-selected by setup based on complexity. User can override]
 JUDGE_PANEL: [optional custom judge definitions — omit to use defaults for problem class]
 USE_AGENCY: [true | false — default false. When true AND Agency MCP is available, compose judges from task-matched primitives. Trigger: "simmer this with agency"]
 AGENCY_GENERATOR: [true | false — default false, experimental: Agency-composed generator for execution craft]
@@ -277,7 +286,7 @@ If no evaluator, skip this step.
 
 **Step 3: Judge (subagent or judge board)**
 
-**If `JUDGE_BOARD: true`:** Invoke `simmer:simmer-judge-board` instead of the single judge. Pass it all the same context below, plus `JUDGE_PANEL` if specified in the setup brief. The board dispatches multiple judges, runs deliberation, and returns output in the exact same format as a single judge. The rest of the loop (reflect, generator) is unchanged.
+**If `JUDGE_MODE: board`:** Invoke `simmer:simmer-judge-board` instead of the single judge. Pass it all the same context below, plus `JUDGE_PANEL` if specified in the setup brief. The board dispatches multiple judges, runs deliberation, and returns output in the exact same format as a single judge. The rest of the loop (reflect, generator) is unchanged.
 
 **Otherwise:** Invoke `simmer:simmer-judge` as a subagent.
 
@@ -363,7 +372,13 @@ Provide: full score history across all iterations so far, current iteration numb
 - *Workspace:* selectively restore workspace files from the best iteration's commit: `git checkout <best-commit> -- <workspace-files>`. Do NOT revert trajectory.md or other tracking files in `{OUTPUT_DIR}`.
 - The generator prompt should note: "Starting from the best version (iteration N), not the latest (which regressed)."
 
-**Plateau detection:** If the best-so-far score (primary criterion if set, otherwise composite) has not improved for 3 consecutive iterations — including regressions that were rolled back — offer the user early termination: "Best score has not improved for 3 iterations (best: N.N/10 at iteration M). Continue or stop?" This catches both flat plateaus and oscillation around a ceiling. Especially important when evaluator runs are expensive (minutes to hours per iteration).
+**Plateau detection:** If the best-so-far score (primary criterion if set, otherwise composite) has not improved for 3 consecutive iterations — including regressions that were rolled back:
+
+- **If currently using single judge (`JUDGE_MODE: single`):** Offer upgrade: "Best score has not improved for 3 iterations (best: N.N/10 at iteration M). Switch to judge board for deeper diagnosis, or stop?" If the user accepts the upgrade, switch to `JUDGE_MODE: board` for the remaining iterations. The board's multi-perspective deliberation often surfaces blind spots the single judge missed.
+
+- **If already using board:** Offer early termination: "Best score has not improved for 3 iterations with the judge board (best: N.N/10 at iteration M). Continue or stop?"
+
+This catches both flat plateaus and oscillation around a ceiling. Especially important when evaluator runs are expensive (minutes to hours per iteration).
 
 ### Phase 3: Output
 
