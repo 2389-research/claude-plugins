@@ -261,9 +261,13 @@ If: returns successfully → use Agency composition
 If: fails or times out → fall back to manual profiles
 ```
 
-### Composing the Judge Panel
+### Composing the Judge Panel (Every Iteration)
 
-Call `agency_assign` with one task per judge. Pack the lens focus, artifact context, and constraints into the description — this is the only field that influences primitive selection.
+**Re-compose judges each iteration, not once at loop start.** The `agency_assign` call is milliseconds (embedding search) — negligible compared to judge dispatch and evaluator runtime. Re-composing lets Agency select different primitives as the problem context evolves.
+
+Iteration 1's descriptions are based on the artifact and criteria alone. Iteration 4's descriptions include everything the panel has learned — what's been tried, what failed, what the model can and can't handle. Different context → potentially different primitives → judges that match the current state of the problem, not just the initial state.
+
+Call `agency_assign` with one task per judge. Pack the lens focus, artifact context, constraints, and **the previous deliberation summary** into the description.
 
 ```
 Call: agency_assign {
@@ -305,11 +309,36 @@ Call: agency_assign {
 }
 ```
 
-**Building the descriptions:** The board constructs each description from:
+**Building the descriptions (evolves each iteration):**
+
+The board constructs each description from:
 - The artifact description and problem class from the setup brief
 - The lens focus from the default panel (or custom panel)
 - Relevant constraints: model size, artifact type, search space
-- Iteration context: what's been tried (from iteration history, if available)
+- **Previous deliberation summary** — what the panel agreed on, what they learned
+- **Iteration history** — what's been tried, scores, regressions
+
+Early iterations have sparse descriptions (just artifact + lens + constraints). Later iterations have rich descriptions that include everything the panel has learned. This means Agency may select different primitives as the problem context evolves — a judge composed for "evaluate a raw extraction prompt" gets different primitives than one composed for "evaluate an extraction prompt where we've learned the 9b model can't handle conditional logic and corrections tables work well."
+
+**Example — iteration 1 description (sparse):**
+```
+Judge an LLM extraction prompt for entity extraction from video
+transcripts. Model: qwen3.5:9b. Focus: evaluator output patterns,
+failure clustering. Single-file mode.
+```
+
+**Example — iteration 4 description (rich):**
+```
+Judge an LLM extraction prompt for entity extraction from video
+transcripts. Model: qwen3.5:9b. Focus: evaluator output patterns.
+Single-file mode.
+
+Panel history: Iteration 1 added correction table but stripped
+working stop-list (regressed). Iteration 2 tried conditional
+logic (9b can't follow it). Iteration 3 recovered with positive
+examples + lookup tables. The model handles tables and checklists
+well but fails at abstract rules. Current best: 5.3/10.
+```
 
 Agency returns a `rendered_prompt` per agent — use it as the judge's system context alongside the standard panelist prompt template. The rendered prompt replaces the generic lens description.
 
