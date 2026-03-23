@@ -85,8 +85,14 @@ PREVIOUS PANEL DELIBERATION:
 [summary of what last round's panel agreed on, disagreed on, and concluded
 — omit on iteration 0]
 
-Score honestly from this lens. Your unique perspective is why you're
-on this board. Don't try to be comprehensive — go deep on your angle.
+Score ALL criteria from your lens — not just one. Your lens frames
+HOW you analyze, not WHAT you analyze. A Metrics judge scores coverage,
+noise, specificity, and conceptual depth — all from a data-analysis
+perspective. This gives the board cross-criterion insight: "coverage
+went up but noise went up more — the change isn't worth it."
+
+Do NOT split criteria across judges (one judge per criterion). Every
+judge scores every criterion from their unique perspective.
 Your scores and reasoning will be shared with the other judges for
 deliberation, so be specific about what you see.
 
@@ -288,7 +294,11 @@ Testing showed static composition produces better output than adaptive re-compos
 
 **Optional: re-compose each iteration (`AGENCY_COMPOSE: each-iteration`).** Call `agency_assign` fresh each iteration with updated descriptions including deliberation summaries and stable wins. Use for diagnostic/research runs where understanding the capability boundary matters more than output quality, or for workspace tasks where the problem domain shifts significantly between iterations.
 
-Call `agency_assign` with one task per judge. Pack the lens focus, artifact context, and constraints into the description. If `AGENCY_COMPOSE: once`, store the returned `rendered_prompt` per judge and reuse it on subsequent iterations.
+Call `agency_assign` with one task per judge. Each description should frame the judge as a **lens on the full problem** — not a specialist on one criterion. The description says what perspective to bring ("focus on evaluator output patterns"), not what criterion to score ("score coverage").
+
+**CRITICAL: Do NOT split criteria across judges.** Every judge scores every criterion from their unique perspective. A Metrics judge scoring all 4 criteria can say "coverage went up but noise went up more — not worth it." A coverage-only judge can't see that trade-off.
+
+If `AGENCY_COMPOSE: once`, store the returned `rendered_prompt` per judge and reuse it on subsequent iterations.
 
 ```
 Call: agency_assign {
@@ -455,6 +465,10 @@ The board preserves simmer's context discipline exactly:
 No new cross-iteration information is introduced. The board multiplies perspectives within a single iteration, not across iterations.
 
 ## Common Mistakes
+
+**Splitting criteria across judges (one criterion per judge)**
+- Problem: Each judge scores only one criterion — loses cross-criterion insight. A coverage-only judge can't see that coverage went up but noise went up more. The board produces 4 isolated scores instead of 12 data points with trade-off awareness.
+- Fix: Every judge scores ALL criteria from their lens. The lens frames the perspective (data analysis, strategy, integration), not the criterion. 3 judges × 4 criteria = 12 scored data points with cross-criterion insight.
 
 **Compound ASI overwhelming the generator**
 - Problem: Each judge's ASI candidate is multi-faceted. The clerk picks one but it still lists 3-4 changes. Generator tries all of them, artifact bloats, scores regress.
