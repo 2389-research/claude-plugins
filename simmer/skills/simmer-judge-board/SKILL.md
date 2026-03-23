@@ -79,11 +79,11 @@ PREVIOUS PANEL DELIBERATION:
 [WORKING / NOT WORKING / DIRECTION from last round — omit on iteration 0]
 
 FILES YOU SHOULD READ:
-- Candidate: [file path]
-- Evaluator script: [file path — omit if judge-only]
-- Ground truth / test data: [file path — omit if unknown]
-- Prior candidates: [file paths for iterations 0 through N-1]
-- Config: [file paths for any config files]
+- Candidate: [e.g., ./docs/simmer/iteration-2-candidate.md]
+- Evaluator script: [e.g., ./evaluate.sh — omit if judge-only]
+- Ground truth / test data: [e.g., ./test-data/expected.json — omit if unknown]
+- Prior candidates: [e.g., ./docs/simmer/iteration-0-candidate.md, iteration-1-candidate.md — code/pipeline only]
+- Config: [e.g., ./config.json — omit if none]
 
 ─── STEP 1: INVESTIGATE (required, before scoring) ───
 
@@ -99,8 +99,9 @@ On iteration 0 (seed):
 Every iteration:
 - Read the candidate file — structure and formatting matter, not just
   the text summary in this prompt
-- Read prior candidates — what structural changes were tried and what
-  was their effect?
+- [Code/pipeline only] Read prior candidates — what structural changes
+  were tried and what was their effect? (Text/creative judges do NOT
+  read prior candidates — this prevents anchoring to previous versions)
 - When you see a failure pattern you don't know how to fix, SEARCH
   for solutions before proposing your ASI
 
