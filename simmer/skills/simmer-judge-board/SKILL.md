@@ -34,7 +34,7 @@ Plus board-specific context:
 - **Problem class**: text/creative, code/testable, or pipeline/engineering
 - **ARTIFACT_TYPE**: single-file or workspace — this determines what the generator can change
 - **SEARCH_SPACE** (if defined): explicit bounds on what's in scope to explore (models, topologies, prompt files, config parameters)
-- **BACKGROUND**: constraints, available resources, execution environment (model size, infrastructure, budget). Judges need this to calibrate their ASI to what the executor can actually do — suggesting a 20-rule correction table for a 9b model is different from suggesting it for a 70b model.
+- **BACKGROUND**: constraints, available resources, execution environment (model size, infrastructure, budget). Judges need this to calibrate their ASI to what the executor can actually do.
 - **Previous deliberation summary** (iteration 2+): structured as WORKING / NOT WORKING / DIRECTION. Judges must respect the WORKING list — these are elements that have been stable across iterations and should not be removed or changed. The NOT WORKING list prevents retrying failed approaches. The DIRECTION is where the panel's strategic reasoning lives. Build on prior conclusions rather than reasoning from scratch each iteration.
 
 ### Mutation Bounds
@@ -46,7 +46,7 @@ Plus board-specific context:
 | **single-file** | The text content of the artifact (prompt, document, config file) | Model selection, code, infrastructure, pipeline topology, add new files |
 | **workspace** | Any files in the workspace directory — code, config, prompts, scripts, add new files | Things outside the workspace, external infrastructure not in the search space |
 
-If `SEARCH_SPACE` is defined, it further constrains what's in scope. A workspace with `SEARCH_SPACE: Models: qwen3.5:4b, qwen3.5:9b. Prompt changes: unlimited.` means the generator can swap between those two models and edit prompts, but can't add new pipeline stages or change the evaluator.
+If `SEARCH_SPACE` is defined, it further constrains what's in scope. The generator can only change things within the search space bounds.
 
 **Every ASI the panel produces must be actionable within these bounds.** If the panel concludes "the model is the bottleneck" but the artifact is single-file (can't swap models), the ASI should say "prompt changes alone won't break through this ceiling — recommend switching to workspace mode or early termination" rather than suggesting a model swap the generator can't execute.
 
@@ -70,46 +70,64 @@ YOUR LENS: [name]
 
 ARTIFACT_TYPE: [single-file | workspace]
 SEARCH_SPACE: [what's in scope to change — omit if unconstrained]
-
-WHAT THE GENERATOR CAN CHANGE:
-[single-file: only the text content of this file. Cannot swap models,
-add code, or change infrastructure.
-OR workspace: any files in the workspace. Can edit code, config, prompts,
-add files. Bounded by search space if defined.]
+WHAT THE GENERATOR CAN CHANGE: [single-file: text only | workspace: files in scope]
 
 BACKGROUND:
-[constraints, model size, infrastructure, available resources — everything
-the generator knows about the execution environment]
+[constraints, model size, infrastructure, available resources]
 
 PREVIOUS PANEL DELIBERATION:
-[summary of what last round's panel agreed on, disagreed on, and concluded
-— omit on iteration 0]
+[WORKING / NOT WORKING / DIRECTION from last round — omit on iteration 0]
+
+FILES YOU SHOULD READ:
+- Candidate: [file path]
+- Evaluator script: [file path — omit if judge-only]
+- Ground truth / test data: [file path — omit if unknown]
+- Prior candidates: [file paths for iterations 0 through N-1]
+- Config: [file paths for any config files]
+
+─── STEP 1: INVESTIGATE (required, before scoring) ───
+
+Read the files listed above. Understand the problem before judging it.
+
+On iteration 0 (seed):
+- Read the evaluator script — understand HOW it scores (exact match?
+  fuzzy? case-sensitive? what format does it expect?)
+- Read the ground truth if accessible — what's the theoretical maximum?
+  Are there unreachable targets?
+- Read the background constraints — what can the model actually do?
+
+Every iteration:
+- Read the candidate file — structure and formatting matter, not just
+  the text summary in this prompt
+- Read prior candidates — what structural changes were tried and what
+  was their effect?
+- When you see a failure pattern you don't know how to fix, SEARCH
+  for solutions before proposing your ASI
+
+─── STEP 2: SCORE (with full understanding) ───
 
 Score ALL criteria from your lens — not just one. Your lens frames
-HOW you analyze, not WHAT you analyze. A Metrics judge scores coverage,
-noise, specificity, and conceptual depth — all from a data-analysis
-perspective. This gives the board cross-criterion insight: "coverage
-went up but noise went up more — the change isn't worth it."
+HOW you analyze, not WHAT you analyze. Every judge scores every
+criterion from their unique perspective. This gives cross-criterion
+insight — one criterion improving while another regresses is a
+trade-off the board needs to surface.
 
-Do NOT split criteria across judges (one judge per criterion). Every
-judge scores every criterion from their unique perspective.
-Your scores and reasoning will be shared with the other judges for
-deliberation, so be specific about what you see.
+Your scores should be grounded in what you found during investigation,
+not just observation of the evaluator output.
 
-Your ASI candidate must be actionable within the generator's bounds.
-If you conclude the bottleneck is outside those bounds (e.g., "model
-is too weak" on a single-file artifact), say so — the clerk will
-recommend early termination or mode change rather than a wasted iteration.
+─── STEP 3: ASI (informed by research) ───
 
-Before scoring and writing your ASI, read the relevant code and
-artifacts — the candidate, the evaluator script, config files, prior
-candidates if available. Understand how the system works, not just
-what the scores say. Then research if needed — if you see a pattern
-in the failures, look up how similar problems are solved.
+Your ASI candidate must:
+- Be actionable within the generator's bounds
+- Cite what you found during investigation — reference the evaluator
+  mechanics, prior iteration results, or research you did
+- Reference prior iterations when relevant — what was tried, why it
+  worked or didn't, and how your suggestion differs
+- If you searched for solutions, cite what you found
 
-A good reviewer reads the code, understands the scores in context,
-and reasons about improvements from that understanding. A bad
-reviewer looks at metrics and guesses.
+If the bottleneck is outside the generator's bounds, say so — the
+clerk will recommend early termination or mode change.
+```
 
 Invoke the skill: simmer:simmer-judge
 
@@ -197,7 +215,7 @@ WORKING (preserve — do not remove or change):
 - [another stable element]
 
 NOT WORKING (do not retry same approach):
-- [element that was tried and regressed, e.g., "Abstract conditional rules — tried iter 2, 9b model can't follow them"]
+- [element that was tried and regressed, e.g., "Verbose rule lists — tried iter 2, caused regression"]
 - [another failed approach]
 
 DIRECTION:
@@ -239,7 +257,7 @@ This is the same pattern as Agency's `AGENCY_COMPOSE: once`, built into simmer. 
 1. **Read the full problem context.** The artifact, criteria, evaluator output format (if any), background constraints, model capabilities, what's mutable. Understand the problem before designing judges for it.
 
 2. **Design 3 judges with diverse perspectives.** Each judge needs a unique angle on the problem. Ask: "What are the 3 most different ways to evaluate this artifact?" The answer depends on the problem:
-   - An LLM extraction prompt for a 9b model might get: **Evaluator Analyst** (deep-dive the metrics), **Model Realist** (what can a 9b model actually follow?), **Downstream User** (would this output work in a RAG pipeline?)
+   - A prompt with an evaluator might get: **Evaluator Analyst** (deep-dive the metrics), **Constraint Realist** (what can the executor actually handle?), **Downstream User** (does the output work for its intended use?)
    - A DND adventure hook might get: **Craft** (structure, pacing), **Player** (agency, decision points), **DM** (runnability, stat completeness)
    - A cold outreach email might get: **Copywriter** (hook, flow, CTA), **Recipient** (cold-read as a busy VP), **Deliverability** (length, spam triggers, reply friction)
 
@@ -271,12 +289,12 @@ Building blocks for constructing judges. Apply relevant ones to each judge based
 
 These show how judges are constructed for different problems — they're examples, not templates.
 
-**LLM extraction prompt (9b model, evaluator-backed):**
+**Code/pipeline with evaluator:**
 | Judge | Why this lens | Key primitives |
 |-------|--------------|----------------|
-| **Evaluator Analyst** | Someone needs to deep-dive the metrics — which entities were missed, which were hallucinated, what patterns emerge | Cluster failures, verify proper nouns, flag stochasticity |
-| **Model Realist** | The 9b model has specific capabilities and limits that affect what prompt structures work | Diagnose before scoring, flag ceilings, research if stuck |
-| **Downstream User** | The extracted entities feed a RAG pipeline — does the output actually work for search? | Protect high-scoring elements, score via seed calibration |
+| **Evaluator Analyst** | Someone needs to deep-dive the metrics — what patterns emerge in pass/fail, where are the near-misses vs systematic gaps? | Cluster failures, flag stochasticity |
+| **Constraint Realist** | The execution environment has specific capabilities and limits that affect what approaches work | Diagnose before scoring, flag ceilings, research if stuck |
+| **Downstream User** | Does the output actually work for its intended use? Would a consumer of this output be satisfied? | Protect high-scoring elements, score via seed calibration |
 
 **Creative writing (judge-only, no evaluator):**
 | Judge | Why this lens | Key primitives |
@@ -328,7 +346,7 @@ If: fails or times out → fall back to manual profiles
 
 **Default: compose once (`AGENCY_COMPOSE: once`).** Call `agency_assign` at iteration 0 and reuse the same `rendered_prompt` for all subsequent iterations. The judges still get updated context each iteration (evaluator output, deliberation summaries, stable wins, iteration history) — they just analyze it from a consistent compositional perspective.
 
-Testing showed static composition produces better output than adaptive re-composition. The same judges building incrementally on one architecture beats re-composed judges who pivot their analysis each round. Static judges had 6.4 composite / 73% recall / ±1 entity variance. Adaptive judges had 4.8-6.0 and pivoted too much.
+Testing showed static composition produces better output than adaptive re-composition. The same judges building incrementally on one architecture beats re-composed judges who pivot their analysis each round.
 
 **Optional: re-compose each iteration (`AGENCY_COMPOSE: each-iteration`).** Call `agency_assign` fresh each iteration with updated descriptions including deliberation summaries and stable wins. Use for diagnostic/research runs where understanding the capability boundary matters more than output quality, or for workspace tasks where the problem domain shifts significantly between iterations.
 
@@ -342,38 +360,16 @@ If `AGENCY_COMPOSE: once`, store the returned `rendered_prompt` per judge and re
 Call: agency_assign {
   tasks: [
     {
-      external_id: "simmer-judge-metrics-iter-N",
-      description: "Judge an LLM extraction prompt for entity extraction
-        from miniature painting video transcripts. Model: qwen3.5:9b.
-        Evaluator output includes per-video coverage %, precision %,
-        parse error counts. Focus your analysis on: evaluator output
-        patterns, failure clustering, near-miss vs systematic gaps.
-        This is a single-file artifact — the generator can only change
-        the prompt text, not code or infrastructure.",
-      skills: ["evaluation", "prompt-engineering", "data-analysis"],
+      external_id: "simmer-judge-[lens]-iter-N",
+      description: "[Describe the judging task from this lens's
+        perspective. Include: artifact type, what the evaluator
+        measures (if any), what constraints apply, and what angle
+        this judge should focus on. Keep it about the lens, not
+        about specific criteria.]",
+      skills: ["evaluation", "[domain-relevant skills]"],
       deliverables: ["scoring-report", "improvement-direction"]
     },
-    {
-      external_id: "simmer-judge-strategy-iter-N",
-      description: "Judge an LLM extraction prompt optimization strategy.
-        The prompt runs on qwen3.5:9b via Ollama for entity extraction.
-        Previous iterations have tried: [summary from iteration history].
-        Focus on: whether the current approach is stuck, what's been
-        tried vs untried, whether prompt complexity is hurting the small
-        model. Single-file mode — only prompt text changes are possible.",
-      skills: ["strategy", "prompt-engineering", "optimization"],
-      deliverables: ["scoring-report", "improvement-direction"]
-    },
-    {
-      external_id: "simmer-judge-integration-iter-N",
-      description: "Judge the output quality of an LLM extraction prompt.
-        Output contract: JSON with 'entities' array, each with 'name'
-        and 'type'. Focus on: output format compliance, entity naming
-        precision, type assignment accuracy, downstream usability for
-        RAG search. Model: qwen3.5:9b, single-file mode.",
-      skills: ["evaluation", "data-quality", "integration"],
-      deliverables: ["scoring-report", "improvement-direction"]
-    }
+    // ... one per judge
   ]
 }
 ```
@@ -382,32 +378,12 @@ Call: agency_assign {
 
 The board constructs each description from:
 - The artifact description and problem class from the setup brief
-- The lens focus from the default panel (or custom panel)
-- Relevant constraints: model size, artifact type, search space
+- The lens focus for this specific judge
+- Relevant constraints: artifact type, execution environment, search space
 
-**If `AGENCY_COMPOSE: once` (default):** Build descriptions once at iteration 0. The judges get updated context (evaluator output, stable wins, deliberation summaries) via the panelist prompt each iteration, but their Agency composition stays constant. This gives compositional continuity — the same judges build incrementally.
+**If `AGENCY_COMPOSE: once` (default):** Build descriptions once at iteration 0. Judges get updated context (evaluator output, stable wins, deliberation summaries) via the panelist prompt each iteration, but their Agency composition stays constant.
 
 **If `AGENCY_COMPOSE: each-iteration`:** Also include previous deliberation summary and iteration history in the description so Agency may select different primitives as context evolves.
-
-**Example description (used for initial composition):**
-```
-Judge an LLM extraction prompt for entity extraction from video
-transcripts. Model: qwen3.5:9b. Focus: evaluator output patterns,
-failure clustering. Single-file mode.
-```
-
-**Example — iteration 4 description (rich):**
-```
-Judge an LLM extraction prompt for entity extraction from video
-transcripts. Model: qwen3.5:9b. Focus: evaluator output patterns.
-Single-file mode.
-
-Panel history: Iteration 1 added correction table but stripped
-working stop-list (regressed). Iteration 2 tried conditional
-logic (9b can't follow it). Iteration 3 recovered with positive
-examples + lookup tables. The model handles tables and checklists
-well but fails at abstract rules. Current best: 5.3/10.
-```
 
 Agency returns a `rendered_prompt` per agent — use it as the judge's system context alongside the standard panelist prompt template. The rendered prompt replaces the generic lens description.
 

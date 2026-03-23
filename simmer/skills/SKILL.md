@@ -289,6 +289,15 @@ If no evaluator, skip this step.
 
 **If `JUDGE_MODE: board`:** Invoke `simmer:simmer-judge-board` instead of the single judge. Pass it all the same context below, plus `JUDGE_PANEL` if specified in the setup brief. The board dispatches multiple judges, runs deliberation, and returns output in the exact same format as a single judge. The rest of the loop (reflect, generator) is unchanged.
 
+**Include file paths so judges can investigate.** In addition to pasted content, pass:
+- Path to the candidate file (or workspace directory)
+- Path to the evaluator script (if evaluator mode)
+- Path to ground truth / test data (if known from setup inspection)
+- Paths to prior iteration candidate files
+- Paths to config files (from setup inspection)
+
+Judges need to read these files themselves — not just the pre-digested summaries in the prompt. A judge who reads the evaluator script discovers exact-match scoring on iteration 0 instead of learning it through 3 iterations of trial and error.
+
 **Otherwise:** Invoke `simmer:simmer-judge` as a subagent.
 
 *Without evaluator:*
