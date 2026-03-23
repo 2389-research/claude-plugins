@@ -35,7 +35,7 @@ Plus board-specific context:
 - **ARTIFACT_TYPE**: single-file or workspace — this determines what the generator can change
 - **SEARCH_SPACE** (if defined): explicit bounds on what's in scope to explore (models, topologies, prompt files, config parameters)
 - **BACKGROUND**: constraints, available resources, execution environment (model size, infrastructure, budget). Judges need this to calibrate their ASI to what the executor can actually do — suggesting a 20-rule correction table for a 9b model is different from suggesting it for a 70b model.
-- **Previous deliberation summary** (iteration 2+): what the panel agreed on, disagreed on, and concluded last round. Judges should build on prior panel conclusions rather than reasoning from scratch each iteration. If the panel concluded "complexity is hurting, keep it simple," the next panel should factor that in.
+- **Previous deliberation summary** (iteration 2+): structured as WORKING / NOT WORKING / DIRECTION. Judges must respect the WORKING list — these are elements that have been stable across iterations and should not be removed or changed. The NOT WORKING list prevents retrying failed approaches. The DIRECTION is where the panel's strategic reasoning lives. Build on prior conclusions rather than reasoning from scratch each iteration.
 
 ### Mutation Bounds
 
@@ -181,11 +181,30 @@ The board's value is in its analysis. The ASI's value is in its focus. Don't let
 
 4. **Keep it focused.** The ASI is ONE direction with ONE primary change. The generator should know exactly what to do. A compound ASI ("fix the correction table AND expand the taxonomy AND add self-check") will overwhelm the generator, especially with smaller models. The single judge's strength was focus — the board must match that.
 
-**Step 3: Deliberation summary (for next iteration's panel).**
+**Step 3: Deliberation summary (for next iteration's panel and Agency re-composition).**
 
-Write a 2-3 sentence summary of what the panel agreed on, what they disagreed on, and what they concluded. This gets passed to the next iteration's panel as PREVIOUS PANEL DELIBERATION. Focus on actionable conclusions, not score details.
+Write a structured summary with three sections. This gets passed to the next iteration's judges, to Agency's `agency_assign` descriptions for re-composition, and to the generator as execution context.
 
-Example: "Panel agreed that the 9b model can't handle long prompts — all three regressions correlated with prompt length increases. Metrics judge noted 15 near-miss entities that need code-side normalization rather than prompt rules. Strategy judge argued for simpler prompt + Python post-processing, which the panel endorsed."
+```
+WORKING (preserve — do not remove or change):
+- [element that's been stable across iterations, e.g., "Corrections lookup table — working since iter 1, held through 3 iterations"]
+- [another stable element]
+
+NOT WORKING (do not retry same approach):
+- [element that was tried and regressed, e.g., "Abstract conditional rules — tried iter 2, 9b model can't follow them"]
+- [another failed approach]
+
+DIRECTION:
+[What the panel concluded about where to go next — one sentence.
+e.g., "Add brand inference as an explicit checklist item — the model handles binary checks well."]
+```
+
+Incorporate the STABLE WINS from the reflect subskill if available — those are tracked across the full trajectory, not just the current deliberation. The deliberation summary adds the panel's reasoning about *why* things worked or didn't.
+
+This structured format ensures:
+- The next iteration's judges know what to preserve (stops the pivoting problem)
+- Agency re-composition gets richer context about what's actually happening
+- The generator knows what's load-bearing and won't strip it when implementing the ASI
 
 **Step 4: Output.**
 
