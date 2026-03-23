@@ -228,57 +228,65 @@ This is identical to what a single judge produces. The orchestrator, reflect, an
 
 ## Judge Composition
 
-The board composes 3 judges for each run. Judges are tailored to the specific problem — the board reads the artifact, criteria, background, and problem class, then composes judges with diverse lenses that cover the problem from different angles.
+The board **constructs** judges for each run — it doesn't pick from a fixed menu. The board reads the artifact, criteria, background, evaluator, and constraints, then builds 3 judges with diverse lenses tailored to this specific problem. The primitives and example lenses below are building blocks and samples, not the judges themselves.
 
-### How Composition Works (No Agency Required)
+### How Composition Works
 
-The board composes judges by:
+1. **Read the full problem context.** The artifact, criteria, evaluator output format (if any), background constraints, model capabilities, what's mutable. Understand the problem before designing judges for it.
 
-1. **Reading the problem context** — artifact type, criteria, evaluator (if any), background constraints, domain
-2. **Selecting 3 diverse lenses** that cover different dimensions of the problem. Each lens should bring a perspective the others don't have. Aim for at least one lens that focuses on the evaluator/metrics (if present), one on the approach/strategy, and one on the output/usability.
-3. **Applying relevant judge primitives** from the built-in set below — these are capabilities that make judges better regardless of the specific problem
+2. **Design 3 judges with diverse perspectives.** Each judge needs a unique angle on the problem. Ask: "What are the 3 most different ways to evaluate this artifact?" The answer depends on the problem:
+   - An LLM extraction prompt for a 9b model might get: **Evaluator Analyst** (deep-dive the metrics), **Model Realist** (what can a 9b model actually follow?), **Downstream User** (would this output work in a RAG pipeline?)
+   - A DND adventure hook might get: **Craft** (structure, pacing), **Player** (agency, decision points), **DM** (runnability, stat completeness)
+   - A cold outreach email might get: **Copywriter** (hook, flow, CTA), **Recipient** (cold-read as a busy VP), **Deliverability** (length, spam triggers, reply friction)
 
-The goal is judges that are **specific to this problem** but **diverse from each other**. "Three judges who all look at the metrics from slightly different angles" is worse than "one metrics judge, one strategy judge, one integration judge."
+   The judges should be specific to the problem, not generic "Metrics/Strategy/Integration."
 
-### Built-In Judge Primitives
+3. **Give each judge relevant capabilities from the primitive library.** These are proven capabilities that make judges more effective — apply the relevant ones based on what each judge needs to do.
 
-These are capabilities proven across 6 rounds of testing to make judges more effective. Apply the relevant ones to each judge's prompt:
+### Judge Primitive Library
+
+Building blocks for constructing judges. Apply relevant ones to each judge based on their role.
 
 **Core (apply to all judges):**
 - Score via seed calibration — score the original first, anchor all subsequent iterations to it
-- Diagnose before scoring — read the candidate, evaluator output, and relevant code/config before writing scores. Understand *why* things are the way they are.
+- Diagnose before scoring — read the candidate, evaluator output, and relevant code/config. Understand *why* things are the way they are before writing scores.
 - Protect high-scoring elements — identify what's working and constrain your ASI to preserve it
+- Score ALL criteria from your lens — every judge scores every criterion from their perspective, not one criterion per judge
 
-**Evaluation (apply when evaluator is present):**
+**When evaluator is present:**
 - Cluster evaluator failures by type — near-misses (spelling), systematic gaps (whole category), noise (hallucinations). The pattern determines the fix.
-- Verify proper nouns from lossy sources — transcripts, OCR, and auto-captions garble names. Check before scoring entity precision.
-- Flag evaluator stochasticity — if the same config produces different results across runs, note it. Small score changes may be noise, not signal.
+- Verify proper nouns from lossy sources — transcripts, OCR, and auto-captions garble names
+- Flag evaluator stochasticity — if the same config produces different results, small score changes may be noise
 
-**Strategy (apply to the strategy-focused judge):**
-- Review what's been tried — check iteration history and exploration status before suggesting more of the same
-- Flag when the current approach has hit a ceiling — if 2+ iterations tried the same type of change with no improvement, the bottleneck is structural
+**When the problem involves exploration:**
+- Review what's been tried — check iteration history before suggesting more of the same
+- Flag ceilings — if 2+ iterations tried the same type of change with no improvement, the bottleneck is structural
 - Research if stuck — look up how similar problems are solved rather than guessing
 
-### Suggested Lenses by Problem Class
+### Example Compositions
 
-These are starting points — the board should adapt them to the specific problem.
+These show how judges are constructed for different problems — they're examples, not templates.
 
-**Text/Creative:**
-- **Craft** — structure, mechanics, pacing, technique
-- **Reader** — engagement, clarity, emotional impact from a cold-read perspective
-- **Domain** — factual accuracy, genre conventions, domain credibility
+**LLM extraction prompt (9b model, evaluator-backed):**
+| Judge | Why this lens | Key primitives |
+|-------|--------------|----------------|
+| **Evaluator Analyst** | Someone needs to deep-dive the metrics — which entities were missed, which were hallucinated, what patterns emerge | Cluster failures, verify proper nouns, flag stochasticity |
+| **Model Realist** | The 9b model has specific capabilities and limits that affect what prompt structures work | Diagnose before scoring, flag ceilings, research if stuck |
+| **Downstream User** | The extracted entities feed a RAG pipeline — does the output actually work for search? | Protect high-scoring elements, score via seed calibration |
 
-**Code/Testable:**
-- **Correctness** — test results, edge cases, error handling
-- **Architecture** — design quality, maintainability, separation of concerns
-- **Efficiency** — performance, resource usage, operational cost
+**Creative writing (judge-only, no evaluator):**
+| Judge | Why this lens | Key primitives |
+|-------|--------------|----------------|
+| **Craft** | Is the writing working at a technical level — structure, pacing, voice? | Diagnose before scoring, protect high-scoring elements |
+| **Reader** | Does this land emotionally for someone reading it cold? | Score via seed calibration |
+| **Domain Expert** | Does it get the genre/setting/rules right? | Research if stuck (for genre conventions) |
 
-**Pipeline/Engineering:**
-- **Metrics** — evaluator output patterns, failure clustering, near-miss analysis
-- **Strategy** — exploration status, approach effectiveness, whether the search space is being navigated well
-- **Integration** — output quality, contract compliance, downstream usability
-
-**Adapt freely.** If the problem is an LLM prompt for a small model, the board might compose: a Metrics judge (what the evaluator shows), a Model Constraints judge (what the 9b model can and can't handle), and a Prompt Architecture judge (whether the prompt structure matches the model's capabilities). The suggested lenses are defaults, not requirements.
+**Pipeline optimization (workspace, multi-model):**
+| Judge | Why this lens | Key primitives |
+|-------|--------------|----------------|
+| **Metrics** | What do the evaluator numbers actually show? | Cluster failures, flag stochasticity |
+| **Architecture** | Is the pipeline structure right, or is it a local optimum? | Flag ceilings, review what's been tried |
+| **Operations** | Can this run reliably in production at acceptable cost? | Protect high-scoring elements |
 
 ### Custom Judge Panels
 
