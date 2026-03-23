@@ -226,35 +226,61 @@ ASI (highest-leverage direction):
 
 This is identical to what a single judge produces. The orchestrator, reflect, and generator cannot tell the difference.
 
-## Default Judge Panels
+## Judge Composition
 
-When no `JUDGE_PANEL` is provided, use defaults based on problem class:
+The board composes 3 judges for each run. Judges are tailored to the specific problem — the board reads the artifact, criteria, background, and problem class, then composes judges with diverse lenses that cover the problem from different angles.
 
-### Text/Creative
+### How Composition Works (No Agency Required)
 
-| Judge | Lens |
-|-------|------|
-| **Craft** | Structure, mechanics, technique. Does the writing work at a craft level — pacing, word choice, sentence rhythm, paragraph flow? Score from the perspective of a writing instructor. |
-| **Reader** | Engagement, clarity, emotional impact. Does this land for the intended audience? Score from the perspective of someone reading this cold with no context. Flag anything that requires re-reading or assumed knowledge. |
-| **Domain** | Factual accuracy, genre conventions, domain credibility. Does this get the subject matter right? Score from the perspective of someone who knows this domain well. |
+The board composes judges by:
 
-### Code/Testable
+1. **Reading the problem context** — artifact type, criteria, evaluator (if any), background constraints, domain
+2. **Selecting 3 diverse lenses** that cover different dimensions of the problem. Each lens should bring a perspective the others don't have. Aim for at least one lens that focuses on the evaluator/metrics (if present), one on the approach/strategy, and one on the output/usability.
+3. **Applying relevant judge primitives** from the built-in set below — these are capabilities that make judges better regardless of the specific problem
 
-| Judge | Lens |
-|-------|------|
-| **Correctness** | Does it work? Focus on test results, edge cases, error handling. Score from the perspective of someone who will run this in production. |
-| **Architecture** | Design quality, maintainability, separation of concerns. Score from the perspective of someone who has to modify this in 6 months. |
-| **Efficiency** | Performance, resource usage, cost. Score from the perspective of someone who cares about the operational cost of running this. |
+The goal is judges that are **specific to this problem** but **diverse from each other**. "Three judges who all look at the metrics from slightly different angles" is worse than "one metrics judge, one strategy judge, one integration judge."
 
-### Pipeline/Engineering
+### Built-In Judge Primitives
 
-| Judge | Lens |
-|-------|------|
-| **Metrics** | Evaluator output analysis. Deep-dive the numbers — which test cases failed, what patterns emerge, where are the near-misses vs systematic gaps? Score based on what the data shows, not what the approach promises. |
-| **Strategy** | Exploration and approach. Is the current configuration the right one? Has the search space been adequately explored? Is the approach stuck, oscillating, or genuinely improving? Score based on trajectory and remaining potential. |
-| **Integration** | Output quality, contract compliance, downstream usability. Does the output actually work for its intended use? Score based on whether someone could use this output today. |
+These are capabilities proven across 6 rounds of testing to make judges more effective. Apply the relevant ones to each judge's prompt:
 
-## Custom Judge Panels
+**Core (apply to all judges):**
+- Score via seed calibration — score the original first, anchor all subsequent iterations to it
+- Diagnose before scoring — read the candidate, evaluator output, and relevant code/config before writing scores. Understand *why* things are the way they are.
+- Protect high-scoring elements — identify what's working and constrain your ASI to preserve it
+
+**Evaluation (apply when evaluator is present):**
+- Cluster evaluator failures by type — near-misses (spelling), systematic gaps (whole category), noise (hallucinations). The pattern determines the fix.
+- Verify proper nouns from lossy sources — transcripts, OCR, and auto-captions garble names. Check before scoring entity precision.
+- Flag evaluator stochasticity — if the same config produces different results across runs, note it. Small score changes may be noise, not signal.
+
+**Strategy (apply to the strategy-focused judge):**
+- Review what's been tried — check iteration history and exploration status before suggesting more of the same
+- Flag when the current approach has hit a ceiling — if 2+ iterations tried the same type of change with no improvement, the bottleneck is structural
+- Research if stuck — look up how similar problems are solved rather than guessing
+
+### Suggested Lenses by Problem Class
+
+These are starting points — the board should adapt them to the specific problem.
+
+**Text/Creative:**
+- **Craft** — structure, mechanics, pacing, technique
+- **Reader** — engagement, clarity, emotional impact from a cold-read perspective
+- **Domain** — factual accuracy, genre conventions, domain credibility
+
+**Code/Testable:**
+- **Correctness** — test results, edge cases, error handling
+- **Architecture** — design quality, maintainability, separation of concerns
+- **Efficiency** — performance, resource usage, operational cost
+
+**Pipeline/Engineering:**
+- **Metrics** — evaluator output patterns, failure clustering, near-miss analysis
+- **Strategy** — exploration status, approach effectiveness, whether the search space is being navigated well
+- **Integration** — output quality, contract compliance, downstream usability
+
+**Adapt freely.** If the problem is an LLM prompt for a small model, the board might compose: a Metrics judge (what the evaluator shows), a Model Constraints judge (what the 9b model can and can't handle), and a Prompt Architecture judge (whether the prompt structure matches the model's capabilities). The suggested lenses are defaults, not requirements.
+
+### Custom Judge Panels
 
 Users can define custom judges in the setup brief:
 
@@ -268,7 +294,7 @@ JUDGE_PANEL:
     lens: Score with focus on whether the reader can act on this immediately
 ```
 
-Custom panels override the defaults entirely. Minimum 2 judges, maximum 5. Default is 3.
+Custom panels override auto-composition entirely. Minimum 2 judges, maximum 5. Default is 3.
 
 ## Agency Integration
 
