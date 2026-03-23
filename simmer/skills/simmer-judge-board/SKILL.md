@@ -228,9 +228,13 @@ This is identical to what a single judge produces. The orchestrator, reflect, an
 
 ## Judge Composition
 
-The board **constructs** judges for each run — it doesn't pick from a fixed menu. The board reads the artifact, criteria, background, evaluator, and constraints, then builds 3 judges with diverse lenses tailored to this specific problem. The primitives and example lenses below are building blocks and samples, not the judges themselves.
+The board composes judges **once at the start of the run**, tailored to the specific problem. It reads the artifact, criteria, background, evaluator, and constraints, then builds 3 judges with diverse lenses. These judges are reused for every iteration — they get updated context each round (evaluator output, stable wins, deliberation summaries) but their lens and capabilities stay fixed.
+
+This is the same pattern as Agency's `AGENCY_COMPOSE: once`, built into simmer. No MCP server needed — the board uses the primitive library below to construct judges the way Agency would.
 
 ### How Composition Works
+
+**At the start of the run (once):**
 
 1. **Read the full problem context.** The artifact, criteria, evaluator output format (if any), background constraints, model capabilities, what's mutable. Understand the problem before designing judges for it.
 
