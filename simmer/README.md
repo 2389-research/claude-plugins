@@ -124,9 +124,6 @@ Judges investigate before scoring — they read the evaluator script, ground tru
 
 If a single-judge run hits a plateau (3 iterations without improvement), simmer offers to upgrade to the board mid-run with 2 extra iterations.
 
-## Agency Integration (Optional)
-
-If the [Agency](https://github.com/agentbureau/agency) MCP server is running, say `"simmer this with agency"` to compose judges from Agency's broader primitive pool. This adds cross-run learning (primitives evolve based on evaluation scores) but is not required — the built-in judge composition produces excellent results on its own.
 
 ## Defaults and Safety
 

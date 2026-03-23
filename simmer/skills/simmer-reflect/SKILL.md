@@ -130,7 +130,7 @@ NOT WORKING:
 - Multi-step prompt structure (tried iter 1, 9b model skipped steps)
 ```
 
-This gets passed to the judge board's deliberation summary and to Agency's `agency_assign` descriptions so judges and generators know what to preserve and what to avoid.
+This gets passed to the judge board's deliberation summary so judges and the generator know what to preserve and what to avoid.
 
 ### 5. Pass ASI Forward
 

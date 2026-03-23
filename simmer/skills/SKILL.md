@@ -67,7 +67,6 @@ Trigger when user wants iterative refinement of any kind:
 - "Tune this configuration", "improve these prompts against this test suite"
 - Any request to iteratively improve an artifact or workspace
 
-**"with agency"** — if the user says "simmer this with agency" or "use agency," set `USE_AGENCY: true`. Composes judges from Agency primitives. Requires Agency MCP server running.
 
 **Judge mode is auto-selected by setup** based on problem complexity:
 
@@ -117,7 +116,6 @@ VALIDATION_COMMAND: [quick check command — omit if no cheap validation exists]
 SEARCH_SPACE: [what's in scope to explore — omit if unconstrained]
 JUDGE_MODE: [single | board — auto-selected by setup based on complexity. User can override]
 JUDGE_PANEL: [optional custom judge definitions — omit to use defaults for problem class]
-USE_AGENCY: [true | false — default false. When true AND Agency MCP is available, compose judges from Agency's broader primitive pool. Trigger: "simmer this with agency"]
 ITERATIONS: [N]
 MODE: [seedless | from-file | from-paste | from-workspace]
 OUTPUT_DIR: [path, default: docs/simmer]

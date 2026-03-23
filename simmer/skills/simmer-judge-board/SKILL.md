@@ -205,9 +205,9 @@ The board's value is in its analysis. The ASI's value is in its focus. Don't let
 
 4. **Keep it focused.** The ASI is ONE direction with ONE primary change. The generator should know exactly what to do. A compound ASI ("fix the correction table AND expand the taxonomy AND add self-check") will overwhelm the generator, especially with smaller models. The single judge's strength was focus — the board must match that.
 
-**Step 3: Deliberation summary (for next iteration's panel and Agency re-composition).**
+**Step 3: Deliberation summary (for next iteration's panel).**
 
-Write a structured summary with three sections. This gets passed to the next iteration's judges, to Agency's `agency_assign` descriptions for re-composition, and to the generator as execution context.
+Write a structured summary with three sections. This gets passed to the next iteration's judges and to the generator as execution context.
 
 ```
 WORKING (preserve — do not remove or change):
@@ -227,7 +227,7 @@ Incorporate the STABLE WINS from the reflect subskill if available — those are
 
 This structured format ensures:
 - The next iteration's judges know what to preserve (stops the pivoting problem)
-- Agency re-composition gets richer context about what's actually happening
+- Future iterations' judges get richer context about what's actually happening
 - The generator knows what's load-bearing and won't strip it when implementing the ASI
 
 **Step 4: Output.**
@@ -248,7 +248,7 @@ This is identical to what a single judge produces. The orchestrator, reflect, an
 
 The board composes judges **once at the start of the run**, tailored to the specific problem. It reads the artifact, criteria, background, evaluator, and constraints, then builds 3 judges with diverse lenses. These judges are reused for every iteration — they get updated context each round (evaluator output, stable wins, deliberation summaries) but their lens and capabilities stay fixed.
 
-This is the same pattern as Agency's `AGENCY_COMPOSE: once`, built into simmer. No MCP server needed — the board uses the primitive library below to construct judges the way Agency would.
+The board uses the primitive library below to construct judges tailored to the specific problem.
 
 ### How Composition Works
 
@@ -325,136 +325,6 @@ JUDGE_PANEL:
 ```
 
 Custom panels override auto-composition entirely. Minimum 2 judges, maximum 5. Default is 3.
-
-## Agency Integration
-
-When the Agency MCP server is available, the board composes judges dynamically instead of using manual profiles. Agency selects primitives (role components, desired outcomes, trade-off configs) matched to each judge's task description, producing agents with task-specific capabilities.
-
-**The board's three-phase workflow stays the same.** Agency only changes how judges are composed, not how they interact.
-
-### Detecting Agency
-
-Before composing, check if Agency is available:
-
-```
-Call: agency_status
-If: returns successfully → use Agency composition
-If: fails or times out → fall back to manual profiles
-```
-
-### Composing the Judge Panel
-
-**Default: compose once (`AGENCY_COMPOSE: once`).** Call `agency_assign` at iteration 0 and reuse the same `rendered_prompt` for all subsequent iterations. The judges still get updated context each iteration (evaluator output, deliberation summaries, stable wins, iteration history) — they just analyze it from a consistent compositional perspective.
-
-Testing showed static composition produces better output than adaptive re-composition. The same judges building incrementally on one architecture beats re-composed judges who pivot their analysis each round.
-
-**Optional: re-compose each iteration (`AGENCY_COMPOSE: each-iteration`).** Call `agency_assign` fresh each iteration with updated descriptions including deliberation summaries and stable wins. Use for diagnostic/research runs where understanding the capability boundary matters more than output quality, or for workspace tasks where the problem domain shifts significantly between iterations.
-
-Call `agency_assign` with one task per judge. Each description should frame the judge as a **lens on the full problem** — not a specialist on one criterion. The description says what perspective to bring ("focus on evaluator output patterns"), not what criterion to score ("score coverage").
-
-**CRITICAL: Do NOT split criteria across judges.** Every judge scores every criterion from their unique perspective. A Metrics judge scoring all 4 criteria can say "coverage went up but noise went up more — not worth it." A coverage-only judge can't see that trade-off.
-
-If `AGENCY_COMPOSE: once`, store the returned `rendered_prompt` per judge and reuse it on subsequent iterations.
-
-```
-Call: agency_assign {
-  tasks: [
-    {
-      external_id: "simmer-judge-[lens]-iter-N",
-      description: "[Describe the judging task from this lens's
-        perspective. Include: artifact type, what the evaluator
-        measures (if any), what constraints apply, and what angle
-        this judge should focus on. Keep it about the lens, not
-        about specific criteria.]",
-      skills: ["evaluation", "[domain-relevant skills]"],
-      deliverables: ["scoring-report", "improvement-direction"]
-    },
-    // ... one per judge
-  ]
-}
-```
-
-**Building the descriptions:**
-
-The board constructs each description from:
-- The artifact description and problem class from the setup brief
-- The lens focus for this specific judge
-- Relevant constraints: artifact type, execution environment, search space
-
-**If `AGENCY_COMPOSE: once` (default):** Build descriptions once at iteration 0. Judges get updated context (evaluator output, stable wins, deliberation summaries) via the panelist prompt each iteration, but their Agency composition stays constant.
-
-**If `AGENCY_COMPOSE: each-iteration`:** Also include previous deliberation summary and iteration history in the description so Agency may select different primitives as context evolves.
-
-Agency returns a `rendered_prompt` per agent — use it as the judge's system context alongside the standard panelist prompt template. The rendered prompt replaces the generic lens description.
-
-### Using the Rendered Prompt
-
-Each judge's panelist prompt becomes:
-
-```
-You are one of three judges on a simmer judge board.
-
-AGENCY COMPOSITION:
-[rendered_prompt from agency_assign — contains role components,
-desired outcomes, and trade-off configuration selected for this
-specific judging task]
-
-[... rest of standard panelist prompt: artifact type, mutation bounds,
-background, previous deliberation, instructions to read code, etc.]
-```
-
-The rendered prompt provides the judge's specialized capabilities. The standard panelist prompt provides simmer-specific context (mutation bounds, deliberation protocol, scoring format).
-
-### Submitting Evaluations
-
-After synthesis, submit the panel's consensus evaluation back to Agency so primitives evolve:
-
-```
-For each judge:
-  Call: agency_evaluator { agency_task_id: "[from assign response]" }
-  → returns evaluator_prompt, callback_jwt
-
-  Call: agency_submit_evaluation {
-    agency_task_id: "[from assign response]",
-    callback_jwt: "[from evaluator response]",
-    output: "Judge [lens] scored: [scores]. Key contribution to
-      deliberation: [what this judge uniquely surfaced]. Panel
-      consensus composite: [N.N]/10.",
-    score: [composite * 10, as 0-100 integer],
-    task_completed: true,
-    score_type: "rubric"
-  }
-```
-
-This closes the feedback loop. Agency learns which primitive compositions produce good judges for this type of task. Future simmer runs on similar artifacts get better-composed judges.
-
-### Graceful Degradation
-
-```
-IF agency_status succeeds:
-    Compose judges via agency_assign
-    After synthesis, submit evaluations via agency_submit_evaluation
-ELSE:
-    Use manual profiles from default panels (or JUDGE_PANEL if specified)
-    Skip evaluation submission
-    Tell the user what happened and how to fix it
-```
-
-**When Agency is unavailable and the user requested it**, explain clearly:
-
-> "Agency MCP isn't running — I'll use manual judge profiles for this run. You'll still get the judge board with deliberation, just without task-matched composition.
->
-> To enable Agency for future runs:
-> ```
-> pipx install agency-engine
-> agency init
-> agency serve
-> ```
-> Then add it to your Claude Code MCP settings. See the [Agency docs](https://github.com/agentbureau/agency) for details."
-
-**When Agency is unavailable and the user didn't request it**, say nothing — just use manual profiles silently. Don't advertise Agency to users who haven't asked for it.
-
-The board works identically in both paths. Agency adds better composition and cross-run learning, but isn't required.
 
 ## Context Discipline
 

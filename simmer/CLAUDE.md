@@ -49,7 +49,6 @@ Output best candidate + trajectory
 
 **Judge board:** For complex artifacts, the board constructs problem-specific judges that investigate before scoring — reading the evaluator script, ground truth, prior candidates, and config to understand the problem before proposing improvements. Judges are composed once per run, tailored to the specific problem, then reuse for all iterations with updated context. Tracks stable wins (WORKING/NOT WORKING) across iterations to prevent undoing proven improvements.
 
-**Agency integration (optional):** When `USE_AGENCY: true` and the Agency MCP server is available, judges are composed from Agency's broader primitive pool with cross-run learning. Not required — the built-in composition produces excellent results on its own.
 
 ## Artifact Modes
 
