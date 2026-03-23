@@ -1,6 +1,6 @@
 {
   "name": "simmer",
   "description": "Iterative artifact refinement - hone any artifact or workspace over multiple rounds using criteria-driven judge feedback, runnable evaluators, and focused directional improvements",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "commands": []
 }
