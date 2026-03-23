@@ -280,13 +280,15 @@ If: returns successfully → use Agency composition
 If: fails or times out → fall back to manual profiles
 ```
 
-### Composing the Judge Panel (Every Iteration)
+### Composing the Judge Panel
 
-**Re-compose judges each iteration, not once at loop start.** The `agency_assign` call is milliseconds (embedding search) — negligible compared to judge dispatch and evaluator runtime. Re-composing lets Agency select different primitives as the problem context evolves.
+**Default: compose once (`AGENCY_COMPOSE: once`).** Call `agency_assign` at iteration 0 and reuse the same `rendered_prompt` for all subsequent iterations. The judges still get updated context each iteration (evaluator output, deliberation summaries, stable wins, iteration history) — they just analyze it from a consistent compositional perspective.
 
-Iteration 1's descriptions are based on the artifact and criteria alone. Iteration 4's descriptions include everything the panel has learned — what's been tried, what failed, what the model can and can't handle. Different context → potentially different primitives → judges that match the current state of the problem, not just the initial state.
+Testing showed static composition produces better output than adaptive re-composition. The same judges building incrementally on one architecture beats re-composed judges who pivot their analysis each round. Static judges had 6.4 composite / 73% recall / ±1 entity variance. Adaptive judges had 4.8-6.0 and pivoted too much.
 
-Call `agency_assign` with one task per judge. Pack the lens focus, artifact context, constraints, and **the previous deliberation summary** into the description.
+**Optional: re-compose each iteration (`AGENCY_COMPOSE: each-iteration`).** Call `agency_assign` fresh each iteration with updated descriptions including deliberation summaries and stable wins. Use for diagnostic/research runs where understanding the capability boundary matters more than output quality, or for workspace tasks where the problem domain shifts significantly between iterations.
+
+Call `agency_assign` with one task per judge. Pack the lens focus, artifact context, and constraints into the description. If `AGENCY_COMPOSE: once`, store the returned `rendered_prompt` per judge and reuse it on subsequent iterations.
 
 ```
 Call: agency_assign {
@@ -328,18 +330,18 @@ Call: agency_assign {
 }
 ```
 
-**Building the descriptions (evolves each iteration):**
+**Building the descriptions:**
 
 The board constructs each description from:
 - The artifact description and problem class from the setup brief
 - The lens focus from the default panel (or custom panel)
 - Relevant constraints: model size, artifact type, search space
-- **Previous deliberation summary** — what the panel agreed on, what they learned
-- **Iteration history** — what's been tried, scores, regressions
 
-Early iterations have sparse descriptions (just artifact + lens + constraints). Later iterations have rich descriptions that include everything the panel has learned. This means Agency may select different primitives as the problem context evolves — a judge composed for "evaluate a raw extraction prompt" gets different primitives than one composed for "evaluate an extraction prompt where we've learned the 9b model can't handle conditional logic and corrections tables work well."
+**If `AGENCY_COMPOSE: once` (default):** Build descriptions once at iteration 0. The judges get updated context (evaluator output, stable wins, deliberation summaries) via the panelist prompt each iteration, but their Agency composition stays constant. This gives compositional continuity — the same judges build incrementally.
 
-**Example — iteration 1 description (sparse):**
+**If `AGENCY_COMPOSE: each-iteration`:** Also include previous deliberation summary and iteration history in the description so Agency may select different primitives as context evolves.
+
+**Example description (used for initial composition):**
 ```
 Judge an LLM extraction prompt for entity extraction from video
 transcripts. Model: qwen3.5:9b. Focus: evaluator output patterns,
