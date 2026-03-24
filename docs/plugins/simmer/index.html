@@ -7,7 +7,7 @@
   <!-- Primary Meta Tags -->
   <title>simmer — Development Plugin for Claude Code | 2389 Research</title>
   <meta name="title" content="simmer — Development Plugin for Claude Code | 2389 Research">
-  <meta name="description" content="Iterative artifact refinement - hone any artifact or workspace over multiple rounds using criteria-driven judge feedback, runnable evaluators, and focused directional improvements">
+  <meta name="description" content="Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements">
   <meta name="keywords" content="refinement, iteration, criteria, scoring, judge, generator, artifact, improvement, workspace, evaluator, pipeline, optimization, Claude Code, plugins, MCP servers, AI development, Claude, Anthropic, development tools, 2389 Research">
   <meta name="author" content="2389 Research Inc">
   <meta name="robots" content="index, follow">
@@ -19,7 +19,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://2389-research.github.io/claude-plugins/plugins/simmer/">
   <meta property="og:title" content="simmer — Development Plugin for Claude Code | 2389 Research">
-  <meta property="og:description" content="Iterative artifact refinement - hone any artifact or workspace over multiple rounds using criteria-driven judge feedback, runnable evaluators, and focused directional improvements">
+  <meta property="og:description" content="Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements">
   <meta property="og:image" content="https://2389-research.github.io/claude-plugins/plugins/simmer/og-image.png">
   <meta property="og:site_name" content="2389 Research Plugin Marketplace">
 
@@ -27,7 +27,7 @@
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://2389-research.github.io/claude-plugins/plugins/simmer/">
   <meta property="twitter:title" content="simmer — Development Plugin for Claude Code | 2389 Research">
-  <meta property="twitter:description" content="Iterative artifact refinement - hone any artifact or workspace over multiple rounds using criteria-driven judge feedback, runnable evaluators, and focused directional improvements">
+  <meta property="twitter:description" content="Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements">
   <meta property="twitter:image" content="https://2389-research.github.io/claude-plugins/plugins/simmer/og-image.png">
 
   <!-- Favicon -->
@@ -78,11 +78,11 @@
 
       <div class="plugin-hero-header">
         <h1 class="plugin-hero-title">simmer</h1>
-        <span class="plugin-hero-version">v2.0.0</span>
+        <span class="plugin-hero-version">v3.0.0</span>
         
       </div>
 
-      <p class="plugin-hero-description">Iterative artifact refinement - hone any artifact or workspace over multiple rounds using criteria-driven judge feedback, runnable evaluators, and focused directional improvements</p>
+      <p class="plugin-hero-description">Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements</p>
 
       <div class="plugin-tags-large"><span class="tag">refinement</span><span class="tag">iteration</span><span class="tag">criteria</span><span class="tag">scoring</span><span class="tag">judge</span><span class="tag">generator</span><span class="tag">artifact</span><span class="tag">improvement</span><span class="tag">workspace</span><span class="tag">evaluator</span><span class="tag">pipeline</span><span class="tag">optimization</span></div>
 
@@ -185,15 +185,9 @@ No format contract on evaluator output. The judge reads whatever your script pro
 <h3>Judge Board</h3>
 <p>Simmer auto-selects between a single judge and a multi-judge board based on complexity:</p>
 <ul><li><strong>Simple</strong> (short email, tweet, ≤2 criteria) → single judge, fast</li><li><strong>Complex</strong> (3 criteria, long artifact, code, pipelines) → judge board with deliberation</li></ul>
-<p>The board dispatches three judges with different lenses, runs one deliberation round, and synthesizes consensus scores + single ASI. If a single-judge run hits a plateau (3 iterations without improvement), simmer offers to upgrade to the board mid-run.</p>
-<p>Default lenses per problem class (or define your own):</p>
-<ul><li><strong>Text/creative:</strong> Craft, Reader, Domain</li><li><strong>Code/testable:</strong> Correctness, Architecture, Efficiency</li><li><strong>Pipeline/engineering:</strong> Metrics, Strategy, Integration</li></ul>
-<h3>Agency Composition (Opt-In)</h3>
-<p>If the <a href="https://github.com/agentbureau/agency" rel="noopener noreferrer">Agency</a> MCP server is running, say:</p>
-<pre><code class="language-">"Simmer this with agency"
-</code></pre>
-<p>Agency composes task-matched judges from evolved primitives instead of manual profiles. Judges come in understanding your specific problem domain. Evaluation scores feed back into Agency so future runs get better judges automatically.</p>
-<p>Agency composes judges only — the generator stays standard. Testing showed Agency judges + standard generator produces the best results.</p>
+<p>The board constructs three judges tailored to your specific problem — not from a fixed menu, but by reading your artifact, criteria, and constraints and designing judges with diverse perspectives. An extraction prompt gets different judges than a DND adventure hook.</p>
+<p>Judges investigate before scoring — they read the evaluator script, ground truth, prior candidates, and config files to understand the problem deeply. A judge who reads the evaluator discovers scoring mechanics on iteration 0 instead of learning them through 3 iterations of trial and error.</p>
+<p>If a single-judge run hits a plateau (3 iterations without improvement), simmer offers to upgrade to the board mid-run with 2 extra iterations.</p>
 <h3>Defaults and Safety</h3>
 <p><strong>Default iteration count:</strong> 3 rounds per batch. After each batch, simmer asks whether to continue. You can request a specific count ("simmer this for 10 rounds") or stop early at any prompt.</p>
 <p><strong>Regression safety:</strong> The reflect subskill tracks the best candidate seen so far. If a new iteration scores lower than the current best, the best-so-far is preserved — the loop never loses progress. At the end, <code>result.md</code> always contains the highest-scoring candidate, not just the latest one.</p>
@@ -385,10 +379,10 @@ docs/simmer/                   # Tracking files (separate from workspace)
     "name": "2389 Research Inc",
     "url": "https://2389.ai"
   },
-  "description": "Iterative artifact refinement - hone any artifact or workspace over multiple rounds using criteria-driven judge feedback, runnable evaluators, and focused directional improvements",
+  "description": "Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements",
   "url": "https://2389-research.github.io/claude-plugins/plugins/simmer/",
   "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/simmer",
-  "softwareVersion": "2.0.0",
+  "softwareVersion": "3.0.0",
   "license": "https://opensource.org/licenses/MIT"
 }
   </script>
