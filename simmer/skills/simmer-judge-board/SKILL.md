@@ -34,8 +34,8 @@ Plus board-specific context:
 - **Problem class**: text/creative, code/testable, or pipeline/engineering
 - **ARTIFACT_TYPE**: single-file or workspace — this determines what the generator can change
 - **SEARCH_SPACE** (if defined): explicit bounds on what's in scope to explore (models, topologies, prompt files, config parameters)
-- **BACKGROUND**: constraints, available resources, execution environment (model size, infrastructure, budget). Judges need this to calibrate their ASI to what the executor can actually do — suggesting a 20-rule correction table for a 9b model is different from suggesting it for a 70b model.
-- **Previous deliberation summary** (iteration 2+): what the panel agreed on, disagreed on, and concluded last round. Judges should build on prior panel conclusions rather than reasoning from scratch each iteration. If the panel concluded "complexity is hurting, keep it simple," the next panel should factor that in.
+- **BACKGROUND**: constraints, available resources, execution environment (model size, infrastructure, budget). Judges need this to calibrate their ASI to what the executor can actually do.
+- **Previous deliberation summary** (iteration 2+): structured as WORKING / NOT WORKING / DIRECTION. Judges must respect the WORKING list — these are elements that have been stable across iterations and should not be removed or changed. The NOT WORKING list prevents retrying failed approaches. The DIRECTION is where the panel's strategic reasoning lives. Build on prior conclusions rather than reasoning from scratch each iteration.
 
 ### Mutation Bounds
 
@@ -46,7 +46,7 @@ Plus board-specific context:
 | **single-file** | The text content of the artifact (prompt, document, config file) | Model selection, code, infrastructure, pipeline topology, add new files |
 | **workspace** | Any files in the workspace directory — code, config, prompts, scripts, add new files | Things outside the workspace, external infrastructure not in the search space |
 
-If `SEARCH_SPACE` is defined, it further constrains what's in scope. A workspace with `SEARCH_SPACE: Models: qwen3.5:4b, qwen3.5:9b. Prompt changes: unlimited.` means the generator can swap between those two models and edit prompts, but can't add new pipeline stages or change the evaluator.
+If `SEARCH_SPACE` is defined, it further constrains what's in scope. The generator can only change things within the search space bounds.
 
 **Every ASI the panel produces must be actionable within these bounds.** If the panel concludes "the model is the bottleneck" but the artifact is single-file (can't swap models), the ASI should say "prompt changes alone won't break through this ceiling — recommend switching to workspace mode or early termination" rather than suggesting a model swap the generator can't execute.
 
@@ -70,40 +70,65 @@ YOUR LENS: [name]
 
 ARTIFACT_TYPE: [single-file | workspace]
 SEARCH_SPACE: [what's in scope to change — omit if unconstrained]
-
-WHAT THE GENERATOR CAN CHANGE:
-[single-file: only the text content of this file. Cannot swap models,
-add code, or change infrastructure.
-OR workspace: any files in the workspace. Can edit code, config, prompts,
-add files. Bounded by search space if defined.]
+WHAT THE GENERATOR CAN CHANGE: [single-file: text only | workspace: files in scope]
 
 BACKGROUND:
-[constraints, model size, infrastructure, available resources — everything
-the generator knows about the execution environment]
+[constraints, model size, infrastructure, available resources]
 
 PREVIOUS PANEL DELIBERATION:
-[summary of what last round's panel agreed on, disagreed on, and concluded
-— omit on iteration 0]
+[WORKING / NOT WORKING / DIRECTION from last round — omit on iteration 0]
 
-Score honestly from this lens. Your unique perspective is why you're
-on this board. Don't try to be comprehensive — go deep on your angle.
-Your scores and reasoning will be shared with the other judges for
-deliberation, so be specific about what you see.
+FILES YOU SHOULD READ:
+- Candidate: [e.g., ./docs/simmer/iteration-2-candidate.md]
+- Evaluator script: [e.g., ./evaluate.sh — omit if judge-only]
+- Ground truth / test data: [e.g., ./test-data/expected.json — omit if unknown]
+- Prior candidates: [e.g., ./docs/simmer/iteration-0-candidate.md, iteration-1-candidate.md — code/pipeline only]
+- Config: [e.g., ./config.json — omit if none]
 
-Your ASI candidate must be actionable within the generator's bounds.
-If you conclude the bottleneck is outside those bounds (e.g., "model
-is too weak" on a single-file artifact), say so — the clerk will
-recommend early termination or mode change rather than a wasted iteration.
+─── STEP 1: INVESTIGATE (required, before scoring) ───
 
-Before scoring and writing your ASI, read the relevant code and
-artifacts — the candidate, the evaluator script, config files, prior
-candidates if available. Understand how the system works, not just
-what the scores say. Then research if needed — if you see a pattern
-in the failures, look up how similar problems are solved.
+Read the files listed above. Understand the problem before judging it.
 
-A good reviewer reads the code, understands the scores in context,
-and reasons about improvements from that understanding. A bad
-reviewer looks at metrics and guesses.
+On iteration 0 (seed):
+- Read the evaluator script — understand HOW it scores (exact match?
+  fuzzy? case-sensitive? what format does it expect?)
+- Read the ground truth if accessible — what's the theoretical maximum?
+  Are there unreachable targets?
+- Read the background constraints — what can the model actually do?
+
+Every iteration:
+- Read the candidate file — structure and formatting matter, not just
+  the text summary in this prompt
+- [Code/pipeline only] Read prior candidates — what structural changes
+  were tried and what was their effect? (Text/creative judges do NOT
+  read prior candidates — this prevents anchoring to previous versions)
+- When you see a failure pattern you don't know how to fix, SEARCH
+  for solutions before proposing your ASI
+
+─── STEP 2: SCORE (with full understanding) ───
+
+Score ALL criteria from your lens — not just one. Your lens frames
+HOW you analyze, not WHAT you analyze. Every judge scores every
+criterion from their unique perspective. This gives cross-criterion
+insight — one criterion improving while another regresses is a
+trade-off the board needs to surface.
+
+Your scores should be grounded in what you found during investigation,
+not just observation of the evaluator output.
+
+─── STEP 3: ASI (informed by research) ───
+
+Your ASI candidate must:
+- Be actionable within the generator's bounds
+- Cite what you found during investigation — reference the evaluator
+  mechanics, prior iteration results, or research you did
+- Reference prior iterations when relevant — what was tried, why it
+  worked or didn't, and how your suggestion differs
+- If you searched for solutions, cite what you found
+
+If the bottleneck is outside the generator's bounds, say so — the
+clerk will recommend early termination or mode change.
+```
 
 Invoke the skill: simmer:simmer-judge
 
@@ -183,9 +208,28 @@ The board's value is in its analysis. The ASI's value is in its focus. Don't let
 
 **Step 3: Deliberation summary (for next iteration's panel).**
 
-Write a 2-3 sentence summary of what the panel agreed on, what they disagreed on, and what they concluded. This gets passed to the next iteration's panel as PREVIOUS PANEL DELIBERATION. Focus on actionable conclusions, not score details.
+Write a structured summary with three sections. This gets passed to the next iteration's judges and to the generator as execution context.
 
-Example: "Panel agreed that the 9b model can't handle long prompts — all three regressions correlated with prompt length increases. Metrics judge noted 15 near-miss entities that need code-side normalization rather than prompt rules. Strategy judge argued for simpler prompt + Python post-processing, which the panel endorsed."
+```
+WORKING (preserve — do not remove or change):
+- [element that's been stable across iterations, e.g., "Corrections lookup table — working since iter 1, held through 3 iterations"]
+- [another stable element]
+
+NOT WORKING (do not retry same approach):
+- [element that was tried and regressed, e.g., "Verbose rule lists — tried iter 2, caused regression"]
+- [another failed approach]
+
+DIRECTION:
+[What the panel concluded about where to go next — one sentence.
+e.g., "Add brand inference as an explicit checklist item — the model handles binary checks well."]
+```
+
+Incorporate the STABLE WINS from the reflect subskill if available — those are tracked across the full trajectory, not just the current deliberation. The deliberation summary adds the panel's reasoning about *why* things worked or didn't.
+
+This structured format ensures:
+- The next iteration's judges know what to preserve (stops the pivoting problem)
+- Future iterations' judges get richer context about what's actually happening
+- The generator knows what's load-bearing and won't strip it when implementing the ASI
 
 **Step 4: Output.**
 
@@ -201,35 +245,73 @@ ASI (highest-leverage direction):
 
 This is identical to what a single judge produces. The orchestrator, reflect, and generator cannot tell the difference.
 
-## Default Judge Panels
+## Judge Composition
 
-When no `JUDGE_PANEL` is provided, use defaults based on problem class:
+The board composes judges **once at the start of the run**, tailored to the specific problem. It reads the artifact, criteria, background, evaluator, and constraints, then builds 3 judges with diverse lenses. These judges are reused for every iteration — they get updated context each round (evaluator output, stable wins, deliberation summaries) but their lens and capabilities stay fixed.
 
-### Text/Creative
+The board uses the primitive library below to construct judges tailored to the specific problem.
 
-| Judge | Lens |
-|-------|------|
-| **Craft** | Structure, mechanics, technique. Does the writing work at a craft level — pacing, word choice, sentence rhythm, paragraph flow? Score from the perspective of a writing instructor. |
-| **Reader** | Engagement, clarity, emotional impact. Does this land for the intended audience? Score from the perspective of someone reading this cold with no context. Flag anything that requires re-reading or assumed knowledge. |
-| **Domain** | Factual accuracy, genre conventions, domain credibility. Does this get the subject matter right? Score from the perspective of someone who knows this domain well. |
+### How Composition Works
 
-### Code/Testable
+**At the start of the run (once):**
 
-| Judge | Lens |
-|-------|------|
-| **Correctness** | Does it work? Focus on test results, edge cases, error handling. Score from the perspective of someone who will run this in production. |
-| **Architecture** | Design quality, maintainability, separation of concerns. Score from the perspective of someone who has to modify this in 6 months. |
-| **Efficiency** | Performance, resource usage, cost. Score from the perspective of someone who cares about the operational cost of running this. |
+1. **Read the full problem context.** The artifact, criteria, evaluator output format (if any), background constraints, model capabilities, what's mutable. Understand the problem before designing judges for it.
 
-### Pipeline/Engineering
+2. **Design 3 judges with diverse perspectives.** Each judge needs a unique angle on the problem. Ask: "What are the 3 most different ways to evaluate this artifact?" The answer depends on the problem:
+   - A prompt with an evaluator might get: **Evaluator Analyst** (deep-dive the metrics), **Constraint Realist** (what can the executor actually handle?), **Downstream User** (does the output work for its intended use?)
+   - A DND adventure hook might get: **Craft** (structure, pacing), **Player** (agency, decision points), **DM** (runnability, stat completeness)
+   - A cold outreach email might get: **Copywriter** (hook, flow, CTA), **Recipient** (cold-read as a busy VP), **Deliverability** (length, spam triggers, reply friction)
 
-| Judge | Lens |
-|-------|------|
-| **Metrics** | Evaluator output analysis. Deep-dive the numbers — which test cases failed, what patterns emerge, where are the near-misses vs systematic gaps? Score based on what the data shows, not what the approach promises. |
-| **Strategy** | Exploration and approach. Is the current configuration the right one? Has the search space been adequately explored? Is the approach stuck, oscillating, or genuinely improving? Score based on trajectory and remaining potential. |
-| **Integration** | Output quality, contract compliance, downstream usability. Does the output actually work for its intended use? Score based on whether someone could use this output today. |
+   The judges should be specific to the problem, not generic "Metrics/Strategy/Integration."
 
-## Custom Judge Panels
+3. **Give each judge relevant capabilities from the primitive library.** These are proven capabilities that make judges more effective — apply the relevant ones based on what each judge needs to do.
+
+### Judge Primitive Library
+
+Building blocks for constructing judges. Apply relevant ones to each judge based on their role.
+
+**Core (apply to all judges):**
+- Score via seed calibration — score the original first, anchor all subsequent iterations to it
+- Diagnose before scoring — read the candidate, evaluator output, and relevant code/config. Understand *why* things are the way they are before writing scores.
+- Protect high-scoring elements — identify what's working and constrain your ASI to preserve it
+- Score ALL criteria from your lens — every judge scores every criterion from their perspective, not one criterion per judge
+
+**When evaluator is present:**
+- Cluster evaluator failures by type — near-misses (spelling), systematic gaps (whole category), noise (hallucinations). The pattern determines the fix.
+- Verify proper nouns from lossy sources — transcripts, OCR, and auto-captions garble names
+- Flag evaluator stochasticity — if the same config produces different results, small score changes may be noise
+
+**When the problem involves exploration:**
+- Review what's been tried — check iteration history before suggesting more of the same
+- Flag ceilings — if 2+ iterations tried the same type of change with no improvement, the bottleneck is structural
+- Research if stuck — look up how similar problems are solved rather than guessing
+
+### Example Compositions
+
+These show how judges are constructed for different problems — they're examples, not templates.
+
+**Code/pipeline with evaluator:**
+| Judge | Why this lens | Key primitives |
+|-------|--------------|----------------|
+| **Evaluator Analyst** | Someone needs to deep-dive the metrics — what patterns emerge in pass/fail, where are the near-misses vs systematic gaps? | Cluster failures, flag stochasticity |
+| **Constraint Realist** | The execution environment has specific capabilities and limits that affect what approaches work | Diagnose before scoring, flag ceilings, research if stuck |
+| **Downstream User** | Does the output actually work for its intended use? Would a consumer of this output be satisfied? | Protect high-scoring elements, score via seed calibration |
+
+**Creative writing (judge-only, no evaluator):**
+| Judge | Why this lens | Key primitives |
+|-------|--------------|----------------|
+| **Craft** | Is the writing working at a technical level — structure, pacing, voice? | Diagnose before scoring, protect high-scoring elements |
+| **Reader** | Does this land emotionally for someone reading it cold? | Score via seed calibration |
+| **Domain Expert** | Does it get the genre/setting/rules right? | Research if stuck (for genre conventions) |
+
+**Pipeline optimization (workspace, multi-model):**
+| Judge | Why this lens | Key primitives |
+|-------|--------------|----------------|
+| **Metrics** | What do the evaluator numbers actually show? | Cluster failures, flag stochasticity |
+| **Architecture** | Is the pipeline structure right, or is it a local optimum? | Flag ceilings, review what's been tried |
+| **Operations** | Can this run reliably in production at acceptable cost? | Protect high-scoring elements |
+
+### Custom Judge Panels
 
 Users can define custom judges in the setup brief:
 
@@ -243,144 +325,7 @@ JUDGE_PANEL:
     lens: Score with focus on whether the reader can act on this immediately
 ```
 
-Custom panels override the defaults entirely. Minimum 2 judges, maximum 5. Default is 3.
-
-## Agency Integration
-
-When the Agency MCP server is available, the board composes judges dynamically instead of using manual profiles. Agency selects primitives (role components, desired outcomes, trade-off configs) matched to each judge's task description, producing agents with task-specific capabilities.
-
-**The board's three-phase workflow stays the same.** Agency only changes how judges are composed, not how they interact.
-
-### Detecting Agency
-
-Before composing, check if Agency is available:
-
-```
-Call: agency_status
-If: returns successfully → use Agency composition
-If: fails or times out → fall back to manual profiles
-```
-
-### Composing the Judge Panel
-
-Call `agency_assign` with one task per judge. Pack the lens focus, artifact context, and constraints into the description — this is the only field that influences primitive selection.
-
-```
-Call: agency_assign {
-  tasks: [
-    {
-      external_id: "simmer-judge-metrics-iter-N",
-      description: "Judge an LLM extraction prompt for entity extraction
-        from miniature painting video transcripts. Model: qwen3.5:9b.
-        Evaluator output includes per-video coverage %, precision %,
-        parse error counts. Focus your analysis on: evaluator output
-        patterns, failure clustering, near-miss vs systematic gaps.
-        This is a single-file artifact — the generator can only change
-        the prompt text, not code or infrastructure.",
-      skills: ["evaluation", "prompt-engineering", "data-analysis"],
-      deliverables: ["scoring-report", "improvement-direction"]
-    },
-    {
-      external_id: "simmer-judge-strategy-iter-N",
-      description: "Judge an LLM extraction prompt optimization strategy.
-        The prompt runs on qwen3.5:9b via Ollama for entity extraction.
-        Previous iterations have tried: [summary from iteration history].
-        Focus on: whether the current approach is stuck, what's been
-        tried vs untried, whether prompt complexity is hurting the small
-        model. Single-file mode — only prompt text changes are possible.",
-      skills: ["strategy", "prompt-engineering", "optimization"],
-      deliverables: ["scoring-report", "improvement-direction"]
-    },
-    {
-      external_id: "simmer-judge-integration-iter-N",
-      description: "Judge the output quality of an LLM extraction prompt.
-        Output contract: JSON with 'entities' array, each with 'name'
-        and 'type'. Focus on: output format compliance, entity naming
-        precision, type assignment accuracy, downstream usability for
-        RAG search. Model: qwen3.5:9b, single-file mode.",
-      skills: ["evaluation", "data-quality", "integration"],
-      deliverables: ["scoring-report", "improvement-direction"]
-    }
-  ]
-}
-```
-
-**Building the descriptions:** The board constructs each description from:
-- The artifact description and problem class from the setup brief
-- The lens focus from the default panel (or custom panel)
-- Relevant constraints: model size, artifact type, search space
-- Iteration context: what's been tried (from iteration history, if available)
-
-Agency returns a `rendered_prompt` per agent — use it as the judge's system context alongside the standard panelist prompt template. The rendered prompt replaces the generic lens description.
-
-### Using the Rendered Prompt
-
-Each judge's panelist prompt becomes:
-
-```
-You are one of three judges on a simmer judge board.
-
-AGENCY COMPOSITION:
-[rendered_prompt from agency_assign — contains role components,
-desired outcomes, and trade-off configuration selected for this
-specific judging task]
-
-[... rest of standard panelist prompt: artifact type, mutation bounds,
-background, previous deliberation, instructions to read code, etc.]
-```
-
-The rendered prompt provides the judge's specialized capabilities. The standard panelist prompt provides simmer-specific context (mutation bounds, deliberation protocol, scoring format).
-
-### Submitting Evaluations
-
-After synthesis, submit the panel's consensus evaluation back to Agency so primitives evolve:
-
-```
-For each judge:
-  Call: agency_evaluator { agency_task_id: "[from assign response]" }
-  → returns evaluator_prompt, callback_jwt
-
-  Call: agency_submit_evaluation {
-    agency_task_id: "[from assign response]",
-    callback_jwt: "[from evaluator response]",
-    output: "Judge [lens] scored: [scores]. Key contribution to
-      deliberation: [what this judge uniquely surfaced]. Panel
-      consensus composite: [N.N]/10.",
-    score: [composite * 10, as 0-100 integer],
-    task_completed: true,
-    score_type: "rubric"
-  }
-```
-
-This closes the feedback loop. Agency learns which primitive compositions produce good judges for this type of task. Future simmer runs on similar artifacts get better-composed judges.
-
-### Graceful Degradation
-
-```
-IF agency_status succeeds:
-    Compose judges via agency_assign
-    After synthesis, submit evaluations via agency_submit_evaluation
-ELSE:
-    Use manual profiles from default panels (or JUDGE_PANEL if specified)
-    Skip evaluation submission
-    Tell the user what happened and how to fix it
-```
-
-**When Agency is unavailable and the user requested it**, explain clearly:
-
-> "Agency MCP isn't running — I'll use manual judge profiles for this run. You'll still get the judge board with deliberation, just without task-matched composition.
->
-> To enable Agency for future runs:
-> ```
-> pipx install agency-engine
-> agency init
-> agency serve
-> ```
-> Then add it to your Claude Code MCP settings. See the [Agency docs](https://github.com/agentbureau/agency) for details."
-
-**When Agency is unavailable and the user didn't request it**, say nothing — just use manual profiles silently. Don't advertise Agency to users who haven't asked for it.
-
-The board works identically in both paths. Agency adds better composition and cross-run learning, but isn't required.
+Custom panels override auto-composition entirely. Minimum 2 judges, maximum 5. Default is 3.
 
 ## Context Discipline
 
@@ -405,6 +350,10 @@ The board preserves simmer's context discipline exactly:
 No new cross-iteration information is introduced. The board multiplies perspectives within a single iteration, not across iterations.
 
 ## Common Mistakes
+
+**Splitting criteria across judges (one criterion per judge)**
+- Problem: Each judge scores only one criterion — loses cross-criterion insight. A coverage-only judge can't see that coverage went up but noise went up more. The board produces 4 isolated scores instead of 12 data points with trade-off awareness.
+- Fix: Every judge scores ALL criteria from their lens. The lens frames the perspective (data analysis, strategy, integration), not the criterion. 3 judges × 4 criteria = 12 scored data points with cross-criterion insight.
 
 **Compound ASI overwhelming the generator**
 - Problem: Each judge's ASI candidate is multi-faceted. The clerk picks one but it still lists 3-4 changes. Generator tries all of them, artifact bloats, scores regress.

@@ -112,7 +112,26 @@ Prompt changes: 4 variations tried.
 
 Skip this for text/creative mode or when no search space is specified.
 
-### 4. Pass ASI Forward
+### 4. Track Stable Wins
+
+Review the trajectory to identify what's been consistently working — elements that were added in a previous iteration and have NOT been associated with a regression since.
+
+Look at the Key Change column across iterations. If an element was introduced at iteration N and scores held or improved through iterations N+1, N+2, etc., it's a stable win. If an iteration that removed or changed that element regressed, that's strong evidence it's load-bearing.
+
+Produce a concise list. Example:
+```text
+STABLE WINS (do not remove):
+- Correction lookup table (added iter 1, held through iters 2-4)
+- Worked examples format (added iter 3, improved coverage each iteration since)
+
+NOT WORKING:
+- Verbose rule lists (tried iter 2, regressed)
+- Multi-step prompt structure (tried iter 1, skipped by executor)
+```
+
+This gets passed to the judge board's deliberation summary so judges and the generator know what to preserve and what to avoid.
+
+### 5. Pass ASI Forward
 
 Return to the orchestrator:
 - The ASI from this round's judge (passed unchanged to next generator)
@@ -120,6 +139,7 @@ Return to the orchestrator:
 - Whether iterations remain
 - Whether a regression occurred (and which candidate to use as input)
 - Exploration status (workspace mode with search space only)
+- Stable wins (what's working, what's not)
 
 ## Output to Orchestrator
 
@@ -130,6 +150,8 @@ REGRESSION: [true/false] — [if true: use iteration N as input to next generato
 ITERATIONS REMAINING: [N]
 ASI FOR NEXT ROUND: [the judge's ASI, unchanged]
 EXPLORATION STATUS: [what's been tried vs untried — omit for text/creative or no search space]
+STABLE WINS: [what's working — do not remove]
+NOT WORKING: [what's been tried and failed — do not retry same approach]
 ```
 
 ## Common Mistakes

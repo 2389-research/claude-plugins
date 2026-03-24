@@ -2,13 +2,13 @@
 name: simmer
 description: >
   Use when user says "simmer this", "refine this", "hone this", "iterate on this",
-  or asks to improve a specific artifact over multiple rounds. "simmer this with
-  agency" enables Agency MCP composition for task-matched judges. Runs an iterative
-  refinement loop using a judge board (multi-judge deliberation panel) against
-  user-defined criteria. Works on any artifact type: documents, prompts, specs,
-  emails, creative writing, API designs, pipelines, codebases — anything Claude
-  can read and produce. Supports multi-file workspace targets, runnable evaluators,
-  and open-ended optimization (model selection, pipeline topology, prompt tuning).
+  or asks to improve a specific artifact over multiple rounds. Runs an iterative
+  refinement loop with investigation-first judges that read the code, understand
+  the problem, and propose evidence-based improvements. Auto-selects single judge
+  or multi-judge board based on complexity. Works on any artifact type: documents,
+  prompts, specs, emails, creative writing, API designs, pipelines, codebases.
+  Supports multi-file workspace targets, runnable evaluators, and open-ended
+  optimization (model selection, pipeline topology, prompt tuning).
 ---
 
 # Simmer
@@ -67,7 +67,6 @@ Trigger when user wants iterative refinement of any kind:
 - "Tune this configuration", "improve these prompts against this test suite"
 - Any request to iteratively improve an artifact or workspace
 
-**"with agency"** — if the user says "simmer this with agency" or "use agency," set `USE_AGENCY: true`. Composes judges from Agency primitives. Requires Agency MCP server running.
 
 **Judge mode is auto-selected by setup** based on problem complexity:
 
@@ -117,8 +116,6 @@ VALIDATION_COMMAND: [quick check command — omit if no cheap validation exists]
 SEARCH_SPACE: [what's in scope to explore — omit if unconstrained]
 JUDGE_MODE: [single | board — auto-selected by setup based on complexity. User can override]
 JUDGE_PANEL: [optional custom judge definitions — omit to use defaults for problem class]
-USE_AGENCY: [true | false — default false. When true AND Agency MCP is available, compose judges from task-matched primitives. Trigger: "simmer this with agency"]
-AGENCY_GENERATOR: [true | false — default false, experimental: Agency-composed generator for execution craft]
 ITERATIONS: [N]
 MODE: [seedless | from-file | from-paste | from-workspace]
 OUTPUT_DIR: [path, default: docs/simmer]
@@ -165,50 +162,7 @@ For seedless mode: iteration 1 generates the initial candidate AND judges it. `I
 
 **Step 1: Generator (subagent)**
 
-**If `AGENCY_GENERATOR: true` and Agency MCP is available (experimental):** Compose the generator via Agency for **execution craft**, not strategy. The board decides *what* to change (via ASI). The generator's Agency composition should make it better at *how* to implement changes — formatting, model-aware writing, structural editing.
-
-**Note:** Testing showed Agency-composed generators can conflict with the board's ASI when given strategic primitives. This flag is separate from `USE_AGENCY` (which only composes judges) because generator composition needs further validation. Use `USE_AGENCY: true` for proven results; add `AGENCY_GENERATOR: true` only for experimentation.
-
-**CRITICAL: The generator must not strategize.** Testing showed that Agency-composed generators with strategic primitives ("diagnose before editing") override the ASI with their own analysis, breaking simmer's core design. The generator's task description must frame it as an executor, not a strategist.
-
-**Build the description focused on execution craft:**
-```
-Call: agency_assign {
-  tasks: [{
-    external_id: "simmer-generator-iter-N",
-    description: "Execute a specific edit to [artifact type description].
-      You will receive one precise direction (ASI) to implement. Your
-      job is faithful, skilled execution of that direction — not
-      diagnosis or strategy. [Execution context: e.g., 'The artifact
-      is a prompt for qwen3.5:9b. The model responds well to lookup
-      tables, worked examples, and binary checklists. It struggles
-      with abstract rules and conditional logic. Single-file mode —
-      can only change text content.']",
-    skills: ["technical-writing", "structured-editing", "prompt-engineering"],
-    deliverables: ["improved-artifact"]
-  }]
-}
-```
-
-The description tells Agency to select primitives for **skilled execution** — formatting, model-aware prompt construction, structured editing — not strategic reasoning. The board handles strategy; the generator handles craft.
-
-Include the `rendered_prompt` in the generator's subagent prompt as `AGENCY COMPOSITION:` context. The rendered prompt teaches *how* to write well for this context; the ASI tells *what* to change.
-
-**After the iteration completes**, submit evaluation so execution primitives evolve:
-```
-Call: agency_submit_evaluation {
-  agency_task_id: "[from assign]",
-  callback_jwt: "[from agency_evaluator]",
-  output: "Generator executed ASI: [summary]. Result: [improved/regressed].
-    Execution quality: [how well the ASI was implemented — clean edit,
-    preserved existing structure, appropriate formatting for the target].",
-  score: [composite * 10],
-  task_completed: true,
-  score_type: "rubric"
-}
-```
-
-**Otherwise:** Invoke `simmer:simmer-generator` as a subagent with the standard prompt.
+Invoke `simmer:simmer-generator` as a subagent.
 
 *Single-file subagent prompt:*
 ```
@@ -287,6 +241,15 @@ If no evaluator, skip this step.
 **Step 3: Judge (subagent or judge board)**
 
 **If `JUDGE_MODE: board`:** Invoke `simmer:simmer-judge-board` instead of the single judge. Pass it all the same context below, plus `JUDGE_PANEL` if specified in the setup brief. The board dispatches multiple judges, runs deliberation, and returns output in the exact same format as a single judge. The rest of the loop (reflect, generator) is unchanged.
+
+**Include file paths so judges can investigate.** In addition to pasted content, pass:
+- Path to the candidate file (or workspace directory)
+- Path to the evaluator script (if evaluator mode)
+- Path to ground truth / test data (if known from setup inspection)
+- Paths to prior iteration candidate files
+- Paths to config files (from setup inspection)
+
+Judges need to read these files themselves — not just the pre-digested summaries in the prompt. A judge who reads the evaluator script discovers exact-match scoring on iteration 0 instead of learning it through 3 iterations of trial and error.
 
 **Otherwise:** Invoke `simmer:simmer-judge` as a subagent.
 

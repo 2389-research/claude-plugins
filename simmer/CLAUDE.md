@@ -47,7 +47,8 @@ Output best candidate + trajectory
 
 **Regression handling:** Reflect tracks best-so-far. If an iteration regresses, next generator receives the best candidate, not the regressed one. In workspace mode, this means git checkout to the best iteration's commit.
 
-**Agency integration (opt-in):** When `USE_AGENCY: true` and the Agency MCP server is available, judges are composed from task-matched primitives for strategic analysis, and the generator is composed for execution craft (formatting, model-aware writing, structural editing — not strategy). The board decides *what* to change; the Agency-composed generator is better at *how* to implement it. Evaluation scores feed back into Agency so primitives evolve across runs. Falls back to manual profiles / standard prompts if Agency is unavailable.
+**Judge board:** For complex artifacts, the board constructs problem-specific judges that investigate before scoring — reading the evaluator script, ground truth, prior candidates, and config to understand the problem before proposing improvements. Judges are composed once per run, tailored to the specific problem, then reuse for all iterations with updated context. Tracks stable wins (WORKING/NOT WORKING) across iterations to prevent undoing proven improvements.
+
 
 ## Artifact Modes
 

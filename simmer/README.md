@@ -118,24 +118,12 @@ Simmer auto-selects between a single judge and a multi-judge board based on comp
 - **Simple** (short email, tweet, ≤2 criteria) → single judge, fast
 - **Complex** (3 criteria, long artifact, code, pipelines) → judge board with deliberation
 
-The board dispatches three judges with different lenses, runs one deliberation round, and synthesizes consensus scores + single ASI. If a single-judge run hits a plateau (3 iterations without improvement), simmer offers to upgrade to the board mid-run.
+The board constructs three judges tailored to your specific problem — not from a fixed menu, but by reading your artifact, criteria, and constraints and designing judges with diverse perspectives. An extraction prompt gets different judges than a DND adventure hook.
 
-Default lenses per problem class (or define your own):
-- **Text/creative:** Craft, Reader, Domain
-- **Code/testable:** Correctness, Architecture, Efficiency
-- **Pipeline/engineering:** Metrics, Strategy, Integration
+Judges investigate before scoring — they read the evaluator script, ground truth, prior candidates, and config files to understand the problem deeply. A judge who reads the evaluator discovers scoring mechanics on iteration 0 instead of learning them through 3 iterations of trial and error.
 
-## Agency Composition (Opt-In)
+If a single-judge run hits a plateau (3 iterations without improvement), simmer offers to upgrade to the board mid-run with 2 extra iterations.
 
-If the [Agency](https://github.com/agentbureau/agency) MCP server is running, say:
-
-```
-"Simmer this with agency"
-```
-
-Agency composes task-matched judges from evolved primitives instead of manual profiles. Judges come in understanding your specific problem domain. Evaluation scores feed back into Agency so future runs get better judges automatically.
-
-Agency composes judges only — the generator stays standard. Testing showed Agency judges + standard generator produces the best results.
 
 ## Defaults and Safety
 

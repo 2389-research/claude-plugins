@@ -235,7 +235,6 @@ OUTPUT_CONTRACT: [valid output format description — omit for text/creative]
 VALIDATION_COMMAND: [quick check command — omit if no cheap validation exists]
 SEARCH_SPACE: [what's in scope to explore — omit if unconstrained]
 JUDGE_MODE: [single | board — auto-select, see below]
-USE_AGENCY: [true | false — true only if user said "with agency"]
 ITERATIONS: [N]
 MODE: [seedless | from-file | from-paste | from-workspace]
 OUTPUT_DIR: [path, default: docs/simmer]
@@ -261,8 +260,6 @@ Select `JUDGE_MODE` based on problem complexity. **Do not ask the user** — inf
 > "This is a [workspace/pipeline/complex] artifact with [N criteria / an evaluator / multiple files] — a judge board would give you better diagnosis here. Want to use the board instead, or stick with single judge?"
 
 One question, one time. If they say single, respect it and move on.
-
-**If `USE_AGENCY: true`**, always use `board` — Agency composition only applies to the board path.
 
 The `OUTPUT_DIR` defaults to `docs/simmer`. Override if the user specifies a different location or if running in a test/scratch context.
 
