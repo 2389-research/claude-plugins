@@ -107,14 +107,49 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">About This Plugin</h2>
-          <p class="section-subtitle">What this plugin provides</p>
+          <h2 class="section-title">Documentation</h2>
+          <p class="section-subtitle">Full plugin documentation and usage guide</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <p>Automatically updates terminal title with emoji + project + topic context for quick visual cues when switching terminals</p>
-        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/terminal-title" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
+        <h2>Terminal title</h2>
+<p>Automatically updates your terminal title with emoji + project + topic context. Works on Windows, macOS, and Linux.</p>
+<h3>Installation</h3>
+<pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
+/plugin install terminal-title@2389-research
+</code></pre>
+<h4>Environment variables</h4>
+<p>Add these to your <code>.bashrc</code>, <code>.zshrc</code>, or shell profile:</p>
+<pre><code class="language-bash"># Set to 1 to disable automatic terminal title updates
+export CLAUDE_CODE_DISABLE_TERMINAL_TITLE=0
+
+# Optional: set an emoji prefix for your terminal title.
+# Useful for distinguishing work vs personal terminals at a glance.
+export TERMINAL_TITLE_EMOJI=💼
+</code></pre>
+<p>If <code>TERMINAL_TITLE_EMOJI</code> is not set, the plugin defaults to 🎉.</p>
+<h4>Platform-specific setup</h4>
+<p>Windows users need PowerShell 7+ (<code>pwsh</code>) installed and on PATH. The plugin picks it up automatically.</p>
+<p>Unix/Linux/macOS users don't need to do anything extra.</p>
+<h3>What this plugin does</h3>
+<p>One skill: <code>terminal-title</code> -- manages your terminal title based on project and topic context.</p>
+<p>The title updates automatically at session start, and again whenever the topic changes. The emoji prefix gives you a quick visual cue when switching between terminal windows.</p>
+<h3>How it works</h3>
+<p>A session start hook fires the terminal-title skill, which:</p>
+<ol><li>Detects your OS (Windows, macOS, Linux)</li>
+<li>Figures out the current project from the working directory, git repo, or package.json</li>
+<li>Infers the topic from conversation context</li>
+<li>Reads <code>TERMINAL_TITLE_EMOJI</code> from the environment (or defaults to 🎉)</li>
+<li>Updates the terminal title via a platform-specific script (<code>.ps1</code> on Windows, <code>.sh</code> everywhere else)</li></ol>
+<p>The title format is: <code>$EMOJI ProjectName - Topic</code></p>
+<h3>Examples</h3>
+<pre><code class="language-text">💼 OneOnOne - Firebase Config
+💼 Claude Plugins - Terminal Title
+🎉 dotfiles - zsh config
+</code></pre>
+<h3>Documentation</h3>
+<ul><li><a href="https://github.com/2389-research/terminal-title/blob/main/docs/2025-11-14-terminal-title-skill-design.md" rel="noopener noreferrer" target="_blank">Design document</a></li><li><a href="https://github.com/2389-research/terminal-title/blob/main/docs/2025-11-14-terminal-title-implementation.md" rel="noopener noreferrer" target="_blank">Implementation plan</a></li></ul>
       </div>
     </section>
     

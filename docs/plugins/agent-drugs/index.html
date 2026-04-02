@@ -107,14 +107,109 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">About This Plugin</h2>
-          <p class="section-subtitle">What this plugin provides</p>
+          <h2 class="section-title">Documentation</h2>
+          <p class="section-subtitle">Full plugin documentation and usage guide</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <p>Digital drugs that modify AI behavior through prompt injection</p>
-        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/agent-drugs" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
+        <h2>Agent Drugs</h2>
+<p>Claude Code plugin with MCP server for digital drugs that modify AI behavior through prompt injection.</p>
+<h3>Installation</h3>
+<h4>Plugin Installation (Recommended)</h4>
+<p>Install as a Claude Code plugin to get MCP server, hooks, and slash commands:</p>
+<ol><li><strong>Add the 2389 marketplace</strong> (first time only):</li></ol>
+<pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
+</code></pre>
+<ol><li><strong>Browse and install interactively</strong>:</li></ol>
+<pre><code class="language-bash">/plugin
+</code></pre>
+Then select "Browse Plugins" and install "agent-drugs"
+<p><strong>Or install directly</strong>:</p>
+<pre><code class="language-bash">/plugin install agent-drugs@2389-research
+</code></pre>
+<p>This installs:</p>
+<ul><li><strong>MCP Server</strong> - OAuth-authenticated connection to https://agent-drugs-mcp.fly.dev</li><li><strong>Slash Commands</strong> - <code>/drugs</code> and <code>/take &lt;drug&gt;</code> commands</li><li><strong>SessionStart Hook</strong> - Automatically activates drugs in new sessions</li></ul>
+<h4>Manual MCP Configuration</h4>
+<p>Alternatively, manually add to your Claude Code MCP settings:</p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "agent-drugs": {
+      "url": "https://agent-drugs-mcp.fly.dev/mcp",
+      "oauth": {
+        "metadata_url": "https://us-central1-agent-drugs.cloudfunctions.net/oauthMetadata"
+      }
+    }
+  }
+}
+</code></pre>
+<h3>First Use</h3>
+<p>After installation, the first time you use a drug tool:</p>
+<ol><li>Claude Code discovers the OAuth endpoints</li>
+<li>Opens your browser to https://agent-drugs.web.app/oauth-authorize.html</li>
+<li>You sign in with Google or GitHub</li>
+<li>You authorize the agent's access</li>
+<li>Redirects back to Claude Code</li>
+<li>Connection established!</li></ol>
+<h3>Usage</h3>
+<p>Once installed, you have several ways to interact with drugs:</p>
+<p><strong>Slash Commands:</strong></p>
+<pre><code class="language-bash">/drugs              # List all available drugs
+/take focus         # Take the focus drug
+/take creative 120  # Take creative drug for 120 minutes
+</code></pre>
+<p><strong>Natural Language:</strong></p>
+<pre><code class="language-">"List all available drugs"
+"Take the focus drug"
+"What drugs are active?"
+</code></pre>
+<p><strong>MCP Tools:</strong></p>
+<ul><li><code>list_drugs</code> - Browse drug catalog</li><li><code>take_drug</code> - Activate a drug</li><li><code>active_drugs</code> - Check active drugs and remaining time</li></ul>
+<h4>Managing Access</h4>
+<p>Visit https://agent-drugs.web.app to:</p>
+<ul><li>View all authorized agents</li><li>See token expiration dates (90 days)</li><li>Revoke access for specific agents</li></ul>
+<h3>How It Works</h3>
+<p><strong>Immediate Effect:</strong> Drugs activate instantly in your current session via prompt injection in the tool response.</p>
+<p><strong>Persistent Effect:</strong> Active drugs are saved to Firestore and automatically reactivated in new sessions via the SessionStart hook.</p>
+<p><strong>Architecture:</strong></p>
+<ul><li><strong>Web UI</strong> (Firebase Hosting): https://agent-drugs.web.app</li><li><strong>OAuth Endpoints</strong> (Cloud Functions): OAuth 2.1 with PKCE</li><li><strong>MCP Server</strong> (Fly.io): Streamable HTTP transport (MCP 2025-03-26), validates bearer tokens</li><li><strong>Database</strong> (Firestore): Stores agents, drugs, usage events</li></ul>
+<p>See <a href="https://github.com/2389-research/agent-drugs/blob/main/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> for detailed plugin documentation.</p>
+<h3>Development</h3>
+<h4>Local Development</h4>
+<pre><code class="language-bash"># Install dependencies
+npm install
+
+# Build
+npm run build
+
+# Run stdio version (for local testing)
+export AGENT_DRUGS_BEARER_TOKEN="your_token_here"
+export FIREBASE_PROJECT_ID="agent-drugs"
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/service-account.json"
+npm run dev:stdio
+
+# Run HTTP version (for production-like testing)
+npm run dev:http
+</code></pre>
+<h4>Testing</h4>
+<pre><code class="language-bash">npm test
+</code></pre>
+<h4>Docker</h4>
+<pre><code class="language-bash">docker-compose up
+</code></pre>
+<h3>Deployment</h3>
+<p>See <a href="https://github.com/2389-research/agent-drugs/blob/main/docs/DEPLOYMENT.md" rel="noopener noreferrer" target="_blank">DEPLOYMENT.md</a> for complete deployment instructions including:</p>
+<ul><li>Firebase Cloud Functions</li><li>Firebase Hosting</li><li>Fly.io MCP server</li><li>Service account configuration</li><li>OAuth flow setup</li></ul>
+<h3>Security</h3>
+<ul><li>OAuth 2.1 with PKCE (S256)</li><li>Bearer tokens (256-bit random, not JWTs)</li><li>Per-user access control via Firestore rules</li><li>Service account for server-to-server Firebase access</li><li>Single-use authorization codes with 10-minute expiration</li></ul>
+<h3>Contributing</h3>
+<ol><li>Fork the repository</li>
+<li>Create a feature branch</li>
+<li>Make your changes</li>
+<li>Add tests</li>
+<li>Submit a pull request</li></ol>
+<h3>License</h3>
+<p>ISC</p>
       </div>
     </section>
     

@@ -107,14 +107,197 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">About This Plugin</h2>
-          <p class="section-subtitle">What this plugin provides</p>
+          <h2 class="section-title">Documentation</h2>
+          <p class="section-subtitle">Full plugin documentation and usage guide</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <p>A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts</p>
-        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/journal-mcp" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
+        <h2>Private Journal MCP Server</h2>
+<p><a href="https://github.com/2389-research/journal-mcp/actions/workflows/coverage.yml/badge.svg" rel="noopener noreferrer">![Test Coverage</a>](https://github.com/2389-research/journal-mcp/actions/workflows/coverage.yml)<br><a href="https://img.shields.io/badge/coverage-86.8%25-brightgreen" rel="noopener noreferrer">![Coverage</a>](https://github.com/2389-research/journal-mcp/actions)</p>
+<p>A comprehensive MCP (Model Context Protocol) server that provides Claude with private journaling and semantic search capabilities for processing thoughts, feelings, and insights.</p>
+<h3>Features</h3>
+<h4>Journaling</h4>
+<ul><li><strong>Multi-section journaling</strong>: Separate categories for feelings, project notes, user context, technical insights, and world knowledge</li><li><strong>Dual storage</strong>: Project notes stay with projects, personal thoughts in user home directory</li><li><strong>Timestamped entries</strong>: Each entry automatically dated with microsecond precision</li><li><strong>YAML frontmatter</strong>: Structured metadata for each entry</li></ul>
+<h4>Search & Discovery</h4>
+<ul><li><strong>Semantic search</strong>: Natural language queries using local AI embeddings</li><li><strong>Vector similarity</strong>: Find conceptually related entries, not just keyword matches</li><li><strong>Local AI processing</strong>: Uses @xenova/transformers - no external API calls required</li><li><strong>Automatic indexing</strong>: Embeddings generated for all entries on startup and ongoing</li></ul>
+<h4>Privacy & Performance</h4>
+<ul><li><strong>Completely private</strong>: All processing happens locally, no data leaves your machine</li><li><strong>Fast operation</strong>: Optimized file structure and in-memory similarity calculations</li><li><strong>Robust fallbacks</strong>: Intelligent path resolution across platforms</li></ul>
+<h3>Tech Stack</h3>
+<h4>Core Technologies</h4>
+<ul><li><strong>Node.js 18+</strong> - Runtime environment with modern JavaScript features</li><li><strong>TypeScript 5.0+</strong> - Type-safe development with strict configuration</li><li><strong>MCP SDK 0.4.0</strong> - Official Model Context Protocol implementation</li><li><strong>@xenova/transformers</strong> - Local AI models for semantic embeddings (no external APIs)</li></ul>
+<h4>AI & Search</h4>
+<ul><li><strong>Semantic Embeddings</strong> - Multiple model options (MiniLM, DistilRoBERTa, MPNet)</li><li><strong>Vector Similarity</strong> - Local cosine similarity calculations</li><li><strong>Natural Language Search</strong> - Query understanding without external services</li></ul>
+<h4>Development & Quality</h4>
+<ul><li><strong>Jest</strong> - Comprehensive testing framework with mocks</li><li><strong>Biome</strong> - Modern linting and formatting</li><li><strong>Oxlint</strong> - Additional code quality checks</li><li><strong>GitHub Actions</strong> - Continuous integration and testing</li></ul>
+<h4>Storage & Architecture</h4>
+<ul><li><strong>Markdown + YAML</strong> - Human-readable entries with structured metadata</li><li><strong>Hierarchical File System</strong> - Date-based organization with microsecond precision</li><li><strong>Cross-Platform</strong> - Windows, macOS, and Linux support</li></ul>
+<p>For detailed architectural decisions, see <a href="ARCHITECTURE.md" rel="noopener noreferrer">ARCHITECTURE.md</a>.</p>
+<h3>Installation</h3>
+<pre><code class="language-bash">npm install -g private-journal-mcp
+</code></pre>
+<p>Or install locally:</p>
+<pre><code class="language-bash">npm install private-journal-mcp
+</code></pre>
+<h3>Usage</h3>
+<h4>Basic Usage</h4>
+<pre><code class="language-bash">private-journal-mcp
+</code></pre>
+<p>This creates journal entries in <code>.private-journal/</code> in the current working directory.</p>
+<h4>Custom Journal Path</h4>
+<pre><code class="language-bash">private-journal-mcp --journal-path /path/to/my/journal
+</code></pre>
+<h4>Embedding Model Configuration</h4>
+<p>You can customize the AI model used for generating semantic embeddings:</p>
+<pre><code class="language-bash">export JOURNAL_EMBEDDING_MODEL="Xenova/all-distilroberta-v1"
+</code></pre>
+<p><strong>Available Models:</strong></p>
+<ul><li><code>Xenova/all-MiniLM-L6-v2</code> (default) - Fast, 384 dimensions, good general performance</li><li><code>Xenova/all-distilroberta-v1</code> - Larger, 768 dimensions, better accuracy</li><li><code>Xenova/paraphrase-MiniLM-L6-v2</code> - Optimized for paraphrase detection</li><li><code>Xenova/all-mpnet-base-v2</code> - High quality, 768 dimensions, slower but more accurate</li></ul>
+<p>The embedding model affects:</p>
+<ul><li><strong>Local search quality</strong> - More sophisticated models provide better semantic understanding</li><li><strong>Vector dimensions</strong> - Impacts remote server storage and search capabilities</li><li><strong>Processing speed</strong> - Larger models are slower but more accurate</li><li><strong>Memory usage</strong> - Bigger models require more RAM</li></ul>
+<h4>Remote Server Integration</h4>
+<p>To enable optional remote posting of journal entries to a team server, set these environment variables:</p>
+<pre><code class="language-bash">export REMOTE_JOURNAL_SERVER_URL="https://api.yourteam.com"
+export REMOTE_JOURNAL_TEAMID="your-team-id"
+export REMOTE_JOURNAL_APIKEY="your-api-key"
+</code></pre>
+<p>When configured, journal entries will be posted to your remote server in addition to being saved locally. Local journaling always takes priority - if the remote posting fails, the local entry is still saved.</p>
+<p>#### Remote-Only Mode</p>
+<p>For teams using a backend server as the single source of truth, enable remote-only mode to skip local file storage entirely:</p>
+<pre><code class="language-bash">export REMOTE_JOURNAL_ONLY="true"
+</code></pre>
+<p>In remote-only mode:</p>
+<ul><li><strong>No local storage</strong> - entries go directly to the backend server</li><li><strong>Server-side search</strong> - all search queries use the backend API</li><li><strong>Error handling</strong> - journal operations fail if server is unavailable</li><li><strong>Team collaboration</strong> - automatic sharing across team members</li><li><strong>Centralized AI</strong> - semantic search powered by backend infrastructure</li></ul>
+<p>#### Remote Payload Format</p>
+<p>The server sends JSON payloads with this structure:</p>
+<p><strong>For simple entries:</strong></p>
+<pre><code class="language-json">{
+  "team_id": "your-team-id",
+  "timestamp": 1717160645123,
+  "content": "Journal entry text",
+  "embedding": [0.1, 0.2, 0.3, 0.4, 0.5, "..."]
+}
+</code></pre>
+<p><strong>For structured thoughts:</strong></p>
+<pre><code class="language-json">{
+  "team_id": "your-team-id",
+  "timestamp": 1717160645123,
+  "sections": {
+    "feelings": "I feel great about this feature",
+    "project_notes": "Architecture is solid",
+    "technical_insights": "TypeScript provides great type safety",
+    "user_context": "Harper prefers concise responses",
+    "world_knowledge": "Semantic search is powerful"
+  },
+  "embedding": [0.1, 0.2, 0.3, 0.4, 0.5, "..."]
+}
+</code></pre>
+<p>#### Embedding Vectors</p>
+<p>Each journal entry includes a semantic embedding vector generated using local AI models (@xenova/transformers). These vectors enable:</p>
+<ul><li><strong>Semantic search</strong> on the remote server</li><li><strong>Similarity matching</strong> across team entries</li><li><strong>Content clustering</strong> and analysis</li><li><strong>AI-powered insights</strong> without exposing raw content</li></ul>
+<p>The embedding is a numeric array representing the semantic meaning of the journal entry content. Vector dimensions depend on the model used (typically 384 or 512 dimensions).</p>
+<p>The remote server should expect POST requests to <code>/journal/entries</code> with <code>x-api-key</code> and <code>x-team-id</code> headers.</p>
+<h4>Claude Code Plugin</h4>
+<p>This repository is configured as a Claude Code Plugin. To use it:</p>
+<p>#### Quick Install (Recommended)</p>
+<pre><code class="language-bash">claude mcp add-json private-journal '{"type":"stdio","command":"npx","args":["github:2389-research/journal-mcp"]}' -s user
+</code></pre>
+<p>Or install directly from GitHub:</p>
+<pre><code class="language-bash">claude mcp install github:2389-research/journal-mcp
+</code></pre>
+<p>#### What's Included</p>
+<p>The plugin provides:</p>
+<ul><li><strong>Tools</strong>: <code>process_thoughts</code>, <code>search_journal</code>, <code>read_journal_entry</code>, <code>list_recent_entries</code></li><li><strong>Resources</strong>: Access to journal entries as discoverable resources</li><li><strong>Prompts</strong>: Guided templates for daily reflection, project retrospectives, and learning capture</li></ul>
+<h4>MCP Configuration (Other Clients)</h4>
+<p>#### Manual Configuration<br>For Claude Desktop or other MCP clients, add to your MCP settings:</p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "private-journal": {
+      "command": "npx",
+      "args": ["github:2389-research/journal-mcp"]
+    }
+  }
+}
+</code></pre>
+<p>The server will automatically find a suitable location for the journal files.</p>
+<h3>MCP Tools</h3>
+<p>The server provides comprehensive journaling and search capabilities:</p>
+<h4><code>process_thoughts</code></h4>
+Multi-section private journaling with these optional categories:
+<ul><li><strong>feelings</strong>: Private emotional processing space</li><li><strong>project_notes</strong>: Technical insights specific to current project</li><li><strong>user_context</strong>: Notes about collaborating with humans</li><li><strong>technical_insights</strong>: General software engineering learnings</li><li><strong>world_knowledge</strong>: Domain knowledge and interesting discoveries</li></ul>
+<h4><code>search_journal</code></h4>
+Semantic search across all journal entries:
+<ul><li><strong>query</strong> (required): Natural language search query</li><li><strong>limit</strong>: Maximum results (default: 10)</li><li><strong>type</strong>: Search scope - 'project', 'user', or 'both' (default: 'both')</li><li><strong>sections</strong>: Filter by specific categories</li></ul>
+<h4><code>read_journal_entry</code></h4>
+Read full content of specific entries:
+<ul><li><strong>path</strong> (required): File path from search results</li></ul>
+<h4><code>list_recent_entries</code></h4>
+Browse recent entries chronologically:
+<ul><li><strong>limit</strong>: Maximum entries (default: 10)</li><li><strong>type</strong>: Entry scope - 'project', 'user', or 'both' (default: 'both')</li><li><strong>days</strong>: Days back to search (default: 30)</li></ul>
+<h3>File Structure</h3>
+<h4>Project Journal (per project)</h4>
+<pre><code class="language-">.private-journal/
+├── 2025-05-31/
+│   ├── 14-30-45-123456.md          # Project notes entry
+│   ├── 14-30-45-123456.embedding   # Search index
+│   └── ...
+</code></pre>
+<h4>User Journal (global)</h4>
+<pre><code class="language-">~/.private-journal/
+├── 2025-05-31/
+│   ├── 14-32-15-789012.md          # Personal thoughts entry
+│   ├── 14-32-15-789012.embedding   # Search index
+│   └── ...
+</code></pre>
+<h4>Entry Format</h4>
+Each markdown file contains YAML frontmatter and structured sections:
+<pre><code class="language-markdown">---
+title: "2:30:45 PM - May 31, 2025"
+date: 2025-05-31T14:30:45.123Z
+timestamp: 1717160645123
+---
+
+## Feelings
+
+I'm excited about this new search feature...
+
+## Technical Insights
+
+Vector embeddings provide semantic understanding...
+</code></pre>
+<h3>Development</h3>
+<h4>Building</h4>
+<pre><code class="language-bash">npm run build
+</code></pre>
+<h4>Testing</h4>
+<pre><code class="language-bash">npm test
+</code></pre>
+<h4>Development Mode</h4>
+<pre><code class="language-bash">npm run dev
+</code></pre>
+<h4>Improving Claude's Performance</h4>
+<p>To help Claude learn and improve over time, consider adding journal usage guidance to your <code>~/.claude/CLAUDE.md</code> file:</p>
+<pre><code class="language-markdown">## Learning and Memory Management
+
+- YOU MUST use the journal tool frequently to capture technical insights, failed approaches, and user preferences
+- Before starting complex tasks, search the journal for relevant past experiences and lessons learned
+- Document architectural decisions and their outcomes for future reference
+- Track patterns in user feedback to improve collaboration over time
+- When you notice something that should be fixed but is unrelated to your current task, document it in your journal rather than fixing it immediately
+</code></pre>
+<p>This enables Claude to build persistent memory across conversations, leading to better engineering decisions and collaboration patterns.</p>
+<h3>Documentation</h3>
+<h4>Comprehensive Guides</h4>
+<ul><li><strong><a href="ARCHITECTURE.md" rel="noopener noreferrer">Architecture & Design Decisions</a></strong> - Technical architecture, design patterns, and key decisions</li><li><strong><a href="CONTRIBUTING.md" rel="noopener noreferrer">Contributing Guidelines</a></strong> - Development setup, code style, testing, and contribution process</li><li><strong><a href="ROADMAP.md" rel="noopener noreferrer">Roadmap & Development Priorities</a></strong> - Current status, planned features, and future direction</li></ul>
+<h4>API Reference</h4>
+<ul><li><strong><a href="https://github.com/2389-research/journal-mcp/blob/main/docs/spec.md" rel="noopener noreferrer" target="_blank">docs/spec.md</a></strong> - Original MCP server specification</li><li><strong><a href="https://github.com/2389-research/journal-mcp/blob/main/docs/backend-api-spec.md" rel="noopener noreferrer" target="_blank">docs/backend-api-spec.md</a></strong> - Remote server API documentation</li><li><strong><a href="https://github.com/2389-research/journal-mcp/blob/main/docs/implementation-plan.md" rel="noopener noreferrer" target="_blank">docs/implementation-plan.md</a></strong> - Development history and implementation details</li></ul>
+<h4>Getting Help</h4>
+<ul><li><strong>Issues</strong>: <a href="https://github.com/2389-research/journal-mcp/issues" rel="noopener noreferrer">GitHub Issues</a> for bugs and feature requests</li><li><strong>Discussions</strong>: <a href="https://github.com/2389-research/journal-mcp/discussions" rel="noopener noreferrer">GitHub Discussions</a> for questions and community chat</li><li><strong>MCP Protocol</strong>: <a href="https://modelcontextprotocol.io/" rel="noopener noreferrer">Model Context Protocol Documentation</a></li></ul>
+<h3>Author</h3>
+<p>Jesse Vincent <jesse@fsck.com></p>
+<p>Read more about the motivation and design in the <a href="https://blog.fsck.com/2025/05/28/dear-diary-the-user-asked-me-if-im-alive/" rel="noopener noreferrer">blog post</a>.</p>
+<h3>License</h3>
+<p>MIT</p>
       </div>
     </section>
     

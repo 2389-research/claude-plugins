@@ -107,14 +107,52 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">About This Plugin</h2>
-          <p class="section-subtitle">What this plugin provides</p>
+          <h2 class="section-title">Documentation</h2>
+          <p class="section-subtitle">Full plugin documentation and usage guide</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <p>Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation</p>
-        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/worldview-synthesis" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
+        <h2>Worldview Synthesis Plugin</h2>
+<p>Surface your beliefs, identify the tensions between them, and generate narrative outputs for personal philosophy documentation.</p>
+<h3>Installation</h3>
+<pre><code class="language-bash">/plugin install worldview-synthesis@2389-research
+</code></pre>
+<h3>What this plugin provides</h3>
+<h4>Skills</h4>
+<ul><li><code>worldview-synthesis</code> -- methodology for articulating personal philosophy through structured interrogation, tension mapping, and narrative generation</li></ul>
+<h4>Reference materials</h4>
+<ul><li><code>interrogation-questions.md</code> -- 6 rounds of ready-to-use questions covering mortality, body, relationships, emotion, work, ethics, society, and future</li></ul>
+<h3>Quick example</h3>
+<p>Start with: "Help me articulate my worldview"</p>
+<p>The skill guides you through:</p>
+<ol><li>Bootstrap -- create project structure for beliefs and narratives</li>
+<li>Seed -- extract ideas from your influences (books, people, experiences)</li>
+<li>Interrogate -- 4-6 rounds of multi-choice questions across 20 domains</li>
+<li>Capture tensions -- name contradictions, don't resolve them</li>
+<li>Generate narratives -- mission, thesis, synopsis, full narrative</li>
+<li>Iterate -- a worldview is living, update as you evolve</li></ol>
+<h3>Core principle</h3>
+<p>A worldview isn't a list of opinions. It's a graph of beliefs with tensions. The goal is to surface what you already believe, name the contradictions, and synthesize into something you can share.</p>
+<h3>Output examples</h3>
+<p>Mission (~100 words):</p>
+<pre><code class="language-">Put people first. Prepare for what's coming. Fight anyway.
+Find the cracks. Leave no trace.
+</code></pre>
+<p>Idea node:</p>
+<pre><code class="language-yaml">- id: strategic-ruthlessness
+  claim: "Sometimes you have to crush opponents"
+  confidence: 0.7
+  tensions: [collaboration-over-competition]
+</code></pre>
+<p>Tension:</p>
+<pre><code class="language-yaml">- id: collaboration-vs-ruthlessness
+  status: embraced  # Live in the paradox
+</code></pre>
+<h3>When this skill applies</h3>
+<ul><li>"I want to articulate my values"</li><li>"Help me figure out what I believe"</li><li>Writing a manifesto or leadership philosophy</li><li>Defining company culture</li><li>Personal philosophy documentation</li></ul>
+<h3>Links</h3>
+<ul><li><a href="https://github.com/2389-research/worldview-synthesis/blob/main/CLAUDE.md" rel="noopener noreferrer" target="_blank">Plugin CLAUDE.md</a> -- development instructions</li></ul>
       </div>
     </section>
     

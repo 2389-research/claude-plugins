@@ -107,14 +107,38 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">About This Plugin</h2>
-          <p class="section-subtitle">What this plugin provides</p>
+          <h2 class="section-title">Documentation</h2>
+          <p class="section-subtitle">Full plugin documentation and usage guide</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <p>Prepare codebases for public/open-source release and audit them for openness - full lifecycle prep or standalone review</p>
-        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/git-repo-prep" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
+        <h2>git-repo-prep</h2>
+<p>Prepare codebases for public/open-source release and audit them for openness.</p>
+<h3>Installation</h3>
+<pre><code class="language-">/plugin install git-repo-prep@2389-research
+</code></pre>
+<h3>What This Plugin Does</h3>
+<p>Two modes:</p>
+<p><strong>Prepare</strong> — Full lifecycle walking through 9 phases interactively:</p>
+<ol><li>Discovery (detect ecosystem, scan structure)</li>
+<li>Secrets & personal info audit</li>
+<li>License selection and consistency</li>
+<li>Documentation (README, CONTRIBUTING, SECURITY)</li>
+<li>Gitignore refinement</li>
+<li>Project hardening (CI/CD, dependabot, hooks)</li>
+<li>Repository metadata</li>
+<li>Backlog & honesty</li>
+<li>Final review</li></ol>
+<p><strong>Review</strong> — Standalone openness audit, re-runnable anytime. Scans for secrets, personal info, license issues, missing docs, gitignore gaps, CI/CD, and metadata. Presents findings by severity (critical/recommended/nice-to-have) and offers to fix each issue.</p>
+<h3>Usage</h3>
+<pre><code class="language-">"Prepare this repo for open-source release"    → full lifecycle
+"Review this repo for openness"                → standalone audit
+</code></pre>
+<h3>Ecosystem Support</h3>
+<p>Agnostic core with specific hints for Node.js, Python, Rust, Go, .NET, Ruby, and Java/Kotlin.</p>
+<h3>Skills</h3>
+<table class="readme-table"><thead><tr><th>Skill</th><th>Description</th></tr></thead><tbody><tr><td><code>git-repo-prep</code></td><td>Router — detects intent, dispatches</td></tr><tr><td><code>git-repo-prep:prepare</code></td><td>Full 9-phase open-source prep lifecycle</td></tr><tr><td><code>git-repo-prep:review</code></td><td>Standalone openness audit</td></tr></tbody></table>
       </div>
     </section>
     
