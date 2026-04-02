@@ -1,6 +1,0 @@
-{
-  "name": "review-squad",
-  "description": "Dispatch panels of specialized subagents to review projects from multiple angles — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks",
-  "version": "1.0.0",
-  "commands": []
-}

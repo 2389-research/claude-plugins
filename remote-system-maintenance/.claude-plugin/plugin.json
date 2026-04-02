@@ -1,5 +1,0 @@
-{
-  "name": "remote-system-maintenance",
-  "description": "Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists",
-  "version": "1.0.0"
-}

@@ -88,11 +88,10 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Commands</span>
-          <code class="install-command">/plugin marketplace add 2389-research/claude-plugins
-/plugin install review-squad@2389-research</code>
+          <span class="install-label">Install Command</span>
+          <code class="install-command">/plugin install 2389-research/review-squad</code>
         </div>
-        <a href="https://github.com/2389-research/claude-plugins/tree/main/review-squad" class="cta-button" rel="noopener noreferrer" target="_blank">
+        <a href="https://github.com/2389-research/review-squad" class="cta-button" rel="noopener noreferrer" target="_blank">
           View Source
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -108,33 +107,14 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">Documentation</h2>
-          <p class="section-subtitle">Full plugin documentation and usage guide</p>
+          <h2 class="section-title">About This Plugin</h2>
+          <p class="section-subtitle">What this plugin provides</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <h2>Review Squad</h2>
-<p>Dispatch panels of specialized subagents to review your project from multiple angles.</p>
-<h3>Installation</h3>
-<pre><code class="language-bash">/plugin install review-squad@2389-research
-</code></pre>
-<h3>Skills</h3>
-<table class="readme-table"><thead><tr><th>Skill</th><th>What it does</th><th>Dispatch</th></tr></thead><tbody><tr><td><code>review-squad:experts</code></td><td>Expert audit panel (SEO, a11y, security, perf, etc.)</td><td>Parallel</td></tr><tr><td><code>review-squad:normies</code></td><td>First-time visitors across a sophistication spectrum</td><td>Sequential</td></tr><tr><td><code>review-squad:regulars</code></td><td>Task-oriented users verifying real flows work</td><td>Sequential</td></tr><tr><td><code>review-squad:well-actually</code></td><td>Pedantic nitpickers finding what pros skip</td><td>Sequential</td></tr></tbody></table>
-<h3>Quick Examples</h3>
-<p><strong>Expert audit before launch:</strong></p>
-<blockquote>"Run a review-squad:experts audit on my site before we go live"</blockquote>
-<p><strong>First impressions check:</strong></p>
-<blockquote>"Use review-squad:normies to see if people can tell what my site is about"</blockquote>
-<p><strong>Smoke test user flows:</strong></p>
-<blockquote>"Run review-squad:regulars to check if the signup and checkout flows work"</blockquote>
-<p><strong>Get roasted:</strong></p>
-<blockquote>"Hit my site with review-squad:well-actually before I post it to HN"</blockquote>
-<h3>How It Works</h3>
-<p>Each skill dispatches a panel of subagents — you approve (and optionally customize) the panel before they're sent out. Agents review independently, then results are consolidated into a single report with actionable findings.</p>
-<p>Three of the four skills (normies, regulars, well-actually) use browser MCP tools, so you'll need a dev server running for those.</p>
-<h3>Links</h3>
-<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/review-squad/CLAUDE.md" rel="noopener noreferrer" target="_blank">Plugin details</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/review-squad/skills/experts/SKILL.md" rel="noopener noreferrer" target="_blank">Expert Panel skill</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/review-squad/skills/normies/SKILL.md" rel="noopener noreferrer" target="_blank">Normies skill</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/review-squad/skills/regulars/SKILL.md" rel="noopener noreferrer" target="_blank">Regulars skill</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/review-squad/skills/well-actually/SKILL.md" rel="noopener noreferrer" target="_blank">Well Actually skill</a></li></ul>
+        <p>Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks</p>
+        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/review-squad" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
       </div>
     </section>
     
@@ -154,19 +134,12 @@
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
-              <span class="step-label">Add the marketplace (if not already added)</span>
-              <code>/plugin marketplace add 2389-research/claude-plugins</code>
+              <span class="step-label">Install this plugin</span>
+              <code>/plugin install 2389-research/review-squad</code>
             </div>
           </div>
           <div class="step">
             <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code>/plugin install review-squad@2389-research</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
             <div class="step-content">
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>
@@ -198,7 +171,7 @@
           <p class="plugin-description">Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination</p>
           <div class="plugin-tags"><span class="tag">multi-agent</span><span class="tag">orchestrator</span><span class="tag">coordination</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install building-multiagent-systems</code>
+            <code class="plugin-install">/plugin install 2389-research/building-multiagent-systems</code>
             <a href="../building-multiagent-systems/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -213,7 +186,7 @@
           <p class="plugin-description">Decision-making through deliberation - seeking unity through discernment rather than consensus through debate</p>
           <div class="plugin-tags"><span class="tag">decision-making</span><span class="tag">discernment</span><span class="tag">deliberation</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install deliberation</code>
+            <code class="plugin-install">/plugin install 2389-research/deliberation</code>
             <a href="../deliberation/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -228,7 +201,7 @@
           <p class="plugin-description">A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions.</p>
           <div class="plugin-tags"><span class="tag">social-media</span><span class="tag">communication</span><span class="tag">team-discussion</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install socialmedia</code>
+            <code class="plugin-install">/plugin install 2389-research/socialmedia</code>
             <a href="../socialmedia/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -296,7 +269,7 @@
   },
   "description": "Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks",
   "url": "https://2389-research.github.io/claude-plugins/plugins/review-squad/",
-  "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/review-squad",
+  "downloadUrl": "https://github.com/2389-research/review-squad",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT"
 }

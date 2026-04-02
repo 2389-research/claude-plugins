@@ -88,11 +88,10 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Commands</span>
-          <code class="install-command">/plugin marketplace add 2389-research/claude-plugins
-/plugin install css-development@2389-research</code>
+          <span class="install-label">Install Command</span>
+          <code class="install-command">/plugin install 2389-research/css-development</code>
         </div>
-        <a href="https://github.com/2389-research/claude-plugins/tree/main/css-development" class="cta-button" rel="noopener noreferrer" target="_blank">
+        <a href="https://github.com/2389-research/css-development" class="cta-button" rel="noopener noreferrer" target="_blank">
           View Source
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -108,40 +107,14 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">Documentation</h2>
-          <p class="section-subtitle">Full plugin documentation and usage guide</p>
+          <h2 class="section-title">About This Plugin</h2>
+          <p class="section-subtitle">What this plugin provides</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <h2>CSS Development Plugin</h2>
-<p>CSS development workflows with Tailwind composition, semantic naming, and dark mode by default.</p>
-<h3>Installation</h3>
-<pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
-/plugin install css-development@2389-research
-</code></pre>
-<h3>What this plugin provides</h3>
-<p>Skills for CSS development following 2389 patterns:</p>
-<ul><li><code>css-development</code> -- main orchestrator skill that routes to specific sub-skills</li><li><code>css-development:create-component</code> -- create new styled components</li><li><code>css-development:validate</code> -- validate CSS against patterns</li><li><code>css-development:refactor</code> -- refactor existing CSS</li></ul>
-<h3>Patterns</h3>
-<p>This plugin enforces:</p>
-<ul><li>Semantic class naming -- <code>.user-profile</code>, <code>.nav-menu</code> (not <code>.container-1</code>, <code>.box-blue</code>)</li><li>Tailwind composition -- use <code>@apply</code> to compose utilities into semantic classes</li><li>Dark mode by default -- every component includes <code>dark:</code> variants</li><li>Test coverage -- static analysis + component rendering tests</li></ul>
-<h3>Quick example</h3>
-<pre><code class="language-css">.user-profile {
-  @apply flex items-center space-x-4 p-4 bg-white dark:bg-gray-800;
-}
-
-.user-profile__avatar {
-  @apply w-12 h-12 rounded-full;
-}
-
-.user-profile__name {
-  @apply text-lg font-semibold text-gray-900 dark:text-gray-100;
-}
-</code></pre>
-<h3>Documentation</h3>
-<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/css-development/docs/plans/2025-11-13-css-development-skill-design.md" rel="noopener noreferrer" target="_blank">Design document</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/css-development/docs/plans/2025-11-13-css-development-skill-implementation.md" rel="noopener noreferrer" target="_blank">Implementation plan</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/css-development/docs/examples/css-development-examples.md" rel="noopener noreferrer" target="_blank">Examples</a></li></ul>
-
+        <p>CSS development workflows with Tailwind composition, semantic naming, and dark mode by default</p>
+        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/css-development" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
       </div>
     </section>
     
@@ -161,19 +134,12 @@
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
-              <span class="step-label">Add the marketplace (if not already added)</span>
-              <code>/plugin marketplace add 2389-research/claude-plugins</code>
+              <span class="step-label">Install this plugin</span>
+              <code>/plugin install 2389-research/css-development</code>
             </div>
           </div>
           <div class="step">
             <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code>/plugin install css-development@2389-research</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
             <div class="step-content">
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>
@@ -205,7 +171,7 @@
           <p class="plugin-description">Firebase project workflows including setup, features, debugging, and validation</p>
           <div class="plugin-tags"><span class="tag">firebase</span><span class="tag">firestore</span><span class="tag">cloud-functions</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install firebase-development</code>
+            <code class="plugin-install">/plugin install 2389-research/firebase-development</code>
             <a href="../firebase-development/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -220,7 +186,7 @@
           <p class="plugin-description">Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles</p>
           <div class="plugin-tags"><span class="tag">landing-page</span><span class="tag">marketing</span><span class="tag">design</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install landing-page-design</code>
+            <code class="plugin-install">/plugin install 2389-research/landing-page-design</code>
             <a href="../landing-page-design/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -235,7 +201,7 @@
           <p class="plugin-description">Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode</p>
           <div class="plugin-tags"><span class="tag">ios</span><span class="tag">xtool</span><span class="tag">swiftpm</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install xtool</code>
+            <code class="plugin-install">/plugin install 2389-research/xtool</code>
             <a href="../xtool/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -303,7 +269,7 @@
   },
   "description": "CSS development workflows with Tailwind composition, semantic naming, and dark mode by default",
   "url": "https://2389-research.github.io/claude-plugins/plugins/css-development/",
-  "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/css-development",
+  "downloadUrl": "https://github.com/2389-research/css-development",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT"
 }

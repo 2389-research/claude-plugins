@@ -88,11 +88,10 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Commands</span>
-          <code class="install-command">/plugin marketplace add 2389-research/claude-plugins
-/plugin install worldview-synthesis@2389-research</code>
+          <span class="install-label">Install Command</span>
+          <code class="install-command">/plugin install 2389-research/worldview-synthesis</code>
         </div>
-        <a href="https://github.com/2389-research/claude-plugins/tree/main/worldview-synthesis" class="cta-button" rel="noopener noreferrer" target="_blank">
+        <a href="https://github.com/2389-research/worldview-synthesis" class="cta-button" rel="noopener noreferrer" target="_blank">
           View Source
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -108,52 +107,14 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">Documentation</h2>
-          <p class="section-subtitle">Full plugin documentation and usage guide</p>
+          <h2 class="section-title">About This Plugin</h2>
+          <p class="section-subtitle">What this plugin provides</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <h2>Worldview Synthesis Plugin</h2>
-<p>Surface your beliefs, identify the tensions between them, and generate narrative outputs for personal philosophy documentation.</p>
-<h3>Installation</h3>
-<pre><code class="language-bash">/plugin install worldview-synthesis@2389-research
-</code></pre>
-<h3>What this plugin provides</h3>
-<h4>Skills</h4>
-<ul><li><code>worldview-synthesis</code> -- methodology for articulating personal philosophy through structured interrogation, tension mapping, and narrative generation</li></ul>
-<h4>Reference materials</h4>
-<ul><li><code>interrogation-questions.md</code> -- 6 rounds of ready-to-use questions covering mortality, body, relationships, emotion, work, ethics, society, and future</li></ul>
-<h3>Quick example</h3>
-<p>Start with: "Help me articulate my worldview"</p>
-<p>The skill guides you through:</p>
-<ol><li>Bootstrap -- create project structure for beliefs and narratives</li>
-<li>Seed -- extract ideas from your influences (books, people, experiences)</li>
-<li>Interrogate -- 4-6 rounds of multi-choice questions across 20 domains</li>
-<li>Capture tensions -- name contradictions, don't resolve them</li>
-<li>Generate narratives -- mission, thesis, synopsis, full narrative</li>
-<li>Iterate -- a worldview is living, update as you evolve</li></ol>
-<h3>Core principle</h3>
-<p>A worldview isn't a list of opinions. It's a graph of beliefs with tensions. The goal is to surface what you already believe, name the contradictions, and synthesize into something you can share.</p>
-<h3>Output examples</h3>
-<p>Mission (~100 words):</p>
-<pre><code class="language-">Put people first. Prepare for what's coming. Fight anyway.
-Find the cracks. Leave no trace.
-</code></pre>
-<p>Idea node:</p>
-<pre><code class="language-yaml">- id: strategic-ruthlessness
-  claim: "Sometimes you have to crush opponents"
-  confidence: 0.7
-  tensions: [collaboration-over-competition]
-</code></pre>
-<p>Tension:</p>
-<pre><code class="language-yaml">- id: collaboration-vs-ruthlessness
-  status: embraced  # Live in the paradox
-</code></pre>
-<h3>When this skill applies</h3>
-<ul><li>"I want to articulate my values"</li><li>"Help me figure out what I believe"</li><li>Writing a manifesto or leadership philosophy</li><li>Defining company culture</li><li>Personal philosophy documentation</li></ul>
-<h3>Links</h3>
-<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/worldview-synthesis/CLAUDE.md" rel="noopener noreferrer" target="_blank">Plugin CLAUDE.md</a> -- development instructions</li></ul>
+        <p>Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation</p>
+        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/worldview-synthesis" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
       </div>
     </section>
     
@@ -173,19 +134,12 @@ Find the cracks. Leave no trace.
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
-              <span class="step-label">Add the marketplace (if not already added)</span>
-              <code>/plugin marketplace add 2389-research/claude-plugins</code>
+              <span class="step-label">Install this plugin</span>
+              <code>/plugin install 2389-research/worldview-synthesis</code>
             </div>
           </div>
           <div class="step">
             <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code>/plugin install worldview-synthesis@2389-research</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
             <div class="step-content">
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>
@@ -217,7 +171,7 @@ Find the cracks. Leave no trace.
           <p class="plugin-description">Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)</p>
           <div class="plugin-tags"><span class="tag">ceo</span><span class="tag">executive</span><span class="tag">reflection</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install ceo-personal-os</code>
+            <code class="plugin-install">/plugin install 2389-research/ceo-personal-os</code>
             <a href="../ceo-personal-os/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -232,7 +186,7 @@ Find the cracks. Leave no trace.
           <p class="plugin-description">Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction</p>
           <div class="plugin-tags"><span class="tag">meeting</span><span class="tag">summary</span><span class="tag">obsidian</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install summarize-meetings</code>
+            <code class="plugin-install">/plugin install 2389-research/summarize-meetings</code>
             <a href="../summarize-meetings/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -247,7 +201,7 @@ Find the cracks. Leave no trace.
           <p class="plugin-description">A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts</p>
           <div class="plugin-tags"><span class="tag">journal</span><span class="tag">journaling</span><span class="tag">thoughts</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install journal</code>
+            <code class="plugin-install">/plugin install 2389-research/journal</code>
             <a href="../journal/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -315,7 +269,7 @@ Find the cracks. Leave no trace.
   },
   "description": "Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation",
   "url": "https://2389-research.github.io/claude-plugins/plugins/worldview-synthesis/",
-  "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/worldview-synthesis",
+  "downloadUrl": "https://github.com/2389-research/worldview-synthesis",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT"
 }

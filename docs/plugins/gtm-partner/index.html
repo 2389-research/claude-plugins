@@ -88,11 +88,10 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Commands</span>
-          <code class="install-command">/plugin marketplace add 2389-research/claude-plugins
-/plugin install gtm-partner@2389-research</code>
+          <span class="install-label">Install Command</span>
+          <code class="install-command">/plugin install 2389-research/gtm-partner</code>
         </div>
-        <a href="https://github.com/2389-research/claude-plugins/tree/main/gtm-partner" class="cta-button" rel="noopener noreferrer" target="_blank">
+        <a href="https://github.com/2389-research/gtm-partner" class="cta-button" rel="noopener noreferrer" target="_blank">
           View Source
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -108,53 +107,14 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">Documentation</h2>
-          <p class="section-subtitle">Full plugin documentation and usage guide</p>
+          <h2 class="section-title">About This Plugin</h2>
+          <p class="section-subtitle">What this plugin provides</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <h2>GTM Partner</h2>
-<p>Strategic go-to-market consultant for validated business ideas.</p>
-<h3>What it does</h3>
-<p>Takes a validated idea and turns it into a GTM strategy:</p>
-<ul><li>Channel recommendations based on audience and budget</li><li>Verified naming options (domain availability checked)</li><li>Pricing strategy for your specific audience</li><li>Outreach templates ready to copy-paste</li><li>Blog post outlines in authentic voice</li></ul>
-<h3>Philosophy</h3>
-<p>Understand before recommending. Recommend before generating. Generate only what's approved. This is a strategic partner, not a content factory.</p>
-<h3>The flow</h3>
-<h4>Phase 1: Gather context</h4>
-One question at a time, confirms:
-<ul><li>Target audience</li><li>Value proposition</li><li>First milestone + goal</li><li>Timeline</li><li>Pricing strategy (with deep analysis)</li><li>Budget</li><li>Existing assets</li></ul>
-<h4>Phase 2: Recommend channels</h4>
-Presents 2-4 channels with rationale. Also explains what it's NOT recommending and why.
-<h4>Phase 2.5: Context summary (mandatory)</h4>
-Creates a checkpoint webpage with all decisions before generating assets. Includes verified naming options with domain availability.
-<h4>Phase 3: Generate assets</h4>
-Only generates what was approved:
-<ul><li>Product brief</li><li>Naming + domains</li><li>Pricing strategy</li><li>Landing page updates</li><li>Outreach templates</li><li>Blog post outline</li></ul>
-<h4>Phase 4: Deliver</h4>
-Consolidates everything into <code>GTM-STRATEGY.html</code> with next steps.
-<h3>Details</h3>
-<h4>Pricing analysis</h4>
-Never defaults to generic "$20-30/mo". Analyzes who pays and how (individual vs company, annual vs monthly), what they already pay for similar tools, value delivered (quantified), and multiple business models with trade-offs.
-<h4>Milestone clarity</h4>
-Shows the reasoning chain: Goal, Optimizing For, Approach, Success Metric. Different asks have different relationship costs. Escalation path: Feedback, Quote, Mention, Write-up.
-<h4>Network leverage</h4>
-For 2389 products, factors in the existing network. Who do we know close to this problem? Warm intros before cold outreach, with specific asks for each person.
-<h4>Harper writing style</h4>
-Long-form copy (outreach, blogs) uses authentic voice -- conversational, not corporate. Opens with personal narrative. No marketing speak. Self-deprecating humor allowed.
-<h3>Output files</h3>
-<p>Generated to <code>.scratch/gtm-assets/</code>:</p>
-<ul><li><code>CONTEXT-SUMMARY.html</code> -- decision checkpoint</li><li><code>GTM-STRATEGY.html</code> -- final strategy with all assets</li><li><code>outreach-templates.md</code> -- ready-to-send DM templates</li><li><code>harper-blog-outline.md</code> -- blog structure</li></ul>
-<h3>Usage</h3>
-<pre><code class="language-">/gtm-partner
-</code></pre>
-<p>Or naturally:</p>
-<ul><li>"Let's build a GTM strategy for this"</li><li>"Help me launch this product"</li><li>"What channels should we use?"</li></ul>
-<h3>Requirements</h3>
-<ul><li>Works best after idea validation (idea-validator tool)</li><li>Needs user input for decisions</li><li>Creates files in <code>.scratch/gtm-assets/</code></li></ul>
-<h3>Integration</h3>
-<ul><li>Uses <code>frontend-design</code> skill for landing pages when there's no existing design system</li><li>Reads from idea-validator output when available</li><li>Respects existing CSS/design systems</li></ul>
+        <p>Strategic go-to-market partner - recommends channels, validates strategy, generates only assets that matter. Not a content factory.</p>
+        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/gtm-partner" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
       </div>
     </section>
     
@@ -174,19 +134,12 @@ Long-form copy (outreach, blogs) uses authentic voice -- conversational, not cor
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
-              <span class="step-label">Add the marketplace (if not already added)</span>
-              <code>/plugin marketplace add 2389-research/claude-plugins</code>
+              <span class="step-label">Install this plugin</span>
+              <code>/plugin install 2389-research/gtm-partner</code>
             </div>
           </div>
           <div class="step">
             <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code>/plugin install gtm-partner@2389-research</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
             <div class="step-content">
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>
@@ -218,7 +171,7 @@ Long-form copy (outreach, blogs) uses authentic voice -- conversational, not cor
           <p class="plugin-description">CSS development workflows with Tailwind composition, semantic naming, and dark mode by default</p>
           <div class="plugin-tags"><span class="tag">css</span><span class="tag">tailwind</span><span class="tag">styling</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install css-development</code>
+            <code class="plugin-install">/plugin install 2389-research/css-development</code>
             <a href="../css-development/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -233,7 +186,7 @@ Long-form copy (outreach, blogs) uses authentic voice -- conversational, not cor
           <p class="plugin-description">Firebase project workflows including setup, features, debugging, and validation</p>
           <div class="plugin-tags"><span class="tag">firebase</span><span class="tag">firestore</span><span class="tag">cloud-functions</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install firebase-development</code>
+            <code class="plugin-install">/plugin install 2389-research/firebase-development</code>
             <a href="../firebase-development/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -248,7 +201,7 @@ Long-form copy (outreach, blogs) uses authentic voice -- conversational, not cor
           <p class="plugin-description">Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles</p>
           <div class="plugin-tags"><span class="tag">landing-page</span><span class="tag">marketing</span><span class="tag">design</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install landing-page-design</code>
+            <code class="plugin-install">/plugin install 2389-research/landing-page-design</code>
             <a href="../landing-page-design/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -316,7 +269,7 @@ Long-form copy (outreach, blogs) uses authentic voice -- conversational, not cor
   },
   "description": "Strategic go-to-market partner - recommends channels, validates strategy, generates only assets that matter. Not a content factory.",
   "url": "https://2389-research.github.io/claude-plugins/plugins/gtm-partner/",
-  "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/gtm-partner",
+  "downloadUrl": "https://github.com/2389-research/gtm-partner",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT"
 }

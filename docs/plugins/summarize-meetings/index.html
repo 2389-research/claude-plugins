@@ -88,11 +88,10 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Commands</span>
-          <code class="install-command">/plugin marketplace add 2389-research/claude-plugins
-/plugin install summarize-meetings@2389-research</code>
+          <span class="install-label">Install Command</span>
+          <code class="install-command">/plugin install 2389-research/summarize-meetings</code>
         </div>
-        <a href="https://github.com/2389-research/claude-plugins/tree/main/summarize-meetings" class="cta-button" rel="noopener noreferrer" target="_blank">
+        <a href="https://github.com/2389-research/summarize-meetings" class="cta-button" rel="noopener noreferrer" target="_blank">
           View Source
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -108,30 +107,14 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">Documentation</h2>
-          <p class="section-subtitle">Full plugin documentation and usage guide</p>
+          <h2 class="section-title">About This Plugin</h2>
+          <p class="section-subtitle">What this plugin provides</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <h2>Summarize Meetings</h2>
-<p>Turn a pile of Granola transcripts into an Obsidian knowledge graph. Processes meetings in monthly batches, extracts the stuff that matters, and wires it all together with wiki-links.</p>
-<h3>Installation</h3>
-<pre><code class="language-bash">/plugin install summarize-meetings@2389-research
-</code></pre>
-<h3>What it does</h3>
-<p>Point this at a month of meeting transcripts and it will:</p>
-<ul><li>Read each transcript, skip the junk (empty stubs, scheduling fragments, recording setup chats)</li><li>Dispatch 10-15 parallel agents to process the real meetings</li><li>Write a summary file for each meeting with YAML frontmatter and a narrative recap</li><li>Create or update People notes in <code>People/</code> (checks for existing entries and aliases first)</li><li>Pull out concepts worth their own atomic note in <code>Concepts/</code></li><li>Stub out any projects mentioned that don't already exist</li><li>Report back with a table of what got processed and what got skipped</li></ul>
-<h3>What gets extracted</h3>
-<p>From each meeting, agents pull out seven categories: people, action items, project ideas, blog ideas, knowledge graph connections, concepts, and general ideas. The summary file includes all of these plus a 2-4 paragraph narrative that reads like a real meeting recap — what happened, what mattered, what the vibe was.</p>
-<h3>Triage</h3>
-<p>Not everything in <code>Meetings/transcripts/</code> is worth a summary. The skill skips files that are empty stubs, have fewer than 20 words of real content, are garbled recordings, or are medical appointments and kid-related content. Sparse but real notes (like bullet points from a fundraising call) still get processed.</p>
-<h3>How it works</h3>
-<pre><code class="language-">Scan month → Triage → Dispatch agents in waves → Compile report → Post update
-</code></pre>
-<p>Agents run in parallel (waves of 10-15) and each one handles a single transcript end-to-end. Large files (50K+) get chunked automatically.</p>
-<h3>Documentation</h3>
-<p>The full workflow, templates, and extraction rules are in <a href="https://github.com/2389-research/claude-plugins/blob/main/summarize-meetings/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a>.</p>
+        <p>Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction</p>
+        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/summarize-meetings" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
       </div>
     </section>
     
@@ -151,19 +134,12 @@
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
-              <span class="step-label">Add the marketplace (if not already added)</span>
-              <code>/plugin marketplace add 2389-research/claude-plugins</code>
+              <span class="step-label">Install this plugin</span>
+              <code>/plugin install 2389-research/summarize-meetings</code>
             </div>
           </div>
           <div class="step">
             <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code>/plugin install summarize-meetings@2389-research</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
             <div class="step-content">
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>
@@ -195,7 +171,7 @@
           <p class="plugin-description">Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)</p>
           <div class="plugin-tags"><span class="tag">ceo</span><span class="tag">executive</span><span class="tag">reflection</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install ceo-personal-os</code>
+            <code class="plugin-install">/plugin install 2389-research/ceo-personal-os</code>
             <a href="../ceo-personal-os/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -210,7 +186,7 @@
           <p class="plugin-description">Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation</p>
           <div class="plugin-tags"><span class="tag">worldview</span><span class="tag">values</span><span class="tag">philosophy</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install worldview-synthesis</code>
+            <code class="plugin-install">/plugin install 2389-research/worldview-synthesis</code>
             <a href="../worldview-synthesis/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -225,7 +201,7 @@
           <p class="plugin-description">A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts</p>
           <div class="plugin-tags"><span class="tag">journal</span><span class="tag">journaling</span><span class="tag">thoughts</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install journal</code>
+            <code class="plugin-install">/plugin install 2389-research/journal</code>
             <a href="../journal/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -293,7 +269,7 @@
   },
   "description": "Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction",
   "url": "https://2389-research.github.io/claude-plugins/plugins/summarize-meetings/",
-  "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/summarize-meetings",
+  "downloadUrl": "https://github.com/2389-research/summarize-meetings",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT"
 }

@@ -88,11 +88,10 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Commands</span>
-          <code class="install-command">/plugin marketplace add 2389-research/claude-plugins
-/plugin install simmer@2389-research</code>
+          <span class="install-label">Install Command</span>
+          <code class="install-command">/plugin install 2389-research/simmer</code>
         </div>
-        <a href="https://github.com/2389-research/claude-plugins/tree/main/simmer" class="cta-button" rel="noopener noreferrer" target="_blank">
+        <a href="https://github.com/2389-research/simmer" class="cta-button" rel="noopener noreferrer" target="_blank">
           View Source
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -108,118 +107,14 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">Documentation</h2>
-          <p class="section-subtitle">Full plugin documentation and usage guide</p>
+          <h2 class="section-title">About This Plugin</h2>
+          <p class="section-subtitle">What this plugin provides</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <h2>Simmer</h2>
-<p>Iterative artifact refinement — take any artifact or workspace and hone it over multiple rounds using criteria-driven feedback.</p>
-<h3>Installation</h3>
-<pre><code class="language-bash">/plugin install simmer@2389-research
-</code></pre>
-<h3>What This Plugin Provides</h3>
-<p>One skill (<code>simmer</code>) with four subskills that run the refinement loop:</p>
-<ul><li><strong>Setup</strong> — identify the artifact (file or workspace), elicit 2-3 quality criteria, determine evaluation method</li><li><strong>Generator</strong> — produce an improved version based on the judge's ASI (Actionable Side Information — the single highest-leverage fix)</li><li><strong>Judge</strong> — score the candidate 1-10 per criterion, produce the ASI</li><li><strong>Reflect</strong> — record the trajectory, track the best candidate across iterations</li></ul>
-<h3>Trigger Phrases</h3>
-<p>Say any of these to start a simmer loop:</p>
-<blockquote>"simmer this", "refine this", "hone this", "iterate on this", "make this better", "improve this over a few rounds", "polish this", "tighten this up", "optimize this pipeline", "find the best model for this task", "tune this configuration"</blockquote>
-<p>Any request to <strong>iteratively improve</strong> an artifact triggers simmer.</p>
-<h3>When to Use Simmer vs. Cookoff vs. Omakase-Off</h3>
-<table class="readme-table"><thead><tr><th>Situation</th><th>Use</th><th>Why</th></tr></thead><tbody><tr><td>You have an artifact and want it better</td><td><strong>simmer</strong></td><td>Iterative refinement against criteria</td></tr><tr><td>You want parallel code implementations competing</td><td><strong>cookoff</strong></td><td>Parallel generation + fixed criteria + pick winner</td></tr><tr><td>You don't know what you want yet</td><td><strong>omakase-off</strong></td><td>Parallel designs + react + discover preference</td></tr></tbody></table>
-<strong>Rule of thumb:</strong> Simmer = serial iteration. Cookoff/omakase-off = parallel exploration.
-<h3>Quick Example: Single File</h3>
-<pre><code class="language-">User: "Simmer this" [pastes a pitch email]
-
-Claude: I'm using the simmer skill to set up iterative refinement.
-
-What does "better" mean for this? I'd suggest:
-1. Value prop clarity
-2. Tone match
-3. Call to action strength
-
-User: "Those work"
-
-[Iteration 0: Judge scores seed — 4.0/10]
-[Iteration 1: Generator fixes value prop → 5.3/10]
-[Iteration 2: Generator fixes CTA → 6.3/10]
-[Iteration 3: Generator fixes tone → 7.3/10]
-
-Trajectory:
-| Iter | Value Prop | Tone | CTA | Composite | Key Change |
-|------|-----------|------|-----|-----------|------------|
-| 0    | 4         | 5    | 3   | 4.0       | seed       |
-| 1    | 7         | 5    | 4   | 5.3       | specific problem statement |
-| 2    | 7         | 6    | 6   | 6.3       | low-friction CTA |
-| 3    | 7         | 7    | 8   | 7.3       | peer-sharing tone |
-
-Best candidate: iteration 3 (7.3/10)
-3 iterations complete. Run 3 more?
-</code></pre>
-<h3>Quick Example: Workspace with Evaluator</h3>
-<pre><code class="language-">User: "Simmer this pipeline — find the best setup for this task"
-
-Claude inspects the workspace, finds evaluate.sh and config.json,
-and proposes criteria + evaluation method:
-
-  Evaluator: ./evaluate.sh
-  Criteria: accuracy, cost efficiency, latency
-  Search space: models, prompt text, pipeline topology
-
-User: "Looks good, coverage is the priority. 5 iterations."
-
-[Iteration 0: Run evaluator on seed, judge scores — 3.7/10]
-[Iteration 1: Generator swaps to cheaper model → 5.3/10]
-[Iteration 2: Generator splits into 2-step chain → 7.0/10]
-[Iteration 3: Generator adds few-shot examples → 7.7/10]
-...
-
-Best candidate: iteration 4 (8.1/10)
-</code></pre>
-<h3>Works On Anything</h3>
-<table class="readme-table"><thead><tr><th>Artifact type</th><th>Suggested criteria</th></tr></thead><tbody><tr><td>Document / spec</td><td>clarity, completeness, actionability</td></tr><tr><td>Creative writing</td><td>narrative tension, specificity, voice consistency</td></tr><tr><td>Email / comms</td><td>value prop clarity, tone match, call to action strength</td></tr><tr><td>Prompt / instructions</td><td>instruction precision, output predictability, edge case coverage</td></tr><tr><td>API design</td><td>contract completeness, developer ergonomics, consistency</td></tr><tr><td>Pipeline / workflow</td><td>coverage, efficiency, noise</td></tr><tr><td>Configuration / infra</td><td>correctness, resource efficiency, maintainability</td></tr></tbody></table>
-<h3>Evaluation Modes</h3>
-<table class="readme-table"><thead><tr><th>Mode</th><th>When to use</th></tr></thead><tbody><tr><td><strong>Judge-only</strong> (default)</td><td>Text artifacts — judge scores against criteria</td></tr><tr><td><strong>Runnable</strong></td><td>Code/pipelines — judge interprets script output</td></tr><tr><td><strong>Hybrid</strong></td><td>Both — run script AND judge results against criteria</td></tr></tbody></table>
-No format contract on evaluator output. The judge reads whatever your script produces — test results, metrics, error logs, anything.
-<h3>Judge Board</h3>
-<p>Simmer auto-selects between a single judge and a multi-judge board based on complexity:</p>
-<ul><li><strong>Simple</strong> (short email, tweet, ≤2 criteria) → single judge, fast</li><li><strong>Complex</strong> (3 criteria, long artifact, code, pipelines) → judge board with deliberation</li></ul>
-<p>The board constructs three judges tailored to your specific problem — not from a fixed menu, but by reading your artifact, criteria, and constraints and designing judges with diverse perspectives. An extraction prompt gets different judges than a DND adventure hook.</p>
-<p>Judges investigate before scoring — they read the evaluator script, ground truth, prior candidates, and config files to understand the problem deeply. A judge who reads the evaluator discovers scoring mechanics on iteration 0 instead of learning them through 3 iterations of trial and error.</p>
-<p>If a single-judge run hits a plateau (3 iterations without improvement), simmer offers to upgrade to the board mid-run with 2 extra iterations.</p>
-<h3>Defaults and Safety</h3>
-<p><strong>Default iteration count:</strong> 3 rounds per batch. After each batch, simmer asks whether to continue. You can request a specific count ("simmer this for 10 rounds") or stop early at any prompt.</p>
-<p><strong>Regression safety:</strong> The reflect subskill tracks the best candidate seen so far. If a new iteration scores lower than the current best, the best-so-far is preserved — the loop never loses progress. At the end, <code>result.md</code> always contains the highest-scoring candidate, not just the latest one.</p>
-<h3>Advanced Features</h3>
-<table class="readme-table"><thead><tr><th>Feature</th><th>When you need it</th></tr></thead><tbody><tr><td><strong>Workspace targets</strong></td><td>Refining a multi-file directory — iterations tracked as git commits so you can diff any two rounds</td></tr><tr><td><strong>Runnable evaluators</strong></td><td>Your artifact has a test script — point simmer at it (<code>python evaluate.py</code>) and the judge interprets output</td></tr><tr><td><strong>Background constraints</strong></td><td>The generator needs to know what's available (models, budget, latency targets) to make realistic choices</td></tr><tr><td><strong>Output contracts</strong></td><td>Valid output has a defined shape (e.g., JSON schema) — violations score 1/10, forcing format fixes first</td></tr><tr><td><strong>Validation commands</strong></td><td>A cheap pre-check (<code>./validate.sh</code>) catches broken pipelines in seconds before the full evaluator runs</td></tr><tr><td><strong>Search space tracking</strong></td><td>Explicit bounds on what to explore — reflect tracks tried vs. untried regions so the judge steers toward gaps</td></tr></tbody></table>
-See the <a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/docs/specs/2026-03-16-simmer-v2-design.md" rel="noopener noreferrer" target="_blank">v2 design spec</a> for full details on each feature.
-<h3>Output Directory Structure</h3>
-<p><strong>Single-file mode</strong> (default output dir: <code>docs/simmer</code>):</p>
-<pre><code class="language-">docs/simmer/
-  iteration-0-candidate.md     # Seed (original artifact)
-  iteration-1-candidate.md     # Each improved candidate
-  iteration-2-candidate.md
-  iteration-3-candidate.md
-  trajectory.md                # Running score table
-  result.md                    # Final best candidate (highest score, not necessarily latest)
-</code></pre>
-<p><strong>Workspace mode:</strong></p>
-<pre><code class="language-">./pipeline/                    # Target directory (modified in place)
-  [project files]              # Tracked via git commits per iteration
-
-docs/simmer/                   # Tracking files (separate from workspace)
-  trajectory.md                # Running score table
-</code></pre>
-<p>Workspace iterations are tracked as git commits rather than separate files.</p>
-<h3>How It Works</h3>
-<ul><li><strong>Focused improvement</strong> — each iteration targets one direction (the ASI), not everything at once. Compound gains over scattered edits.</li><li><strong>Context isolation</strong> — generator doesn't see scores, judge doesn't see previous scores. Each role gets only the context it needs to avoid bias.</li><li><strong>The generator is the search strategy</strong> — in workspace mode, the generator decides what to change (swap a model, restructure a pipeline, tune a prompt). The ASI guides direction, the generator executes.</li></ul>
-<p>See the <a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/docs/specs/2026-03-16-simmer-v2-design.md" rel="noopener noreferrer" target="_blank">design spec</a> for the full architecture.</p>
-<h3>Related Skills</h3>
-<p>Part of the test-kitchen family, but independently installable:</p>
-<ul><li><code>test-kitchen:omakase-off</code> — parallel design exploration</li><li><code>test-kitchen:cookoff</code> — parallel implementation competition</li><li><code>simmer</code> — iterative refinement</li></ul>
-<h3>Documentation</h3>
-<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> — full plugin instructions</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/skills/SKILL.md" rel="noopener noreferrer" target="_blank">Simmer skill</a> — orchestrator</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/docs/specs/2026-03-16-simmer-v2-design.md" rel="noopener noreferrer" target="_blank">v2 Design</a> — design spec</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/simmer/tests/integration/simmer-scenario.md" rel="noopener noreferrer" target="_blank">Integration tests</a> — test scenarios</li></ul>
+        <p>Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements</p>
+        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/simmer" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
       </div>
     </section>
     
@@ -239,19 +134,12 @@ docs/simmer/                   # Tracking files (separate from workspace)
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
-              <span class="step-label">Add the marketplace (if not already added)</span>
-              <code>/plugin marketplace add 2389-research/claude-plugins</code>
+              <span class="step-label">Install this plugin</span>
+              <code>/plugin install 2389-research/simmer</code>
             </div>
           </div>
           <div class="step">
             <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code>/plugin install simmer@2389-research</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
             <div class="step-content">
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>
@@ -283,7 +171,7 @@ docs/simmer/                   # Tracking files (separate from workspace)
           <p class="plugin-description">CSS development workflows with Tailwind composition, semantic naming, and dark mode by default</p>
           <div class="plugin-tags"><span class="tag">css</span><span class="tag">tailwind</span><span class="tag">styling</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install css-development</code>
+            <code class="plugin-install">/plugin install 2389-research/css-development</code>
             <a href="../css-development/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -298,7 +186,7 @@ docs/simmer/                   # Tracking files (separate from workspace)
           <p class="plugin-description">Firebase project workflows including setup, features, debugging, and validation</p>
           <div class="plugin-tags"><span class="tag">firebase</span><span class="tag">firestore</span><span class="tag">cloud-functions</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install firebase-development</code>
+            <code class="plugin-install">/plugin install 2389-research/firebase-development</code>
             <a href="../firebase-development/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -313,7 +201,7 @@ docs/simmer/                   # Tracking files (separate from workspace)
           <p class="plugin-description">Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles</p>
           <div class="plugin-tags"><span class="tag">landing-page</span><span class="tag">marketing</span><span class="tag">design</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install landing-page-design</code>
+            <code class="plugin-install">/plugin install 2389-research/landing-page-design</code>
             <a href="../landing-page-design/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -381,7 +269,7 @@ docs/simmer/                   # Tracking files (separate from workspace)
   },
   "description": "Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements",
   "url": "https://2389-research.github.io/claude-plugins/plugins/simmer/",
-  "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/simmer",
+  "downloadUrl": "https://github.com/2389-research/simmer",
   "softwareVersion": "3.0.0",
   "license": "https://opensource.org/licenses/MIT"
 }

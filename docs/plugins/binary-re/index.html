@@ -88,11 +88,10 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Commands</span>
-          <code class="install-command">/plugin marketplace add 2389-research/claude-plugins
-/plugin install binary-re@2389-research</code>
+          <span class="install-label">Install Command</span>
+          <code class="install-command">/plugin install 2389-research/binary-re</code>
         </div>
-        <a href="https://github.com/2389-research/claude-plugins/tree/main/binary-re" class="cta-button" rel="noopener noreferrer" target="_blank">
+        <a href="https://github.com/2389-research/binary-re" class="cta-button" rel="noopener noreferrer" target="_blank">
           View Source
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -108,74 +107,14 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">Documentation</h2>
-          <p class="section-subtitle">Full plugin documentation and usage guide</p>
+          <h2 class="section-title">About This Plugin</h2>
+          <p class="section-subtitle">What this plugin provides</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <h2>Binary Reverse Engineering Plugin</h2>
-<p>Reverse engineer ELF binaries from embedded devices using radare2, Ghidra, GDB, and QEMU.</p>
-<h3>Installation</h3>
-<pre><code class="language-bash">/plugin install binary-re@2389-research
-</code></pre>
-<h3>What this plugin provides</h3>
-<h4>Skills</h4>
-<ul><li><code>binary-re</code> -- structured RE workflow with hypothesis-driven analysis</li></ul>
-<h4>Capabilities</h4>
-<ul><li>Cross-architecture static analysis (ARM64, ARMv7, x86_64, MIPS)</li><li>Dynamic tracing via QEMU user-mode emulation</li><li>GDB integration for debugging</li><li>Ghidra headless decompilation</li><li>Human-in-the-loop gates for risky operations</li></ul>
-<h3>Quick example</h3>
-<pre><code class="language-">User: "Analyze this binary from an IoT device - ARM, Linux-based"
-
-Claude: [Triggers binary-re skill]
-
-Let me start with triage to understand what we're working with.
-
-Phase 1: Initial Triage
-┌─────────────────────────────────────────┐
-│ Architecture: ARM 32-bit LE (v7)        │
-│ Libc: musl 1.2.3                        │
-│ Dependencies: libcurl, libssl, libz     │
-│ Stripped: Yes                           │
-│ Strings: 847 (including URLs, paths)    │
-└─────────────────────────────────────────┘
-
-FACTS recorded:
-- Links against libcurl.so.4 (network client)
-- Contains string "api.vendor.com/telemetry"
-- Imports socket, connect, SSL_read functions
-
-HYPOTHESIS: This is a telemetry client that phones home over HTTPS
-Confidence: 0.7
-Evidence: curl+ssl imports, telemetry URL string
-
-Do you want me to proceed with static analysis of network-related
-functions, or should we try dynamic analysis under QEMU first?
-</code></pre>
-<h3>Tool requirements</h3>
-<pre><code class="language-bash"># Required
-sudo apt install radare2 qemu-user gdb-multiarch
-
-# Recommended
-# Ghidra from https://ghidra-sre.org/
-pip install frida-tools
-
-# ARM sysroots
-sudo apt install libc6-armhf-cross libc6-arm64-cross
-</code></pre>
-<h3>Use cases</h3>
-<ul><li>Firmware analysis -- understand device behavior without source</li><li>Protocol reverse engineering -- map network communications</li><li>Security research -- find vulnerabilities in embedded systems</li><li>Hardware hacking -- analyze robot/IoT device internals</li></ul>
-<h3>Philosophy</h3>
-<p>The LLM drives analysis; the human provides context.</p>
-<p>You tell Claude what platform/device the binary came from, what hardware is involved, what the binary is theorized to do, and any constraints (no network, isolated test env, etc).</p>
-<p>Claude runs the tools, forms hypotheses from evidence, designs experiments to test theories, and synthesizes findings into something actionable.</p>
-<h3>Human-in-the-loop</h3>
-<p>The skill asks for confirmation before:</p>
-<ul><li>Executing binaries (even sandboxed)</li><li>Network-capable dynamic analysis</li><li>Operations requiring device access</li><li>Major changes in analysis direction</li></ul>
-<h3>Documentation</h3>
-<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/binary-re/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> -- detailed skill reference</li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/binary-re/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a> -- full workflow documentation</li></ul>
-<h3>License</h3>
-<p>MIT</p>
+        <p>Agentic binary reverse engineering for ELF binaries on ARM64, ARMv7, x86_64 - hypothesis-driven analysis with radare2, Ghidra, GDB, QEMU</p>
+        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/binary-re" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
       </div>
     </section>
     
@@ -195,19 +134,12 @@ sudo apt install libc6-armhf-cross libc6-arm64-cross
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
-              <span class="step-label">Add the marketplace (if not already added)</span>
-              <code>/plugin marketplace add 2389-research/claude-plugins</code>
+              <span class="step-label">Install this plugin</span>
+              <code>/plugin install 2389-research/binary-re</code>
             </div>
           </div>
           <div class="step">
             <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code>/plugin install binary-re@2389-research</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
             <div class="step-content">
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>
@@ -239,7 +171,7 @@ sudo apt install libc6-armhf-cross libc6-arm64-cross
           <p class="plugin-description">Automatically updates terminal title with emoji + project + topic context for quick visual cues when switching terminals</p>
           <div class="plugin-tags"><span class="tag">terminal</span><span class="tag">title</span><span class="tag">session</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install terminal-title</code>
+            <code class="plugin-install">/plugin install 2389-research/terminal-title</code>
             <a href="../terminal-title/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -254,7 +186,7 @@ sudo apt install libc6-armhf-cross libc6-arm64-cross
           <p class="plugin-description">Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists</p>
           <div class="plugin-tags"><span class="tag">linux</span><span class="tag">ubuntu</span><span class="tag">debian</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install remote-system-maintenance</code>
+            <code class="plugin-install">/plugin install 2389-research/remote-system-maintenance</code>
             <a href="../remote-system-maintenance/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -322,7 +254,7 @@ sudo apt install libc6-armhf-cross libc6-arm64-cross
   },
   "description": "Agentic binary reverse engineering for ELF binaries on ARM64, ARMv7, x86_64 - hypothesis-driven analysis with radare2, Ghidra, GDB, QEMU",
   "url": "https://2389-research.github.io/claude-plugins/plugins/binary-re/",
-  "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/binary-re",
+  "downloadUrl": "https://github.com/2389-research/binary-re",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT"
 }

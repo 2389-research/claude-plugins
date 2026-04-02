@@ -88,11 +88,10 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Commands</span>
-          <code class="install-command">/plugin marketplace add 2389-research/claude-plugins
-/plugin install firebase-development@2389-research</code>
+          <span class="install-label">Install Command</span>
+          <code class="install-command">/plugin install 2389-research/firebase-development</code>
         </div>
-        <a href="https://github.com/2389-research/claude-plugins/tree/main/firebase-development" class="cta-button" rel="noopener noreferrer" target="_blank">
+        <a href="https://github.com/2389-research/firebase-development" class="cta-button" rel="noopener noreferrer" target="_blank">
           View Source
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -108,38 +107,14 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">Documentation</h2>
-          <p class="section-subtitle">Full plugin documentation and usage guide</p>
+          <h2 class="section-title">About This Plugin</h2>
+          <p class="section-subtitle">What this plugin provides</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <h2>Firebase development plugin</h2>
-<p>Firebase project workflows including setup, features, debugging, and validation.</p>
-<h3>Installation</h3>
-<pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
-/plugin install firebase-development@2389-research
-</code></pre>
-<h3>What this plugin provides</h3>
-<p>Skills for Firebase development following 2389 patterns:</p>
-<ul><li><code>firebase-development</code> -- main orchestrator skill that routes to specific sub-skills</li><li><code>firebase-development:project-setup</code> -- initialize new Firebase projects</li><li><code>firebase-development:add-feature</code> -- add features to existing projects</li><li><code>firebase-development:debug</code> -- debug Firebase issues</li><li><code>firebase-development:validate</code> -- validate project structure</li></ul>
-<h3>Patterns</h3>
-<p>This plugin supports multi-hosting (multiple sites or single), authentication via custom API keys or Firebase Auth or both, Cloud Functions organized as Express apps or domain-grouped or individual files, and server-write-only vs client-write security models.</p>
-<p>Development is emulator-first -- always test locally before deploying. Tooling is TypeScript, vitest, and biome.</p>
-<h3>Quick example</h3>
-<pre><code class="language-typescript">// Cloud Function with domain grouping
-export const users = {
-  onCreate: onDocumentCreated('users/{userId}', async (event) =&gt; {
-    // Implementation
-  }),
-  onUpdate: onDocumentUpdated('users/{userId}', async (event) =&gt; {
-    // Implementation
-  })
-};
-</code></pre>
-<h3>Documentation</h3>
-<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/firebase-development/docs/plans/2025-01-14-firebase-skills-design.md" rel="noopener noreferrer" target="_blank">Design Document</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/firebase-development/docs/plans/2025-01-14-firebase-skills-implementation.md" rel="noopener noreferrer" target="_blank">Implementation Plan</a></li><li>Examples:<ul><li><a href="https://github.com/2389-research/claude-plugins/blob/main/firebase-development/docs/examples/api-key-authentication.md" rel="noopener noreferrer" target="_blank">API Key Authentication</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/firebase-development/docs/examples/emulator-workflow.md" rel="noopener noreferrer" target="_blank">Emulator Workflow</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/firebase-development/docs/examples/express-function-architecture.md" rel="noopener noreferrer" target="_blank">Express Function Architecture</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/firebase-development/docs/examples/firestore-rules-patterns.md" rel="noopener noreferrer" target="_blank">Firestore Rules Patterns</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/firebase-development/docs/examples/multi-hosting-setup.md" rel="noopener noreferrer" target="_blank">Multi-Hosting Setup</a></li></ul></li></ul>
-
+        <p>Firebase project workflows including setup, features, debugging, and validation</p>
+        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/firebase-development" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
       </div>
     </section>
     
@@ -159,19 +134,12 @@ export const users = {
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
-              <span class="step-label">Add the marketplace (if not already added)</span>
-              <code>/plugin marketplace add 2389-research/claude-plugins</code>
+              <span class="step-label">Install this plugin</span>
+              <code>/plugin install 2389-research/firebase-development</code>
             </div>
           </div>
           <div class="step">
             <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code>/plugin install firebase-development@2389-research</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
             <div class="step-content">
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>
@@ -203,7 +171,7 @@ export const users = {
           <p class="plugin-description">CSS development workflows with Tailwind composition, semantic naming, and dark mode by default</p>
           <div class="plugin-tags"><span class="tag">css</span><span class="tag">tailwind</span><span class="tag">styling</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install css-development</code>
+            <code class="plugin-install">/plugin install 2389-research/css-development</code>
             <a href="../css-development/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -218,7 +186,7 @@ export const users = {
           <p class="plugin-description">Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles</p>
           <div class="plugin-tags"><span class="tag">landing-page</span><span class="tag">marketing</span><span class="tag">design</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install landing-page-design</code>
+            <code class="plugin-install">/plugin install 2389-research/landing-page-design</code>
             <a href="../landing-page-design/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -233,7 +201,7 @@ export const users = {
           <p class="plugin-description">Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode</p>
           <div class="plugin-tags"><span class="tag">ios</span><span class="tag">xtool</span><span class="tag">swiftpm</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install xtool</code>
+            <code class="plugin-install">/plugin install 2389-research/xtool</code>
             <a href="../xtool/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -301,7 +269,7 @@ export const users = {
   },
   "description": "Firebase project workflows including setup, features, debugging, and validation",
   "url": "https://2389-research.github.io/claude-plugins/plugins/firebase-development/",
-  "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/firebase-development",
+  "downloadUrl": "https://github.com/2389-research/firebase-development",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT"
 }

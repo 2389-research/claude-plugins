@@ -88,11 +88,10 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Commands</span>
-          <code class="install-command">/plugin marketplace add 2389-research/claude-plugins
-/plugin install xtool@2389-research</code>
+          <span class="install-label">Install Command</span>
+          <code class="install-command">/plugin install 2389-research/xtool</code>
         </div>
-        <a href="https://github.com/2389-research/claude-plugins/tree/main/xtool" class="cta-button" rel="noopener noreferrer" target="_blank">
+        <a href="https://github.com/2389-research/xtool" class="cta-button" rel="noopener noreferrer" target="_blank">
           View Source
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -108,39 +107,14 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">Documentation</h2>
-          <p class="section-subtitle">Full plugin documentation and usage guide</p>
+          <h2 class="section-title">About This Plugin</h2>
+          <p class="section-subtitle">What this plugin provides</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <h2>xtool Plugin</h2>
-<p>Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode.</p>
-<h3>Installation</h3>
-<pre><code class="language-bash">/plugin install xtool@2389-research
-</code></pre>
-<h3>What this plugin provides</h3>
-<h4>Skills</h4>
-<ul><li><code>using-xtool</code> -- guide for xtool iOS development including project creation, app extensions (widgets, share extensions), and configuration</li></ul>
-<h3>Quick example</h3>
-<p>Create a new iOS app:</p>
-<pre><code class="language-bash">xtool new MyApp
-cd MyApp
-xtool dev
-</code></pre>
-<p>Add a widget extension:</p>
-<ol><li>Add product + target to <code>Package.swift</code></li>
-<li>Configure in <code>xtool.yml</code> under <code>extensions:</code></li>
-<li>Create <code>Sources/MyWidget/Widget.swift</code></li>
-<li>Create <code>MyWidget-Info.plist</code> with <code>NSExtensionPointIdentifier</code></li>
-<li>Run <code>xtool dev</code></li></ol>
-<h3>When this skill applies</h3>
-<p>The skill auto-triggers on:</p>
-<ul><li>Mentions of <code>xtool</code></li><li>SwiftPM iOS app development</li><li>Building iOS apps on Linux/Windows</li><li>App extension setup (widgets, share extensions)</li></ul>
-<h3>How xtool differs from XcodeGen/Tuist</h3>
-<table class="readme-table"><thead><tr><th>xtool Uses</th><th>NOT These</th></tr></thead><tbody><tr><td><code>xtool.yml</code></td><td><code>project.yml</code>, <code>Project.swift</code></td></tr><tr><td><code>Package.swift</code> (SwiftPM)</td><td>Xcode project files</td></tr><tr><td><code>xtool dev</code></td><td><code>xtool build</code>, <code>xtool run</code></td></tr></tbody></table>
-<h3>Links</h3>
-<ul><li><a href="https://github.com/nickyramone/xtool" rel="noopener noreferrer">xtool GitHub</a></li><li><a href="https://github.com/2389-research/claude-plugins/blob/main/xtool/CLAUDE.md" rel="noopener noreferrer" target="_blank">Plugin CLAUDE.md</a> -- development instructions</li></ul>
+        <p>Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode</p>
+        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/xtool" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
       </div>
     </section>
     
@@ -160,19 +134,12 @@ xtool dev
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
-              <span class="step-label">Add the marketplace (if not already added)</span>
-              <code>/plugin marketplace add 2389-research/claude-plugins</code>
+              <span class="step-label">Install this plugin</span>
+              <code>/plugin install 2389-research/xtool</code>
             </div>
           </div>
           <div class="step">
             <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code>/plugin install xtool@2389-research</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
             <div class="step-content">
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>
@@ -204,7 +171,7 @@ xtool dev
           <p class="plugin-description">CSS development workflows with Tailwind composition, semantic naming, and dark mode by default</p>
           <div class="plugin-tags"><span class="tag">css</span><span class="tag">tailwind</span><span class="tag">styling</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install css-development</code>
+            <code class="plugin-install">/plugin install 2389-research/css-development</code>
             <a href="../css-development/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -219,7 +186,7 @@ xtool dev
           <p class="plugin-description">Firebase project workflows including setup, features, debugging, and validation</p>
           <div class="plugin-tags"><span class="tag">firebase</span><span class="tag">firestore</span><span class="tag">cloud-functions</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install firebase-development</code>
+            <code class="plugin-install">/plugin install 2389-research/firebase-development</code>
             <a href="../firebase-development/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -234,7 +201,7 @@ xtool dev
           <p class="plugin-description">Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles</p>
           <div class="plugin-tags"><span class="tag">landing-page</span><span class="tag">marketing</span><span class="tag">design</span></div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install landing-page-design</code>
+            <code class="plugin-install">/plugin install 2389-research/landing-page-design</code>
             <a href="../landing-page-design/" class="plugin-source">Details →</a>
           </div>
         </article>
@@ -302,7 +269,7 @@ xtool dev
   },
   "description": "Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode",
   "url": "https://2389-research.github.io/claude-plugins/plugins/xtool/",
-  "downloadUrl": "https://github.com/2389-research/claude-plugins/tree/main/xtool",
+  "downloadUrl": "https://github.com/2389-research/xtool",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT"
 }
