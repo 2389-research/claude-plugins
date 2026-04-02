@@ -3,6 +3,8 @@ name: Generate Plugin Marketplace Site
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '23 6 * * 3'  # Weekly on Wednesday at 6:23 AM UTC
   workflow_dispatch:
 
 jobs:
@@ -18,7 +20,12 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install gh CLI
+        run: type gh || (curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null && sudo apt update && sudo apt install gh)
+
       - name: Generate site
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: node scripts/generate-site.js
 
       - name: Commit generated site
