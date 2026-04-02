@@ -1,3 +1,6 @@
+// ABOUTME: Tests that the site generator produces correct install blocks for plugin pages
+// ABOUTME: Validates install command format uses 2389-research/{name} pattern
+
 const assert = require('assert');
 const fs = require('fs');
 const { execFileSync } = require('child_process');
@@ -21,35 +24,26 @@ function getInstallBlock(html) {
   return match[0];
 }
 
-const internalInstallBlock = getInstallBlock(readPage('css-development'));
+// All plugins now use the same direct install format: /plugin install 2389-research/{name}
+const cssInstallBlock = getInstallBlock(readPage('css-development'));
 assert.match(
-  internalInstallBlock,
-  /\/plugin marketplace add 2389-research\/claude-plugins/,
-  'expected internal plugin hero install block to include marketplace add'
-);
-assert.match(
-  internalInstallBlock,
-  /\/plugin install css-development@2389-research/,
-  'expected internal plugin hero install block to include scoped plugin install'
+  cssInstallBlock,
+  /\/plugin install 2389-research\/css-development/,
+  'expected plugin install block to use 2389-research/{name} format'
 );
 
-const externalInstallBlock = getInstallBlock(readPage('socialmedia'));
-assert.doesNotMatch(
-  externalInstallBlock,
-  /\/plugin marketplace add 2389-research\/claude-plugins/,
-  'expected external plugin hero install block to omit marketplace add'
-);
+const socialmediaInstallBlock = getInstallBlock(readPage('socialmedia'));
 assert.match(
-  externalInstallBlock,
-  /\/plugin install socialmedia/,
-  'expected external plugin hero install block to preserve direct install'
+  socialmediaInstallBlock,
+  /\/plugin install 2389-research\/socialmedia/,
+  'expected external plugin install block to use 2389-research/{name} format'
 );
 
-const externalPage = readPage('socialmedia');
-assert.doesNotMatch(
-  externalPage,
-  /\/plugin marketplace add 2389-research\/claude-plugins/,
-  'expected external plugin page to omit marketplace add instructions'
+const simmerInstallBlock = getInstallBlock(readPage('simmer'));
+assert.match(
+  simmerInstallBlock,
+  /\/plugin install 2389-research\/simmer/,
+  'expected simmer install block to use 2389-research/{name} format'
 );
 
 console.log('generate-site install template test passed');
