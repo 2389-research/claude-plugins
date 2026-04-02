@@ -107,38 +107,14 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">Documentation</h2>
-          <p class="section-subtitle">Full plugin documentation and usage guide</p>
+          <h2 class="section-title">About This Plugin</h2>
+          <p class="section-subtitle">What this plugin provides</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <h2>Firebase development plugin</h2>
-<p>Firebase project workflows including setup, features, debugging, and validation.</p>
-<h3>Installation</h3>
-<pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
-/plugin install firebase-development@2389-research
-</code></pre>
-<h3>What this plugin provides</h3>
-<p>Skills for Firebase development following 2389 patterns:</p>
-<ul><li><code>firebase-development</code> -- main orchestrator skill that routes to specific sub-skills</li><li><code>firebase-development:project-setup</code> -- initialize new Firebase projects</li><li><code>firebase-development:add-feature</code> -- add features to existing projects</li><li><code>firebase-development:debug</code> -- debug Firebase issues</li><li><code>firebase-development:validate</code> -- validate project structure</li></ul>
-<h3>Patterns</h3>
-<p>This plugin supports multi-hosting (multiple sites or single), authentication via custom API keys or Firebase Auth or both, Cloud Functions organized as Express apps or domain-grouped or individual files, and server-write-only vs client-write security models.</p>
-<p>Development is emulator-first -- always test locally before deploying. Tooling is TypeScript, vitest, and biome.</p>
-<h3>Quick example</h3>
-<pre><code class="language-typescript">// Cloud Function with domain grouping
-export const users = {
-  onCreate: onDocumentCreated('users/{userId}', async (event) =&gt; {
-    // Implementation
-  }),
-  onUpdate: onDocumentUpdated('users/{userId}', async (event) =&gt; {
-    // Implementation
-  })
-};
-</code></pre>
-<h3>Documentation</h3>
-<ul><li><a href="https://github.com/2389-research/firebase-development/blob/main/docs/plans/2025-01-14-firebase-skills-design.md" rel="noopener noreferrer" target="_blank">Design Document</a></li><li><a href="https://github.com/2389-research/firebase-development/blob/main/docs/plans/2025-01-14-firebase-skills-implementation.md" rel="noopener noreferrer" target="_blank">Implementation Plan</a></li><li>Examples:<ul><li><a href="https://github.com/2389-research/firebase-development/blob/main/docs/examples/api-key-authentication.md" rel="noopener noreferrer" target="_blank">API Key Authentication</a></li><li><a href="https://github.com/2389-research/firebase-development/blob/main/docs/examples/emulator-workflow.md" rel="noopener noreferrer" target="_blank">Emulator Workflow</a></li><li><a href="https://github.com/2389-research/firebase-development/blob/main/docs/examples/express-function-architecture.md" rel="noopener noreferrer" target="_blank">Express Function Architecture</a></li><li><a href="https://github.com/2389-research/firebase-development/blob/main/docs/examples/firestore-rules-patterns.md" rel="noopener noreferrer" target="_blank">Firestore Rules Patterns</a></li><li><a href="https://github.com/2389-research/firebase-development/blob/main/docs/examples/multi-hosting-setup.md" rel="noopener noreferrer" target="_blank">Multi-Hosting Setup</a></li></ul></li></ul>
-
+        <p>Firebase project workflows including setup, features, debugging, and validation</p>
+        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/firebase-development" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
       </div>
     </section>
     
