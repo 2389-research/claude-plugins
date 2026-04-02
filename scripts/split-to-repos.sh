@@ -27,9 +27,10 @@ done
 # ---------------------------------------------------------------------------
 # Collect local plugins: those whose source is a plain string (starts with ./)
 # ---------------------------------------------------------------------------
-mapfile -t PLUGIN_NAMES < <(
-    jq -r '.plugins[] | select(.source | type == "string") | .name' "${MARKETPLACE_JSON}"
-)
+PLUGIN_NAMES=()
+while IFS= read -r name; do
+    PLUGIN_NAMES+=("${name}")
+done < <(jq -r '.plugins[] | select(.source | type == "string") | .name' "${MARKETPLACE_JSON}")
 
 TOTAL="${#PLUGIN_NAMES[@]}"
 echo "Found ${TOTAL} local plugins to process."
@@ -103,7 +104,9 @@ for PLUGIN_NAME in "${PLUGIN_NAMES[@]}"; do
     git clone "${REPO_ROOT}" "${CLONE_DIR}"
 
     echo "  -> Filtering history to subdirectory: ${PLUGIN_DIR}/"
-    git -C "${CLONE_DIR}" filter-repo --subdirectory-filter "${PLUGIN_DIR}" --force
+    cd "${CLONE_DIR}"
+    uv run git-filter-repo --subdirectory-filter "${PLUGIN_DIR}" --force
+    cd "${REPO_ROOT}"
 
     # ------------------------------------------------------------------
     # Add MIT LICENSE if missing
