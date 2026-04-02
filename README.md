@@ -1,7 +1,11 @@
-# 2389 Research 
-## Claude Code Plugin Marketplace
+<!-- ABOUTME: README for the 2389 Research Claude Code plugin marketplace -->
+<!-- ABOUTME: Public-facing documentation with install instructions and plugin catalog -->
+
+# 2389 Research Claude Code Plugin Marketplace
 
 Claude Code plugins and MCP servers we use at [2389](https://2389.ai).
+
+**Browse the marketplace:** https://2389-research.github.io/claude-plugins
 
 ## Installation
 
@@ -15,64 +19,85 @@ Install plugins individually:
 
 ```bash
 /plugin install css-development@2389-research
-/plugin install firebase-development@2389-research
+/plugin install simmer@2389-research
 /plugin install terminal-title@2389-research
 ```
 
 ## Available Plugins
 
-| Plugin | Description | Documentation |
-|--------|-------------|---------------|
-| [css-development](css-development/) | CSS development workflows with Tailwind composition, semantic naming, and dark mode by default | [README](css-development/README.md) |
-| [firebase-development](firebase-development/) | Firebase project workflows including setup, features, debugging, and validation | [README](firebase-development/README.md) |
-| [terminal-title](terminal-title/) | Automatically updates terminal title with emoji + project + topic context, plus TodoWrite conventions | [README](terminal-title/README.md) |
+### Meta Plugins
 
-## External MCP Servers
+| Plugin | Description |
+|--------|-------------|
+| [botboard-biz](https://github.com/2389-research/botboard-biz) | Social media and journaling capabilities for AI agents |
+| [better-dev](https://github.com/2389-research/better-dev) | CSS, Firebase, code quality, testing, parallel exploration, docs verification, codegen |
+| [sysadmin](https://github.com/2389-research/sysadmin) | Structured Linux maintenance and diagnostics |
 
-This marketplace also lists external MCP servers:
+### Development
 
-- **agent-drugs** - Digital drugs that modify AI behavior through prompt injection
-- **socialmedia** - Social media functionality for AI agents
-- **journal** - Private journaling capability for Claude
+| Plugin | Description |
+|--------|-------------|
+| [css-development](https://github.com/2389-research/css-development) | CSS workflows with Tailwind, semantic naming, dark mode by default |
+| [firebase-development](https://github.com/2389-research/firebase-development) | Firebase project workflows: setup, features, debugging, validation |
+| [landing-page-design](https://github.com/2389-research/landing-page-design) | High-converting landing pages with anti-AI-slop principles |
+| [xtool](https://github.com/2389-research/xtool) | Xcode-free iOS development with xtool via SwiftPM |
+| [building-multiagent-systems](https://github.com/2389-research/building-multiagent-systems) | Architecture patterns for multi-agent systems |
+| [speed-run](https://github.com/2389-research/speed-run) | Token-efficient code generation with hosted LLM (Cerebras) |
+| [binary-re](https://github.com/2389-research/binary-re) | Agentic binary reverse engineering for ELF binaries |
 
-## Marketplace Site
+### Testing and Quality
 
-Browse the marketplace: [https://2389-research.github.io/claude-plugins](https://2389-research.github.io/claude-plugins)
+| Plugin | Description |
+|--------|-------------|
+| [test-kitchen](https://github.com/2389-research/test-kitchen) | Parallel exploration of implementation approaches |
+| [simmer](https://github.com/2389-research/simmer) | Iterative artifact refinement with investigation-first judges |
+| [scenario-testing](https://github.com/2389-research/scenario-testing) | End-to-end testing with real dependencies, no mocks |
+| [fresh-eyes-review](https://github.com/2389-research/fresh-eyes-review) | Final sanity check before commits/PRs |
+| [documentation-audit](https://github.com/2389-research/documentation-audit) | Verify documentation against codebase reality |
+| [review-squad](https://github.com/2389-research/review-squad) | Dispatch panels of specialized subagents for project review |
+| [prbuddy](https://github.com/2389-research/prbuddy) | PR health assistant: CI monitoring, review triage, fixes |
+| [git-repo-prep](https://github.com/2389-research/git-repo-prep) | Prepare codebases for public/open-source release |
 
-## Repository Structure
+### Business and Strategy
 
-This is a monorepo containing multiple independent plugins. Each plugin:
+| Plugin | Description |
+|--------|-------------|
+| [ceo-personal-os](https://github.com/2389-research/ceo-personal-os) | Personal operating system for executives |
+| [gtm-partner](https://github.com/2389-research/gtm-partner) | Strategic go-to-market partner |
+| [product-launcher](https://github.com/2389-research/product-launcher) | Generate launch materials for 2389.ai products |
+| [worldview-synthesis](https://github.com/2389-research/worldview-synthesis) | Systematic worldview articulation |
+| [deliberation](https://github.com/2389-research/deliberation) | Decision-making through deliberation and discernment |
+| [summarize-meetings](https://github.com/2389-research/summarize-meetings) | Batch-process meeting transcripts into structured summaries |
 
-- Lives in its own directory (`css-development/`, `firebase-development/`, etc.)
-- Has its own `.claude-plugin/plugin.json` configuration
-- Contains its own skills, docs, and tests
-- Can be installed independently
+### Utilities
 
-See [CLAUDE.md](CLAUDE.md) for developer documentation on the monorepo structure and conventions.
+| Plugin | Description |
+|--------|-------------|
+| [terminal-title](https://github.com/2389-research/terminal-title) | Auto-update terminal title with emoji + project + topic |
+| [remote-system-maintenance](https://github.com/2389-research/remote-system-maintenance) | Linux system diagnostics and maintenance via SSH/tmux |
 
-## Contributing
+### MCP Servers
 
-### Adding a New Plugin
+| Server | Description |
+|--------|-------------|
+| [agent-drugs](https://github.com/2389-research/agent-drugs) | Digital drugs that modify AI behavior through prompt injection |
+| [socialmedia](https://github.com/2389-research/mcp-socialmedia) | Social media functionality for AI agents |
+| [journal](https://github.com/2389-research/journal-mcp) | Private journaling capability for Claude |
+| [slack-mcp](https://github.com/2389-research/slack-mcp) | Slack workspace integration MCP server |
 
-1. Create plugin directory: `mkdir -p new-plugin/.claude-plugin`
-2. Write `new-plugin/.claude-plugin/plugin.json`
-3. Add skills to `new-plugin/skills/`
-4. Create `new-plugin/README.md` and `new-plugin/CLAUDE.md`
-5. Update `.claude-plugin/marketplace.json` with new plugin entry
-6. Regenerate marketplace site: `npm run generate`
+## Adding a Plugin
 
-See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for comprehensive development guide.
+1. Create a GitHub repo under `2389-research/` with standard plugin structure
+2. Add an entry to `.claude-plugin/marketplace.json`
+3. Run `npm run generate` to update the marketplace site
+4. Commit and push
+
+See [CLAUDE.md](CLAUDE.md) for the full marketplace.json format and detailed instructions.
 
 ## Contact
 
-Want to chat about these plugins or how we use Claude Code?
+**Email:** [hello@2389.ai](mailto:hello@2389.ai)
 
-**Email us:** [hello@2389.ai](mailto:hello@2389.ai)
+## License
 
-We'd love to hear from you!
-
-## Resources
-
-- **Claude Code Documentation:** https://docs.claude.com/en/docs/claude-code
-- **Skills Guide:** https://docs.claude.com/en/docs/claude-code/skills
-- **Plugin Development:** https://docs.claude.com/en/docs/claude-code/plugins
+MIT
