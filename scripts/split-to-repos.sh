@@ -128,14 +128,10 @@ for PLUGIN_NAME in "${PLUGIN_NAMES[@]}"; do
     # ------------------------------------------------------------------
     # Set GitHub topics from marketplace.json keywords
     # ------------------------------------------------------------------
-    KEYWORDS_JSON="$(jq --arg n "${PLUGIN_NAME}" '[.plugins[] | select(.name == $n) | .keywords[]]' "${MARKETPLACE_JSON}")"
+    KEYWORDS_JSON="$(jq --arg n "${PLUGIN_NAME}" '{"names": [.plugins[] | select(.name == $n) | .keywords[]]}' "${MARKETPLACE_JSON}")"
     echo "  -> Setting GitHub topics"
-    gh api --method PUT "repos/${REPO_SLUG}/topics" \
-        --field "names[]=${KEYWORDS_JSON}" \
-        --silent 2>/dev/null || \
-    gh api --method PUT "repos/${REPO_SLUG}/topics" \
-        -f "$(echo "${KEYWORDS_JSON}" | jq -r 'to_entries | map("names[]=\(.value)") | join("&")')" \
-        --silent 2>/dev/null || \
+    echo "${KEYWORDS_JSON}" | gh api --method PUT "repos/${REPO_SLUG}/topics" \
+        --input - --silent 2>/dev/null || \
     echo "  [warn] Could not set topics via API — set them manually if needed."
 
     # ------------------------------------------------------------------
