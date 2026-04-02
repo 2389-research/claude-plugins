@@ -3,6 +3,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 // Read marketplace.json
 const marketplace = JSON.parse(
@@ -56,14 +57,27 @@ function getCategoryForPlugin(plugin) {
   }
 }
 
-// Try to read README.md for a plugin
-function getReadmeContent(plugin) {
-  if (typeof plugin.source !== 'string') return null;
+// Extract org/repo from a plugin source URL or fall back to 2389-research/{name}
+function getRepoName(plugin) {
+  if (plugin.source?.url) {
+    const match = plugin.source.url.replace(/\.git$/, '').match(/github\.com\/([^/]+\/[^/]+)/);
+    if (match) return match[1];
+  }
+  if (typeof plugin.source === 'string') {
+    return `2389-research/${plugin.source.replace('./', '')}`;
+  }
+  return `2389-research/${plugin.name}`;
+}
 
-  const readmePath = path.join(plugin.source.replace('./', ''), 'README.md');
+// Fetch README.md from GitHub via gh api
+function getReadmeContent(plugin) {
+  const repo = getRepoName(plugin);
   try {
-    const content = fs.readFileSync(readmePath, 'utf8');
-    return content;
+    const content = execSync(
+      `gh api repos/${repo}/readme --jq .content | base64 -d`,
+      { encoding: 'utf8', timeout: 15000 }
+    );
+    return content || null;
   } catch {
     return null;
   }
@@ -75,9 +89,11 @@ const linkReport = {
   broken: []
 };
 
-// Convert relative repo links to GitHub URLs with validation
-function convertRepoLinks(html, pluginName, pluginSourcePath) {
-  if (!html || !pluginSourcePath) return html;
+// Convert relative repo links to GitHub URLs using per-plugin repos
+function convertRepoLinks(html, pluginName, repoName) {
+  if (!html) return html;
+
+  const repo = repoName || `2389-research/${pluginName}`;
 
   // Match <a href="..."> where href is a relative path to .md file or directory
   return html.replace(
@@ -86,58 +102,41 @@ function convertRepoLinks(html, pluginName, pluginSourcePath) {
       // Normalize the path
       let normalizedPath = linkPath.replace(/^\.\//, '');
 
-      // Handle cross-plugin links (../other-plugin/)
+      // Handle cross-plugin links (../other-plugin/) by linking to marketplace pages
       if (normalizedPath.startsWith('../')) {
         const crossPluginMatch = normalizedPath.match(/^\.\.\/([^/]+)\/?(.*)$/);
         if (crossPluginMatch) {
-          const [, otherPlugin, subPath] = crossPluginMatch;
-          const otherPluginPath = path.join(pluginSourcePath, '..', otherPlugin);
-
-          if (fs.existsSync(otherPluginPath)) {
-            // Link to the plugin's page on the marketplace site
+          const [, otherPlugin] = crossPluginMatch;
+          // Check if the other plugin exists in the marketplace
+          const otherExists = marketplace.plugins.some(p => p.name === otherPlugin);
+          if (otherExists) {
             linkReport.converted.push({
               plugin: pluginName,
               from: linkPath,
-              to: `../../${otherPlugin}/`
+              to: `../${otherPlugin}/`
             });
             return `<a href="../${otherPlugin}/"${attrs}>${linkText}</a>`;
           } else {
             linkReport.broken.push({
               plugin: pluginName,
               path: linkPath,
-              reason: 'Cross-plugin target not found'
+              reason: 'Cross-plugin target not found in marketplace'
             });
             return `<span class="broken-link" title="Link target not found">${linkText}</span>`;
           }
         }
       }
 
-      // Build the local file path to check
-      const localPath = path.join(pluginSourcePath, normalizedPath);
-      const exists = fs.existsSync(localPath);
-
-      // Check if it's a directory
-      const isDirectory = exists && fs.statSync(localPath).isDirectory();
-
-      if (exists) {
-        // File/directory exists - convert to GitHub URL (use tree for directories, blob for files)
-        const urlType = isDirectory ? 'tree' : 'blob';
-        const githubUrl = `https://github.com/2389-research/claude-plugins/${urlType}/main/${pluginName}/${normalizedPath}`;
-        linkReport.converted.push({
-          plugin: pluginName,
-          from: linkPath,
-          to: githubUrl
-        });
-        return `<a href="${githubUrl}"${attrs} target="_blank">${linkText}</a>`;
-      } else {
-        // File doesn't exist - mark as broken
-        linkReport.broken.push({
-          plugin: pluginName,
-          path: linkPath,
-          reason: `File not found: ${localPath}`
-        });
-        return `<span class="broken-link" title="Link target not found: ${normalizedPath}">${linkText}</span>`;
-      }
+      // Determine URL type heuristically: paths with extensions are blobs, others are trees
+      const hasExtension = /\.\w+$/.test(normalizedPath);
+      const urlType = hasExtension ? 'blob' : 'tree';
+      const githubUrl = `https://github.com/${repo}/${urlType}/main/${normalizedPath}`;
+      linkReport.converted.push({
+        plugin: pluginName,
+        from: linkPath,
+        to: githubUrl
+      });
+      return `<a href="${githubUrl}"${attrs} target="_blank">${linkText}</a>`;
     }
   );
 }
@@ -359,12 +358,13 @@ function markdownToHtml(md) {
 
 // Helper to get source URL
 function getSourceUrl(plugin) {
-  if (typeof plugin.source === 'string') {
-    return `https://github.com/2389-research/claude-plugins/tree/main/${plugin.source.replace('./', '')}`;
-  } else if (plugin.source?.url) {
-    return plugin.source.url;
+  if (plugin.source?.url) {
+    return plugin.source.url.replace(/\.git$/, '');
   }
-  return `https://github.com/2389-research/claude-plugins`;
+  if (typeof plugin.source === 'string') {
+    return `https://github.com/2389-research/${plugin.source.replace('./', '')}`;
+  }
+  return `https://github.com/2389-research/${plugin.name}`;
 }
 
 // Clean description
@@ -498,60 +498,31 @@ function generatePluginCard(plugin) {
               <p class="plugin-description">${description}</p>
               <div class="plugin-tags">${tags}</div>
               <div class="plugin-footer">
-                <code class="plugin-install">/plugin install ${plugin.name}</code>
+                <code class="plugin-install">/plugin install 2389-research/${plugin.name}</code>
                 <a href="plugins/${plugin.name}/" class="plugin-source">Details →</a>
               </div>
             </article>`;
 }
 
-function getPluginInstallCommand(plugin, isExternal, scoped = false) {
-  return `/plugin install ${plugin.name}${!isExternal && scoped ? '@2389-research' : ''}`;
+function getPluginInstallCommand(plugin) {
+  return `/plugin install 2389-research/${plugin.name}`;
 }
 
-function generatePluginPageInstallSnippet(plugin, isExternal) {
-  if (isExternal) {
-    return getPluginInstallCommand(plugin, isExternal);
-  }
-
-  return `${INTERNAL_MARKETPLACE_COMMAND}\n${getPluginInstallCommand(plugin, isExternal, true)}`;
+function generatePluginPageInstallSnippet(plugin) {
+  return getPluginInstallCommand(plugin);
 }
 
-function generateQuickInstallSteps(plugin, isExternal) {
-  if (isExternal) {
-    return `
-          <div class="step">
-            <span class="step-number">1</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code>${getPluginInstallCommand(plugin, isExternal)}</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">You're good to go</span>
-              <code>Capabilities auto-trigger when relevant</code>
-            </div>
-          </div>`;
-  }
-
+function generateQuickInstallSteps(plugin) {
   return `
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
-              <span class="step-label">Add the marketplace (if not already added)</span>
-              <code>${INTERNAL_MARKETPLACE_COMMAND}</code>
+              <span class="step-label">Install this plugin</span>
+              <code>${getPluginInstallCommand(plugin)}</code>
             </div>
           </div>
           <div class="step">
             <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code>${getPluginInstallCommand(plugin, isExternal, true)}</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
             <div class="step-content">
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>
@@ -613,7 +584,7 @@ ${related.map(p => {
           <p class="plugin-description">${desc}</p>
           <div class="plugin-tags">${tags}</div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install ${p.name}</code>
+            <code class="plugin-install">/plugin install 2389-research/${p.name}</code>
             <a href="../${p.name}/" class="plugin-source">Details →</a>
           </div>
         </article>`;
@@ -628,11 +599,11 @@ function generatePluginPage(plugin) {
   const sourceUrl = getSourceUrl(plugin);
   const category = getCategoryForPlugin(plugin);
   const readme = getReadmeContent(plugin);
-  const pluginSourcePath = typeof plugin.source === 'string' ? plugin.source.replace('./', '') : null;
+  const repo = getRepoName(plugin);
   let readmeHtml = markdownToHtml(readme);
-  // Convert relative links to GitHub URLs with validation
-  readmeHtml = convertRepoLinks(readmeHtml, plugin.name, pluginSourcePath);
-  const isExternal = typeof plugin.source !== 'string';
+  // Convert relative links to GitHub URLs using per-plugin repo
+  readmeHtml = convertRepoLinks(readmeHtml, plugin.name, repo);
+  const isExternal = plugin.strict === true;
 
   const tags = (plugin.keywords || []).map(k =>
     `<span class="tag">${k}</span>`
@@ -696,8 +667,8 @@ ${generateHead(pluginTitle, description, `plugins/${plugin.name}/`, plugin.keywo
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">${isExternal ? 'Install Command' : 'Install Commands'}</span>
-          <code class="install-command">${generatePluginPageInstallSnippet(plugin, isExternal)}</code>
+          <span class="install-label">Install Command</span>
+          <code class="install-command">${generatePluginPageInstallSnippet(plugin)}</code>
         </div>
         <a href="${sourceUrl}" class="cta-button" rel="noopener noreferrer" target="_blank">
           View Source
@@ -752,7 +723,7 @@ ${generateHead(pluginTitle, description, `plugins/${plugin.name}/`, plugin.keywo
 
       <div class="quick-start">
         <div class="quick-start-steps">
-${generateQuickInstallSteps(plugin, isExternal)}
+${generateQuickInstallSteps(plugin)}
         </div>
       </div>
     </section>
@@ -925,7 +896,7 @@ ${generateCategorySections()}
               <span class="step-number">2</span>
               <div class="step-content">
                 <span class="step-label">Grab what you need</span>
-                <code>/plugin install better-dev</code>
+                <code>/plugin install 2389-research/better-dev</code>
               </div>
             </div>
             <div class="step">
@@ -1083,12 +1054,11 @@ function getLastModDate(targetPath) {
   }
 }
 
+const marketplaceLastmod = getLastModDate('.claude-plugin/marketplace.json');
 const sitemapUrls = [
-  { loc: '', priority: '1.0', lastmod: getLastModDate('.claude-plugin/marketplace.json') },
+  { loc: '', priority: '1.0', lastmod: marketplaceLastmod },
   ...marketplace.plugins.map(p => {
-    const dir = typeof p.source === 'string' ? p.source : null;
-    const lastmod = dir ? getLastModDate(dir) : getLastModDate('.claude-plugin/marketplace.json');
-    return { loc: `plugins/${p.name}/`, priority: '0.8', lastmod };
+    return { loc: `plugins/${p.name}/`, priority: '0.8', lastmod: marketplaceLastmod };
   })
 ];
 
