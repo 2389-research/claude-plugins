@@ -1,5 +1,14 @@
 {
   "name": "better-dev",
   "description": "[meta] better development: CSS workflows, Firebase development, code quality, real testing, parallel exploration, documentation verification, and token-efficient codegen",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": [
+    "2389-research/css-development",
+    "2389-research/firebase-development",
+    "2389-research/fresh-eyes-review",
+    "2389-research/scenario-testing",
+    "2389-research/test-kitchen",
+    "2389-research/documentation-audit",
+    "2389-research/speed-run"
+  ]
 }

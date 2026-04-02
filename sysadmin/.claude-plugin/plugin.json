@@ -1,5 +1,9 @@
 {
   "name": "sysadmin",
   "description": "[meta] system administration: structured Linux maintenance and diagnostics",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": [
+    "2389-research/remote-system-maintenance",
+    "2389-research/terminal-title"
+  ]
 }
