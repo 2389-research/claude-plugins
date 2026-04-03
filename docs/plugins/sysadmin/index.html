@@ -107,14 +107,41 @@
       <div class="section-header">
         <span class="section-number">01</span>
         <div class="section-title-group">
-          <h2 class="section-title">About This Plugin</h2>
-          <p class="section-subtitle">What this plugin provides</p>
+          <h2 class="section-title">Documentation</h2>
+          <p class="section-subtitle">Full plugin documentation and usage guide</p>
         </div>
       </div>
 
       <div class="readme-content">
-        <p>system administration: structured Linux maintenance and diagnostics</p>
-        <p>For full documentation and usage examples, visit the <a href="https://github.com/2389-research/sysadmin" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
+        <h2>[meta] Sysadmin</h2>
+<p>Meta-plugin for system administration workflows on Linux systems.</p>
+<h3>Installation</h3>
+<pre><code class="language-bash">/plugin install sysadmin@2389-research
+</code></pre>
+<p>This will automatically install:</p>
+<ul><li><code>remote-system-maintenance</code> -- structured Linux diagnostics and cleanup</li></ul>
+<h3>What this provides</h3>
+<h4>Remote system maintenance</h4>
+<p>Structured procedures for diagnosing and maintaining remote Linux systems via SSH/tmux.</p>
+<p>Diagnostics run in three phases:</p>
+<ol><li>Initial diagnostics (hostname, resources, processes, zombies)</li>
+<li>System log review (errors, journal consumption, service status)</li>
+<li>Package assessment (upgradable, orphaned, cached)</li></ol>
+<p>Cleanup runs in seven stages:</p>
+<ol><li>apt update -- refresh package lists</li>
+<li>apt upgrade -- apply security fixes</li>
+<li>apt autoremove -- remove unused dependencies</li>
+<li>apt clean -- purge package cache</li>
+<li>journalctl vacuum -- prune old logs</li>
+<li>snap cleanup -- remove disabled revisions (500MB-2GB savings!)</li>
+<li>/tmp assessment -- check temporary directories</li></ol>
+<p>Expect to recover 2+ GB in a comprehensive session.</p>
+<h3>Why a meta-plugin?</h3>
+<p>Right now it just wraps <code>remote-system-maintenance</code>, but it gives you clear categorization (sysadmin vs development tools), a place to add future sysadmin tools, and a semantic install path (<code>/plugin install sysadmin</code>).</p>
+<h3>Future additions</h3>
+<ul><li>Docker cleanup workflows</li><li>Log analysis tools</li><li>Performance monitoring</li><li>Backup verification</li><li>Security hardening checklists</li></ul>
+<h3>Documentation</h3>
+<p>See <a href="../remote-system-maintenance/" rel="noopener noreferrer">remote-system-maintenance plugin</a> for complete maintenance procedures.</p>
       </div>
     </section>
     
