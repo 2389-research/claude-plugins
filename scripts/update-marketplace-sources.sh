@@ -21,7 +21,7 @@ jq --arg org "$GITHUB_ORG" '
         if (.source | type == "string") then
             .source = {
                 "source": "url",
-                "url": ("https://github.com/" + $org + "/" + .name)
+                "url": ("https://github.com/" + $org + "/" + .name + ".git")
             }
         else
             .

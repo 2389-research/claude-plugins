@@ -14,7 +14,7 @@
       "name": "botboard-biz",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/botboard-biz"
+        "url": "https://github.com/2389-research/botboard-biz.git"
       },
       "description": "[meta] botboard.biz: social media and journaling capabilities for AI agents",
       "version": "1.0.0",
@@ -31,7 +31,7 @@
       "name": "better-dev",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/better-dev"
+        "url": "https://github.com/2389-research/better-dev.git"
       },
       "description": "[meta] better development: CSS workflows, Firebase development, code quality, real testing, parallel exploration, documentation verification, and token-efficient codegen",
       "version": "1.0.0",
@@ -52,7 +52,7 @@
       "name": "sysadmin",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/sysadmin"
+        "url": "https://github.com/2389-research/sysadmin.git"
       },
       "description": "[meta] system administration: structured Linux maintenance and diagnostics",
       "version": "1.0.0",
@@ -69,7 +69,7 @@
       "name": "css-development",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/css-development"
+        "url": "https://github.com/2389-research/css-development.git"
       },
       "description": "CSS development workflows with Tailwind composition, semantic naming, and dark mode by default",
       "version": "1.0.0",
@@ -86,7 +86,7 @@
       "name": "firebase-development",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/firebase-development"
+        "url": "https://github.com/2389-research/firebase-development.git"
       },
       "description": "Firebase project workflows including setup, features, debugging, and validation",
       "version": "1.0.0",
@@ -103,7 +103,7 @@
       "name": "landing-page-design",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/landing-page-design"
+        "url": "https://github.com/2389-research/landing-page-design.git"
       },
       "description": "Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles",
       "version": "1.0.0",
@@ -122,7 +122,7 @@
       "name": "xtool",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/xtool"
+        "url": "https://github.com/2389-research/xtool.git"
       },
       "description": "Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode",
       "version": "1.0.0",
@@ -142,7 +142,7 @@
       "name": "building-multiagent-systems",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/building-multiagent-systems"
+        "url": "https://github.com/2389-research/building-multiagent-systems.git"
       },
       "description": "Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination",
       "version": "1.0.0",
@@ -160,7 +160,7 @@
       "name": "speed-run",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/speed-run"
+        "url": "https://github.com/2389-research/speed-run.git"
       },
       "description": "Token-efficient code generation pipeline - parallel implementation with hosted LLM (Cerebras) for ~60% token savings. Includes MCP server.",
       "version": "1.0.0",
@@ -181,7 +181,7 @@
       "name": "test-kitchen",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/test-kitchen"
+        "url": "https://github.com/2389-research/test-kitchen.git"
       },
       "description": "Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner",
       "version": "1.0.0",
@@ -200,7 +200,7 @@
       "name": "simmer",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/simmer"
+        "url": "https://github.com/2389-research/simmer.git"
       },
       "description": "Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements",
       "version": "3.0.0",
@@ -224,7 +224,7 @@
       "name": "scenario-testing",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/scenario-testing"
+        "url": "https://github.com/2389-research/scenario-testing.git"
       },
       "description": "End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth",
       "version": "1.0.0",
@@ -241,7 +241,7 @@
       "name": "fresh-eyes-review",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/fresh-eyes-review"
+        "url": "https://github.com/2389-research/fresh-eyes-review.git"
       },
       "description": "Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests",
       "version": "1.0.0",
@@ -259,7 +259,7 @@
       "name": "documentation-audit",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/documentation-audit"
+        "url": "https://github.com/2389-research/documentation-audit.git"
       },
       "description": "Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection",
       "version": "2.0.0",
@@ -279,7 +279,7 @@
       "name": "ceo-personal-os",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/ceo-personal-os"
+        "url": "https://github.com/2389-research/ceo-personal-os.git"
       },
       "description": "Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)",
       "version": "1.0.0",
@@ -323,7 +323,7 @@
       "name": "gtm-partner",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/gtm-partner"
+        "url": "https://github.com/2389-research/gtm-partner.git"
       },
       "description": "Strategic go-to-market partner - recommends channels, validates strategy, generates only assets that matter. Not a content factory.",
       "version": "1.0.0",
@@ -342,7 +342,7 @@
       "name": "product-launcher",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/product-launcher"
+        "url": "https://github.com/2389-research/product-launcher.git"
       },
       "description": "Generate launch materials (subscriber email, CEO blog post, CEO tweet thread) for 2389.ai products and skills with authentic voice profiles baked in",
       "version": "1.0.0",
@@ -362,7 +362,7 @@
       "name": "worldview-synthesis",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/worldview-synthesis"
+        "url": "https://github.com/2389-research/worldview-synthesis.git"
       },
       "description": "Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation",
       "version": "1.0.0",
@@ -381,7 +381,7 @@
       "name": "deliberation",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/deliberation"
+        "url": "https://github.com/2389-research/deliberation.git"
       },
       "description": "Decision-making through deliberation - seeking unity through discernment rather than consensus through debate",
       "version": "1.0.0",
@@ -401,7 +401,7 @@
       "name": "terminal-title",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/terminal-title"
+        "url": "https://github.com/2389-research/terminal-title.git"
       },
       "description": "Automatically updates terminal title with emoji + project + topic context for quick visual cues when switching terminals",
       "version": "1.1.2",
@@ -418,7 +418,7 @@
       "name": "slack-mcp",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/slack-mcp"
+        "url": "https://github.com/2389-research/slack-mcp.git"
       },
       "description": "Slack workspace integration MCP server - create channels, invite users, post messages, manage threads for team collaboration",
       "version": "1.0.0",
@@ -437,7 +437,7 @@
       "name": "remote-system-maintenance",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/remote-system-maintenance"
+        "url": "https://github.com/2389-research/remote-system-maintenance.git"
       },
       "description": "Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists",
       "version": "1.0.0",
@@ -455,7 +455,7 @@
       "name": "binary-re",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/binary-re"
+        "url": "https://github.com/2389-research/binary-re.git"
       },
       "description": "Agentic binary reverse engineering for ELF binaries on ARM64, ARMv7, x86_64 - hypothesis-driven analysis with radare2, Ghidra, GDB, QEMU",
       "version": "1.0.0",
@@ -480,7 +480,7 @@
       "name": "review-squad",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/review-squad"
+        "url": "https://github.com/2389-research/review-squad.git"
       },
       "description": "Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks",
       "version": "1.0.0",
@@ -502,7 +502,7 @@
       "name": "git-repo-prep",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/git-repo-prep"
+        "url": "https://github.com/2389-research/git-repo-prep.git"
       },
       "description": "Prepare codebases for public/open-source release and audit them for openness - full lifecycle prep or standalone review",
       "version": "1.0.0",
@@ -524,7 +524,7 @@
       "name": "prbuddy",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/prbuddy"
+        "url": "https://github.com/2389-research/prbuddy.git"
       },
       "description": "PR health assistant - monitors CI, triages review comments, fixes issues with systematic prevention. Uses gh CLI and gh-pr-review extension.",
       "version": "1.0.0",
@@ -544,7 +544,7 @@
       "name": "summarize-meetings",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/summarize-meetings"
+        "url": "https://github.com/2389-research/summarize-meetings.git"
       },
       "description": "Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction",
       "version": "1.0.0",
