@@ -866,6 +866,154 @@ body {
 }
 
 /* ============================================
+   Star CTAs & New Components
+   ============================================ */
+
+/* Nav star button */
+.nav-star-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--bg-primary);
+  background: var(--accent-gold);
+  padding: 0.375rem 0.875rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  margin-left: var(--space-sm);
+}
+
+.nav-star-btn:hover {
+  background: var(--accent-gold-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 12px var(--accent-gold-glow);
+}
+
+/* Hero star button */
+.hero-cta-buttons {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.star-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.star-button:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(232, 197, 71, 0.15);
+}
+
+.star-button:hover svg {
+  transform: scale(1.15);
+}
+
+/* Star count badge in stats */
+.stat-link {
+  text-decoration: none;
+  display: block;
+}
+
+.star-badge {
+  height: 28px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Bottom star CTA section */
+.star-cta-section {
+  text-align: center;
+}
+
+.star-cta-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-lg);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.star-cta-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+  letter-spacing: -0.02em;
+}
+
+.star-cta-text {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+  line-height: 1.6;
+}
+
+.star-cta-card .cta-button {
+  display: inline-flex;
+}
+
+/* Plugin search/filter */
+.plugin-filter {
+  margin-bottom: var(--space-lg);
+}
+
+.plugin-search-input {
+  width: 100%;
+  max-width: 480px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.plugin-search-input:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px var(--accent-gold-dim);
+}
+
+.plugin-search-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Copy-to-clipboard */
+.install-command,
+.plugin-install {
+  cursor: pointer;
+}
+
+.install-command.copied,
+.plugin-install.copied {
+  color: #5dd39e !important;
+}
+
+/* ============================================
    Responsive Design
    ============================================ */
 @media (max-width: 900px) {
