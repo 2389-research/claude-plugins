@@ -320,45 +320,6 @@
       "strict": false
     },
     {
-      "name": "gtm-partner",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/2389-research/gtm-partner.git"
-      },
-      "description": "Strategic go-to-market partner - recommends channels, validates strategy, generates only assets that matter. Not a content factory.",
-      "version": "1.0.0",
-      "keywords": [
-        "gtm",
-        "go-to-market",
-        "launch",
-        "marketing",
-        "strategy",
-        "pricing",
-        "outreach"
-      ],
-      "strict": false
-    },
-    {
-      "name": "product-launcher",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/2389-research/product-launcher.git"
-      },
-      "description": "Generate launch materials (subscriber email, CEO blog post, CEO tweet thread) for 2389.ai products and skills with authentic voice profiles baked in",
-      "version": "1.0.0",
-      "keywords": [
-        "launch",
-        "email",
-        "blog",
-        "twitter",
-        "announcement",
-        "gtm",
-        "buttondown",
-        "harper"
-      ],
-      "strict": false
-    },
-    {
       "name": "worldview-synthesis",
       "source": {
         "source": "url",

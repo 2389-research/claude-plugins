@@ -3,24 +3,20 @@
 
 # 2389 Research Claude Code Plugin Marketplace
 
-Claude Code plugins and MCP servers we use at [2389](https://2389.ai).
+28 plugins and MCP servers for Claude Code — parallel exploration, iterative refinement, binary reverse engineering, structured decision-making, and more.
+
+Built by the team at [2389](https://2389.ai). These are the tools we use every day.
 
 **Browse the marketplace:** https://2389-research.github.io/claude-plugins
 
-## Installation
-
-Add the marketplace:
+## Quick Start
 
 ```bash
+# Add the marketplace
 /plugin marketplace add 2389-research/claude-plugins
-```
 
-Install plugins individually:
-
-```bash
-/plugin install css-development@2389-research
+# Install any plugin
 /plugin install simmer@2389-research
-/plugin install terminal-title@2389-research
 ```
 
 ## Available Plugins
@@ -63,8 +59,6 @@ Install plugins individually:
 | Plugin | Description |
 |--------|-------------|
 | [ceo-personal-os](https://github.com/2389-research/ceo-personal-os) | Personal operating system for executives |
-| [gtm-partner](https://github.com/2389-research/gtm-partner) | Strategic go-to-market partner |
-| [product-launcher](https://github.com/2389-research/product-launcher) | Generate launch materials for 2389.ai products |
 | [worldview-synthesis](https://github.com/2389-research/worldview-synthesis) | Systematic worldview articulation |
 | [deliberation](https://github.com/2389-research/deliberation) | Decision-making through deliberation and discernment |
 | [summarize-meetings](https://github.com/2389-research/summarize-meetings) | Batch-process meeting transcripts into structured summaries |
@@ -94,9 +88,13 @@ Install plugins individually:
 
 See [CLAUDE.md](CLAUDE.md) for the full marketplace.json format and detailed instructions.
 
+## Like this?
+
+If these plugins save you time, a ⭐ helps us know what's landing. We build what people use.
+
 ## Contact
 
-**Email:** [hello@2389.ai](mailto:hello@2389.ai)
+**Email:** [hello@2389.ai](mailto:hello@2389.ai) — we'd love to hear what you're building with these.
 
 ## License
 

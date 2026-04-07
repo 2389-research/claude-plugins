@@ -114,26 +114,59 @@
 
       <div class="readme-content">
         <h2>Review Squad</h2>
-<p>Dispatch panels of specialized subagents to review your project from multiple angles.</p>
+<p>Your project is about to ship. Instead of one reviewer catching what they catch, Review Squad dispatches a panel — security analyst, UX critic, performance specialist, pedantic nitpicker — each doing deep parallel analysis and reporting back.</p>
 <h3>Installation</h3>
-<pre><code class="language-bash">/plugin install review-squad@2389-research
+<pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
+/plugin install review-squad@2389-research
 </code></pre>
 <h3>Skills</h3>
-<table class="readme-table"><thead><tr><th>Skill</th><th>What it does</th><th>Dispatch</th></tr></thead><tbody><tr><td><code>review-squad:experts</code></td><td>Expert audit panel (SEO, a11y, security, perf, etc.)</td><td>Parallel</td></tr><tr><td><code>review-squad:normies</code></td><td>First-time visitors across a sophistication spectrum</td><td>Sequential</td></tr><tr><td><code>review-squad:regulars</code></td><td>Task-oriented users verifying real flows work</td><td>Sequential</td></tr><tr><td><code>review-squad:well-actually</code></td><td>Pedantic nitpickers finding what pros skip</td><td>Sequential</td></tr></tbody></table>
+<table class="readme-table"><thead><tr><th>Skill</th><th>What it does</th><th>When to use it</th></tr></thead><tbody><tr><td><code>review-squad:experts</code></td><td>Expert audit panel (SEO, a11y, security, perf, etc.)</td><td>Before launch — catch what you missed</td></tr><tr><td><code>review-squad:normies</code></td><td>First-time visitors across a sophistication spectrum</td><td>When you can't tell if your site makes sense to outsiders</td></tr><tr><td><code>review-squad:regulars</code></td><td>Task-oriented users verifying real flows work</td><td>Smoke test signup, checkout, search — the flows that matter</td></tr><tr><td><code>review-squad:well-actually</code></td><td>Pedantic nitpickers finding what pros skip</td><td>Before posting to HN — find the nits before they do</td></tr></tbody></table>
 <h3>Quick Examples</h3>
 <p><strong>Expert audit before launch:</strong></p>
-<blockquote>"Run a review-squad:experts audit on my site before we go live"</blockquote>
+<pre><code class="language-">User: "Run a review-squad:experts audit on my site before we go live"
+
+Claude: I'd suggest this panel for your site:
+- Security analyst — auth flows, data handling, headers
+- Performance specialist — load times, bundle size, caching
+- SEO reviewer — meta tags, structured data, crawlability
+- Accessibility auditor — screen readers, contrast, keyboard nav
+
+Approve this panel, or swap anyone out?
+
+[After approval, 4 agents dispatch in parallel]
+[Each returns a focused report with specific findings]
+[Consolidated into a single prioritized action list]
+</code></pre>
 <p><strong>First impressions check:</strong></p>
-<blockquote>"Use review-squad:normies to see if people can tell what my site is about"</blockquote>
-<p><strong>Smoke test user flows:</strong></p>
-<blockquote>"Run review-squad:regulars to check if the signup and checkout flows work"</blockquote>
+<pre><code class="language-">User: "Use review-squad:normies to see if people can tell what my site is about"
+
+Claude: I'll send these visitors to your site:
+- Tech-savvy developer (comfortable with jargon)
+- Non-technical manager (skims, needs clear value prop)
+- Skeptical senior engineer (assumes everything is overhyped)
+
+Each lands cold on your homepage and reports: what they think it does,
+where they got confused, and whether they'd explore further.
+</code></pre>
 <p><strong>Get roasted:</strong></p>
-<blockquote>"Hit my site with review-squad:well-actually before I post it to HN"</blockquote>
+<pre><code class="language-">User: "Hit my site with review-squad:well-actually before I post it to HN"
+
+Claude: Dispatching the pedants — typography snobs, grammar hawks,
+standards purists, and "um actually" engineers. They'll find the
+things professional reviewers skip because they're too polite.
+</code></pre>
 <h3>How It Works</h3>
-<p>Each skill dispatches a panel of subagents — you approve (and optionally customize) the panel before they're sent out. Agents review independently, then results are consolidated into a single report with actionable findings.</p>
+<ol><li>You pick a skill (experts, normies, regulars, or well-actually)</li>
+<li>Claude proposes a panel — you approve or customize it</li>
+<li>Agents dispatch (parallel for experts, sequential for the others)</li>
+<li>Each agent reviews independently using their specific lens</li>
+<li>Results consolidate into a single report with actionable findings</li></ol>
 <p>Three of the four skills (normies, regulars, well-actually) use browser MCP tools, so you'll need a dev server running for those.</p>
-<h3>Links</h3>
+<h3>Documentation</h3>
 <ul><li><a href="https://github.com/2389-research/review-squad/blob/main/CLAUDE.md" rel="noopener noreferrer" target="_blank">Plugin details</a></li><li><a href="https://github.com/2389-research/review-squad/blob/main/skills/experts/SKILL.md" rel="noopener noreferrer" target="_blank">Expert Panel skill</a></li><li><a href="https://github.com/2389-research/review-squad/blob/main/skills/normies/SKILL.md" rel="noopener noreferrer" target="_blank">Normies skill</a></li><li><a href="https://github.com/2389-research/review-squad/blob/main/skills/regulars/SKILL.md" rel="noopener noreferrer" target="_blank">Regulars skill</a></li><li><a href="https://github.com/2389-research/review-squad/blob/main/skills/well-actually/SKILL.md" rel="noopener noreferrer" target="_blank">Well Actually skill</a></li></ul>
+<p>---</p>
+<p>If Review Squad caught something your tests didn't, a ⭐ helps us know it's landing.</p>
+<p>Built by <a href="https://2389.ai" rel="noopener noreferrer">2389</a> · Part of the <a href="https://github.com/2389-research/claude-plugins" rel="noopener noreferrer">Claude Code plugin marketplace</a></p>
       </div>
     </section>
     

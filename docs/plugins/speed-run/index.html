@@ -117,7 +117,8 @@
 <p>Token-efficient code generation pipeline. Uses hosted LLM (Cerebras) for fast, cheap first-pass generation with Claude handling architecture and surgical fixes.</p>
 <table class="readme-table"><thead><tr><th>Skill</th><th>Description</th><th>Best For</th></tr></thead><tbody><tr><td><code>speed-run:turbo</code></td><td>Direct hosted codegen</td><td>Single task, algorithmic code, boilerplate</td></tr><tr><td><code>speed-run:showdown</code></td><td>Same design, parallel runners compete</td><td>Medium-high complexity, want best implementation</td></tr><tr><td><code>speed-run:any-percent</code></td><td>Different approaches explored in parallel</td><td>Unsure of architecture, want to compare designs</td></tr></tbody></table>
 <h3>Installation</h3>
-<pre><code class="language-bash">/plugin install speed-run@2389-research
+<pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
+/plugin install speed-run@2389-research
 </code></pre>
 <h4>Prerequisites</h4>
 <p>Speed-run requires a Cerebras API key for hosted code generation. Free tier includes ~1M tokens/day.</p>
@@ -199,6 +200,9 @@ The most direct comparison: test-kitchen's <strong>cookoff</strong> vs speed-run
 <ul><li><a href="https://github.com/2389-research/speed-run/blob/main/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> — Architecture, skill details, config, common mistakes</li><li><a href="https://github.com/2389-research/speed-run/blob/main/skills/turbo/SKILL.md" rel="noopener noreferrer" target="_blank">Turbo Skill</a> — Direct hosted codegen</li><li><a href="https://github.com/2389-research/speed-run/blob/main/skills/showdown/SKILL.md" rel="noopener noreferrer" target="_blank">Showdown Skill</a> — Parallel competition</li><li><a href="https://github.com/2389-research/speed-run/blob/main/skills/any-percent/SKILL.md" rel="noopener noreferrer" target="_blank">Any% Skill</a> — Parallel exploration</li><li><a href="https://github.com/2389-research/speed-run/blob/main/skills/judge/SKILL.md" rel="noopener noreferrer" target="_blank">Judge Skill</a> — Scoring framework</li></ul>
 <h3>Origin</h3>
 <p>Speed-run was born from test-kitchen's token cost problem. Running 3-5 parallel Claude agents generates a lot of expensive output tokens. By shifting first-pass code generation to Cerebras (~3000 tokens/second), we keep the same parallel exploration patterns at a fraction of the cost — Claude focuses on what it's best at: architecture, orchestration, and surgical fixes.</p>
+<p>---</p>
+<p>If Speed Run saved you tokens and time, a ⭐ helps us know it's landing.</p>
+<p>Built by <a href="https://2389.ai" rel="noopener noreferrer">2389</a> · Part of the <a href="https://github.com/2389-research/claude-plugins" rel="noopener noreferrer">Claude Code plugin marketplace</a></p>
       </div>
     </section>
     

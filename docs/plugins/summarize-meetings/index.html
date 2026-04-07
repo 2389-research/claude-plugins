@@ -114,9 +114,11 @@
 
       <div class="readme-content">
         <h2>Summarize Meetings</h2>
-<p>Turn a pile of Granola transcripts into an Obsidian knowledge graph. Processes meetings in monthly batches, extracts the stuff that matters, and wires it all together with wiki-links.</p>
+<p>Meeting transcripts pile up. The names, the action items, the project ideas, they're all in there but nobody's going back to read them. This skill turns a backlog of Granola transcripts into a connected Obsidian knowledge graph. Processes meetings in monthly batches, extracts the stuff that matters, and wires it all together with wiki-links. We used it to process ~600 meetings into something actually useful: <a href="https://harper.blog/2026/03/11/2026-immaculate-knowledge-graph/" rel="noopener noreferrer">My Now Immaculate Knowledge Graph of Life</a></p>
+<p>!<a href="https://github.com/user-attachments/assets/76a71ed6-018a-4dc6-8aff-79c2d76b86df" rel="noopener noreferrer">network-annotated_hu_dc5f11550bad1d72</a><br><em>Obsidian graph view after processing ~600 meetings. Nodes are people and concepts, edges are co-occurrence in the same meeting.</em></p>
 <h3>Installation</h3>
-<pre><code class="language-bash">/plugin install summarize-meetings@2389-research
+<pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
+/plugin install summarize-meetings@2389-research
 </code></pre>
 <h3>What it does</h3>
 <p>Point this at a month of meeting transcripts and it will:</p>
@@ -131,6 +133,8 @@
 <p>Agents run in parallel (waves of 10-15) and each one handles a single transcript end-to-end. Large files (50K+) get chunked automatically.</p>
 <h3>Documentation</h3>
 <p>The full workflow, templates, and extraction rules are in <a href="https://github.com/2389-research/summarize-meetings/blob/main/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a>.</p>
+<h3>Like this?</h3>
+<p>If Summarize Meetings saved you from transcript purgatory, a star ⭐️ helps us know it's landing.</p>
       </div>
     </section>
     

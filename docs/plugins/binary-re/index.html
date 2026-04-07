@@ -114,9 +114,10 @@
 
       <div class="readme-content">
         <h2>Binary Reverse Engineering Plugin</h2>
-<p>Reverse engineer ELF binaries from embedded devices using radare2, Ghidra, GDB, and QEMU.</p>
+<p>You pulled a binary off an embedded device. It's an ELF, probably ARM, and you need to figure out what it does. Binary RE gives Claude the tools to help — radare2 for disassembly, Ghidra for decompilation, GDB for dynamic analysis, QEMU for emulation — driven by hypothesis-testing, not blind exploration.</p>
 <h3>Installation</h3>
-<pre><code class="language-bash">/plugin install binary-re@2389-research
+<pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
+/plugin install binary-re@2389-research
 </code></pre>
 <h3>What this plugin provides</h3>
 <h4>Skills</h4>
@@ -173,8 +174,9 @@ sudo apt install libc6-armhf-cross libc6-arm64-cross
 <ul><li>Executing binaries (even sandboxed)</li><li>Network-capable dynamic analysis</li><li>Operations requiring device access</li><li>Major changes in analysis direction</li></ul>
 <h3>Documentation</h3>
 <ul><li><a href="https://github.com/2389-research/binary-re/blob/main/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> -- detailed skill reference</li><li><a href="https://github.com/2389-research/binary-re/blob/main/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a> -- full workflow documentation</li></ul>
-<h3>License</h3>
-<p>MIT</p>
+<p>---</p>
+<p>If Binary RE helped you crack a firmware blob, a ⭐ helps us know it's landing.</p>
+<p>Built by <a href="https://2389.ai" rel="noopener noreferrer">2389</a> · Part of the <a href="https://github.com/2389-research/claude-plugins" rel="noopener noreferrer">Claude Code plugin marketplace</a></p>
       </div>
     </section>
     

@@ -97,18 +97,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/gtm-partner/</loc>
-    <lastmod>2026-04-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/product-launcher/</loc>
-    <lastmod>2026-04-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/worldview-synthesis/</loc>
     <lastmod>2026-04-05</lastmod>
     <changefreq>weekly</changefreq>

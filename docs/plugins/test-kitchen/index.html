@@ -114,10 +114,13 @@
 
       <div class="readme-content">
         <h2>Test Kitchen</h2>
+<p>You have a spec. Three valid approaches exist. Instead of guessing which one to build, Test Kitchen builds all of them in parallel git worktrees and lets your tests pick the winner.</p>
+<p>Read more: <a href="https://2389.ai/posts/cookoff-same-spec-different-code/" rel="noopener noreferrer">Cookoff: Same Spec, Different Code</a> · <a href="https://2389.ai/posts/omakase-show-me/" rel="noopener noreferrer">Omakase: Show Me</a></p>
 <p>Parallel implementation framework with two gate skills:</p>
 <table class="readme-table"><thead><tr><th>Skill</th><th>Gate</th><th>Trigger</th></tr></thead><tbody><tr><td><code>test-kitchen:omakase-off</code></td><td><strong>Entry</strong></td><td>FIRST on any build/create/implement request</td></tr><tr><td><code>test-kitchen:cookoff</code></td><td><strong>Exit</strong></td><td>At design→implementation transition</td></tr></tbody></table>
 <h3>Installation</h3>
-<pre><code class="language-bash">/plugin install test-kitchen@2389-research
+<pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
+/plugin install test-kitchen@2389-research
 </code></pre>
 <h3>Flow</h3>
 <pre><code class="language-">"Build X" / "Create Y" / "Implement Z"
@@ -207,6 +210,9 @@ Which approach?
 <ul><li><a href="https://github.com/2389-research/test-kitchen/blob/main/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> -- full plugin instructions</li><li><a href="https://github.com/2389-research/test-kitchen/blob/main/skills/omakase-off/SKILL.md" rel="noopener noreferrer" target="_blank">Omakase-off skill</a> -- entry gate (wraps brainstorming)</li><li><a href="https://github.com/2389-research/test-kitchen/blob/main/skills/cookoff/SKILL.md" rel="noopener noreferrer" target="_blank">Cookoff skill</a> -- exit gate (wraps implementation)</li></ul>
 <h3>Origin</h3>
 <p>Named after a restaurant test kitchen, where chefs try multiple approaches before putting a dish on the menu.</p>
+<p>---</p>
+<p>If Test Kitchen saved you from building the wrong approach first, a ⭐ helps us know it's landing.</p>
+<p>Built by <a href="https://2389.ai" rel="noopener noreferrer">2389</a> · Part of the <a href="https://github.com/2389-research/claude-plugins" rel="noopener noreferrer">Claude Code plugin marketplace</a></p>
       </div>
     </section>
     
