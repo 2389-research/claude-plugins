@@ -14,7 +14,6 @@ const INTERNAL_MARKETPLACE_COMMAND = '/plugin marketplace add 2389-research/clau
 
 // Group plugins by category
 const categories = {
-  meta: { title: 'Meta Plugins', description: 'Bundles that combine multiple capabilities into single installs', plugins: [] },
   development: { title: 'Development', description: 'Workflows for building, testing, and shipping code', plugins: [] },
   infrastructure: { title: 'Infrastructure', description: 'System administration and operational tooling', plugins: [] },
   agents: { title: 'Agent Systems', description: 'Multi-agent architecture and agent capabilities', plugins: [] },
@@ -26,9 +25,7 @@ marketplace.plugins.forEach(plugin => {
   const keywords = plugin.keywords || [];
   const desc = plugin.description.toLowerCase();
 
-  if (plugin.description.startsWith('[meta]') || keywords.includes('meta')) {
-    categories.meta.plugins.push(plugin);
-  } else if (keywords.includes('linux') || keywords.includes('sysadmin') || keywords.includes('terminal') || keywords.includes('reverse-engineering') || keywords.includes('maintenance')) {
+  if (keywords.includes('linux') || keywords.includes('sysadmin') || keywords.includes('terminal') || keywords.includes('reverse-engineering') || keywords.includes('maintenance')) {
     categories.infrastructure.plugins.push(plugin);
   } else if (keywords.includes('multi-agent') || keywords.includes('agents') || keywords.includes('social') || desc.includes('agent')) {
     categories.agents.plugins.push(plugin);
@@ -44,9 +41,7 @@ function getCategoryForPlugin(plugin) {
   const keywords = plugin.keywords || [];
   const desc = plugin.description.toLowerCase();
 
-  if (plugin.description.startsWith('[meta]') || keywords.includes('meta')) {
-    return categories.meta;
-  } else if (keywords.includes('linux') || keywords.includes('sysadmin') || keywords.includes('terminal') || keywords.includes('reverse-engineering') || keywords.includes('maintenance')) {
+  if (keywords.includes('linux') || keywords.includes('sysadmin') || keywords.includes('terminal') || keywords.includes('reverse-engineering') || keywords.includes('maintenance')) {
     return categories.infrastructure;
   } else if (keywords.includes('multi-agent') || keywords.includes('agents') || keywords.includes('social') || desc.includes('agent')) {
     return categories.agents;
@@ -517,12 +512,19 @@ function generateQuickInstallSteps(plugin) {
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
+              <span class="step-label">Add the marketplace</span>
+              <code>${INTERNAL_MARKETPLACE_COMMAND}</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
               <span class="step-label">Install this plugin</span>
               <code>${getPluginInstallCommand(plugin)}</code>
             </div>
           </div>
           <div class="step">
-            <span class="step-number">2</span>
+            <span class="step-number">3</span>
             <div class="step-content">
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>

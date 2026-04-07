@@ -116,7 +116,8 @@
         <h2>git-repo-prep</h2>
 <p>Prepare codebases for public/open-source release and audit them for openness.</p>
 <h3>Installation</h3>
-<pre><code class="language-">/plugin install git-repo-prep@2389-research
+<pre><code class="language-">/plugin marketplace add 2389-research/claude-plugins
+/plugin install git-repo-prep@2389-research
 </code></pre>
 <h3>What This Plugin Does</h3>
 <p>Two modes:</p>
@@ -161,12 +162,19 @@
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
+              <span class="step-label">Add the marketplace</span>
+              <code>/plugin marketplace add 2389-research/claude-plugins</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
               <span class="step-label">Install this plugin</span>
               <code>/plugin install 2389-research/git-repo-prep</code>
             </div>
           </div>
           <div class="step">
-            <span class="step-number">2</span>
+            <span class="step-number">3</span>
             <div class="step-content">
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>

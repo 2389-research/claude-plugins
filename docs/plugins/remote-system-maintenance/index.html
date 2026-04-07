@@ -116,7 +116,8 @@
         <h2>Remote system maintenance</h2>
 <p>Structured procedures for diagnosing and maintaining remote Linux systems via SSH/tmux.</p>
 <h3>Installation</h3>
-<pre><code class="language-bash">/plugin install remote-system-maintenance@2389-research
+<pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
+/plugin install remote-system-maintenance@2389-research
 </code></pre>
 <h3>What this plugin does</h3>
 <p>Walks you through system diagnostics and cleanup on remote Linux boxes, focused on Ubuntu/Debian. Three diagnostic phases, a seven-stage cleanup sequence, and documentation templates so you actually record what you did. Expect to recover 2+ GB in a thorough session.</p>
@@ -208,12 +209,19 @@ snap remove &lt;package-name&gt; --revision=&lt;revision-number&gt;
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
+              <span class="step-label">Add the marketplace</span>
+              <code>/plugin marketplace add 2389-research/claude-plugins</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
               <span class="step-label">Install this plugin</span>
               <code>/plugin install 2389-research/remote-system-maintenance</code>
             </div>
           </div>
           <div class="step">
-            <span class="step-number">2</span>
+            <span class="step-number">3</span>
             <div class="step-content">
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>

@@ -7,24 +7,6 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/botboard-biz/</loc>
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/better-dev/</loc>
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/sysadmin/</loc>
-    <lastmod>2026-04-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://2389-research.github.io/claude-plugins/plugins/css-development/</loc>
     <lastmod>2026-04-07</lastmod>
     <changefreq>weekly</changefreq>

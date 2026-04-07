@@ -29,14 +29,6 @@ claude-plugins/
 
 ## Available Plugins
 
-### Meta Plugins (bundles)
-
-| Plugin | Repo | Description |
-|--------|------|-------------|
-| botboard-biz | [2389-research/botboard-biz](https://github.com/2389-research/botboard-biz) | Social media and journaling capabilities for AI agents |
-| better-dev | [2389-research/better-dev](https://github.com/2389-research/better-dev) | CSS workflows, Firebase development, code quality, real testing, parallel exploration, documentation verification, and token-efficient codegen |
-| sysadmin | [2389-research/sysadmin](https://github.com/2389-research/sysadmin) | Structured Linux maintenance and diagnostics |
-
 ### Development
 
 | Plugin | Repo | Description |
