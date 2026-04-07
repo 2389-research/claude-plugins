@@ -816,28 +816,15 @@ ${generateHead('Claude Code Plugin Marketplace', 'Open source Claude Code plugin
           <span class="install-label">One Command Install</span>
           <code class="install-command">${INTERNAL_MARKETPLACE_COMMAND}</code>
         </div>
-        <div class="hero-cta-buttons">
-          <a href="#plugins" class="cta-button">
-            Browse the Goods
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-          <a href="https://github.com/2389-research/claude-plugins" class="star-button" rel="noopener noreferrer" target="_blank">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-            Star on GitHub
-          </a>
-        </div>
+        <a href="#plugins" class="cta-button">
+          Browse the Goods
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
       </div>
 
       <div class="hero-stats">
-        <div class="stat">
-          <a href="https://github.com/2389-research/claude-plugins/stargazers" class="stat-link" rel="noopener noreferrer" target="_blank">
-            <img src="https://img.shields.io/github/stars/2389-research/claude-plugins?style=flat&label=&color=e8c547" alt="GitHub stars" class="star-badge">
-          </a>
-          <span class="stat-label">GitHub Stars</span>
-        </div>
-        <div class="stat-divider"></div>
         <div class="stat">
           <span class="stat-value">${totalPlugins}</span>
           <span class="stat-label">Plugins</span>
@@ -865,10 +852,6 @@ ${generateHead('Claude Code Plugin Marketplace', 'Open source Claude Code plugin
           <p class="section-subtitle">Install individually or add the full marketplace</p>
         </div>
       </div>
-      <div class="plugin-filter">
-        <input type="text" id="plugin-search" class="plugin-search-input" placeholder="Filter plugins... (e.g. testing, firebase, agent)" autocomplete="off">
-      </div>
-
       <div class="plugin-categories">
 ${generateCategorySections()}
       </div>
@@ -1076,20 +1059,6 @@ ${generateCategorySections()}
     });
   });
 
-  // Plugin search/filter
-  const searchInput = document.getElementById('plugin-search');
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase();
-      document.querySelectorAll('.plugin-card').forEach(card => {
-        card.style.display = card.textContent.toLowerCase().includes(q) ? '' : 'none';
-      });
-      document.querySelectorAll('.category').forEach(cat => {
-        const visible = cat.querySelectorAll('.plugin-card:not([style*="none"])').length;
-        cat.style.display = visible > 0 ? '' : 'none';
-      });
-    });
-  }
   </script>
 </body>
 </html>`;
