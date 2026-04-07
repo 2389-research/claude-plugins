@@ -17,7 +17,7 @@
 
 ## 1. Simmer
 
-**Stars:** 0 | **Blog post:** https://2389.ai/blog/simmer | **README:** 192 lines, strong
+**Stars:** 0 | **Blog post:** https://2389.ai/posts/simmer-skill/ | **README:** 192 lines, strong
 
 **Current state:** Best README of the five. Has problem framing, two detailed examples with scoring trajectories, "when to use" comparison table. Missing: star CTA, marketplace install step, license.
 
@@ -35,7 +35,7 @@
 
 6. **README: Attribution footer** — `Built by [2389](https://2389.ai) · Part of the [Claude Code plugin marketplace](https://github.com/2389-research/claude-plugins)`
 
-7. **GitHub homepage** — Set to: `https://2389.ai/blog/simmer`
+7. **GitHub homepage** — Set to: `https://2389.ai/posts/simmer-skill/`
 
 ---
 

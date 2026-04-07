@@ -106,7 +106,7 @@ for repo in $ALL_REPOS; do
 done
 
 # Tier 1 homepage overrides (blog posts)
-gh repo edit 2389-research/simmer --homepage "https://2389.ai/blog/simmer"
+gh repo edit 2389-research/simmer --homepage "https://2389.ai/posts/simmer-skill/"
 gh repo edit 2389-research/deliberation --homepage "https://2389.ai/posts/deliberation-perspectives-not-answers/"
 gh repo edit 2389-research/test-kitchen --homepage "https://2389.ai/posts/cookoff-same-spec-different-code/"
 ```
