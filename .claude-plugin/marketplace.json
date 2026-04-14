@@ -467,6 +467,27 @@
       "strict": false
     },
     {
+      "name": "jam",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/2389-research/jam.git"
+      },
+      "description": "Parallel exploration powered by diverse perspectives - independent agent panels propose, build variants in worktrees, review, pick a winner, and synthesize the best of all variants into the final result",
+      "version": "1.0.0",
+      "keywords": [
+        "parallel",
+        "exploration",
+        "perspectives",
+        "variants",
+        "worktrees",
+        "synthesis",
+        "design",
+        "multi-agent",
+        "brainstorming"
+      ],
+      "strict": false
+    },
+    {
       "name": "agent-drugs",
       "source": {
         "source": "url",
