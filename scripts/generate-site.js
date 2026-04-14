@@ -416,7 +416,7 @@ function generateHead(title, description, canonicalPath, extraKeywords) {
   <link rel="stylesheet" href="${canonicalPath === '' ? '' : '../..'}${canonicalPath === '' ? '' : '/'}style.css">
 
   <!-- Analytics -->
-  <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js" defer></script>
+  <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js?events" defer></script>
 </head>`;
 }
 
@@ -432,10 +432,10 @@ function generateNav(isPluginPage = false) {
       <div class="nav-links" role="menubar">
         <a href="${homeLink}#plugins" class="nav-link" role="menuitem">Plugins</a>
         <a href="${homeLink}#about" class="nav-link" role="menuitem">About</a>
-        <a href="https://github.com/2389-research/claude-plugins" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank">GitHub</a>
-        <a href="https://2389.ai" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank">2389.ai</a>
+        <a href="https://github.com/2389-research/claude-plugins" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank" data-tinylytics-event="nav.github">GitHub</a>
+        <a href="https://2389.ai" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank" data-tinylytics-event="nav.visit-2389">2389.ai</a>
       </div>
-      <a href="https://github.com/2389-research/claude-plugins" class="nav-star-btn" rel="noopener noreferrer" target="_blank" title="Star on GitHub">
+      <a href="https://github.com/2389-research/claude-plugins" class="nav-star-btn" rel="noopener noreferrer" target="_blank" title="Star on GitHub" data-tinylytics-event="nav.star-github">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
         Star
       </a>
@@ -459,15 +459,15 @@ function generateFooter(isPluginPage = false) {
       <div class="footer-links-grid">
         <div class="footer-column">
           <h5>Company</h5>
-          <a href="https://2389.ai">About Us</a>
-          <a href="https://github.com/2389-research/claude-plugins">GitHub</a>
-          <a href="mailto:hello@2389.ai">Contact</a>
+          <a href="https://2389.ai" data-tinylytics-event="footer.company" data-tinylytics-event-value="about">About Us</a>
+          <a href="https://github.com/2389-research/claude-plugins" data-tinylytics-event="footer.company" data-tinylytics-event-value="github">GitHub</a>
+          <a href="mailto:hello@2389.ai" data-tinylytics-event="footer.company" data-tinylytics-event-value="contact">Contact</a>
         </div>
         <div class="footer-column">
           <h5>Resources</h5>
-          <a href="https://docs.claude.com/en/docs/claude-code">Claude Code Docs</a>
-          <a href="https://docs.claude.com/en/docs/claude-code/skills">Skills Guide</a>
-          <a href="https://docs.claude.com/en/docs/claude-code/plugins">Plugin Development</a>
+          <a href="https://docs.claude.com/en/docs/claude-code" data-tinylytics-event="footer.resource" data-tinylytics-event-value="claude-code-docs">Claude Code Docs</a>
+          <a href="https://docs.claude.com/en/docs/claude-code/skills" data-tinylytics-event="footer.resource" data-tinylytics-event-value="skills-guide">Skills Guide</a>
+          <a href="https://docs.claude.com/en/docs/claude-code/plugins" data-tinylytics-event="footer.resource" data-tinylytics-event-value="plugin-dev">Plugin Development</a>
         </div>
       </div>
     </div>
@@ -489,7 +489,7 @@ function generatePluginCard(plugin) {
   return `
             <article class="plugin-card">
               <div class="plugin-card-header">
-                <a href="plugins/${plugin.name}/" class="plugin-name-link">
+                <a href="plugins/${plugin.name}/" class="plugin-name-link" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="${plugin.name}">
                   <h4 class="plugin-name">${plugin.name}</h4>
                 </a>
                 <span class="plugin-version">v${plugin.version || '1.0.0'}</span>
@@ -497,8 +497,8 @@ function generatePluginCard(plugin) {
               <p class="plugin-description">${description}</p>
               <div class="plugin-tags">${tags}</div>
               <div class="plugin-footer">
-                <code class="plugin-install">/plugin install 2389-research/${plugin.name}</code>
-                <a href="plugins/${plugin.name}/" class="plugin-source">Details →</a>
+                <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">/plugin install 2389-research/${plugin.name}</code>
+                <a href="plugins/${plugin.name}/" class="plugin-source" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="${plugin.name}">Details →</a>
               </div>
             </article>`;
 }
@@ -517,14 +517,14 @@ function generateQuickInstallSteps(plugin) {
             <span class="step-number">1</span>
             <div class="step-content">
               <span class="step-label">Add the marketplace</span>
-              <code>${INTERNAL_MARKETPLACE_COMMAND}</code>
+              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="${plugin.name}-marketplace">${INTERNAL_MARKETPLACE_COMMAND}</code>
             </div>
           </div>
           <div class="step">
             <span class="step-number">2</span>
             <div class="step-content">
               <span class="step-label">Install this plugin</span>
-              <code>${getPluginInstallCommand(plugin)}</code>
+              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="${plugin.name}-install">${getPluginInstallCommand(plugin)}</code>
             </div>
           </div>
           <div class="step">
@@ -582,7 +582,7 @@ ${related.map(p => {
   return `
         <article class="plugin-card">
           <div class="plugin-card-header">
-            <a href="../${p.name}/" class="plugin-name-link">
+            <a href="../${p.name}/" class="plugin-name-link" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="${p.name}">
               <h4 class="plugin-name">${p.name}</h4>
             </a>
             <span class="plugin-version">v${p.version || '1.0.0'}</span>
@@ -590,8 +590,8 @@ ${related.map(p => {
           <p class="plugin-description">${desc}</p>
           <div class="plugin-tags">${tags}</div>
           <div class="plugin-footer">
-            <code class="plugin-install">/plugin install 2389-research/${p.name}</code>
-            <a href="../${p.name}/" class="plugin-source">Details →</a>
+            <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}">/plugin install 2389-research/${p.name}</code>
+            <a href="../${p.name}/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="${p.name}">Details →</a>
           </div>
         </article>`;
 }).join('\n')}
@@ -674,9 +674,9 @@ ${generateHead(pluginTitle, description, `plugins/${plugin.name}/`, plugin.keywo
       <div class="plugin-hero-actions">
         <div class="install-block">
           <span class="install-label">Install Command</span>
-          <code class="install-command">${generatePluginPageInstallSnippet(plugin)}</code>
+          <code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${generatePluginPageInstallSnippet(plugin)}</code>
         </div>
-        <a href="${sourceUrl}" class="cta-button" rel="noopener noreferrer" target="_blank">
+        <a href="${sourceUrl}" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="${plugin.name}">
           View Source
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
