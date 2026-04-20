@@ -108,7 +108,7 @@
         "url": "https://github.com/2389-research/speed-run.git"
       },
       "description": "Token-efficient code generation pipeline - parallel implementation with hosted LLM (Cerebras) for ~60% token savings. Includes MCP server.",
-      "version": "1.0.0",
+      "version": "1.1.1",
       "keywords": [
         "codegen",
         "speed-run",
