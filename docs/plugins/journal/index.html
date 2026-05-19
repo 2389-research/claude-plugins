@@ -13,22 +13,25 @@
   <meta name="robots" content="index, follow">
 
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://2389-research.github.io/claude-plugins/plugins/journal/">
+  <link rel="canonical" href="https://skills.2389.ai/plugins/journal/">
+
+  <!-- Markdown mirror for AI agents -->
+  <link rel="alternate" type="text/markdown" href="https://skills.2389.ai/plugins/journal/index.md">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://2389-research.github.io/claude-plugins/plugins/journal/">
+  <meta property="og:url" content="https://skills.2389.ai/plugins/journal/">
   <meta property="og:title" content="journal — Personal & Strategy Plugin for Claude Code | 2389 Research">
   <meta property="og:description" content="A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts">
-  <meta property="og:image" content="https://2389-research.github.io/claude-plugins/plugins/journal/og-image.png">
+  <meta property="og:image" content="https://skills.2389.ai/plugins/journal/og-image.png">
   <meta property="og:site_name" content="2389 Research Plugin Marketplace">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://2389-research.github.io/claude-plugins/plugins/journal/">
+  <meta property="twitter:url" content="https://skills.2389.ai/plugins/journal/">
   <meta property="twitter:title" content="journal — Personal & Strategy Plugin for Claude Code | 2389 Research">
   <meta property="twitter:description" content="A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts">
-  <meta property="twitter:image" content="https://2389-research.github.io/claude-plugins/plugins/journal/og-image.png">
+  <meta property="twitter:image" content="https://skills.2389.ai/plugins/journal/og-image.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔌</text></svg>">
@@ -136,7 +139,7 @@
 <ul><li><strong>Jest</strong> - Comprehensive testing framework with mocks</li><li><strong>Biome</strong> - Modern linting and formatting</li><li><strong>Oxlint</strong> - Additional code quality checks</li><li><strong>GitHub Actions</strong> - Continuous integration and testing</li></ul>
 <h4>Storage & Architecture</h4>
 <ul><li><strong>Markdown + YAML</strong> - Human-readable entries with structured metadata</li><li><strong>Hierarchical File System</strong> - Date-based organization with microsecond precision</li><li><strong>Cross-Platform</strong> - Windows, macOS, and Linux support</li></ul>
-<p>For detailed architectural decisions, see <a href="ARCHITECTURE.md" rel="noopener noreferrer">ARCHITECTURE.md</a>.</p>
+<p>For detailed architectural decisions, see <a href="https://github.com/2389-research/journal-mcp/blob/main/ARCHITECTURE.md" rel="noopener noreferrer" target="_blank">ARCHITECTURE.md</a>.</p>
 <h3>Installation</h3>
 <pre><code class="language-bash">npm install -g private-journal-mcp
 </code></pre>
@@ -292,7 +295,7 @@ Vector embeddings provide semantic understanding...
 <p>This enables Claude to build persistent memory across conversations, leading to better engineering decisions and collaboration patterns.</p>
 <h3>Documentation</h3>
 <h4>Comprehensive Guides</h4>
-<ul><li><strong><a href="ARCHITECTURE.md" rel="noopener noreferrer">Architecture & Design Decisions</a></strong> - Technical architecture, design patterns, and key decisions</li><li><strong><a href="CONTRIBUTING.md" rel="noopener noreferrer">Contributing Guidelines</a></strong> - Development setup, code style, testing, and contribution process</li><li><strong><a href="ROADMAP.md" rel="noopener noreferrer">Roadmap & Development Priorities</a></strong> - Current status, planned features, and future direction</li></ul>
+<ul><li><strong><a href="https://github.com/2389-research/journal-mcp/blob/main/ARCHITECTURE.md" rel="noopener noreferrer" target="_blank">Architecture & Design Decisions</a></strong> - Technical architecture, design patterns, and key decisions</li><li><strong><a href="https://github.com/2389-research/journal-mcp/blob/main/CONTRIBUTING.md" rel="noopener noreferrer" target="_blank">Contributing Guidelines</a></strong> - Development setup, code style, testing, and contribution process</li><li><strong><a href="https://github.com/2389-research/journal-mcp/blob/main/ROADMAP.md" rel="noopener noreferrer" target="_blank">Roadmap & Development Priorities</a></strong> - Current status, planned features, and future direction</li></ul>
 <h4>API Reference</h4>
 <ul><li><strong><a href="https://github.com/2389-research/journal-mcp/blob/main/docs/spec.md" rel="noopener noreferrer" target="_blank">docs/spec.md</a></strong> - Original MCP server specification</li><li><strong><a href="https://github.com/2389-research/journal-mcp/blob/main/docs/backend-api-spec.md" rel="noopener noreferrer" target="_blank">docs/backend-api-spec.md</a></strong> - Remote server API documentation</li><li><strong><a href="https://github.com/2389-research/journal-mcp/blob/main/docs/implementation-plan.md" rel="noopener noreferrer" target="_blank">docs/implementation-plan.md</a></strong> - Development history and implementation details</li></ul>
 <h4>Getting Help</h4>
@@ -437,6 +440,7 @@ Vector embeddings provide semantic understanding...
           <a href="https://docs.claude.com/en/docs/claude-code" data-tinylytics-event="footer.resource" data-tinylytics-event-value="claude-code-docs">Claude Code Docs</a>
           <a href="https://docs.claude.com/en/docs/claude-code/skills" data-tinylytics-event="footer.resource" data-tinylytics-event-value="skills-guide">Skills Guide</a>
           <a href="https://docs.claude.com/en/docs/claude-code/plugins" data-tinylytics-event="footer.resource" data-tinylytics-event-value="plugin-dev">Plugin Development</a>
+          <a href="../../glossary/" data-tinylytics-event="footer.resource" data-tinylytics-event-value="glossary">Glossary</a>
         </div>
       </div>
     </div>
@@ -465,10 +469,12 @@ Vector embeddings provide semantic understanding...
     "url": "https://2389.ai"
   },
   "description": "A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts",
-  "url": "https://2389-research.github.io/claude-plugins/plugins/journal/",
+  "url": "https://skills.2389.ai/plugins/journal/",
   "downloadUrl": "https://github.com/2389-research/journal-mcp",
   "softwareVersion": "1.0.0",
-  "license": "https://opensource.org/licenses/MIT"
+  "license": "https://opensource.org/licenses/MIT",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-05-19"
 }
   </script>
 
@@ -488,13 +494,13 @@ Vector embeddings provide semantic understanding...
       "@type": "ListItem",
       "position": 2,
       "name": "Plugin Marketplace",
-      "item": "https://2389-research.github.io/claude-plugins/"
+      "item": "https://skills.2389.ai/"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "journal",
-      "item": "https://2389-research.github.io/claude-plugins/plugins/journal/"
+      "item": "https://skills.2389.ai/plugins/journal/"
     }
   ]
 }

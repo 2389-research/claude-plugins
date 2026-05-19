@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>Glossary | 2389 Research</title>
+  <meta name="title" content="Glossary | 2389 Research">
+  <meta name="description" content="Marketplace-specific terms: plugin, skill, MCP server, hook, slash command, scorecard.">
+  <meta name="keywords" content="glossary, terminology, Claude Code, plugins, MCP servers, AI development, Claude, Anthropic, development tools, 2389 Research">
+  <meta name="author" content="2389 Research Inc">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://skills.2389.ai/glossary/">
+
+  <!-- Markdown mirror for AI agents -->
+  <link rel="alternate" type="text/markdown" href="https://skills.2389.ai/glossary/index.md">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skills.2389.ai/glossary/">
+  <meta property="og:title" content="Glossary | 2389 Research">
+  <meta property="og:description" content="Marketplace-specific terms: plugin, skill, MCP server, hook, slash command, scorecard.">
+  <meta property="og:image" content="https://skills.2389.ai/glossary/og-image.png">
+  <meta property="og:site_name" content="2389 Research Plugin Marketplace">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://skills.2389.ai/glossary/">
+  <meta property="twitter:title" content="Glossary | 2389 Research">
+  <meta property="twitter:description" content="Marketplace-specific terms: plugin, skill, MCP server, hook, slash command, scorecard.">
+  <meta property="twitter:image" content="https://skills.2389.ai/glossary/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔌</text></svg>">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://github.com">
+
+  <!-- Fonts with display=swap for performance -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../style.css">
+
+  <!-- Analytics -->
+  <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js?events" defer></script>
+</head>
+<body>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo" aria-label="2389 Research Plugin Marketplace">
+        <span class="status-indicator" aria-hidden="true"></span>
+        2389 Research Inc
+      </a>
+      <div class="nav-links" role="menubar">
+        <a href="../../#plugins" class="nav-link" role="menuitem">Plugins</a>
+        <a href="../../#about" class="nav-link" role="menuitem">About</a>
+        <a href="https://github.com/2389-research/claude-plugins" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank" data-tinylytics-event="nav.github">GitHub</a>
+        <a href="https://2389.ai" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank" data-tinylytics-event="nav.visit-2389">2389.ai</a>
+      </div>
+      <a href="https://github.com/2389-research/claude-plugins" class="nav-star-btn" rel="noopener noreferrer" target="_blank" title="Star on GitHub" data-tinylytics-event="nav.star-github">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
+        Star
+      </a>
+    </div>
+  </nav>
+
+  <header class="plugin-hero">
+    <div class="plugin-hero-inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../">Marketplace</a>
+        <span class="breadcrumb-sep">→</span>
+        <span class="breadcrumb-current">Glossary</span>
+      </nav>
+
+      <div class="plugin-hero-header">
+        <h1 class="plugin-hero-title">Glossary</h1>
+      </div>
+
+      <p class="plugin-hero-description">Terms used across the 2389 Research plugin marketplace.</p>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="section readme-section">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <div class="section-title-group">
+          <h2 class="section-title">Definitions</h2>
+          <p class="section-subtitle">What things mean on this site</p>
+        </div>
+      </div>
+
+      <div class="readme-content">
+        <dl>
+          <dt><strong>Plugin</strong></dt>
+          <dd>A bundle of skills, slash commands, hooks, and/or MCP servers distributed as a single unit. Installed in Claude Code via <code>/plugin install</code>.</dd>
+          <dt><strong>Skill</strong></dt>
+          <dd>A self-contained capability — instructions plus optional supporting files — that Claude can invoke for specific tasks. Lives under <code>skills/</code> in a plugin.</dd>
+          <dt><strong>Marketplace</strong></dt>
+          <dd>A catalog of plugins. This site is the marketplace for 2389 Research plugins. Added in Claude Code with <code>/plugin marketplace add &lt;repo&gt;</code>.</dd>
+          <dt><strong>MCP server</strong></dt>
+          <dd>Model Context Protocol server. Exposes tools, resources, and prompts to Claude over a standard protocol. Some plugins ship MCP servers; others integrate with existing ones.</dd>
+          <dt><strong>Hook</strong></dt>
+          <dd>A shell command Claude Code executes in response to events such as tool calls or session start. Configured in <code>settings.json</code>.</dd>
+          <dt><strong>Slash command</strong></dt>
+          <dd>A user-invocable command typed in Claude Code as <code>/&lt;name&gt;</code>. Slash commands are defined inside skills or as standalone files in a plugin.</dd>
+          <dt><strong>Scorecard</strong></dt>
+          <dd>A versioned set of automated checks. The a14y scorecard, for example, rates how readable this site is for AI agents.</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section back-section">
+      <a href="../" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to Marketplace
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="../../" class="footer-logo">
+          <span class="status-indicator"></span>
+          2389 Research Inc
+        </a>
+        <p class="footer-tagline">Building tools for how we actually work.<br>(No matching jumpsuits. Yet.)</p>
+      </div>
+
+      <div class="footer-links-grid">
+        <div class="footer-column">
+          <h5>Company</h5>
+          <a href="https://2389.ai" data-tinylytics-event="footer.company" data-tinylytics-event-value="about">About Us</a>
+          <a href="https://github.com/2389-research/claude-plugins" data-tinylytics-event="footer.company" data-tinylytics-event-value="github">GitHub</a>
+          <a href="mailto:hello@2389.ai" data-tinylytics-event="footer.company" data-tinylytics-event-value="contact">Contact</a>
+        </div>
+        <div class="footer-column">
+          <h5>Resources</h5>
+          <a href="https://docs.claude.com/en/docs/claude-code" data-tinylytics-event="footer.resource" data-tinylytics-event-value="claude-code-docs">Claude Code Docs</a>
+          <a href="https://docs.claude.com/en/docs/claude-code/skills" data-tinylytics-event="footer.resource" data-tinylytics-event-value="skills-guide">Skills Guide</a>
+          <a href="https://docs.claude.com/en/docs/claude-code/plugins" data-tinylytics-event="footer.resource" data-tinylytics-event-value="plugin-dev">Plugin Development</a>
+          <a href="../../glossary/" data-tinylytics-event="footer.resource" data-tinylytics-event-value="glossary">Glossary</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 2389 Research Inc. All plugins are open source. (Robots included.)</p>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "name": "Marketplace Glossary",
+  "url": "https://skills.2389.ai/glossary/",
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-05-19",
+  "hasDefinedTerm": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Plugin",
+      "description": "A bundle of skills, slash commands, hooks, and/or MCP servers distributed as a single unit. Installed in Claude Code via /plugin install."
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Skill",
+      "description": "A self-contained capability — instructions plus optional supporting files — that Claude can invoke for specific tasks. Lives under skills/ in a plugin."
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Marketplace",
+      "description": "A catalog of plugins. This site is the marketplace for 2389 Research plugins. Added in Claude Code with /plugin marketplace add &lt;repo&gt;."
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "MCP server",
+      "description": "Model Context Protocol server. Exposes tools, resources, and prompts to Claude over a standard protocol. Some plugins ship MCP servers; others integrate with existing ones."
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Hook",
+      "description": "A shell command Claude Code executes in response to events such as tool calls or session start. Configured in settings.json."
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Slash command",
+      "description": "A user-invocable command typed in Claude Code as /&lt;name&gt;. Slash commands are defined inside skills or as standalone files in a plugin."
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Scorecard",
+      "description": "A versioned set of automated checks. The a14y scorecard, for example, rates how readable this site is for AI agents."
+    }
+  ]
+}
+  </script>
+</body>
+</html>

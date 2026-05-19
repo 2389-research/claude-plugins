@@ -3,7 +3,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execSync, execFileSync } = require('child_process');
 
 // Read marketplace.json
 const marketplace = JSON.parse(
@@ -11,6 +11,19 @@ const marketplace = JSON.parse(
 );
 
 const INTERNAL_MARKETPLACE_COMMAND = '/plugin marketplace add 2389-research/claude-plugins';
+const SITE_URL = 'https://skills.2389.ai';
+const BUILD_DATE = new Date().toISOString().slice(0, 10);
+
+// Use git commit dates so generated metadata only changes when content actually changes
+function getLastModDate(targetPath) {
+  try {
+    return execFileSync('git', ['log', '-1', '--format=%cs', '--', targetPath], { encoding: 'utf8' }).trim() || BUILD_DATE;
+  } catch {
+    return BUILD_DATE;
+  }
+}
+
+const MARKETPLACE_LASTMOD = getLastModDate('.claude-plugin/marketplace.json');
 
 // Group plugins by category
 const categories = {
@@ -91,8 +104,11 @@ function convertRepoLinks(html, pluginName, repoName) {
   const repo = repoName || `2389-research/${pluginName}`;
 
   // Match <a href="..."> where href is a relative path to .md file or directory
+  // Covers: known dirs (skills/, docs/, tests/, hooks/), any root-level .md file
+  // (CLAUDE.md, README.md, ROADMAP.md, ARCHITECTURE.md, CONTRIBUTING.md, etc.),
+  // and parent-relative paths.
   return html.replace(
-    /<a href="(\.?\.?\/?)((?:skills|docs|tests|hooks)(?:\/[^"]+)?|CLAUDE\.md|README\.md|\.\.\/?[^"]*)"([^>]*)>([^<]*)<\/a>/g,
+    /<a href="(\.?\.?\/?)((?:skills|docs|tests|hooks)(?:\/[^"]+)?|[^"\/]+\.md|\.\.\/?[^"]*)"([^>]*)>([^<]*)<\/a>/g,
     (match, prefix, linkPath, attrs, linkText) => {
       // Normalize the path
       let normalizedPath = linkPath.replace(/^\.\//, '');
@@ -384,22 +400,25 @@ function generateHead(title, description, canonicalPath, extraKeywords) {
   <meta name="robots" content="index, follow">
 
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://2389-research.github.io/claude-plugins/${canonicalPath}">
+  <link rel="canonical" href="${SITE_URL}/${canonicalPath}">
+
+  <!-- Markdown mirror for AI agents -->
+  <link rel="alternate" type="text/markdown" href="${SITE_URL}/${canonicalPath}index.md">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://2389-research.github.io/claude-plugins/${canonicalPath}">
+  <meta property="og:url" content="${SITE_URL}/${canonicalPath}">
   <meta property="og:title" content="${title} | 2389 Research">
   <meta property="og:description" content="${description}">
-  <meta property="og:image" content="https://2389-research.github.io/claude-plugins/${canonicalPath}og-image.png">
+  <meta property="og:image" content="${SITE_URL}/${canonicalPath}og-image.png">
   <meta property="og:site_name" content="2389 Research Plugin Marketplace">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://2389-research.github.io/claude-plugins/${canonicalPath}">
+  <meta property="twitter:url" content="${SITE_URL}/${canonicalPath}">
   <meta property="twitter:title" content="${title} | 2389 Research">
   <meta property="twitter:description" content="${description}">
-  <meta property="twitter:image" content="https://2389-research.github.io/claude-plugins/${canonicalPath}og-image.png">
+  <meta property="twitter:image" content="${SITE_URL}/${canonicalPath}og-image.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔌</text></svg>">
@@ -468,6 +487,7 @@ function generateFooter(isPluginPage = false) {
           <a href="https://docs.claude.com/en/docs/claude-code" data-tinylytics-event="footer.resource" data-tinylytics-event-value="claude-code-docs">Claude Code Docs</a>
           <a href="https://docs.claude.com/en/docs/claude-code/skills" data-tinylytics-event="footer.resource" data-tinylytics-event-value="skills-guide">Skills Guide</a>
           <a href="https://docs.claude.com/en/docs/claude-code/plugins" data-tinylytics-event="footer.resource" data-tinylytics-event-value="plugin-dev">Plugin Development</a>
+          <a href="${homeLink}glossary/" data-tinylytics-event="footer.resource" data-tinylytics-event-value="glossary">Glossary</a>
         </div>
       </div>
     </div>
@@ -633,10 +653,12 @@ function generatePluginPage(plugin) {
       "url": "https://2389.ai"
     },
     "description": description,
-    "url": `https://2389-research.github.io/claude-plugins/plugins/${plugin.name}/`,
+    "url": `${SITE_URL}/plugins/${plugin.name}/`,
     "downloadUrl": sourceUrl,
     "softwareVersion": plugin.version || "1.0.0",
-    "license": "https://opensource.org/licenses/MIT"
+    "license": "https://opensource.org/licenses/MIT",
+    "datePublished": MARKETPLACE_LASTMOD,
+    "dateModified": BUILD_DATE
   };
 
   // Build a descriptive title from the plugin name and category
@@ -769,13 +791,13 @@ ${generateQuickInstallSteps(plugin)}
         "@type": "ListItem",
         "position": 2,
         "name": "Plugin Marketplace",
-        "item": "https://2389-research.github.io/claude-plugins/"
+        "item": `${SITE_URL}/`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": plugin.name,
-        "item": `https://2389-research.github.io/claude-plugins/plugins/${plugin.name}/`
+        "item": `${SITE_URL}/plugins/${plugin.name}/`
       }
     ]
   }, null, 2)}
@@ -999,10 +1021,12 @@ ${generateCategorySections()}
       "url": "https://2389.ai"
     },
     "description": "Open source Claude Code plugins and MCP servers for development workflows, testing, and AI agent capabilities",
-    "url": "https://2389-research.github.io/claude-plugins/",
+    "url": "${SITE_URL}/",
     "downloadUrl": "https://github.com/2389-research/claude-plugins",
     "softwareVersion": "1.0.0",
-    "license": "https://opensource.org/licenses/MIT"
+    "license": "https://opensource.org/licenses/MIT",
+    "datePublished": "${MARKETPLACE_LASTMOD}",
+    "dateModified": "${BUILD_DATE}"
   }
   </script>
 
@@ -1022,7 +1046,7 @@ ${generateCategorySections()}
         "@type": "ListItem",
         "position": 2,
         "name": "Plugin Marketplace",
-        "item": "https://2389-research.github.io/claude-plugins/"
+        "item": "${SITE_URL}/"
       }
     ]
   }
@@ -1040,7 +1064,7 @@ ${generateCategorySections()}
       "@type": "ListItem",
       "position": i + 1,
       "name": p.name,
-      "url": `https://2389-research.github.io/claude-plugins/plugins/${p.name}/`
+      "url": `${SITE_URL}/plugins/${p.name}/`
     }))
   }, null, 2)}
   </script>
@@ -1075,29 +1099,17 @@ marketplace.plugins.forEach(plugin => {
   fs.writeFileSync(`${pluginDir}/index.html`, generatePluginPage(plugin));
 });
 
-// Generate sitemap with all pages
-// Use git commit dates so the sitemap only changes when content actually changes
-const { execFileSync } = require('child_process');
-function getLastModDate(targetPath) {
-  try {
-    return execFileSync('git', ['log', '-1', '--format=%cs', '--', targetPath], { encoding: 'utf8' }).trim();
-  } catch {
-    return '2026-01-13'; // fallback: repo creation date
-  }
-}
-
-const marketplaceLastmod = getLastModDate('.claude-plugin/marketplace.json');
+// Generate sitemap.xml with all pages (homepage, glossary, every plugin)
 const sitemapUrls = [
-  { loc: '', priority: '1.0', lastmod: marketplaceLastmod },
-  ...marketplace.plugins.map(p => {
-    return { loc: `plugins/${p.name}/`, priority: '0.8', lastmod: marketplaceLastmod };
-  })
+  { loc: '', priority: '1.0', lastmod: MARKETPLACE_LASTMOD },
+  { loc: 'glossary/', priority: '0.6', lastmod: BUILD_DATE },
+  ...marketplace.plugins.map(p => ({ loc: `plugins/${p.name}/`, priority: '0.8', lastmod: MARKETPLACE_LASTMOD })),
 ];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${sitemapUrls.map(url => `  <url>
-    <loc>https://2389-research.github.io/claude-plugins/${url.loc}</loc>
+    <loc>${SITE_URL}/${url.loc}</loc>
     <lastmod>${url.lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${url.priority}</priority>
@@ -1105,20 +1117,257 @@ ${sitemapUrls.map(url => `  <url>
 </urlset>`;
 fs.writeFileSync('docs/sitemap.xml', sitemap);
 
-// Generate robots.txt
+// Markdown sitemap for AI agents that prefer plain text
+const sitemapMd = `# Sitemap
+
+Pages on this site, for AI agents and other tools that prefer markdown over XML.
+
+- [Plugin Marketplace](${SITE_URL}/) — homepage with the full plugin catalog
+- [Glossary](${SITE_URL}/glossary/) — terms used across the marketplace
+- [AGENTS.md](${SITE_URL}/AGENTS.md) — site overview for AI agents
+- [llms.txt](${SITE_URL}/llms.txt) — structured site index per llmstxt.org
+
+## Plugins
+
+${marketplace.plugins.map(p => `- [${p.name}](${SITE_URL}/plugins/${p.name}/) — ${cleanDescription(p.description)}`).join('\n')}
+`;
+fs.writeFileSync('docs/sitemap.md', sitemapMd);
+
+// robots.txt points at the live host
 const robots = `# Robots.txt for 2389 Claude Code Plugin Marketplace
 User-agent: *
 Allow: /
 
-Sitemap: https://2389-research.github.io/claude-plugins/sitemap.xml
+Sitemap: ${SITE_URL}/sitemap.xml
 Crawl-delay: 1
 `;
 fs.writeFileSync('docs/robots.txt', robots);
 
+// llms.txt per the llmstxt.org spec — structured site index for AI agents
+const llmsTxt = `# 2389 Research Claude Code Plugin Marketplace
+
+> Open source Claude Code plugins and MCP servers from 2389 Research Inc. Development workflows, testing, system administration, and AI agent capabilities. Install with one command via the Claude Code plugin marketplace.
+
+## Install the marketplace
+
+\`\`\`
+${INTERNAL_MARKETPLACE_COMMAND}
+\`\`\`
+
+${Object.values(categories).filter(c => c.plugins.length).map(cat =>
+`## ${cat.title}
+
+${cat.description}
+
+${cat.plugins.map(p => `- [${p.name}](${SITE_URL}/plugins/${p.name}/): ${cleanDescription(p.description)}`).join('\n')}`
+).join('\n\n')}
+
+## Reference
+
+- [Sitemap](${SITE_URL}/sitemap.md)
+- [Glossary](${SITE_URL}/glossary/)
+- [Source repository](https://github.com/2389-research/claude-plugins)
+- [Claude Code documentation](https://docs.claude.com/en/docs/claude-code)
+`;
+fs.writeFileSync('docs/llms.txt', llmsTxt);
+
+// AGENTS.md — site-level guide for AI agents, plus the a14y config block
+const agentsMd = `# Agents guide — 2389 Research Claude Code Plugin Marketplace
+
+This site is the official catalog of Claude Code plugins and MCP servers from 2389 Research Inc. It is generated from \`.claude-plugin/marketplace.json\` in [2389-research/claude-plugins](https://github.com/2389-research/claude-plugins).
+
+## What's here
+
+- The homepage at [${SITE_URL}/](${SITE_URL}/) lists every plugin grouped into Development, Infrastructure, Agent Systems, and Personal & Strategy.
+- Each plugin has its own page under \`/plugins/{name}/\` with the full README, install command, and source link.
+- A [glossary](${SITE_URL}/glossary/) defines marketplace-specific terms (plugin, skill, MCP server, hook, scorecard).
+- Machine-readable index files: [sitemap.xml](${SITE_URL}/sitemap.xml), [sitemap.md](${SITE_URL}/sitemap.md), [llms.txt](${SITE_URL}/llms.txt).
+- Every HTML page advertises a markdown mirror via \`<link rel="alternate" type="text/markdown" href="…/index.md">\`. Fetch the \`index.md\` URL directly for the markdown copy.
+
+## Install a plugin
+
+\`\`\`
+${INTERNAL_MARKETPLACE_COMMAND}
+/plugin install 2389-research/<plugin-name>
+\`\`\`
+
+## a14y configuration
+
+- Target URL: ${SITE_URL}/
+- Scorecard: 0.2.0
+- Mode: site
+- Last runs:
+  - ${BUILD_DATE} — baseline 67 (scorecard 0.2.0)
+`;
+fs.writeFileSync('docs/AGENTS.md', agentsMd);
+
+// Per-page markdown mirrors — homepage + every plugin
+function homepageMarkdown() {
+  const catBlocks = Object.values(categories).filter(c => c.plugins.length).map(cat =>
+`## ${cat.title}
+
+${cat.description}
+
+${cat.plugins.map(p => `- [${p.name}](${SITE_URL}/plugins/${p.name}/) — ${cleanDescription(p.description)}`).join('\n')}`
+  ).join('\n\n');
+
+  return `# 2389 Research Claude Code Plugin Marketplace
+
+> Open source Claude Code plugins and MCP servers from 2389 Research Inc.
+
+## Install
+
+\`\`\`
+${INTERNAL_MARKETPLACE_COMMAND}
+\`\`\`
+
+${catBlocks}
+
+## Reference
+
+- [AGENTS.md](${SITE_URL}/AGENTS.md)
+- [llms.txt](${SITE_URL}/llms.txt)
+- [sitemap.md](${SITE_URL}/sitemap.md)
+- [Glossary](${SITE_URL}/glossary/)
+- [Source](https://github.com/2389-research/claude-plugins)
+`;
+}
+fs.writeFileSync('docs/index.md', homepageMarkdown());
+
+function pluginMarkdown(plugin) {
+  const description = cleanDescription(plugin.description);
+  const sourceUrl = getSourceUrl(plugin);
+  const readme = getReadmeContent(plugin) || '';
+  return `# ${plugin.name}
+
+> ${description}
+
+- **Version:** ${plugin.version || '1.0.0'}
+- **Source:** ${sourceUrl}
+- **Install:** \`${getPluginInstallCommand(plugin)}\`
+
+## Install via marketplace
+
+\`\`\`
+${INTERNAL_MARKETPLACE_COMMAND}
+${getPluginInstallCommand(plugin)}
+\`\`\`
+
+## README
+
+${readme || `See ${sourceUrl} for full documentation.`}
+`;
+}
+marketplace.plugins.forEach(plugin => {
+  fs.writeFileSync(`docs/plugins/${plugin.name}/index.md`, pluginMarkdown(plugin));
+});
+
+// Glossary page (HTML + markdown mirror) — resolves html.glossary-link site-wide
+const GLOSSARY_TERMS = [
+  ['Plugin', 'A bundle of skills, slash commands, hooks, and/or MCP servers distributed as a single unit. Installed in Claude Code via <code>/plugin install</code>.'],
+  ['Skill', 'A self-contained capability — instructions plus optional supporting files — that Claude can invoke for specific tasks. Lives under <code>skills/</code> in a plugin.'],
+  ['Marketplace', 'A catalog of plugins. This site is the marketplace for 2389 Research plugins. Added in Claude Code with <code>/plugin marketplace add &lt;repo&gt;</code>.'],
+  ['MCP server', 'Model Context Protocol server. Exposes tools, resources, and prompts to Claude over a standard protocol. Some plugins ship MCP servers; others integrate with existing ones.'],
+  ['Hook', 'A shell command Claude Code executes in response to events such as tool calls or session start. Configured in <code>settings.json</code>.'],
+  ['Slash command', 'A user-invocable command typed in Claude Code as <code>/&lt;name&gt;</code>. Slash commands are defined inside skills or as standalone files in a plugin.'],
+  ['Scorecard', 'A versioned set of automated checks. The a14y scorecard, for example, rates how readable this site is for AI agents.'],
+];
+
+const glossaryStructuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "name": "Marketplace Glossary",
+  "url": `${SITE_URL}/glossary/`,
+  "datePublished": MARKETPLACE_LASTMOD,
+  "dateModified": BUILD_DATE,
+  "hasDefinedTerm": GLOSSARY_TERMS.map(([term, definition]) => ({
+    "@type": "DefinedTerm",
+    "name": term,
+    "description": definition.replace(/<[^>]+>/g, ''),
+  })),
+}, null, 2);
+
+const glossaryHtml = `<!DOCTYPE html>
+<html lang="en">
+${generateHead('Glossary', 'Marketplace-specific terms: plugin, skill, MCP server, hook, slash command, scorecard.', 'glossary/', ['glossary', 'terminology'])}
+<body>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  ${generateNav(true)}
+
+  <header class="plugin-hero">
+    <div class="plugin-hero-inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../">Marketplace</a>
+        <span class="breadcrumb-sep">→</span>
+        <span class="breadcrumb-current">Glossary</span>
+      </nav>
+
+      <div class="plugin-hero-header">
+        <h1 class="plugin-hero-title">Glossary</h1>
+      </div>
+
+      <p class="plugin-hero-description">Terms used across the 2389 Research plugin marketplace.</p>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="section readme-section">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <div class="section-title-group">
+          <h2 class="section-title">Definitions</h2>
+          <p class="section-subtitle">What things mean on this site</p>
+        </div>
+      </div>
+
+      <div class="readme-content">
+        <dl>
+${GLOSSARY_TERMS.map(([term, definition]) => `          <dt><strong>${term}</strong></dt>
+          <dd>${definition}</dd>`).join('\n')}
+        </dl>
+      </div>
+    </section>
+
+    <section class="section back-section">
+      <a href="../" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to Marketplace
+      </a>
+    </section>
+  </main>
+
+  ${generateFooter(true)}
+
+  <script type="application/ld+json">
+  ${glossaryStructuredData}
+  </script>
+</body>
+</html>`;
+
+fs.mkdirSync('docs/glossary', { recursive: true });
+fs.writeFileSync('docs/glossary/index.html', glossaryHtml);
+
+const glossaryMd = `# Glossary
+
+Terms used across the 2389 Research plugin marketplace.
+
+${GLOSSARY_TERMS.map(([term, definition]) => `## ${term}\n\n${definition.replace(/<[^>]+>/g, '')}`).join('\n\n')}
+
+[Back to marketplace](${SITE_URL}/)
+`;
+fs.writeFileSync('docs/glossary/index.md', glossaryMd);
+
 console.log('✓ Generated docs/index.html');
 console.log(`✓ Generated ${marketplace.plugins.length} plugin pages in docs/plugins/`);
-console.log('✓ Generated docs/sitemap.xml');
+console.log('✓ Generated docs/glossary/index.html');
+console.log('✓ Generated docs/sitemap.xml + sitemap.md');
+console.log('✓ Generated docs/llms.txt + AGENTS.md');
 console.log('✓ Generated docs/robots.txt');
+console.log(`✓ Generated ${marketplace.plugins.length + 2} markdown mirrors (index.md)`);
 console.log(`✓ ${totalPlugins} plugins across ${Object.values(categories).filter(c => c.plugins.length > 0).length} categories`);
 
 // Report link conversion results
