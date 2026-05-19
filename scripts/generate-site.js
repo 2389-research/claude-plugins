@@ -1197,7 +1197,8 @@ ${INTERNAL_MARKETPLACE_COMMAND}
 - Scorecard: 0.2.0
 - Mode: site
 - Last runs:
-  - ${BUILD_DATE} — baseline 67 (scorecard 0.2.0)
+  - 2026-05-19 — 82 (scorecard 0.2.0)
+  - 2026-05-19 — 67 (scorecard 0.2.0, baseline)
 `;
 fs.writeFileSync('docs/AGENTS.md', agentsMd);
 

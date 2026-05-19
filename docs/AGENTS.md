@@ -23,4 +23,5 @@ This site is the official catalog of Claude Code plugins and MCP servers from 23
 - Scorecard: 0.2.0
 - Mode: site
 - Last runs:
-  - 2026-05-19 — baseline 67 (scorecard 0.2.0)
+  - 2026-05-19 — 82 (scorecard 0.2.0)
+  - 2026-05-19 — 67 (scorecard 0.2.0, baseline)
