@@ -1,163 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/</loc>
+    <loc>https://skills.2389.ai/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/css-development/</loc>
+    <loc>https://skills.2389.ai/glossary/</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skills.2389.ai/plugins/css-development/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/firebase-development/</loc>
+    <loc>https://skills.2389.ai/plugins/firebase-development/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/landing-page-design/</loc>
+    <loc>https://skills.2389.ai/plugins/landing-page-design/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/xtool/</loc>
+    <loc>https://skills.2389.ai/plugins/xtool/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/building-multiagent-systems/</loc>
+    <loc>https://skills.2389.ai/plugins/building-multiagent-systems/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/speed-run/</loc>
+    <loc>https://skills.2389.ai/plugins/speed-run/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/test-kitchen/</loc>
+    <loc>https://skills.2389.ai/plugins/test-kitchen/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/simmer/</loc>
+    <loc>https://skills.2389.ai/plugins/simmer/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/scenario-testing/</loc>
+    <loc>https://skills.2389.ai/plugins/scenario-testing/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/fresh-eyes-review/</loc>
+    <loc>https://skills.2389.ai/plugins/fresh-eyes-review/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/documentation-audit/</loc>
+    <loc>https://skills.2389.ai/plugins/documentation-audit/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/ceo-personal-os/</loc>
+    <loc>https://skills.2389.ai/plugins/ceo-personal-os/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/worldview-synthesis/</loc>
+    <loc>https://skills.2389.ai/plugins/worldview-synthesis/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/deliberation/</loc>
+    <loc>https://skills.2389.ai/plugins/deliberation/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/terminal-title/</loc>
+    <loc>https://skills.2389.ai/plugins/terminal-title/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/slack-mcp/</loc>
+    <loc>https://skills.2389.ai/plugins/slack-mcp/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/remote-system-maintenance/</loc>
+    <loc>https://skills.2389.ai/plugins/remote-system-maintenance/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/binary-re/</loc>
+    <loc>https://skills.2389.ai/plugins/binary-re/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/review-squad/</loc>
+    <loc>https://skills.2389.ai/plugins/review-squad/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/git-repo-prep/</loc>
+    <loc>https://skills.2389.ai/plugins/git-repo-prep/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/prbuddy/</loc>
+    <loc>https://skills.2389.ai/plugins/prbuddy/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/summarize-meetings/</loc>
+    <loc>https://skills.2389.ai/plugins/summarize-meetings/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/jam/</loc>
+    <loc>https://skills.2389.ai/plugins/jam/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/agent-drugs/</loc>
+    <loc>https://skills.2389.ai/plugins/agent-drugs/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/socialmedia/</loc>
+    <loc>https://skills.2389.ai/plugins/socialmedia/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://2389-research.github.io/claude-plugins/plugins/journal/</loc>
+    <loc>https://skills.2389.ai/plugins/journal/</loc>
     <lastmod>2026-04-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
