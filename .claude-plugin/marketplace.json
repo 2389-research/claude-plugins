@@ -148,7 +148,7 @@
         "url": "https://github.com/2389-research/simmer.git"
       },
       "description": "Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements",
-      "version": "3.0.0",
+      "version": "3.0.1",
       "keywords": [
         "refinement",
         "iteration",
