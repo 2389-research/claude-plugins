@@ -2,7 +2,7 @@
 
 > Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements
 
-- **Version:** 3.0.0
+- **Version:** 3.0.1
 - **Source:** https://github.com/2389-research/simmer
 - **Install:** `/plugin install 2389-research/simmer`
 
