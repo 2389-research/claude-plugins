@@ -95,8 +95,15 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Command</span>
-          <code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="ceo-personal-os">/plugin install 2389-research/ceo-personal-os</code>
+          <span class="install-label">Install</span>
+          <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-ceo-personal-os" aria-controls="panel-npx-ceo-personal-os" id="tab-npx-ceo-personal-os">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-ceo-personal-os" aria-controls="panel-cc-ceo-personal-os" id="tab-cc-ceo-personal-os">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-ceo-personal-os" aria-labelledby="tab-npx-ceo-personal-os" data-panel="npx-ceo-personal-os"><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="ceo-personal-os-npx">npx skills add 2389-research/ceo-personal-os</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-ceo-personal-os" aria-labelledby="tab-cc-ceo-personal-os" data-panel="cc-ceo-personal-os" hidden><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="ceo-personal-os">/plugin install 2389-research/ceo-personal-os</code></div>
+          </div>
         </div>
         <a href="https://github.com/2389-research/ceo-personal-os" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="ceo-personal-os">
           View Source
@@ -318,8 +325,8 @@
   "downloadUrl": "https://github.com/2389-research/ceo-personal-os",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-05-19",
-  "dateModified": "2026-05-19"
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-05-27"
 }
   </script>
 
@@ -349,6 +356,36 @@
     }
   ]
 }
+  </script>
+
+  <script>
+  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
+    el.title = 'Click to copy';
+    el.addEventListener('click', () => {
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        const orig = el.textContent;
+        el.textContent = 'Copied!';
+        el.classList.add('copied');
+        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+
+  document.querySelectorAll('.install-tabs').forEach(group => {
+    group.querySelectorAll('.install-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.dataset.tab;
+        group.querySelectorAll('.install-tab').forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        group.querySelectorAll('.install-tab-panel').forEach(p => {
+          p.hidden = p.dataset.panel !== key;
+        });
+      });
+    });
+  });
   </script>
 </body>
 </html>

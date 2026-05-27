@@ -95,8 +95,15 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Command</span>
-          <code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="remote-system-maintenance">/plugin install 2389-research/remote-system-maintenance</code>
+          <span class="install-label">Install</span>
+          <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-remote-system-maintenance" aria-controls="panel-npx-remote-system-maintenance" id="tab-npx-remote-system-maintenance">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-remote-system-maintenance" aria-controls="panel-cc-remote-system-maintenance" id="tab-cc-remote-system-maintenance">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-remote-system-maintenance" aria-labelledby="tab-npx-remote-system-maintenance" data-panel="npx-remote-system-maintenance"><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="remote-system-maintenance-npx">npx skills add 2389-research/remote-system-maintenance</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-remote-system-maintenance" aria-labelledby="tab-cc-remote-system-maintenance" data-panel="cc-remote-system-maintenance" hidden><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="remote-system-maintenance">/plugin install 2389-research/remote-system-maintenance</code></div>
+          </div>
         </div>
         <a href="https://github.com/2389-research/remote-system-maintenance" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="remote-system-maintenance">
           View Source
@@ -347,8 +354,8 @@ snap remove &lt;package-name&gt; --revision=&lt;revision-number&gt;
   "downloadUrl": "https://github.com/2389-research/remote-system-maintenance",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-05-19",
-  "dateModified": "2026-05-19"
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-05-27"
 }
   </script>
 
@@ -378,6 +385,36 @@ snap remove &lt;package-name&gt; --revision=&lt;revision-number&gt;
     }
   ]
 }
+  </script>
+
+  <script>
+  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
+    el.title = 'Click to copy';
+    el.addEventListener('click', () => {
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        const orig = el.textContent;
+        el.textContent = 'Copied!';
+        el.classList.add('copied');
+        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+
+  document.querySelectorAll('.install-tabs').forEach(group => {
+    group.querySelectorAll('.install-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.dataset.tab;
+        group.querySelectorAll('.install-tab').forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        group.querySelectorAll('.install-tab-panel').forEach(p => {
+          p.hidden = p.dataset.panel !== key;
+        });
+      });
+    });
+  });
   </script>
 </body>
 </html>

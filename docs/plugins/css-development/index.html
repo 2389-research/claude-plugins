@@ -95,8 +95,15 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Command</span>
-          <code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="css-development">/plugin install 2389-research/css-development</code>
+          <span class="install-label">Install</span>
+          <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-css-development" aria-controls="panel-npx-css-development" id="tab-npx-css-development">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-css-development" aria-controls="panel-cc-css-development" id="tab-cc-css-development">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-css-development" aria-labelledby="tab-npx-css-development" data-panel="npx-css-development"><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="css-development-npx">npx skills add 2389-research/css-development</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-css-development" aria-labelledby="tab-cc-css-development" data-panel="cc-css-development" hidden><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="css-development">/plugin install 2389-research/css-development</code></div>
+          </div>
         </div>
         <a href="https://github.com/2389-research/css-development" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="css-development">
           View Source
@@ -315,8 +322,8 @@
   "downloadUrl": "https://github.com/2389-research/css-development",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-05-19",
-  "dateModified": "2026-05-19"
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-05-27"
 }
   </script>
 
@@ -346,6 +353,36 @@
     }
   ]
 }
+  </script>
+
+  <script>
+  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
+    el.title = 'Click to copy';
+    el.addEventListener('click', () => {
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        const orig = el.textContent;
+        el.textContent = 'Copied!';
+        el.classList.add('copied');
+        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+
+  document.querySelectorAll('.install-tabs').forEach(group => {
+    group.querySelectorAll('.install-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.dataset.tab;
+        group.querySelectorAll('.install-tab').forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        group.querySelectorAll('.install-tab-panel').forEach(p => {
+          p.hidden = p.dataset.panel !== key;
+        });
+      });
+    });
+  });
   </script>
 </body>
 </html>

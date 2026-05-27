@@ -749,8 +749,8 @@
     "downloadUrl": "https://github.com/2389-research/claude-plugins",
     "softwareVersion": "1.0.0",
     "license": "https://opensource.org/licenses/MIT",
-    "datePublished": "2026-05-19",
-    "dateModified": "2026-05-19"
+    "datePublished": "2026-04-20",
+    "dateModified": "2026-05-27"
   }
   </script>
 
@@ -946,7 +946,6 @@
   </script>
 
   <script>
-  // Copy-to-clipboard on install commands
   document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
     el.title = 'Click to copy';
     el.addEventListener('click', () => {
@@ -959,6 +958,21 @@
     });
   });
 
+  document.querySelectorAll('.install-tabs').forEach(group => {
+    group.querySelectorAll('.install-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.dataset.tab;
+        group.querySelectorAll('.install-tab').forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        group.querySelectorAll('.install-tab-panel').forEach(p => {
+          p.hidden = p.dataset.panel !== key;
+        });
+      });
+    });
+  });
   </script>
 </body>
 </html>

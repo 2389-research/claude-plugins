@@ -531,6 +531,62 @@ function generatePluginPageInstallSnippet(plugin) {
   return getPluginInstallCommand(plugin);
 }
 
+function getNpxInstallCommand(plugin) {
+  return `npx skills add ${getRepoName(plugin)}`;
+}
+
+// MCP-only entries (strict: true) ship no skills, so npx skills add can't install them.
+function pluginHasSkills(plugin) {
+  return plugin.strict !== true;
+}
+
+// Renders the npx-default / Claude-Code-secondary install tabs.
+// group must be unique per page so ARIA ids don't collide.
+function renderInstallTabs({ group, npxHtml, ccHtml }) {
+  return `<div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-${group}" aria-controls="panel-npx-${group}" id="tab-npx-${group}">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-${group}" aria-controls="panel-cc-${group}" id="tab-cc-${group}">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-${group}" aria-labelledby="tab-npx-${group}" data-panel="npx-${group}">${npxHtml}</div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-${group}" aria-labelledby="tab-cc-${group}" data-panel="cc-${group}" hidden>${ccHtml}</div>
+          </div>`;
+}
+
+// Shared interactive <script>: copy-to-clipboard + tab switching.
+// Used by both the homepage and every plugin page (plugin pages had no script before).
+function generateInteractiveScript() {
+  return `<script>
+  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
+    el.title = 'Click to copy';
+    el.addEventListener('click', () => {
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        const orig = el.textContent;
+        el.textContent = 'Copied!';
+        el.classList.add('copied');
+        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+
+  document.querySelectorAll('.install-tabs').forEach(group => {
+    group.querySelectorAll('.install-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.dataset.tab;
+        group.querySelectorAll('.install-tab').forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        group.querySelectorAll('.install-tab-panel').forEach(p => {
+          p.hidden = p.dataset.panel !== key;
+        });
+      });
+    });
+  });
+  </script>`;
+}
+
 function generateQuickInstallSteps(plugin) {
   return `
           <div class="step">
@@ -695,8 +751,14 @@ ${generateHead(pluginTitle, description, `plugins/${plugin.name}/`, plugin.keywo
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Command</span>
-          <code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${generatePluginPageInstallSnippet(plugin)}</code>
+          <span class="install-label">Install</span>
+          ${pluginHasSkills(plugin)
+            ? renderInstallTabs({
+                group: plugin.name,
+                npxHtml: `<code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}-npx">${getNpxInstallCommand(plugin)}</code>`,
+                ccHtml: `<code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`
+              })
+            : `<code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`}
         </div>
         <a href="${sourceUrl}" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="${plugin.name}">
           View Source
@@ -802,6 +864,8 @@ ${generateQuickInstallSteps(plugin)}
     ]
   }, null, 2)}
   </script>
+
+  ${generateInteractiveScript()}
 </body>
 </html>`;
 }
@@ -1069,21 +1133,7 @@ ${generateCategorySections()}
   }, null, 2)}
   </script>
 
-  <script>
-  // Copy-to-clipboard on install commands
-  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
-    el.title = 'Click to copy';
-    el.addEventListener('click', () => {
-      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
-        const orig = el.textContent;
-        el.textContent = 'Copied!';
-        el.classList.add('copied');
-        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
-      });
-    });
-  });
-
-  </script>
+  ${generateInteractiveScript()}
 </body>
 </html>`;
 

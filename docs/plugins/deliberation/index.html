@@ -95,8 +95,15 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Command</span>
-          <code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="deliberation">/plugin install 2389-research/deliberation</code>
+          <span class="install-label">Install</span>
+          <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-deliberation" aria-controls="panel-npx-deliberation" id="tab-npx-deliberation">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-deliberation" aria-controls="panel-cc-deliberation" id="tab-cc-deliberation">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-deliberation" aria-labelledby="tab-npx-deliberation" data-panel="npx-deliberation"><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="deliberation-npx">npx skills add 2389-research/deliberation</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-deliberation" aria-labelledby="tab-cc-deliberation" data-panel="cc-deliberation" hidden><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="deliberation">/plugin install 2389-research/deliberation</code></div>
+          </div>
         </div>
         <a href="https://github.com/2389-research/deliberation" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="deliberation">
           View Source
@@ -330,8 +337,8 @@ Business Strategist, Developer Culture voice. Anyone to add?"
   "downloadUrl": "https://github.com/2389-research/deliberation",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-05-19",
-  "dateModified": "2026-05-19"
+  "datePublished": "2026-04-20",
+  "dateModified": "2026-05-27"
 }
   </script>
 
@@ -361,6 +368,36 @@ Business Strategist, Developer Culture voice. Anyone to add?"
     }
   ]
 }
+  </script>
+
+  <script>
+  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
+    el.title = 'Click to copy';
+    el.addEventListener('click', () => {
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        const orig = el.textContent;
+        el.textContent = 'Copied!';
+        el.classList.add('copied');
+        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+
+  document.querySelectorAll('.install-tabs').forEach(group => {
+    group.querySelectorAll('.install-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.dataset.tab;
+        group.querySelectorAll('.install-tab').forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        group.querySelectorAll('.install-tab-panel').forEach(p => {
+          p.hidden = p.dataset.panel !== key;
+        });
+      });
+    });
+  });
   </script>
 </body>
 </html>
