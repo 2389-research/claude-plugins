@@ -516,8 +516,14 @@ function generatePluginCard(plugin) {
               </div>
               <p class="plugin-description">${description}</p>
               <div class="plugin-tags">${tags}</div>
-              <div class="plugin-footer">
-                <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">/plugin install 2389-research/${plugin.name}</code>
+              <div class="plugin-footer${pluginHasSkills(plugin) ? ' plugin-footer-tabs' : ''}">
+                ${pluginHasSkills(plugin)
+                  ? renderInstallTabs({
+                      group: `card-${plugin.name}`,
+                      npxHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}-npx">${getNpxInstallCommand(plugin)}</code>`,
+                      ccHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`
+                    })
+                  : `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`}
                 <a href="plugins/${plugin.name}/" class="plugin-source" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="${plugin.name}">Details →</a>
               </div>
             </article>`;
@@ -661,8 +667,14 @@ ${related.map(p => {
           </div>
           <p class="plugin-description">${desc}</p>
           <div class="plugin-tags">${tags}</div>
-          <div class="plugin-footer">
-            <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}">/plugin install 2389-research/${p.name}</code>
+          <div class="plugin-footer${pluginHasSkills(p) ? ' plugin-footer-tabs' : ''}">
+            ${pluginHasSkills(p)
+              ? renderInstallTabs({
+                  group: `related-${p.name}`,
+                  npxHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}-npx">${getNpxInstallCommand(p)}</code>`,
+                  ccHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}">${getPluginInstallCommand(p)}</code>`
+                })
+              : `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}">${getPluginInstallCommand(p)}</code>`}
             <a href="../${p.name}/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="${p.name}">Details →</a>
           </div>
         </article>`;

@@ -15,9 +15,9 @@ assert.match(simmer, /npx skills add 2389-research\/simmer/, 'simmer page should
 assert.match(simmer, /\/plugin install 2389-research\/simmer/, 'simmer page should still show /plugin install');
 assert.match(simmer, /class="install-tab active"[^>]*data-tab="npx-simmer"/, 'npx tab should be active by default on simmer page');
 
-// MCP server page: no npx, /plugin only
+// MCP server page: journal's own install command must not use npx; /plugin only for the hero block
 const journal = read('docs/plugins/journal/index.html');
-assert.doesNotMatch(journal, /npx skills add/, 'MCP server page (journal) must not show npx');
+assert.doesNotMatch(journal, /npx skills add 2389-research\/journal/, 'MCP server page (journal) must not show npx for its own install');
 assert.match(journal, /\/plugin install 2389-research\/journal/, 'journal page should show /plugin install');
 
 // Homepage: hero shows the npx pattern, default to npx
@@ -26,5 +26,9 @@ assert.match(index, /npx skills add 2389-research\/&lt;plugin&gt;/, 'hero should
 assert.match(index, /class="install-tab active"[^>]*data-tab="npx-hero"/, 'hero npx tab should be active by default');
 // Get Started block defaults to the npx flow
 assert.match(index, /class="install-tab active"[^>]*data-tab="npx-getstarted"/, 'Get Started should default to npx');
+
+// Homepage cards: skill-plugin card shows npx; an MCP server's repo never appears in an npx command
+assert.match(index, /npx skills add 2389-research\/simmer/, 'simmer card should show npx command');
+assert.doesNotMatch(index, /npx skills add 2389-research\/journal/, 'journal (MCP) must never appear in an npx command');
 
 console.log('generate-site npx install test passed');
