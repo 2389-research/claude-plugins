@@ -1590,7 +1590,6 @@ body {
 
 /* Card footer becomes a column when it holds tabs */
 .plugin-footer-tabs {
-  display: flex;
   flex-direction: column;
   align-items: stretch;
   gap: var(--space-xs);
