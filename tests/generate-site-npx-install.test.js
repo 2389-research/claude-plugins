@@ -14,6 +14,7 @@ const simmer = read('docs/plugins/simmer/index.html');
 assert.match(simmer, /npx skills add 2389-research\/simmer/, 'simmer page should show npx command');
 assert.match(simmer, /\/plugin install 2389-research\/simmer/, 'simmer page should still show /plugin install');
 assert.match(simmer, /class="install-tab active"[^>]*data-tab="npx-simmer"/, 'npx tab should be active by default on simmer page');
+assert.match(simmer, /class="install-tab active"[^>]*data-tab="npx-qi-simmer"/, 'quick-install should default to npx');
 
 // MCP server page: /plugin only for the hero block
 const journal = read('docs/plugins/journal/index.html');

@@ -590,7 +590,7 @@ function generateInteractiveScript() {
 }
 
 function generateQuickInstallSteps(plugin) {
-  return `
+  const ccSteps = `
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
@@ -612,6 +612,33 @@ function generateQuickInstallSteps(plugin) {
               <code>Skills auto-trigger when relevant</code>
             </div>
           </div>`;
+
+  if (!pluginHasSkills(plugin)) return ccSteps;
+
+  const npxSteps = `
+          <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+              <span class="step-label">Run it — works in any agent</span>
+              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="${plugin.name}-npx">${getNpxInstallCommand(plugin)}</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+              <span class="step-label">Pick your agents when prompted</span>
+              <code>Claude Code, Cursor, Codex…</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+              <span class="step-label">You're good to go</span>
+              <code>Skills auto-trigger when relevant</code>
+            </div>
+          </div>`;
+
+  return renderInstallTabs({ group: `qi-${plugin.name}`, npxHtml: npxSteps, ccHtml: ccSteps });
 }
 
 // Generate category sections
