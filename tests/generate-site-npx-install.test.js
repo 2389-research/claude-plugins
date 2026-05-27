@@ -47,6 +47,10 @@ assert.match(read('docs/llms.txt'), /npx skills add/, 'llms.txt should mention n
 assert.match(read('docs/AGENTS.md'), /npx skills add/, 'AGENTS.md should mention npx');
 assert.match(read('docs/index.md'), /npx skills add/, 'index.md should mention npx');
 assert.match(read('docs/plugins/simmer/index.md'), /npx skills add 2389-research\/simmer/, 'simmer .md should show npx');
-assert.doesNotMatch(read('docs/plugins/journal/index.md'), /npx skills add/, 'journal .md must not show npx');
+const mcpNames = marketplace.plugins.filter((p) => p.strict === true).map((p) => p.name);
+assert.ok(mcpNames.length >= 4, 'expected at least 4 MCP servers');
+for (const name of mcpNames) {
+  assert.doesNotMatch(read(`docs/plugins/${name}/index.md`), /npx skills add/, `${name} .md (MCP) must not show npx`);
+}
 
 console.log('generate-site npx install test passed');

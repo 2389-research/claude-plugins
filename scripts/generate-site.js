@@ -1268,7 +1268,7 @@ const llmsTxt = `# 2389 Research Claude Code Plugin Marketplace
 
 ## Install a plugin
 
-Default — works in any agent (Claude Code, Cursor, Codex, …) via [vercel-labs/skills](https://github.com/vercel-labs/skills):
+Default — any agent (Claude Code, Cursor, Codex, …) via [vercel-labs/skills](https://github.com/vercel-labs/skills):
 
 \`\`\`
 npx skills add 2389-research/<plugin>
@@ -1326,7 +1326,7 @@ ${INTERNAL_MARKETPLACE_COMMAND}
 /plugin install 2389-research/<plugin-name>
 \`\`\`
 
-(MCP servers — journal, socialmedia, slack-mcp, agent-drugs — install via Claude Code only; they ship no skills for npx.)
+(MCP servers — ${marketplace.plugins.filter((p) => p.strict === true).map((p) => p.name).join(', ')} — install via Claude Code only; they ship no skills for npx.)
 
 ## a14y configuration
 
@@ -1361,7 +1361,7 @@ Default — any agent via [npx skills](https://github.com/vercel-labs/skills):
 npx skills add 2389-research/<plugin>
 \`\`\`
 
-Or in Claude Code:
+Or natively in Claude Code:
 
 \`\`\`
 ${INTERNAL_MARKETPLACE_COMMAND}

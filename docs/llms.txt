@@ -4,7 +4,7 @@
 
 ## Install a plugin
 
-Default — works in any agent (Claude Code, Cursor, Codex, …) via [vercel-labs/skills](https://github.com/vercel-labs/skills):
+Default — any agent (Claude Code, Cursor, Codex, …) via [vercel-labs/skills](https://github.com/vercel-labs/skills):
 
 ```
 npx skills add 2389-research/<plugin>

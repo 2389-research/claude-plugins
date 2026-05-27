@@ -25,7 +25,7 @@ Or natively in Claude Code:
 /plugin install 2389-research/<plugin-name>
 ```
 
-(MCP servers — journal, socialmedia, slack-mcp, agent-drugs — install via Claude Code only; they ship no skills for npx.)
+(MCP servers — slack-mcp, agent-drugs, socialmedia, journal — install via Claude Code only; they ship no skills for npx.)
 
 ## a14y configuration
 
