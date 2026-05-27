@@ -895,8 +895,12 @@ ${generateHead('Claude Code Plugin Marketplace', 'Open source Claude Code plugin
 
       <div class="hero-cta">
         <div class="install-block">
-          <span class="install-label">One Command Install</span>
-          <code class="install-command">${INTERNAL_MARKETPLACE_COMMAND}</code>
+          <span class="install-label">Install</span>
+          ${renderInstallTabs({
+            group: 'hero',
+            npxHtml: `<code class="install-command">npx skills add 2389-research/&lt;plugin&gt;</code>`,
+            ccHtml: `<code class="install-command">${INTERNAL_MARKETPLACE_COMMAND}</code>`
+          })}
         </div>
         <a href="#plugins" class="cta-button">
           Browse the Goods
@@ -971,7 +975,32 @@ ${generateCategorySections()}
 
         <div class="quick-start">
           <h3 class="quick-start-title">Get Started in 30 Seconds</h3>
-          <div class="quick-start-steps">
+          ${renderInstallTabs({
+            group: 'getstarted',
+            npxHtml: `<div class="quick-start-steps">
+            <div class="step">
+              <span class="step-number">1</span>
+              <div class="step-content">
+                <span class="step-label">Run it — works in any agent</span>
+                <code>npx skills add 2389-research/better-dev</code>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-number">2</span>
+              <div class="step-content">
+                <span class="step-label">Pick your agents when prompted</span>
+                <code>Claude Code, Cursor, Codex…</code>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-number">3</span>
+              <div class="step-content">
+                <span class="step-label">That's it. Seriously.</span>
+                <code>Skills auto-trigger when relevant</code>
+              </div>
+            </div>
+          </div>`,
+            ccHtml: `<div class="quick-start-steps">
             <div class="step">
               <span class="step-number">1</span>
               <div class="step-content">
@@ -993,7 +1022,8 @@ ${generateCategorySections()}
                 <code>Skills auto-trigger when relevant</code>
               </div>
             </div>
-          </div>
+          </div>`
+          })}
         </div>
       </div>
     </section>

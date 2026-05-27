@@ -84,8 +84,15 @@
 
       <div class="hero-cta">
         <div class="install-block">
-          <span class="install-label">One Command Install</span>
-          <code class="install-command">/plugin marketplace add 2389-research/claude-plugins</code>
+          <span class="install-label">Install</span>
+          <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-hero" aria-controls="panel-npx-hero" id="tab-npx-hero">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-hero" aria-controls="panel-cc-hero" id="tab-cc-hero">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-hero" aria-labelledby="tab-npx-hero" data-panel="npx-hero"><code class="install-command">npx skills add 2389-research/&lt;plugin&gt;</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-hero" aria-labelledby="tab-cc-hero" data-panel="cc-hero" hidden><code class="install-command">/plugin marketplace add 2389-research/claude-plugins</code></div>
+          </div>
         </div>
         <a href="#plugins" class="cta-button">
           Browse the Goods
@@ -605,7 +612,35 @@
 
         <div class="quick-start">
           <h3 class="quick-start-title">Get Started in 30 Seconds</h3>
-          <div class="quick-start-steps">
+          <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-getstarted" aria-controls="panel-npx-getstarted" id="tab-npx-getstarted">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-getstarted" aria-controls="panel-cc-getstarted" id="tab-cc-getstarted">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-getstarted" aria-labelledby="tab-npx-getstarted" data-panel="npx-getstarted"><div class="quick-start-steps">
+            <div class="step">
+              <span class="step-number">1</span>
+              <div class="step-content">
+                <span class="step-label">Run it — works in any agent</span>
+                <code>npx skills add 2389-research/better-dev</code>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-number">2</span>
+              <div class="step-content">
+                <span class="step-label">Pick your agents when prompted</span>
+                <code>Claude Code, Cursor, Codex…</code>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-number">3</span>
+              <div class="step-content">
+                <span class="step-label">That's it. Seriously.</span>
+                <code>Skills auto-trigger when relevant</code>
+              </div>
+            </div>
+          </div></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-getstarted" aria-labelledby="tab-cc-getstarted" data-panel="cc-getstarted" hidden><div class="quick-start-steps">
             <div class="step">
               <span class="step-number">1</span>
               <div class="step-content">
@@ -627,6 +662,7 @@
                 <code>Skills auto-trigger when relevant</code>
               </div>
             </div>
+          </div></div>
           </div>
         </div>
       </div>

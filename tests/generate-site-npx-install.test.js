@@ -20,4 +20,11 @@ const journal = read('docs/plugins/journal/index.html');
 assert.doesNotMatch(journal, /npx skills add/, 'MCP server page (journal) must not show npx');
 assert.match(journal, /\/plugin install 2389-research\/journal/, 'journal page should show /plugin install');
 
+// Homepage: hero shows the npx pattern, default to npx
+const index = read('docs/index.html');
+assert.match(index, /npx skills add 2389-research\/&lt;plugin&gt;/, 'hero should show npx pattern command');
+assert.match(index, /class="install-tab active"[^>]*data-tab="npx-hero"/, 'hero npx tab should be active by default');
+// Get Started block defaults to the npx flow
+assert.match(index, /class="install-tab active"[^>]*data-tab="npx-getstarted"/, 'Get Started should default to npx');
+
 console.log('generate-site npx install test passed (Task 1 scope)');
