@@ -1266,10 +1266,19 @@ const llmsTxt = `# 2389 Research Claude Code Plugin Marketplace
 
 > Open source Claude Code plugins and MCP servers from 2389 Research Inc. Development workflows, testing, system administration, and AI agent capabilities. Install with one command via the Claude Code plugin marketplace.
 
-## Install the marketplace
+## Install a plugin
+
+Default — works in any agent (Claude Code, Cursor, Codex, …) via [vercel-labs/skills](https://github.com/vercel-labs/skills):
+
+\`\`\`
+npx skills add 2389-research/<plugin>
+\`\`\`
+
+Or natively in Claude Code:
 
 \`\`\`
 ${INTERNAL_MARKETPLACE_COMMAND}
+/plugin install 2389-research/<plugin>
 \`\`\`
 
 ${Object.values(categories).filter(c => c.plugins.length).map(cat =>
@@ -1304,10 +1313,20 @@ This site is the official catalog of Claude Code plugins and MCP servers from 23
 
 ## Install a plugin
 
+Default — any agent (Claude Code, Cursor, Codex, …) via [vercel-labs/skills](https://github.com/vercel-labs/skills):
+
+\`\`\`
+npx skills add 2389-research/<plugin-name>
+\`\`\`
+
+Or natively in Claude Code:
+
 \`\`\`
 ${INTERNAL_MARKETPLACE_COMMAND}
 /plugin install 2389-research/<plugin-name>
 \`\`\`
+
+(MCP servers — journal, socialmedia, slack-mcp, agent-drugs — install via Claude Code only; they ship no skills for npx.)
 
 ## a14y configuration
 
@@ -1336,6 +1355,14 @@ ${cat.plugins.map(p => `- [${p.name}](${SITE_URL}/plugins/${p.name}/) — ${clea
 
 ## Install
 
+Default — any agent via [npx skills](https://github.com/vercel-labs/skills):
+
+\`\`\`
+npx skills add 2389-research/<plugin>
+\`\`\`
+
+Or in Claude Code:
+
 \`\`\`
 ${INTERNAL_MARKETPLACE_COMMAND}
 \`\`\`
@@ -1363,14 +1390,26 @@ function pluginMarkdown(plugin) {
 
 - **Version:** ${plugin.version || '1.0.0'}
 - **Source:** ${sourceUrl}
-- **Install:** \`${getPluginInstallCommand(plugin)}\`
 
-## Install via marketplace
+## Install
+
+${pluginHasSkills(plugin) ? `Default — any agent (Claude Code, Cursor, Codex, …) via [vercel-labs/skills](https://github.com/vercel-labs/skills):
+
+\`\`\`
+${getNpxInstallCommand(plugin)}
+\`\`\`
+
+Or natively in Claude Code:
 
 \`\`\`
 ${INTERNAL_MARKETPLACE_COMMAND}
 ${getPluginInstallCommand(plugin)}
+\`\`\`` : `This is an MCP server — install it in Claude Code:
+
 \`\`\`
+${INTERNAL_MARKETPLACE_COMMAND}
+${getPluginInstallCommand(plugin)}
+\`\`\``}
 
 ## README
 

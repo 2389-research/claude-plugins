@@ -42,4 +42,11 @@ for (const repo of mcpRepos) {
   assert.doesNotMatch(index, new RegExp(`npx skills add ${escaped}`), `${repo} (MCP) must never appear in an npx command`);
 }
 
+// Markdown mirrors include npx (npx first)
+assert.match(read('docs/llms.txt'), /npx skills add/, 'llms.txt should mention npx');
+assert.match(read('docs/AGENTS.md'), /npx skills add/, 'AGENTS.md should mention npx');
+assert.match(read('docs/index.md'), /npx skills add/, 'index.md should mention npx');
+assert.match(read('docs/plugins/simmer/index.md'), /npx skills add 2389-research\/simmer/, 'simmer .md should show npx');
+assert.doesNotMatch(read('docs/plugins/journal/index.md'), /npx skills add/, 'journal .md must not show npx');
+
 console.log('generate-site npx install test passed');

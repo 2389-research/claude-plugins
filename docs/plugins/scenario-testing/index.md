@@ -4,9 +4,16 @@
 
 - **Version:** 1.0.0
 - **Source:** https://github.com/2389-research/scenario-testing
-- **Install:** `/plugin install 2389-research/scenario-testing`
 
-## Install via marketplace
+## Install
+
+Default — any agent (Claude Code, Cursor, Codex, …) via [vercel-labs/skills](https://github.com/vercel-labs/skills):
+
+```
+npx skills add 2389-research/scenario-testing
+```
+
+Or natively in Claude Code:
 
 ```
 /plugin marketplace add 2389-research/claude-plugins

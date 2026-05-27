@@ -12,10 +12,20 @@ This site is the official catalog of Claude Code plugins and MCP servers from 23
 
 ## Install a plugin
 
+Default — any agent (Claude Code, Cursor, Codex, …) via [vercel-labs/skills](https://github.com/vercel-labs/skills):
+
+```
+npx skills add 2389-research/<plugin-name>
+```
+
+Or natively in Claude Code:
+
 ```
 /plugin marketplace add 2389-research/claude-plugins
 /plugin install 2389-research/<plugin-name>
 ```
+
+(MCP servers — journal, socialmedia, slack-mcp, agent-drugs — install via Claude Code only; they ship no skills for npx.)
 
 ## a14y configuration
 

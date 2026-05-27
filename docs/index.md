@@ -4,6 +4,14 @@
 
 ## Install
 
+Default — any agent via [npx skills](https://github.com/vercel-labs/skills):
+
+```
+npx skills add 2389-research/<plugin>
+```
+
+Or in Claude Code:
+
 ```
 /plugin marketplace add 2389-research/claude-plugins
 ```

@@ -4,9 +4,16 @@
 
 - **Version:** 1.1.2
 - **Source:** https://github.com/2389-research/terminal-title
-- **Install:** `/plugin install 2389-research/terminal-title`
 
-## Install via marketplace
+## Install
+
+Default — any agent (Claude Code, Cursor, Codex, …) via [vercel-labs/skills](https://github.com/vercel-labs/skills):
+
+```
+npx skills add 2389-research/terminal-title
+```
+
+Or natively in Claude Code:
 
 ```
 /plugin marketplace add 2389-research/claude-plugins
