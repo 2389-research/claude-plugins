@@ -527,10 +527,6 @@ function getPluginInstallCommand(plugin) {
   return `/plugin install 2389-research/${plugin.name}`;
 }
 
-function generatePluginPageInstallSnippet(plugin) {
-  return getPluginInstallCommand(plugin);
-}
-
 function getNpxInstallCommand(plugin) {
   return `npx skills add ${getRepoName(plugin)}`;
 }
