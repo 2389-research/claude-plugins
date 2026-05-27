@@ -1536,3 +1536,61 @@ body {
     font-size: 0.75rem;
   }
 }
+
+/* ============================================
+   Install method tabs (npx default / Claude Code)
+   ============================================ */
+.install-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  width: 100%;
+}
+
+.install-tab-row {
+  display: inline-flex;
+  gap: 0.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.25rem;
+}
+
+.install-tab {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.install-tab:hover { color: var(--text-primary); }
+
+.install-tab.active {
+  color: var(--bg-primary);
+  background: var(--accent-gold);
+}
+
+.install-tab-panel[hidden] { display: none; }
+
+/* Light context: cards sit on a white/light background */
+.plugin-card .install-tab-row {
+  background: rgba(26, 26, 46, 0.04);
+  border-color: var(--border-on-card);
+}
+.plugin-card .install-tab { color: var(--text-on-card-secondary); }
+.plugin-card .install-tab:hover { color: var(--text-on-card); }
+.plugin-card .install-tab.active { color: var(--bg-primary); background: var(--accent-gold); }
+
+/* Card footer becomes a column when it holds tabs */
+.plugin-footer-tabs {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-xs);
+}
