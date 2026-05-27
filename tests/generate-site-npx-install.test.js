@@ -19,6 +19,7 @@ assert.match(simmer, /class="install-tab active"[^>]*data-tab="npx-qi-simmer"/, 
 // MCP server page: /plugin only for the hero block
 const journal = read('docs/plugins/journal/index.html');
 assert.match(journal, /\/plugin install 2389-research\/journal/, 'journal page should show /plugin install');
+assert.doesNotMatch(journal, /qi-journal/, 'journal (MCP) quick-install must not be tabbed');
 
 // Homepage: hero shows the npx pattern, default to npx
 const index = read('docs/index.html');

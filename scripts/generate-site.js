@@ -590,6 +590,15 @@ function generateInteractiveScript() {
 }
 
 function generateQuickInstallSteps(plugin) {
+  const step3 = `
+          <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+              <span class="step-label">You're good to go</span>
+              <code>Skills auto-trigger when relevant</code>
+            </div>
+          </div>`;
+
   const ccSteps = `
           <div class="step">
             <span class="step-number">1</span>
@@ -604,16 +613,9 @@ function generateQuickInstallSteps(plugin) {
               <span class="step-label">Install this plugin</span>
               <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="${plugin.name}-install">${getPluginInstallCommand(plugin)}</code>
             </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
-            <div class="step-content">
-              <span class="step-label">You're good to go</span>
-              <code>Skills auto-trigger when relevant</code>
-            </div>
-          </div>`;
+          </div>${step3}`;
 
-  if (!pluginHasSkills(plugin)) return ccSteps;
+  if (!pluginHasSkills(plugin)) return `<div class="quick-start-steps">${ccSteps}</div>`;
 
   const npxSteps = `
           <div class="step">
@@ -629,14 +631,7 @@ function generateQuickInstallSteps(plugin) {
               <span class="step-label">Pick your agents when prompted</span>
               <code>Claude Code, Cursor, Codex…</code>
             </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
-            <div class="step-content">
-              <span class="step-label">You're good to go</span>
-              <code>Skills auto-trigger when relevant</code>
-            </div>
-          </div>`;
+          </div>${step3}`;
 
   return renderInstallTabs({
     group: `qi-${plugin.name}`,
@@ -851,9 +846,7 @@ ${generateHead(pluginTitle, description, `plugins/${plugin.name}/`, plugin.keywo
       </div>
 
       <div class="quick-start">
-        <div class="quick-start-steps">
 ${generateQuickInstallSteps(plugin)}
-        </div>
       </div>
     </section>
 
