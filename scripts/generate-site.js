@@ -638,7 +638,11 @@ function generateQuickInstallSteps(plugin) {
             </div>
           </div>`;
 
-  return renderInstallTabs({ group: `qi-${plugin.name}`, npxHtml: npxSteps, ccHtml: ccSteps });
+  return renderInstallTabs({
+    group: `qi-${plugin.name}`,
+    npxHtml: `<div class="quick-start-steps">${npxSteps}</div>`,
+    ccHtml: `<div class="quick-start-steps">${ccSteps}</div>`,
+  });
 }
 
 // Generate category sections
