@@ -47,6 +47,24 @@ Windows users need PowerShell 7+ (`pwsh`) installed and on PATH. The plugin pick
 
 Unix/Linux/macOS users don't need to do anything extra.
 
+## Use with other agent harnesses (Codex, etc.)
+
+The skill itself is harness-neutral — only the install path differs. For non-Claude-Code harnesses:
+
+1. Clone this repo somewhere stable (the install path is baked into the wrapper).
+2. Run `bin/install.sh`. This creates `~/.local/bin/set-terminal-title` pointing at the bundled script.
+3. Make sure `~/.local/bin` is on your `PATH`.
+4. Register `skills/SKILL.md` with your harness's skill discovery (mechanism is harness-specific).
+5. Approve the wrapper in your harness's command allowlist. For Codex, that looks like:
+
+   ```json
+   ["/Users/<you>/.local/bin/set-terminal-title"]
+   ```
+
+   The wrapper path is stable across plugin updates, so the approval doesn't need to change when the skill's internals move.
+
+The agent invokes `set-terminal-title "Project" "Topic"`. If the wrapper isn't installed or isn't approved, the skill instructs the agent to skip silently.
+
 ## What this plugin does
 
 One skill: `terminal-title` -- manages your terminal title based on project and topic context.

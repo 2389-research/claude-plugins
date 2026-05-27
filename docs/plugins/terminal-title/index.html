@@ -139,6 +139,17 @@ export TERMINAL_TITLE_EMOJI=💼
 <h4>Platform-specific setup</h4>
 <p>Windows users need PowerShell 7+ (<code>pwsh</code>) installed and on PATH. The plugin picks it up automatically.</p>
 <p>Unix/Linux/macOS users don't need to do anything extra.</p>
+<h3>Use with other agent harnesses (Codex, etc.)</h3>
+<p>The skill itself is harness-neutral — only the install path differs. For non-Claude-Code harnesses:</p>
+<ol><li>Clone this repo somewhere stable (the install path is baked into the wrapper).</li>
+<li>Run <code>bin/install.sh</code>. This creates <code>~/.local/bin/set-terminal-title</code> pointing at the bundled script.</li>
+<li>Make sure <code>~/.local/bin</code> is on your <code>PATH</code>.</li>
+<li>Register <code>skills/SKILL.md</code> with your harness's skill discovery (mechanism is harness-specific).</li>
+<li>Approve the wrapper in your harness's command allowlist. For Codex, that looks like:</li></ol>
+<pre><code class="language-json">   ["/Users/&lt;you&gt;/.local/bin/set-terminal-title"]
+   </code></pre>
+<p>The wrapper path is stable across plugin updates, so the approval doesn't need to change when the skill's internals move.</p>
+<p>The agent invokes <code>set-terminal-title "Project" "Topic"</code>. If the wrapper isn't installed or isn't approved, the skill instructs the agent to skip silently.</p>
 <h3>What this plugin does</h3>
 <p>One skill: <code>terminal-title</code> -- manages your terminal title based on project and topic context.</p>
 <p>The title updates automatically at session start, and again whenever the topic changes. The emoji prefix gives you a quick visual cue when switching between terminal windows.</p>
@@ -310,8 +321,8 @@ export TERMINAL_TITLE_EMOJI=💼
   "downloadUrl": "https://github.com/2389-research/terminal-title",
   "softwareVersion": "1.1.2",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-05-21",
-  "dateModified": "2026-05-22"
+  "datePublished": "2026-05-22",
+  "dateModified": "2026-05-27"
 }
   </script>
 
