@@ -874,6 +874,56 @@ const mcpServers = marketplace.plugins.filter(p =>
   p.description?.toLowerCase().includes('mcp server')
 ).length || 3;
 
+// Step list HTML for the homepage "Get Started in 30 Seconds" install tabs.
+// Extracted so the renderInstallTabs call stays readable.
+const npxGetStartedSteps = `<div class="quick-start-steps">
+            <div class="step">
+              <span class="step-number">1</span>
+              <div class="step-content">
+                <span class="step-label">Run it — works in any agent</span>
+                <code>npx skills add 2389-research/better-dev</code>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-number">2</span>
+              <div class="step-content">
+                <span class="step-label">Pick your agents when prompted</span>
+                <code>Claude Code, Cursor, Codex…</code>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-number">3</span>
+              <div class="step-content">
+                <span class="step-label">That's it. Seriously.</span>
+                <code>Skills auto-trigger when relevant</code>
+              </div>
+            </div>
+          </div>`;
+
+const ccGetStartedSteps = `<div class="quick-start-steps">
+            <div class="step">
+              <span class="step-number">1</span>
+              <div class="step-content">
+                <span class="step-label">Add the marketplace</span>
+                <code>/plugin marketplace add 2389-research/claude-plugins</code>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-number">2</span>
+              <div class="step-content">
+                <span class="step-label">Grab what you need</span>
+                <code>/plugin install 2389-research/better-dev</code>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-number">3</span>
+              <div class="step-content">
+                <span class="step-label">That's it. Seriously.</span>
+                <code>Skills auto-trigger when relevant</code>
+              </div>
+            </div>
+          </div>`;
+
 // Generate main index HTML
 const indexHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -977,52 +1027,8 @@ ${generateCategorySections()}
           <h3 class="quick-start-title">Get Started in 30 Seconds</h3>
           ${renderInstallTabs({
             group: 'getstarted',
-            npxHtml: `<div class="quick-start-steps">
-            <div class="step">
-              <span class="step-number">1</span>
-              <div class="step-content">
-                <span class="step-label">Run it — works in any agent</span>
-                <code>npx skills add 2389-research/better-dev</code>
-              </div>
-            </div>
-            <div class="step">
-              <span class="step-number">2</span>
-              <div class="step-content">
-                <span class="step-label">Pick your agents when prompted</span>
-                <code>Claude Code, Cursor, Codex…</code>
-              </div>
-            </div>
-            <div class="step">
-              <span class="step-number">3</span>
-              <div class="step-content">
-                <span class="step-label">That's it. Seriously.</span>
-                <code>Skills auto-trigger when relevant</code>
-              </div>
-            </div>
-          </div>`,
-            ccHtml: `<div class="quick-start-steps">
-            <div class="step">
-              <span class="step-number">1</span>
-              <div class="step-content">
-                <span class="step-label">Add the marketplace</span>
-                <code>/plugin marketplace add 2389-research/claude-plugins</code>
-              </div>
-            </div>
-            <div class="step">
-              <span class="step-number">2</span>
-              <div class="step-content">
-                <span class="step-label">Grab what you need</span>
-                <code>/plugin install 2389-research/better-dev</code>
-              </div>
-            </div>
-            <div class="step">
-              <span class="step-number">3</span>
-              <div class="step-content">
-                <span class="step-label">That's it. Seriously.</span>
-                <code>Skills auto-trigger when relevant</code>
-              </div>
-            </div>
-          </div>`
+            npxHtml: npxGetStartedSteps,
+            ccHtml: ccGetStartedSteps
           })}
         </div>
       </div>

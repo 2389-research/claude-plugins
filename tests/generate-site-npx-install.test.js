@@ -27,4 +27,4 @@ assert.match(index, /class="install-tab active"[^>]*data-tab="npx-hero"/, 'hero 
 // Get Started block defaults to the npx flow
 assert.match(index, /class="install-tab active"[^>]*data-tab="npx-getstarted"/, 'Get Started should default to npx');
 
-console.log('generate-site npx install test passed (Task 1 scope)');
+console.log('generate-site npx install test passed');
