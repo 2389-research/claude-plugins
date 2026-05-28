@@ -11,13 +11,21 @@ Built by the team at [2389](https://2389.ai). These are the tools we use every d
 
 ## Quick Start
 
-```bash
-# Add the marketplace
-/plugin marketplace add 2389-research/claude-plugins
+Install any plugin in **any agent** (Claude Code, Cursor, Codex, …) with [vercel-labs/skills](https://github.com/vercel-labs/skills):
 
-# Install any plugin
-/plugin install simmer@2389-research
+```bash
+npx skills add 2389-research/simmer
 ```
+
+Or natively in Claude Code:
+
+```bash
+# Add the marketplace, then install any plugin
+/plugin marketplace add 2389-research/claude-plugins
+/plugin install 2389-research/simmer
+```
+
+> The 4 MCP servers (journal, socialmedia, slack-mcp, agent-drugs) install via Claude Code only — they ship no skills for npx.
 
 ## Available Plugins
 

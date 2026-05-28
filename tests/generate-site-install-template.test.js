@@ -24,13 +24,10 @@ function getInstallBlock(html) {
   return match[0];
 }
 
-// All plugins now use the same direct install format: /plugin install 2389-research/{name}
-const cssInstallBlock = getInstallBlock(readPage('css-development'));
-assert.match(
-  cssInstallBlock,
-  /\/plugin install 2389-research\/css-development/,
-  'expected plugin install block to use 2389-research/{name} format'
-);
+// Skill plugins now render install tabs (npx default + /plugin secondary)
+const cssPage = readPage('css-development');
+assert.match(cssPage, /npx skills add 2389-research\/css-development/, 'expected npx command on skill plugin page');
+assert.match(cssPage, /\/plugin install 2389-research\/css-development/, 'expected /plugin install on skill plugin page');
 
 const socialmediaInstallBlock = getInstallBlock(readPage('socialmedia'));
 assert.match(
@@ -39,11 +36,8 @@ assert.match(
   'expected external plugin install block to use 2389-research/{name} format'
 );
 
-const simmerInstallBlock = getInstallBlock(readPage('simmer'));
-assert.match(
-  simmerInstallBlock,
-  /\/plugin install 2389-research\/simmer/,
-  'expected simmer install block to use 2389-research/{name} format'
-);
+const simmerPage = readPage('simmer');
+assert.match(simmerPage, /npx skills add 2389-research\/simmer/, 'expected npx command on simmer page');
+assert.match(simmerPage, /\/plugin install 2389-research\/simmer/, 'expected /plugin install on simmer page');
 
 console.log('generate-site install template test passed');

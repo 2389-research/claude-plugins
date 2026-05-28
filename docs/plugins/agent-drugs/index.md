@@ -4,9 +4,10 @@
 
 - **Version:** 1.0.0
 - **Source:** https://github.com/2389-research/agent-drugs
-- **Install:** `/plugin install 2389-research/agent-drugs`
 
-## Install via marketplace
+## Install
+
+This is an MCP server — install it in Claude Code:
 
 ```
 /plugin marketplace add 2389-research/claude-plugins

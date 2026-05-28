@@ -95,8 +95,15 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Command</span>
-          <code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="binary-re">/plugin install 2389-research/binary-re</code>
+          <span class="install-label">Install</span>
+          <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-binary-re" aria-controls="panel-npx-binary-re" id="tab-npx-binary-re">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-binary-re" aria-controls="panel-cc-binary-re" id="tab-cc-binary-re">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-binary-re" aria-labelledby="tab-npx-binary-re" data-panel="npx-binary-re"><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="binary-re-npx">npx skills add 2389-research/binary-re</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-binary-re" aria-labelledby="tab-cc-binary-re" data-panel="cc-binary-re" hidden><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="binary-re">/plugin install 2389-research/binary-re</code></div>
+          </div>
         </div>
         <a href="https://github.com/2389-research/binary-re" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="binary-re">
           View Source
@@ -198,8 +205,34 @@ sudo apt install libc6-armhf-cross libc6-arm64-cross
       </div>
 
       <div class="quick-start">
-        <div class="quick-start-steps">
-
+<div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-qi-binary-re" aria-controls="panel-npx-qi-binary-re" id="tab-npx-qi-binary-re">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-qi-binary-re" aria-controls="panel-cc-qi-binary-re" id="tab-cc-qi-binary-re">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-qi-binary-re" aria-labelledby="tab-npx-qi-binary-re" data-panel="npx-qi-binary-re"><div class="quick-start-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+              <span class="step-label">Run it — works in any agent</span>
+              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="binary-re-npx">npx skills add 2389-research/binary-re</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+              <span class="step-label">Pick your agents when prompted</span>
+              <code>Claude Code, Cursor, Codex…</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+              <span class="step-label">You're good to go</span>
+              <code>Skills auto-trigger when relevant</code>
+            </div>
+          </div></div></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-qi-binary-re" aria-labelledby="tab-cc-qi-binary-re" data-panel="cc-qi-binary-re" hidden><div class="quick-start-steps">
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
@@ -220,8 +253,8 @@ sudo apt install libc6-armhf-cross libc6-arm64-cross
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>
             </div>
+          </div></div></div>
           </div>
-        </div>
       </div>
     </section>
 
@@ -246,8 +279,15 @@ sudo apt install libc6-armhf-cross libc6-arm64-cross
           </div>
           <p class="plugin-description">Automatically updates terminal title with emoji + project + topic context for quick visual cues when switching terminals</p>
           <div class="plugin-tags"><span class="tag">terminal</span><span class="tag">title</span><span class="tag">session</span></div>
-          <div class="plugin-footer">
-            <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="terminal-title">/plugin install 2389-research/terminal-title</code>
+          <div class="plugin-footer plugin-footer-tabs">
+            <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-related-terminal-title" aria-controls="panel-npx-related-terminal-title" id="tab-npx-related-terminal-title">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-related-terminal-title" aria-controls="panel-cc-related-terminal-title" id="tab-cc-related-terminal-title">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-related-terminal-title" aria-labelledby="tab-npx-related-terminal-title" data-panel="npx-related-terminal-title"><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="terminal-title-npx">npx skills add 2389-research/terminal-title</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-related-terminal-title" aria-labelledby="tab-cc-related-terminal-title" data-panel="cc-related-terminal-title" hidden><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="terminal-title">/plugin install 2389-research/terminal-title</code></div>
+          </div>
             <a href="../terminal-title/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="terminal-title">Details →</a>
           </div>
         </article>
@@ -261,8 +301,15 @@ sudo apt install libc6-armhf-cross libc6-arm64-cross
           </div>
           <p class="plugin-description">Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists</p>
           <div class="plugin-tags"><span class="tag">linux</span><span class="tag">ubuntu</span><span class="tag">debian</span></div>
-          <div class="plugin-footer">
-            <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="remote-system-maintenance">/plugin install 2389-research/remote-system-maintenance</code>
+          <div class="plugin-footer plugin-footer-tabs">
+            <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-related-remote-system-maintenance" aria-controls="panel-npx-related-remote-system-maintenance" id="tab-npx-related-remote-system-maintenance">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-related-remote-system-maintenance" aria-controls="panel-cc-related-remote-system-maintenance" id="tab-cc-related-remote-system-maintenance">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-related-remote-system-maintenance" aria-labelledby="tab-npx-related-remote-system-maintenance" data-panel="npx-related-remote-system-maintenance"><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="remote-system-maintenance-npx">npx skills add 2389-research/remote-system-maintenance</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-related-remote-system-maintenance" aria-labelledby="tab-cc-related-remote-system-maintenance" data-panel="cc-related-remote-system-maintenance" hidden><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="remote-system-maintenance">/plugin install 2389-research/remote-system-maintenance</code></div>
+          </div>
             <a href="../remote-system-maintenance/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="remote-system-maintenance">Details →</a>
           </div>
         </article>
@@ -334,8 +381,8 @@ sudo apt install libc6-armhf-cross libc6-arm64-cross
   "downloadUrl": "https://github.com/2389-research/binary-re",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-05-22",
-  "dateModified": "2026-05-27"
+  "datePublished": "2026-05-21",
+  "dateModified": "2026-05-28"
 }
   </script>
 
@@ -365,6 +412,36 @@ sudo apt install libc6-armhf-cross libc6-arm64-cross
     }
   ]
 }
+  </script>
+
+  <script>
+  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
+    el.title = 'Click to copy';
+    el.addEventListener('click', () => {
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        const orig = el.textContent;
+        el.textContent = 'Copied!';
+        el.classList.add('copied');
+        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+
+  document.querySelectorAll('.install-tabs').forEach(group => {
+    group.querySelectorAll('.install-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.dataset.tab;
+        group.querySelectorAll('.install-tab').forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        group.querySelectorAll('.install-tab-panel').forEach(p => {
+          p.hidden = p.dataset.panel !== key;
+        });
+      });
+    });
+  });
   </script>
 </body>
 </html>

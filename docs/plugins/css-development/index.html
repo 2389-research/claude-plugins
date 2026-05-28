@@ -95,8 +95,15 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Command</span>
-          <code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="css-development">/plugin install 2389-research/css-development</code>
+          <span class="install-label">Install</span>
+          <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-css-development" aria-controls="panel-npx-css-development" id="tab-npx-css-development">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-css-development" aria-controls="panel-cc-css-development" id="tab-cc-css-development">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-css-development" aria-labelledby="tab-npx-css-development" data-panel="npx-css-development"><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="css-development-npx">npx skills add 2389-research/css-development</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-css-development" aria-labelledby="tab-cc-css-development" data-panel="cc-css-development" hidden><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="css-development">/plugin install 2389-research/css-development</code></div>
+          </div>
         </div>
         <a href="https://github.com/2389-research/css-development" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="css-development">
           View Source
@@ -164,8 +171,34 @@
       </div>
 
       <div class="quick-start">
-        <div class="quick-start-steps">
-
+<div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-qi-css-development" aria-controls="panel-npx-qi-css-development" id="tab-npx-qi-css-development">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-qi-css-development" aria-controls="panel-cc-qi-css-development" id="tab-cc-qi-css-development">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-qi-css-development" aria-labelledby="tab-npx-qi-css-development" data-panel="npx-qi-css-development"><div class="quick-start-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+              <span class="step-label">Run it — works in any agent</span>
+              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="css-development-npx">npx skills add 2389-research/css-development</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+              <span class="step-label">Pick your agents when prompted</span>
+              <code>Claude Code, Cursor, Codex…</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+              <span class="step-label">You're good to go</span>
+              <code>Skills auto-trigger when relevant</code>
+            </div>
+          </div></div></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-qi-css-development" aria-labelledby="tab-cc-qi-css-development" data-panel="cc-qi-css-development" hidden><div class="quick-start-steps">
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
@@ -186,8 +219,8 @@
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>
             </div>
+          </div></div></div>
           </div>
-        </div>
       </div>
     </section>
 
@@ -212,8 +245,15 @@
           </div>
           <p class="plugin-description">Firebase project workflows including setup, features, debugging, and validation</p>
           <div class="plugin-tags"><span class="tag">firebase</span><span class="tag">firestore</span><span class="tag">cloud-functions</span></div>
-          <div class="plugin-footer">
-            <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="firebase-development">/plugin install 2389-research/firebase-development</code>
+          <div class="plugin-footer plugin-footer-tabs">
+            <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-related-firebase-development" aria-controls="panel-npx-related-firebase-development" id="tab-npx-related-firebase-development">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-related-firebase-development" aria-controls="panel-cc-related-firebase-development" id="tab-cc-related-firebase-development">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-related-firebase-development" aria-labelledby="tab-npx-related-firebase-development" data-panel="npx-related-firebase-development"><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="firebase-development-npx">npx skills add 2389-research/firebase-development</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-related-firebase-development" aria-labelledby="tab-cc-related-firebase-development" data-panel="cc-related-firebase-development" hidden><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="firebase-development">/plugin install 2389-research/firebase-development</code></div>
+          </div>
             <a href="../firebase-development/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="firebase-development">Details →</a>
           </div>
         </article>
@@ -227,8 +267,15 @@
           </div>
           <p class="plugin-description">Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles</p>
           <div class="plugin-tags"><span class="tag">landing-page</span><span class="tag">marketing</span><span class="tag">design</span></div>
-          <div class="plugin-footer">
-            <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="landing-page-design">/plugin install 2389-research/landing-page-design</code>
+          <div class="plugin-footer plugin-footer-tabs">
+            <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-related-landing-page-design" aria-controls="panel-npx-related-landing-page-design" id="tab-npx-related-landing-page-design">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-related-landing-page-design" aria-controls="panel-cc-related-landing-page-design" id="tab-cc-related-landing-page-design">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-related-landing-page-design" aria-labelledby="tab-npx-related-landing-page-design" data-panel="npx-related-landing-page-design"><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="landing-page-design-npx">npx skills add 2389-research/landing-page-design</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-related-landing-page-design" aria-labelledby="tab-cc-related-landing-page-design" data-panel="cc-related-landing-page-design" hidden><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="landing-page-design">/plugin install 2389-research/landing-page-design</code></div>
+          </div>
             <a href="../landing-page-design/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="landing-page-design">Details →</a>
           </div>
         </article>
@@ -242,8 +289,15 @@
           </div>
           <p class="plugin-description">Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode</p>
           <div class="plugin-tags"><span class="tag">ios</span><span class="tag">xtool</span><span class="tag">swiftpm</span></div>
-          <div class="plugin-footer">
-            <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="xtool">/plugin install 2389-research/xtool</code>
+          <div class="plugin-footer plugin-footer-tabs">
+            <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-related-xtool" aria-controls="panel-npx-related-xtool" id="tab-npx-related-xtool">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-related-xtool" aria-controls="panel-cc-related-xtool" id="tab-cc-related-xtool">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-related-xtool" aria-labelledby="tab-npx-related-xtool" data-panel="npx-related-xtool"><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="xtool-npx">npx skills add 2389-research/xtool</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-related-xtool" aria-labelledby="tab-cc-related-xtool" data-panel="cc-related-xtool" hidden><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="xtool">/plugin install 2389-research/xtool</code></div>
+          </div>
             <a href="../xtool/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="xtool">Details →</a>
           </div>
         </article>
@@ -315,8 +369,8 @@
   "downloadUrl": "https://github.com/2389-research/css-development",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-05-22",
-  "dateModified": "2026-05-27"
+  "datePublished": "2026-05-21",
+  "dateModified": "2026-05-28"
 }
   </script>
 
@@ -346,6 +400,36 @@
     }
   ]
 }
+  </script>
+
+  <script>
+  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
+    el.title = 'Click to copy';
+    el.addEventListener('click', () => {
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        const orig = el.textContent;
+        el.textContent = 'Copied!';
+        el.classList.add('copied');
+        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+
+  document.querySelectorAll('.install-tabs').forEach(group => {
+    group.querySelectorAll('.install-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.dataset.tab;
+        group.querySelectorAll('.install-tab').forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        group.querySelectorAll('.install-tab-panel').forEach(p => {
+          p.hidden = p.dataset.panel !== key;
+        });
+      });
+    });
+  });
   </script>
 </body>
 </html>

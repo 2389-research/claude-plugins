@@ -95,8 +95,15 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Command</span>
-          <code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="deliberation">/plugin install 2389-research/deliberation</code>
+          <span class="install-label">Install</span>
+          <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-deliberation" aria-controls="panel-npx-deliberation" id="tab-npx-deliberation">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-deliberation" aria-controls="panel-cc-deliberation" id="tab-cc-deliberation">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-deliberation" aria-labelledby="tab-npx-deliberation" data-panel="npx-deliberation"><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="deliberation-npx">npx skills add 2389-research/deliberation</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-deliberation" aria-labelledby="tab-cc-deliberation" data-panel="cc-deliberation" hidden><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="deliberation">/plugin install 2389-research/deliberation</code></div>
+          </div>
         </div>
         <a href="https://github.com/2389-research/deliberation" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="deliberation">
           View Source
@@ -179,8 +186,34 @@ Business Strategist, Developer Culture voice. Anyone to add?"
       </div>
 
       <div class="quick-start">
-        <div class="quick-start-steps">
-
+<div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-qi-deliberation" aria-controls="panel-npx-qi-deliberation" id="tab-npx-qi-deliberation">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-qi-deliberation" aria-controls="panel-cc-qi-deliberation" id="tab-cc-qi-deliberation">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-qi-deliberation" aria-labelledby="tab-npx-qi-deliberation" data-panel="npx-qi-deliberation"><div class="quick-start-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+              <span class="step-label">Run it — works in any agent</span>
+              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="deliberation-npx">npx skills add 2389-research/deliberation</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+              <span class="step-label">Pick your agents when prompted</span>
+              <code>Claude Code, Cursor, Codex…</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+              <span class="step-label">You're good to go</span>
+              <code>Skills auto-trigger when relevant</code>
+            </div>
+          </div></div></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-qi-deliberation" aria-labelledby="tab-cc-qi-deliberation" data-panel="cc-qi-deliberation" hidden><div class="quick-start-steps">
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
@@ -201,8 +234,8 @@ Business Strategist, Developer Culture voice. Anyone to add?"
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>
             </div>
+          </div></div></div>
           </div>
-        </div>
       </div>
     </section>
 
@@ -227,8 +260,15 @@ Business Strategist, Developer Culture voice. Anyone to add?"
           </div>
           <p class="plugin-description">Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination</p>
           <div class="plugin-tags"><span class="tag">multi-agent</span><span class="tag">orchestrator</span><span class="tag">coordination</span></div>
-          <div class="plugin-footer">
-            <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="building-multiagent-systems">/plugin install 2389-research/building-multiagent-systems</code>
+          <div class="plugin-footer plugin-footer-tabs">
+            <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-related-building-multiagent-systems" aria-controls="panel-npx-related-building-multiagent-systems" id="tab-npx-related-building-multiagent-systems">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-related-building-multiagent-systems" aria-controls="panel-cc-related-building-multiagent-systems" id="tab-cc-related-building-multiagent-systems">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-related-building-multiagent-systems" aria-labelledby="tab-npx-related-building-multiagent-systems" data-panel="npx-related-building-multiagent-systems"><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="building-multiagent-systems-npx">npx skills add 2389-research/building-multiagent-systems</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-related-building-multiagent-systems" aria-labelledby="tab-cc-related-building-multiagent-systems" data-panel="cc-related-building-multiagent-systems" hidden><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="building-multiagent-systems">/plugin install 2389-research/building-multiagent-systems</code></div>
+          </div>
             <a href="../building-multiagent-systems/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="building-multiagent-systems">Details →</a>
           </div>
         </article>
@@ -242,8 +282,15 @@ Business Strategist, Developer Culture voice. Anyone to add?"
           </div>
           <p class="plugin-description">Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks</p>
           <div class="plugin-tags"><span class="tag">review</span><span class="tag">audit</span><span class="tag">launch</span></div>
-          <div class="plugin-footer">
-            <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="review-squad">/plugin install 2389-research/review-squad</code>
+          <div class="plugin-footer plugin-footer-tabs">
+            <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-related-review-squad" aria-controls="panel-npx-related-review-squad" id="tab-npx-related-review-squad">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-related-review-squad" aria-controls="panel-cc-related-review-squad" id="tab-cc-related-review-squad">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-related-review-squad" aria-labelledby="tab-npx-related-review-squad" data-panel="npx-related-review-squad"><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="review-squad-npx">npx skills add 2389-research/review-squad</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-related-review-squad" aria-labelledby="tab-cc-related-review-squad" data-panel="cc-related-review-squad" hidden><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="review-squad">/plugin install 2389-research/review-squad</code></div>
+          </div>
             <a href="../review-squad/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="review-squad">Details →</a>
           </div>
         </article>
@@ -257,8 +304,15 @@ Business Strategist, Developer Culture voice. Anyone to add?"
           </div>
           <p class="plugin-description">Parallel exploration powered by diverse perspectives - independent agent panels propose, build variants in worktrees, review, pick a winner, and synthesize the best of all variants into the final result</p>
           <div class="plugin-tags"><span class="tag">parallel</span><span class="tag">exploration</span><span class="tag">perspectives</span></div>
-          <div class="plugin-footer">
-            <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="jam">/plugin install 2389-research/jam</code>
+          <div class="plugin-footer plugin-footer-tabs">
+            <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-related-jam" aria-controls="panel-npx-related-jam" id="tab-npx-related-jam">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-related-jam" aria-controls="panel-cc-related-jam" id="tab-cc-related-jam">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-related-jam" aria-labelledby="tab-npx-related-jam" data-panel="npx-related-jam"><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="jam-npx">npx skills add 2389-research/jam</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-related-jam" aria-labelledby="tab-cc-related-jam" data-panel="cc-related-jam" hidden><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="jam">/plugin install 2389-research/jam</code></div>
+          </div>
             <a href="../jam/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="jam">Details →</a>
           </div>
         </article>
@@ -330,8 +384,8 @@ Business Strategist, Developer Culture voice. Anyone to add?"
   "downloadUrl": "https://github.com/2389-research/deliberation",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-05-22",
-  "dateModified": "2026-05-27"
+  "datePublished": "2026-05-21",
+  "dateModified": "2026-05-28"
 }
   </script>
 
@@ -361,6 +415,36 @@ Business Strategist, Developer Culture voice. Anyone to add?"
     }
   ]
 }
+  </script>
+
+  <script>
+  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
+    el.title = 'Click to copy';
+    el.addEventListener('click', () => {
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        const orig = el.textContent;
+        el.textContent = 'Copied!';
+        el.classList.add('copied');
+        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+
+  document.querySelectorAll('.install-tabs').forEach(group => {
+    group.querySelectorAll('.install-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.dataset.tab;
+        group.querySelectorAll('.install-tab').forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        group.querySelectorAll('.install-tab-panel').forEach(p => {
+          p.hidden = p.dataset.panel !== key;
+        });
+      });
+    });
+  });
   </script>
 </body>
 </html>

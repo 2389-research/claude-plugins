@@ -2,10 +2,19 @@
 
 > Open source Claude Code plugins and MCP servers from 2389 Research Inc. Development workflows, testing, system administration, and AI agent capabilities. Install with one command via the Claude Code plugin marketplace.
 
-## Install the marketplace
+## Install a plugin
+
+Default — any agent (Claude Code, Cursor, Codex, …) via [vercel-labs/skills](https://github.com/vercel-labs/skills):
+
+```
+npx skills add 2389-research/<plugin>
+```
+
+Or natively in Claude Code:
 
 ```
 /plugin marketplace add 2389-research/claude-plugins
+/plugin install 2389-research/<plugin>
 ```
 
 ## Development

@@ -95,8 +95,15 @@
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Command</span>
-          <code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="ceo-personal-os">/plugin install 2389-research/ceo-personal-os</code>
+          <span class="install-label">Install</span>
+          <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-ceo-personal-os" aria-controls="panel-npx-ceo-personal-os" id="tab-npx-ceo-personal-os">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-ceo-personal-os" aria-controls="panel-cc-ceo-personal-os" id="tab-cc-ceo-personal-os">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-ceo-personal-os" aria-labelledby="tab-npx-ceo-personal-os" data-panel="npx-ceo-personal-os"><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="ceo-personal-os-npx">npx skills add 2389-research/ceo-personal-os</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-ceo-personal-os" aria-labelledby="tab-cc-ceo-personal-os" data-panel="cc-ceo-personal-os" hidden><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="ceo-personal-os">/plugin install 2389-research/ceo-personal-os</code></div>
+          </div>
         </div>
         <a href="https://github.com/2389-research/ceo-personal-os" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="ceo-personal-os">
           View Source
@@ -167,8 +174,34 @@
       </div>
 
       <div class="quick-start">
-        <div class="quick-start-steps">
-
+<div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-qi-ceo-personal-os" aria-controls="panel-npx-qi-ceo-personal-os" id="tab-npx-qi-ceo-personal-os">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-qi-ceo-personal-os" aria-controls="panel-cc-qi-ceo-personal-os" id="tab-cc-qi-ceo-personal-os">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-qi-ceo-personal-os" aria-labelledby="tab-npx-qi-ceo-personal-os" data-panel="npx-qi-ceo-personal-os"><div class="quick-start-steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+              <span class="step-label">Run it — works in any agent</span>
+              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="ceo-personal-os-npx">npx skills add 2389-research/ceo-personal-os</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+              <span class="step-label">Pick your agents when prompted</span>
+              <code>Claude Code, Cursor, Codex…</code>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+              <span class="step-label">You're good to go</span>
+              <code>Skills auto-trigger when relevant</code>
+            </div>
+          </div></div></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-qi-ceo-personal-os" aria-labelledby="tab-cc-qi-ceo-personal-os" data-panel="cc-qi-ceo-personal-os" hidden><div class="quick-start-steps">
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
@@ -189,8 +222,8 @@
               <span class="step-label">You're good to go</span>
               <code>Skills auto-trigger when relevant</code>
             </div>
+          </div></div></div>
           </div>
-        </div>
       </div>
     </section>
 
@@ -215,8 +248,15 @@
           </div>
           <p class="plugin-description">Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation</p>
           <div class="plugin-tags"><span class="tag">worldview</span><span class="tag">values</span><span class="tag">philosophy</span></div>
-          <div class="plugin-footer">
-            <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="worldview-synthesis">/plugin install 2389-research/worldview-synthesis</code>
+          <div class="plugin-footer plugin-footer-tabs">
+            <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-related-worldview-synthesis" aria-controls="panel-npx-related-worldview-synthesis" id="tab-npx-related-worldview-synthesis">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-related-worldview-synthesis" aria-controls="panel-cc-related-worldview-synthesis" id="tab-cc-related-worldview-synthesis">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-related-worldview-synthesis" aria-labelledby="tab-npx-related-worldview-synthesis" data-panel="npx-related-worldview-synthesis"><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="worldview-synthesis-npx">npx skills add 2389-research/worldview-synthesis</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-related-worldview-synthesis" aria-labelledby="tab-cc-related-worldview-synthesis" data-panel="cc-related-worldview-synthesis" hidden><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="worldview-synthesis">/plugin install 2389-research/worldview-synthesis</code></div>
+          </div>
             <a href="../worldview-synthesis/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="worldview-synthesis">Details →</a>
           </div>
         </article>
@@ -230,8 +270,15 @@
           </div>
           <p class="plugin-description">Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction</p>
           <div class="plugin-tags"><span class="tag">meeting</span><span class="tag">summary</span><span class="tag">obsidian</span></div>
-          <div class="plugin-footer">
-            <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="summarize-meetings">/plugin install 2389-research/summarize-meetings</code>
+          <div class="plugin-footer plugin-footer-tabs">
+            <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-related-summarize-meetings" aria-controls="panel-npx-related-summarize-meetings" id="tab-npx-related-summarize-meetings">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-related-summarize-meetings" aria-controls="panel-cc-related-summarize-meetings" id="tab-cc-related-summarize-meetings">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-related-summarize-meetings" aria-labelledby="tab-npx-related-summarize-meetings" data-panel="npx-related-summarize-meetings"><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="summarize-meetings-npx">npx skills add 2389-research/summarize-meetings</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-related-summarize-meetings" aria-labelledby="tab-cc-related-summarize-meetings" data-panel="cc-related-summarize-meetings" hidden><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="summarize-meetings">/plugin install 2389-research/summarize-meetings</code></div>
+          </div>
             <a href="../summarize-meetings/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="summarize-meetings">Details →</a>
           </div>
         </article>
@@ -318,8 +365,8 @@
   "downloadUrl": "https://github.com/2389-research/ceo-personal-os",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-05-22",
-  "dateModified": "2026-05-27"
+  "datePublished": "2026-05-21",
+  "dateModified": "2026-05-28"
 }
   </script>
 
@@ -349,6 +396,36 @@
     }
   ]
 }
+  </script>
+
+  <script>
+  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
+    el.title = 'Click to copy';
+    el.addEventListener('click', () => {
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        const orig = el.textContent;
+        el.textContent = 'Copied!';
+        el.classList.add('copied');
+        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+
+  document.querySelectorAll('.install-tabs').forEach(group => {
+    group.querySelectorAll('.install-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.dataset.tab;
+        group.querySelectorAll('.install-tab').forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        group.querySelectorAll('.install-tab-panel').forEach(p => {
+          p.hidden = p.dataset.panel !== key;
+        });
+      });
+    });
+  });
   </script>
 </body>
 </html>

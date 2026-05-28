@@ -516,8 +516,14 @@ function generatePluginCard(plugin) {
               </div>
               <p class="plugin-description">${description}</p>
               <div class="plugin-tags">${tags}</div>
-              <div class="plugin-footer">
-                <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">/plugin install 2389-research/${plugin.name}</code>
+              <div class="plugin-footer${pluginHasSkills(plugin) ? ' plugin-footer-tabs' : ''}">
+                ${pluginHasSkills(plugin)
+                  ? renderInstallTabs({
+                      group: `card-${plugin.name}`,
+                      npxHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}-npx">${getNpxInstallCommand(plugin)}</code>`,
+                      ccHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`
+                    })
+                  : `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`}
                 <a href="plugins/${plugin.name}/" class="plugin-source" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="${plugin.name}">Details →</a>
               </div>
             </article>`;
@@ -527,12 +533,73 @@ function getPluginInstallCommand(plugin) {
   return `/plugin install 2389-research/${plugin.name}`;
 }
 
-function generatePluginPageInstallSnippet(plugin) {
-  return getPluginInstallCommand(plugin);
+function getNpxInstallCommand(plugin) {
+  return `npx skills add ${getRepoName(plugin)}`;
+}
+
+// MCP-only entries (strict: true) ship no skills, so npx skills add can't install them.
+function pluginHasSkills(plugin) {
+  return plugin.strict !== true;
+}
+
+// Renders the npx-default / Claude-Code-secondary install tabs.
+// group must be unique per page so ARIA ids don't collide.
+function renderInstallTabs({ group, npxHtml, ccHtml }) {
+  return `<div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-${group}" aria-controls="panel-npx-${group}" id="tab-npx-${group}">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-${group}" aria-controls="panel-cc-${group}" id="tab-cc-${group}">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-${group}" aria-labelledby="tab-npx-${group}" data-panel="npx-${group}">${npxHtml}</div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-${group}" aria-labelledby="tab-cc-${group}" data-panel="cc-${group}" hidden>${ccHtml}</div>
+          </div>`;
+}
+
+// Shared interactive <script>: copy-to-clipboard + tab switching.
+// Used by both the homepage and every plugin page (plugin pages had no script before).
+function generateInteractiveScript() {
+  return `<script>
+  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
+    el.title = 'Click to copy';
+    el.addEventListener('click', () => {
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        const orig = el.textContent;
+        el.textContent = 'Copied!';
+        el.classList.add('copied');
+        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+
+  document.querySelectorAll('.install-tabs').forEach(group => {
+    group.querySelectorAll('.install-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const key = tab.dataset.tab;
+        group.querySelectorAll('.install-tab').forEach(t => {
+          const on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        group.querySelectorAll('.install-tab-panel').forEach(p => {
+          p.hidden = p.dataset.panel !== key;
+        });
+      });
+    });
+  });
+  </script>`;
 }
 
 function generateQuickInstallSteps(plugin) {
-  return `
+  const step3 = `
+          <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+              <span class="step-label">You're good to go</span>
+              <code>Skills auto-trigger when relevant</code>
+            </div>
+          </div>`;
+
+  const ccSteps = `
           <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
@@ -546,14 +613,31 @@ function generateQuickInstallSteps(plugin) {
               <span class="step-label">Install this plugin</span>
               <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="${plugin.name}-install">${getPluginInstallCommand(plugin)}</code>
             </div>
+          </div>${step3}`;
+
+  if (!pluginHasSkills(plugin)) return `<div class="quick-start-steps">${ccSteps}</div>`;
+
+  const npxSteps = `
+          <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+              <span class="step-label">Run it — works in any agent</span>
+              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="${plugin.name}-npx">${getNpxInstallCommand(plugin)}</code>
+            </div>
           </div>
           <div class="step">
-            <span class="step-number">3</span>
+            <span class="step-number">2</span>
             <div class="step-content">
-              <span class="step-label">You're good to go</span>
-              <code>Skills auto-trigger when relevant</code>
+              <span class="step-label">Pick your agents when prompted</span>
+              <code>Claude Code, Cursor, Codex…</code>
             </div>
-          </div>`;
+          </div>${step3}`;
+
+  return renderInstallTabs({
+    group: `qi-${plugin.name}`,
+    npxHtml: `<div class="quick-start-steps">${npxSteps}</div>`,
+    ccHtml: `<div class="quick-start-steps">${ccSteps}</div>`,
+  });
 }
 
 // Generate category sections
@@ -609,8 +693,14 @@ ${related.map(p => {
           </div>
           <p class="plugin-description">${desc}</p>
           <div class="plugin-tags">${tags}</div>
-          <div class="plugin-footer">
-            <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}">/plugin install 2389-research/${p.name}</code>
+          <div class="plugin-footer${pluginHasSkills(p) ? ' plugin-footer-tabs' : ''}">
+            ${pluginHasSkills(p)
+              ? renderInstallTabs({
+                  group: `related-${p.name}`,
+                  npxHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}-npx">${getNpxInstallCommand(p)}</code>`,
+                  ccHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}">${getPluginInstallCommand(p)}</code>`
+                })
+              : `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}">${getPluginInstallCommand(p)}</code>`}
             <a href="../${p.name}/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="${p.name}">Details →</a>
           </div>
         </article>`;
@@ -695,8 +785,14 @@ ${generateHead(pluginTitle, description, `plugins/${plugin.name}/`, plugin.keywo
 
       <div class="plugin-hero-actions">
         <div class="install-block">
-          <span class="install-label">Install Command</span>
-          <code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${generatePluginPageInstallSnippet(plugin)}</code>
+          <span class="install-label">Install</span>
+          ${pluginHasSkills(plugin)
+            ? renderInstallTabs({
+                group: plugin.name,
+                npxHtml: `<code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}-npx">${getNpxInstallCommand(plugin)}</code>`,
+                ccHtml: `<code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`
+              })
+            : `<code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`}
         </div>
         <a href="${sourceUrl}" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="${plugin.name}">
           View Source
@@ -750,9 +846,7 @@ ${generateHead(pluginTitle, description, `plugins/${plugin.name}/`, plugin.keywo
       </div>
 
       <div class="quick-start">
-        <div class="quick-start-steps">
 ${generateQuickInstallSteps(plugin)}
-        </div>
       </div>
     </section>
 
@@ -802,6 +896,8 @@ ${generateQuickInstallSteps(plugin)}
     ]
   }, null, 2)}
   </script>
+
+  ${generateInteractiveScript()}
 </body>
 </html>`;
 }
@@ -813,6 +909,56 @@ const mcpServers = marketplace.plugins.filter(p =>
   p.source?.url?.includes('mcp') ||
   p.description?.toLowerCase().includes('mcp server')
 ).length || 3;
+
+// Step list HTML for the homepage "Get Started in 30 Seconds" install tabs.
+// Extracted so the renderInstallTabs call stays readable.
+const npxGetStartedSteps = `<div class="quick-start-steps">
+            <div class="step">
+              <span class="step-number">1</span>
+              <div class="step-content">
+                <span class="step-label">Run it — works in any agent</span>
+                <code>npx skills add 2389-research/better-dev</code>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-number">2</span>
+              <div class="step-content">
+                <span class="step-label">Pick your agents when prompted</span>
+                <code>Claude Code, Cursor, Codex…</code>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-number">3</span>
+              <div class="step-content">
+                <span class="step-label">That's it. Seriously.</span>
+                <code>Skills auto-trigger when relevant</code>
+              </div>
+            </div>
+          </div>`;
+
+const ccGetStartedSteps = `<div class="quick-start-steps">
+            <div class="step">
+              <span class="step-number">1</span>
+              <div class="step-content">
+                <span class="step-label">Add the marketplace</span>
+                <code>/plugin marketplace add 2389-research/claude-plugins</code>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-number">2</span>
+              <div class="step-content">
+                <span class="step-label">Grab what you need</span>
+                <code>/plugin install 2389-research/better-dev</code>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-number">3</span>
+              <div class="step-content">
+                <span class="step-label">That's it. Seriously.</span>
+                <code>Skills auto-trigger when relevant</code>
+              </div>
+            </div>
+          </div>`;
 
 // Generate main index HTML
 const indexHtml = `<!DOCTYPE html>
@@ -835,8 +981,12 @@ ${generateHead('Claude Code Plugin Marketplace', 'Open source Claude Code plugin
 
       <div class="hero-cta">
         <div class="install-block">
-          <span class="install-label">One Command Install</span>
-          <code class="install-command">${INTERNAL_MARKETPLACE_COMMAND}</code>
+          <span class="install-label">Install</span>
+          ${renderInstallTabs({
+            group: 'hero',
+            npxHtml: `<code class="install-command">npx skills add 2389-research/&lt;plugin&gt;</code>`,
+            ccHtml: `<code class="install-command">${INTERNAL_MARKETPLACE_COMMAND}</code>`
+          })}
         </div>
         <a href="#plugins" class="cta-button">
           Browse the Goods
@@ -911,29 +1061,11 @@ ${generateCategorySections()}
 
         <div class="quick-start">
           <h3 class="quick-start-title">Get Started in 30 Seconds</h3>
-          <div class="quick-start-steps">
-            <div class="step">
-              <span class="step-number">1</span>
-              <div class="step-content">
-                <span class="step-label">Add the marketplace</span>
-                <code>/plugin marketplace add 2389-research/claude-plugins</code>
-              </div>
-            </div>
-            <div class="step">
-              <span class="step-number">2</span>
-              <div class="step-content">
-                <span class="step-label">Grab what you need</span>
-                <code>/plugin install 2389-research/better-dev</code>
-              </div>
-            </div>
-            <div class="step">
-              <span class="step-number">3</span>
-              <div class="step-content">
-                <span class="step-label">That's it. Seriously.</span>
-                <code>Skills auto-trigger when relevant</code>
-              </div>
-            </div>
-          </div>
+          ${renderInstallTabs({
+            group: 'getstarted',
+            npxHtml: npxGetStartedSteps,
+            ccHtml: ccGetStartedSteps
+          })}
         </div>
       </div>
     </section>
@@ -1069,21 +1201,7 @@ ${generateCategorySections()}
   }, null, 2)}
   </script>
 
-  <script>
-  // Copy-to-clipboard on install commands
-  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
-    el.title = 'Click to copy';
-    el.addEventListener('click', () => {
-      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
-        const orig = el.textContent;
-        el.textContent = 'Copied!';
-        el.classList.add('copied');
-        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
-      });
-    });
-  });
-
-  </script>
+  ${generateInteractiveScript()}
 </body>
 </html>`;
 
@@ -1148,10 +1266,19 @@ const llmsTxt = `# 2389 Research Claude Code Plugin Marketplace
 
 > Open source Claude Code plugins and MCP servers from 2389 Research Inc. Development workflows, testing, system administration, and AI agent capabilities. Install with one command via the Claude Code plugin marketplace.
 
-## Install the marketplace
+## Install a plugin
+
+Default — any agent (Claude Code, Cursor, Codex, …) via [vercel-labs/skills](https://github.com/vercel-labs/skills):
+
+\`\`\`
+npx skills add 2389-research/<plugin>
+\`\`\`
+
+Or natively in Claude Code:
 
 \`\`\`
 ${INTERNAL_MARKETPLACE_COMMAND}
+/plugin install 2389-research/<plugin>
 \`\`\`
 
 ${Object.values(categories).filter(c => c.plugins.length).map(cat =>
@@ -1186,10 +1313,20 @@ This site is the official catalog of Claude Code plugins and MCP servers from 23
 
 ## Install a plugin
 
+Default — any agent (Claude Code, Cursor, Codex, …) via [vercel-labs/skills](https://github.com/vercel-labs/skills):
+
+\`\`\`
+npx skills add 2389-research/<plugin-name>
+\`\`\`
+
+Or natively in Claude Code:
+
 \`\`\`
 ${INTERNAL_MARKETPLACE_COMMAND}
 /plugin install 2389-research/<plugin-name>
 \`\`\`
+
+(MCP servers — ${marketplace.plugins.filter((p) => p.strict === true).map((p) => p.name).join(', ')} — install via Claude Code only; they ship no skills for npx.)
 
 ## a14y configuration
 
@@ -1218,6 +1355,14 @@ ${cat.plugins.map(p => `- [${p.name}](${SITE_URL}/plugins/${p.name}/) — ${clea
 
 ## Install
 
+Default — any agent via [npx skills](https://github.com/vercel-labs/skills):
+
+\`\`\`
+npx skills add 2389-research/<plugin>
+\`\`\`
+
+Or natively in Claude Code:
+
 \`\`\`
 ${INTERNAL_MARKETPLACE_COMMAND}
 \`\`\`
@@ -1245,14 +1390,26 @@ function pluginMarkdown(plugin) {
 
 - **Version:** ${plugin.version || '1.0.0'}
 - **Source:** ${sourceUrl}
-- **Install:** \`${getPluginInstallCommand(plugin)}\`
 
-## Install via marketplace
+## Install
+
+${pluginHasSkills(plugin) ? `Default — any agent (Claude Code, Cursor, Codex, …) via [vercel-labs/skills](https://github.com/vercel-labs/skills):
+
+\`\`\`
+${getNpxInstallCommand(plugin)}
+\`\`\`
+
+Or natively in Claude Code:
 
 \`\`\`
 ${INTERNAL_MARKETPLACE_COMMAND}
 ${getPluginInstallCommand(plugin)}
+\`\`\`` : `This is an MCP server — install it in Claude Code:
+
 \`\`\`
+${INTERNAL_MARKETPLACE_COMMAND}
+${getPluginInstallCommand(plugin)}
+\`\`\``}
 
 ## README
 
