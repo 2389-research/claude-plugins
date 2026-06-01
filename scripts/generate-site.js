@@ -15,6 +15,12 @@ const INTERNAL_MARKETPLACE_COMMAND = '/plugin marketplace add 2389-research/clau
 // and `/plugin install` resolves plugins as `<plugin>@<marketplace-name>`. Derive it from the
 // manifest so the generated install commands always match the registered marketplace name.
 const MARKETPLACE_NAME = marketplace.name;
+if (typeof MARKETPLACE_NAME !== 'string' || MARKETPLACE_NAME.trim() === '') {
+  throw new Error(
+    'marketplace.json is missing a non-empty top-level "name". The generated /plugin install ' +
+    'commands resolve as <plugin>@<name>, so an empty name would emit broken docs.'
+  );
+}
 const SITE_URL = 'https://skills.2389.ai';
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
 
