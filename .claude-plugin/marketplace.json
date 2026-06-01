@@ -388,7 +388,7 @@
         "source": "url",
         "url": "https://github.com/2389-research/review-squad.git"
       },
-      "description": "Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks",
+      "description": "Dispatch panels of specialized subagents to review projects \u2014 expert audits, first-impression personas, task-completion flows, and pedantic nitpicks",
       "version": "1.0.0",
       "keywords": [
         "review",
@@ -542,6 +542,24 @@
         "diary"
       ],
       "strict": true
+    },
+    {
+      "name": "atelier",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/2389-research/atelier.git"
+      },
+      "description": "Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality.",
+      "version": "0.2.0",
+      "keywords": [
+        "orchestration",
+        "delegation",
+        "tiered-build",
+        "multi-agent",
+        "codegen",
+        "cost"
+      ],
+      "strict": false
     }
   ]
 }
