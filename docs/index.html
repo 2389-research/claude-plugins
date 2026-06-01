@@ -104,7 +104,7 @@
 
       <div class="hero-stats">
         <div class="stat">
-          <span class="stat-value">26</span>
+          <span class="stat-value">27</span>
           <span class="stat-label">Plugins</span>
         </div>
         <div class="stat-divider"></div>
@@ -526,7 +526,7 @@
               <span class="category-indicator"></span>
               Agent Systems
             </h3>
-            <span class="category-count">5 plugins</span>
+            <span class="category-count">6 plugins</span>
           </div>
           <p class="category-description">Multi-agent architecture and agent capabilities</p>
 
@@ -632,6 +632,28 @@
               <div class="plugin-footer">
                 <code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="socialmedia">/plugin install socialmedia@2389-research</code>
                 <a href="plugins/socialmedia/" class="plugin-source" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="socialmedia">Details →</a>
+              </div>
+            </article>
+
+            <article class="plugin-card">
+              <div class="plugin-card-header">
+                <a href="plugins/atelier/" class="plugin-name-link" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="atelier">
+                  <h4 class="plugin-name">atelier</h4>
+                </a>
+                <span class="plugin-version">v0.2.0</span>
+              </div>
+              <p class="plugin-description">Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality.</p>
+              <div class="plugin-tags"><span class="tag">orchestration</span><span class="tag">delegation</span><span class="tag">tiered-build</span></div>
+              <div class="plugin-footer plugin-footer-tabs">
+                <div class="install-tabs" data-install-tabs>
+            <div class="install-tab-row" role="tablist" aria-label="Install method">
+              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-card-atelier" aria-controls="panel-npx-card-atelier" id="tab-npx-card-atelier">npx (any agent)</button>
+              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-card-atelier" aria-controls="panel-cc-card-atelier" id="tab-cc-card-atelier">Claude Code</button>
+            </div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-npx-card-atelier" aria-labelledby="tab-npx-card-atelier" data-panel="npx-card-atelier"><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="atelier-npx">npx skills add 2389-research/atelier</code></div>
+            <div class="install-tab-panel" role="tabpanel" id="panel-cc-card-atelier" aria-labelledby="tab-cc-card-atelier" data-panel="cc-card-atelier" hidden><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="atelier">/plugin install atelier@2389-research</code></div>
+          </div>
+                <a href="plugins/atelier/" class="plugin-source" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="atelier">Details →</a>
               </div>
             </article>
           </div>
@@ -973,7 +995,7 @@
   "@type": "ItemList",
   "name": "Claude Code Plugins",
   "description": "Open source Claude Code plugins and MCP servers from 2389 Research",
-  "numberOfItems": 26,
+  "numberOfItems": 27,
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -1130,6 +1152,12 @@
       "position": 26,
       "name": "journal",
       "url": "https://skills.2389.ai/plugins/journal/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 27,
+      "name": "atelier",
+      "url": "https://skills.2389.ai/plugins/atelier/"
     }
   ]
 }
