@@ -207,7 +207,7 @@
         "url": "https://github.com/2389-research/documentation-audit.git"
       },
       "description": "Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "keywords": [
         "documentation",
         "audit",
