@@ -22,7 +22,7 @@ Or natively in Claude Code:
 ```bash
 # Add the marketplace, then install any plugin
 /plugin marketplace add 2389-research/claude-plugins
-/plugin install 2389-research/simmer
+/plugin install simmer@2389-research
 ```
 
 > The 4 MCP servers (journal, socialmedia, slack-mcp, agent-drugs) install via Claude Code only — they ship no skills for npx.

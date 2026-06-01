@@ -17,7 +17,7 @@ Or natively in Claude Code:
 
 ```
 /plugin marketplace add 2389-research/claude-plugins
-/plugin install 2389-research/remote-system-maintenance
+/plugin install remote-system-maintenance@2389-research
 ```
 
 ## README

@@ -17,7 +17,7 @@ Or natively in Claude Code:
 
 ```
 /plugin marketplace add 2389-research/claude-plugins
-/plugin install 2389-research/documentation-audit
+/plugin install documentation-audit@2389-research
 ```
 
 ## README

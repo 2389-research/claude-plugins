@@ -11,7 +11,7 @@ This is an MCP server — install it in Claude Code:
 
 ```
 /plugin marketplace add 2389-research/claude-plugins
-/plugin install 2389-research/socialmedia
+/plugin install socialmedia@2389-research
 ```
 
 ## README
