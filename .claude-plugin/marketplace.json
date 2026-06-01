@@ -549,7 +549,7 @@
         "source": "url",
         "url": "https://github.com/2389-research/atelier.git"
       },
-      "description": "Tiered-delegation execution - Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, with a scoped Sonnet fix only on failure. Benchmarked ~64% cheaper than Opus at equal quality. Code and non-code.",
+      "description": "Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality.",
       "version": "0.2.0",
       "keywords": [
         "orchestration",
