@@ -11,6 +11,16 @@ const marketplace = JSON.parse(
 );
 
 const INTERNAL_MARKETPLACE_COMMAND = '/plugin marketplace add 2389-research/claude-plugins';
+// Claude Code registers a marketplace under the top-level `name` field in marketplace.json,
+// and `/plugin install` resolves plugins as `<plugin>@<marketplace-name>`. Derive it from the
+// manifest so the generated install commands always match the registered marketplace name.
+const MARKETPLACE_NAME = marketplace.name;
+if (typeof MARKETPLACE_NAME !== 'string' || MARKETPLACE_NAME.trim() === '') {
+  throw new Error(
+    'marketplace.json is missing a non-empty top-level "name". The generated /plugin install ' +
+    'commands resolve as <plugin>@<name>, so an empty name would emit broken docs.'
+  );
+}
 const SITE_URL = 'https://skills.2389.ai';
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
 
@@ -530,7 +540,7 @@ function generatePluginCard(plugin) {
 }
 
 function getPluginInstallCommand(plugin) {
-  return `/plugin install 2389-research/${plugin.name}`;
+  return `/plugin install ${plugin.name}@${MARKETPLACE_NAME}`;
 }
 
 function getNpxInstallCommand(plugin) {
@@ -948,7 +958,7 @@ const ccGetStartedSteps = `<div class="quick-start-steps">
               <span class="step-number">2</span>
               <div class="step-content">
                 <span class="step-label">Grab what you need</span>
-                <code>/plugin install 2389-research/better-dev</code>
+                <code>/plugin install better-dev@${MARKETPLACE_NAME}</code>
               </div>
             </div>
             <div class="step">
@@ -1278,7 +1288,7 @@ Or natively in Claude Code:
 
 \`\`\`
 ${INTERNAL_MARKETPLACE_COMMAND}
-/plugin install 2389-research/<plugin>
+/plugin install <plugin>@${MARKETPLACE_NAME}
 \`\`\`
 
 ${Object.values(categories).filter(c => c.plugins.length).map(cat =>
@@ -1323,7 +1333,7 @@ Or natively in Claude Code:
 
 \`\`\`
 ${INTERNAL_MARKETPLACE_COMMAND}
-/plugin install 2389-research/<plugin-name>
+/plugin install <plugin-name>@${MARKETPLACE_NAME}
 \`\`\`
 
 (MCP servers — ${marketplace.plugins.filter((p) => p.strict === true).map((p) => p.name).join(', ')} — install via Claude Code only; they ship no skills for npx.)

@@ -22,7 +22,7 @@ Or natively in Claude Code:
 
 ```
 /plugin marketplace add 2389-research/claude-plugins
-/plugin install 2389-research/<plugin-name>
+/plugin install <plugin-name>@2389-research
 ```
 
 (MCP servers — slack-mcp, agent-drugs, socialmedia, journal — install via Claude Code only; they ship no skills for npx.)

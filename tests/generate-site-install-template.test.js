@@ -1,5 +1,5 @@
 // ABOUTME: Tests that the site generator produces correct install blocks for plugin pages
-// ABOUTME: Validates install command format uses 2389-research/{name} pattern
+// ABOUTME: Validates /plugin install uses the {name}@2389-research marketplace form (issue #32)
 
 const assert = require('assert');
 const fs = require('fs');
@@ -24,20 +24,26 @@ function getInstallBlock(html) {
   return match[0];
 }
 
+// The marketplace registers under the `name` field of marketplace.json, and Claude Code
+// resolves `/plugin install` as `<plugin>@<marketplace-name>`. The npx command keeps the
+// GitHub owner/repo form (2389-research/<plugin>) since that is what vercel-labs/skills expects.
+const MARKETPLACE_NAME = require('../.claude-plugin/marketplace.json').name;
+assert.strictEqual(MARKETPLACE_NAME, '2389-research', 'marketplace name should be 2389-research (issue #32)');
+
 // Skill plugins now render install tabs (npx default + /plugin secondary)
 const cssPage = readPage('css-development');
 assert.match(cssPage, /npx skills add 2389-research\/css-development/, 'expected npx command on skill plugin page');
-assert.match(cssPage, /\/plugin install 2389-research\/css-development/, 'expected /plugin install on skill plugin page');
+assert.match(cssPage, /\/plugin install css-development@2389-research/, 'expected /plugin install at-form on skill plugin page');
 
 const socialmediaInstallBlock = getInstallBlock(readPage('socialmedia'));
 assert.match(
   socialmediaInstallBlock,
-  /\/plugin install 2389-research\/socialmedia/,
-  'expected external plugin install block to use 2389-research/{name} format'
+  /\/plugin install socialmedia@2389-research/,
+  'expected external plugin install block to use the <name>@2389-research marketplace form'
 );
 
 const simmerPage = readPage('simmer');
 assert.match(simmerPage, /npx skills add 2389-research\/simmer/, 'expected npx command on simmer page');
-assert.match(simmerPage, /\/plugin install 2389-research\/simmer/, 'expected /plugin install on simmer page');
+assert.match(simmerPage, /\/plugin install simmer@2389-research/, 'expected /plugin install at-form on simmer page');
 
 console.log('generate-site install template test passed');

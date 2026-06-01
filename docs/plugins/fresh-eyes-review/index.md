@@ -17,7 +17,7 @@ Or natively in Claude Code:
 
 ```
 /plugin marketplace add 2389-research/claude-plugins
-/plugin install 2389-research/fresh-eyes-review
+/plugin install fresh-eyes-review@2389-research
 ```
 
 ## README

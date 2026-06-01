@@ -122,7 +122,7 @@ git commit -m "feat: add my-plugin to marketplace"
 
 ```json
 {
-  "name": "2389-research-marketplace",
+  "name": "2389-research",
   "owner": {
     "name": "2389 Research Inc",
     "email": "hello@2389.ai",

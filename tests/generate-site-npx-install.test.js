@@ -12,13 +12,13 @@ const read = (p) => fs.readFileSync(p, 'utf8');
 // Skill plugin page: npx present, /plugin present, npx tab active by default
 const simmer = read('docs/plugins/simmer/index.html');
 assert.match(simmer, /npx skills add 2389-research\/simmer/, 'simmer page should show npx command');
-assert.match(simmer, /\/plugin install 2389-research\/simmer/, 'simmer page should still show /plugin install');
+assert.match(simmer, /\/plugin install simmer@2389-research/, 'simmer page should still show /plugin install (at-form)');
 assert.match(simmer, /class="install-tab active"[^>]*data-tab="npx-simmer"/, 'npx tab should be active by default on simmer page');
 assert.match(simmer, /class="install-tab active"[^>]*data-tab="npx-qi-simmer"/, 'quick-install should default to npx');
 
 // MCP server page: /plugin only for the hero block
 const journal = read('docs/plugins/journal/index.html');
-assert.match(journal, /\/plugin install 2389-research\/journal/, 'journal page should show /plugin install');
+assert.match(journal, /\/plugin install journal@2389-research/, 'journal page should show /plugin install (at-form)');
 assert.doesNotMatch(journal, /qi-journal/, 'journal (MCP) quick-install must not be tabbed');
 
 // Homepage: hero shows the npx pattern, default to npx
