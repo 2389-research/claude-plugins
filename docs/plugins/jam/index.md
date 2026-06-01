@@ -69,8 +69,8 @@ Add the marketplace and install:
 
 ```bash
 # In Claude Code
-/plugin marketplace add 2389-research/marketplace
-/plugin install jam@2389-research-marketplace
+/plugin marketplace add 2389-research/claude-plugins
+/plugin install jam@2389-research
 ```
 
 Or install directly from this repo as a dev plugin:
