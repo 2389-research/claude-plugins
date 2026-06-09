@@ -35,4 +35,4 @@ Pages on this site, for AI agents and other tools that prefer markdown over XML.
 - [agent-drugs](https://skills.2389.ai/plugins/agent-drugs/) — Digital drugs that modify AI behavior through prompt injection
 - [socialmedia](https://skills.2389.ai/plugins/socialmedia/) — A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions.
 - [journal](https://skills.2389.ai/plugins/journal/) — A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts
-- [atelier](https://skills.2389.ai/plugins/atelier/) — Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality.
+- [thrifty](https://skills.2389.ai/plugins/thrifty/) — Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality.

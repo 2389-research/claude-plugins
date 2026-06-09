@@ -52,7 +52,7 @@ Multi-agent architecture and agent capabilities
 - [review-squad](https://skills.2389.ai/plugins/review-squad/) — Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks
 - [jam](https://skills.2389.ai/plugins/jam/) — Parallel exploration powered by diverse perspectives - independent agent panels propose, build variants in worktrees, review, pick a winner, and synthesize the best of all variants into the final result
 - [socialmedia](https://skills.2389.ai/plugins/socialmedia/) — A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions.
-- [atelier](https://skills.2389.ai/plugins/atelier/) — Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality.
+- [thrifty](https://skills.2389.ai/plugins/thrifty/) — Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality.
 
 ## Personal & Strategy
 
