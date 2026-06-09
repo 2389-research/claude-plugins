@@ -47,7 +47,7 @@ Or natively in Claude Code:
 | [xtool](https://github.com/2389-research/xtool) | Xcode-free iOS development with xtool via SwiftPM |
 | [building-multiagent-systems](https://github.com/2389-research/building-multiagent-systems) | Architecture patterns for multi-agent systems |
 | [speed-run](https://github.com/2389-research/speed-run) | Token-efficient code generation with hosted LLM (Cerebras) |
-| [atelier](https://github.com/2389-research/atelier) | Tiered-delegation execution: Sonnet plans a spec into sprints, cheap Haiku executes + self-verifies; ~64% cheaper than Opus |
+| [thrifty](https://github.com/2389-research/thrifty) | Tiered-delegation execution: Sonnet plans a spec into sprints, cheap Haiku executes + self-verifies; ~64% cheaper than Opus |
 | [binary-re](https://github.com/2389-research/binary-re) | Agentic binary reverse engineering for ELF binaries |
 
 ### Testing and Quality

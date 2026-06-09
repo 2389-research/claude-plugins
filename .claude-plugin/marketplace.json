@@ -544,13 +544,13 @@
       "strict": true
     },
     {
-      "name": "atelier",
+      "name": "thrifty",
       "source": {
         "source": "url",
-        "url": "https://github.com/2389-research/atelier.git"
+        "url": "https://github.com/2389-research/thrifty.git"
       },
       "description": "Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality.",
-      "version": "0.2.0",
+      "version": "0.5.0",
       "keywords": [
         "orchestration",
         "delegation",
