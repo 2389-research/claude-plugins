@@ -4,6 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync, execFileSync } = require('child_process');
+const { renderStarButton } = require('./lib/star-button');
 
 // Read marketplace.json
 const marketplace = JSON.parse(
@@ -96,6 +97,22 @@ function getReadmeContent(plugin) {
       { encoding: 'utf8', timeout: 15000 }
     );
     return content || null;
+  } catch {
+    return null;
+  }
+}
+
+// Fetch the GitHub star count for a plugin's repo. Returns null on any failure
+// so the button degrades to icon-only rather than breaking the build.
+function getStarCount(plugin) {
+  const repo = getRepoName(plugin);
+  try {
+    const out = execSync(
+      `gh api repos/${repo} --jq .stargazers_count`,
+      { encoding: 'utf8', timeout: 15000 }
+    ).trim();
+    const count = parseInt(out, 10);
+    return Number.isNaN(count) ? null : count;
   } catch {
     return null;
   }
@@ -522,7 +539,10 @@ function generatePluginCard(plugin) {
                 <a href="plugins/${plugin.name}/" class="plugin-name-link" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="${plugin.name}">
                   <h4 class="plugin-name">${plugin.name}</h4>
                 </a>
-                <span class="plugin-version">v${plugin.version || '1.0.0'}</span>
+                <div class="plugin-card-meta">
+                  ${renderStarButton({ repoUrl: sourceUrl, pluginName: plugin.name, count: starCounts[plugin.name], variant: 'card' })}
+                  <span class="plugin-version">v${plugin.version || '1.0.0'}</span>
+                </div>
               </div>
               <p class="plugin-description">${description}</p>
               <div class="plugin-tags">${tags}</div>
@@ -699,7 +719,10 @@ ${related.map(p => {
             <a href="../${p.name}/" class="plugin-name-link" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="${p.name}">
               <h4 class="plugin-name">${p.name}</h4>
             </a>
-            <span class="plugin-version">v${p.version || '1.0.0'}</span>
+            <div class="plugin-card-meta">
+              ${renderStarButton({ repoUrl: getSourceUrl(p), pluginName: p.name, count: starCounts[p.name], variant: 'card' })}
+              <span class="plugin-version">v${p.version || '1.0.0'}</span>
+            </div>
           </div>
           <p class="plugin-description">${desc}</p>
           <div class="plugin-tags">${tags}</div>
@@ -804,6 +827,7 @@ ${generateHead(pluginTitle, description, `plugins/${plugin.name}/`, plugin.keywo
               })
             : `<code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`}
         </div>
+        ${renderStarButton({ repoUrl: sourceUrl, pluginName: plugin.name, count: starCounts[plugin.name], variant: 'hero' })}
         <a href="${sourceUrl}" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="${plugin.name}">
           View Source
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -919,6 +943,14 @@ const mcpServers = marketplace.plugins.filter(p =>
   p.source?.url?.includes('mcp') ||
   p.description?.toLowerCase().includes('mcp server')
 ).length || 3;
+
+// Fetch GitHub star counts once per plugin, keyed by name. Cards, related cards, and
+// plugin heroes all read from this map. Refreshed each time CI regenerates the site.
+const starCounts = {};
+marketplace.plugins.forEach(plugin => {
+  starCounts[plugin.name] = getStarCount(plugin);
+});
+console.log(`Fetched star counts for ${Object.keys(starCounts).length} plugins`);
 
 // Step list HTML for the homepage "Get Started in 30 Seconds" install tabs.
 // Extracted so the renderInstallTabs call stays readable.

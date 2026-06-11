@@ -565,6 +565,39 @@ body {
   border: 1px solid var(--border-on-card);
 }
 
+/* Per-skill star button: links to the skill's own GitHub repo, not the marketplace */
+.plugin-card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-shrink: 0;
+}
+
+.plugin-star {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-on-card-secondary);
+  background: #f0f0f5;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-on-card);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.plugin-star:hover {
+  color: var(--accent-gold);
+  background: var(--accent-gold-dim);
+  border-color: var(--accent-gold);
+}
+
+.star-count {
+  font-variant-numeric: tabular-nums;
+}
+
 .plugin-description {
   font-size: 0.875rem;
   color: var(--text-on-card-secondary);
@@ -1259,6 +1292,30 @@ body {
   max-width: 680px;
 }
 
+/* Hero variant of the per-skill star button: outline secondary beside View Source */
+.star-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: transparent;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.star-button:hover {
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px var(--accent-gold-glow);
+}
+
 /* README Content Styling */
 .readme-section {
   background: var(--bg-surface);
@@ -1515,7 +1572,8 @@ body {
     max-width: none;
   }
 
-  .plugin-hero-actions .cta-button {
+  .plugin-hero-actions .cta-button,
+  .plugin-hero-actions .star-button {
     width: 100%;
     justify-content: center;
   }
