@@ -26,7 +26,7 @@ Or natively in Claude Code:
 
 **Tiered-delegation task execution for Claude Code.** A planner model writes the spec
 into sprints, a cheap model executes and self-verifies against the gate — same gate
-quality as the strong model, **~64% cheaper** (≈⅓ the cost) ([benchmarked](eval/RESULTS.md)).
+quality as the strong model, **~64% cheaper** (≈⅓ the cost) ([benchmarked](https://github.com/2389-research/thrifty/blob/main/eval/RESULTS.md)).
 
 > Offload each sprint of work to the **weakest model that can do it correctly.**
 
@@ -40,8 +40,8 @@ self-reported. This generalizes "tests as the source of truth" to any task, code
 ### Benchmarked architecture
 
 The configuration that won the cost/quality bake-off (spec → working code, 7 tasks across
-JS / Python / Go / prose, gate-verified — see [`eval/RESULTS.md`](eval/RESULTS.md) and
-[`experiments/`](experiments/README.md)):
+JS / Python / Go / prose, gate-verified — see [`eval/RESULTS.md`](https://github.com/2389-research/thrifty/blob/main/eval/RESULTS.md) and
+[`experiments/`](https://github.com/2389-research/thrifty/blob/main/experiments/README.md)):
 
 ```text
 spec ──▶ Sonnet  writes contract (pins cross-sprint + genuinely-ambiguous decisions)
@@ -55,7 +55,10 @@ spec ──▶ Sonnet  writes contract (pins cross-sprint + genuinely-ambiguous 
                  the Haiku agent self-fixed to green on all 7 tasks)
 ```
 
-**Result: ~64% cheaper than Opus building the same spec, at equal gate quality.** Two
+**Result: ~64% cheaper than Opus building the same spec, at equal gate quality** — on
+*large, multi-unit* builds (the win grows with size). On trivial builds the planning
+overhead makes thrifty cost *more* than a single capable agent, so there's a crossover
+below which you should just use one strong model directly (see [Usage](#usage)). Two
 things make it work: a single cached agent reuses the contract across turns (cheap, no
 cold-call bloat), and the contract **pins every decision that crosses a sprint boundary**
 so the executor never invents a system-level choice (leave one ambiguous and the executor
@@ -106,7 +109,8 @@ would otherwise diverge on, and let Haiku infer the rest.
 
 | Skill | Role | Model | Runs as |
 |-------|------|-------|---------|
-| `thrifty` | orchestrator | — | this session |
+| `thrifty` | orchestrator (subagent flow) | — | this session |
+| `thrifty-dispatch` | orchestrator (lean dispatch flow — **default**) | — | this session |
 | `thrifty-plan` | director's planning discipline | Sonnet | this session |
 | `thrifty-brief` | expand a unit spec into a brief *(split tier)* | Sonnet | dispatched subagent |
 | `thrifty-execute` | execute one unit | Haiku | dispatched subagent |
@@ -132,7 +136,16 @@ architect.
 ## Usage
 
 Say **"thrifty"**, **"delegate this"**, or **"tiered build"** on a multi-part task.
-The orchestrator will: frame the goal, plan (write `CONTRACT.md` + per-sprint briefs
+
+**Which flow runs:** the agent should **try the lean dispatch flow (`thrifty-dispatch`)
+first** — it's the benchmarked, cheapest path — and fall back to the subagent flow below
+only when the dispatch runtime is unavailable (`python3` / `claude -p` can't be spawned) or
+the task genuinely needs per-unit *parallel* verification. Cost ordering, measured: **dispatch
+< subagent < direct-strong-model on large builds; on trivial builds the planning overhead
+makes either thrifty flow cost *more* than just one capable agent — so below ~a few real
+units, skip thrifty.** The `thrifty` skill now points the agent at dispatch by default.
+
+For the subagent flow, the orchestrator will: frame the goal, plan (write `CONTRACT.md` + per-sprint briefs
 with acceptance criteria, confirmed with you), dispatch Haiku executors in parallel
 where dependencies allow, **verify each unit by criterion type** (run the gate for
 runnable criteria; spend a Sonnet read only when a gate fails or there are
@@ -184,24 +197,42 @@ A regression guard rolls back any fix that breaks a previously-passing criterion
 ## Design & evidence
 
 The benchmarked architecture and the full cost/quality investigation (including the
-approaches we tried and rejected) are in [`eval/RESULTS.md`](eval/RESULTS.md); reproducible
-scripts + captured data are in [`experiments/`](experiments/README.md).
+approaches we tried and rejected) are in [`eval/RESULTS.md`](https://github.com/2389-research/thrifty/blob/main/eval/RESULTS.md); reproducible
+scripts + captured data are in [`experiments/`](https://github.com/2389-research/thrifty/blob/main/experiments/README.md).
 
-## Two implementations
+## Two implementations — use dispatch by default
+
+> **Recommended: the lean dispatch flow (`thrifty-dispatch`).** It is the benchmarked
+> architecture and the one the ~64% cost claim is measured on. Reach for the subagent
+> substrate only when you specifically need per-unit *parallel* verification — and know
+> it costs materially more (see why below).
 
 - **Lean dispatch flow (benchmarked, recommended)** — `thrifty-dispatch`: Sonnet writes
-  `contract.md` + `sprints.jsonl`, one cached Haiku agent builds + self-fixes, scoped
-  Sonnet patch if needed. ~64% cheaper than Opus at equal gate quality. This is the
-  architecture diagrammed at the top.
+  `contract.md` + `sprints.jsonl`, then `dispatch.py` runs bare `claude -p` calls that
+  **hard-pin every codegen sprint to Haiku** (the plan's tier is ignored in code) and write
+  outputs to disk; the orchestrator reads only a tiny manifest. ~64% cheaper than Opus at
+  equal gate quality. This is the architecture diagrammed at the top.
 - **Subagent substrate (richer, pricier)** — the `thrifty-*` skills above (Sonnet architect
-  → parallel Haiku executor subagents → Sonnet checker). More expensive in the bake-off
-  (per-subagent harness + orchestrator context re-read); reach for it only when you need
-  per-sprint *parallel* verification. Still uses "unit/brief" terminology internally.
+  → parallel Haiku executor subagents → Sonnet checker). Reach for it only when you need
+  per-unit *parallel* verification.
+
+  **Why it costs more (structural, not a bug):** every subagent spawn carries ~40k of
+  Claude Code harness context, and each subagent's report lands back in the orchestrator's
+  context — which is then re-read every turn, so cost compounds with the number of units.
+  The dispatch flow avoids both (bare calls, outputs to disk, manifest-only reads).
+
+  **Executor-tier caveat:** unlike dispatch, this path **cannot force the executor model in
+  code** — it asks the orchestrator to dispatch with `model: "haiku"`, which a runtime may
+  silently ignore (falling back to Sonnet/the default). Verify the *actual* model each
+  executor ran on before trusting any cost figure — and note a subagent's *self-reported*
+  model is only a weak signal (a silently-substituted model often still claims to be Haiku);
+  the authoritative check is observed cost/usage. The ledger's savings line is an estimate,
+  not a measurement. (See the "Verify the executor tier" step in `thrifty`'s Step 3.)
 
 ## Status
 
 v0.1 — **benchmarked.** The lean dispatch flow is ~64% cheaper than Opus building the same
 spec, at equal gate quality, across 7 tasks (JS / Python / Go / prose). Evidence:
-[`eval/RESULTS.md`](eval/RESULTS.md) (main findings + full journey) and
-[`experiments/`](experiments/README.md) (reproducible scripts + captured cost data).
+[`eval/RESULTS.md`](https://github.com/2389-research/thrifty/blob/main/eval/RESULTS.md) (main findings + full journey) and
+[`experiments/`](https://github.com/2389-research/thrifty/blob/main/experiments/README.md) (reproducible scripts + captured cost data).
 
