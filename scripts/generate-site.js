@@ -4,6 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync, execFileSync } = require('child_process');
+const { convertRepoLinks } = require('./lib/convert-repo-links');
 
 // Read marketplace.json
 const marketplace = JSON.parse(
@@ -107,60 +108,9 @@ const linkReport = {
   broken: []
 };
 
-// Convert relative repo links to GitHub URLs using per-plugin repos
-function convertRepoLinks(html, pluginName, repoName) {
-  if (!html) return html;
-
-  const repo = repoName || `2389-research/${pluginName}`;
-
-  // Match <a href="..."> where href is a relative path to .md file or directory
-  // Covers: known dirs (skills/, docs/, tests/, hooks/), any root-level .md file
-  // (CLAUDE.md, README.md, ROADMAP.md, ARCHITECTURE.md, CONTRIBUTING.md, etc.),
-  // and parent-relative paths.
-  return html.replace(
-    /<a href="(\.?\.?\/?)((?:skills|docs|tests|hooks)(?:\/[^"]+)?|[^"\/]+\.md|\.\.\/?[^"]*)"([^>]*)>([^<]*)<\/a>/g,
-    (match, prefix, linkPath, attrs, linkText) => {
-      // Normalize the path
-      let normalizedPath = linkPath.replace(/^\.\//, '');
-
-      // Handle cross-plugin links (../other-plugin/) by linking to marketplace pages
-      if (normalizedPath.startsWith('../')) {
-        const crossPluginMatch = normalizedPath.match(/^\.\.\/([^/]+)\/?(.*)$/);
-        if (crossPluginMatch) {
-          const [, otherPlugin] = crossPluginMatch;
-          // Check if the other plugin exists in the marketplace
-          const otherExists = marketplace.plugins.some(p => p.name === otherPlugin);
-          if (otherExists) {
-            linkReport.converted.push({
-              plugin: pluginName,
-              from: linkPath,
-              to: `../${otherPlugin}/`
-            });
-            return `<a href="../${otherPlugin}/"${attrs}>${linkText}</a>`;
-          } else {
-            linkReport.broken.push({
-              plugin: pluginName,
-              path: linkPath,
-              reason: 'Cross-plugin target not found in marketplace'
-            });
-            return `<span class="broken-link" title="Link target not found">${linkText}</span>`;
-          }
-        }
-      }
-
-      // Determine URL type heuristically: paths with extensions are blobs, others are trees
-      const hasExtension = /\.\w+$/.test(normalizedPath);
-      const urlType = hasExtension ? 'blob' : 'tree';
-      const githubUrl = `https://github.com/${repo}/${urlType}/main/${normalizedPath}`;
-      linkReport.converted.push({
-        plugin: pluginName,
-        from: linkPath,
-        to: githubUrl
-      });
-      return `<a href="${githubUrl}"${attrs} target="_blank">${linkText}</a>`;
-    }
-  );
-}
+// convertRepoLinks lives in ./lib/convert-repo-links.js so it can be unit-tested in
+// isolation. It absolutizes relative README links against each plugin's GitHub repo;
+// marketplace.plugins and linkReport are passed in at the call site below.
 
 // Convert markdown table to HTML
 function convertMarkdownTable(tableText) {
@@ -728,7 +678,10 @@ function generatePluginPage(plugin) {
   const repo = getRepoName(plugin);
   let readmeHtml = markdownToHtml(readme);
   // Convert relative links to GitHub URLs using per-plugin repo
-  readmeHtml = convertRepoLinks(readmeHtml, plugin.name, repo);
+  readmeHtml = convertRepoLinks(readmeHtml, plugin.name, repo, {
+    marketplacePlugins: marketplace.plugins,
+    linkReport,
+  });
   const isExternal = plugin.strict === true;
 
   const tags = (plugin.keywords || []).map(k =>
