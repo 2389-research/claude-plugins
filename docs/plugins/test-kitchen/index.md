@@ -1,6 +1,6 @@
 # test-kitchen
 
-> Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner
+> Intercepts build/create/implement requests to offer parallel design exploration (omakase-off) and parallel implementation competition (cookoff) — runs multiple variants simultaneously and lets tests and the judge pick the winner
 
 - **Version:** 1.0.0
 - **Source:** https://github.com/2389-research/test-kitchen

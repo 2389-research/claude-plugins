@@ -3,7 +3,7 @@
 
 # 2389 Research Claude Code Plugin Marketplace
 
-28 plugins and MCP servers for Claude Code — parallel exploration, iterative refinement, binary reverse engineering, structured decision-making, and more.
+30 plugins and MCP servers for Claude Code — parallel exploration, iterative refinement, binary reverse engineering, structured decision-making, and more.
 
 Built by the team at [2389](https://2389.ai). These are the tools we use every day.
 
@@ -47,14 +47,15 @@ Or natively in Claude Code:
 | [xtool](https://github.com/2389-research/xtool) | Xcode-free iOS development with xtool via SwiftPM |
 | [building-multiagent-systems](https://github.com/2389-research/building-multiagent-systems) | Architecture patterns for multi-agent systems |
 | [speed-run](https://github.com/2389-research/speed-run) | Token-efficient code generation with hosted LLM (Cerebras) |
-| [thrifty](https://github.com/2389-research/thrifty) | Tiered-delegation execution: Sonnet plans a spec into sprints, cheap Haiku executes + self-verifies; ~64% cheaper than Opus |
+| [thrifty](https://github.com/2389-research/thrifty) | Tiered-delegation execution: Sonnet plans units of work, cheap Haiku executes + self-verifies; ~64% cheaper than Opus (2026-05 benchmark) |
 | [binary-re](https://github.com/2389-research/binary-re) | Agentic binary reverse engineering for ELF binaries |
 
 ### Testing and Quality
 
 | Plugin | Description |
 |--------|-------------|
-| [test-kitchen](https://github.com/2389-research/test-kitchen) | Parallel exploration of implementation approaches |
+| [test-kitchen](https://github.com/2389-research/test-kitchen) | Parallel design exploration (omakase-off) and implementation competition (cookoff) |
+| [jam](https://github.com/2389-research/jam) | Parallel perspective panels build and evaluate variants, synthesizing the best into the winner |
 | [simmer](https://github.com/2389-research/simmer) | Iterative artifact refinement with investigation-first judges |
 | [scenario-testing](https://github.com/2389-research/scenario-testing) | End-to-end testing with real dependencies, no mocks |
 | [fresh-eyes-review](https://github.com/2389-research/fresh-eyes-review) | Final sanity check before commits/PRs |

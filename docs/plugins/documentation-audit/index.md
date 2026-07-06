@@ -1,6 +1,6 @@
 # documentation-audit
 
-> Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection
+> Systematically verify documentation claims against codebase reality using two-pass extraction and pattern expansion. Runs in an isolated forked context.
 
 - **Version:** 2.0.1
 - **Source:** https://github.com/2389-research/documentation-audit

@@ -1,6 +1,6 @@
 # ceo-personal-os
 
-> Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)
+> Personal OS for executives: 11 reflection frameworks (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank, Schumacher), coaching interview scripts, and structured review cadences.
 
 - **Version:** 1.0.0
 - **Source:** https://github.com/2389-research/ceo-personal-os

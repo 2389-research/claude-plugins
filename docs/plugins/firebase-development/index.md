@@ -1,6 +1,6 @@
 # firebase-development
 
-> Firebase project workflows including setup, features, debugging, and validation
+> Firebase project setup, feature development, debugging, and code validation via specialized sub-skills for Cloud Functions, Firestore, and emulator workflows.
 
 - **Version:** 1.0.0
 - **Source:** https://github.com/2389-research/firebase-development

@@ -1,6 +1,6 @@
 # thrifty
 
-> Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality.
+> Tiered-delegation task execution — a planner model (Sonnet) turns a spec into a contract that pins every cross-cutting decision plus self-contained units of work, a fast cheap model (Haiku) executes and self-verifies against the gate, and a scoped fix runs only on failure. Benchmarked ~64% cheaper than Opus at equal quality (measured 2026-05, see eval/RESULTS.md; the gap narrowed to ~43% on large tasks after price changes). General-purpose: code and non-code tasks.
 
 - **Version:** 0.5.0
 - **Source:** https://github.com/2389-research/thrifty

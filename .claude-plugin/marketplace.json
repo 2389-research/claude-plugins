@@ -7,7 +7,7 @@
   },
   "metadata": {
     "description": "Plugins and MCP servers we use at 2389",
-    "version": "2.0.0"
+    "version": "2.0.1"
   },
   "plugins": [
     {
@@ -16,7 +16,7 @@
         "source": "url",
         "url": "https://github.com/2389-research/css-development.git"
       },
-      "description": "CSS development workflows with Tailwind composition, semantic naming, and dark mode by default",
+      "description": "Handles CSS and Tailwind development — semantic class naming, @apply composition, dark mode by default, component creation, refactoring, and CSS audits.",
       "version": "1.0.0",
       "keywords": [
         "css",
@@ -33,7 +33,7 @@
         "source": "url",
         "url": "https://github.com/2389-research/firebase-development.git"
       },
-      "description": "Firebase project workflows including setup, features, debugging, and validation",
+      "description": "Firebase project setup, feature development, debugging, and code validation via specialized sub-skills for Cloud Functions, Firestore, and emulator workflows.",
       "version": "1.0.0",
       "keywords": [
         "firebase",
@@ -107,7 +107,7 @@
         "source": "url",
         "url": "https://github.com/2389-research/speed-run.git"
       },
-      "description": "Token-efficient code generation pipeline - parallel implementation with hosted LLM (Cerebras) for ~60% token savings. Includes MCP server.",
+      "description": "Token-efficient code generation pipeline using hosted LLM (Cerebras) — requires CEREBRAS_API_KEY from https://cloud.cerebras.ai",
       "version": "1.1.1",
       "keywords": [
         "codegen",
@@ -128,7 +128,7 @@
         "source": "url",
         "url": "https://github.com/2389-research/test-kitchen.git"
       },
-      "description": "Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner",
+      "description": "Intercepts build/create/implement requests to offer parallel design exploration (omakase-off) and parallel implementation competition (cookoff) — runs multiple variants simultaneously and lets tests and the judge pick the winner",
       "version": "1.0.0",
       "keywords": [
         "parallel",
@@ -147,7 +147,7 @@
         "source": "url",
         "url": "https://github.com/2389-research/simmer.git"
       },
-      "description": "Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements",
+      "description": "Iterative artifact refinement - hone any artifact or workspace over multiple rounds using criteria-driven judge feedback, runnable evaluators, and focused directional improvements",
       "version": "3.0.1",
       "keywords": [
         "refinement",
@@ -206,7 +206,7 @@
         "source": "url",
         "url": "https://github.com/2389-research/documentation-audit.git"
       },
-      "description": "Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection",
+      "description": "Systematically verify documentation claims against codebase reality using two-pass extraction and pattern expansion. Runs in an isolated forked context.",
       "version": "2.0.1",
       "keywords": [
         "documentation",
@@ -226,7 +226,7 @@
         "source": "url",
         "url": "https://github.com/2389-research/ceo-personal-os.git"
       },
-      "description": "Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)",
+      "description": "Personal OS for executives: 11 reflection frameworks (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank, Schumacher), coaching interview scripts, and structured review cadences.",
       "version": "1.0.0",
       "keywords": [
         "ceo",
@@ -260,7 +260,10 @@
         "mvp",
         "pivot",
         "product-market-fit",
-        "get-out-of-the-building"
+        "get-out-of-the-building",
+        "schumacher",
+        "human-scale",
+        "buddhist-economics"
       ],
       "strict": false
     },
@@ -363,7 +366,7 @@
         "source": "url",
         "url": "https://github.com/2389-research/binary-re.git"
       },
-      "description": "Agentic binary reverse engineering for ELF binaries on ARM64, ARMv7, x86_64 - hypothesis-driven analysis with radare2, Ghidra, GDB, QEMU",
+      "description": "Analyzes ELF binaries, executables, and firmware images to understand behavior without source code — hypothesis-driven workflow with radare2, Ghidra, QEMU, GDB, and Frida across ARM64, ARMv7, x86_64, and MIPS.",
       "version": "1.0.0",
       "keywords": [
         "reverse-engineering",
@@ -378,7 +381,9 @@
         "disassembly",
         "decompile",
         "qemu",
-        "gdb"
+        "gdb",
+        "frida",
+        "mips"
       ],
       "strict": false
     },
@@ -388,7 +393,7 @@
         "source": "url",
         "url": "https://github.com/2389-research/review-squad.git"
       },
-      "description": "Dispatch panels of specialized subagents to review projects \u2014 expert audits, first-impression personas, task-completion flows, and pedantic nitpicks",
+      "description": "Multi-angle project review covering expert audits, visitor comprehension testing, task-completion smoke tests, and adversarial nitpick passes.",
       "version": "1.0.0",
       "keywords": [
         "review",
@@ -472,7 +477,7 @@
         "source": "url",
         "url": "https://github.com/2389-research/jam.git"
       },
-      "description": "Parallel exploration powered by diverse perspectives - independent agent panels propose, build variants in worktrees, review, pick a winner, and synthesize the best of all variants into the final result",
+      "description": "Structured multi-approach exploration using parallel perspective panels to generate, implement, and evaluate distinct variants, synthesizing the best insights from all into the winner.",
       "version": "1.0.0",
       "keywords": [
         "parallel",
@@ -549,7 +554,7 @@
         "source": "url",
         "url": "https://github.com/2389-research/thrifty.git"
       },
-      "description": "Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality.",
+      "description": "Tiered-delegation task execution — a planner model (Sonnet) turns a spec into a contract that pins every cross-cutting decision plus self-contained units of work, a fast cheap model (Haiku) executes and self-verifies against the gate, and a scoped fix runs only on failure. Benchmarked ~64% cheaper than Opus at equal quality (measured 2026-05, see eval/RESULTS.md; the gap narrowed to ~43% on large tasks after price changes). General-purpose: code and non-code tasks.",
       "version": "0.5.0",
       "keywords": [
         "orchestration",

@@ -1,6 +1,6 @@
 # binary-re
 
-> Agentic binary reverse engineering for ELF binaries on ARM64, ARMv7, x86_64 - hypothesis-driven analysis with radare2, Ghidra, GDB, QEMU
+> Analyzes ELF binaries, executables, and firmware images to understand behavior without source code — hypothesis-driven workflow with radare2, Ghidra, QEMU, GDB, and Frida across ARM64, ARMv7, x86_64, and MIPS.
 
 - **Version:** 1.0.0
 - **Source:** https://github.com/2389-research/binary-re

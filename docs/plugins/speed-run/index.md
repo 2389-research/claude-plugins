@@ -1,6 +1,6 @@
 # speed-run
 
-> Token-efficient code generation pipeline - parallel implementation with hosted LLM (Cerebras) for ~60% token savings. Includes MCP server.
+> Token-efficient code generation pipeline using hosted LLM (Cerebras) — requires CEREBRAS_API_KEY from https://cloud.cerebras.ai
 
 - **Version:** 1.1.1
 - **Source:** https://github.com/2389-research/speed-run

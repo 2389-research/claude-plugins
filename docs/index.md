@@ -20,16 +20,16 @@ Or natively in Claude Code:
 
 Workflows for building, testing, and shipping code
 
-- [css-development](https://skills.2389.ai/plugins/css-development/) — CSS development workflows with Tailwind composition, semantic naming, and dark mode by default
-- [firebase-development](https://skills.2389.ai/plugins/firebase-development/) — Firebase project workflows including setup, features, debugging, and validation
+- [css-development](https://skills.2389.ai/plugins/css-development/) — Handles CSS and Tailwind development — semantic class naming, @apply composition, dark mode by default, component creation, refactoring, and CSS audits.
+- [firebase-development](https://skills.2389.ai/plugins/firebase-development/) — Firebase project setup, feature development, debugging, and code validation via specialized sub-skills for Cloud Functions, Firestore, and emulator workflows.
 - [landing-page-design](https://skills.2389.ai/plugins/landing-page-design/) — Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles
 - [xtool](https://skills.2389.ai/plugins/xtool/) — Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode
-- [speed-run](https://skills.2389.ai/plugins/speed-run/) — Token-efficient code generation pipeline - parallel implementation with hosted LLM (Cerebras) for ~60% token savings. Includes MCP server.
-- [test-kitchen](https://skills.2389.ai/plugins/test-kitchen/) — Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner
-- [simmer](https://skills.2389.ai/plugins/simmer/) — Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements
+- [speed-run](https://skills.2389.ai/plugins/speed-run/) — Token-efficient code generation pipeline using hosted LLM (Cerebras) — requires CEREBRAS_API_KEY from https://cloud.cerebras.ai
+- [test-kitchen](https://skills.2389.ai/plugins/test-kitchen/) — Intercepts build/create/implement requests to offer parallel design exploration (omakase-off) and parallel implementation competition (cookoff) — runs multiple variants simultaneously and lets tests and the judge pick the winner
+- [simmer](https://skills.2389.ai/plugins/simmer/) — Iterative artifact refinement - hone any artifact or workspace over multiple rounds using criteria-driven judge feedback, runnable evaluators, and focused directional improvements
 - [scenario-testing](https://skills.2389.ai/plugins/scenario-testing/) — End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth
 - [fresh-eyes-review](https://skills.2389.ai/plugins/fresh-eyes-review/) — Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests
-- [documentation-audit](https://skills.2389.ai/plugins/documentation-audit/) — Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection
+- [documentation-audit](https://skills.2389.ai/plugins/documentation-audit/) — Systematically verify documentation claims against codebase reality using two-pass extraction and pattern expansion. Runs in an isolated forked context.
 - [slack-mcp](https://skills.2389.ai/plugins/slack-mcp/) — Slack workspace integration MCP server - create channels, invite users, post messages, manage threads for team collaboration
 - [git-repo-prep](https://skills.2389.ai/plugins/git-repo-prep/) — Prepare codebases for public/open-source release and audit them for openness - full lifecycle prep or standalone review
 - [prbuddy](https://skills.2389.ai/plugins/prbuddy/) — PR health assistant - monitors CI, triages review comments, fixes issues with systematic prevention. Uses gh CLI and gh-pr-review extension.
@@ -41,7 +41,7 @@ System administration and operational tooling
 
 - [terminal-title](https://skills.2389.ai/plugins/terminal-title/) — Automatically updates terminal title with emoji + project + topic context for quick visual cues when switching terminals
 - [remote-system-maintenance](https://skills.2389.ai/plugins/remote-system-maintenance/) — Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists
-- [binary-re](https://skills.2389.ai/plugins/binary-re/) — Agentic binary reverse engineering for ELF binaries on ARM64, ARMv7, x86_64 - hypothesis-driven analysis with radare2, Ghidra, GDB, QEMU
+- [binary-re](https://skills.2389.ai/plugins/binary-re/) — Analyzes ELF binaries, executables, and firmware images to understand behavior without source code — hypothesis-driven workflow with radare2, Ghidra, QEMU, GDB, and Frida across ARM64, ARMv7, x86_64, and MIPS.
 
 ## Agent Systems
 
@@ -49,16 +49,16 @@ Multi-agent architecture and agent capabilities
 
 - [building-multiagent-systems](https://skills.2389.ai/plugins/building-multiagent-systems/) — Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination
 - [deliberation](https://skills.2389.ai/plugins/deliberation/) — Decision-making through deliberation - seeking unity through discernment rather than consensus through debate
-- [review-squad](https://skills.2389.ai/plugins/review-squad/) — Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks
-- [jam](https://skills.2389.ai/plugins/jam/) — Parallel exploration powered by diverse perspectives - independent agent panels propose, build variants in worktrees, review, pick a winner, and synthesize the best of all variants into the final result
+- [review-squad](https://skills.2389.ai/plugins/review-squad/) — Multi-angle project review covering expert audits, visitor comprehension testing, task-completion smoke tests, and adversarial nitpick passes.
+- [jam](https://skills.2389.ai/plugins/jam/) — Structured multi-approach exploration using parallel perspective panels to generate, implement, and evaluate distinct variants, synthesizing the best insights from all into the winner.
 - [socialmedia](https://skills.2389.ai/plugins/socialmedia/) — A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions.
-- [thrifty](https://skills.2389.ai/plugins/thrifty/) — Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality.
+- [thrifty](https://skills.2389.ai/plugins/thrifty/) — Tiered-delegation task execution — a planner model (Sonnet) turns a spec into a contract that pins every cross-cutting decision plus self-contained units of work, a fast cheap model (Haiku) executes and self-verifies against the gate, and a scoped fix runs only on failure. Benchmarked ~64% cheaper than Opus at equal quality (measured 2026-05, see eval/RESULTS.md; the gap narrowed to ~43% on large tasks after price changes). General-purpose: code and non-code tasks.
 
 ## Personal & Strategy
 
 Reflection frameworks and personal operating systems
 
-- [ceo-personal-os](https://skills.2389.ai/plugins/ceo-personal-os/) — Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)
+- [ceo-personal-os](https://skills.2389.ai/plugins/ceo-personal-os/) — Personal OS for executives: 11 reflection frameworks (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank, Schumacher), coaching interview scripts, and structured review cadences.
 - [worldview-synthesis](https://skills.2389.ai/plugins/worldview-synthesis/) — Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation
 - [summarize-meetings](https://skills.2389.ai/plugins/summarize-meetings/) — Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction
 - [journal](https://skills.2389.ai/plugins/journal/) — A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts

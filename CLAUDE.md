@@ -39,13 +39,15 @@ claude-plugins/
 | xtool | [2389-research/xtool](https://github.com/2389-research/xtool) | Xcode-free iOS development with xtool via SwiftPM |
 | building-multiagent-systems | [2389-research/building-multiagent-systems](https://github.com/2389-research/building-multiagent-systems) | Architecture patterns for multi-agent systems |
 | speed-run | [2389-research/speed-run](https://github.com/2389-research/speed-run) | Token-efficient code generation with hosted LLM (Cerebras) |
+| thrifty | [2389-research/thrifty](https://github.com/2389-research/thrifty) | Tiered-delegation execution: Sonnet plans units of work, cheap Haiku executes and self-verifies |
 | binary-re | [2389-research/binary-re](https://github.com/2389-research/binary-re) | Agentic binary reverse engineering for ELF binaries |
 
 ### Testing and Quality
 
 | Plugin | Repo | Description |
 |--------|------|-------------|
-| test-kitchen | [2389-research/test-kitchen](https://github.com/2389-research/test-kitchen) | Parallel exploration of implementation approaches |
+| test-kitchen | [2389-research/test-kitchen](https://github.com/2389-research/test-kitchen) | Parallel design exploration (omakase-off) and implementation competition (cookoff) |
+| jam | [2389-research/jam](https://github.com/2389-research/jam) | Parallel perspective panels build and evaluate variants, synthesizing the best into the winner |
 | simmer | [2389-research/simmer](https://github.com/2389-research/simmer) | Iterative artifact refinement with investigation-first judge board |
 | scenario-testing | [2389-research/scenario-testing](https://github.com/2389-research/scenario-testing) | End-to-end testing with real dependencies, no mocks |
 | fresh-eyes-review | [2389-research/fresh-eyes-review](https://github.com/2389-research/fresh-eyes-review) | Final sanity check before commits/PRs |
@@ -59,8 +61,6 @@ claude-plugins/
 | Plugin | Repo | Description |
 |--------|------|-------------|
 | ceo-personal-os | [2389-research/ceo-personal-os](https://github.com/2389-research/ceo-personal-os) | Personal operating system for executives with reflection frameworks |
-| gtm-partner | [2389-research/gtm-partner](https://github.com/2389-research/gtm-partner) | Strategic go-to-market partner |
-| product-launcher | [2389-research/product-launcher](https://github.com/2389-research/product-launcher) | Generate launch materials for 2389.ai products |
 | worldview-synthesis | [2389-research/worldview-synthesis](https://github.com/2389-research/worldview-synthesis) | Systematic worldview articulation |
 | deliberation | [2389-research/deliberation](https://github.com/2389-research/deliberation) | Decision-making through deliberation and discernment |
 | summarize-meetings | [2389-research/summarize-meetings](https://github.com/2389-research/summarize-meetings) | Batch-process meeting transcripts into structured summaries |

@@ -1,6 +1,6 @@
 # review-squad
 
-> Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks
+> Multi-angle project review covering expert audits, visitor comprehension testing, task-completion smoke tests, and adversarial nitpick passes.
 
 - **Version:** 1.0.0
 - **Source:** https://github.com/2389-research/review-squad

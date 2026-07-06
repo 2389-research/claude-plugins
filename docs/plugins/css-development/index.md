@@ -1,6 +1,6 @@
 # css-development
 
-> CSS development workflows with Tailwind composition, semantic naming, and dark mode by default
+> Handles CSS and Tailwind development — semantic class naming, @apply composition, dark mode by default, component creation, refactoring, and CSS audits.
 
 - **Version:** 1.0.0
 - **Source:** https://github.com/2389-research/css-development
