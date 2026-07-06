@@ -356,10 +356,63 @@ Order of attack:
    deletions like jam-router) get a baseline/verify pass per
    superpowers:writing-skills.
 
-Open questions for Doctor Biz:
-- jam-router: delete it, or keep as sole discovery surface? (Currently both
-  load and double-fire.)
-- test-kitchen/omakase-off intentionally claims EVERY "build/create" request
-  — keep that aggressive entry-gate posture or narrow it like jam?
-- thrifty "~64% cheaper" headline: date-qualify, or re-run the eval and
-  publish the current number?
+Open questions for Doctor Biz — RESOLVED 2026-07-06:
+- jam-router: **deleted** (delegated to my judgment; both skills loaded and
+  double-fired; jam's own description now carries discovery).
+- test-kitchen/omakase-off entry gate: **kept** (delegated to my judgment);
+  descriptions now state the interception posture honestly.
+- thrifty "~64% cheaper": **date-qualified + linked to eval/RESULTS.md**
+  (Doctor Biz picked this option). Actual eval dates: main run 2026-05-29,
+  re-measure 2026-06-10; gap narrowed to ~43% on large tasks.
+
+## Fix phase — COMPLETE 2026-07-06
+
+All 23 plugin repos fixed on branch `skill-audit-fixes`, one PR each,
+dispatched as three batches of parallel fixer agents. Zero failures.
+
+| Plugin | PR |
+|---|---|
+| binary-re | https://github.com/2389-research/binary-re/pull/1 |
+| building-multiagent-systems | https://github.com/2389-research/building-multiagent-systems/pull/1 |
+| ceo-personal-os | https://github.com/2389-research/ceo-personal-os/pull/1 |
+| css-development | https://github.com/2389-research/css-development/pull/1 |
+| deliberation | https://github.com/2389-research/deliberation/pull/1 |
+| documentation-audit | https://github.com/2389-research/documentation-audit/pull/3 |
+| firebase-development | https://github.com/2389-research/firebase-development/pull/1 |
+| fresh-eyes-review | https://github.com/2389-research/fresh-eyes-review/pull/1 |
+| git-repo-prep | https://github.com/2389-research/git-repo-prep/pull/1 |
+| jam | https://github.com/2389-research/jam/pull/2 |
+| landing-page-design | https://github.com/2389-research/landing-page-design/pull/1 |
+| prbuddy | https://github.com/2389-research/prbuddy/pull/1 |
+| remote-system-maintenance | https://github.com/2389-research/remote-system-maintenance/pull/1 |
+| review-squad | https://github.com/2389-research/review-squad/pull/3 |
+| scenario-testing | https://github.com/2389-research/scenario-testing/pull/1 |
+| simmer | https://github.com/2389-research/simmer/pull/5 |
+| speed-run | https://github.com/2389-research/speed-run/pull/8 |
+| summarize-meetings | https://github.com/2389-research/summarize-meetings/pull/1 |
+| terminal-title | https://github.com/2389-research/terminal-title/pull/2 |
+| test-kitchen | https://github.com/2389-research/test-kitchen/pull/1 |
+| thrifty | https://github.com/2389-research/thrifty/pull/12 |
+| worldview-synthesis | https://github.com/2389-research/worldview-synthesis/pull/1 |
+| xtool | https://github.com/2389-research/xtool/pull/1 |
+
+Hub repo (this PR): marketplace.json descriptions synced to the fixed
+plugin.json descs for the 11 entries with meaningful drift (binary-re,
+ceo-personal-os, css-development, documentation-audit, firebase-development,
+jam, review-squad, simmer, speed-run, test-kitchen, thrifty) + keyword adds
+(binary-re: frida/mips; ceo-personal-os: schumacher/human-scale/
+buddhist-economics); README + CLAUDE.md plugin tables synced (jam and
+thrifty rows added, stale gtm-partner/product-launcher rows removed from
+CLAUDE.md, thrifty "sprints"/unqualified-64% row fixed).
+
+Known leftovers (intentional, noted in the respective PR bodies):
+- prbuddy `--not_outdated` flag: not in `gh pr-review threads list --help`;
+  left with a verify-against-source note instead of inventing a replacement.
+- jam SKILL.md body is 1923w (target was <1000): further cuts required
+  rewriting surviving prose, which the fix brief forbade.
+- speed-run mcp/dist/index.js still names the old model (build artifact —
+  fix belongs in a rebuild, not a hand-edit).
+- ceo-personal-os McWilliams framework has no standalone file (exists only
+  in interview-scripts.md); flagged as follow-up rather than invented.
+- Marketplace site README content refreshes via the weekly CI cron once
+  plugin PRs merge (site regen on hub-push bakes pre-merge READMEs).
