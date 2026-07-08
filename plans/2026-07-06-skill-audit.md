@@ -490,7 +490,7 @@ unverified — needs one live `/plugin install` test.
 - [major] Zero tests in the repo.
 - [minor] `slack_list_users` paginates the whole workspace with no cap; "manage threads" overstates `slack_post_thread` (reply-only); deprecated tsconfig moduleResolution for ESM.
 
-### Suggested fix order (pending Doctor Biz review — no PRs made)
+### Suggested fix order (fix round executed 2026-07-08 — PRs below)
 
 1. agent-drugs: decide — redeploy the fly.io + Firebase backend, or pull the
    entry from the marketplace (currently ships a guaranteed-broken install).
@@ -514,3 +514,39 @@ unverified — needs one live `/plugin install` test.
    committed-journal purge decision (history rewrite vs leave); marketplace
    desc for journal ("lightweight" → accurate); agent-drugs README duration
    claim.
+
+### MCP fix round — 2026-07-08 (items 2–4 above, approved by Doctor Biz)
+
+Pattern decisions applied across all three repos: plugin.json names align TO
+the marketplace names (those are the advertised install commands); launch via
+`node ${CLAUDE_PLUGIN_ROOT}/dist/index.js` with dist/ committed + a CI
+freshness guard (`/plugin install` is a git fetch, never an npm install, so
+prepare scripts can't help); env vars flow through `${VAR}` expansion, not
+hardcoded placeholders.
+
+- **mcp-socialmedia#18** — name → `socialmedia`, npx → committed dist,
+  SOCIAL_* → SOCIALMEDIA_* in setup docs, engines field, dist guard in
+  coverage.yml, placeholder creds (`YOUR_API_KEY_HERE`) → `${VAR}` expansion.
+  708/708 tests; smoke-tested initialize + 3 tools.
+- **journal-mcp#16** — name → `journal` (`.mcp.json` server key
+  `private-journal` deliberately unchanged: existing tool permissions
+  reference it), 16 committed real journal files removed + `.private-journal/`
+  gitignored (data remains in git history — purge is a separate owner
+  decision, flagged in PR), dist committed + CI guard, server version
+  1.3.0-hardcode → synced 1.4.1, README SDK version corrected. 225 passed /
+  6 skipped (same as baseline); smoke-tested under temp HOME, real
+  `~/.private-journal` untouched.
+- **slack-mcp#1** — `${CLAUDE_PLUGIN_ROOT}` launch (cwd-dependence removed),
+  dist committed + CI, first tests ever (10: protocol-over-stdio against the
+  real built server with an obviously-fake token, zero network; separate
+  cred-gated `test:e2e` script), tsconfig moduleResolution → nodenext.
+
+Follow-ups deliberately NOT in these PRs: MCP SDK major upgrades
+(socialmedia 1.12.x, journal 0.5.0), journal git-history purge,
+`--journal-path` user-thoughts redirect design, slack list_users pagination
+cap, socialmedia module-load-time config crash, npm publishing, and the
+1-critical dependabot alert GitHub reports on mcp-socialmedia's default
+branch. Also observed: the three repos use three different plugin-manifest
+shapes for declaring their server (`mcpServers` inline / `mcpServers:
+"./.mcp.json"` pointer / top-level `mcp` + `type: "mcp"`) — all apparently
+tolerated, but worth normalizing someday.
