@@ -416,3 +416,90 @@ Known leftovers (intentional, noted in the respective PR bodies):
   in interview-scripts.md); flagged as follow-up rather than invented.
 - Marketplace site README content refreshes via the weekly CI cron once
   plugin PRs merge (site regen on hub-push bakes pre-merge READMEs).
+
+## MCP server audit — 2026-07-08 ("do they even work?")
+
+Functional audit of the 4 MCP-server marketplace entries (excluded from the
+skill audit). Method: per repo — deps install, build, test suite, live MCP
+stdio smoke test (initialize / tools/list / resources / prompts), wiring
+check (plugin.json name vs marketplace name, npm publication, env vars),
+docs-truth pass. Read-only; no fixes made. Headline claims (dead backend,
+npm 404s) re-verified firsthand from the orchestrating session.
+
+### Verdicts
+
+| Server | Verdict | One-liner |
+|--------|---------|-----------|
+| agent-drugs | **BROKEN** | Backend gone: `agent-drugs-mcp.fly.dev` has no DNS record; OAuth endpoint returns 503. Tools unreachable for any installer. |
+| socialmedia (mcp-socialmedia) | WORKS-WITH-CAVEATS | Server itself healthy (708/708 tests, clean MCP handshake) but the install path is dead: plugin.json runs `npx -y mcp-agent-social`, which is 404 on npm. |
+| journal (journal-mcp) | WORKS-WITH-CAVEATS | Works locally (225 tests pass, tools+resources+prompts live, local embeddings, no API key needed) but npm package unpublished and plugin name mismatched. |
+| slack-mcp | WORKS-WITH-CAVEATS | Healthiest: current MCP SDK, current Slack SDK, all advertised capabilities have tools. Needs manual `npm install && npm run build` after install; zero tests. |
+
+### Cross-cutting: the install story is broken for all four
+
+No server is usable purely via `/plugin install X@2389-research`:
+
+- **agent-drugs** — HTTP-type MCP pointing at an undeployed fly.io app
+  (NXDOMAIN) + Firebase OAuth backend down (503). Dead regardless of client.
+- **socialmedia** — plugin.json declares `npx -y mcp-agent-social`; that
+  package was never published (registry 404). Also `plugin.json` name is
+  `mcp-agent-social`, marketplace entry says `socialmedia`.
+- **journal** — `plugin.json` name is `private-journal-mcp`, marketplace says
+  `journal`; npm package unpublished; `.mcp.json` runs
+  `${CLAUDE_PLUGIN_ROOT}/dist/index.js`, which requires a local
+  `npm install && npm run build` first.
+- **slack-mcp** — name matches and `.mcp.json` is sane, but also requires a
+  manual local build (no npm package, no prepare/postinstall script).
+
+Name-mismatch consequence (socialmedia, journal): the discrepancy is verified
+fact; whether Claude Code hard-fails or installs under the wrong name is
+unverified — needs one live `/plugin install` test.
+
+### Per-server detail
+
+**agent-drugs (BROKEN)**
+- [critical] `agent-drugs-mcp.fly.dev` → NXDOMAIN (verified via dig, twice).
+- [critical] OAuth metadata endpoint `us-central1-agent-drugs.cloudfunctions.net/oauthMetadata` → HTTP 503 (verified via curl).
+- [major] All 7 test suites fail, 0 tests pass: tests call renamed/changed APIs (`validateApiKey`→`validateBearerToken`; `StateManager()` now requires `(agentId, userId)`), plus ts-jest ESM resolution failures.
+- [major] `http-server.ts:321` hardcodes protocolVersion `2024-11-05`.
+- [major] `src/hooks.ts` direct-injection hook is wired to nothing; the shipped hook just asks Claude to call `active_drugs` — persistence silently no-ops when the backend is down (it is).
+- [minor] README documents `/take creative 120` custom duration that the tool schema doesn't support; MCP SDK 9 minors behind; 29 npm audit vulns (3 critical).
+
+**socialmedia / mcp-socialmedia (WORKS-WITH-CAVEATS)**
+- Positive: builds clean; 708/708 tests pass; with env vars set, valid initialize + 3 tools (`login`, `read_posts`, `create_post`), 8 prompts, 6 resources; backend API host resolves and is live.
+- [critical] `npx -y mcp-agent-social` → npm 404 (verified). Fresh install cannot start the server.
+- [critical] plugin.json name `mcp-agent-social` ≠ marketplace `socialmedia`.
+- [major] docs/CLAUDE_SETUP.md and docs/QUICK_SETUP.md document wrong env var names (`SOCIAL_API_*`; code reads `SOCIALMEDIA_API_*` per src/config.ts:17-18) — copy-paste of the docs crashes the server at startup.
+- [major] MCP SDK 1.12.1 vs 1.29.0 current; negotiates protocol 2025-03-26.
+- [minor] config read at module load → crash-with-stack-trace instead of graceful error when env vars missing; 13 npm audit vulns (1 critical); no engines field.
+
+**journal / journal-mcp (WORKS-WITH-CAVEATS)**
+- Positive: builds clean; 225 passed / 6 skipped / 0 failed; initialize + 4 tools, 4 prompts, 50 resources; semantic search fully local (Xenova all-MiniLM-L6-v2), no external API needed; write+search round-trip verified live.
+- [critical] plugin.json name `private-journal-mcp` ≠ marketplace `journal`; `.mcp.json` server key is `private-journal`.
+- [critical] npm package `private-journal-mcp` unpublished (404); install requires local build.
+- [major] `--journal-path` only redirects project notes; feelings/user_context/technical_insights/world_knowledge ALWAYS write to `$HOME/.private-journal` (journal.ts:23 — constructor never receives userJournalPath). No env override. Undocumented.
+- [major] Committed real journal entries in the public repo: 8 .md + 8 .embedding files from 2025 (upstream author's data); `.private-journal/` is in .claudeignore but NOT .gitignore.
+- [major] MCP SDK 0.5.0 (pre-1.0!) vs 1.29.0; announces protocol 2024-11-05.
+- [minor] server.ts:35 hardcodes version 1.3.0 while package.json says 1.4.0; README says SDK 0.4.0; 14 npm audit vulns (2 critical, transitive via @xenova/transformers).
+- Marketplace desc says "lightweight"; repo says "comprehensive" (semantic search + resources + prompts). Code supports "comprehensive".
+- Audit side effect (cleaned up): the smoke test's write landed in the real `~/.private-journal/` (proving the redirect gap); test entry + embedding deleted afterward.
+
+**slack-mcp (WORKS-WITH-CAVEATS)**
+- Positive: builds clean, 0 vulns; initialize on CURRENT protocol 2025-06-18; MCP SDK 1.29.0 (latest), Slack SDK 7.19.0 (latest); all 4 marketplace-claimed capabilities map to real tools (`slack_create_channel`, `slack_invite_to_channel`, `slack_post_message`, `slack_post_thread`) + 2 more (`slack_pin_message`, `slack_list_users`); token presence checked eagerly, Slack API only called lazily on tool use.
+- [major] No npm package (@2389/slack-mcp → 404) and no prepare script: fresh install needs manual `npm install && npm run build`.
+- [major] Zero tests in the repo.
+- [minor] `slack_list_users` paginates the whole workspace with no cap; "manage threads" overstates `slack_post_thread` (reply-only); deprecated tsconfig moduleResolution for ESM.
+
+### Suggested fix order (pending Doctor Biz review — no PRs made)
+
+1. agent-drugs: decide — redeploy the fly.io + Firebase backend, or pull the
+   entry from the marketplace (currently ships a guaranteed-broken install).
+2. socialmedia + journal: align plugin.json names with marketplace names (or
+   vice versa) and replace the npx-unpublished command with
+   `${CLAUDE_PLUGIN_ROOT}`-based invocation + build-on-install (prepare
+   script or committed dist), matching whichever pattern is chosen.
+3. slack-mcp: add prepare script (or commit dist); tests.
+4. Docs: fix mcp-socialmedia env-var names; journal-mcp .gitignore +
+   committed-journal purge decision (history rewrite vs leave); marketplace
+   desc for journal ("lightweight" → accurate); agent-drugs README duration
+   claim.
