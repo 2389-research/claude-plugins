@@ -494,6 +494,17 @@ unverified — needs one live `/plugin install` test.
 
 1. agent-drugs: decide — redeploy the fly.io + Firebase backend, or pull the
    entry from the marketplace (currently ships a guaranteed-broken install).
+   **DECIDED 2026-07-08: neither — converted to a fully local skill plugin**
+   (drug catalog recovered verbatim from the still-public Firestore `drugs`
+   collection; local state in `~/.agent-drugs/state.json`; SessionStart hook
+   injects prompts directly, realizing the design orphaned in `src/hooks.ts`).
+   PR: agent-drugs#2 — commit 2 of that PR is the pure deletion of the dead
+   backend, droppable independently. Verified: 22/22 new tests, full
+   take→inject→sober round-trip. Post-merge hub follow-ups: agent-drugs is
+   then no longer an MCP server — move it out of the "MCP Servers" tables in
+   README/CLAUDE.md, drop `strict: true` in marketplace.json, sync the entry
+   description, and the README duration-claim item in (4) below is obsolete
+   (README was rewritten in the conversion).
 2. socialmedia + journal: align plugin.json names with marketplace names (or
    vice versa) and replace the npx-unpublished command with
    `${CLAUDE_PLUGIN_ROOT}`-based invocation + build-on-install (prepare
