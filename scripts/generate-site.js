@@ -401,29 +401,6 @@ function generateHead(title, description, canonicalPath, extraKeywords) {
 </head>`;
 }
 
-// Common navigation
-function generateNav(isPluginPage = false) {
-  const homeLink = isPluginPage ? '../../' : '';
-  return `<nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="${homeLink || '.'}" class="nav-logo" aria-label="2389 Research Plugin Marketplace">
-        <span class="status-indicator" aria-hidden="true"></span>
-        2389 Research Inc
-      </a>
-      <div class="nav-links" role="menubar">
-        <a href="${homeLink}#plugins" class="nav-link" role="menuitem">Plugins</a>
-        <a href="${homeLink}#about" class="nav-link" role="menuitem">About</a>
-        <a href="https://github.com/2389-research/claude-plugins" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank" data-tinylytics-event="nav.github">GitHub</a>
-        <a href="https://2389.ai" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank" data-tinylytics-event="nav.visit-2389">2389.ai</a>
-      </div>
-      <a href="https://github.com/2389-research/claude-plugins" class="nav-star-btn" rel="noopener noreferrer" target="_blank" title="Star on GitHub" data-tinylytics-event="nav.star-github">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-        Star
-      </a>
-    </div>
-  </nav>`;
-}
-
 // Common footer
 function generateFooter(isPluginPage = false) {
   const home = isPluginPage ? '../../' : '';
@@ -1155,60 +1132,31 @@ const glossaryHtml = `<!DOCTYPE html>
 <html lang="en">
 ${generateHead('Glossary', 'Marketplace-specific terms: plugin, skill, MCP server, hook, slash command, scorecard.', 'glossary/', ['glossary', 'terminology'])}
 <body>
-  <div class="grid-overlay" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  ${generateNav(true)}
-
-  <header class="plugin-hero">
-    <div class="plugin-hero-inner">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="../">Marketplace</a>
-        <span class="breadcrumb-sep">→</span>
-        <span class="breadcrumb-current">Glossary</span>
-      </nav>
-
-      <div class="plugin-hero-header">
-        <h1 class="plugin-hero-title">Glossary</h1>
-      </div>
-
-      <p class="plugin-hero-description">Terms used across the 2389 Research plugin marketplace.</p>
+  <canvas id="topo-bg" aria-hidden="true"></canvas>
+  <div class="topo-fade" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="mast-bar mono rule-b" style="padding-top:52px">
+      <a href="../">← All skills</a>
+      <span>Glossary · 2389 Research</span>
     </div>
-  </header>
-
-  <main id="main-content">
-    <section class="section readme-section">
-      <div class="section-header">
-        <span class="section-number">01</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Definitions</h2>
-          <p class="section-subtitle">What things mean on this site</p>
-        </div>
-      </div>
-
-      <div class="readme-content">
-        <dl>
-${GLOSSARY_TERMS.map(([term, definition]) => `          <dt><strong>${term}</strong></dt>
-          <dd>${definition}</dd>`).join('\n')}
-        </dl>
-      </div>
-    </section>
-
-    <section class="section back-section">
-      <a href="../" class="back-link">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Back to Marketplace
-      </a>
-    </section>
-  </main>
-
-  ${generateFooter(true)}
-
+    <header class="glossary-head glass">
+      <div class="kicker">Reference</div>
+      <h1 class="hero-head" style="font-size:clamp(40px,6vw,72px)">Glossary</h1>
+      <p class="hero-lede">Terms you'll meet across coding-agent skills and MCP servers.</p>
+    </header>
+    <main id="main-content" class="glossary-list">
+      ${GLOSSARY_TERMS.map(([term, definition]) => `<section class="glossary-term">
+        <h2 class="mono">${term}</h2>
+        <p>${definition}</p>
+      </section>`).join('\n')}
+    </main>
+    ${generateFooter(false)}
+  </div>
   <script type="application/ld+json">
   ${glossaryStructuredData}
   </script>
+  ${generateInteractiveScript()}
 </body>
 </html>`;
 

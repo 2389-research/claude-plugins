@@ -87,3 +87,17 @@ test('detail: prev/next follow flat marketplace order', () => {
   assert.match(simmer, new RegExp('\\.\\./' + marketplace.plugins[i-1].name + '/'));
   assert.match(simmer, new RegExp('\\.\\./' + marketplace.plugins[i+1].name + '/'));
 });
+test('glossary: editorial shell, tuples rendered, JSON-LD kept', () => {
+  const g = fs.readFileSync(path.join(ROOT, 'docs/glossary/index.html'), 'utf8');
+  assert.match(g, /family=Newsreader:/);
+  assert.match(g, /class="wrap/);
+  const year = new Date().getFullYear();                                     // generator renders © new Date().getFullYear() — do NOT hardcode 2026
+  assert.match(g, new RegExp(`© ${year} 2389 Research Inc`));
+  assert.match(g, /application\/ld\+json/);
+  assert.doesNotMatch(g, /class="nav"/);
+});
+test('generator: generateNav is fully removed', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/generate-site.js'), 'utf8');
+  assert.doesNotMatch(src, /function generateNav/);
+  assert.doesNotMatch(src, /generateNav\(/);
+});

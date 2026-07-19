@@ -850,3 +850,9 @@ a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offse
 .related-list a:hover{text-decoration:none;color:var(--accent);}
 .related-name{font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;}
 .related-desc{font-size:14px;color:var(--body);}
+.glossary-head{padding:44px 24px 34px;margin:0 -24px;}
+.glossary-head .kicker{margin-bottom:16px;}
+.glossary-list{padding:24px 0 40px;max-width:760px;}
+.glossary-term{padding:22px 0;border-top:1px solid var(--hair);}
+.glossary-term h2{font-size:20px;font-weight:600;margin:0 0 8px;color:var(--ink);}
+.glossary-term p{font-size:17px;line-height:1.55;color:var(--body);margin:0;max-width:64ch;}
