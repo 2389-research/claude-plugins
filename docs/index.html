@@ -74,6 +74,20 @@
       <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" class="btn-ghost mono" data-tinylytics-event="nav.star-github">★ Star on GitHub</a>
     </div>
   </header>
+    <div class="toolbar rule-t rule-b glass" role="search">
+      <div class="toolbar-search">
+        <span class="mono" aria-hidden="true">⌕</span>
+        <input type="search" class="mono" data-search placeholder="Search names, tags, descriptions…" aria-label="Search skills" />
+        <span class="mono" data-count>27 of 27 entries</span>
+      </div>
+      <div class="toolbar-chips">
+        <button type="button" class="chip mono active" data-cat="all" style="--chip:#171512">All (27)</button>
+        <button type="button" class="chip mono" data-cat="Development" style="--chip:#e6196e">Development (14)</button>
+        <button type="button" class="chip mono" data-cat="Infrastructure" style="--chip:#c67514">Infrastructure (3)</button>
+        <button type="button" class="chip mono" data-cat="Agent Systems" style="--chip:#7a3fb0">Agent Systems (6)</button>
+        <button type="button" class="chip mono" data-cat="Personal & Strategy" style="--chip:#1f9e6b">Personal & Strategy (4)</button>
+        <button type="button" class="chip-cleartag mono" data-cleartag hidden></button>
+      </div>
     </div>
 
   <main id="main-content">
@@ -1157,6 +1171,55 @@
       setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
     });
   });
+
+  const search = document.querySelector('[data-search]');
+  if (search) {
+    const rows = [...document.querySelectorAll('[data-skill-row]')];
+    const countEl = document.querySelector('[data-count]');
+    const chips = [...document.querySelectorAll('.chip[data-cat]')];
+    const clearTag = document.querySelector('[data-cleartag]');
+    let cat = 'all', tag = null;
+    const apply = () => {
+      const q = search.value.trim().toLowerCase();
+      let shown = 0;
+      rows.forEach(r => {
+        const okCat = cat === 'all' || r.dataset.cat === cat;
+        const okTag = !tag || r.dataset.tags.split(',').includes(tag);
+        const hay = (r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags).toLowerCase();
+        const okQ = !q || hay.includes(q);
+        const show = okCat && okTag && okQ;
+        r.style.display = show ? '' : 'none';
+        if (show) shown++;
+      });
+      document.querySelectorAll('[data-cat-section]').forEach(s => {
+        const any = [...s.querySelectorAll('[data-skill-row]')].some(r => r.style.display !== 'none');
+        s.style.display = any ? '' : 'none';
+      });
+      const empty = document.querySelector('[data-empty]');
+      if (empty) empty.hidden = shown !== 0;
+      if (countEl) countEl.textContent = shown + ' of ' + rows.length + ' entries';
+    };
+    search.addEventListener('input', apply);
+    chips.forEach(c => c.addEventListener('click', () => {
+      cat = c.dataset.cat; tag = null;
+      chips.forEach(x => x.classList.toggle('active', x === c));
+      if (clearTag) clearTag.hidden = true;
+      apply();
+    }));
+    document.addEventListener('click', e => {
+      const t = e.target.closest('[data-tag]');
+      if (!t) return;
+      e.preventDefault(); e.stopPropagation();
+      tag = t.dataset.tag; cat = 'all';
+      chips.forEach(x => x.classList.toggle('active', x.dataset.cat === 'all'));
+      if (clearTag) { clearTag.hidden = false; clearTag.textContent = '#' + tag + ' ✕'; }
+      window.scrollTo({ top: 360, behavior: 'smooth' });
+      apply();
+    });
+    if (clearTag) clearTag.addEventListener('click', () => { tag = null; clearTag.hidden = true; apply(); });
+    const resetBtn = document.querySelector('[data-reset]');
+    if (resetBtn) resetBtn.addEventListener('click', () => { search.value=''; cat='all'; tag=null; chips.forEach(x=>x.classList.toggle('active',x.dataset.cat==='all')); if(clearTag) clearTag.hidden=true; apply(); });
+  }
   </script>
 </body>
 </html>

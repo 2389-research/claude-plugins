@@ -559,6 +559,55 @@ function generateInteractiveScript() {
       setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
     });
   });
+
+  const search = document.querySelector('[data-search]');
+  if (search) {
+    const rows = [...document.querySelectorAll('[data-skill-row]')];
+    const countEl = document.querySelector('[data-count]');
+    const chips = [...document.querySelectorAll('.chip[data-cat]')];
+    const clearTag = document.querySelector('[data-cleartag]');
+    let cat = 'all', tag = null;
+    const apply = () => {
+      const q = search.value.trim().toLowerCase();
+      let shown = 0;
+      rows.forEach(r => {
+        const okCat = cat === 'all' || r.dataset.cat === cat;
+        const okTag = !tag || r.dataset.tags.split(',').includes(tag);
+        const hay = (r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags).toLowerCase();
+        const okQ = !q || hay.includes(q);
+        const show = okCat && okTag && okQ;
+        r.style.display = show ? '' : 'none';
+        if (show) shown++;
+      });
+      document.querySelectorAll('[data-cat-section]').forEach(s => {
+        const any = [...s.querySelectorAll('[data-skill-row]')].some(r => r.style.display !== 'none');
+        s.style.display = any ? '' : 'none';
+      });
+      const empty = document.querySelector('[data-empty]');
+      if (empty) empty.hidden = shown !== 0;
+      if (countEl) countEl.textContent = shown + ' of ' + rows.length + ' entries';
+    };
+    search.addEventListener('input', apply);
+    chips.forEach(c => c.addEventListener('click', () => {
+      cat = c.dataset.cat; tag = null;
+      chips.forEach(x => x.classList.toggle('active', x === c));
+      if (clearTag) clearTag.hidden = true;
+      apply();
+    }));
+    document.addEventListener('click', e => {
+      const t = e.target.closest('[data-tag]');
+      if (!t) return;
+      e.preventDefault(); e.stopPropagation();
+      tag = t.dataset.tag; cat = 'all';
+      chips.forEach(x => x.classList.toggle('active', x.dataset.cat === 'all'));
+      if (clearTag) { clearTag.hidden = false; clearTag.textContent = '#' + tag + ' ✕'; }
+      window.scrollTo({ top: 360, behavior: 'smooth' });
+      apply();
+    });
+    if (clearTag) clearTag.addEventListener('click', () => { tag = null; clearTag.hidden = true; apply(); });
+    const resetBtn = document.querySelector('[data-reset]');
+    if (resetBtn) resetBtn.addEventListener('click', () => { search.value=''; cat='all'; tag=null; chips.forEach(x=>x.classList.toggle('active',x.dataset.cat==='all')); if(clearTag) clearTag.hidden=true; apply(); });
+  }
   </script>`;
 }
 
@@ -936,6 +985,30 @@ const ccGetStartedSteps = `<div class="quick-start-steps">
             </div>
           </div>`;
 
+// One category→hex map for the whole generator. Task 4 (rows/sections) and Task 7 (detail) reuse it.
+const CAT_COLOR = { 'Development': '#e6196e', 'Infrastructure': '#c67514', 'Agent Systems': '#7a3fb0', 'Personal & Strategy': '#1f9e6b' };
+
+function generateToolbar() {
+  const total = marketplace.plugins.length;
+  const chips = [['all', 'All', total, '#171512'],
+    ...Object.values(categories).filter(c => c.plugins.length).map(c =>
+      [c.title, c.title, c.plugins.length, CAT_COLOR[c.title] || '#e6196e'])];
+  const chipHtml = chips.map(([val, label, n, color], i) =>
+    `<button type="button" class="chip mono${i === 0 ? ' active' : ''}" data-cat="${val}" style="--chip:${color}">${label} (${n})</button>`
+  ).join('\n        ');
+  return `<div class="toolbar rule-t rule-b glass" role="search">
+      <div class="toolbar-search">
+        <span class="mono" aria-hidden="true">⌕</span>
+        <input type="search" class="mono" data-search placeholder="Search names, tags, descriptions…" aria-label="Search skills" />
+        <span class="mono" data-count>${total} of ${total} entries</span>
+      </div>
+      <div class="toolbar-chips">
+        ${chipHtml}
+        <button type="button" class="chip-cleartag mono" data-cleartag hidden></button>
+      </div>
+    </div>`;
+}
+
 function generateMasthead() {
   return `<header class="masthead">
     <div class="mast-bar mono rule-b">
@@ -967,7 +1040,7 @@ ${generateHead('Coding-agent Skills & Servers', 'A working index of coding-agent
   <div class="topo-fade" aria-hidden="true"></div>
   <div class="wrap">
     ${generateMasthead()}
-    </div>
+    ${generateToolbar()}
 
   <main id="main-content">
     <section id="plugins" class="section plugins-section">

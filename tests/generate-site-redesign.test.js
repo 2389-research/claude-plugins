@@ -28,3 +28,14 @@ test('copy: single data-copy handler with stopPropagation', () => {
   assert.match(index, /\[data-copy\]/);
   assert.match(index, /stopPropagation/);
 });
+test('toolbar: search input, live count, category chips with counts', () => {
+  assert.match(index, /data-search/);
+  assert.match(index, /data-count/);
+  assert.match(index, /data-cat="all"[^>]*>All \(27\)/);
+  assert.match(index, /data-cat="Development"/);
+  assert.match(index, /data-cat="Agent Systems"/);
+});
+test('script: filter wiring reads skill rows on input', () => {
+  assert.match(index, /\[data-skill-row\]/);
+  assert.match(index, /addEventListener\('input'/);
+});
