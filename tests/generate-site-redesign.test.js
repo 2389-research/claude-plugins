@@ -39,3 +39,18 @@ test('script: filter wiring reads skill rows on input', () => {
   assert.match(index, /\[data-skill-row\]/);
   assert.match(index, /addEventListener\('input'/);
 });
+test('index: one row per marketplace entry, with details links', () => {
+  const marketplace = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude-plugin/marketplace.json'), 'utf8'));
+  const rowCount = (index.match(/class="skill-row"/g) || []).length;
+  assert.strictEqual(rowCount, marketplace.plugins.length);
+  assert.match(index, /href="plugins\/simmer\/"/);
+});
+test('index: MCP-only row copies the Claude Code command, not npx', () => {
+  assert.match(index, /data-copy="\/plugin install journal@2389-research"/);
+  assert.doesNotMatch(index, /data-copy="npx skills add 2389-research\/journal"/);
+});
+test('index: numbered category sections and an empty state', () => {
+  assert.match(index, /data-cat-section/);
+  assert.match(index, /data-empty/);
+  assert.match(index, /Nothing here\./);
+});

@@ -24,10 +24,8 @@ assert.doesNotMatch(journal, /qi-journal/, 'journal (MCP) quick-install must not
 // Homepage: hero shows the npx pattern, default to npx
 const index = read('docs/index.html');
 assert.match(index, /data-copy="npx skills add 2389-research\/&lt;name&gt;"/, 'hero install strip copies the npx pattern');
-// Get Started block defaults to the npx flow
-assert.match(index, /class="install-tab active"[^>]*data-tab="npx-getstarted"/, 'Get Started should default to npx');
 
-// Homepage cards: skill-plugin card shows npx; an MCP server's repo never appears in an npx command
+// Homepage index: skill-plugin row shows npx; an MCP server's repo never appears in an npx command
 assert.match(index, /npx skills add 2389-research\/simmer/, 'simmer card should show npx command');
 
 // No MCP server's own repo may ever appear in an npx command (derived from the strict flag, like the generator)

@@ -460,35 +460,35 @@ function generateFooter(isPluginPage = false) {
   </footer>`;
 }
 
-// Helper to generate plugin card HTML
-function generatePluginCard(plugin) {
-  const sourceUrl = getSourceUrl(plugin);
-  const description = cleanDescription(plugin.description);
-  const tags = (plugin.keywords || []).slice(0, 3).map(k =>
-    `<span class="tag">${k}</span>`
-  ).join('');
+// CAT_COLOR is already defined at top level in Task 3 — do not redeclare it.
+const pad = n => String(n).padStart(2, '0');
 
-  return `
-            <article class="plugin-card">
-              <div class="plugin-card-header">
-                <a href="plugins/${plugin.name}/" class="plugin-name-link" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="${plugin.name}">
-                  <h4 class="plugin-name">${plugin.name}</h4>
-                </a>
-                <span class="plugin-version">v${plugin.version || '1.0.0'}</span>
+function generateSkillRow(plugin, gi, catTitle) {
+  const desc = cleanDescription(plugin.description);
+  const tags = (plugin.keywords || []).slice(0, 3);
+  const isMcp = !pluginHasSkills(plugin);
+  const copyCmd = isMcp ? getPluginInstallCommand(plugin) : getNpxInstallCommand(plugin);
+  const color = CAT_COLOR[catTitle] || '#e6196e';
+  const tagHtml = tags.map(t =>
+    `<button type="button" class="tag-btn mono" data-tag="${t}">#${t}</button>`
+  ).join(' ');
+  return `<a href="plugins/${plugin.name}/" class="skill-row" data-skill-row data-name="${plugin.name}" data-desc="${desc.replace(/"/g, '&quot;')}" data-tags="${tags.join(',')}" data-cat="${catTitle}" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="${plugin.name}">
+              <div class="row-num mono">${pad(gi)}</div>
+              <div class="row-body">
+                <div class="row-title">
+                  <h3 class="skill-name mono">${plugin.name}</h3>
+                  ${isMcp ? `<span class="mcp-badge mono">MCP</span>` : ''}
+                  <span class="skill-ver mono">v${plugin.version || '1.0.0'}</span>
+                </div>
+                <p class="skill-desc">${desc}</p>
+                <div class="row-tags">${tagHtml}</div>
               </div>
-              <p class="plugin-description">${description}</p>
-              <div class="plugin-tags">${tags}</div>
-              <div class="plugin-footer${pluginHasSkills(plugin) ? ' plugin-footer-tabs' : ''}">
-                ${pluginHasSkills(plugin)
-                  ? renderInstallTabs({
-                      group: `card-${plugin.name}`,
-                      npxHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}-npx">${getNpxInstallCommand(plugin)}</code>`,
-                      ccHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`
-                    })
-                  : `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`}
-                <a href="plugins/${plugin.name}/" class="plugin-source" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="${plugin.name}">Details →</a>
+              <div class="row-rail">
+                <span class="row-cat mono" style="color:${color}">${catTitle}</span>
+                <button type="button" class="row-copy mono" data-copy="${copyCmd}" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">copy install</button>
+                <span class="row-more mono">details →</span>
               </div>
-            </article>`;
+            </a>`;
 }
 
 function getPluginInstallCommand(plugin) {
@@ -664,24 +664,24 @@ function generateQuickInstallSteps(plugin) {
 
 // Generate category sections
 function generateCategorySections() {
+  let gi = 0, si = 0;
   return Object.values(categories)
     .filter(cat => cat.plugins.length > 0)
-    .map(cat => `
-        <div class="category">
-          <div class="category-header">
-            <h3 class="category-title">
-              <span class="category-indicator"></span>
-              ${cat.title}
-            </h3>
-            <span class="category-count">${cat.plugins.length} plugin${cat.plugins.length !== 1 ? 's' : ''}</span>
+    .map(cat => {
+      si++;
+      const color = CAT_COLOR[cat.title] || '#e6196e';
+      const rows = cat.plugins.map(p => { gi++; return generateSkillRow(p, gi, cat.title); }).join('\n');
+      return `<section class="cat-section" data-cat-section style="animation:fadeIn .3s ease both">
+          <div class="cat-head">
+            <span class="mono cat-num" style="color:${color}">${pad(si)}</span>
+            <h2 class="cat-name">${cat.title}</h2>
+            <span class="mono cat-count">${cat.plugins.length} skill${cat.plugins.length !== 1 ? 's' : ''}</span>
+            <span class="cat-rule"></span>
           </div>
-          <p class="category-description">${cat.description}</p>
-
-          <div class="plugins-grid">
-${cat.plugins.map(generatePluginCard).join('\n')}
-          </div>
-        </div>`
-    ).join('\n');
+          <p class="mono cat-blurb">${cat.description}</p>
+          ${rows}
+        </section>`;
+    }).join('\n');
 }
 
 // Generate related plugins section for internal linking
@@ -1042,101 +1042,14 @@ ${generateHead('Coding-agent Skills & Servers', 'A working index of coding-agent
     ${generateMasthead()}
     ${generateToolbar()}
 
-  <main id="main-content">
-    <section id="plugins" class="section plugins-section">
-      <div class="section-header">
-        <span class="section-number">01</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Available Plugins</h2>
-          <p class="section-subtitle">Install individually or add the full marketplace</p>
-        </div>
+    <main id="main-content" class="index-list">
+      ${generateCategorySections()}
+      <div class="empty-state" data-empty hidden>
+        <div class="empty-big">Nothing here.</div>
+        <div class="mono empty-sub">No entries match your filters.</div>
+        <button type="button" class="mono btn-outline" data-reset>Clear filters</button>
       </div>
-      <div class="plugin-categories">
-${generateCategorySections()}
-      </div>
-    </section>
-
-    <section id="about" class="section about-section">
-      <div class="section-header">
-        <span class="section-number">02</span>
-        <div class="section-title-group">
-          <h2 class="section-title">About This Marketplace</h2>
-          <p class="section-subtitle">Open source tools from 2389 Research</p>
-        </div>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-content">
-          <p>A collection of Claude Code plugins and MCP servers from <a href="https://2389.ai">2389 Research Inc</a>. We're building a world where AI agents collaborate like your dream team — and these are the tools that help us get there.</p>
-          <p>All plugins are open source. Use them, fork them, contribute back. We'd love to hear how you're using them. (No corporate fine print, we promise.)</p>
-
-          <div class="about-links">
-            <a href="https://github.com/2389-research/claude-plugins" class="about-link" rel="noopener noreferrer" target="_blank">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z" fill="currentColor"/>
-              </svg>
-              View on GitHub
-            </a>
-            <a href="mailto:hello@2389.ai" class="about-link">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              hello@2389.ai
-            </a>
-          </div>
-        </div>
-
-        <div class="quick-start">
-          <h3 class="quick-start-title">Get Started in 30 Seconds</h3>
-          ${renderInstallTabs({
-            group: 'getstarted',
-            npxHtml: npxGetStartedSteps,
-            ccHtml: ccGetStartedSteps
-          })}
-        </div>
-      </div>
-    </section>
-
-    <section class="section resources-section">
-      <div class="section-header">
-        <span class="section-number">03</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Learn More</h2>
-          <p class="section-subtitle">The official docs (for when you want to go deeper)</p>
-        </div>
-      </div>
-
-      <div class="resources-grid">
-        <a href="https://docs.claude.com/en/docs/claude-code" class="resource-card">
-          <h4>Claude Code Docs</h4>
-          <p>Official documentation for Claude Code CLI</p>
-        </a>
-        <a href="https://docs.claude.com/en/docs/claude-code/skills" class="resource-card">
-          <h4>Skills Guide</h4>
-          <p>How to create and use Claude Code skills</p>
-        </a>
-        <a href="https://docs.claude.com/en/docs/claude-code/plugins" class="resource-card">
-          <h4>Plugin Development</h4>
-          <p>Build your own Claude Code plugins</p>
-        </a>
-        <a href="https://docs.claude.com/en/docs/claude-code/mcp" class="resource-card">
-          <h4>MCP Servers</h4>
-          <p>Model Context Protocol server documentation</p>
-        </a>
-      </div>
-    </section>
-
-    <section class="section star-cta-section">
-      <div class="star-cta-card">
-        <h3 class="star-cta-title">Found something useful?</h3>
-        <p class="star-cta-text">A star helps others discover these tools. It takes one second and means a lot to us.</p>
-        <a href="https://github.com/2389-research/claude-plugins" class="cta-button" rel="noopener noreferrer" target="_blank">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-          Star on GitHub
-        </a>
-      </div>
-    </section>
-  </main>
+    </main>
 
   ${generateFooter(false)}
 
