@@ -52,75 +52,29 @@
   <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js?events" defer></script>
 </head>
 <body>
-  <div class="grid-overlay" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="." class="nav-logo" aria-label="2389 Research Plugin Marketplace">
-        <span class="status-indicator" aria-hidden="true"></span>
-        2389 Research Inc
-      </a>
-      <div class="nav-links" role="menubar">
-        <a href="#plugins" class="nav-link" role="menuitem">Plugins</a>
-        <a href="#about" class="nav-link" role="menuitem">About</a>
-        <a href="https://github.com/2389-research/claude-plugins" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank" data-tinylytics-event="nav.github">GitHub</a>
-        <a href="https://2389.ai" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank" data-tinylytics-event="nav.visit-2389">2389.ai</a>
-      </div>
-      <a href="https://github.com/2389-research/claude-plugins" class="nav-star-btn" rel="noopener noreferrer" target="_blank" title="Star on GitHub" data-tinylytics-event="nav.star-github">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-        Star
-      </a>
+  <canvas id="topo-bg" aria-hidden="true"></canvas>
+  <div class="topo-fade" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="masthead">
+    <div class="mast-bar mono rule-b">
+      <span>2389 Research</span>
+      <span>Agent Skills · Open Source</span>
+      <span>Est. 2026</span>
     </div>
-  </nav>
-
-  <header class="hero">
-    <div class="hero-inner">
-      <div class="hero-label">
-        <span class="label-indicator"></span>
-        Welcome, Fellow Builder
+    <div class="hero-panel glass">
+      <div class="kicker">A working index of</div>
+      <h1 class="hero-head">Coding-agent <em>skills</em> &amp; servers</h1>
+      <p class="hero-lede">A library of skills and MCP servers for the coding agents you already use — Claude Code, Codex, Cursor, and friends. Build workflows, testing regimes, agent architectures, and operational tooling. Each one is its own tool, doing one thing well. Install any of them with a single line.</p>
+    </div>
+    <div class="install-strip">
+      <div class="cmd mono"><span class="dollar">$</span> npx skills add 2389-research/<span class="accent">&lt;name&gt;</span>
+        <button type="button" class="btn-primary" data-copy="npx skills add 2389-research/&lt;name&gt;" data-tinylytics-event="hero.copy-install">Copy</button>
       </div>
-      <h1 class="hero-title">Plugins that actually<br>get stuff done</h1>
-      <p class="hero-subtitle">Open source Claude Code plugins and MCP servers from 2389 Research. The tools we use every day to build, ship, and not lose our minds. No corporate handbook energy here.</p>
-
-      <div class="hero-cta">
-        <div class="install-block">
-          <span class="install-label">Install</span>
-          <div class="install-tabs" data-install-tabs>
-            <div class="install-tab-row" role="tablist" aria-label="Install method">
-              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-hero" aria-controls="panel-npx-hero" id="tab-npx-hero">npx (any agent)</button>
-              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-hero" aria-controls="panel-cc-hero" id="tab-cc-hero">Claude Code</button>
-            </div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-npx-hero" aria-labelledby="tab-npx-hero" data-panel="npx-hero"><code class="install-command">npx skills add 2389-research/&lt;plugin&gt;</code></div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-cc-hero" aria-labelledby="tab-cc-hero" data-panel="cc-hero" hidden><code class="install-command">/plugin marketplace add 2389-research/claude-plugins</code></div>
-          </div>
-        </div>
-        <a href="#plugins" class="cta-button">
-          Browse the Goods
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-value">27</span>
-          <span class="stat-label">Plugins</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-value">4</span>
-          <span class="stat-label">MCP Servers</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-value">100%</span>
-          <span class="stat-label">Open Source</span>
-        </div>
-      </div>
+      <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" class="btn-ghost mono" data-tinylytics-event="nav.star-github">★ Star on GitHub</a>
     </div>
   </header>
+    </div>
 
   <main id="main-content">
     <section id="plugins" class="section plugins-section">
@@ -1190,6 +1144,17 @@
           p.hidden = p.dataset.panel !== key;
         });
       });
+    });
+  });
+
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      navigator.clipboard.writeText(btn.dataset.copy.replace(/&lt;/g,'<').replace(/&gt;/g,'>')).catch(()=>{});
+      const orig = btn.textContent;
+      const done = /Copy$/.test(orig) ? '✓ Copied' : '✓ copied';
+      btn.textContent = done; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
     });
   });
   </script>

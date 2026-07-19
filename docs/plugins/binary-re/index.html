@@ -443,6 +443,17 @@ sudo apt install libc6-armhf-cross libc6-arm64-cross
       });
     });
   });
+
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      navigator.clipboard.writeText(btn.dataset.copy.replace(/&lt;/g,'<').replace(/&gt;/g,'>')).catch(()=>{});
+      const orig = btn.textContent;
+      const done = /Copy$/.test(orig) ? '✓ Copied' : '✓ copied';
+      btn.textContent = done; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
+    });
+  });
   </script>
 </body>
 </html>

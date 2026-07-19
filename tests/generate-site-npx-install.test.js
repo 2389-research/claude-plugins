@@ -23,8 +23,7 @@ assert.doesNotMatch(journal, /qi-journal/, 'journal (MCP) quick-install must not
 
 // Homepage: hero shows the npx pattern, default to npx
 const index = read('docs/index.html');
-assert.match(index, /npx skills add 2389-research\/&lt;plugin&gt;/, 'hero should show npx pattern command');
-assert.match(index, /class="install-tab active"[^>]*data-tab="npx-hero"/, 'hero npx tab should be active by default');
+assert.match(index, /data-copy="npx skills add 2389-research\/&lt;name&gt;"/, 'hero install strip copies the npx pattern');
 // Get Started block defaults to the npx flow
 assert.match(index, /class="install-tab active"[^>]*data-tab="npx-getstarted"/, 'Get Started should default to npx');
 

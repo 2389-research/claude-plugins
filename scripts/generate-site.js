@@ -548,6 +548,17 @@ function generateInteractiveScript() {
       });
     });
   });
+
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      navigator.clipboard.writeText(btn.dataset.copy.replace(/&lt;/g,'<').replace(/&gt;/g,'>')).catch(()=>{});
+      const orig = btn.textContent;
+      const done = /Copy$/.test(orig) ? '✓ Copied' : '✓ copied';
+      btn.textContent = done; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
+    });
+  });
   </script>`;
 }
 
@@ -925,60 +936,38 @@ const ccGetStartedSteps = `<div class="quick-start-steps">
             </div>
           </div>`;
 
+function generateMasthead() {
+  return `<header class="masthead">
+    <div class="mast-bar mono rule-b">
+      <span>2389 Research</span>
+      <span>Agent Skills · Open Source</span>
+      <span>Est. 2026</span>
+    </div>
+    <div class="hero-panel glass">
+      <div class="kicker">A working index of</div>
+      <h1 class="hero-head">Coding-agent <em>skills</em> &amp; servers</h1>
+      <p class="hero-lede">A library of skills and MCP servers for the coding agents you already use — Claude Code, Codex, Cursor, and friends. Build workflows, testing regimes, agent architectures, and operational tooling. Each one is its own tool, doing one thing well. Install any of them with a single line.</p>
+    </div>
+    <div class="install-strip">
+      <div class="cmd mono"><span class="dollar">$</span> npx skills add 2389-research/<span class="accent">&lt;name&gt;</span>
+        <button type="button" class="btn-primary" data-copy="npx skills add 2389-research/&lt;name&gt;" data-tinylytics-event="hero.copy-install">Copy</button>
+      </div>
+      <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" class="btn-ghost mono" data-tinylytics-event="nav.star-github">★ Star on GitHub</a>
+    </div>
+  </header>`;
+}
+
 // Generate main index HTML
 const indexHtml = `<!DOCTYPE html>
 <html lang="en">
 ${generateHead('Coding-agent Skills & Servers', 'A working index of coding-agent skills and MCP servers from 2389 Research — install any with one line.', '')}
 <body>
-  <div class="grid-overlay" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  ${generateNav(false)}
-
-  <header class="hero">
-    <div class="hero-inner">
-      <div class="hero-label">
-        <span class="label-indicator"></span>
-        Welcome, Fellow Builder
-      </div>
-      <h1 class="hero-title">Plugins that actually<br>get stuff done</h1>
-      <p class="hero-subtitle">Open source Claude Code plugins and MCP servers from 2389 Research. The tools we use every day to build, ship, and not lose our minds. No corporate handbook energy here.</p>
-
-      <div class="hero-cta">
-        <div class="install-block">
-          <span class="install-label">Install</span>
-          ${renderInstallTabs({
-            group: 'hero',
-            npxHtml: `<code class="install-command">npx skills add 2389-research/&lt;plugin&gt;</code>`,
-            ccHtml: `<code class="install-command">${INTERNAL_MARKETPLACE_COMMAND}</code>`
-          })}
-        </div>
-        <a href="#plugins" class="cta-button">
-          Browse the Goods
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-value">${totalPlugins}</span>
-          <span class="stat-label">Plugins</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-value">${mcpServers}</span>
-          <span class="stat-label">MCP Servers</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-value">100%</span>
-          <span class="stat-label">Open Source</span>
-        </div>
-      </div>
+  <canvas id="topo-bg" aria-hidden="true"></canvas>
+  <div class="topo-fade" aria-hidden="true"></div>
+  <div class="wrap">
+    ${generateMasthead()}
     </div>
-  </header>
 
   <main id="main-content">
     <section id="plugins" class="section plugins-section">

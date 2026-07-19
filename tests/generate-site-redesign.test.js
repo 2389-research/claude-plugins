@@ -17,3 +17,14 @@ test('head: loads Newsreader and three.js and uses the skills title', () => {
   assert.match(index, /<title>Coding-agent Skills &amp; Servers \| 2389 Research<\/title>/);
   assert.doesNotMatch(index, /Plus\+Jakarta\+Sans/);
 });
+test('masthead: rule bar, headline, install strip, star link', () => {
+  assert.match(index, /2389 Research/);
+  assert.match(index, /Agent Skills · Open Source/);
+  assert.match(index, /Coding-agent <em>skills<\/em> &amp; servers/);
+  assert.match(index, /data-copy="npx skills add 2389-research\/&lt;name&gt;"/);
+  assert.match(index, /★ Star on GitHub/);
+});
+test('copy: single data-copy handler with stopPropagation', () => {
+  assert.match(index, /\[data-copy\]/);
+  assert.match(index, /stopPropagation/);
+});
