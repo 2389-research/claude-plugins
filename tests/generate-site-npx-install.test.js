@@ -1,5 +1,5 @@
 // ABOUTME: Tests the generator emits the npx (vercel-labs/skills) install method
-// ABOUTME: npx is the default tab for skill plugins; MCP servers get /plugin only
+// ABOUTME: Skill plugins show both npx and /plugin install blocks; MCP servers get /plugin only
 
 const assert = require('assert');
 const fs = require('fs');
@@ -9,17 +9,15 @@ execFileSync('npm', ['run', 'generate:site'], { stdio: 'pipe' });
 
 const read = (p) => fs.readFileSync(p, 'utf8');
 
-// Skill plugin page: npx present, /plugin present, npx tab active by default
+// Skill plugin page: npx present, /plugin present — one-line install blocks (no tabs)
 const simmer = read('docs/plugins/simmer/index.html');
 assert.match(simmer, /npx skills add 2389-research\/simmer/, 'simmer page should show npx command');
 assert.match(simmer, /\/plugin install simmer@2389-research/, 'simmer page should still show /plugin install (at-form)');
-assert.match(simmer, /class="install-tab active"[^>]*data-tab="npx-simmer"/, 'npx tab should be active by default on simmer page');
-assert.match(simmer, /class="install-tab active"[^>]*data-tab="npx-qi-simmer"/, 'quick-install should default to npx');
 
-// MCP server page: /plugin only for the hero block
+// MCP server page: /plugin only — npx block absent entirely
 const journal = read('docs/plugins/journal/index.html');
 assert.match(journal, /\/plugin install journal@2389-research/, 'journal page should show /plugin install (at-form)');
-assert.doesNotMatch(journal, /qi-journal/, 'journal (MCP) quick-install must not be tabbed');
+assert.doesNotMatch(journal, /npx skills add 2389-research\/journal/, 'journal (MCP) page must not show npx anywhere');
 
 // Homepage: hero shows the npx pattern, default to npx
 const index = read('docs/index.html');

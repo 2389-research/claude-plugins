@@ -18,29 +18,20 @@ function readPage(pluginName) {
   return fs.readFileSync(`docs/plugins/${pluginName}/index.html`, 'utf8');
 }
 
-function getInstallBlock(html) {
-  const match = html.match(/<div class="install-block">[\s\S]*?<\/div>/);
-  assert(match, 'expected install block in generated plugin page');
-  return match[0];
-}
-
 // The marketplace registers under the `name` field of marketplace.json, and Claude Code
 // resolves `/plugin install` as `<plugin>@<marketplace-name>`. The npx command keeps the
 // GitHub owner/repo form (2389-research/<plugin>) since that is what vercel-labs/skills expects.
 const MARKETPLACE_NAME = require('../.claude-plugin/marketplace.json').name;
 assert.strictEqual(MARKETPLACE_NAME, '2389-research', 'marketplace name should be 2389-research (issue #32)');
 
-// Skill plugins now render install tabs (npx default + /plugin secondary)
+// Skill plugins show both install blocks: npx present, /plugin install present (no tabs)
 const cssPage = readPage('css-development');
 assert.match(cssPage, /npx skills add 2389-research\/css-development/, 'expected npx command on skill plugin page');
 assert.match(cssPage, /\/plugin install css-development@2389-research/, 'expected /plugin install at-form on skill plugin page');
 
-const socialmediaInstallBlock = getInstallBlock(readPage('socialmedia'));
-assert.match(
-  socialmediaInstallBlock,
-  /\/plugin install socialmedia@2389-research/,
-  'expected external plugin install block to use the <name>@2389-research marketplace form'
-);
+const socialmediaPage = readPage('socialmedia');
+assert.match(socialmediaPage, /\/plugin install socialmedia@2389-research/, 'MCP plugin page shows the /plugin install at-form');
+assert.doesNotMatch(socialmediaPage, /npx skills add 2389-research\/socialmedia/, 'MCP plugin page must not show npx');
 
 const simmerPage = readPage('simmer');
 assert.match(simmerPage, /npx skills add 2389-research\/simmer/, 'expected npx command on simmer page');

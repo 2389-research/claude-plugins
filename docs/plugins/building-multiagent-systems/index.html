@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Primary Meta Tags -->
-  <title>building-multiagent-systems — Agent Systems Plugin for Claude Code | 2389 Research</title>
-  <meta name="title" content="building-multiagent-systems — Agent Systems Plugin for Claude Code | 2389 Research">
+  <title>building-multiagent-systems | 2389 Research</title>
+  <meta name="title" content="building-multiagent-systems | 2389 Research">
   <meta name="description" content="Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination">
   <meta name="keywords" content="multi-agent, orchestrator, coordination, agents, architecture, patterns, coding agent skills, Claude Code, MCP servers, Codex, Cursor, AI development, Anthropic, 2389 Research">
   <meta name="author" content="2389 Research Inc">
@@ -21,7 +21,7 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://skills.2389.ai/plugins/building-multiagent-systems/">
-  <meta property="og:title" content="building-multiagent-systems — Agent Systems Plugin for Claude Code | 2389 Research">
+  <meta property="og:title" content="building-multiagent-systems | 2389 Research">
   <meta property="og:description" content="Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination">
   <meta property="og:image" content="https://skills.2389.ai/plugins/building-multiagent-systems/og-image.png">
   <meta property="og:site_name" content="2389 Research Plugin Marketplace">
@@ -29,7 +29,7 @@
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://skills.2389.ai/plugins/building-multiagent-systems/">
-  <meta property="twitter:title" content="building-multiagent-systems — Agent Systems Plugin for Claude Code | 2389 Research">
+  <meta property="twitter:title" content="building-multiagent-systems | 2389 Research">
   <meta property="twitter:description" content="Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination">
   <meta property="twitter:image" content="https://skills.2389.ai/plugins/building-multiagent-systems/og-image.png">
 
@@ -52,83 +52,36 @@
   <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js?events" defer></script>
 </head>
 <body>
-  <div class="grid-overlay" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="../../" class="nav-logo" aria-label="2389 Research Plugin Marketplace">
-        <span class="status-indicator" aria-hidden="true"></span>
-        2389 Research Inc
-      </a>
-      <div class="nav-links" role="menubar">
-        <a href="../../#plugins" class="nav-link" role="menuitem">Plugins</a>
-        <a href="../../#about" class="nav-link" role="menuitem">About</a>
-        <a href="https://github.com/2389-research/claude-plugins" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank" data-tinylytics-event="nav.github">GitHub</a>
-        <a href="https://2389.ai" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank" data-tinylytics-event="nav.visit-2389">2389.ai</a>
-      </div>
-      <a href="https://github.com/2389-research/claude-plugins" class="nav-star-btn" rel="noopener noreferrer" target="_blank" title="Star on GitHub" data-tinylytics-event="nav.star-github">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-        Star
-      </a>
+  <canvas id="topo-bg" aria-hidden="true"></canvas>
+  <div class="topo-fade" aria-hidden="true"></div>
+  <div class="wrap detail">
+    <div class="detail-topbar mono rule-b">
+      <a href="../../" data-tinylytics-event="nav.home">← All skills</a>
+      <span>2389 Research · Agent Skills</span>
     </div>
-  </nav>
-
-  <header class="plugin-hero">
-    <div class="plugin-hero-inner">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="../../">Marketplace</a>
-        <span class="breadcrumb-sep">→</span>
-        <a href="../../#plugins">Agent Systems</a>
-        <span class="breadcrumb-sep">→</span>
-        <span class="breadcrumb-current">building-multiagent-systems</span>
-      </nav>
-
-      <div class="plugin-hero-header">
-        <h1 class="plugin-hero-title">building-multiagent-systems</h1>
-        <span class="plugin-hero-version">v1.0.0</span>
-        
+    <header class="detail-head">
+      <div class="detail-kicker mono" style="color:#7a3fb0">Agent Systems</div>
+      <div class="detail-title-row">
+        <h1 class="detail-name mono">building-multiagent-systems</h1>
+        <span class="detail-ver mono">v1.0.0</span>
       </div>
-
-      <p class="plugin-hero-description">Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination</p>
-
-      <div class="plugin-tags-large"><span class="tag">multi-agent</span><span class="tag">orchestrator</span><span class="tag">coordination</span><span class="tag">agents</span><span class="tag">architecture</span><span class="tag">patterns</span></div>
-
-      <div class="plugin-hero-actions">
-        <div class="install-block">
-          <span class="install-label">Install</span>
-          <div class="install-tabs" data-install-tabs>
-            <div class="install-tab-row" role="tablist" aria-label="Install method">
-              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-building-multiagent-systems" aria-controls="panel-npx-building-multiagent-systems" id="tab-npx-building-multiagent-systems">npx (any agent)</button>
-              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-building-multiagent-systems" aria-controls="panel-cc-building-multiagent-systems" id="tab-cc-building-multiagent-systems">Claude Code</button>
-            </div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-npx-building-multiagent-systems" aria-labelledby="tab-npx-building-multiagent-systems" data-panel="npx-building-multiagent-systems"><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="building-multiagent-systems-npx">npx skills add 2389-research/building-multiagent-systems</code></div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-cc-building-multiagent-systems" aria-labelledby="tab-cc-building-multiagent-systems" data-panel="cc-building-multiagent-systems" hidden><code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="building-multiagent-systems">/plugin install building-multiagent-systems@2389-research</code></div>
+      <p class="detail-lede">Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination</p>
+      <div class="row-tags"><a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="multi-agent">#multi-agent</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="orchestrator">#orchestrator</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="coordination">#coordination</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="agents">#agents</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="architecture">#architecture</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="patterns">#patterns</a></div>
+      
+          <div class="mono install-label">Install — npx (any agent)</div>
+          <div class="install-box">
+            <code class="mono">npx skills add 2389-research/building-multiagent-systems</code>
+            <button type="button" class="btn-primary" data-copy="npx skills add 2389-research/building-multiagent-systems" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="building-multiagent-systems-npx">Copy</button>
           </div>
-        </div>
-        <a href="https://github.com/2389-research/building-multiagent-systems" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="building-multiagent-systems">
-          View Source
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
+      <div class="mono install-label">Install — Claude Code</div>
+      <div class="install-box">
+        <code class="mono">/plugin install building-multiagent-systems@2389-research</code>
+        <button type="button" class="btn-ghost-sm mono" data-copy="/plugin install building-multiagent-systems@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="building-multiagent-systems">Copy</button>
       </div>
-    </div>
-  </header>
-
-  <main id="main-content">
-    
-    <section class="section readme-section">
-      <div class="section-header">
-        <span class="section-number">01</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Documentation</h2>
-          <p class="section-subtitle">Full plugin documentation and usage guide</p>
-        </div>
-      </div>
-
-      <div class="readme-content">
-        <h2>Building multi-agent systems</h2>
+    </header>
+    <main id="main-content" class="readme-body">
+      <h2>Building multi-agent systems</h2>
 <p>Architecture patterns for multi-agent systems where AI agents coordinate using tools.</p>
 <h3>Installation</h3>
 <pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
@@ -191,164 +144,20 @@ async function cleanup() {
 <p>---</p>
 <p>If these patterns helped you build a better multi-agent system, a ⭐ helps us know it's landing.</p>
 <p>Built by <a href="https://2389.ai" rel="noopener noreferrer">2389</a> · Part of the <a href="https://github.com/2389-research/claude-plugins" rel="noopener noreferrer">Claude Code plugin marketplace</a></p>
-      </div>
+    </main>
+    <nav class="detail-nav mono rule-t" aria-label="Skill navigation">
+      <a href="../xtool/" data-tinylytics-event="plugin.prev">← xtool</a>
+      <a href="../speed-run/" data-tinylytics-event="plugin.next">speed-run →</a>
+    </nav>
+    <section class="related rule-t">
+      <div class="mono related-label">More from Agent Systems</div>
+      <ul class="related-list">
+        <li><a href="../deliberation/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="deliberation"><span class="mono related-name">deliberation</span><span class="related-desc">Decision-making through deliberation - seeking unity through discernment rather than consensus through debate</span></a></li>
+        <li><a href="../review-squad/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="review-squad"><span class="mono related-name">review-squad</span><span class="related-desc">Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks</span></a></li>
+        <li><a href="../jam/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="jam"><span class="mono related-name">jam</span><span class="related-desc">Parallel exploration powered by diverse perspectives - independent agent panels propose, build variants in worktrees, review, pick a winner, and synthesize the best of all variants into the final result</span></a></li>
+      </ul>
     </section>
-    
-
-    <section class="section quick-install-section">
-      <div class="section-header">
-        <span class="section-number">02</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Quick Install</h2>
-          <p class="section-subtitle">Get started in seconds</p>
-        </div>
-      </div>
-
-      <div class="quick-start">
-<div class="install-tabs" data-install-tabs>
-            <div class="install-tab-row" role="tablist" aria-label="Install method">
-              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-qi-building-multiagent-systems" aria-controls="panel-npx-qi-building-multiagent-systems" id="tab-npx-qi-building-multiagent-systems">npx (any agent)</button>
-              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-qi-building-multiagent-systems" aria-controls="panel-cc-qi-building-multiagent-systems" id="tab-cc-qi-building-multiagent-systems">Claude Code</button>
-            </div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-npx-qi-building-multiagent-systems" aria-labelledby="tab-npx-qi-building-multiagent-systems" data-panel="npx-qi-building-multiagent-systems"><div class="quick-start-steps">
-          <div class="step">
-            <span class="step-number">1</span>
-            <div class="step-content">
-              <span class="step-label">Run it — works in any agent</span>
-              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="building-multiagent-systems-npx">npx skills add 2389-research/building-multiagent-systems</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Pick your agents when prompted</span>
-              <code>Claude Code, Cursor, Codex…</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
-            <div class="step-content">
-              <span class="step-label">You're good to go</span>
-              <code>Skills auto-trigger when relevant</code>
-            </div>
-          </div></div></div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-cc-qi-building-multiagent-systems" aria-labelledby="tab-cc-qi-building-multiagent-systems" data-panel="cc-qi-building-multiagent-systems" hidden><div class="quick-start-steps">
-          <div class="step">
-            <span class="step-number">1</span>
-            <div class="step-content">
-              <span class="step-label">Add the marketplace</span>
-              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="building-multiagent-systems-marketplace">/plugin marketplace add 2389-research/claude-plugins</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="building-multiagent-systems-install">/plugin install building-multiagent-systems@2389-research</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">3</span>
-            <div class="step-content">
-              <span class="step-label">You're good to go</span>
-              <code>Skills auto-trigger when relevant</code>
-            </div>
-          </div></div></div>
-          </div>
-      </div>
-    </section>
-
-    
-    <section class="section related-section">
-      <div class="section-header">
-        <span class="section-number">03</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Related Plugins</h2>
-          <p class="section-subtitle">More from Agent Systems</p>
-        </div>
-      </div>
-
-      <div class="plugins-grid">
-
-        <article class="plugin-card">
-          <div class="plugin-card-header">
-            <a href="../deliberation/" class="plugin-name-link" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="deliberation">
-              <h4 class="plugin-name">deliberation</h4>
-            </a>
-            <span class="plugin-version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Decision-making through deliberation - seeking unity through discernment rather than consensus through debate</p>
-          <div class="plugin-tags"><span class="tag">decision-making</span><span class="tag">discernment</span><span class="tag">deliberation</span></div>
-          <div class="plugin-footer plugin-footer-tabs">
-            <div class="install-tabs" data-install-tabs>
-            <div class="install-tab-row" role="tablist" aria-label="Install method">
-              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-related-deliberation" aria-controls="panel-npx-related-deliberation" id="tab-npx-related-deliberation">npx (any agent)</button>
-              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-related-deliberation" aria-controls="panel-cc-related-deliberation" id="tab-cc-related-deliberation">Claude Code</button>
-            </div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-npx-related-deliberation" aria-labelledby="tab-npx-related-deliberation" data-panel="npx-related-deliberation"><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="deliberation-npx">npx skills add 2389-research/deliberation</code></div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-cc-related-deliberation" aria-labelledby="tab-cc-related-deliberation" data-panel="cc-related-deliberation" hidden><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="deliberation">/plugin install deliberation@2389-research</code></div>
-          </div>
-            <a href="../deliberation/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="deliberation">Details →</a>
-          </div>
-        </article>
-
-        <article class="plugin-card">
-          <div class="plugin-card-header">
-            <a href="../review-squad/" class="plugin-name-link" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="review-squad">
-              <h4 class="plugin-name">review-squad</h4>
-            </a>
-            <span class="plugin-version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks</p>
-          <div class="plugin-tags"><span class="tag">review</span><span class="tag">audit</span><span class="tag">launch</span></div>
-          <div class="plugin-footer plugin-footer-tabs">
-            <div class="install-tabs" data-install-tabs>
-            <div class="install-tab-row" role="tablist" aria-label="Install method">
-              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-related-review-squad" aria-controls="panel-npx-related-review-squad" id="tab-npx-related-review-squad">npx (any agent)</button>
-              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-related-review-squad" aria-controls="panel-cc-related-review-squad" id="tab-cc-related-review-squad">Claude Code</button>
-            </div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-npx-related-review-squad" aria-labelledby="tab-npx-related-review-squad" data-panel="npx-related-review-squad"><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="review-squad-npx">npx skills add 2389-research/review-squad</code></div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-cc-related-review-squad" aria-labelledby="tab-cc-related-review-squad" data-panel="cc-related-review-squad" hidden><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="review-squad">/plugin install review-squad@2389-research</code></div>
-          </div>
-            <a href="../review-squad/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="review-squad">Details →</a>
-          </div>
-        </article>
-
-        <article class="plugin-card">
-          <div class="plugin-card-header">
-            <a href="../jam/" class="plugin-name-link" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="jam">
-              <h4 class="plugin-name">jam</h4>
-            </a>
-            <span class="plugin-version">v1.0.0</span>
-          </div>
-          <p class="plugin-description">Parallel exploration powered by diverse perspectives - independent agent panels propose, build variants in worktrees, review, pick a winner, and synthesize the best of all variants into the final result</p>
-          <div class="plugin-tags"><span class="tag">parallel</span><span class="tag">exploration</span><span class="tag">perspectives</span></div>
-          <div class="plugin-footer plugin-footer-tabs">
-            <div class="install-tabs" data-install-tabs>
-            <div class="install-tab-row" role="tablist" aria-label="Install method">
-              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-related-jam" aria-controls="panel-npx-related-jam" id="tab-npx-related-jam">npx (any agent)</button>
-              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-related-jam" aria-controls="panel-cc-related-jam" id="tab-cc-related-jam">Claude Code</button>
-            </div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-npx-related-jam" aria-labelledby="tab-npx-related-jam" data-panel="npx-related-jam"><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="jam-npx">npx skills add 2389-research/jam</code></div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-cc-related-jam" aria-labelledby="tab-cc-related-jam" data-panel="cc-related-jam" hidden><code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="jam">/plugin install jam@2389-research</code></div>
-          </div>
-            <a href="../jam/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="jam">Details →</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section back-section">
-      <a href="../../" class="back-link">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Back to Marketplace
-      </a>
-    </section>
-  </main>
-
-  <footer class="colophon rule-t glass">
+    <footer class="colophon rule-t glass">
       <span class="mono">© 2026 2389 Research Inc — all plugins open source</span>
       <span class="colophon-links mono">
         <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="github">GitHub</a>
@@ -357,7 +166,7 @@ async function cleanup() {
         <a href="https://2389.ai" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="about">2389.ai</a>
       </span>
     </footer>
-
+  </div>
   <!-- Structured Data - Plugin -->
   <script type="application/ld+json">
   {
@@ -415,34 +224,6 @@ async function cleanup() {
   </script>
 
   <script>
-  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
-    el.title = 'Click to copy';
-    el.addEventListener('click', () => {
-      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
-        const orig = el.textContent;
-        el.textContent = 'Copied!';
-        el.classList.add('copied');
-        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
-      });
-    });
-  });
-
-  document.querySelectorAll('.install-tabs').forEach(group => {
-    group.querySelectorAll('.install-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const key = tab.dataset.tab;
-        group.querySelectorAll('.install-tab').forEach(t => {
-          const on = t === tab;
-          t.classList.toggle('active', on);
-          t.setAttribute('aria-selected', on ? 'true' : 'false');
-        });
-        group.querySelectorAll('.install-tab-panel').forEach(p => {
-          p.hidden = p.dataset.panel !== key;
-        });
-      });
-    });
-  });
-
   document.querySelectorAll('[data-copy]').forEach(btn => {
     btn.addEventListener('click', e => {
       e.preventDefault(); e.stopPropagation();

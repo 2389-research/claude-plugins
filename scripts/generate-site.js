@@ -483,51 +483,11 @@ function pluginHasSkills(plugin) {
   return plugin.strict !== true;
 }
 
-// Renders the npx-default / Claude-Code-secondary install tabs.
-// group must be unique per page so ARIA ids don't collide.
-function renderInstallTabs({ group, npxHtml, ccHtml }) {
-  return `<div class="install-tabs" data-install-tabs>
-            <div class="install-tab-row" role="tablist" aria-label="Install method">
-              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-${group}" aria-controls="panel-npx-${group}" id="tab-npx-${group}">npx (any agent)</button>
-              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-${group}" aria-controls="panel-cc-${group}" id="tab-cc-${group}">Claude Code</button>
-            </div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-npx-${group}" aria-labelledby="tab-npx-${group}" data-panel="npx-${group}">${npxHtml}</div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-cc-${group}" aria-labelledby="tab-cc-${group}" data-panel="cc-${group}" hidden>${ccHtml}</div>
-          </div>`;
-}
 
-// Shared interactive <script>: copy-to-clipboard + tab switching.
-// Used by both the homepage and every plugin page (plugin pages had no script before).
+// Shared interactive <script>: copy-to-clipboard, search/filter, topo background.
+// Used by both the homepage and every plugin page.
 function generateInteractiveScript() {
   return `<script>
-  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
-    el.title = 'Click to copy';
-    el.addEventListener('click', () => {
-      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
-        const orig = el.textContent;
-        el.textContent = 'Copied!';
-        el.classList.add('copied');
-        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
-      });
-    });
-  });
-
-  document.querySelectorAll('.install-tabs').forEach(group => {
-    group.querySelectorAll('.install-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const key = tab.dataset.tab;
-        group.querySelectorAll('.install-tab').forEach(t => {
-          const on = t === tab;
-          t.classList.toggle('active', on);
-          t.setAttribute('aria-selected', on ? 'true' : 'false');
-        });
-        group.querySelectorAll('.install-tab-panel').forEach(p => {
-          p.hidden = p.dataset.panel !== key;
-        });
-      });
-    });
-  });
-
   document.querySelectorAll('[data-copy]').forEach(btn => {
     btn.addEventListener('click', e => {
       e.preventDefault(); e.stopPropagation();
@@ -614,56 +574,6 @@ function generateInteractiveScript() {
   </script>`;
 }
 
-function generateQuickInstallSteps(plugin) {
-  const step3 = `
-          <div class="step">
-            <span class="step-number">3</span>
-            <div class="step-content">
-              <span class="step-label">You're good to go</span>
-              <code>Skills auto-trigger when relevant</code>
-            </div>
-          </div>`;
-
-  const ccSteps = `
-          <div class="step">
-            <span class="step-number">1</span>
-            <div class="step-content">
-              <span class="step-label">Add the marketplace</span>
-              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="${plugin.name}-marketplace">${INTERNAL_MARKETPLACE_COMMAND}</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="${plugin.name}-install">${getPluginInstallCommand(plugin)}</code>
-            </div>
-          </div>${step3}`;
-
-  if (!pluginHasSkills(plugin)) return `<div class="quick-start-steps">${ccSteps}</div>`;
-
-  const npxSteps = `
-          <div class="step">
-            <span class="step-number">1</span>
-            <div class="step-content">
-              <span class="step-label">Run it — works in any agent</span>
-              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="${plugin.name}-npx">${getNpxInstallCommand(plugin)}</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Pick your agents when prompted</span>
-              <code>Claude Code, Cursor, Codex…</code>
-            </div>
-          </div>${step3}`;
-
-  return renderInstallTabs({
-    group: `qi-${plugin.name}`,
-    npxHtml: `<div class="quick-start-steps">${npxSteps}</div>`,
-    ccHtml: `<div class="quick-start-steps">${ccSteps}</div>`,
-  });
-}
 
 // Generate category sections
 function generateCategorySections() {
@@ -691,46 +601,11 @@ function generateCategorySections() {
 function generateRelatedPlugins(plugin, category) {
   const related = category.plugins.filter(p => p.name !== plugin.name).slice(0, 3);
   if (related.length === 0) return '';
-
-  return `
-    <section class="section related-section">
-      <div class="section-header">
-        <span class="section-number">03</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Related Plugins</h2>
-          <p class="section-subtitle">More from ${category.title}</p>
-        </div>
-      </div>
-
-      <div class="plugins-grid">
-${related.map(p => {
-  const desc = cleanDescription(p.description);
-  const tags = (p.keywords || []).slice(0, 3).map(k =>
-    `<span class="tag">${k}</span>`
-  ).join('');
-  return `
-        <article class="plugin-card">
-          <div class="plugin-card-header">
-            <a href="../${p.name}/" class="plugin-name-link" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="${p.name}">
-              <h4 class="plugin-name">${p.name}</h4>
-            </a>
-            <span class="plugin-version">v${p.version || '1.0.0'}</span>
-          </div>
-          <p class="plugin-description">${desc}</p>
-          <div class="plugin-tags">${tags}</div>
-          <div class="plugin-footer${pluginHasSkills(p) ? ' plugin-footer-tabs' : ''}">
-            ${pluginHasSkills(p)
-              ? renderInstallTabs({
-                  group: `related-${p.name}`,
-                  npxHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}-npx">${getNpxInstallCommand(p)}</code>`,
-                  ccHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}">${getPluginInstallCommand(p)}</code>`
-                })
-              : `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}">${getPluginInstallCommand(p)}</code>`}
-            <a href="../${p.name}/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="${p.name}">Details →</a>
-          </div>
-        </article>`;
-}).join('\n')}
-      </div>
+  return `<section class="related rule-t">
+      <div class="mono related-label">More from ${category.title}</div>
+      <ul class="related-list">
+        ${related.map(p => `<li><a href="../${p.name}/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="${p.name}"><span class="mono related-name">${p.name}</span><span class="related-desc">${cleanDescription(p.description)}</span></a></li>`).join('\n        ')}
+      </ul>
     </section>`;
 }
 
@@ -747,11 +622,6 @@ function generatePluginPage(plugin) {
     marketplacePlugins: marketplace.plugins,
     linkReport,
   });
-  const isExternal = plugin.strict === true;
-
-  const tags = (plugin.keywords || []).map(k =>
-    `<span class="tag">${k}</span>`
-  ).join('');
 
   // Structured data for the plugin
   const structuredData = {
@@ -779,119 +649,60 @@ function generatePluginPage(plugin) {
     "dateModified": BUILD_DATE
   };
 
-  // Build a descriptive title from the plugin name and category
-  const pluginTitle = `${plugin.name} — ${category.title} Plugin for Claude Code`;
+  // `category` is already declared at the top of generatePluginPage — REUSE it (do NOT add `const cat`; correction #2).
+  const catColor = CAT_COLOR[category.title] || '#e6196e';
+  const isMcp = !pluginHasSkills(plugin);
+  const allPlugins = marketplace.plugins;
+  const idx = allPlugins.findIndex(p => p.name === plugin.name);
+  const prev = idx > 0 ? allPlugins[idx - 1] : null;
+  const next = idx < allPlugins.length - 1 ? allPlugins[idx + 1] : null;
+  const tagHtml = (plugin.keywords || []).slice(0, 6).map(t =>
+    `<a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="${t}">#${t}</a>`
+  ).join(' ');
+  const npxBlock = isMcp ? '' : `
+          <div class="mono install-label">Install — npx (any agent)</div>
+          <div class="install-box">
+            <code class="mono">${getNpxInstallCommand(plugin)}</code>
+            <button type="button" class="btn-primary" data-copy="${getNpxInstallCommand(plugin)}" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}-npx">Copy</button>
+          </div>`;
 
   return `<!DOCTYPE html>
 <html lang="en">
-${generateHead(pluginTitle, description, `plugins/${plugin.name}/`, plugin.keywords)}
+${generateHead(plugin.name, description, `plugins/${plugin.name}/`, plugin.keywords)}
 <body>
-  <div class="grid-overlay" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  ${generateNav(true)}
-
-  <header class="plugin-hero">
-    <div class="plugin-hero-inner">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="../../">Marketplace</a>
-        <span class="breadcrumb-sep">→</span>
-        <a href="../../#plugins">${category.title}</a>
-        <span class="breadcrumb-sep">→</span>
-        <span class="breadcrumb-current">${plugin.name}</span>
-      </nav>
-
-      <div class="plugin-hero-header">
-        <h1 class="plugin-hero-title">${plugin.name}</h1>
-        <span class="plugin-hero-version">v${plugin.version || '1.0.0'}</span>
-        ${isExternal ? '<span class="plugin-external-badge">External</span>' : ''}
-      </div>
-
-      <p class="plugin-hero-description">${description}</p>
-
-      <div class="plugin-tags-large">${tags}</div>
-
-      <div class="plugin-hero-actions">
-        <div class="install-block">
-          <span class="install-label">Install</span>
-          ${pluginHasSkills(plugin)
-            ? renderInstallTabs({
-                group: plugin.name,
-                npxHtml: `<code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}-npx">${getNpxInstallCommand(plugin)}</code>`,
-                ccHtml: `<code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`
-              })
-            : `<code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`}
-        </div>
-        <a href="${sourceUrl}" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="${plugin.name}">
-          View Source
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
+  <canvas id="topo-bg" aria-hidden="true"></canvas>
+  <div class="topo-fade" aria-hidden="true"></div>
+  <div class="wrap detail">
+    <div class="detail-topbar mono rule-b">
+      <a href="../../" data-tinylytics-event="nav.home">← All skills</a>
+      <span>2389 Research · Agent Skills</span>
     </div>
-  </header>
-
-  <main id="main-content">
-    ${readme ? `
-    <section class="section readme-section">
-      <div class="section-header">
-        <span class="section-number">01</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Documentation</h2>
-          <p class="section-subtitle">Full plugin documentation and usage guide</p>
-        </div>
+    <header class="detail-head">
+      <div class="detail-kicker mono" style="color:${catColor}">${category.title}${isMcp ? ' · <span class="mcp-badge">MCP SERVER</span>' : ''}</div>
+      <div class="detail-title-row">
+        <h1 class="detail-name mono">${plugin.name}</h1>
+        <span class="detail-ver mono">v${plugin.version || '1.0.0'}</span>
       </div>
-
-      <div class="readme-content">
-        ${readmeHtml}
+      <p class="detail-lede">${description}</p>
+      <div class="row-tags">${tagHtml}</div>
+      ${npxBlock}
+      <div class="mono install-label">Install — Claude Code</div>
+      <div class="install-box">
+        <code class="mono">${getPluginInstallCommand(plugin)}</code>
+        <button type="button" class="btn-ghost-sm mono" data-copy="${getPluginInstallCommand(plugin)}" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">Copy</button>
       </div>
-    </section>
-    ` : `
-    <section class="section readme-section">
-      <div class="section-header">
-        <span class="section-number">01</span>
-        <div class="section-title-group">
-          <h2 class="section-title">About This Plugin</h2>
-          <p class="section-subtitle">What this plugin provides</p>
-        </div>
-      </div>
-
-      <div class="readme-content">
-        <p>${description}</p>
-        <p>For full documentation and usage examples, visit the <a href="${sourceUrl}" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
-      </div>
-    </section>
-    `}
-
-    <section class="section quick-install-section">
-      <div class="section-header">
-        <span class="section-number">02</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Quick Install</h2>
-          <p class="section-subtitle">Get started in seconds</p>
-        </div>
-      </div>
-
-      <div class="quick-start">
-${generateQuickInstallSteps(plugin)}
-      </div>
-    </section>
-
+    </header>
+    <main id="main-content" class="readme-body">
+      ${readme ? readmeHtml : `<p>${description}</p>`}
+    </main>
+    <nav class="detail-nav mono rule-t" aria-label="Skill navigation">
+      ${prev ? `<a href="../${prev.name}/" data-tinylytics-event="plugin.prev">← ${prev.name}</a>` : '<span></span>'}
+      ${next ? `<a href="../${next.name}/" data-tinylytics-event="plugin.next">${next.name} →</a>` : '<span></span>'}
+    </nav>
     ${generateRelatedPlugins(plugin, category)}
-
-    <section class="section back-section">
-      <a href="../../" class="back-link">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Back to Marketplace
-      </a>
-    </section>
-  </main>
-
-  ${generateFooter(true)}
-
+    ${generateFooter(true)}
+  </div>
   <!-- Structured Data - Plugin -->
   <script type="application/ld+json">
   ${JSON.stringify(structuredData, null, 2)}
@@ -938,55 +749,6 @@ const mcpServers = marketplace.plugins.filter(p =>
   p.description?.toLowerCase().includes('mcp server')
 ).length || 3;
 
-// Step list HTML for the homepage "Get Started in 30 Seconds" install tabs.
-// Extracted so the renderInstallTabs call stays readable.
-const npxGetStartedSteps = `<div class="quick-start-steps">
-            <div class="step">
-              <span class="step-number">1</span>
-              <div class="step-content">
-                <span class="step-label">Run it — works in any agent</span>
-                <code>npx skills add 2389-research/better-dev</code>
-              </div>
-            </div>
-            <div class="step">
-              <span class="step-number">2</span>
-              <div class="step-content">
-                <span class="step-label">Pick your agents when prompted</span>
-                <code>Claude Code, Cursor, Codex…</code>
-              </div>
-            </div>
-            <div class="step">
-              <span class="step-number">3</span>
-              <div class="step-content">
-                <span class="step-label">That's it. Seriously.</span>
-                <code>Skills auto-trigger when relevant</code>
-              </div>
-            </div>
-          </div>`;
-
-const ccGetStartedSteps = `<div class="quick-start-steps">
-            <div class="step">
-              <span class="step-number">1</span>
-              <div class="step-content">
-                <span class="step-label">Add the marketplace</span>
-                <code>/plugin marketplace add 2389-research/claude-plugins</code>
-              </div>
-            </div>
-            <div class="step">
-              <span class="step-number">2</span>
-              <div class="step-content">
-                <span class="step-label">Grab what you need</span>
-                <code>/plugin install better-dev@${MARKETPLACE_NAME}</code>
-              </div>
-            </div>
-            <div class="step">
-              <span class="step-number">3</span>
-              <div class="step-content">
-                <span class="step-label">That's it. Seriously.</span>
-                <code>Skills auto-trigger when relevant</code>
-              </div>
-            </div>
-          </div>`;
 
 // One category→hex map for the whole generator. Task 4 (rows/sections) and Task 7 (detail) reuse it.
 const CAT_COLOR = { 'Development': '#e6196e', 'Infrastructure': '#c67514', 'Agent Systems': '#7a3fb0', 'Personal & Strategy': '#1f9e6b' };

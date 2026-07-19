@@ -66,3 +66,24 @@ test('footer: colophon with copyright and links', () => {
   assert.match(index, /Skills Guide/);
   assert.match(index, /2389\.ai/);
 });
+test('detail: editorial header, both install blocks, no legacy install UI', () => {
+  const simmer = fs.readFileSync(path.join(ROOT, 'docs/plugins/simmer/index.html'), 'utf8');
+  assert.match(simmer, /← All skills/);
+  assert.match(simmer, /npx skills add 2389-research\/simmer/);
+  assert.match(simmer, /\/plugin install simmer@2389-research/);
+  assert.match(simmer, /readme-body/);
+  assert.doesNotMatch(simmer, /install-tabs/);
+  assert.doesNotMatch(simmer, /class="plugin-install"/);
+});
+test('detail: MCP-only page omits the npx block', () => {
+  const journal = fs.readFileSync(path.join(ROOT, 'docs/plugins/journal/index.html'), 'utf8');
+  assert.doesNotMatch(journal, /npx skills add 2389-research\/journal/);
+  assert.match(journal, /\/plugin install journal@2389-research/);
+});
+test('detail: prev/next follow flat marketplace order', () => {
+  const marketplace = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude-plugin/marketplace.json'), 'utf8'));
+  const i = marketplace.plugins.findIndex(p => p.name === 'simmer');
+  const simmer = fs.readFileSync(path.join(ROOT, 'docs/plugins/simmer/index.html'), 'utf8');
+  assert.match(simmer, new RegExp('\\.\\./' + marketplace.plugins[i-1].name + '/'));
+  assert.match(simmer, new RegExp('\\.\\./' + marketplace.plugins[i+1].name + '/'));
+});

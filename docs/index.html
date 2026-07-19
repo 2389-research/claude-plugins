@@ -851,34 +851,6 @@
   </script>
 
   <script>
-  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
-    el.title = 'Click to copy';
-    el.addEventListener('click', () => {
-      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
-        const orig = el.textContent;
-        el.textContent = 'Copied!';
-        el.classList.add('copied');
-        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
-      });
-    });
-  });
-
-  document.querySelectorAll('.install-tabs').forEach(group => {
-    group.querySelectorAll('.install-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const key = tab.dataset.tab;
-        group.querySelectorAll('.install-tab').forEach(t => {
-          const on = t === tab;
-          t.classList.toggle('active', on);
-          t.setAttribute('aria-selected', on ? 'true' : 'false');
-        });
-        group.querySelectorAll('.install-tab-panel').forEach(p => {
-          p.hidden = p.dataset.panel !== key;
-        });
-      });
-    });
-  });
-
   document.querySelectorAll('[data-copy]').forEach(btn => {
     btn.addEventListener('click', e => {
       e.preventDefault(); e.stopPropagation();
