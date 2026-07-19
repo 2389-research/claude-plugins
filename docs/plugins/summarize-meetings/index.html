@@ -476,6 +476,30 @@
     const resetBtn = document.querySelector('[data-reset]');
     if (resetBtn) resetBtn.addEventListener('click', () => { search.value=''; cat='all'; tag=null; chips.forEach(x=>x.classList.toggle('active',x.dataset.cat==='all')); if(clearTag) clearTag.hidden=true; apply(); });
   }
+  (function topo(){
+    var canvas = document.getElementById('topo-bg');
+    if (!canvas || !window.THREE) { if (!window.__topoTries) window.__topoTries = 0; if (window.__topoTries++ < 40) setTimeout(topo, 120); return; }
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var THREE = window.THREE, scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0xffffff, 3.2, 10.5);
+    var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+    camera.position.set(0, 2.05, 3.15); camera.lookAt(0, -0.15, -1.6);
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setClearColor(0x000000, 0);
+    var SEG = 108, SIZE = 18;
+    var geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG); geo.rotateX(-Math.PI/2);
+    var base = geo.attributes.position.array.slice();
+    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xe6196e, wireframe: true, transparent: true, opacity: 0.16 })));
+    var m2 = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0x171512, wireframe: true, transparent: true, opacity: 0.05 })); m2.position.y = 0.012; scene.add(m2);
+    var p = [0,1,2,3].map(function(i){ return i * 1.7; });
+    var H = function(x,z,t){ return Math.sin(x*0.55+t+p[0])*0.55 + Math.cos(z*0.42-t*0.75+p[1])*0.5 + Math.sin((x+z)*0.30+t*0.6+p[2])*0.42 + Math.sin(x*0.16-z*0.22+t*0.35+p[3])*0.7; };
+    var pos = geo.attributes.position;
+    function resize(){ var w = canvas.clientWidth||innerWidth, h = canvas.clientHeight||innerHeight; renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+    addEventListener('resize', resize); resize();
+    var start = performance.now();
+    function frame(){ var t = reduce ? 6.2 : (performance.now()-start)*0.00035; for (var i=0;i<pos.count;i++){ var x=base[i*3], z=base[i*3+2]; var y=H(x,z,t); var edge=1-Math.min(1,(Math.abs(x)+Math.abs(z))/15); pos.array[i*3+1]=y*(0.35+edge*0.9); } pos.needsUpdate=true; renderer.render(scene,camera); if(!reduce) requestAnimationFrame(frame); }
+    frame();
+  })();
   </script>
 </body>
 </html>

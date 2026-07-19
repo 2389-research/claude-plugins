@@ -54,3 +54,8 @@ test('index: numbered category sections and an empty state', () => {
   assert.match(index, /data-empty/);
   assert.match(index, /Nothing here\./);
 });
+test('script: topo init is reduced-motion aware', () => {
+  assert.match(index, /getElementById\('topo-bg'\)/);
+  assert.match(index, /prefers-reduced-motion/);
+  assert.match(index, /new THREE\.WebGLRenderer/);
+});
