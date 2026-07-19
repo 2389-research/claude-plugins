@@ -492,7 +492,7 @@ npm start
       let shown = 0;
       rows.forEach(r => {
         const okCat = cat === 'all' || r.dataset.cat === cat;
-        const okTag = !tag || r.dataset.tags.split(',').includes(tag);
+        const okTag = !tag || (r.dataset.tags || '').split(',').includes(tag);
         const hay = (r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags).toLowerCase();
         const okQ = !q || hay.includes(q);
         const show = okCat && okTag && okQ;
