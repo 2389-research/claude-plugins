@@ -59,3 +59,9 @@ test('script: topo init is reduced-motion aware', () => {
   assert.match(index, /prefers-reduced-motion/);
   assert.match(index, /new THREE\.WebGLRenderer/);
 });
+test('footer: colophon with copyright and links', () => {
+  assert.match(index, /class="colophon/);                                    // NEW colophon class — RED on the old .footer markup
+  assert.match(index, /© 2026 2389 Research Inc — all plugins open source/);  // NEW copy (em-dash —, U+2014) — RED on old "All plugins are open source."
+  assert.match(index, /Skills Guide/);
+  assert.match(index, /2389\.ai/);
+});
