@@ -345,15 +345,16 @@ function cleanDescription(desc) {
 
 // Common HTML head
 function generateHead(title, description, canonicalPath, extraKeywords) {
-  const baseKeywords = ['Claude Code', 'plugins', 'MCP servers', 'AI development', 'Claude', 'Anthropic', 'development tools', '2389 Research'];
+  const baseKeywords = ['coding agent skills', 'Claude Code', 'MCP servers', 'Codex', 'Cursor', 'AI development', 'Anthropic', '2389 Research'];
   const allKeywords = extraKeywords ? [...new Set([...extraKeywords, ...baseKeywords])] : baseKeywords;
+  const escapedTitle = title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   return `<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Primary Meta Tags -->
-  <title>${title} | 2389 Research</title>
-  <meta name="title" content="${title} | 2389 Research">
+  <title>${escapedTitle} | 2389 Research</title>
+  <meta name="title" content="${escapedTitle} | 2389 Research">
   <meta name="description" content="${description}">
   <meta name="keywords" content="${allKeywords.join(', ')}">
   <meta name="author" content="2389 Research Inc">
@@ -368,7 +369,7 @@ function generateHead(title, description, canonicalPath, extraKeywords) {
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="${SITE_URL}/${canonicalPath}">
-  <meta property="og:title" content="${title} | 2389 Research">
+  <meta property="og:title" content="${escapedTitle} | 2389 Research">
   <meta property="og:description" content="${description}">
   <meta property="og:image" content="${SITE_URL}/${canonicalPath}og-image.png">
   <meta property="og:site_name" content="2389 Research Plugin Marketplace">
@@ -376,7 +377,7 @@ function generateHead(title, description, canonicalPath, extraKeywords) {
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="${SITE_URL}/${canonicalPath}">
-  <meta property="twitter:title" content="${title} | 2389 Research">
+  <meta property="twitter:title" content="${escapedTitle} | 2389 Research">
   <meta property="twitter:description" content="${description}">
   <meta property="twitter:image" content="${SITE_URL}/${canonicalPath}og-image.png">
 
@@ -389,7 +390,8 @@ function generateHead(title, description, canonicalPath, extraKeywords) {
   <link rel="dns-prefetch" href="https://github.com">
 
   <!-- Fonts with display=swap for performance -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
   <!-- Styles -->
   <link rel="stylesheet" href="${canonicalPath === '' ? '' : '../..'}${canonicalPath === '' ? '' : '/'}style.css">
@@ -926,7 +928,7 @@ const ccGetStartedSteps = `<div class="quick-start-steps">
 // Generate main index HTML
 const indexHtml = `<!DOCTYPE html>
 <html lang="en">
-${generateHead('Claude Code Plugin Marketplace', 'Open source Claude Code plugins and MCP servers from 2389 Research. Development workflows, testing, system administration, and AI agent capabilities. Install with one command.', '')}
+${generateHead('Coding-agent Skills & Servers', 'A working index of coding-agent skills and MCP servers from 2389 Research — install any with one line.', '')}
 <body>
   <div class="grid-overlay" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Skip to main content</a>
