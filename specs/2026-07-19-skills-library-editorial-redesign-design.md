@@ -146,14 +146,32 @@ per-plugin `.md` mirrors; og-images. Canonical URLs and the markdown-alternate l
 
 ## Testing
 
-- Existing generator tests stay green: `convert-repo-links`, `generate-site-install-template`,
+**Generator tests (unit)**
+- Existing tests stay green: `convert-repo-links`, `generate-site-install-template`,
   `generate-site-npx-install`.
 - Add tests: search/filter markup is present and wired; every skill in `marketplace.json`
   renders exactly one index row; MCP-only entries expose the Claude Code command (not npx);
   the four category sections render with correct counts.
-- Manual: `npm run generate`, open the site, verify search, category chips, tag filter,
-  empty state, copy buttons, the topo canvas (and its reduced-motion freeze), and two or
-  three per-plugin pages plus the glossary.
+
+**Visual accuracy (agent-browser)**
+The design comp is the acceptance reference. Use the `agent-browser` skill to compare the
+built site against it, surface by surface, and iterate until they match.
+
+- Reference: open the comp at `Skills Library.dc.html` (renders via its bundled
+  `support.js` runtime + three.js) to capture the intended rendering.
+- Candidate: `npm run generate`, serve `docs/` locally, open the generated pages.
+- Screenshot-compare each surface and check the design tokens (Newsreader + IBM Plex Mono,
+  the color palette, the `1.5px` ink rules, glass panels, numbered sections, topo canvas):
+  1. **Index** — masthead, install strip, sticky toolbar, a category section of skill rows,
+     the colophon.
+  2. **Detail** — a per-plugin page (e.g. `simmer`): detail header, README body in the
+     editorial type system, prev/next, footer.
+  3. **Glossary** — restyled to match.
+- Also verify behaviour in-browser: search filters rows and updates the count; category
+  chips and tag filtering work; the empty state appears; copy buttons flash "copied"; the
+  topo canvas animates and freezes to a static frame under `prefers-reduced-motion`.
+- Note where comp and site legitimately differ (live marketplace data vs the comp's
+  hardcoded rows) so those are not filed as visual defects.
 
 ## Risks
 
