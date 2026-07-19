@@ -4,3 +4,6 @@ node_modules/
 
 # superpowers SDD scratch (ledger, briefs, review packages)
 .superpowers/
+
+# visual-comp extraction + throwaway scratch
+.scratch/

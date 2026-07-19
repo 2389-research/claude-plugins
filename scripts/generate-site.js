@@ -402,8 +402,8 @@ function generateHead(title, description, canonicalPath, extraKeywords) {
 }
 
 // Common footer
-function generateFooter(isPluginPage = false) {
-  const home = isPluginPage ? '../../' : '';
+function generateFooter(homePrefix = '') {
+  const home = homePrefix;
   const year = new Date().getFullYear();
   return `<footer class="colophon rule-t glass">
       <span class="mono">© ${year} 2389 Research Inc — all plugins open source</span>
@@ -678,7 +678,7 @@ ${generateHead(plugin.name, description, `plugins/${plugin.name}/`, plugin.keywo
       ${next ? `<a href="../${next.name}/" data-tinylytics-event="plugin.next">${next.name} →</a>` : '<span></span>'}
     </nav>
     ${generateRelatedPlugins(plugin, category)}
-    ${generateFooter(true)}
+    ${generateFooter('../../')}
   </div>
   <!-- Structured Data - Plugin -->
   <script type="application/ld+json">
@@ -793,7 +793,7 @@ ${generateHead('Coding-agent Skills & Servers', 'A working index of coding-agent
       </div>
     </main>
 
-  ${generateFooter(false)}
+  ${generateFooter('')}
   </div><!-- /.wrap -->
 
   <!-- Structured Data - Organization -->
@@ -1151,7 +1151,7 @@ ${generateHead('Glossary', 'Marketplace-specific terms: plugin, skill, MCP serve
         <p>${definition}</p>
       </section>`).join('\n')}
     </main>
-    ${generateFooter(false)}
+    ${generateFooter('../')}
   </div>
   <script type="application/ld+json">
   ${glossaryStructuredData}
