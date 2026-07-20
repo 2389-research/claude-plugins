@@ -36,44 +36,30 @@ function getLastModDate(targetPath) {
 
 const MARKETPLACE_LASTMOD = getLastModDate('.claude-plugin/marketplace.json');
 
-// Group plugins by category
+// Group plugins by category. Insertion order here sets the display order on the
+// index, in the toolbar chips, and in every markdown mirror.
 const categories = {
-  development: { title: 'Development', description: 'Workflows for building, testing, and shipping code', plugins: [] },
-  infrastructure: { title: 'Infrastructure', description: 'System administration and operational tooling', plugins: [] },
-  agents: { title: 'Agent Systems', description: 'Multi-agent architecture and agent capabilities', plugins: [] },
-  personal: { title: 'Personal & Strategy', description: 'Reflection frameworks and personal operating systems', plugins: [] }
+  development: { title: 'Development', description: 'Write and ship code', plugins: [] },
+  testing: { title: 'Testing & Review', description: 'Quality and verification', plugins: [] },
+  agents: { title: 'Agents & Orchestration', description: 'Multi-agent systems, delegation, and behavior', plugins: [] },
+  infrastructure: { title: 'Infrastructure & Ops', description: 'Backend, systems, and integrations', plugins: [] },
+  strategy: { title: 'Strategy & Reflection', description: 'Decisions, business, and personal practice', plugins: [] }
 };
 
-// Categorize plugins
+// Each plugin declares its own category in marketplace.json — one source of truth,
+// no keyword guessing. An unknown or missing category fails the build loudly rather
+// than silently mis-shelving a plugin.
 marketplace.plugins.forEach(plugin => {
-  const keywords = plugin.keywords || [];
-  const desc = plugin.description.toLowerCase();
-
-  if (keywords.includes('linux') || keywords.includes('sysadmin') || keywords.includes('terminal') || keywords.includes('reverse-engineering') || keywords.includes('maintenance')) {
-    categories.infrastructure.plugins.push(plugin);
-  } else if (keywords.includes('multi-agent') || keywords.includes('agents') || keywords.includes('social') || desc.includes('agent')) {
-    categories.agents.plugins.push(plugin);
-  } else if (keywords.includes('ceo') || keywords.includes('executive') || keywords.includes('worldview') || keywords.includes('journal') || keywords.includes('reflection')) {
-    categories.personal.plugins.push(plugin);
-  } else {
-    categories.development.plugins.push(plugin);
+  const cat = categories[plugin.category];
+  if (!cat) {
+    throw new Error(`Plugin "${plugin.name}" has an unknown or missing category: ${JSON.stringify(plugin.category)}`);
   }
+  cat.plugins.push(plugin);
 });
 
-// Get category for a plugin
+// Get category for a plugin. The loop above validated every plugin, so this always resolves.
 function getCategoryForPlugin(plugin) {
-  const keywords = plugin.keywords || [];
-  const desc = plugin.description.toLowerCase();
-
-  if (keywords.includes('linux') || keywords.includes('sysadmin') || keywords.includes('terminal') || keywords.includes('reverse-engineering') || keywords.includes('maintenance')) {
-    return categories.infrastructure;
-  } else if (keywords.includes('multi-agent') || keywords.includes('agents') || keywords.includes('social') || desc.includes('agent')) {
-    return categories.agents;
-  } else if (keywords.includes('ceo') || keywords.includes('executive') || keywords.includes('worldview') || keywords.includes('journal') || keywords.includes('reflection')) {
-    return categories.personal;
-  } else {
-    return categories.development;
-  }
+  return categories[plugin.category];
 }
 
 // Extract org/repo from a plugin source URL or fall back to 2389-research/{name}
@@ -101,6 +87,51 @@ function getReadmeContent(plugin) {
     return null;
   }
 }
+
+// Fetch every repo's star count in ONE GraphQL request rather than one REST call per
+// plugin. GitHub GraphQL aliases let a single query select many repositories at once, so a
+// 27-plugin marketplace costs one gh invocation instead of 27 — far lighter on local builds
+// and CI (27 serial subprocess spawns per generation was heavy enough to get the test suite
+// OOM-killed). It refreshes on every push plus the weekly cron: near-live, not live. Runs
+// through execFileSync so the query travels as one argv element with no shell quoting.
+// Returns Map<pluginName, count|null>; every failure path leaves counts null, so a rate
+// limit, a renamed repo, or a network blip omits the number instead of breaking the build.
+function getStarCounts(plugins) {
+  const counts = new Map(plugins.map(p => [p.name, null]));
+  const aliasToName = new Map();
+  const lit = s => JSON.stringify(String(s)); // GraphQL string literals share JSON escaping
+  const selections = plugins.map((plugin, i) => {
+    const repo = getRepoName(plugin);
+    const slash = repo.indexOf('/');
+    const owner = repo.slice(0, slash);
+    const name = repo.slice(slash + 1);
+    const alias = `a${i}`; // plugin names aren't valid GraphQL aliases; index by position
+    aliasToName.set(alias, plugin.name);
+    return `${alias}: repository(owner: ${lit(owner)}, name: ${lit(name)}) { stargazerCount }`;
+  }).join('\n');
+  const query = `query {\n${selections}\n}`;
+  try {
+    const out = execFileSync('gh', ['api', 'graphql', '-f', `query=${query}`], {
+      encoding: 'utf8',
+      timeout: 20000,
+      maxBuffer: 10 * 1024 * 1024,
+    });
+    const data = JSON.parse(out).data;
+    if (data) {
+      for (const [alias, node] of Object.entries(data)) {
+        const name = aliasToName.get(alias);
+        const n = node && node.stargazerCount;
+        if (name && Number.isFinite(n)) counts.set(name, n);
+      }
+    }
+  } catch {
+    // leave every count null — the pages simply omit the number
+  }
+  return counts;
+}
+
+// Built once at load: a single GraphQL round-trip covers all plugins' star counts.
+const STAR_COUNTS = getStarCounts(marketplace.plugins);
 
 // Track link issues for reporting
 const linkReport = {
@@ -468,11 +499,10 @@ function generateSkillRow(plugin, gi, catTitle) {
                 </div>
                 <p class="skill-desc">${desc}</p>
                 <div class="row-tags">${tagHtml}</div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">${copyCmd}</code></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">${copyCmd}</code><button type="button" class="row-copy mono" data-copy="${copyCmd}" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">copy</button></div>
               </div>
               <div class="row-rail">
                 <span class="row-cat mono" style="color:${color}">${catTitle}</span>
-                <button type="button" class="row-copy mono" data-copy="${copyCmd}" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">copy install</button>
                 <span class="row-more mono">details →</span>
               </div>
             </a>`;
@@ -585,16 +615,13 @@ function generateInteractiveScript() {
 
 // Generate category sections
 function generateCategorySections() {
-  let gi = 0, si = 0;
+  let gi = 0;
   return Object.values(categories)
     .filter(cat => cat.plugins.length > 0)
     .map(cat => {
-      si++;
-      const color = CAT_COLOR[cat.title] || '#e6196e';
       const rows = cat.plugins.map(p => { gi++; return generateSkillRow(p, gi, cat.title); }).join('\n');
       return `<section class="cat-section" data-cat-section style="animation:fadeIn .3s ease both">
           <div class="cat-head">
-            <span class="mono cat-num" style="color:${color}">${pad(si)}</span>
             <h2 class="cat-name">${cat.title}</h2>
             <span class="mono cat-count">${cat.plugins.length} skill${cat.plugins.length !== 1 ? 's' : ''}</span>
             <span class="cat-rule"></span>
@@ -624,6 +651,9 @@ function generatePluginPage(plugin) {
   const category = getCategoryForPlugin(plugin);
   const readme = getReadmeContent(plugin);
   const repo = getRepoName(plugin);
+  const starCount = STAR_COUNTS.get(plugin.name) ?? null;
+  const starText = starCount != null ? ` <span class="star-count">· ${starCount.toLocaleString('en-US')}</span>` : '';
+  const starBlock = `<div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/${repo}" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="${plugin.name}">★ Star on GitHub${starText}</a></div>`;
   let readmeHtml = markdownToHtml(readme);
   // Convert relative links to GitHub URLs using per-plugin repo
   readmeHtml = convertRepoLinks(readmeHtml, plugin.name, repo, {
@@ -710,6 +740,7 @@ ${generateHead(plugin.name, description, `plugins/${plugin.name}/`, plugin.keywo
       <div class="row-tags">${tagHtml}</div>
       ${npxBlock}
       ${claudeBlock}
+      ${starBlock}
     </header>
     <main id="main-content" class="readme-body">
       ${readme ? readmeHtml : `<p>${escapeHtml(description)}</p>`}
@@ -769,7 +800,13 @@ const mcpServers = marketplace.plugins.filter(p =>
 
 
 // One category→hex map for the whole generator. Task 4 (rows/sections) and Task 7 (detail) reuse it.
-const CAT_COLOR = { 'Development': '#e6196e', 'Infrastructure': '#c67514', 'Agent Systems': '#7a3fb0', 'Personal & Strategy': '#1f9e6b' };
+const CAT_COLOR = {
+  'Development': '#e6196e',
+  'Testing & Review': '#2f7d8c',
+  'Agents & Orchestration': '#7a3fb0',
+  'Infrastructure & Ops': '#c67514',
+  'Strategy & Reflection': '#1f9e6b'
+};
 
 function generateToolbar() {
   const total = marketplace.plugins.length;
@@ -803,12 +840,9 @@ function generateMasthead() {
       <div class="kicker">A working index of</div>
       <h1 class="hero-head">Coding-agent <em>skills</em> &amp; servers</h1>
       <p class="hero-lede">A library of skills and MCP servers for the coding agents you already use — Claude Code, Codex, Cursor, and friends. Build workflows, testing regimes, agent architectures, and operational tooling. Each one is its own tool, doing one thing well. Install any of them with a single line.</p>
-    </div>
-    <div class="install-strip">
-      <div class="cmd mono"><span class="dollar">$</span> npx skills add 2389-research/<span class="accent">&lt;name&gt;</span>
-        <button type="button" class="btn-primary" data-copy="npx skills add 2389-research/&lt;name&gt;" data-tinylytics-event="hero.copy-install">Copy</button>
+      <div class="hero-actions">
+        <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" class="btn-ghost mono" data-tinylytics-event="nav.star-github">★ Star on GitHub</a>
       </div>
-      <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" class="btn-ghost mono" data-tinylytics-event="nav.star-github">★ Star on GitHub</a>
     </div>
   </header>`;
 }
@@ -1029,7 +1063,7 @@ This site is the official catalog of Claude Code plugins and MCP servers from 23
 
 ## What's here
 
-- The homepage at [${SITE_URL}/](${SITE_URL}/) lists every plugin grouped into Development, Infrastructure, Agent Systems, and Personal & Strategy.
+- The homepage at [${SITE_URL}/](${SITE_URL}/) lists every plugin grouped into ${Object.values(categories).filter(c => c.plugins.length).map(c => c.title).join(', ')}.
 - Each plugin has its own page under \`/plugins/{name}/\` with the full README, install command, and source link.
 - A [glossary](${SITE_URL}/glossary/) defines marketplace-specific terms (plugin, skill, MCP server, hook, scorecard).
 - Machine-readable index files: [sitemap.xml](${SITE_URL}/sitemap.xml), [sitemap.md](${SITE_URL}/sitemap.md), [llms.txt](${SITE_URL}/llms.txt).

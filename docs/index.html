@@ -66,12 +66,9 @@
       <div class="kicker">A working index of</div>
       <h1 class="hero-head">Coding-agent <em>skills</em> &amp; servers</h1>
       <p class="hero-lede">A library of skills and MCP servers for the coding agents you already use — Claude Code, Codex, Cursor, and friends. Build workflows, testing regimes, agent architectures, and operational tooling. Each one is its own tool, doing one thing well. Install any of them with a single line.</p>
-    </div>
-    <div class="install-strip">
-      <div class="cmd mono"><span class="dollar">$</span> npx skills add 2389-research/<span class="accent">&lt;name&gt;</span>
-        <button type="button" class="btn-primary" data-copy="npx skills add 2389-research/&lt;name&gt;" data-tinylytics-event="hero.copy-install">Copy</button>
+      <div class="hero-actions">
+        <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" class="btn-ghost mono" data-tinylytics-event="nav.star-github">★ Star on GitHub</a>
       </div>
-      <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" class="btn-ghost mono" data-tinylytics-event="nav.star-github">★ Star on GitHub</a>
     </div>
   </header>
     <div class="toolbar rule-t rule-b glass" role="search">
@@ -82,10 +79,11 @@
       </div>
       <div class="toolbar-chips">
         <button type="button" class="chip mono active" data-cat="all" style="--chip:#171512">All (27)</button>
-        <button type="button" class="chip mono" data-cat="Development" style="--chip:#e6196e">Development (14)</button>
-        <button type="button" class="chip mono" data-cat="Infrastructure" style="--chip:#c67514">Infrastructure (3)</button>
-        <button type="button" class="chip mono" data-cat="Agent Systems" style="--chip:#7a3fb0">Agent Systems (6)</button>
-        <button type="button" class="chip mono" data-cat="Personal & Strategy" style="--chip:#1f9e6b">Personal & Strategy (4)</button>
+        <button type="button" class="chip mono" data-cat="Development" style="--chip:#e6196e">Development (7)</button>
+        <button type="button" class="chip mono" data-cat="Testing & Review" style="--chip:#2f7d8c">Testing & Review (6)</button>
+        <button type="button" class="chip mono" data-cat="Agents & Orchestration" style="--chip:#7a3fb0">Agents & Orchestration (5)</button>
+        <button type="button" class="chip mono" data-cat="Infrastructure & Ops" style="--chip:#c67514">Infrastructure & Ops (4)</button>
+        <button type="button" class="chip mono" data-cat="Strategy & Reflection" style="--chip:#1f9e6b">Strategy & Reflection (5)</button>
         <button type="button" class="chip-cleartag mono" data-cleartag hidden></button>
       </div>
     </div>
@@ -93,12 +91,11 @@
     <main id="main-content" class="index-list">
       <section class="cat-section" data-cat-section style="animation:fadeIn .3s ease both">
           <div class="cat-head">
-            <span class="mono cat-num" style="color:#e6196e">01</span>
             <h2 class="cat-name">Development</h2>
-            <span class="mono cat-count">14 skills</span>
+            <span class="mono cat-count">7 skills</span>
             <span class="cat-rule"></span>
           </div>
-          <p class="mono cat-blurb">Workflows for building, testing, and shipping code</p>
+          <p class="mono cat-blurb">Write and ship code</p>
           <a href="plugins/css-development/" class="skill-row" data-skill-row data-name="css-development" data-desc="CSS development workflows with Tailwind composition, semantic naming, and dark mode by default" data-tags="css,tailwind,styling" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="css-development">
               <div class="row-num mono">01</div>
               <div class="row-body">
@@ -109,34 +106,15 @@
                 </div>
                 <p class="skill-desc">CSS development workflows with Tailwind composition, semantic naming, and dark mode by default</p>
                 <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="css">#css</button> <button type="button" class="tag-btn mono" data-tag="tailwind">#tailwind</button> <button type="button" class="tag-btn mono" data-tag="styling">#styling</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/css-development</code></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/css-development</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/css-development" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="css-development">copy</button></div>
               </div>
               <div class="row-rail">
                 <span class="row-cat mono" style="color:#e6196e">Development</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/css-development" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="css-development">copy install</button>
-                <span class="row-more mono">details →</span>
-              </div>
-            </a>
-<a href="plugins/firebase-development/" class="skill-row" data-skill-row data-name="firebase-development" data-desc="Firebase project workflows including setup, features, debugging, and validation" data-tags="firebase,firestore,cloud-functions" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="firebase-development">
-              <div class="row-num mono">02</div>
-              <div class="row-body">
-                <div class="row-title">
-                  <h3 class="skill-name mono">firebase-development</h3>
-                  
-                  <span class="skill-ver mono">v1.0.0</span>
-                </div>
-                <p class="skill-desc">Firebase project workflows including setup, features, debugging, and validation</p>
-                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="firebase">#firebase</button> <button type="button" class="tag-btn mono" data-tag="firestore">#firestore</button> <button type="button" class="tag-btn mono" data-tag="cloud-functions">#cloud-functions</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/firebase-development</code></div>
-              </div>
-              <div class="row-rail">
-                <span class="row-cat mono" style="color:#e6196e">Development</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/firebase-development" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="firebase-development">copy install</button>
                 <span class="row-more mono">details →</span>
               </div>
             </a>
 <a href="plugins/landing-page-design/" class="skill-row" data-skill-row data-name="landing-page-design" data-desc="Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles" data-tags="landing-page,marketing,design" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="landing-page-design">
-              <div class="row-num mono">03</div>
+              <div class="row-num mono">02</div>
               <div class="row-body">
                 <div class="row-title">
                   <h3 class="skill-name mono">landing-page-design</h3>
@@ -145,16 +123,15 @@
                 </div>
                 <p class="skill-desc">Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles</p>
                 <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="landing-page">#landing-page</button> <button type="button" class="tag-btn mono" data-tag="marketing">#marketing</button> <button type="button" class="tag-btn mono" data-tag="design">#design</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/landing-page-design</code></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/landing-page-design</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/landing-page-design" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="landing-page-design">copy</button></div>
               </div>
               <div class="row-rail">
                 <span class="row-cat mono" style="color:#e6196e">Development</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/landing-page-design" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="landing-page-design">copy install</button>
                 <span class="row-more mono">details →</span>
               </div>
             </a>
 <a href="plugins/xtool/" class="skill-row" data-skill-row data-name="xtool" data-desc="Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode" data-tags="ios,xtool,swiftpm" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="xtool">
-              <div class="row-num mono">04</div>
+              <div class="row-num mono">03</div>
               <div class="row-body">
                 <div class="row-title">
                   <h3 class="skill-name mono">xtool</h3>
@@ -163,16 +140,15 @@
                 </div>
                 <p class="skill-desc">Xcode-free iOS development with xtool - build SwiftPM apps on Linux, Windows, and macOS without Xcode</p>
                 <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="ios">#ios</button> <button type="button" class="tag-btn mono" data-tag="xtool">#xtool</button> <button type="button" class="tag-btn mono" data-tag="swiftpm">#swiftpm</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/xtool</code></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/xtool</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/xtool" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="xtool">copy</button></div>
               </div>
               <div class="row-rail">
                 <span class="row-cat mono" style="color:#e6196e">Development</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/xtool" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="xtool">copy install</button>
                 <span class="row-more mono">details →</span>
               </div>
             </a>
 <a href="plugins/speed-run/" class="skill-row" data-skill-row data-name="speed-run" data-desc="Token-efficient code generation pipeline - parallel implementation with hosted LLM (Cerebras) for ~60% token savings. Includes MCP server." data-tags="codegen,speed-run,parallel" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="speed-run">
-              <div class="row-num mono">05</div>
+              <div class="row-num mono">04</div>
               <div class="row-body">
                 <div class="row-title">
                   <h3 class="skill-name mono">speed-run</h3>
@@ -181,223 +157,15 @@
                 </div>
                 <p class="skill-desc">Token-efficient code generation pipeline - parallel implementation with hosted LLM (Cerebras) for ~60% token savings. Includes MCP server.</p>
                 <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="codegen">#codegen</button> <button type="button" class="tag-btn mono" data-tag="speed-run">#speed-run</button> <button type="button" class="tag-btn mono" data-tag="parallel">#parallel</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/speed-run</code></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/speed-run</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/speed-run" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="speed-run">copy</button></div>
               </div>
               <div class="row-rail">
                 <span class="row-cat mono" style="color:#e6196e">Development</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/speed-run" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="speed-run">copy install</button>
                 <span class="row-more mono">details →</span>
               </div>
             </a>
-<a href="plugins/test-kitchen/" class="skill-row" data-skill-row data-name="test-kitchen" data-desc="Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner" data-tags="parallel,exploration,variants" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="test-kitchen">
-              <div class="row-num mono">06</div>
-              <div class="row-body">
-                <div class="row-title">
-                  <h3 class="skill-name mono">test-kitchen</h3>
-                  
-                  <span class="skill-ver mono">v1.0.0</span>
-                </div>
-                <p class="skill-desc">Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner</p>
-                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="parallel">#parallel</button> <button type="button" class="tag-btn mono" data-tag="exploration">#exploration</button> <button type="button" class="tag-btn mono" data-tag="variants">#variants</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/test-kitchen</code></div>
-              </div>
-              <div class="row-rail">
-                <span class="row-cat mono" style="color:#e6196e">Development</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/test-kitchen" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="test-kitchen">copy install</button>
-                <span class="row-more mono">details →</span>
-              </div>
-            </a>
-<a href="plugins/simmer/" class="skill-row" data-skill-row data-name="simmer" data-desc="Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements" data-tags="refinement,iteration,criteria" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="simmer">
-              <div class="row-num mono">07</div>
-              <div class="row-body">
-                <div class="row-title">
-                  <h3 class="skill-name mono">simmer</h3>
-                  
-                  <span class="skill-ver mono">v3.0.1</span>
-                </div>
-                <p class="skill-desc">Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements</p>
-                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="refinement">#refinement</button> <button type="button" class="tag-btn mono" data-tag="iteration">#iteration</button> <button type="button" class="tag-btn mono" data-tag="criteria">#criteria</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/simmer</code></div>
-              </div>
-              <div class="row-rail">
-                <span class="row-cat mono" style="color:#e6196e">Development</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/simmer" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="simmer">copy install</button>
-                <span class="row-more mono">details →</span>
-              </div>
-            </a>
-<a href="plugins/scenario-testing/" class="skill-row" data-skill-row data-name="scenario-testing" data-desc="End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth" data-tags="testing,e2e,scenarios" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="scenario-testing">
-              <div class="row-num mono">08</div>
-              <div class="row-body">
-                <div class="row-title">
-                  <h3 class="skill-name mono">scenario-testing</h3>
-                  
-                  <span class="skill-ver mono">v1.0.0</span>
-                </div>
-                <p class="skill-desc">End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth</p>
-                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="testing">#testing</button> <button type="button" class="tag-btn mono" data-tag="e2e">#e2e</button> <button type="button" class="tag-btn mono" data-tag="scenarios">#scenarios</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/scenario-testing</code></div>
-              </div>
-              <div class="row-rail">
-                <span class="row-cat mono" style="color:#e6196e">Development</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/scenario-testing" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="scenario-testing">copy install</button>
-                <span class="row-more mono">details →</span>
-              </div>
-            </a>
-<a href="plugins/fresh-eyes-review/" class="skill-row" data-skill-row data-name="fresh-eyes-review" data-desc="Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests" data-tags="review,quality,security" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="fresh-eyes-review">
-              <div class="row-num mono">09</div>
-              <div class="row-body">
-                <div class="row-title">
-                  <h3 class="skill-name mono">fresh-eyes-review</h3>
-                  
-                  <span class="skill-ver mono">v1.0.0</span>
-                </div>
-                <p class="skill-desc">Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests</p>
-                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="review">#review</button> <button type="button" class="tag-btn mono" data-tag="quality">#quality</button> <button type="button" class="tag-btn mono" data-tag="security">#security</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/fresh-eyes-review</code></div>
-              </div>
-              <div class="row-rail">
-                <span class="row-cat mono" style="color:#e6196e">Development</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/fresh-eyes-review" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="fresh-eyes-review">copy install</button>
-                <span class="row-more mono">details →</span>
-              </div>
-            </a>
-<a href="plugins/documentation-audit/" class="skill-row" data-skill-row data-name="documentation-audit" data-desc="Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection" data-tags="documentation,audit,verify" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="documentation-audit">
-              <div class="row-num mono">10</div>
-              <div class="row-body">
-                <div class="row-title">
-                  <h3 class="skill-name mono">documentation-audit</h3>
-                  
-                  <span class="skill-ver mono">v2.0.1</span>
-                </div>
-                <p class="skill-desc">Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection</p>
-                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="documentation">#documentation</button> <button type="button" class="tag-btn mono" data-tag="audit">#audit</button> <button type="button" class="tag-btn mono" data-tag="verify">#verify</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/documentation-audit</code></div>
-              </div>
-              <div class="row-rail">
-                <span class="row-cat mono" style="color:#e6196e">Development</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/documentation-audit" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="documentation-audit">copy install</button>
-                <span class="row-more mono">details →</span>
-              </div>
-            </a>
-<a href="plugins/slack-mcp/" class="skill-row" data-skill-row data-name="slack-mcp" data-desc="Slack workspace integration MCP server - create channels, invite users, post messages, manage threads for team collaboration" data-tags="slack,mcp,messaging" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="slack-mcp">
-              <div class="row-num mono">11</div>
-              <div class="row-body">
-                <div class="row-title">
-                  <h3 class="skill-name mono">slack-mcp</h3>
-                  <span class="mcp-badge mono">MCP</span>
-                  <span class="skill-ver mono">v1.0.0</span>
-                </div>
-                <p class="skill-desc">Slack workspace integration MCP server - create channels, invite users, post messages, manage threads for team collaboration</p>
-                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="slack">#slack</button> <button type="button" class="tag-btn mono" data-tag="mcp">#mcp</button> <button type="button" class="tag-btn mono" data-tag="messaging">#messaging</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">/plugin install slack-mcp@2389-research</code></div>
-              </div>
-              <div class="row-rail">
-                <span class="row-cat mono" style="color:#e6196e">Development</span>
-                <button type="button" class="row-copy mono" data-copy="/plugin install slack-mcp@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="slack-mcp">copy install</button>
-                <span class="row-more mono">details →</span>
-              </div>
-            </a>
-<a href="plugins/git-repo-prep/" class="skill-row" data-skill-row data-name="git-repo-prep" data-desc="Prepare codebases for public/open-source release and audit them for openness - full lifecycle prep or standalone review" data-tags="open-source,public-release,secrets-audit" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="git-repo-prep">
-              <div class="row-num mono">12</div>
-              <div class="row-body">
-                <div class="row-title">
-                  <h3 class="skill-name mono">git-repo-prep</h3>
-                  
-                  <span class="skill-ver mono">v1.0.0</span>
-                </div>
-                <p class="skill-desc">Prepare codebases for public/open-source release and audit them for openness - full lifecycle prep or standalone review</p>
-                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="open-source">#open-source</button> <button type="button" class="tag-btn mono" data-tag="public-release">#public-release</button> <button type="button" class="tag-btn mono" data-tag="secrets-audit">#secrets-audit</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/git-repo-prep</code></div>
-              </div>
-              <div class="row-rail">
-                <span class="row-cat mono" style="color:#e6196e">Development</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/git-repo-prep" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="git-repo-prep">copy install</button>
-                <span class="row-more mono">details →</span>
-              </div>
-            </a>
-<a href="plugins/prbuddy/" class="skill-row" data-skill-row data-name="prbuddy" data-desc="PR health assistant - monitors CI, triages review comments, fixes issues with systematic prevention. Uses gh CLI and gh-pr-review extension." data-tags="pr,pull-request,ci" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="prbuddy">
-              <div class="row-num mono">13</div>
-              <div class="row-body">
-                <div class="row-title">
-                  <h3 class="skill-name mono">prbuddy</h3>
-                  
-                  <span class="skill-ver mono">v1.0.0</span>
-                </div>
-                <p class="skill-desc">PR health assistant - monitors CI, triages review comments, fixes issues with systematic prevention. Uses gh CLI and gh-pr-review extension.</p>
-                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="pr">#pr</button> <button type="button" class="tag-btn mono" data-tag="pull-request">#pull-request</button> <button type="button" class="tag-btn mono" data-tag="ci">#ci</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/prbuddy</code></div>
-              </div>
-              <div class="row-rail">
-                <span class="row-cat mono" style="color:#e6196e">Development</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/prbuddy" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="prbuddy">copy install</button>
-                <span class="row-more mono">details →</span>
-              </div>
-            </a>
-<a href="plugins/agent-drugs/" class="skill-row" data-skill-row data-name="agent-drugs" data-desc="Digital drugs that modify AI behavior through prompt injection" data-tags="behavior,prompts,modification" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="agent-drugs">
-              <div class="row-num mono">14</div>
-              <div class="row-body">
-                <div class="row-title">
-                  <h3 class="skill-name mono">agent-drugs</h3>
-                  <span class="mcp-badge mono">MCP</span>
-                  <span class="skill-ver mono">v1.0.0</span>
-                </div>
-                <p class="skill-desc">Digital drugs that modify AI behavior through prompt injection</p>
-                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="behavior">#behavior</button> <button type="button" class="tag-btn mono" data-tag="prompts">#prompts</button> <button type="button" class="tag-btn mono" data-tag="modification">#modification</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">/plugin install agent-drugs@2389-research</code></div>
-              </div>
-              <div class="row-rail">
-                <span class="row-cat mono" style="color:#e6196e">Development</span>
-                <button type="button" class="row-copy mono" data-copy="/plugin install agent-drugs@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="agent-drugs">copy install</button>
-                <span class="row-more mono">details →</span>
-              </div>
-            </a>
-        </section>
-<section class="cat-section" data-cat-section style="animation:fadeIn .3s ease both">
-          <div class="cat-head">
-            <span class="mono cat-num" style="color:#c67514">02</span>
-            <h2 class="cat-name">Infrastructure</h2>
-            <span class="mono cat-count">3 skills</span>
-            <span class="cat-rule"></span>
-          </div>
-          <p class="mono cat-blurb">System administration and operational tooling</p>
-          <a href="plugins/terminal-title/" class="skill-row" data-skill-row data-name="terminal-title" data-desc="Automatically updates terminal title with emoji + project + topic context for quick visual cues when switching terminals" data-tags="terminal,title,session" data-cat="Infrastructure" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="terminal-title">
-              <div class="row-num mono">15</div>
-              <div class="row-body">
-                <div class="row-title">
-                  <h3 class="skill-name mono">terminal-title</h3>
-                  
-                  <span class="skill-ver mono">v1.1.2</span>
-                </div>
-                <p class="skill-desc">Automatically updates terminal title with emoji + project + topic context for quick visual cues when switching terminals</p>
-                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="terminal">#terminal</button> <button type="button" class="tag-btn mono" data-tag="title">#title</button> <button type="button" class="tag-btn mono" data-tag="session">#session</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/terminal-title</code></div>
-              </div>
-              <div class="row-rail">
-                <span class="row-cat mono" style="color:#c67514">Infrastructure</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/terminal-title" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="terminal-title">copy install</button>
-                <span class="row-more mono">details →</span>
-              </div>
-            </a>
-<a href="plugins/remote-system-maintenance/" class="skill-row" data-skill-row data-name="remote-system-maintenance" data-desc="Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists" data-tags="linux,ubuntu,debian" data-cat="Infrastructure" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="remote-system-maintenance">
-              <div class="row-num mono">16</div>
-              <div class="row-body">
-                <div class="row-title">
-                  <h3 class="skill-name mono">remote-system-maintenance</h3>
-                  
-                  <span class="skill-ver mono">v1.0.0</span>
-                </div>
-                <p class="skill-desc">Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists</p>
-                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="linux">#linux</button> <button type="button" class="tag-btn mono" data-tag="ubuntu">#ubuntu</button> <button type="button" class="tag-btn mono" data-tag="debian">#debian</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/remote-system-maintenance</code></div>
-              </div>
-              <div class="row-rail">
-                <span class="row-cat mono" style="color:#c67514">Infrastructure</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/remote-system-maintenance" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="remote-system-maintenance">copy install</button>
-                <span class="row-more mono">details →</span>
-              </div>
-            </a>
-<a href="plugins/binary-re/" class="skill-row" data-skill-row data-name="binary-re" data-desc="Agentic binary reverse engineering for ELF binaries on ARM64, ARMv7, x86_64 - hypothesis-driven analysis with radare2, Ghidra, GDB, QEMU" data-tags="reverse-engineering,binary,elf" data-cat="Infrastructure" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="binary-re">
-              <div class="row-num mono">17</div>
+<a href="plugins/binary-re/" class="skill-row" data-skill-row data-name="binary-re" data-desc="Agentic binary reverse engineering for ELF binaries on ARM64, ARMv7, x86_64 - hypothesis-driven analysis with radare2, Ghidra, GDB, QEMU" data-tags="reverse-engineering,binary,elf" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="binary-re">
+              <div class="row-num mono">05</div>
               <div class="row-body">
                 <div class="row-title">
                   <h3 class="skill-name mono">binary-re</h3>
@@ -406,61 +174,142 @@
                 </div>
                 <p class="skill-desc">Agentic binary reverse engineering for ELF binaries on ARM64, ARMv7, x86_64 - hypothesis-driven analysis with radare2, Ghidra, GDB, QEMU</p>
                 <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="reverse-engineering">#reverse-engineering</button> <button type="button" class="tag-btn mono" data-tag="binary">#binary</button> <button type="button" class="tag-btn mono" data-tag="elf">#elf</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/binary-re</code></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/binary-re</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/binary-re" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="binary-re">copy</button></div>
               </div>
               <div class="row-rail">
-                <span class="row-cat mono" style="color:#c67514">Infrastructure</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/binary-re" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="binary-re">copy install</button>
+                <span class="row-cat mono" style="color:#e6196e">Development</span>
+                <span class="row-more mono">details →</span>
+              </div>
+            </a>
+<a href="plugins/git-repo-prep/" class="skill-row" data-skill-row data-name="git-repo-prep" data-desc="Prepare codebases for public/open-source release and audit them for openness - full lifecycle prep or standalone review" data-tags="open-source,public-release,secrets-audit" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="git-repo-prep">
+              <div class="row-num mono">06</div>
+              <div class="row-body">
+                <div class="row-title">
+                  <h3 class="skill-name mono">git-repo-prep</h3>
+                  
+                  <span class="skill-ver mono">v1.0.0</span>
+                </div>
+                <p class="skill-desc">Prepare codebases for public/open-source release and audit them for openness - full lifecycle prep or standalone review</p>
+                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="open-source">#open-source</button> <button type="button" class="tag-btn mono" data-tag="public-release">#public-release</button> <button type="button" class="tag-btn mono" data-tag="secrets-audit">#secrets-audit</button></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/git-repo-prep</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/git-repo-prep" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="git-repo-prep">copy</button></div>
+              </div>
+              <div class="row-rail">
+                <span class="row-cat mono" style="color:#e6196e">Development</span>
+                <span class="row-more mono">details →</span>
+              </div>
+            </a>
+<a href="plugins/prbuddy/" class="skill-row" data-skill-row data-name="prbuddy" data-desc="PR health assistant - monitors CI, triages review comments, fixes issues with systematic prevention. Uses gh CLI and gh-pr-review extension." data-tags="pr,pull-request,ci" data-cat="Development" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="prbuddy">
+              <div class="row-num mono">07</div>
+              <div class="row-body">
+                <div class="row-title">
+                  <h3 class="skill-name mono">prbuddy</h3>
+                  
+                  <span class="skill-ver mono">v1.0.0</span>
+                </div>
+                <p class="skill-desc">PR health assistant - monitors CI, triages review comments, fixes issues with systematic prevention. Uses gh CLI and gh-pr-review extension.</p>
+                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="pr">#pr</button> <button type="button" class="tag-btn mono" data-tag="pull-request">#pull-request</button> <button type="button" class="tag-btn mono" data-tag="ci">#ci</button></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/prbuddy</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/prbuddy" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="prbuddy">copy</button></div>
+              </div>
+              <div class="row-rail">
+                <span class="row-cat mono" style="color:#e6196e">Development</span>
                 <span class="row-more mono">details →</span>
               </div>
             </a>
         </section>
 <section class="cat-section" data-cat-section style="animation:fadeIn .3s ease both">
           <div class="cat-head">
-            <span class="mono cat-num" style="color:#7a3fb0">03</span>
-            <h2 class="cat-name">Agent Systems</h2>
+            <h2 class="cat-name">Testing & Review</h2>
             <span class="mono cat-count">6 skills</span>
             <span class="cat-rule"></span>
           </div>
-          <p class="mono cat-blurb">Multi-agent architecture and agent capabilities</p>
-          <a href="plugins/building-multiagent-systems/" class="skill-row" data-skill-row data-name="building-multiagent-systems" data-desc="Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination" data-tags="multi-agent,orchestrator,coordination" data-cat="Agent Systems" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="building-multiagent-systems">
-              <div class="row-num mono">18</div>
+          <p class="mono cat-blurb">Quality and verification</p>
+          <a href="plugins/test-kitchen/" class="skill-row" data-skill-row data-name="test-kitchen" data-desc="Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner" data-tags="parallel,exploration,variants" data-cat="Testing & Review" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="test-kitchen">
+              <div class="row-num mono">08</div>
               <div class="row-body">
                 <div class="row-title">
-                  <h3 class="skill-name mono">building-multiagent-systems</h3>
+                  <h3 class="skill-name mono">test-kitchen</h3>
                   
                   <span class="skill-ver mono">v1.0.0</span>
                 </div>
-                <p class="skill-desc">Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination</p>
-                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="multi-agent">#multi-agent</button> <button type="button" class="tag-btn mono" data-tag="orchestrator">#orchestrator</button> <button type="button" class="tag-btn mono" data-tag="coordination">#coordination</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/building-multiagent-systems</code></div>
+                <p class="skill-desc">Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner</p>
+                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="parallel">#parallel</button> <button type="button" class="tag-btn mono" data-tag="exploration">#exploration</button> <button type="button" class="tag-btn mono" data-tag="variants">#variants</button></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/test-kitchen</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/test-kitchen" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="test-kitchen">copy</button></div>
               </div>
               <div class="row-rail">
-                <span class="row-cat mono" style="color:#7a3fb0">Agent Systems</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/building-multiagent-systems" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="building-multiagent-systems">copy install</button>
+                <span class="row-cat mono" style="color:#2f7d8c">Testing & Review</span>
                 <span class="row-more mono">details →</span>
               </div>
             </a>
-<a href="plugins/deliberation/" class="skill-row" data-skill-row data-name="deliberation" data-desc="Decision-making through deliberation - seeking unity through discernment rather than consensus through debate" data-tags="decision-making,discernment,deliberation" data-cat="Agent Systems" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="deliberation">
-              <div class="row-num mono">19</div>
+<a href="plugins/simmer/" class="skill-row" data-skill-row data-name="simmer" data-desc="Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements" data-tags="refinement,iteration,criteria" data-cat="Testing & Review" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="simmer">
+              <div class="row-num mono">09</div>
               <div class="row-body">
                 <div class="row-title">
-                  <h3 class="skill-name mono">deliberation</h3>
+                  <h3 class="skill-name mono">simmer</h3>
+                  
+                  <span class="skill-ver mono">v3.0.1</span>
+                </div>
+                <p class="skill-desc">Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements</p>
+                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="refinement">#refinement</button> <button type="button" class="tag-btn mono" data-tag="iteration">#iteration</button> <button type="button" class="tag-btn mono" data-tag="criteria">#criteria</button></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/simmer</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/simmer" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="simmer">copy</button></div>
+              </div>
+              <div class="row-rail">
+                <span class="row-cat mono" style="color:#2f7d8c">Testing & Review</span>
+                <span class="row-more mono">details →</span>
+              </div>
+            </a>
+<a href="plugins/scenario-testing/" class="skill-row" data-skill-row data-name="scenario-testing" data-desc="End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth" data-tags="testing,e2e,scenarios" data-cat="Testing & Review" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="scenario-testing">
+              <div class="row-num mono">10</div>
+              <div class="row-body">
+                <div class="row-title">
+                  <h3 class="skill-name mono">scenario-testing</h3>
                   
                   <span class="skill-ver mono">v1.0.0</span>
                 </div>
-                <p class="skill-desc">Decision-making through deliberation - seeking unity through discernment rather than consensus through debate</p>
-                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="decision-making">#decision-making</button> <button type="button" class="tag-btn mono" data-tag="discernment">#discernment</button> <button type="button" class="tag-btn mono" data-tag="deliberation">#deliberation</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/deliberation</code></div>
+                <p class="skill-desc">End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth</p>
+                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="testing">#testing</button> <button type="button" class="tag-btn mono" data-tag="e2e">#e2e</button> <button type="button" class="tag-btn mono" data-tag="scenarios">#scenarios</button></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/scenario-testing</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/scenario-testing" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="scenario-testing">copy</button></div>
               </div>
               <div class="row-rail">
-                <span class="row-cat mono" style="color:#7a3fb0">Agent Systems</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/deliberation" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="deliberation">copy install</button>
+                <span class="row-cat mono" style="color:#2f7d8c">Testing & Review</span>
                 <span class="row-more mono">details →</span>
               </div>
             </a>
-<a href="plugins/review-squad/" class="skill-row" data-skill-row data-name="review-squad" data-desc="Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks" data-tags="review,audit,launch" data-cat="Agent Systems" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="review-squad">
-              <div class="row-num mono">20</div>
+<a href="plugins/fresh-eyes-review/" class="skill-row" data-skill-row data-name="fresh-eyes-review" data-desc="Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests" data-tags="review,quality,security" data-cat="Testing & Review" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="fresh-eyes-review">
+              <div class="row-num mono">11</div>
+              <div class="row-body">
+                <div class="row-title">
+                  <h3 class="skill-name mono">fresh-eyes-review</h3>
+                  
+                  <span class="skill-ver mono">v1.0.0</span>
+                </div>
+                <p class="skill-desc">Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests</p>
+                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="review">#review</button> <button type="button" class="tag-btn mono" data-tag="quality">#quality</button> <button type="button" class="tag-btn mono" data-tag="security">#security</button></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/fresh-eyes-review</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/fresh-eyes-review" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="fresh-eyes-review">copy</button></div>
+              </div>
+              <div class="row-rail">
+                <span class="row-cat mono" style="color:#2f7d8c">Testing & Review</span>
+                <span class="row-more mono">details →</span>
+              </div>
+            </a>
+<a href="plugins/documentation-audit/" class="skill-row" data-skill-row data-name="documentation-audit" data-desc="Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection" data-tags="documentation,audit,verify" data-cat="Testing & Review" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="documentation-audit">
+              <div class="row-num mono">12</div>
+              <div class="row-body">
+                <div class="row-title">
+                  <h3 class="skill-name mono">documentation-audit</h3>
+                  
+                  <span class="skill-ver mono">v2.0.1</span>
+                </div>
+                <p class="skill-desc">Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection</p>
+                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="documentation">#documentation</button> <button type="button" class="tag-btn mono" data-tag="audit">#audit</button> <button type="button" class="tag-btn mono" data-tag="verify">#verify</button></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/documentation-audit</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/documentation-audit" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="documentation-audit">copy</button></div>
+              </div>
+              <div class="row-rail">
+                <span class="row-cat mono" style="color:#2f7d8c">Testing & Review</span>
+                <span class="row-more mono">details →</span>
+              </div>
+            </a>
+<a href="plugins/review-squad/" class="skill-row" data-skill-row data-name="review-squad" data-desc="Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks" data-tags="review,audit,launch" data-cat="Testing & Review" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="review-squad">
+              <div class="row-num mono">13</div>
               <div class="row-body">
                 <div class="row-title">
                   <h3 class="skill-name mono">review-squad</h3>
@@ -469,16 +318,40 @@
                 </div>
                 <p class="skill-desc">Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks</p>
                 <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="review">#review</button> <button type="button" class="tag-btn mono" data-tag="audit">#audit</button> <button type="button" class="tag-btn mono" data-tag="launch">#launch</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/review-squad</code></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/review-squad</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/review-squad" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="review-squad">copy</button></div>
               </div>
               <div class="row-rail">
-                <span class="row-cat mono" style="color:#7a3fb0">Agent Systems</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/review-squad" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="review-squad">copy install</button>
+                <span class="row-cat mono" style="color:#2f7d8c">Testing & Review</span>
                 <span class="row-more mono">details →</span>
               </div>
             </a>
-<a href="plugins/jam/" class="skill-row" data-skill-row data-name="jam" data-desc="Parallel exploration powered by diverse perspectives - independent agent panels propose, build variants in worktrees, review, pick a winner, and synthesize the best of all variants into the final result" data-tags="parallel,exploration,perspectives" data-cat="Agent Systems" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="jam">
-              <div class="row-num mono">21</div>
+        </section>
+<section class="cat-section" data-cat-section style="animation:fadeIn .3s ease both">
+          <div class="cat-head">
+            <h2 class="cat-name">Agents & Orchestration</h2>
+            <span class="mono cat-count">5 skills</span>
+            <span class="cat-rule"></span>
+          </div>
+          <p class="mono cat-blurb">Multi-agent systems, delegation, and behavior</p>
+          <a href="plugins/building-multiagent-systems/" class="skill-row" data-skill-row data-name="building-multiagent-systems" data-desc="Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination" data-tags="multi-agent,orchestrator,coordination" data-cat="Agents & Orchestration" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="building-multiagent-systems">
+              <div class="row-num mono">14</div>
+              <div class="row-body">
+                <div class="row-title">
+                  <h3 class="skill-name mono">building-multiagent-systems</h3>
+                  
+                  <span class="skill-ver mono">v1.0.0</span>
+                </div>
+                <p class="skill-desc">Architecture patterns for multi-agent systems with orchestrators, sub-agents, and tool coordination</p>
+                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="multi-agent">#multi-agent</button> <button type="button" class="tag-btn mono" data-tag="orchestrator">#orchestrator</button> <button type="button" class="tag-btn mono" data-tag="coordination">#coordination</button></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/building-multiagent-systems</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/building-multiagent-systems" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="building-multiagent-systems">copy</button></div>
+              </div>
+              <div class="row-rail">
+                <span class="row-cat mono" style="color:#7a3fb0">Agents & Orchestration</span>
+                <span class="row-more mono">details →</span>
+              </div>
+            </a>
+<a href="plugins/jam/" class="skill-row" data-skill-row data-name="jam" data-desc="Parallel exploration powered by diverse perspectives - independent agent panels propose, build variants in worktrees, review, pick a winner, and synthesize the best of all variants into the final result" data-tags="parallel,exploration,perspectives" data-cat="Agents & Orchestration" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="jam">
+              <div class="row-num mono">15</div>
               <div class="row-body">
                 <div class="row-title">
                   <h3 class="skill-name mono">jam</h3>
@@ -487,16 +360,32 @@
                 </div>
                 <p class="skill-desc">Parallel exploration powered by diverse perspectives - independent agent panels propose, build variants in worktrees, review, pick a winner, and synthesize the best of all variants into the final result</p>
                 <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="parallel">#parallel</button> <button type="button" class="tag-btn mono" data-tag="exploration">#exploration</button> <button type="button" class="tag-btn mono" data-tag="perspectives">#perspectives</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/jam</code></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/jam</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/jam" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="jam">copy</button></div>
               </div>
               <div class="row-rail">
-                <span class="row-cat mono" style="color:#7a3fb0">Agent Systems</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/jam" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="jam">copy install</button>
+                <span class="row-cat mono" style="color:#7a3fb0">Agents & Orchestration</span>
                 <span class="row-more mono">details →</span>
               </div>
             </a>
-<a href="plugins/socialmedia/" class="skill-row" data-skill-row data-name="socialmedia" data-desc="A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions." data-tags="social-media,communication,team-discussion" data-cat="Agent Systems" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="socialmedia">
-              <div class="row-num mono">22</div>
+<a href="plugins/agent-drugs/" class="skill-row" data-skill-row data-name="agent-drugs" data-desc="Digital drugs that modify AI behavior through prompt injection" data-tags="behavior,prompts,modification" data-cat="Agents & Orchestration" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="agent-drugs">
+              <div class="row-num mono">16</div>
+              <div class="row-body">
+                <div class="row-title">
+                  <h3 class="skill-name mono">agent-drugs</h3>
+                  <span class="mcp-badge mono">MCP</span>
+                  <span class="skill-ver mono">v1.0.0</span>
+                </div>
+                <p class="skill-desc">Digital drugs that modify AI behavior through prompt injection</p>
+                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="behavior">#behavior</button> <button type="button" class="tag-btn mono" data-tag="prompts">#prompts</button> <button type="button" class="tag-btn mono" data-tag="modification">#modification</button></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">/plugin install agent-drugs@2389-research</code><button type="button" class="row-copy mono" data-copy="/plugin install agent-drugs@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="agent-drugs">copy</button></div>
+              </div>
+              <div class="row-rail">
+                <span class="row-cat mono" style="color:#7a3fb0">Agents & Orchestration</span>
+                <span class="row-more mono">details →</span>
+              </div>
+            </a>
+<a href="plugins/socialmedia/" class="skill-row" data-skill-row data-name="socialmedia" data-desc="A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions." data-tags="social-media,communication,team-discussion" data-cat="Agents & Orchestration" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="socialmedia">
+              <div class="row-num mono">17</div>
               <div class="row-body">
                 <div class="row-title">
                   <h3 class="skill-name mono">socialmedia</h3>
@@ -505,16 +394,15 @@
                 </div>
                 <p class="skill-desc">A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions.</p>
                 <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="social-media">#social-media</button> <button type="button" class="tag-btn mono" data-tag="communication">#communication</button> <button type="button" class="tag-btn mono" data-tag="team-discussion">#team-discussion</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">/plugin install socialmedia@2389-research</code></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">/plugin install socialmedia@2389-research</code><button type="button" class="row-copy mono" data-copy="/plugin install socialmedia@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="socialmedia">copy</button></div>
               </div>
               <div class="row-rail">
-                <span class="row-cat mono" style="color:#7a3fb0">Agent Systems</span>
-                <button type="button" class="row-copy mono" data-copy="/plugin install socialmedia@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="socialmedia">copy install</button>
+                <span class="row-cat mono" style="color:#7a3fb0">Agents & Orchestration</span>
                 <span class="row-more mono">details →</span>
               </div>
             </a>
-<a href="plugins/thrifty/" class="skill-row" data-skill-row data-name="thrifty" data-desc="Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality." data-tags="orchestration,delegation,tiered-build" data-cat="Agent Systems" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="thrifty">
-              <div class="row-num mono">23</div>
+<a href="plugins/thrifty/" class="skill-row" data-skill-row data-name="thrifty" data-desc="Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality." data-tags="orchestration,delegation,tiered-build" data-cat="Agents & Orchestration" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="thrifty">
+              <div class="row-num mono">18</div>
               <div class="row-body">
                 <div class="row-title">
                   <h3 class="skill-name mono">thrifty</h3>
@@ -523,25 +411,99 @@
                 </div>
                 <p class="skill-desc">Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality.</p>
                 <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="orchestration">#orchestration</button> <button type="button" class="tag-btn mono" data-tag="delegation">#delegation</button> <button type="button" class="tag-btn mono" data-tag="tiered-build">#tiered-build</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/thrifty</code></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/thrifty</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/thrifty" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="thrifty">copy</button></div>
               </div>
               <div class="row-rail">
-                <span class="row-cat mono" style="color:#7a3fb0">Agent Systems</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/thrifty" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="thrifty">copy install</button>
+                <span class="row-cat mono" style="color:#7a3fb0">Agents & Orchestration</span>
                 <span class="row-more mono">details →</span>
               </div>
             </a>
         </section>
 <section class="cat-section" data-cat-section style="animation:fadeIn .3s ease both">
           <div class="cat-head">
-            <span class="mono cat-num" style="color:#1f9e6b">04</span>
-            <h2 class="cat-name">Personal & Strategy</h2>
+            <h2 class="cat-name">Infrastructure & Ops</h2>
             <span class="mono cat-count">4 skills</span>
             <span class="cat-rule"></span>
           </div>
-          <p class="mono cat-blurb">Reflection frameworks and personal operating systems</p>
-          <a href="plugins/ceo-personal-os/" class="skill-row" data-skill-row data-name="ceo-personal-os" data-desc="Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)" data-tags="ceo,executive,reflection" data-cat="Personal & Strategy" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="ceo-personal-os">
-              <div class="row-num mono">24</div>
+          <p class="mono cat-blurb">Backend, systems, and integrations</p>
+          <a href="plugins/firebase-development/" class="skill-row" data-skill-row data-name="firebase-development" data-desc="Firebase project workflows including setup, features, debugging, and validation" data-tags="firebase,firestore,cloud-functions" data-cat="Infrastructure & Ops" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="firebase-development">
+              <div class="row-num mono">19</div>
+              <div class="row-body">
+                <div class="row-title">
+                  <h3 class="skill-name mono">firebase-development</h3>
+                  
+                  <span class="skill-ver mono">v1.0.0</span>
+                </div>
+                <p class="skill-desc">Firebase project workflows including setup, features, debugging, and validation</p>
+                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="firebase">#firebase</button> <button type="button" class="tag-btn mono" data-tag="firestore">#firestore</button> <button type="button" class="tag-btn mono" data-tag="cloud-functions">#cloud-functions</button></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/firebase-development</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/firebase-development" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="firebase-development">copy</button></div>
+              </div>
+              <div class="row-rail">
+                <span class="row-cat mono" style="color:#c67514">Infrastructure & Ops</span>
+                <span class="row-more mono">details →</span>
+              </div>
+            </a>
+<a href="plugins/terminal-title/" class="skill-row" data-skill-row data-name="terminal-title" data-desc="Automatically updates terminal title with emoji + project + topic context for quick visual cues when switching terminals" data-tags="terminal,title,session" data-cat="Infrastructure & Ops" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="terminal-title">
+              <div class="row-num mono">20</div>
+              <div class="row-body">
+                <div class="row-title">
+                  <h3 class="skill-name mono">terminal-title</h3>
+                  
+                  <span class="skill-ver mono">v1.1.2</span>
+                </div>
+                <p class="skill-desc">Automatically updates terminal title with emoji + project + topic context for quick visual cues when switching terminals</p>
+                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="terminal">#terminal</button> <button type="button" class="tag-btn mono" data-tag="title">#title</button> <button type="button" class="tag-btn mono" data-tag="session">#session</button></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/terminal-title</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/terminal-title" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="terminal-title">copy</button></div>
+              </div>
+              <div class="row-rail">
+                <span class="row-cat mono" style="color:#c67514">Infrastructure & Ops</span>
+                <span class="row-more mono">details →</span>
+              </div>
+            </a>
+<a href="plugins/slack-mcp/" class="skill-row" data-skill-row data-name="slack-mcp" data-desc="Slack workspace integration MCP server - create channels, invite users, post messages, manage threads for team collaboration" data-tags="slack,mcp,messaging" data-cat="Infrastructure & Ops" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="slack-mcp">
+              <div class="row-num mono">21</div>
+              <div class="row-body">
+                <div class="row-title">
+                  <h3 class="skill-name mono">slack-mcp</h3>
+                  <span class="mcp-badge mono">MCP</span>
+                  <span class="skill-ver mono">v1.0.0</span>
+                </div>
+                <p class="skill-desc">Slack workspace integration MCP server - create channels, invite users, post messages, manage threads for team collaboration</p>
+                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="slack">#slack</button> <button type="button" class="tag-btn mono" data-tag="mcp">#mcp</button> <button type="button" class="tag-btn mono" data-tag="messaging">#messaging</button></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">/plugin install slack-mcp@2389-research</code><button type="button" class="row-copy mono" data-copy="/plugin install slack-mcp@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="slack-mcp">copy</button></div>
+              </div>
+              <div class="row-rail">
+                <span class="row-cat mono" style="color:#c67514">Infrastructure & Ops</span>
+                <span class="row-more mono">details →</span>
+              </div>
+            </a>
+<a href="plugins/remote-system-maintenance/" class="skill-row" data-skill-row data-name="remote-system-maintenance" data-desc="Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists" data-tags="linux,ubuntu,debian" data-cat="Infrastructure & Ops" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="remote-system-maintenance">
+              <div class="row-num mono">22</div>
+              <div class="row-body">
+                <div class="row-title">
+                  <h3 class="skill-name mono">remote-system-maintenance</h3>
+                  
+                  <span class="skill-ver mono">v1.0.0</span>
+                </div>
+                <p class="skill-desc">Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists</p>
+                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="linux">#linux</button> <button type="button" class="tag-btn mono" data-tag="ubuntu">#ubuntu</button> <button type="button" class="tag-btn mono" data-tag="debian">#debian</button></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/remote-system-maintenance</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/remote-system-maintenance" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="remote-system-maintenance">copy</button></div>
+              </div>
+              <div class="row-rail">
+                <span class="row-cat mono" style="color:#c67514">Infrastructure & Ops</span>
+                <span class="row-more mono">details →</span>
+              </div>
+            </a>
+        </section>
+<section class="cat-section" data-cat-section style="animation:fadeIn .3s ease both">
+          <div class="cat-head">
+            <h2 class="cat-name">Strategy & Reflection</h2>
+            <span class="mono cat-count">5 skills</span>
+            <span class="cat-rule"></span>
+          </div>
+          <p class="mono cat-blurb">Decisions, business, and personal practice</p>
+          <a href="plugins/ceo-personal-os/" class="skill-row" data-skill-row data-name="ceo-personal-os" data-desc="Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)" data-tags="ceo,executive,reflection" data-cat="Strategy & Reflection" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="ceo-personal-os">
+              <div class="row-num mono">23</div>
               <div class="row-body">
                 <div class="row-title">
                   <h3 class="skill-name mono">ceo-personal-os</h3>
@@ -550,16 +512,15 @@
                 </div>
                 <p class="skill-desc">Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)</p>
                 <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="ceo">#ceo</button> <button type="button" class="tag-btn mono" data-tag="executive">#executive</button> <button type="button" class="tag-btn mono" data-tag="reflection">#reflection</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/ceo-personal-os</code></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/ceo-personal-os</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/ceo-personal-os" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="ceo-personal-os">copy</button></div>
               </div>
               <div class="row-rail">
-                <span class="row-cat mono" style="color:#1f9e6b">Personal & Strategy</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/ceo-personal-os" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="ceo-personal-os">copy install</button>
+                <span class="row-cat mono" style="color:#1f9e6b">Strategy & Reflection</span>
                 <span class="row-more mono">details →</span>
               </div>
             </a>
-<a href="plugins/worldview-synthesis/" class="skill-row" data-skill-row data-name="worldview-synthesis" data-desc="Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation" data-tags="worldview,values,philosophy" data-cat="Personal & Strategy" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="worldview-synthesis">
-              <div class="row-num mono">25</div>
+<a href="plugins/worldview-synthesis/" class="skill-row" data-skill-row data-name="worldview-synthesis" data-desc="Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation" data-tags="worldview,values,philosophy" data-cat="Strategy & Reflection" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="worldview-synthesis">
+              <div class="row-num mono">24</div>
               <div class="row-body">
                 <div class="row-title">
                   <h3 class="skill-name mono">worldview-synthesis</h3>
@@ -568,15 +529,31 @@
                 </div>
                 <p class="skill-desc">Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation</p>
                 <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="worldview">#worldview</button> <button type="button" class="tag-btn mono" data-tag="values">#values</button> <button type="button" class="tag-btn mono" data-tag="philosophy">#philosophy</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/worldview-synthesis</code></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/worldview-synthesis</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/worldview-synthesis" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="worldview-synthesis">copy</button></div>
               </div>
               <div class="row-rail">
-                <span class="row-cat mono" style="color:#1f9e6b">Personal & Strategy</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/worldview-synthesis" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="worldview-synthesis">copy install</button>
+                <span class="row-cat mono" style="color:#1f9e6b">Strategy & Reflection</span>
                 <span class="row-more mono">details →</span>
               </div>
             </a>
-<a href="plugins/summarize-meetings/" class="skill-row" data-skill-row data-name="summarize-meetings" data-desc="Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction" data-tags="meeting,summary,obsidian" data-cat="Personal & Strategy" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="summarize-meetings">
+<a href="plugins/deliberation/" class="skill-row" data-skill-row data-name="deliberation" data-desc="Decision-making through deliberation - seeking unity through discernment rather than consensus through debate" data-tags="decision-making,discernment,deliberation" data-cat="Strategy & Reflection" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="deliberation">
+              <div class="row-num mono">25</div>
+              <div class="row-body">
+                <div class="row-title">
+                  <h3 class="skill-name mono">deliberation</h3>
+                  
+                  <span class="skill-ver mono">v1.0.0</span>
+                </div>
+                <p class="skill-desc">Decision-making through deliberation - seeking unity through discernment rather than consensus through debate</p>
+                <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="decision-making">#decision-making</button> <button type="button" class="tag-btn mono" data-tag="discernment">#discernment</button> <button type="button" class="tag-btn mono" data-tag="deliberation">#deliberation</button></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/deliberation</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/deliberation" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="deliberation">copy</button></div>
+              </div>
+              <div class="row-rail">
+                <span class="row-cat mono" style="color:#1f9e6b">Strategy & Reflection</span>
+                <span class="row-more mono">details →</span>
+              </div>
+            </a>
+<a href="plugins/summarize-meetings/" class="skill-row" data-skill-row data-name="summarize-meetings" data-desc="Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction" data-tags="meeting,summary,obsidian" data-cat="Strategy & Reflection" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="summarize-meetings">
               <div class="row-num mono">26</div>
               <div class="row-body">
                 <div class="row-title">
@@ -586,15 +563,14 @@
                 </div>
                 <p class="skill-desc">Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction</p>
                 <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="meeting">#meeting</button> <button type="button" class="tag-btn mono" data-tag="summary">#summary</button> <button type="button" class="tag-btn mono" data-tag="obsidian">#obsidian</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/summarize-meetings</code></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">npx skills add 2389-research/summarize-meetings</code><button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/summarize-meetings" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="summarize-meetings">copy</button></div>
               </div>
               <div class="row-rail">
-                <span class="row-cat mono" style="color:#1f9e6b">Personal & Strategy</span>
-                <button type="button" class="row-copy mono" data-copy="npx skills add 2389-research/summarize-meetings" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="summarize-meetings">copy install</button>
+                <span class="row-cat mono" style="color:#1f9e6b">Strategy & Reflection</span>
                 <span class="row-more mono">details →</span>
               </div>
             </a>
-<a href="plugins/journal/" class="skill-row" data-skill-row data-name="journal" data-desc="A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts" data-tags="journal,journaling,thoughts" data-cat="Personal & Strategy" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="journal">
+<a href="plugins/journal/" class="skill-row" data-skill-row data-name="journal" data-desc="A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts" data-tags="journal,journaling,thoughts" data-cat="Strategy & Reflection" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="journal">
               <div class="row-num mono">27</div>
               <div class="row-body">
                 <div class="row-title">
@@ -604,11 +580,10 @@
                 </div>
                 <p class="skill-desc">A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts</p>
                 <div class="row-tags"><button type="button" class="tag-btn mono" data-tag="journal">#journal</button> <button type="button" class="tag-btn mono" data-tag="journaling">#journaling</button> <button type="button" class="tag-btn mono" data-tag="thoughts">#thoughts</button></div>
-                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">/plugin install journal@2389-research</code></div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">/plugin install journal@2389-research</code><button type="button" class="row-copy mono" data-copy="/plugin install journal@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="journal">copy</button></div>
               </div>
               <div class="row-rail">
-                <span class="row-cat mono" style="color:#1f9e6b">Personal & Strategy</span>
-                <button type="button" class="row-copy mono" data-copy="/plugin install journal@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="journal">copy install</button>
+                <span class="row-cat mono" style="color:#1f9e6b">Strategy & Reflection</span>
                 <span class="row-more mono">details →</span>
               </div>
             </a>

@@ -17,23 +17,42 @@ test('head: loads Newsreader and three.js and uses the skills title', () => {
   assert.match(index, /<title>Coding-agent Skills &amp; Servers \| 2389 Research<\/title>/);
   assert.doesNotMatch(index, /Plus\+Jakarta\+Sans/);
 });
-test('masthead: rule bar, headline, install strip, star link', () => {
+test('masthead: rule bar, headline, star link, and no generic install paste', () => {
   assert.match(index, /2389 Research/);
   assert.match(index, /Agent Skills · Open Source/);
   assert.match(index, /Coding-agent <em>skills<\/em> &amp; servers/);
-  assert.match(index, /data-copy="npx skills add 2389-research\/&lt;name&gt;"/);
   assert.match(index, /★ Star on GitHub/);
+  // Task 12: the generic "npx skills add …/<name>" copy/paste strip is gone from the top.
+  assert.doesNotMatch(index, /install-strip/);
+  assert.doesNotMatch(index, /data-copy="npx skills add 2389-research\/&lt;name&gt;"/);
 });
 test('copy: single data-copy handler with stopPropagation', () => {
   assert.match(index, /\[data-copy\]/);
   assert.match(index, /stopPropagation/);
 });
-test('toolbar: search input, live count, category chips with counts', () => {
+test('toolbar: search input, live count, the five category chips with counts', () => {
   assert.match(index, /data-search/);
   assert.match(index, /data-count/);
   assert.match(index, /data-cat="all"[^>]*>All \(27\)/);
-  assert.match(index, /data-cat="Development"/);
-  assert.match(index, /data-cat="Agent Systems"/);
+  assert.match(index, /data-cat="Development"[^>]*>Development \(7\)/);
+  assert.match(index, /data-cat="Testing & Review"[^>]*>Testing & Review \(6\)/);
+  assert.match(index, /data-cat="Agents & Orchestration"[^>]*>Agents & Orchestration \(5\)/);
+  assert.match(index, /data-cat="Infrastructure & Ops"[^>]*>Infrastructure & Ops \(4\)/);
+  assert.match(index, /data-cat="Strategy & Reflection"[^>]*>Strategy & Reflection \(5\)/);
+  // the old heuristic's category names are gone
+  assert.doesNotMatch(index, /Agent Systems/);
+  assert.doesNotMatch(index, /Personal & Strategy/);
+});
+test('index: explicit category field drives placement (fixes the old heuristic)', () => {
+  // binary-re was mis-shelved in Infrastructure by the keyword heuristic; it is dev work.
+  assert.match(index, /data-name="binary-re"[^>]*data-cat="Development"/);
+  // firebase-development was in Development; it belongs with Infrastructure & Ops.
+  assert.match(index, /data-name="firebase-development"[^>]*data-cat="Infrastructure & Ops"/);
+  // Harper's gripe: journal sat in strategy while socialmedia did not. Now both are coherent.
+  assert.match(index, /data-name="journal"[^>]*data-cat="Strategy & Reflection"/);
+  assert.match(index, /data-name="socialmedia"[^>]*data-cat="Agents & Orchestration"/);
+  // simmer is verification work, not raw development
+  assert.match(index, /data-name="simmer"[^>]*data-cat="Testing & Review"/);
 });
 test('script: filter wiring reads skill rows on input', () => {
   assert.match(index, /\[data-skill-row\]/);
@@ -55,10 +74,18 @@ test('index: each row prints the install command as visible text, not just a cop
   // An MCP-only plugin writes out its Claude Code command (it has no npx install).
   assert.match(index, /<code class="row-cmd mono">\/plugin install journal@2389-research<\/code>/);
 });
-test('index: numbered category sections and an empty state', () => {
+test('index: category sections and an empty state, with no ordinal numbers', () => {
   assert.match(index, /data-cat-section/);
   assert.match(index, /data-empty/);
   assert.match(index, /Nothing here\./);
+  // Task 13: the "01 / 02" ordinals on category headers are gone.
+  assert.doesNotMatch(index, /cat-num/);
+});
+test('index: the copy button sits inline with the install command, not in the side rail', () => {
+  // Task 11: copy button immediately follows the visible command inside .row-install.
+  assert.match(index, /<\/code><button type="button" class="row-copy mono"/);
+  // The side rail now carries only the category label and the details cue — no copy button.
+  assert.match(index, /<div class="row-rail">\s*<span class="row-cat mono"[^>]*>[^<]*<\/span>\s*<span class="row-more mono">/);
 });
 test('script: topo init is reduced-motion aware', () => {
   assert.match(index, /getElementById\('topo-bg'\)/);
@@ -106,6 +133,18 @@ test('detail: Claude Code install sits behind a disclosure for skills, stays pri
   // MCP-only has no npx, so its Claude Code install stays visible, not hidden behind a click.
   assert.doesNotMatch(journal, /class="install-alt"/);
   assert.match(journal, /\/plugin install journal@2389-research/);
+});
+test('detail: a Star on GitHub CTA links to the plugin repo', () => {
+  const simmer = fs.readFileSync(path.join(ROOT, 'docs/plugins/simmer/index.html'), 'utf8');
+  assert.match(simmer, /★ Star on GitHub/);
+  assert.match(simmer, /href="https:\/\/github\.com\/2389-research\/simmer"/);
+  // socialmedia's repo is mcp-socialmedia — the star link points at the real repo, not the plugin name.
+  const social = fs.readFileSync(path.join(ROOT, 'docs/plugins/socialmedia/index.html'), 'utf8');
+  assert.match(social, /href="https:\/\/github\.com\/2389-research\/mcp-socialmedia"/);
+});
+test('generator: plugin pages carry a build-time star count', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/generate-site.js'), 'utf8');
+  assert.match(src, /stargazerCount/);
 });
 test('detail: prev/next follow flat marketplace order', () => {
   const marketplace = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude-plugin/marketplace.json'), 'utf8'));

@@ -42,14 +42,11 @@ a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offse
 .hero-head{font-size:clamp(48px,8.5vw,104px);line-height:0.92;font-weight:500;letter-spacing:-0.02em;margin:0 0 26px;max-width:13ch;}
 .hero-head em{font-style:italic;font-weight:400;}
 .hero-lede{font-size:clamp(18px,2.4vw,23px);line-height:1.5;color:var(--body);max-width:54ch;margin:0;}
-.install-strip{display:flex;align-items:stretch;gap:12px;flex-wrap:wrap;padding:22px 0 40px;}
-.install-strip .cmd{display:flex;align-items:center;gap:16px;background:var(--paper);border:1.5px solid var(--ink);padding:14px 14px 14px 20px;font-size:14px;color:var(--body-2);}
-.install-strip .dollar{color:var(--muted-2);}
-.install-strip .accent{color:var(--accent);}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px;}
 .btn-primary{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#fff;background:var(--accent);border:none;padding:9px 16px;cursor:pointer;}
 .btn-primary:hover{background:var(--accent-hover);}
 .btn-primary.copied{background:var(--cat-personal);}
-.btn-ghost{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink);border:1.5px solid var(--ink);padding:0 22px;}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink);border:1.5px solid var(--ink);padding:12px 22px;}
 .toolbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,0.86);backdrop-filter:blur(10px);}
 .toolbar-search{display:flex;align-items:center;gap:10px;padding:14px 0;}
 .toolbar-search input{flex:1;min-width:200px;font-size:14px;color:var(--ink);background:transparent;border:none;outline:none;}
@@ -63,7 +60,6 @@ a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offse
 .index-list{padding:8px 0 40px;}
 .cat-section{padding:34px var(--bleed) 0;margin:0 calc(-1 * var(--bleed));}
 .cat-head{display:flex;align-items:baseline;gap:16px;margin-bottom:6px;}
-.cat-num{font-size:13px;}
 .cat-name{font-size:26px;font-weight:500;letter-spacing:-0.01em;margin:0;color:var(--ink);}
 .cat-count{font-size:12px;color:var(--muted);}
 .cat-rule{flex:1;height:1px;background:var(--hair-3);}
@@ -80,12 +76,12 @@ a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offse
 .row-tags{display:flex;flex-wrap:wrap;gap:6px 14px;}
 .tag-btn{font-size:12px;color:var(--muted);background:none;border:none;padding:0;cursor:pointer;}
 .tag-btn:hover{color:var(--accent);}
-.row-install{display:flex;align-items:center;gap:7px;margin-top:11px;min-width:0;}
+.row-install{display:flex;align-items:center;gap:7px;margin-top:11px;min-width:0;flex-wrap:wrap;}
 .row-cmd-prompt{color:var(--muted-2);font-size:12px;}
 .row-cmd{font-size:12.5px;color:var(--body-2);background:var(--paper);border:1px solid var(--hair-2);padding:3px 9px;overflow-wrap:anywhere;max-width:100%;}
 .row-rail{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
 .row-cat{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;}
-.row-copy{font-size:12px;font-weight:600;color:#fff;background:var(--ink);border:1.5px solid var(--ink);padding:7px 13px;cursor:pointer;white-space:nowrap;}
+.row-copy{font-size:12px;font-weight:600;color:#fff;background:var(--ink);border:1.5px solid var(--ink);padding:5px 12px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
 .row-copy.copied{color:var(--cat-personal);background:#fff;border-color:var(--cat-personal);}
 .row-more{font-size:12px;color:var(--muted-2);}
 .empty-state{text-align:center;padding:90px 0 110px;}
@@ -105,6 +101,9 @@ a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offse
 .detail-ver{font-size:14px;color:var(--muted-2);}
 .detail-lede{font-size:clamp(19px,2.4vw,24px);line-height:1.55;color:var(--body-2);margin:0 0 26px;text-wrap:pretty;}
 .detail-head .row-tags{gap:8px 18px;margin-bottom:36px;}
+.detail-actions{margin:10px 0 4px;}
+.detail-star{text-decoration:none;}
+.detail-star .star-count{opacity:.6;}
 .install-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;}
 .install-box{display:flex;align-items:center;gap:10px;background:var(--paper);border:1.5px solid var(--ink);padding:12px 12px 12px 16px;margin-bottom:20px;}
 .install-box code{flex:1;font-size:14px;color:var(--body-2);overflow-x:auto;white-space:nowrap;}

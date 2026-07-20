@@ -12,6 +12,7 @@
   "plugins": [
     {
       "name": "css-development",
+      "category": "development",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/css-development.git"
@@ -29,6 +30,7 @@
     },
     {
       "name": "firebase-development",
+      "category": "infrastructure",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/firebase-development.git"
@@ -46,6 +48,7 @@
     },
     {
       "name": "landing-page-design",
+      "category": "development",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/landing-page-design.git"
@@ -65,6 +68,7 @@
     },
     {
       "name": "xtool",
+      "category": "development",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/xtool.git"
@@ -85,6 +89,7 @@
     },
     {
       "name": "building-multiagent-systems",
+      "category": "agents",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/building-multiagent-systems.git"
@@ -103,6 +108,7 @@
     },
     {
       "name": "speed-run",
+      "category": "development",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/speed-run.git"
@@ -124,6 +130,7 @@
     },
     {
       "name": "test-kitchen",
+      "category": "testing",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/test-kitchen.git"
@@ -143,6 +150,7 @@
     },
     {
       "name": "simmer",
+      "category": "testing",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/simmer.git"
@@ -167,6 +175,7 @@
     },
     {
       "name": "scenario-testing",
+      "category": "testing",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/scenario-testing.git"
@@ -184,6 +193,7 @@
     },
     {
       "name": "fresh-eyes-review",
+      "category": "testing",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/fresh-eyes-review.git"
@@ -202,6 +212,7 @@
     },
     {
       "name": "documentation-audit",
+      "category": "testing",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/documentation-audit.git"
@@ -222,6 +233,7 @@
     },
     {
       "name": "ceo-personal-os",
+      "category": "strategy",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/ceo-personal-os.git"
@@ -266,6 +278,7 @@
     },
     {
       "name": "worldview-synthesis",
+      "category": "strategy",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/worldview-synthesis.git"
@@ -285,6 +298,7 @@
     },
     {
       "name": "deliberation",
+      "category": "strategy",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/deliberation.git"
@@ -305,6 +319,7 @@
     },
     {
       "name": "terminal-title",
+      "category": "infrastructure",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/terminal-title.git"
@@ -322,6 +337,7 @@
     },
     {
       "name": "slack-mcp",
+      "category": "infrastructure",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/slack-mcp.git"
@@ -341,6 +357,7 @@
     },
     {
       "name": "remote-system-maintenance",
+      "category": "infrastructure",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/remote-system-maintenance.git"
@@ -359,6 +376,7 @@
     },
     {
       "name": "binary-re",
+      "category": "development",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/binary-re.git"
@@ -384,6 +402,7 @@
     },
     {
       "name": "review-squad",
+      "category": "testing",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/review-squad.git"
@@ -406,6 +425,7 @@
     },
     {
       "name": "git-repo-prep",
+      "category": "development",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/git-repo-prep.git"
@@ -428,6 +448,7 @@
     },
     {
       "name": "prbuddy",
+      "category": "development",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/prbuddy.git"
@@ -448,6 +469,7 @@
     },
     {
       "name": "summarize-meetings",
+      "category": "strategy",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/summarize-meetings.git"
@@ -468,6 +490,7 @@
     },
     {
       "name": "jam",
+      "category": "agents",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/jam.git"
@@ -489,6 +512,7 @@
     },
     {
       "name": "agent-drugs",
+      "category": "agents",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/agent-drugs.git"
@@ -507,6 +531,7 @@
     },
     {
       "name": "socialmedia",
+      "category": "agents",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/mcp-socialmedia.git"
@@ -525,6 +550,7 @@
     },
     {
       "name": "journal",
+      "category": "strategy",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/journal-mcp.git"
@@ -545,6 +571,7 @@
     },
     {
       "name": "thrifty",
+      "category": "agents",
       "source": {
         "source": "url",
         "url": "https://github.com/2389-research/thrifty.git"

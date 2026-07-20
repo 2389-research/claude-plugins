@@ -19,11 +19,8 @@ const journal = read('docs/plugins/journal/index.html');
 assert.match(journal, /\/plugin install journal@2389-research/, 'journal page should show /plugin install (at-form)');
 assert.doesNotMatch(journal, /npx skills add 2389-research\/journal/, 'journal (MCP) page must not show npx anywhere');
 
-// Homepage: hero shows the npx pattern, default to npx
-const index = read('docs/index.html');
-assert.match(index, /data-copy="npx skills add 2389-research\/&lt;name&gt;"/, 'hero install strip copies the npx pattern');
-
 // Homepage index: skill-plugin row shows npx; an MCP server's repo never appears in an npx command
+const index = read('docs/index.html');
 assert.match(index, /npx skills add 2389-research\/simmer/, 'simmer card should show npx command');
 
 // No MCP server's own repo may ever appear in an npx command (derived from the strict flag, like the generator)
