@@ -49,6 +49,12 @@ test('index: MCP-only row copies the Claude Code command, not npx', () => {
   assert.match(index, /data-copy="\/plugin install journal@2389-research"/);
   assert.doesNotMatch(index, /data-copy="npx skills add 2389-research\/journal"/);
 });
+test('index: each row prints the install command as visible text, not just a copy target', () => {
+  // A skill plugin writes out its npx command in a readable <code>, alongside the existing copy button.
+  assert.match(index, /<code class="row-cmd mono">npx skills add 2389-research\/simmer<\/code>/);
+  // An MCP-only plugin writes out its Claude Code command (it has no npx install).
+  assert.match(index, /<code class="row-cmd mono">\/plugin install journal@2389-research<\/code>/);
+});
 test('index: numbered category sections and an empty state', () => {
   assert.match(index, /data-cat-section/);
   assert.match(index, /data-empty/);
@@ -80,6 +86,16 @@ test('detail: MCP-only page omits the npx block', () => {
   assert.doesNotMatch(journal, /npx skills add 2389-research\/journal/);
   assert.match(journal, /\/plugin install journal@2389-research/);
 });
+test('detail: Claude Code install sits behind a disclosure for skills, stays primary for MCP-only', () => {
+  const simmer = fs.readFileSync(path.join(ROOT, 'docs/plugins/simmer/index.html'), 'utf8');
+  // npx is the up-front suggestion; the Claude Code command is tucked inside a click-to-open <details>.
+  assert.match(simmer, /npx skills add 2389-research\/simmer/);
+  assert.match(simmer, /<details class="install-alt">[\s\S]*?\/plugin install simmer@2389-research[\s\S]*?<\/details>/);
+  const journal = fs.readFileSync(path.join(ROOT, 'docs/plugins/journal/index.html'), 'utf8');
+  // MCP-only has no npx, so its Claude Code install stays visible, not hidden behind a click.
+  assert.doesNotMatch(journal, /class="install-alt"/);
+  assert.match(journal, /\/plugin install journal@2389-research/);
+});
 test('detail: prev/next follow flat marketplace order', () => {
   const marketplace = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude-plugin/marketplace.json'), 'utf8'));
   const i = marketplace.plugins.findIndex(p => p.name === 'simmer');
@@ -108,6 +124,12 @@ test('glossary JSON-LD: DefinedTerm descriptions are plain text, not HTML entiti
   // The visible <p> legitimately shows &lt;repo&gt;; the structured-data description must be decoded.
   assert.match(g, /"description": "[^"]*marketplace add <repo>/);
   assert.doesNotMatch(g, /"description": "[^"]*&lt;repo&gt;/);
+});
+test('style: content column sits on a translucent sheet so the listing reads over the topo', () => {
+  const css = fs.readFileSync(path.join(ROOT, 'docs/style.css'), 'utf8');
+  // .wrap carries a translucent (not fully opaque) white/paper background so text stays readable
+  // over the animated topology while the cool background still shows through.
+  assert.match(css, /\.wrap\{[^}]*background:rgba\([^)]+\)/);
 });
 test('generator: generateNav is fully removed', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/generate-site.js'), 'utf8');

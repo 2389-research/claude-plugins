@@ -462,6 +462,7 @@ function generateSkillRow(plugin, gi, catTitle) {
                 </div>
                 <p class="skill-desc">${desc}</p>
                 <div class="row-tags">${tagHtml}</div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">${copyCmd}</code></div>
               </div>
               <div class="row-rail">
                 <span class="row-cat mono" style="color:${color}">${catTitle}</span>
@@ -661,11 +662,25 @@ function generatePluginPage(plugin) {
     `<a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="${t}">#${t}</a>`
   ).join(' ');
   const npxBlock = isMcp ? '' : `
-          <div class="mono install-label">Install — npx (any agent)</div>
+          <div class="mono install-label">Install — npx skills · recommended</div>
           <div class="install-box">
             <code class="mono">${getNpxInstallCommand(plugin)}</code>
             <button type="button" class="btn-primary" data-copy="${getNpxInstallCommand(plugin)}" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}-npx">Copy</button>
           </div>`;
+
+  // npx is the suggested path; the Claude Code command is deprioritized behind a click for
+  // skill plugins. MCP-only entries have no npx install, so their Claude Code command stays visible.
+  const claudeCodeBox = `<div class="install-box">
+          <code class="mono">${getPluginInstallCommand(plugin)}</code>
+          <button type="button" class="btn-ghost-sm mono" data-copy="${getPluginInstallCommand(plugin)}" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">Copy</button>
+        </div>`;
+  const claudeBlock = isMcp
+    ? `<div class="mono install-label">Install — Claude Code</div>
+        ${claudeCodeBox}`
+    : `<details class="install-alt">
+          <summary class="mono">Prefer Claude Code? Install via /plugin</summary>
+          ${claudeCodeBox}
+        </details>`;
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -688,11 +703,7 @@ ${generateHead(plugin.name, description, `plugins/${plugin.name}/`, plugin.keywo
       <p class="detail-lede">${escapeHtml(description)}</p>
       <div class="row-tags">${tagHtml}</div>
       ${npxBlock}
-      <div class="mono install-label">Install — Claude Code</div>
-      <div class="install-box">
-        <code class="mono">${getPluginInstallCommand(plugin)}</code>
-        <button type="button" class="btn-ghost-sm mono" data-copy="${getPluginInstallCommand(plugin)}" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">Copy</button>
-      </div>
+      ${claudeBlock}
     </header>
     <main id="main-content" class="readme-body">
       ${readme ? readmeHtml : `<p>${escapeHtml(description)}</p>`}

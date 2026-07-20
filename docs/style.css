@@ -21,7 +21,9 @@ a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offse
 ::selection{background:rgba(230,25,110,0.14);}
 .mono{font-family:'IBM Plex Mono',monospace;}
 .kicker{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);}
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(20px,4vw,44px);position:relative;z-index:1;}
+/* Translucent white sheet: keeps text readable over the animated topo while the
+   background still shows through the margins and faintly through the sheet itself. */
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(20px,4vw,44px);position:relative;z-index:1;background:rgba(255,255,255,0.82);}
 .glass{background:rgba(255,255,255,0.62);backdrop-filter:blur(7px);}
 .rule-t{border-top:1.5px solid var(--ink);}
 .rule-b{border-bottom:1.5px solid var(--ink);}
@@ -76,6 +78,9 @@ a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offse
 .row-tags{display:flex;flex-wrap:wrap;gap:6px 14px;}
 .tag-btn{font-size:12px;color:var(--muted);background:none;border:none;padding:0;cursor:pointer;}
 .tag-btn:hover{color:var(--accent);}
+.row-install{display:flex;align-items:center;gap:7px;margin-top:11px;min-width:0;}
+.row-cmd-prompt{color:var(--muted-2);font-size:12px;}
+.row-cmd{font-size:12.5px;color:var(--body-2);background:var(--paper);border:1px solid var(--hair-2);padding:3px 9px;overflow-wrap:anywhere;max-width:100%;}
 .row-rail{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
 .row-cat{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;}
 .row-copy{font-size:12px;font-weight:600;color:#fff;background:var(--ink);border:1.5px solid var(--ink);padding:7px 13px;cursor:pointer;white-space:nowrap;}
@@ -103,6 +108,12 @@ a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offse
 .install-box code{flex:1;font-size:14px;color:var(--body-2);overflow-x:auto;white-space:nowrap;}
 .btn-ghost-sm{font-size:12px;font-weight:600;color:var(--ink);background:#fff;border:1.5px solid var(--ink);padding:9px 14px;cursor:pointer;}
 .btn-ghost-sm:hover,.btn-ghost-sm.copied{background:var(--ink);color:#fff;}
+.install-alt{margin-bottom:20px;}
+.install-alt summary{display:inline-flex;align-items:center;gap:7px;font-size:12px;letter-spacing:0.04em;color:var(--muted);cursor:pointer;list-style:none;padding:5px 0;}
+.install-alt summary::-webkit-details-marker{display:none;}
+.install-alt summary::after{content:'+';font-size:14px;line-height:1;color:var(--muted-2);}
+.install-alt[open] summary::after{content:'\2212';}
+.install-alt summary:hover{color:var(--accent);}
 .readme-body{max-width:760px;padding:20px 0 10px;font-size:18px;line-height:1.65;color:var(--body-2);}
 .readme-body h1,.readme-body h2,.readme-body h3{font-weight:600;letter-spacing:-0.01em;color:var(--ink);margin:1.6em 0 .5em;}
 .readme-body h2{font-size:28px;border-bottom:1px solid var(--hair);padding-bottom:.2em;}
