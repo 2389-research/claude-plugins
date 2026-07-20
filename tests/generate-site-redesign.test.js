@@ -96,6 +96,19 @@ test('glossary: editorial shell, tuples rendered, JSON-LD kept', () => {
   assert.match(g, /application\/ld\+json/);
   assert.doesNotMatch(g, /class="nav"/);
 });
+test('glossary md mirror: HTML entities decoded, tags stripped (no leak into plain text)', () => {
+  const md = fs.readFileSync(path.join(ROOT, 'docs/glossary/index.md'), 'utf8');
+  assert.match(md, /marketplace add <repo>/);         // &lt;repo&gt; decoded to a literal <repo>
+  assert.match(md, /\/<name>/);                        // &lt;name&gt; decoded to a literal <name>
+  assert.doesNotMatch(md, /&lt;|&gt;|&amp;|&quot;/);   // a plain-text mirror carries no HTML entities
+  assert.doesNotMatch(md, /<\/?code>/);                // HTML tags stay stripped
+});
+test('glossary JSON-LD: DefinedTerm descriptions are plain text, not HTML entities', () => {
+  const g = fs.readFileSync(path.join(ROOT, 'docs/glossary/index.html'), 'utf8');
+  // The visible <p> legitimately shows &lt;repo&gt;; the structured-data description must be decoded.
+  assert.match(g, /"description": "[^"]*marketplace add <repo>/);
+  assert.doesNotMatch(g, /"description": "[^"]*&lt;repo&gt;/);
+});
 test('generator: generateNav is fully removed', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/generate-site.js'), 'utf8');
   assert.doesNotMatch(src, /function generateNav/);

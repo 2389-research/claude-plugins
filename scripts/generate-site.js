@@ -353,6 +353,19 @@ function escapeHtml(s) {
     .replace(/"/g, '&quot;');
 }
 
+// Convert HTML-authored text (e.g. a glossary definition with <code> and &lt;) into
+// plain text for Markdown/JSON-LD mirrors. Strip tags FIRST, then decode entities —
+// decoding first would let a literal <repo> look like a tag and get stripped.
+// Decode &amp; last so an escaped entity isn't double-decoded.
+function htmlToPlainText(html) {
+  return String(html)
+    .replace(/<[^>]+>/g, '')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&');
+}
+
 // Common HTML head
 function generateHead(title, description, canonicalPath, extraKeywords) {
   const baseKeywords = ['coding agent skills', 'Claude Code', 'MCP servers', 'Codex', 'Cursor', 'AI development', 'Anthropic', '2389 Research'];
@@ -1135,7 +1148,7 @@ const glossaryStructuredData = JSON.stringify({
   "hasDefinedTerm": GLOSSARY_TERMS.map(([term, definition]) => ({
     "@type": "DefinedTerm",
     "name": term,
-    "description": definition.replace(/<[^>]+>/g, ''),
+    "description": htmlToPlainText(definition),
   })),
 }, null, 2);
 
@@ -1178,7 +1191,7 @@ const glossaryMd = `# Glossary
 
 Terms used across the 2389 Research plugin marketplace.
 
-${GLOSSARY_TERMS.map(([term, definition]) => `## ${term}\n\n${definition.replace(/<[^>]+>/g, '')}`).join('\n\n')}
+${GLOSSARY_TERMS.map(([term, definition]) => `## ${term}\n\n${htmlToPlainText(definition)}`).join('\n\n')}
 
 [Back to marketplace](${SITE_URL}/)
 `;

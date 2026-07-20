@@ -12,7 +12,7 @@ A self-contained capability — instructions plus optional supporting files — 
 
 ## Marketplace
 
-A catalog of plugins. This site is the marketplace for 2389 Research plugins. Added in Claude Code with /plugin marketplace add &lt;repo&gt;.
+A catalog of plugins. This site is the marketplace for 2389 Research plugins. Added in Claude Code with /plugin marketplace add <repo>.
 
 ## MCP server
 
@@ -24,7 +24,7 @@ A shell command Claude Code executes in response to events such as tool calls or
 
 ## Slash command
 
-A user-invocable command typed in Claude Code as /&lt;name&gt;. Slash commands are defined inside skills or as standalone files in a plugin.
+A user-invocable command typed in Claude Code as /<name>. Slash commands are defined inside skills or as standalone files in a plugin.
 
 ## Scorecard
 
