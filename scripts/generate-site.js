@@ -343,11 +343,22 @@ function cleanDescription(desc) {
   return desc.startsWith('[meta]') ? desc.substring(7).trim() : desc;
 }
 
+// Escape a plain-text string for interpolation into HTML (attributes or text).
+// Never apply to Markdown/plain-text mirrors or already-rendered HTML.
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 // Common HTML head
 function generateHead(title, description, canonicalPath, extraKeywords) {
   const baseKeywords = ['coding agent skills', 'Claude Code', 'MCP servers', 'Codex', 'Cursor', 'AI development', 'Anthropic', '2389 Research'];
   const allKeywords = extraKeywords ? [...new Set([...extraKeywords, ...baseKeywords])] : baseKeywords;
-  const escapedTitle = title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const escapedTitle = escapeHtml(title);
+  const escapedDesc = escapeHtml(description);
   return `<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -355,7 +366,7 @@ function generateHead(title, description, canonicalPath, extraKeywords) {
   <!-- Primary Meta Tags -->
   <title>${escapedTitle} | 2389 Research</title>
   <meta name="title" content="${escapedTitle} | 2389 Research">
-  <meta name="description" content="${description}">
+  <meta name="description" content="${escapedDesc}">
   <meta name="keywords" content="${allKeywords.join(', ')}">
   <meta name="author" content="2389 Research Inc">
   <meta name="robots" content="index, follow">
@@ -370,7 +381,7 @@ function generateHead(title, description, canonicalPath, extraKeywords) {
   <meta property="og:type" content="website">
   <meta property="og:url" content="${SITE_URL}/${canonicalPath}">
   <meta property="og:title" content="${escapedTitle} | 2389 Research">
-  <meta property="og:description" content="${description}">
+  <meta property="og:description" content="${escapedDesc}">
   <meta property="og:image" content="${SITE_URL}/${canonicalPath}og-image.png">
   <meta property="og:site_name" content="2389 Research Plugin Marketplace">
 
@@ -378,7 +389,7 @@ function generateHead(title, description, canonicalPath, extraKeywords) {
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="${SITE_URL}/${canonicalPath}">
   <meta property="twitter:title" content="${escapedTitle} | 2389 Research">
-  <meta property="twitter:description" content="${description}">
+  <meta property="twitter:description" content="${escapedDesc}">
   <meta property="twitter:image" content="${SITE_URL}/${canonicalPath}og-image.png">
 
   <!-- Favicon -->
@@ -428,7 +439,7 @@ function generateSkillRow(plugin, gi, catTitle) {
   const tagHtml = tags.map(t =>
     `<button type="button" class="tag-btn mono" data-tag="${t}">#${t}</button>`
   ).join(' ');
-  return `<a href="plugins/${plugin.name}/" class="skill-row" data-skill-row data-name="${plugin.name}" data-desc="${desc.replace(/"/g, '&quot;')}" data-tags="${tags.join(',')}" data-cat="${catTitle}" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="${plugin.name}">
+  return `<a href="plugins/${plugin.name}/" class="skill-row" data-skill-row data-name="${plugin.name}" data-desc="${escapeHtml(desc)}" data-tags="${tags.join(',')}" data-cat="${catTitle}" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="${plugin.name}">
               <div class="row-num mono">${pad(gi)}</div>
               <div class="row-body">
                 <div class="row-title">
@@ -581,7 +592,7 @@ function generateRelatedPlugins(plugin, category) {
   return `<section class="related rule-t">
       <div class="mono related-label">More from ${category.title}</div>
       <ul class="related-list">
-        ${related.map(p => `<li><a href="../${p.name}/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="${p.name}"><span class="mono related-name">${p.name}</span><span class="related-desc">${cleanDescription(p.description)}</span></a></li>`).join('\n        ')}
+        ${related.map(p => `<li><a href="../${p.name}/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="${p.name}"><span class="mono related-name">${p.name}</span><span class="related-desc">${escapeHtml(cleanDescription(p.description))}</span></a></li>`).join('\n        ')}
       </ul>
     </section>`;
 }
@@ -661,7 +672,7 @@ ${generateHead(plugin.name, description, `plugins/${plugin.name}/`, plugin.keywo
         <h1 class="detail-name mono">${plugin.name}</h1>
         <span class="detail-ver mono">v${plugin.version || '1.0.0'}</span>
       </div>
-      <p class="detail-lede">${description}</p>
+      <p class="detail-lede">${escapeHtml(description)}</p>
       <div class="row-tags">${tagHtml}</div>
       ${npxBlock}
       <div class="mono install-label">Install — Claude Code</div>
@@ -671,7 +682,7 @@ ${generateHead(plugin.name, description, `plugins/${plugin.name}/`, plugin.keywo
       </div>
     </header>
     <main id="main-content" class="readme-body">
-      ${readme ? readmeHtml : `<p>${description}</p>`}
+      ${readme ? readmeHtml : `<p>${escapeHtml(description)}</p>`}
     </main>
     <nav class="detail-nav mono rule-t" aria-label="Skill navigation">
       ${prev ? `<a href="../${prev.name}/" data-tinylytics-event="plugin.prev">← ${prev.name}</a>` : '<span></span>'}
