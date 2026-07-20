@@ -68,9 +68,20 @@ test('script: topo init is reduced-motion aware', () => {
 test('footer: colophon with copyright and links', () => {
   assert.match(index, /class="colophon/);                                    // NEW colophon class — RED on the old .footer markup
   const year = new Date().getFullYear();                                     // track runtime year — generateFooter() renders new Date().getFullYear()
-  assert.match(index, new RegExp(`© ${year} 2389 Research Inc — all plugins open source`));  // NEW copy (em-dash —, U+2014) — RED on old "All plugins are open source."
+  // The wordmark in the copyright now links to 2389.ai (the em-dash — is U+2014).
+  assert.match(index, new RegExp(`© ${year} <a[^>]*href="https://2389\\.ai"[^>]*>2389 Research Inc</a> — all plugins open source`));
   assert.match(index, /Skills Guide/);
   assert.match(index, /2389\.ai/);
+});
+test('brand: the 2389 Research wordmark links to 2389.ai across pages', () => {
+  // masthead wordmark on the index (brand-link blends into the bar, accents on hover)
+  assert.match(index, /<a href="https:\/\/2389\.ai"[^>]*class="brand-link"[^>]*>2389 Research<\/a>/);
+  // detail-page topbar
+  const simmer = fs.readFileSync(path.join(ROOT, 'docs/plugins/simmer/index.html'), 'utf8');
+  assert.match(simmer, /<a href="https:\/\/2389\.ai"[^>]*>2389 Research<\/a>/);
+  // glossary topbar
+  const gloss = fs.readFileSync(path.join(ROOT, 'docs/glossary/index.html'), 'utf8');
+  assert.match(gloss, /<a href="https:\/\/2389\.ai"[^>]*>2389 Research<\/a>/);
 });
 test('detail: editorial header, both install blocks, no legacy install UI', () => {
   const simmer = fs.readFileSync(path.join(ROOT, 'docs/plugins/simmer/index.html'), 'utf8');
@@ -108,7 +119,7 @@ test('glossary: editorial shell, tuples rendered, JSON-LD kept', () => {
   assert.match(g, /family=Newsreader:/);
   assert.match(g, /class="wrap/);
   const year = new Date().getFullYear();                                     // generator renders © new Date().getFullYear() — do NOT hardcode 2026
-  assert.match(g, new RegExp(`© ${year} 2389 Research Inc`));
+  assert.match(g, new RegExp(`© ${year} <a[^>]*href="https://2389\\.ai"[^>]*>2389 Research Inc</a>`));  // wordmark links to 2389.ai
   assert.match(g, /application\/ld\+json/);
   assert.doesNotMatch(g, /class="nav"/);
 });

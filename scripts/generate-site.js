@@ -425,12 +425,18 @@ function generateHead(title, description, canonicalPath, extraKeywords) {
 </head>`;
 }
 
+// The 2389 Research wordmark links to the company site. brand-link inherits the surrounding
+// bar's colour and only accents on hover, so it blends into each masthead/topbar/footer.
+function brandLink(label, where) {
+  return `<a href="https://2389.ai" class="brand-link" target="_blank" rel="noopener noreferrer" data-tinylytics-event="brand.company" data-tinylytics-event-value="${where}">${label}</a>`;
+}
+
 // Common footer
 function generateFooter(homePrefix = '') {
   const home = homePrefix;
   const year = new Date().getFullYear();
   return `<footer class="colophon rule-t glass">
-      <span class="mono">© ${year} 2389 Research Inc — all plugins open source</span>
+      <span class="mono">© ${year} ${brandLink('2389 Research Inc', 'colophon')} — all plugins open source</span>
       <span class="colophon-links mono">
         <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="github">GitHub</a>
         <a href="https://docs.claude.com/en/docs/claude-code/skills" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.resource" data-tinylytics-event-value="skills-guide">Skills Guide</a>
@@ -692,7 +698,7 @@ ${generateHead(plugin.name, description, `plugins/${plugin.name}/`, plugin.keywo
   <div class="wrap detail">
     <div class="detail-topbar mono rule-b">
       <a href="../../" data-tinylytics-event="nav.home">← All skills</a>
-      <span>2389 Research · Agent Skills</span>
+      <span>${brandLink('2389 Research', 'detail')} · Agent Skills</span>
     </div>
     <header class="detail-head">
       <div class="detail-kicker mono" style="color:${catColor}">${category.title}${isMcp ? ' · <span class="mcp-badge">MCP SERVER</span>' : ''}</div>
@@ -789,7 +795,7 @@ function generateToolbar() {
 function generateMasthead() {
   return `<header class="masthead">
     <div class="mast-bar mono rule-b">
-      <span>2389 Research</span>
+      <span>${brandLink('2389 Research', 'masthead')}</span>
       <span>Agent Skills · Open Source</span>
       <span>Est. 2026</span>
     </div>
@@ -1173,7 +1179,7 @@ ${generateHead('Glossary', 'Marketplace-specific terms: plugin, skill, MCP serve
   <div class="wrap">
     <div class="mast-bar mono rule-b" style="padding-top:52px">
       <a href="../">← All skills</a>
-      <span>Glossary · 2389 Research</span>
+      <span>Glossary · ${brandLink('2389 Research', 'glossary')}</span>
     </div>
     <header class="glossary-head glass">
       <div class="kicker">Reference</div>

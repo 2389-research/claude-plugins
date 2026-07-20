@@ -19,6 +19,8 @@ body{color:var(--ink);font-family:'Newsreader',serif;-webkit-font-smoothing:anti
 a{color:var(--accent);text-decoration:none;}
 a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offset:3px;}
 ::selection{background:rgba(230,25,110,0.14);}
+.brand-link{color:inherit;text-decoration:none;}
+.brand-link:hover{color:var(--accent);text-decoration:underline;text-underline-offset:3px;}
 .mono{font-family:'IBM Plex Mono',monospace;}
 .kicker{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);}
 /* Translucent white sheet: keeps text readable over the animated topo while the
