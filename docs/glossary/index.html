@@ -8,7 +8,7 @@
   <title>Glossary | 2389 Research</title>
   <meta name="title" content="Glossary | 2389 Research">
   <meta name="description" content="Marketplace-specific terms: plugin, skill, MCP server, hook, slash command, scorecard.">
-  <meta name="keywords" content="glossary, terminology, Claude Code, plugins, MCP servers, AI development, Claude, Anthropic, development tools, 2389 Research">
+  <meta name="keywords" content="glossary, terminology, coding agent skills, Claude Code, MCP servers, Codex, Cursor, AI development, Anthropic, 2389 Research">
   <meta name="author" content="2389 Research Inc">
   <meta name="robots" content="index, follow">
 
@@ -42,7 +42,8 @@
   <link rel="dns-prefetch" href="https://github.com">
 
   <!-- Fonts with display=swap for performance -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
   <!-- Styles -->
   <link rel="stylesheet" href="../../style.css">
@@ -51,124 +52,67 @@
   <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js?events" defer></script>
 </head>
 <body>
-  <div class="grid-overlay" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="../../" class="nav-logo" aria-label="2389 Research Plugin Marketplace">
-        <span class="status-indicator" aria-hidden="true"></span>
-        2389 Research Inc
-      </a>
-      <div class="nav-links" role="menubar">
-        <a href="../../#plugins" class="nav-link" role="menuitem">Plugins</a>
-        <a href="../../#about" class="nav-link" role="menuitem">About</a>
-        <a href="https://github.com/2389-research/claude-plugins" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank" data-tinylytics-event="nav.github">GitHub</a>
-        <a href="https://2389.ai" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank" data-tinylytics-event="nav.visit-2389">2389.ai</a>
-      </div>
-      <a href="https://github.com/2389-research/claude-plugins" class="nav-star-btn" rel="noopener noreferrer" target="_blank" title="Star on GitHub" data-tinylytics-event="nav.star-github">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-        Star
-      </a>
+  <canvas id="topo-bg" aria-hidden="true"></canvas>
+  <div class="topo-fade" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="mast-bar mono rule-b" style="padding-top:52px">
+      <a href="../">← All skills</a>
+      <span>Glossary · <a href="https://2389.ai" class="brand-link" target="_blank" rel="noopener noreferrer" data-tinylytics-event="brand.company" data-tinylytics-event-value="glossary">2389 Research</a></span>
     </div>
-  </nav>
-
-  <header class="plugin-hero">
-    <div class="plugin-hero-inner">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="../">Marketplace</a>
-        <span class="breadcrumb-sep">→</span>
-        <span class="breadcrumb-current">Glossary</span>
-      </nav>
-
-      <div class="plugin-hero-header">
-        <h1 class="plugin-hero-title">Glossary</h1>
-      </div>
-
-      <p class="plugin-hero-description">Terms used across the 2389 Research plugin marketplace.</p>
-    </div>
-  </header>
-
-  <main id="main-content">
-    <section class="section readme-section">
-      <div class="section-header">
-        <span class="section-number">01</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Definitions</h2>
-          <p class="section-subtitle">What things mean on this site</p>
-        </div>
-      </div>
-
-      <div class="readme-content">
-        <dl>
-          <dt><strong>Plugin</strong></dt>
-          <dd>A bundle of skills, slash commands, hooks, and/or MCP servers distributed as a single unit. Installed in Claude Code via <code>/plugin install</code>.</dd>
-          <dt><strong>Skill</strong></dt>
-          <dd>A self-contained capability — instructions plus optional supporting files — that Claude can invoke for specific tasks. Lives under <code>skills/</code> in a plugin.</dd>
-          <dt><strong>Marketplace</strong></dt>
-          <dd>A catalog of plugins. This site is the marketplace for 2389 Research plugins. Added in Claude Code with <code>/plugin marketplace add &lt;repo&gt;</code>.</dd>
-          <dt><strong>MCP server</strong></dt>
-          <dd>Model Context Protocol server. Exposes tools, resources, and prompts to Claude over a standard protocol. Some plugins ship MCP servers; others integrate with existing ones.</dd>
-          <dt><strong>Hook</strong></dt>
-          <dd>A shell command Claude Code executes in response to events such as tool calls or session start. Configured in <code>settings.json</code>.</dd>
-          <dt><strong>Slash command</strong></dt>
-          <dd>A user-invocable command typed in Claude Code as <code>/&lt;name&gt;</code>. Slash commands are defined inside skills or as standalone files in a plugin.</dd>
-          <dt><strong>Scorecard</strong></dt>
-          <dd>A versioned set of automated checks. The a14y scorecard, for example, rates how readable this site is for AI agents.</dd>
-        </dl>
-      </div>
-    </section>
-
-    <section class="section back-section">
-      <a href="../" class="back-link">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Back to Marketplace
-      </a>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="../../" class="footer-logo">
-          <span class="status-indicator"></span>
-          2389 Research Inc
-        </a>
-        <p class="footer-tagline">Building tools for how we actually work.<br>(No matching jumpsuits. Yet.)</p>
-      </div>
-
-      <div class="footer-links-grid">
-        <div class="footer-column">
-          <h5>Company</h5>
-          <a href="https://2389.ai" data-tinylytics-event="footer.company" data-tinylytics-event-value="about">About Us</a>
-          <a href="https://github.com/2389-research/claude-plugins" data-tinylytics-event="footer.company" data-tinylytics-event-value="github">GitHub</a>
-          <a href="mailto:hello@2389.ai" data-tinylytics-event="footer.company" data-tinylytics-event-value="contact">Contact</a>
-        </div>
-        <div class="footer-column">
-          <h5>Resources</h5>
-          <a href="https://docs.claude.com/en/docs/claude-code" data-tinylytics-event="footer.resource" data-tinylytics-event-value="claude-code-docs">Claude Code Docs</a>
-          <a href="https://docs.claude.com/en/docs/claude-code/skills" data-tinylytics-event="footer.resource" data-tinylytics-event-value="skills-guide">Skills Guide</a>
-          <a href="https://docs.claude.com/en/docs/claude-code/plugins" data-tinylytics-event="footer.resource" data-tinylytics-event-value="plugin-dev">Plugin Development</a>
-          <a href="../../glossary/" data-tinylytics-event="footer.resource" data-tinylytics-event-value="glossary">Glossary</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>© 2026 2389 Research Inc. All plugins are open source. (Robots included.)</p>
-    </div>
-  </footer>
-
+    <header class="glossary-head glass">
+      <div class="kicker">Reference</div>
+      <h1 class="hero-head" style="font-size:clamp(40px,6vw,72px)">Glossary</h1>
+      <p class="hero-lede">Terms you'll meet across coding-agent skills and MCP servers.</p>
+    </header>
+    <main id="main-content" class="glossary-list">
+      <section class="glossary-term">
+        <h2 class="mono">Plugin</h2>
+        <p>A bundle of skills, slash commands, hooks, and/or MCP servers distributed as a single unit. Installed in Claude Code via <code>/plugin install</code>.</p>
+      </section>
+<section class="glossary-term">
+        <h2 class="mono">Skill</h2>
+        <p>A self-contained capability — instructions plus optional supporting files — that Claude can invoke for specific tasks. Lives under <code>skills/</code> in a plugin.</p>
+      </section>
+<section class="glossary-term">
+        <h2 class="mono">Marketplace</h2>
+        <p>A catalog of plugins. This site is the marketplace for 2389 Research plugins. Added in Claude Code with <code>/plugin marketplace add &lt;repo&gt;</code>.</p>
+      </section>
+<section class="glossary-term">
+        <h2 class="mono">MCP server</h2>
+        <p>Model Context Protocol server. Exposes tools, resources, and prompts to Claude over a standard protocol. Some plugins ship MCP servers; others integrate with existing ones.</p>
+      </section>
+<section class="glossary-term">
+        <h2 class="mono">Hook</h2>
+        <p>A shell command Claude Code executes in response to events such as tool calls or session start. Configured in <code>settings.json</code>.</p>
+      </section>
+<section class="glossary-term">
+        <h2 class="mono">Slash command</h2>
+        <p>A user-invocable command typed in Claude Code as <code>/&lt;name&gt;</code>. Slash commands are defined inside skills or as standalone files in a plugin.</p>
+      </section>
+<section class="glossary-term">
+        <h2 class="mono">Scorecard</h2>
+        <p>A versioned set of automated checks. The a14y scorecard, for example, rates how readable this site is for AI agents.</p>
+      </section>
+    </main>
+    <footer class="colophon rule-t glass">
+      <span class="mono">© 2026 <a href="https://2389.ai" class="brand-link" target="_blank" rel="noopener noreferrer" data-tinylytics-event="brand.company" data-tinylytics-event-value="colophon">2389 Research Inc</a> — all plugins open source</span>
+      <span class="colophon-links mono">
+        <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="github">GitHub</a>
+        <a href="https://docs.claude.com/en/docs/claude-code/skills" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.resource" data-tinylytics-event-value="skills-guide">Skills Guide</a>
+        <a href="../glossary/" data-tinylytics-event="footer.resource" data-tinylytics-event-value="glossary">Glossary</a>
+        <a href="https://2389.ai" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="about">2389.ai</a>
+      </span>
+    </footer>
+  </div>
   <script type="application/ld+json">
   {
   "@context": "https://schema.org",
   "@type": "DefinedTermSet",
   "name": "Marketplace Glossary",
   "url": "https://skills.2389.ai/glossary/",
-  "datePublished": "2026-07-08",
-  "dateModified": "2026-07-15",
+  "datePublished": "2026-06-09",
+  "dateModified": "2026-07-20",
   "hasDefinedTerm": [
     {
       "@type": "DefinedTerm",
@@ -183,7 +127,7 @@
     {
       "@type": "DefinedTerm",
       "name": "Marketplace",
-      "description": "A catalog of plugins. This site is the marketplace for 2389 Research plugins. Added in Claude Code with /plugin marketplace add &lt;repo&gt;."
+      "description": "A catalog of plugins. This site is the marketplace for 2389 Research plugins. Added in Claude Code with /plugin marketplace add <repo>."
     },
     {
       "@type": "DefinedTerm",
@@ -198,7 +142,7 @@
     {
       "@type": "DefinedTerm",
       "name": "Slash command",
-      "description": "A user-invocable command typed in Claude Code as /&lt;name&gt;. Slash commands are defined inside skills or as standalone files in a plugin."
+      "description": "A user-invocable command typed in Claude Code as /<name>. Slash commands are defined inside skills or as standalone files in a plugin."
     },
     {
       "@type": "DefinedTerm",
@@ -207,6 +151,91 @@
     }
   ]
 }
+  </script>
+  <script>
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      navigator.clipboard.writeText(btn.dataset.copy.replace(/&lt;/g,'<').replace(/&gt;/g,'>')).catch(()=>{});
+      const orig = btn.textContent;
+      const done = /Copy$/.test(orig) ? '✓ Copied' : '✓ copied';
+      btn.textContent = done; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
+    });
+  });
+
+  const search = document.querySelector('[data-search]');
+  if (search) {
+    const rows = [...document.querySelectorAll('[data-skill-row]')];
+    const countEl = document.querySelector('[data-count]');
+    const chips = [...document.querySelectorAll('.chip[data-cat]')];
+    const clearTag = document.querySelector('[data-cleartag]');
+    let cat = 'all', tag = null;
+    const apply = () => {
+      const q = search.value.trim().toLowerCase();
+      let shown = 0;
+      rows.forEach(r => {
+        const okCat = cat === 'all' || r.dataset.cat === cat;
+        const okTag = !tag || (r.dataset.tags || '').split(',').includes(tag);
+        const hay = (r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags).toLowerCase();
+        const okQ = !q || hay.includes(q);
+        const show = okCat && okTag && okQ;
+        r.style.display = show ? '' : 'none';
+        if (show) shown++;
+      });
+      document.querySelectorAll('[data-cat-section]').forEach(s => {
+        const any = [...s.querySelectorAll('[data-skill-row]')].some(r => r.style.display !== 'none');
+        s.style.display = any ? '' : 'none';
+      });
+      const empty = document.querySelector('[data-empty]');
+      if (empty) empty.hidden = shown !== 0;
+      if (countEl) countEl.textContent = shown + ' of ' + rows.length + ' entries';
+    };
+    search.addEventListener('input', apply);
+    chips.forEach(c => c.addEventListener('click', () => {
+      cat = c.dataset.cat; tag = null;
+      chips.forEach(x => x.classList.toggle('active', x === c));
+      if (clearTag) clearTag.hidden = true;
+      apply();
+    }));
+    document.addEventListener('click', e => {
+      const t = e.target.closest('[data-tag]');
+      if (!t) return;
+      e.preventDefault(); e.stopPropagation();
+      tag = t.dataset.tag; cat = 'all';
+      chips.forEach(x => x.classList.toggle('active', x.dataset.cat === 'all'));
+      if (clearTag) { clearTag.hidden = false; clearTag.textContent = '#' + tag + ' ✕'; }
+      window.scrollTo({ top: 360, behavior: 'smooth' });
+      apply();
+    });
+    if (clearTag) clearTag.addEventListener('click', () => { tag = null; clearTag.hidden = true; apply(); });
+    const resetBtn = document.querySelector('[data-reset]');
+    if (resetBtn) resetBtn.addEventListener('click', () => { search.value=''; cat='all'; tag=null; chips.forEach(x=>x.classList.toggle('active',x.dataset.cat==='all')); if(clearTag) clearTag.hidden=true; apply(); });
+  }
+  (function topo(){
+    var canvas = document.getElementById('topo-bg');
+    if (!canvas || !window.THREE) { if (!window.__topoTries) window.__topoTries = 0; if (window.__topoTries++ < 40) setTimeout(topo, 120); return; }
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var THREE = window.THREE, scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0xffffff, 3.2, 10.5);
+    var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+    camera.position.set(0, 2.05, 3.15); camera.lookAt(0, -0.15, -1.6);
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setClearColor(0x000000, 0);
+    var SEG = 108, SIZE = 18;
+    var geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG); geo.rotateX(-Math.PI/2);
+    var base = geo.attributes.position.array.slice();
+    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xe6196e, wireframe: true, transparent: true, opacity: 0.16 })));
+    var m2 = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0x171512, wireframe: true, transparent: true, opacity: 0.05 })); m2.position.y = 0.012; scene.add(m2);
+    var p = [0,1,2,3].map(function(i){ return i * 1.7; });
+    var H = function(x,z,t){ return Math.sin(x*0.55+t+p[0])*0.55 + Math.cos(z*0.42-t*0.75+p[1])*0.5 + Math.sin((x+z)*0.30+t*0.6+p[2])*0.42 + Math.sin(x*0.16-z*0.22+t*0.35+p[3])*0.7; };
+    var pos = geo.attributes.position;
+    function resize(){ var w = canvas.clientWidth||innerWidth, h = canvas.clientHeight||innerHeight; renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+    addEventListener('resize', resize); resize();
+    var start = performance.now();
+    function frame(){ var t = reduce ? 6.2 : (performance.now()-start)*0.00035; for (var i=0;i<pos.count;i++){ var x=base[i*3], z=base[i*3+2]; var y=H(x,z,t); var edge=1-Math.min(1,(Math.abs(x)+Math.abs(z))/15); pos.array[i*3+1]=y*(0.35+edge*0.9); } pos.needsUpdate=true; renderer.render(scene,camera); if(!reduce) requestAnimationFrame(frame); }
+    frame();
+  })();
   </script>
 </body>
 </html>

@@ -343,18 +343,43 @@ function cleanDescription(desc) {
   return desc.startsWith('[meta]') ? desc.substring(7).trim() : desc;
 }
 
+// Escape a plain-text string for interpolation into HTML (attributes or text).
+// Never apply to Markdown/plain-text mirrors or already-rendered HTML.
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// Convert HTML-authored text (e.g. a glossary definition with <code> and &lt;) into
+// plain text for Markdown/JSON-LD mirrors. Strip tags FIRST, then decode entities —
+// decoding first would let a literal <repo> look like a tag and get stripped.
+// Decode &amp; last so an escaped entity isn't double-decoded.
+function htmlToPlainText(html) {
+  return String(html)
+    .replace(/<[^>]+>/g, '')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&');
+}
+
 // Common HTML head
 function generateHead(title, description, canonicalPath, extraKeywords) {
-  const baseKeywords = ['Claude Code', 'plugins', 'MCP servers', 'AI development', 'Claude', 'Anthropic', 'development tools', '2389 Research'];
+  const baseKeywords = ['coding agent skills', 'Claude Code', 'MCP servers', 'Codex', 'Cursor', 'AI development', 'Anthropic', '2389 Research'];
   const allKeywords = extraKeywords ? [...new Set([...extraKeywords, ...baseKeywords])] : baseKeywords;
+  const escapedTitle = escapeHtml(title);
+  const escapedDesc = escapeHtml(description);
   return `<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Primary Meta Tags -->
-  <title>${title} | 2389 Research</title>
-  <meta name="title" content="${title} | 2389 Research">
-  <meta name="description" content="${description}">
+  <title>${escapedTitle} | 2389 Research</title>
+  <meta name="title" content="${escapedTitle} | 2389 Research">
+  <meta name="description" content="${escapedDesc}">
   <meta name="keywords" content="${allKeywords.join(', ')}">
   <meta name="author" content="2389 Research Inc">
   <meta name="robots" content="index, follow">
@@ -368,16 +393,16 @@ function generateHead(title, description, canonicalPath, extraKeywords) {
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="${SITE_URL}/${canonicalPath}">
-  <meta property="og:title" content="${title} | 2389 Research">
-  <meta property="og:description" content="${description}">
+  <meta property="og:title" content="${escapedTitle} | 2389 Research">
+  <meta property="og:description" content="${escapedDesc}">
   <meta property="og:image" content="${SITE_URL}/${canonicalPath}og-image.png">
   <meta property="og:site_name" content="2389 Research Plugin Marketplace">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="${SITE_URL}/${canonicalPath}">
-  <meta property="twitter:title" content="${title} | 2389 Research">
-  <meta property="twitter:description" content="${description}">
+  <meta property="twitter:title" content="${escapedTitle} | 2389 Research">
+  <meta property="twitter:description" content="${escapedDesc}">
   <meta property="twitter:image" content="${SITE_URL}/${canonicalPath}og-image.png">
 
   <!-- Favicon -->
@@ -389,7 +414,8 @@ function generateHead(title, description, canonicalPath, extraKeywords) {
   <link rel="dns-prefetch" href="https://github.com">
 
   <!-- Fonts with display=swap for performance -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
   <!-- Styles -->
   <link rel="stylesheet" href="${canonicalPath === '' ? '' : '../..'}${canonicalPath === '' ? '' : '/'}style.css">
@@ -399,94 +425,57 @@ function generateHead(title, description, canonicalPath, extraKeywords) {
 </head>`;
 }
 
-// Common navigation
-function generateNav(isPluginPage = false) {
-  const homeLink = isPluginPage ? '../../' : '';
-  return `<nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="${homeLink || '.'}" class="nav-logo" aria-label="2389 Research Plugin Marketplace">
-        <span class="status-indicator" aria-hidden="true"></span>
-        2389 Research Inc
-      </a>
-      <div class="nav-links" role="menubar">
-        <a href="${homeLink}#plugins" class="nav-link" role="menuitem">Plugins</a>
-        <a href="${homeLink}#about" class="nav-link" role="menuitem">About</a>
-        <a href="https://github.com/2389-research/claude-plugins" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank" data-tinylytics-event="nav.github">GitHub</a>
-        <a href="https://2389.ai" class="nav-link" role="menuitem" rel="noopener noreferrer" target="_blank" data-tinylytics-event="nav.visit-2389">2389.ai</a>
-      </div>
-      <a href="https://github.com/2389-research/claude-plugins" class="nav-star-btn" rel="noopener noreferrer" target="_blank" title="Star on GitHub" data-tinylytics-event="nav.star-github">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-        Star
-      </a>
-    </div>
-  </nav>`;
+// The 2389 Research wordmark links to the company site. brand-link inherits the surrounding
+// bar's colour and only accents on hover, so it blends into each masthead/topbar/footer.
+function brandLink(label, where) {
+  return `<a href="https://2389.ai" class="brand-link" target="_blank" rel="noopener noreferrer" data-tinylytics-event="brand.company" data-tinylytics-event-value="${where}">${label}</a>`;
 }
 
 // Common footer
-function generateFooter(isPluginPage = false) {
-  const homeLink = isPluginPage ? '../../' : '';
-  return `<footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="${homeLink || '.'}" class="footer-logo">
-          <span class="status-indicator"></span>
-          2389 Research Inc
-        </a>
-        <p class="footer-tagline">Building tools for how we actually work.<br>(No matching jumpsuits. Yet.)</p>
-      </div>
-
-      <div class="footer-links-grid">
-        <div class="footer-column">
-          <h5>Company</h5>
-          <a href="https://2389.ai" data-tinylytics-event="footer.company" data-tinylytics-event-value="about">About Us</a>
-          <a href="https://github.com/2389-research/claude-plugins" data-tinylytics-event="footer.company" data-tinylytics-event-value="github">GitHub</a>
-          <a href="mailto:hello@2389.ai" data-tinylytics-event="footer.company" data-tinylytics-event-value="contact">Contact</a>
-        </div>
-        <div class="footer-column">
-          <h5>Resources</h5>
-          <a href="https://docs.claude.com/en/docs/claude-code" data-tinylytics-event="footer.resource" data-tinylytics-event-value="claude-code-docs">Claude Code Docs</a>
-          <a href="https://docs.claude.com/en/docs/claude-code/skills" data-tinylytics-event="footer.resource" data-tinylytics-event-value="skills-guide">Skills Guide</a>
-          <a href="https://docs.claude.com/en/docs/claude-code/plugins" data-tinylytics-event="footer.resource" data-tinylytics-event-value="plugin-dev">Plugin Development</a>
-          <a href="${homeLink}glossary/" data-tinylytics-event="footer.resource" data-tinylytics-event-value="glossary">Glossary</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>© ${new Date().getFullYear()} 2389 Research Inc. All plugins are open source. (Robots included.)</p>
-    </div>
-  </footer>`;
+function generateFooter(homePrefix = '') {
+  const home = homePrefix;
+  const year = new Date().getFullYear();
+  return `<footer class="colophon rule-t glass">
+      <span class="mono">© ${year} ${brandLink('2389 Research Inc', 'colophon')} — all plugins open source</span>
+      <span class="colophon-links mono">
+        <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="github">GitHub</a>
+        <a href="https://docs.claude.com/en/docs/claude-code/skills" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.resource" data-tinylytics-event-value="skills-guide">Skills Guide</a>
+        <a href="${home}glossary/" data-tinylytics-event="footer.resource" data-tinylytics-event-value="glossary">Glossary</a>
+        <a href="https://2389.ai" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="about">2389.ai</a>
+      </span>
+    </footer>`;
 }
 
-// Helper to generate plugin card HTML
-function generatePluginCard(plugin) {
-  const sourceUrl = getSourceUrl(plugin);
-  const description = cleanDescription(plugin.description);
-  const tags = (plugin.keywords || []).slice(0, 3).map(k =>
-    `<span class="tag">${k}</span>`
-  ).join('');
+// CAT_COLOR is already defined at top level in Task 3 — do not redeclare it.
+const pad = n => String(n).padStart(2, '0');
 
-  return `
-            <article class="plugin-card">
-              <div class="plugin-card-header">
-                <a href="plugins/${plugin.name}/" class="plugin-name-link" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="${plugin.name}">
-                  <h4 class="plugin-name">${plugin.name}</h4>
-                </a>
-                <span class="plugin-version">v${plugin.version || '1.0.0'}</span>
+function generateSkillRow(plugin, gi, catTitle) {
+  const desc = cleanDescription(plugin.description);
+  const tags = (plugin.keywords || []).slice(0, 3);
+  const isMcp = !pluginHasSkills(plugin);
+  const copyCmd = isMcp ? getPluginInstallCommand(plugin) : getNpxInstallCommand(plugin);
+  const color = CAT_COLOR[catTitle] || '#e6196e';
+  const tagHtml = tags.map(t =>
+    `<button type="button" class="tag-btn mono" data-tag="${t}">#${t}</button>`
+  ).join(' ');
+  return `<a href="plugins/${plugin.name}/" class="skill-row" data-skill-row data-name="${plugin.name}" data-desc="${escapeHtml(desc)}" data-tags="${tags.join(',')}" data-cat="${catTitle}" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="${plugin.name}">
+              <div class="row-num mono">${pad(gi)}</div>
+              <div class="row-body">
+                <div class="row-title">
+                  <h3 class="skill-name mono">${plugin.name}</h3>
+                  ${isMcp ? `<span class="mcp-badge mono">MCP</span>` : ''}
+                  <span class="skill-ver mono">v${plugin.version || '1.0.0'}</span>
+                </div>
+                <p class="skill-desc">${desc}</p>
+                <div class="row-tags">${tagHtml}</div>
+                <div class="row-install"><span class="row-cmd-prompt mono">$</span><code class="row-cmd mono">${copyCmd}</code></div>
               </div>
-              <p class="plugin-description">${description}</p>
-              <div class="plugin-tags">${tags}</div>
-              <div class="plugin-footer${pluginHasSkills(plugin) ? ' plugin-footer-tabs' : ''}">
-                ${pluginHasSkills(plugin)
-                  ? renderInstallTabs({
-                      group: `card-${plugin.name}`,
-                      npxHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}-npx">${getNpxInstallCommand(plugin)}</code>`,
-                      ccHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`
-                    })
-                  : `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`}
-                <a href="plugins/${plugin.name}/" class="plugin-source" data-tinylytics-event="plugin.view-details" data-tinylytics-event-value="${plugin.name}">Details →</a>
+              <div class="row-rail">
+                <span class="row-cat mono" style="color:${color}">${catTitle}</span>
+                <button type="button" class="row-copy mono" data-copy="${copyCmd}" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">copy install</button>
+                <span class="row-more mono">details →</span>
               </div>
-            </article>`;
+            </a>`;
 }
 
 function getPluginInstallCommand(plugin) {
@@ -502,170 +491,129 @@ function pluginHasSkills(plugin) {
   return plugin.strict !== true;
 }
 
-// Renders the npx-default / Claude-Code-secondary install tabs.
-// group must be unique per page so ARIA ids don't collide.
-function renderInstallTabs({ group, npxHtml, ccHtml }) {
-  return `<div class="install-tabs" data-install-tabs>
-            <div class="install-tab-row" role="tablist" aria-label="Install method">
-              <button type="button" class="install-tab active" role="tab" aria-selected="true" data-tab="npx-${group}" aria-controls="panel-npx-${group}" id="tab-npx-${group}">npx (any agent)</button>
-              <button type="button" class="install-tab" role="tab" aria-selected="false" data-tab="cc-${group}" aria-controls="panel-cc-${group}" id="tab-cc-${group}">Claude Code</button>
-            </div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-npx-${group}" aria-labelledby="tab-npx-${group}" data-panel="npx-${group}">${npxHtml}</div>
-            <div class="install-tab-panel" role="tabpanel" id="panel-cc-${group}" aria-labelledby="tab-cc-${group}" data-panel="cc-${group}" hidden>${ccHtml}</div>
-          </div>`;
-}
 
-// Shared interactive <script>: copy-to-clipboard + tab switching.
-// Used by both the homepage and every plugin page (plugin pages had no script before).
+// Shared interactive <script>: copy-to-clipboard, search/filter, topo background.
+// Used by both the homepage and every plugin page.
 function generateInteractiveScript() {
   return `<script>
-  document.querySelectorAll('.install-command, .plugin-install').forEach(el => {
-    el.title = 'Click to copy';
-    el.addEventListener('click', () => {
-      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
-        const orig = el.textContent;
-        el.textContent = 'Copied!';
-        el.classList.add('copied');
-        setTimeout(() => { el.textContent = orig; el.classList.remove('copied'); }, 1500);
-      });
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      navigator.clipboard.writeText(btn.dataset.copy.replace(/&lt;/g,'<').replace(/&gt;/g,'>')).catch(()=>{});
+      const orig = btn.textContent;
+      const done = /Copy$/.test(orig) ? '✓ Copied' : '✓ copied';
+      btn.textContent = done; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
     });
   });
 
-  document.querySelectorAll('.install-tabs').forEach(group => {
-    group.querySelectorAll('.install-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const key = tab.dataset.tab;
-        group.querySelectorAll('.install-tab').forEach(t => {
-          const on = t === tab;
-          t.classList.toggle('active', on);
-          t.setAttribute('aria-selected', on ? 'true' : 'false');
-        });
-        group.querySelectorAll('.install-tab-panel').forEach(p => {
-          p.hidden = p.dataset.panel !== key;
-        });
+  const search = document.querySelector('[data-search]');
+  if (search) {
+    const rows = [...document.querySelectorAll('[data-skill-row]')];
+    const countEl = document.querySelector('[data-count]');
+    const chips = [...document.querySelectorAll('.chip[data-cat]')];
+    const clearTag = document.querySelector('[data-cleartag]');
+    let cat = 'all', tag = null;
+    const apply = () => {
+      const q = search.value.trim().toLowerCase();
+      let shown = 0;
+      rows.forEach(r => {
+        const okCat = cat === 'all' || r.dataset.cat === cat;
+        const okTag = !tag || (r.dataset.tags || '').split(',').includes(tag);
+        const hay = (r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags).toLowerCase();
+        const okQ = !q || hay.includes(q);
+        const show = okCat && okTag && okQ;
+        r.style.display = show ? '' : 'none';
+        if (show) shown++;
       });
+      document.querySelectorAll('[data-cat-section]').forEach(s => {
+        const any = [...s.querySelectorAll('[data-skill-row]')].some(r => r.style.display !== 'none');
+        s.style.display = any ? '' : 'none';
+      });
+      const empty = document.querySelector('[data-empty]');
+      if (empty) empty.hidden = shown !== 0;
+      if (countEl) countEl.textContent = shown + ' of ' + rows.length + ' entries';
+    };
+    search.addEventListener('input', apply);
+    chips.forEach(c => c.addEventListener('click', () => {
+      cat = c.dataset.cat; tag = null;
+      chips.forEach(x => x.classList.toggle('active', x === c));
+      if (clearTag) clearTag.hidden = true;
+      apply();
+    }));
+    document.addEventListener('click', e => {
+      const t = e.target.closest('[data-tag]');
+      if (!t) return;
+      e.preventDefault(); e.stopPropagation();
+      tag = t.dataset.tag; cat = 'all';
+      chips.forEach(x => x.classList.toggle('active', x.dataset.cat === 'all'));
+      if (clearTag) { clearTag.hidden = false; clearTag.textContent = '#' + tag + ' ✕'; }
+      window.scrollTo({ top: 360, behavior: 'smooth' });
+      apply();
     });
-  });
+    if (clearTag) clearTag.addEventListener('click', () => { tag = null; clearTag.hidden = true; apply(); });
+    const resetBtn = document.querySelector('[data-reset]');
+    if (resetBtn) resetBtn.addEventListener('click', () => { search.value=''; cat='all'; tag=null; chips.forEach(x=>x.classList.toggle('active',x.dataset.cat==='all')); if(clearTag) clearTag.hidden=true; apply(); });
+  }
+  (function topo(){
+    var canvas = document.getElementById('topo-bg');
+    if (!canvas || !window.THREE) { if (!window.__topoTries) window.__topoTries = 0; if (window.__topoTries++ < 40) setTimeout(topo, 120); return; }
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var THREE = window.THREE, scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0xffffff, 3.2, 10.5);
+    var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+    camera.position.set(0, 2.05, 3.15); camera.lookAt(0, -0.15, -1.6);
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setClearColor(0x000000, 0);
+    var SEG = 108, SIZE = 18;
+    var geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG); geo.rotateX(-Math.PI/2);
+    var base = geo.attributes.position.array.slice();
+    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xe6196e, wireframe: true, transparent: true, opacity: 0.16 })));
+    var m2 = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0x171512, wireframe: true, transparent: true, opacity: 0.05 })); m2.position.y = 0.012; scene.add(m2);
+    var p = [0,1,2,3].map(function(i){ return i * 1.7; });
+    var H = function(x,z,t){ return Math.sin(x*0.55+t+p[0])*0.55 + Math.cos(z*0.42-t*0.75+p[1])*0.5 + Math.sin((x+z)*0.30+t*0.6+p[2])*0.42 + Math.sin(x*0.16-z*0.22+t*0.35+p[3])*0.7; };
+    var pos = geo.attributes.position;
+    function resize(){ var w = canvas.clientWidth||innerWidth, h = canvas.clientHeight||innerHeight; renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+    addEventListener('resize', resize); resize();
+    var start = performance.now();
+    function frame(){ var t = reduce ? 6.2 : (performance.now()-start)*0.00035; for (var i=0;i<pos.count;i++){ var x=base[i*3], z=base[i*3+2]; var y=H(x,z,t); var edge=1-Math.min(1,(Math.abs(x)+Math.abs(z))/15); pos.array[i*3+1]=y*(0.35+edge*0.9); } pos.needsUpdate=true; renderer.render(scene,camera); if(!reduce) requestAnimationFrame(frame); }
+    frame();
+  })();
   </script>`;
 }
 
-function generateQuickInstallSteps(plugin) {
-  const step3 = `
-          <div class="step">
-            <span class="step-number">3</span>
-            <div class="step-content">
-              <span class="step-label">You're good to go</span>
-              <code>Skills auto-trigger when relevant</code>
-            </div>
-          </div>`;
-
-  const ccSteps = `
-          <div class="step">
-            <span class="step-number">1</span>
-            <div class="step-content">
-              <span class="step-label">Add the marketplace</span>
-              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="${plugin.name}-marketplace">${INTERNAL_MARKETPLACE_COMMAND}</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Install this plugin</span>
-              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="${plugin.name}-install">${getPluginInstallCommand(plugin)}</code>
-            </div>
-          </div>${step3}`;
-
-  if (!pluginHasSkills(plugin)) return `<div class="quick-start-steps">${ccSteps}</div>`;
-
-  const npxSteps = `
-          <div class="step">
-            <span class="step-number">1</span>
-            <div class="step-content">
-              <span class="step-label">Run it — works in any agent</span>
-              <code data-tinylytics-event="install.copy-command" data-tinylytics-event-value="${plugin.name}-npx">${getNpxInstallCommand(plugin)}</code>
-            </div>
-          </div>
-          <div class="step">
-            <span class="step-number">2</span>
-            <div class="step-content">
-              <span class="step-label">Pick your agents when prompted</span>
-              <code>Claude Code, Cursor, Codex…</code>
-            </div>
-          </div>${step3}`;
-
-  return renderInstallTabs({
-    group: `qi-${plugin.name}`,
-    npxHtml: `<div class="quick-start-steps">${npxSteps}</div>`,
-    ccHtml: `<div class="quick-start-steps">${ccSteps}</div>`,
-  });
-}
 
 // Generate category sections
 function generateCategorySections() {
+  let gi = 0, si = 0;
   return Object.values(categories)
     .filter(cat => cat.plugins.length > 0)
-    .map(cat => `
-        <div class="category">
-          <div class="category-header">
-            <h3 class="category-title">
-              <span class="category-indicator"></span>
-              ${cat.title}
-            </h3>
-            <span class="category-count">${cat.plugins.length} plugin${cat.plugins.length !== 1 ? 's' : ''}</span>
+    .map(cat => {
+      si++;
+      const color = CAT_COLOR[cat.title] || '#e6196e';
+      const rows = cat.plugins.map(p => { gi++; return generateSkillRow(p, gi, cat.title); }).join('\n');
+      return `<section class="cat-section" data-cat-section style="animation:fadeIn .3s ease both">
+          <div class="cat-head">
+            <span class="mono cat-num" style="color:${color}">${pad(si)}</span>
+            <h2 class="cat-name">${cat.title}</h2>
+            <span class="mono cat-count">${cat.plugins.length} skill${cat.plugins.length !== 1 ? 's' : ''}</span>
+            <span class="cat-rule"></span>
           </div>
-          <p class="category-description">${cat.description}</p>
-
-          <div class="plugins-grid">
-${cat.plugins.map(generatePluginCard).join('\n')}
-          </div>
-        </div>`
-    ).join('\n');
+          <p class="mono cat-blurb">${cat.description}</p>
+          ${rows}
+        </section>`;
+    }).join('\n');
 }
 
 // Generate related plugins section for internal linking
 function generateRelatedPlugins(plugin, category) {
   const related = category.plugins.filter(p => p.name !== plugin.name).slice(0, 3);
   if (related.length === 0) return '';
-
-  return `
-    <section class="section related-section">
-      <div class="section-header">
-        <span class="section-number">03</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Related Plugins</h2>
-          <p class="section-subtitle">More from ${category.title}</p>
-        </div>
-      </div>
-
-      <div class="plugins-grid">
-${related.map(p => {
-  const desc = cleanDescription(p.description);
-  const tags = (p.keywords || []).slice(0, 3).map(k =>
-    `<span class="tag">${k}</span>`
-  ).join('');
-  return `
-        <article class="plugin-card">
-          <div class="plugin-card-header">
-            <a href="../${p.name}/" class="plugin-name-link" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="${p.name}">
-              <h4 class="plugin-name">${p.name}</h4>
-            </a>
-            <span class="plugin-version">v${p.version || '1.0.0'}</span>
-          </div>
-          <p class="plugin-description">${desc}</p>
-          <div class="plugin-tags">${tags}</div>
-          <div class="plugin-footer${pluginHasSkills(p) ? ' plugin-footer-tabs' : ''}">
-            ${pluginHasSkills(p)
-              ? renderInstallTabs({
-                  group: `related-${p.name}`,
-                  npxHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}-npx">${getNpxInstallCommand(p)}</code>`,
-                  ccHtml: `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}">${getPluginInstallCommand(p)}</code>`
-                })
-              : `<code class="plugin-install" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${p.name}">${getPluginInstallCommand(p)}</code>`}
-            <a href="../${p.name}/" class="plugin-source" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="${p.name}">Details →</a>
-          </div>
-        </article>`;
-}).join('\n')}
-      </div>
+  return `<section class="related rule-t">
+      <div class="mono related-label">More from ${category.title}</div>
+      <ul class="related-list">
+        ${related.map(p => `<li><a href="../${p.name}/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="${p.name}"><span class="mono related-name">${p.name}</span><span class="related-desc">${escapeHtml(cleanDescription(p.description))}</span></a></li>`).join('\n        ')}
+      </ul>
     </section>`;
 }
 
@@ -682,11 +630,6 @@ function generatePluginPage(plugin) {
     marketplacePlugins: marketplace.plugins,
     linkReport,
   });
-  const isExternal = plugin.strict === true;
-
-  const tags = (plugin.keywords || []).map(k =>
-    `<span class="tag">${k}</span>`
-  ).join('');
 
   // Structured data for the plugin
   const structuredData = {
@@ -714,119 +657,70 @@ function generatePluginPage(plugin) {
     "dateModified": BUILD_DATE
   };
 
-  // Build a descriptive title from the plugin name and category
-  const pluginTitle = `${plugin.name} — ${category.title} Plugin for Claude Code`;
+  // `category` is already declared at the top of generatePluginPage — REUSE it (do NOT add `const cat`; correction #2).
+  const catColor = CAT_COLOR[category.title] || '#e6196e';
+  const isMcp = !pluginHasSkills(plugin);
+  const allPlugins = marketplace.plugins;
+  const idx = allPlugins.findIndex(p => p.name === plugin.name);
+  const prev = idx > 0 ? allPlugins[idx - 1] : null;
+  const next = idx < allPlugins.length - 1 ? allPlugins[idx + 1] : null;
+  const tagHtml = (plugin.keywords || []).slice(0, 6).map(t =>
+    `<a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="${t}">#${t}</a>`
+  ).join(' ');
+  const npxBlock = isMcp ? '' : `
+          <div class="mono install-label">Install — npx skills · recommended</div>
+          <div class="install-box">
+            <code class="mono">${getNpxInstallCommand(plugin)}</code>
+            <button type="button" class="btn-primary" data-copy="${getNpxInstallCommand(plugin)}" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}-npx">Copy</button>
+          </div>`;
+
+  // npx is the suggested path; the Claude Code command is deprioritized behind a click for
+  // skill plugins. MCP-only entries have no npx install, so their Claude Code command stays visible.
+  const claudeCodeBox = `<div class="install-box">
+          <code class="mono">${getPluginInstallCommand(plugin)}</code>
+          <button type="button" class="btn-ghost-sm mono" data-copy="${getPluginInstallCommand(plugin)}" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">Copy</button>
+        </div>`;
+  const claudeBlock = isMcp
+    ? `<div class="mono install-label">Install — Claude Code</div>
+        ${claudeCodeBox}`
+    : `<details class="install-alt">
+          <summary class="mono">Prefer Claude Code? Install via /plugin</summary>
+          ${claudeCodeBox}
+        </details>`;
 
   return `<!DOCTYPE html>
 <html lang="en">
-${generateHead(pluginTitle, description, `plugins/${plugin.name}/`, plugin.keywords)}
+${generateHead(plugin.name, description, `plugins/${plugin.name}/`, plugin.keywords)}
 <body>
-  <div class="grid-overlay" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  ${generateNav(true)}
-
-  <header class="plugin-hero">
-    <div class="plugin-hero-inner">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="../../">Marketplace</a>
-        <span class="breadcrumb-sep">→</span>
-        <a href="../../#plugins">${category.title}</a>
-        <span class="breadcrumb-sep">→</span>
-        <span class="breadcrumb-current">${plugin.name}</span>
-      </nav>
-
-      <div class="plugin-hero-header">
-        <h1 class="plugin-hero-title">${plugin.name}</h1>
-        <span class="plugin-hero-version">v${plugin.version || '1.0.0'}</span>
-        ${isExternal ? '<span class="plugin-external-badge">External</span>' : ''}
-      </div>
-
-      <p class="plugin-hero-description">${description}</p>
-
-      <div class="plugin-tags-large">${tags}</div>
-
-      <div class="plugin-hero-actions">
-        <div class="install-block">
-          <span class="install-label">Install</span>
-          ${pluginHasSkills(plugin)
-            ? renderInstallTabs({
-                group: plugin.name,
-                npxHtml: `<code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}-npx">${getNpxInstallCommand(plugin)}</code>`,
-                ccHtml: `<code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`
-              })
-            : `<code class="install-command" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">${getPluginInstallCommand(plugin)}</code>`}
-        </div>
-        <a href="${sourceUrl}" class="cta-button" rel="noopener noreferrer" target="_blank" data-tinylytics-event="plugin.view-source" data-tinylytics-event-value="${plugin.name}">
-          View Source
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
+  <canvas id="topo-bg" aria-hidden="true"></canvas>
+  <div class="topo-fade" aria-hidden="true"></div>
+  <div class="wrap detail">
+    <div class="detail-topbar mono rule-b">
+      <a href="../../" data-tinylytics-event="nav.home">← All skills</a>
+      <span>${brandLink('2389 Research', 'detail')} · Agent Skills</span>
     </div>
-  </header>
-
-  <main id="main-content">
-    ${readme ? `
-    <section class="section readme-section">
-      <div class="section-header">
-        <span class="section-number">01</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Documentation</h2>
-          <p class="section-subtitle">Full plugin documentation and usage guide</p>
-        </div>
+    <header class="detail-head">
+      <div class="detail-kicker mono" style="color:${catColor}">${category.title}${isMcp ? ' · <span class="mcp-badge">MCP SERVER</span>' : ''}</div>
+      <div class="detail-title-row">
+        <h1 class="detail-name mono">${plugin.name}</h1>
+        <span class="detail-ver mono">v${plugin.version || '1.0.0'}</span>
       </div>
-
-      <div class="readme-content">
-        ${readmeHtml}
-      </div>
-    </section>
-    ` : `
-    <section class="section readme-section">
-      <div class="section-header">
-        <span class="section-number">01</span>
-        <div class="section-title-group">
-          <h2 class="section-title">About This Plugin</h2>
-          <p class="section-subtitle">What this plugin provides</p>
-        </div>
-      </div>
-
-      <div class="readme-content">
-        <p>${description}</p>
-        <p>For full documentation and usage examples, visit the <a href="${sourceUrl}" rel="noopener noreferrer" target="_blank">source repository</a>.</p>
-      </div>
-    </section>
-    `}
-
-    <section class="section quick-install-section">
-      <div class="section-header">
-        <span class="section-number">02</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Quick Install</h2>
-          <p class="section-subtitle">Get started in seconds</p>
-        </div>
-      </div>
-
-      <div class="quick-start">
-${generateQuickInstallSteps(plugin)}
-      </div>
-    </section>
-
+      <p class="detail-lede">${escapeHtml(description)}</p>
+      <div class="row-tags">${tagHtml}</div>
+      ${npxBlock}
+      ${claudeBlock}
+    </header>
+    <main id="main-content" class="readme-body">
+      ${readme ? readmeHtml : `<p>${escapeHtml(description)}</p>`}
+    </main>
+    <nav class="detail-nav mono rule-t" aria-label="Skill navigation">
+      ${prev ? `<a href="../${prev.name}/" data-tinylytics-event="plugin.prev">← ${prev.name}</a>` : '<span></span>'}
+      ${next ? `<a href="../${next.name}/" data-tinylytics-event="plugin.next">${next.name} →</a>` : '<span></span>'}
+    </nav>
     ${generateRelatedPlugins(plugin, category)}
-
-    <section class="section back-section">
-      <a href="../../" class="back-link">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Back to Marketplace
-      </a>
-    </section>
-  </main>
-
-  ${generateFooter(true)}
-
+    ${generateFooter('../../')}
+  </div>
   <!-- Structured Data - Plugin -->
   <script type="application/ld+json">
   ${JSON.stringify(structuredData, null, 2)}
@@ -873,208 +767,75 @@ const mcpServers = marketplace.plugins.filter(p =>
   p.description?.toLowerCase().includes('mcp server')
 ).length || 3;
 
-// Step list HTML for the homepage "Get Started in 30 Seconds" install tabs.
-// Extracted so the renderInstallTabs call stays readable.
-const npxGetStartedSteps = `<div class="quick-start-steps">
-            <div class="step">
-              <span class="step-number">1</span>
-              <div class="step-content">
-                <span class="step-label">Run it — works in any agent</span>
-                <code>npx skills add 2389-research/better-dev</code>
-              </div>
-            </div>
-            <div class="step">
-              <span class="step-number">2</span>
-              <div class="step-content">
-                <span class="step-label">Pick your agents when prompted</span>
-                <code>Claude Code, Cursor, Codex…</code>
-              </div>
-            </div>
-            <div class="step">
-              <span class="step-number">3</span>
-              <div class="step-content">
-                <span class="step-label">That's it. Seriously.</span>
-                <code>Skills auto-trigger when relevant</code>
-              </div>
-            </div>
-          </div>`;
 
-const ccGetStartedSteps = `<div class="quick-start-steps">
-            <div class="step">
-              <span class="step-number">1</span>
-              <div class="step-content">
-                <span class="step-label">Add the marketplace</span>
-                <code>/plugin marketplace add 2389-research/claude-plugins</code>
-              </div>
-            </div>
-            <div class="step">
-              <span class="step-number">2</span>
-              <div class="step-content">
-                <span class="step-label">Grab what you need</span>
-                <code>/plugin install better-dev@${MARKETPLACE_NAME}</code>
-              </div>
-            </div>
-            <div class="step">
-              <span class="step-number">3</span>
-              <div class="step-content">
-                <span class="step-label">That's it. Seriously.</span>
-                <code>Skills auto-trigger when relevant</code>
-              </div>
-            </div>
-          </div>`;
+// One category→hex map for the whole generator. Task 4 (rows/sections) and Task 7 (detail) reuse it.
+const CAT_COLOR = { 'Development': '#e6196e', 'Infrastructure': '#c67514', 'Agent Systems': '#7a3fb0', 'Personal & Strategy': '#1f9e6b' };
+
+function generateToolbar() {
+  const total = marketplace.plugins.length;
+  const chips = [['all', 'All', total, '#171512'],
+    ...Object.values(categories).filter(c => c.plugins.length).map(c =>
+      [c.title, c.title, c.plugins.length, CAT_COLOR[c.title] || '#e6196e'])];
+  const chipHtml = chips.map(([val, label, n, color], i) =>
+    `<button type="button" class="chip mono${i === 0 ? ' active' : ''}" data-cat="${val}" style="--chip:${color}">${label} (${n})</button>`
+  ).join('\n        ');
+  return `<div class="toolbar rule-t rule-b glass" role="search">
+      <div class="toolbar-search">
+        <span class="mono" aria-hidden="true">⌕</span>
+        <input type="search" class="mono" data-search placeholder="Search names, tags, descriptions…" aria-label="Search skills" />
+        <span class="mono" data-count>${total} of ${total} entries</span>
+      </div>
+      <div class="toolbar-chips">
+        ${chipHtml}
+        <button type="button" class="chip-cleartag mono" data-cleartag hidden></button>
+      </div>
+    </div>`;
+}
+
+function generateMasthead() {
+  return `<header class="masthead">
+    <div class="mast-bar mono rule-b">
+      <span>${brandLink('2389 Research', 'masthead')}</span>
+      <span>Agent Skills · Open Source</span>
+      <span>Est. 2026</span>
+    </div>
+    <div class="hero-panel glass">
+      <div class="kicker">A working index of</div>
+      <h1 class="hero-head">Coding-agent <em>skills</em> &amp; servers</h1>
+      <p class="hero-lede">A library of skills and MCP servers for the coding agents you already use — Claude Code, Codex, Cursor, and friends. Build workflows, testing regimes, agent architectures, and operational tooling. Each one is its own tool, doing one thing well. Install any of them with a single line.</p>
+    </div>
+    <div class="install-strip">
+      <div class="cmd mono"><span class="dollar">$</span> npx skills add 2389-research/<span class="accent">&lt;name&gt;</span>
+        <button type="button" class="btn-primary" data-copy="npx skills add 2389-research/&lt;name&gt;" data-tinylytics-event="hero.copy-install">Copy</button>
+      </div>
+      <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" class="btn-ghost mono" data-tinylytics-event="nav.star-github">★ Star on GitHub</a>
+    </div>
+  </header>`;
+}
 
 // Generate main index HTML
 const indexHtml = `<!DOCTYPE html>
 <html lang="en">
-${generateHead('Claude Code Plugin Marketplace', 'Open source Claude Code plugins and MCP servers from 2389 Research. Development workflows, testing, system administration, and AI agent capabilities. Install with one command.', '')}
+${generateHead('Coding-agent Skills & Servers', 'A working index of coding-agent skills and MCP servers from 2389 Research — install any with one line.', '')}
 <body>
-  <div class="grid-overlay" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Skip to main content</a>
+  <canvas id="topo-bg" aria-hidden="true"></canvas>
+  <div class="topo-fade" aria-hidden="true"></div>
+  <div class="wrap">
+    ${generateMasthead()}
+    ${generateToolbar()}
 
-  ${generateNav(false)}
-
-  <header class="hero">
-    <div class="hero-inner">
-      <div class="hero-label">
-        <span class="label-indicator"></span>
-        Welcome, Fellow Builder
+    <main id="main-content" class="index-list">
+      ${generateCategorySections()}
+      <div class="empty-state" data-empty hidden>
+        <div class="empty-big">Nothing here.</div>
+        <div class="mono empty-sub">No entries match your filters.</div>
+        <button type="button" class="mono btn-outline" data-reset>Clear filters</button>
       </div>
-      <h1 class="hero-title">Plugins that actually<br>get stuff done</h1>
-      <p class="hero-subtitle">Open source Claude Code plugins and MCP servers from 2389 Research. The tools we use every day to build, ship, and not lose our minds. No corporate handbook energy here.</p>
+    </main>
 
-      <div class="hero-cta">
-        <div class="install-block">
-          <span class="install-label">Install</span>
-          ${renderInstallTabs({
-            group: 'hero',
-            npxHtml: `<code class="install-command">npx skills add 2389-research/&lt;plugin&gt;</code>`,
-            ccHtml: `<code class="install-command">${INTERNAL_MARKETPLACE_COMMAND}</code>`
-          })}
-        </div>
-        <a href="#plugins" class="cta-button">
-          Browse the Goods
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-value">${totalPlugins}</span>
-          <span class="stat-label">Plugins</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-value">${mcpServers}</span>
-          <span class="stat-label">MCP Servers</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-value">100%</span>
-          <span class="stat-label">Open Source</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main id="main-content">
-    <section id="plugins" class="section plugins-section">
-      <div class="section-header">
-        <span class="section-number">01</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Available Plugins</h2>
-          <p class="section-subtitle">Install individually or add the full marketplace</p>
-        </div>
-      </div>
-      <div class="plugin-categories">
-${generateCategorySections()}
-      </div>
-    </section>
-
-    <section id="about" class="section about-section">
-      <div class="section-header">
-        <span class="section-number">02</span>
-        <div class="section-title-group">
-          <h2 class="section-title">About This Marketplace</h2>
-          <p class="section-subtitle">Open source tools from 2389 Research</p>
-        </div>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-content">
-          <p>A collection of Claude Code plugins and MCP servers from <a href="https://2389.ai">2389 Research Inc</a>. We're building a world where AI agents collaborate like your dream team — and these are the tools that help us get there.</p>
-          <p>All plugins are open source. Use them, fork them, contribute back. We'd love to hear how you're using them. (No corporate fine print, we promise.)</p>
-
-          <div class="about-links">
-            <a href="https://github.com/2389-research/claude-plugins" class="about-link" rel="noopener noreferrer" target="_blank">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z" fill="currentColor"/>
-              </svg>
-              View on GitHub
-            </a>
-            <a href="mailto:hello@2389.ai" class="about-link">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              hello@2389.ai
-            </a>
-          </div>
-        </div>
-
-        <div class="quick-start">
-          <h3 class="quick-start-title">Get Started in 30 Seconds</h3>
-          ${renderInstallTabs({
-            group: 'getstarted',
-            npxHtml: npxGetStartedSteps,
-            ccHtml: ccGetStartedSteps
-          })}
-        </div>
-      </div>
-    </section>
-
-    <section class="section resources-section">
-      <div class="section-header">
-        <span class="section-number">03</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Learn More</h2>
-          <p class="section-subtitle">The official docs (for when you want to go deeper)</p>
-        </div>
-      </div>
-
-      <div class="resources-grid">
-        <a href="https://docs.claude.com/en/docs/claude-code" class="resource-card">
-          <h4>Claude Code Docs</h4>
-          <p>Official documentation for Claude Code CLI</p>
-        </a>
-        <a href="https://docs.claude.com/en/docs/claude-code/skills" class="resource-card">
-          <h4>Skills Guide</h4>
-          <p>How to create and use Claude Code skills</p>
-        </a>
-        <a href="https://docs.claude.com/en/docs/claude-code/plugins" class="resource-card">
-          <h4>Plugin Development</h4>
-          <p>Build your own Claude Code plugins</p>
-        </a>
-        <a href="https://docs.claude.com/en/docs/claude-code/mcp" class="resource-card">
-          <h4>MCP Servers</h4>
-          <p>Model Context Protocol server documentation</p>
-        </a>
-      </div>
-    </section>
-
-    <section class="section star-cta-section">
-      <div class="star-cta-card">
-        <h3 class="star-cta-title">Found something useful?</h3>
-        <p class="star-cta-text">A star helps others discover these tools. It takes one second and means a lot to us.</p>
-        <a href="https://github.com/2389-research/claude-plugins" class="cta-button" rel="noopener noreferrer" target="_blank">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-          Star on GitHub
-        </a>
-      </div>
-    </section>
-  </main>
-
-  ${generateFooter(false)}
+  ${generateFooter('')}
+  </div><!-- /.wrap -->
 
   <!-- Structured Data - Organization -->
   <script type="application/ld+json">
@@ -1404,7 +1165,7 @@ const glossaryStructuredData = JSON.stringify({
   "hasDefinedTerm": GLOSSARY_TERMS.map(([term, definition]) => ({
     "@type": "DefinedTerm",
     "name": term,
-    "description": definition.replace(/<[^>]+>/g, ''),
+    "description": htmlToPlainText(definition),
   })),
 }, null, 2);
 
@@ -1412,60 +1173,31 @@ const glossaryHtml = `<!DOCTYPE html>
 <html lang="en">
 ${generateHead('Glossary', 'Marketplace-specific terms: plugin, skill, MCP server, hook, slash command, scorecard.', 'glossary/', ['glossary', 'terminology'])}
 <body>
-  <div class="grid-overlay" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  ${generateNav(true)}
-
-  <header class="plugin-hero">
-    <div class="plugin-hero-inner">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="../">Marketplace</a>
-        <span class="breadcrumb-sep">→</span>
-        <span class="breadcrumb-current">Glossary</span>
-      </nav>
-
-      <div class="plugin-hero-header">
-        <h1 class="plugin-hero-title">Glossary</h1>
-      </div>
-
-      <p class="plugin-hero-description">Terms used across the 2389 Research plugin marketplace.</p>
+  <canvas id="topo-bg" aria-hidden="true"></canvas>
+  <div class="topo-fade" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="mast-bar mono rule-b" style="padding-top:52px">
+      <a href="../">← All skills</a>
+      <span>Glossary · ${brandLink('2389 Research', 'glossary')}</span>
     </div>
-  </header>
-
-  <main id="main-content">
-    <section class="section readme-section">
-      <div class="section-header">
-        <span class="section-number">01</span>
-        <div class="section-title-group">
-          <h2 class="section-title">Definitions</h2>
-          <p class="section-subtitle">What things mean on this site</p>
-        </div>
-      </div>
-
-      <div class="readme-content">
-        <dl>
-${GLOSSARY_TERMS.map(([term, definition]) => `          <dt><strong>${term}</strong></dt>
-          <dd>${definition}</dd>`).join('\n')}
-        </dl>
-      </div>
-    </section>
-
-    <section class="section back-section">
-      <a href="../" class="back-link">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Back to Marketplace
-      </a>
-    </section>
-  </main>
-
-  ${generateFooter(true)}
-
+    <header class="glossary-head glass">
+      <div class="kicker">Reference</div>
+      <h1 class="hero-head" style="font-size:clamp(40px,6vw,72px)">Glossary</h1>
+      <p class="hero-lede">Terms you'll meet across coding-agent skills and MCP servers.</p>
+    </header>
+    <main id="main-content" class="glossary-list">
+      ${GLOSSARY_TERMS.map(([term, definition]) => `<section class="glossary-term">
+        <h2 class="mono">${term}</h2>
+        <p>${definition}</p>
+      </section>`).join('\n')}
+    </main>
+    ${generateFooter('../')}
+  </div>
   <script type="application/ld+json">
   ${glossaryStructuredData}
   </script>
+  ${generateInteractiveScript()}
 </body>
 </html>`;
 
@@ -1476,7 +1208,7 @@ const glossaryMd = `# Glossary
 
 Terms used across the 2389 Research plugin marketplace.
 
-${GLOSSARY_TERMS.map(([term, definition]) => `## ${term}\n\n${definition.replace(/<[^>]+>/g, '')}`).join('\n\n')}
+${GLOSSARY_TERMS.map(([term, definition]) => `## ${term}\n\n${htmlToPlainText(definition)}`).join('\n\n')}
 
 [Back to marketplace](${SITE_URL}/)
 `;
