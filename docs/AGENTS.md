@@ -4,7 +4,7 @@ This site is the official catalog of Claude Code plugins and MCP servers from 23
 
 ## What's here
 
-- The homepage at [https://skills.2389.ai/](https://skills.2389.ai/) lists every plugin grouped into Development, Infrastructure, Agent Systems, and Personal & Strategy.
+- The homepage at [https://skills.2389.ai/](https://skills.2389.ai/) lists every plugin grouped into Development, Testing & Review, Agents & Orchestration, Infrastructure & Ops, Strategy & Reflection.
 - Each plugin has its own page under `/plugins/{name}/` with the full README, install command, and source link.
 - A [glossary](https://skills.2389.ai/glossary/) defines marketplace-specific terms (plugin, skill, MCP server, hook, scorecard).
 - Machine-readable index files: [sitemap.xml](https://skills.2389.ai/sitemap.xml), [sitemap.md](https://skills.2389.ai/sitemap.md), [llms.txt](https://skills.2389.ai/llms.txt).

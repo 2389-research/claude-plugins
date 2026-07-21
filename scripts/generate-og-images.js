@@ -9,23 +9,35 @@ const marketplace = JSON.parse(
   fs.readFileSync('.claude-plugin/marketplace.json', 'utf8')
 );
 
-// Category lookup (mirrors generate-site.js logic)
-function getCategoryTitle(plugin) {
-  const keywords = plugin.keywords || [];
-  const desc = plugin.description.toLowerCase();
+// Category title lookup — reads the explicit category each plugin declares in
+// marketplace.json, mapping the key to its display title. Same source of truth
+// generate-site.js uses; falls back to Development if a key is ever unknown.
+const CATEGORY_TITLES = {
+  development: 'Development',
+  testing: 'Testing & Review',
+  agents: 'Agents & Orchestration',
+  infrastructure: 'Infrastructure & Ops',
+  strategy: 'Strategy & Reflection'
+};
 
-  if (plugin.description.startsWith('[meta]') || keywords.includes('meta')) {
-    return 'Meta Plugin';
-  } else if (keywords.includes('linux') || keywords.includes('sysadmin') || keywords.includes('terminal') || keywords.includes('reverse-engineering') || keywords.includes('maintenance')) {
-    return 'Infrastructure';
-  } else if (keywords.includes('multi-agent') || keywords.includes('agents') || keywords.includes('social') || desc.includes('agent')) {
-    return 'Agent Systems';
-  } else if (keywords.includes('ceo') || keywords.includes('executive') || keywords.includes('worldview') || keywords.includes('journal') || keywords.includes('reflection')) {
-    return 'Personal & Strategy';
-  } else {
-    return 'Development';
-  }
+function getCategoryTitle(plugin) {
+  return CATEGORY_TITLES[plugin.category] || 'Development';
 }
+
+// Editorial OG palette — mirrors the live site masthead: warm paper, near-black
+// ink, pink accent, a warm hairline rule. Serif display type (Georgia stands in
+// for the site's Newsreader) and a mono (Menlo) for labels, both chosen because
+// sharp/librsvg renders them from macOS system fonts. These images are built
+// locally and committed; CI never regenerates them (it runs generate-site.js only).
+const OG = {
+  paper: '#faf9f6',
+  ink: '#171512',
+  body: '#4a453b',
+  accent: '#e6196e',
+  rule: '#ddd8cc',
+  serif: "Georgia, 'Times New Roman', serif",
+  mono: "Menlo, 'Courier New', monospace"
+};
 
 function cleanDescription(desc) {
   return desc.startsWith('[meta]') ? desc.substring(7).trim() : desc;
@@ -66,124 +78,77 @@ function wrapText(text, maxChars) {
   return lines;
 }
 
-// Generate SVG for a plugin OG image
+// Generate SVG for a plugin OG image — editorial layout on warm paper.
 function generatePluginSvg(plugin) {
   const name = escapeXml(plugin.name);
-  const category = escapeXml(getCategoryTitle(plugin));
+  const category = escapeXml(getCategoryTitle(plugin).toUpperCase());
   const description = cleanDescription(plugin.description);
-  const descLines = wrapText(description, 45);
-  const version = plugin.version || '1.0.0';
+  const descLines = wrapText(description, 52);
+  const version = escapeXml(plugin.version || '1.0.0');
+  // Long slugs (e.g. building-multiagent-systems) would overrun at display size;
+  // step the serif headline down so the name always fits the 1040px text column.
+  const nameLen = plugin.name.length;
+  const nameSize = nameLen > 20 ? 58 : nameLen > 13 ? 76 : 94;
 
-  // Description lines
   const descSvg = descLines.map((line, i) => {
-    return `<text x="80" y="${340 + i * 40}" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="28" fill="#a0a0b8">${escapeXml(line)}</text>`;
-  }).join('\n      ');
+    return `<text x="80" y="${402 + i * 42}" font-family="${OG.serif}" font-size="30" fill="${OG.body}">${escapeXml(line)}</text>`;
+  }).join('\n    ');
 
   return `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background -->
-    <rect width="1200" height="630" fill="#1a1a2e"/>
+    <rect width="1200" height="630" fill="${OG.paper}"/>
+    <rect x="0" y="0" width="1200" height="5" fill="${OG.accent}"/>
 
-    <!-- Subtle grid dots -->
-    <circle cx="100" cy="80" r="2" fill="#e8c547" opacity="0.3"/>
-    <circle cx="300" cy="50" r="2" fill="#6b8cce" opacity="0.3"/>
-    <circle cx="500" cy="90" r="2" fill="#5dd39e" opacity="0.3"/>
-    <circle cx="700" cy="60" r="2" fill="#ef6b6b" opacity="0.3"/>
-    <circle cx="900" cy="85" r="2" fill="#e8c547" opacity="0.3"/>
-    <circle cx="1100" cy="55" r="2" fill="#6b8cce" opacity="0.3"/>
-    <circle cx="200" cy="550" r="2" fill="#5dd39e" opacity="0.3"/>
-    <circle cx="600" cy="570" r="2" fill="#e8c547" opacity="0.3"/>
-    <circle cx="1000" cy="560" r="2" fill="#ef6b6b" opacity="0.3"/>
+    <!-- Masthead bar -->
+    <text x="80" y="74" font-family="${OG.mono}" font-size="19" fill="${OG.ink}" letter-spacing="1">2389 RESEARCH · AGENT SKILLS</text>
+    <text x="1120" y="74" font-family="${OG.mono}" font-size="19" fill="${OG.body}" letter-spacing="1" text-anchor="end">EST. 2026</text>
+    <rect x="80" y="96" width="1040" height="1" fill="${OG.rule}"/>
 
-    <!-- Gold accent line at top -->
-    <rect x="0" y="0" width="1200" height="4" fill="#e8c547"/>
-
-    <!-- Category badge -->
-    <rect x="80" y="80" width="${category.length * 13 + 32}" height="38" rx="6" fill="rgba(232, 197, 71, 0.15)"/>
-    <text x="96" y="106" font-family="monospace" font-size="18" fill="#e8c547" letter-spacing="0.5">${category}</text>
+    <!-- Category eyebrow -->
+    <text x="80" y="210" font-family="${OG.mono}" font-size="22" fill="${OG.accent}" letter-spacing="3">${category}</text>
 
     <!-- Plugin name -->
-    <text x="80" y="210" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="72" font-weight="bold" fill="#f5f5f7" letter-spacing="-2">${name}</text>
+    <text x="80" y="298" font-family="${OG.serif}" font-size="${nameSize}" fill="${OG.ink}">${name}</text>
 
     <!-- Version -->
-    <text x="80" y="260" font-family="monospace" font-size="24" fill="#e8c547" opacity="0.8">v${escapeXml(version)}</text>
-
-    <!-- Divider line -->
-    <rect x="80" y="280" width="200" height="2" fill="#3a3a5c" rx="1"/>
+    <text x="80" y="346" font-family="${OG.mono}" font-size="22" fill="${OG.body}">v${version}</text>
 
     <!-- Description -->
     ${descSvg}
 
-    <!-- Bottom bar -->
-    <rect x="0" y="520" width="1200" height="110" fill="#242442"/>
-    <rect x="0" y="520" width="1200" height="1" fill="#3a3a5c"/>
-
-    <!-- Status indicator dot -->
-    <circle cx="96" cy="572" r="6" fill="#e8c547"/>
-
-    <!-- Branding -->
-    <text x="116" y="580" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="24" font-weight="600" fill="#f5f5f7">2389 Research Inc</text>
-
-    <!-- Install command -->
-    <text x="1120" y="580" font-family="monospace" font-size="20" fill="#a0a0b8" text-anchor="end">/plugin install ${name}</text>
+    <!-- Footer -->
+    <rect x="80" y="556" width="1040" height="1" fill="${OG.rule}"/>
+    <text x="80" y="596" font-family="${OG.mono}" font-size="18" fill="${OG.accent}" letter-spacing="0.5">skills.2389.ai/plugins/${name}</text>
+    <text x="1120" y="596" font-family="${OG.mono}" font-size="18" fill="${OG.ink}" letter-spacing="1" text-anchor="end">2389 RESEARCH INC</text>
   </svg>`;
 }
 
-// Generate SVG for the main marketplace OG image
+// Generate SVG for the main marketplace OG image — mirrors the site masthead.
 function generateMarketplaceSvg() {
   const pluginCount = marketplace.plugins.length;
 
   return `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-    <!-- Background -->
-    <rect width="1200" height="630" fill="#1a1a2e"/>
+    <rect width="1200" height="630" fill="${OG.paper}"/>
+    <rect x="0" y="0" width="1200" height="5" fill="${OG.accent}"/>
 
-    <!-- Scatter dots -->
-    <circle cx="80" cy="60" r="3" fill="#e8c547" opacity="0.4"/>
-    <circle cx="250" cy="40" r="2" fill="#6b8cce" opacity="0.4"/>
-    <circle cx="450" cy="75" r="3" fill="#5dd39e" opacity="0.4"/>
-    <circle cx="650" cy="45" r="2" fill="#ef6b6b" opacity="0.4"/>
-    <circle cx="850" cy="70" r="3" fill="#e8c547" opacity="0.4"/>
-    <circle cx="1050" cy="50" r="2" fill="#6b8cce" opacity="0.4"/>
-    <circle cx="150" cy="520" r="2" fill="#5dd39e" opacity="0.3"/>
-    <circle cx="400" cy="540" r="2" fill="#e8c547" opacity="0.3"/>
-    <circle cx="750" cy="510" r="3" fill="#ef6b6b" opacity="0.3"/>
-    <circle cx="1000" cy="530" r="2" fill="#6b8cce" opacity="0.3"/>
+    <!-- Masthead bar -->
+    <text x="80" y="74" font-family="${OG.mono}" font-size="19" fill="${OG.ink}" letter-spacing="1">2389 RESEARCH · AGENT SKILLS · OPEN SOURCE</text>
+    <text x="1120" y="74" font-family="${OG.mono}" font-size="19" fill="${OG.body}" letter-spacing="1" text-anchor="end">EST. 2026</text>
+    <rect x="80" y="96" width="1040" height="1" fill="${OG.rule}"/>
 
-    <!-- Gold accent line at top -->
-    <rect x="0" y="0" width="1200" height="4" fill="#e8c547"/>
+    <!-- Kicker -->
+    <text x="80" y="216" font-family="${OG.mono}" font-size="22" fill="${OG.accent}" letter-spacing="3">A WORKING INDEX OF</text>
 
-    <!-- Label -->
-    <circle cx="88" cy="110" r="5" fill="#e8c547"/>
-    <text x="104" y="116" font-family="monospace" font-size="18" fill="#a0a0b8" letter-spacing="1.5">WELCOME, FELLOW BUILDER</text>
+    <!-- Headline (serif, skills set in italic accent, mirroring the site's <em>) -->
+    <text x="78" y="322" font-family="${OG.serif}" font-size="98" fill="${OG.ink}">Coding-agent <tspan font-style="italic" fill="${OG.accent}">skills</tspan></text>
+    <text x="78" y="420" font-family="${OG.serif}" font-size="98" fill="${OG.ink}">&amp; servers</text>
 
-    <!-- Title -->
-    <text x="80" y="220" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="76" font-weight="bold" fill="#f5f5f7" letter-spacing="-2">Plugins that actually</text>
-    <text x="80" y="305" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="76" font-weight="bold" fill="#f5f5f7" letter-spacing="-2">get stuff done</text>
+    <!-- Lede -->
+    <text x="80" y="498" font-family="${OG.serif}" font-size="30" fill="${OG.body}">Skills and MCP servers for the coding agents you already use.</text>
 
-    <!-- Subtitle -->
-    <text x="80" y="370" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="26" fill="#a0a0b8">Open source Claude Code plugins and MCP servers from 2389 Research.</text>
-    <text x="80" y="405" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="26" fill="#a0a0b8">The tools we use every day to build, ship, and not lose our minds.</text>
-
-    <!-- Stats -->
-    <text x="80" y="480" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="48" font-weight="bold" fill="#f5f5f7">${pluginCount}</text>
-    <text x="${90 + String(pluginCount).length * 28}" y="480" font-family="monospace" font-size="18" fill="#a0a0b8" letter-spacing="0.5">PLUGINS</text>
-
-    <rect x="260" y="450" width="1" height="40" fill="#3a3a5c"/>
-
-    <text x="290" y="480" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="48" font-weight="bold" fill="#f5f5f7">100%</text>
-    <text x="440" y="480" font-family="monospace" font-size="18" fill="#a0a0b8" letter-spacing="0.5">OPEN SOURCE</text>
-
-    <!-- Bottom bar -->
-    <rect x="0" y="520" width="1200" height="110" fill="#242442"/>
-    <rect x="0" y="520" width="1200" height="1" fill="#3a3a5c"/>
-
-    <!-- Status indicator dot -->
-    <circle cx="96" cy="572" r="6" fill="#e8c547"/>
-
-    <!-- Branding -->
-    <text x="116" y="580" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="24" font-weight="600" fill="#f5f5f7">2389 Research Inc</text>
-
-    <!-- URL -->
-    <text x="1120" y="580" font-family="monospace" font-size="20" fill="#a0a0b8" text-anchor="end">2389-research.github.io/claude-plugins</text>
+    <!-- Footer -->
+    <rect x="80" y="556" width="1040" height="1" fill="${OG.rule}"/>
+    <text x="80" y="596" font-family="${OG.mono}" font-size="19" fill="${OG.ink}" letter-spacing="1">${pluginCount} SKILLS · 100% OPEN SOURCE</text>
+    <text x="1120" y="596" font-family="${OG.mono}" font-size="19" fill="${OG.accent}" letter-spacing="1" text-anchor="end">skills.2389.ai</text>
   </svg>`;
 }
 
