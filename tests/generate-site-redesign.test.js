@@ -58,6 +58,19 @@ test('script: filter wiring reads skill rows on input', () => {
   assert.match(index, /\[data-skill-row\]/);
   assert.match(index, /addEventListener\('input'/);
 });
+test('search: norm() folds separators so "review squad" finds review-squad', () => {
+  // The shipped script defines a one-line normalizer we can extract and execute.
+  const m = index.match(/const norm = (.*?);/);
+  assert.ok(m, 'interactive script defines a norm() helper');
+  const norm = eval('(' + m[1] + ')');
+  // Users type names as spoken; entries are kebab_or_snake case. Both sides fold to the same form.
+  assert.strictEqual(norm('review squad'), norm('review-squad'));
+  assert.strictEqual(norm('Fresh Eyes Review'), norm('fresh-eyes-review'));
+  assert.strictEqual(norm('slack mcp'), norm('slack_mcp'));
+  // Both the query and the haystack go through norm(), so hyphenated queries keep working too.
+  assert.match(index, /norm\(search\.value/);
+  assert.match(index, /hay = norm\(/);
+});
 test('index: one row per marketplace entry, with details links', () => {
   const marketplace = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude-plugin/marketplace.json'), 'utf8'));
   const rowCount = (index.match(/class="skill-row"/g) || []).length;
