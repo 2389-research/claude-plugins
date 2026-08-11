@@ -81,7 +81,7 @@
           <button type="button" class="btn-ghost-sm mono" data-copy="/plugin install landing-page-design@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="landing-page-design">Copy</button>
         </div>
         </details>
-      <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/landing-page-design" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="landing-page-design">★ Star on GitHub <span class="star-count">· 8</span></a></div>
+      <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/landing-page-design" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="landing-page-design">★ Star on GitHub <span class="star-count">· 14</span></a></div>
     </header>
     <main id="main-content" class="readme-body">
       <h2>Landing Page Design Plugin</h2>
@@ -180,7 +180,7 @@ Full animation system for entrances, continuous effects, interactions, and decor
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
   "datePublished": "2026-07-20",
-  "dateModified": "2026-07-21"
+  "dateModified": "2026-08-11"
 }
   </script>
 
@@ -231,13 +231,14 @@ Full animation system for entrances, continuous effects, interactions, and decor
     const chips = [...document.querySelectorAll('.chip[data-cat]')];
     const clearTag = document.querySelector('[data-cleartag]');
     let cat = 'all', tag = null;
+    const norm = s => s.toLowerCase().replace(/[-_ ]+/g, ' ');
     const apply = () => {
-      const q = search.value.trim().toLowerCase();
+      const q = norm(search.value.trim());
       let shown = 0;
       rows.forEach(r => {
         const okCat = cat === 'all' || r.dataset.cat === cat;
         const okTag = !tag || (r.dataset.tags || '').split(',').includes(tag);
-        const hay = (r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags).toLowerCase();
+        const hay = norm(r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags);
         const okQ = !q || hay.includes(q);
         const show = okCat && okTag && okQ;
         r.style.display = show ? '' : 'none';

@@ -524,6 +524,8 @@ function pluginHasSkills(plugin) {
 
 // Shared interactive <script>: copy-to-clipboard, search/filter, topo background.
 // Used by both the homepage and every plugin page.
+// NB: the body is a template literal — a regex escape like \s loses its backslash on the way
+// out, so emitted regexes must use explicit character classes ([-_ ], not \s).
 function generateInteractiveScript() {
   return `<script>
   document.querySelectorAll('[data-copy]').forEach(btn => {
@@ -544,13 +546,14 @@ function generateInteractiveScript() {
     const chips = [...document.querySelectorAll('.chip[data-cat]')];
     const clearTag = document.querySelector('[data-cleartag]');
     let cat = 'all', tag = null;
+    const norm = s => s.toLowerCase().replace(/[-_ ]+/g, ' ');
     const apply = () => {
-      const q = search.value.trim().toLowerCase();
+      const q = norm(search.value.trim());
       let shown = 0;
       rows.forEach(r => {
         const okCat = cat === 'all' || r.dataset.cat === cat;
         const okTag = !tag || (r.dataset.tags || '').split(',').includes(tag);
-        const hay = (r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags).toLowerCase();
+        const hay = norm(r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags);
         const okQ = !q || hay.includes(q);
         const show = okCat && okTag && okQ;
         r.style.display = show ? '' : 'none';

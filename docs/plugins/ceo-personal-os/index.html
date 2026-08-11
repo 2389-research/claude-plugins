@@ -81,7 +81,7 @@
           <button type="button" class="btn-ghost-sm mono" data-copy="/plugin install ceo-personal-os@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="ceo-personal-os">Copy</button>
         </div>
         </details>
-      <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/ceo-personal-os" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="ceo-personal-os">★ Star on GitHub <span class="star-count">· 2</span></a></div>
+      <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/ceo-personal-os" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="ceo-personal-os">★ Star on GitHub <span class="star-count">· 4</span></a></div>
     </header>
     <main id="main-content" class="readme-body">
       <h2>CEO Personal OS Plugin</h2>
@@ -164,7 +164,7 @@
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
   "datePublished": "2026-07-20",
-  "dateModified": "2026-07-21"
+  "dateModified": "2026-08-11"
 }
   </script>
 
@@ -215,13 +215,14 @@
     const chips = [...document.querySelectorAll('.chip[data-cat]')];
     const clearTag = document.querySelector('[data-cleartag]');
     let cat = 'all', tag = null;
+    const norm = s => s.toLowerCase().replace(/[-_ ]+/g, ' ');
     const apply = () => {
-      const q = search.value.trim().toLowerCase();
+      const q = norm(search.value.trim());
       let shown = 0;
       rows.forEach(r => {
         const okCat = cat === 'all' || r.dataset.cat === cat;
         const okTag = !tag || (r.dataset.tags || '').split(',').includes(tag);
-        const hay = (r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags).toLowerCase();
+        const hay = norm(r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags);
         const okQ = !q || hay.includes(q);
         const show = okCat && okTag && okQ;
         r.style.display = show ? '' : 'none';
