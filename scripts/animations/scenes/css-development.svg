@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <rect width="1200" height="400" fill="#faf9f6"/>
+  <g font-family="Menlo, 'IBM Plex Mono', monospace">
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#8a857a">CSS-DEVELOPMENT</text>
+    <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#8a857a">TOKENS · SEMANTIC COMPOSITION · DARK MODE BY DEFAULT</text>
+
+    <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
+      <path d="M230,132 H340 V210 H440"/>
+      <path d="M230,202 H340 V210 H440"/>
+      <path d="M230,272 H340 V210 H440"/>
+      <path d="M680,210 H860"/>
+    </g>
+
+    <!-- token chips -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.02;0.09;0.95;1" values="0;0;1;1;0"/>
+      <rect x="60" y="110" width="170" height="44" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <text x="78" y="137" font-size="12" fill="#33302a">--color</text>
+      <rect x="60" y="180" width="170" height="44" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <text x="78" y="207" font-size="12" fill="#33302a">--space</text>
+      <rect x="60" y="250" width="170" height="44" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <text x="78" y="277" font-size="12" fill="#33302a">--type</text>
+    </g>
+
+    <!-- the routes stay solid once a token has run down them -->
+    <g fill="none" stroke="#e6196e" stroke-width="1.5">
+      <path d="M230,132 H340 V210 H440" stroke-dasharray="288" stroke-dashoffset="288">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.12;0.30;0.95;1" values="288;288;0;0;288"/>
+      </path>
+      <path d="M230,202 H340 V210 H440" stroke-dasharray="218" stroke-dashoffset="218">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.15;0.32;0.95;1" values="218;218;0;0;218"/>
+      </path>
+      <path d="M230,272 H340 V210 H440" stroke-dasharray="272" stroke-dashoffset="272">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.18;0.34;0.95;1" values="272;272;0;0;272"/>
+      </path>
+    </g>
+
+    <!-- tokens travelling into the component -->
+    <g fill="#e6196e">
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.12;0.13;0.29;0.31;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.12;0.30;1" keyPoints="0;0;1;1"
+                       path="M230,132 H340 V210 H440"/>
+      </circle>
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.15;0.16;0.31;0.33;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.15;0.32;1" keyPoints="0;0;1;1"
+                       path="M230,202 H340 V210 H440"/>
+      </circle>
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.18;0.19;0.33;0.35;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.18;0.34;1" keyPoints="0;0;1;1"
+                       path="M230,272 H340 V210 H440"/>
+      </circle>
+    </g>
+
+    <!-- component shell, pre-allocated so nothing reflows as tokens land -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.04;0.11;0.95;1" values="0;0;1;1;0"/>
+      <rect x="440" y="160" width="240" height="100" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <text x="560" y="196" font-size="13" letter-spacing="1.4" fill="#171512" text-anchor="middle">.card</text>
+    </g>
+
+    <!-- composed state -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.36;0.46;0.95;1" values="0;0;1;1;0"/>
+      <rect x="440" y="160" width="240" height="100" fill="#e6196e" opacity="0.12"/>
+      <rect x="440" y="160" width="240" height="100" fill="none" stroke="#e6196e" stroke-width="3"/>
+      <text x="560" y="232" font-size="12" letter-spacing="1.4" fill="#171512" text-anchor="middle">COMPOSED</text>
+    </g>
+
+    <path d="M680,210 H860" fill="none" stroke="#e6196e" stroke-width="1.5"
+          stroke-dasharray="180" stroke-dashoffset="180">
+      <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+               keyTimes="0;0.56;0.70;0.95;1" values="180;180;0;0;180"/>
+    </path>
+
+    <!-- dark mode falls out of the same tokens -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.68;0.78;0.95;1" values="0;0;1;1;0"/>
+      <rect x="860" y="160" width="240" height="100" fill="#171512"/>
+      <text x="980" y="196" font-size="13" letter-spacing="1.4" fill="#faf9f6" text-anchor="middle">.card</text>
+      <text x="980" y="232" font-size="12" letter-spacing="1.4" fill="#e6196e" text-anchor="middle">DARK MODE</text>
+    </g>
+  </g>
+</svg>

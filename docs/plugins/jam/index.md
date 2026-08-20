@@ -120,7 +120,6 @@ You stay in the loop at every gate — panels and synthesis plans are always pre
 CLAUDE.md                    Agent-facing plugin guide
 AGENTS.md                    Same, for non-Claude agents
 skills/
-  SKILL.md                   Router skill
   jam/SKILL.md               The full Jam workflow
 evals/                       Comparative eval harness (Jam vs. other approaches)
 ```

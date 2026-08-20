@@ -93,7 +93,7 @@ a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offse
 .colophon{margin:0 calc(-1 * var(--bleed));padding:26px var(--bleed) 60px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--muted);}
 .colophon-links{display:flex;gap:24px;flex-wrap:wrap;}
 .detail-topbar{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);padding:52px 0 16px;}
-.detail-head{max-width:760px;padding:48px 0 30px;}
+.detail-head{max-width:760px;padding:48px 0 0;}
 .detail-kicker{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:18px;}
 .detail-kicker .mcp-badge{font-size:10px;}
 .detail-title-row{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:22px;}
@@ -102,6 +102,29 @@ a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offse
 .detail-lede{font-size:clamp(19px,2.4vw,24px);line-height:1.55;color:var(--body-2);margin:0 0 26px;text-wrap:pretty;}
 .detail-head .row-tags{gap:8px 18px;margin-bottom:36px;}
 .detail-actions{margin:10px 0 4px;}
+/* The motion diagram sits between the tags and the install block. It runs the full
+   content column rather than the 760px reading measure — the 11px labels inside the
+   1200x400 scene are only legible at that width. */
+.skill-anim{margin:0 0 36px;}
+/* Both selectors carry equal weight so the display swap below is decided by order,
+   not specificity — a bare .skill-anim-still would lose to `.skill-anim img`. */
+.skill-anim .skill-anim-motion,.skill-anim .skill-anim-still{width:100%;height:auto;border:1.5px solid var(--ink);background:var(--paper);}
+.skill-anim .skill-anim-motion{display:block;}
+.skill-anim .skill-anim-still{display:none;}
+.skill-anim figcaption{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:9px;}
+/* Scaled to a phone's width the 11px labels inside the scene land under 4px. Pan the
+   diagram inside its own scroller instead — the page body still never scrolls sideways. */
+@media(max-width:760px){
+  .skill-anim{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .skill-anim .skill-anim-motion,.skill-anim .skill-anim-still{width:900px;max-width:none;}
+  .skill-anim figcaption{position:sticky;left:0;}
+}
+/* Honour an opted-out reader: hold the settled frame instead of looping. */
+@media(prefers-reduced-motion:reduce){
+  .skill-anim .skill-anim-motion{display:none;}
+  .skill-anim .skill-anim-still{display:block;}
+}
+.detail-install{max-width:760px;padding-bottom:30px;}
 .detail-star{text-decoration:none;}
 .detail-star .star-count{opacity:.6;}
 .install-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;}

@@ -68,6 +68,17 @@
       </div>
       <p class="detail-lede">CSS development workflows with Tailwind composition, semantic naming, and dark mode by default</p>
       <div class="row-tags"><a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="css">#css</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="tailwind">#tailwind</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="styling">#styling</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="components">#components</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="dark-mode">#dark-mode</a></div>
+    </header>
+    <figure class="skill-anim">
+      <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
+             autoplay loop muted playsinline preload="metadata" aria-label="Animated diagram of how css-development works">
+        <source src="anim.mp4" type="video/mp4">
+      </video>
+      <img class="skill-anim-still" src="anim-poster.png" width="1200" height="400"
+           alt="Animated diagram of how css-development works">
+      <figcaption class="mono">How css-development works</figcaption>
+    </figure>
+    <section class="detail-install">
       
           <div class="mono install-label">Install — npx skills · recommended</div>
           <div class="install-box">
@@ -82,7 +93,7 @@
         </div>
         </details>
       <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/css-development" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="css-development">★ Star on GitHub <span class="star-count">· 1</span></a></div>
-    </header>
+    </section>
     <main id="main-content" class="readme-body">
       <h2>CSS Development Plugin</h2>
 <p>CSS development workflows with Tailwind composition, semantic naming, and dark mode by default.</p>
@@ -160,8 +171,8 @@
   "downloadUrl": "https://github.com/2389-research/css-development",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-08-12",
-  "dateModified": "2026-08-19"
+  "datePublished": "2026-07-20",
+  "dateModified": "2026-08-20"
 }
   </script>
 
@@ -204,6 +215,15 @@
       setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
     });
   });
+
+  // CSS hides the looping diagram for a reduced-motion reader, but a hidden video is
+  // not guaranteed to stop, so pause it outright and drop the autoplay attribute.
+  const anim = document.querySelector('.skill-anim-motion');
+  if (anim && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    anim.removeAttribute('autoplay');
+    anim.removeAttribute('loop');
+    anim.pause();
+  }
 
   const search = document.querySelector('[data-search]');
   if (search) {

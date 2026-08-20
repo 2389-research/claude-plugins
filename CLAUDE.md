@@ -105,16 +105,26 @@ Edit `.claude-plugin/marketplace.json` and add an entry to the `plugins` array:
 }
 ```
 
-### Step 3: Regenerate the marketplace site
+### Step 3: Author a motion diagram
+
+Add `scripts/animations/scenes/my-plugin.svg` following the conventions in
+`scripts/animations/README.md`, then render it:
+
+```bash
+node scripts/animations/render.js my-plugin
+```
+
+### Step 4: Regenerate the marketplace site
 
 ```bash
 npm run generate
 ```
 
-### Step 4: Commit and push
+### Step 5: Commit and push
 
 ```bash
-git add .claude-plugin/marketplace.json docs/index.html
+git add .claude-plugin/marketplace.json docs/index.html \
+        scripts/animations/scenes/my-plugin.svg docs/plugins/my-plugin/
 git commit -m "feat: add my-plugin to marketplace"
 ```
 
@@ -169,6 +179,28 @@ node scripts/generate-site.js
 ```
 
 Output goes to `docs/index.html`, served via GitHub Pages at https://2389-research.github.io/claude-plugins
+
+## Skill Animations
+
+Every plugin detail page carries a motion diagram between its tag row and its install
+block. Sources live in `scripts/animations/scenes/<plugin>.svg` — one authored SVG per
+`marketplace.json` entry, using this site's palette and category colours.
+
+```bash
+# Re-render every scene to docs/plugins/<plugin>/anim.mp4 + anim-poster.png
+npm run generate:anim
+
+# Or just the scenes you changed
+node scripts/animations/render.js simmer prbuddy
+```
+
+Rendering needs Chrome and `ffmpeg` and runs locally; the MP4 and poster are committed,
+like the OG images. CI never regenerates them — `generate-site.js` emits the embed
+markup only when both files exist for a plugin.
+
+When adding a plugin to the marketplace, add a scene for it too. The test suite fails
+on a marketplace entry with no scene or no rendered assets. Scene conventions and the
+validated SMIL contract are in `scripts/animations/README.md`.
 
 ## GitHub Actions
 

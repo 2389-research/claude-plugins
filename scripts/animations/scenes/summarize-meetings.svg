@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <rect width="1200" height="400" fill="#faf9f6"/>
+  <g font-family="Menlo, 'IBM Plex Mono', monospace">
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#8a857a">SUMMARIZE-MEETINGS</text>
+    <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#8a857a">BATCH THE TRANSCRIPTS · STRUCTURE THE SUMMARIES · LINK THE NOTES</text>
+
+    <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
+      <path d="M250,120 H320 V210 H400"/>
+      <path d="M250,176 H320 V210 H400"/>
+      <path d="M250,232 H320 V210 H400"/>
+      <path d="M250,288 H320 V210 H400"/>
+      <path d="M580,210 H660 V120 H740"/>
+      <path d="M580,210 H660 V176 H740"/>
+      <path d="M580,210 H660 V232 H740"/>
+      <path d="M580,210 H660 V288 H740"/>
+      <path d="M960,120 H1040 V288 H960"/>
+    </g>
+
+    <!-- the raw pile -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.02;0.10;0.95;1" values="0;0;1;1;0"/>
+      <text x="60" y="88" font-size="11" letter-spacing="1.4" fill="#8a857a">TRANSCRIPTS</text>
+      <g fill="#ffffff" stroke="#171512" stroke-width="1.5">
+        <rect x="60" y="98" width="190" height="44"/>
+        <rect x="60" y="154" width="190" height="44"/>
+        <rect x="60" y="210" width="190" height="44"/>
+        <rect x="60" y="266" width="190" height="44"/>
+      </g>
+      <g fill="#e7e3da">
+        <rect x="76" y="112" width="140" height="8"/>
+        <rect x="76" y="126" width="110" height="8"/>
+        <rect x="76" y="168" width="150" height="8"/>
+        <rect x="76" y="182" width="90" height="8"/>
+        <rect x="76" y="224" width="130" height="8"/>
+        <rect x="76" y="238" width="120" height="8"/>
+        <rect x="76" y="280" width="145" height="8"/>
+        <rect x="76" y="294" width="100" height="8"/>
+      </g>
+    </g>
+
+    <g fill="#1f9e6b">
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.12;0.13;0.25;0.27;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.12;0.26;1" keyPoints="0;0;1;1"
+                       path="M250,120 H320 V210 H400"/>
+      </circle>
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.14;0.15;0.26;0.28;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.14;0.27;1" keyPoints="0;0;1;1"
+                       path="M250,176 H320 V210 H400"/>
+      </circle>
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.16;0.17;0.27;0.29;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.16;0.28;1" keyPoints="0;0;1;1"
+                       path="M250,232 H320 V210 H400"/>
+      </circle>
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.18;0.19;0.28;0.30;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.18;0.29;1" keyPoints="0;0;1;1"
+                       path="M250,288 H320 V210 H400"/>
+      </circle>
+    </g>
+
+    <!-- one pass over the whole batch -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.06;0.16;0.95;1" values="0;0;1;1;0"/>
+      <rect x="400" y="180" width="180" height="60" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <text x="490" y="215" font-size="12" letter-spacing="1.4" fill="#171512" text-anchor="middle">BATCH</text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.28;0.38;0.95;1" values="0;0;1;1;0"/>
+      <rect x="400" y="180" width="180" height="60" fill="#1f9e6b" opacity="0.14"/>
+      <rect x="400" y="180" width="180" height="60" fill="none" stroke="#1f9e6b" stroke-width="3"/>
+      <text x="490" y="168" font-size="11" letter-spacing="1.4" fill="#1f9e6b" text-anchor="middle">4 AT ONCE</text>
+    </g>
+
+    <!-- structured out the other side -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.42;0.54;0.95;1" values="0;0;1;1;0"/>
+      <text x="740" y="88" font-size="11" letter-spacing="1.4" fill="#8a857a">SUMMARIES</text>
+      <g fill="#ffffff" stroke="#1f9e6b" stroke-width="1.5">
+        <rect x="740" y="98" width="220" height="44"/>
+        <rect x="740" y="154" width="220" height="44"/>
+        <rect x="740" y="210" width="220" height="44"/>
+        <rect x="740" y="266" width="220" height="44"/>
+      </g>
+      <g font-size="11" letter-spacing="1.2" fill="#171512">
+        <text x="756" y="116">decisions</text>
+        <text x="756" y="134">owners · dates</text>
+        <text x="756" y="172">decisions</text>
+        <text x="756" y="190">owners · dates</text>
+        <text x="756" y="228">decisions</text>
+        <text x="756" y="246">owners · dates</text>
+        <text x="756" y="284">decisions</text>
+        <text x="756" y="302">owners · dates</text>
+      </g>
+    </g>
+
+    <!-- and they know about each other -->
+    <path d="M960,120 H1040 V288 H960" fill="none" stroke="#1f9e6b" stroke-width="1.5"
+          stroke-dasharray="328" stroke-dashoffset="328">
+      <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+               keyTimes="0;0.62;0.76;0.95;1" values="328;328;0;0;328"/>
+    </path>
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.76;0.86;0.95;1" values="0;0;1;1;0"/>
+      <text x="1058" y="200" font-size="11" letter-spacing="1.4" fill="#1f9e6b">LINKED</text>
+      <text x="1058" y="218" font-size="11" letter-spacing="1.2" fill="#8a857a">across the</text>
+      <text x="1058" y="234" font-size="11" letter-spacing="1.2" fill="#8a857a">vault</text>
+    </g>
+  </g>
+</svg>

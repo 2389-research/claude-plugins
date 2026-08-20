@@ -68,6 +68,17 @@
       </div>
       <p class="detail-lede">Digital drugs that modify AI behavior through prompt injection</p>
       <div class="row-tags"><a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="behavior">#behavior</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="prompts">#prompts</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="modification">#modification</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="drugs">#drugs</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="context-injection">#context-injection</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="productivity">#productivity</a></div>
+    </header>
+    <figure class="skill-anim">
+      <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
+             autoplay loop muted playsinline preload="metadata" aria-label="Animated diagram of how agent-drugs works">
+        <source src="anim.mp4" type="video/mp4">
+      </video>
+      <img class="skill-anim-still" src="anim-poster.png" width="1200" height="400"
+           alt="Animated diagram of how agent-drugs works">
+      <figcaption class="mono">How agent-drugs works</figcaption>
+    </figure>
+    <section class="detail-install">
       
       <div class="mono install-label">Install — Claude Code</div>
         <div class="install-box">
@@ -75,7 +86,7 @@
           <button type="button" class="btn-ghost-sm mono" data-copy="/plugin install agent-drugs@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="agent-drugs">Copy</button>
         </div>
       <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/agent-drugs" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="agent-drugs">★ Star on GitHub <span class="star-count">· 6</span></a></div>
-    </header>
+    </section>
     <main id="main-content" class="readme-body">
       <h2>Agent Drugs</h2>
 <p>Claude Code plugin with MCP server for digital drugs that modify AI behavior through prompt injection.</p>
@@ -223,8 +234,8 @@ npm run dev:http
   "downloadUrl": "https://github.com/2389-research/agent-drugs",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-08-12",
-  "dateModified": "2026-08-19"
+  "datePublished": "2026-07-20",
+  "dateModified": "2026-08-20"
 }
   </script>
 
@@ -267,6 +278,15 @@ npm run dev:http
       setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
     });
   });
+
+  // CSS hides the looping diagram for a reduced-motion reader, but a hidden video is
+  // not guaranteed to stop, so pause it outright and drop the autoplay attribute.
+  const anim = document.querySelector('.skill-anim-motion');
+  if (anim && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    anim.removeAttribute('autoplay');
+    anim.removeAttribute('loop');
+    anim.pause();
+  }
 
   const search = document.querySelector('[data-search]');
   if (search) {

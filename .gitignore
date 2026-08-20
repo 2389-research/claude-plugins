@@ -7,3 +7,6 @@ node_modules/
 
 # visual-comp extraction + throwaway scratch
 .scratch/
+
+# intent skill's per-session drafts, pending triage
+.intent/pending/

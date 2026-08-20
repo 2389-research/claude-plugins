@@ -68,6 +68,17 @@
       </div>
       <p class="detail-lede">Automatically updates terminal title with emoji + project + topic context for quick visual cues when switching terminals</p>
       <div class="row-tags"><a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="terminal">#terminal</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="title">#title</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="session">#session</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="context">#context</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="emoji">#emoji</a></div>
+    </header>
+    <figure class="skill-anim">
+      <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
+             autoplay loop muted playsinline preload="metadata" aria-label="Animated diagram of how terminal-title works">
+        <source src="anim.mp4" type="video/mp4">
+      </video>
+      <img class="skill-anim-still" src="anim-poster.png" width="1200" height="400"
+           alt="Animated diagram of how terminal-title works">
+      <figcaption class="mono">How terminal-title works</figcaption>
+    </figure>
+    <section class="detail-install">
       
           <div class="mono install-label">Install — npx skills · recommended</div>
           <div class="install-box">
@@ -82,7 +93,7 @@
         </div>
         </details>
       <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/terminal-title" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="terminal-title">★ Star on GitHub <span class="star-count">· 2</span></a></div>
-    </header>
+    </section>
     <main id="main-content" class="readme-body">
       <h2>Terminal title</h2>
 <p>Automatically updates your terminal title with emoji + project + topic context. Works on Windows, macOS, and Linux.</p>
@@ -181,8 +192,8 @@ export TERMINAL_TITLE_EMOJI=💼
   "downloadUrl": "https://github.com/2389-research/terminal-title",
   "softwareVersion": "1.1.2",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-08-12",
-  "dateModified": "2026-08-19"
+  "datePublished": "2026-07-20",
+  "dateModified": "2026-08-20"
 }
   </script>
 
@@ -225,6 +236,15 @@ export TERMINAL_TITLE_EMOJI=💼
       setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
     });
   });
+
+  // CSS hides the looping diagram for a reduced-motion reader, but a hidden video is
+  // not guaranteed to stop, so pause it outright and drop the autoplay attribute.
+  const anim = document.querySelector('.skill-anim-motion');
+  if (anim && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    anim.removeAttribute('autoplay');
+    anim.removeAttribute('loop');
+    anim.pause();
+  }
 
   const search = document.querySelector('[data-search]');
   if (search) {

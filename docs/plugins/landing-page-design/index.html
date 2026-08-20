@@ -68,6 +68,17 @@
       </div>
       <p class="detail-lede">Create high-converting, visually distinctive landing pages with Vibe Discovery process and anti-AI-slop principles</p>
       <div class="row-tags"><a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="landing-page">#landing-page</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="marketing">#marketing</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="design">#design</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="conversion">#conversion</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="hero">#hero</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="saas">#saas</a></div>
+    </header>
+    <figure class="skill-anim">
+      <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
+             autoplay loop muted playsinline preload="metadata" aria-label="Animated diagram of how landing-page-design works">
+        <source src="anim.mp4" type="video/mp4">
+      </video>
+      <img class="skill-anim-still" src="anim-poster.png" width="1200" height="400"
+           alt="Animated diagram of how landing-page-design works">
+      <figcaption class="mono">How landing-page-design works</figcaption>
+    </figure>
+    <section class="detail-install">
       
           <div class="mono install-label">Install — npx skills · recommended</div>
           <div class="install-box">
@@ -82,7 +93,7 @@
         </div>
         </details>
       <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/landing-page-design" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="landing-page-design">★ Star on GitHub <span class="star-count">· 14</span></a></div>
-    </header>
+    </section>
     <main id="main-content" class="readme-body">
       <h2>Landing Page Design Plugin</h2>
 <p>Build landing pages that don't look like every other AI-generated page.</p>
@@ -179,8 +190,8 @@ Full animation system for entrances, continuous effects, interactions, and decor
   "downloadUrl": "https://github.com/2389-research/landing-page-design",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-08-12",
-  "dateModified": "2026-08-19"
+  "datePublished": "2026-07-20",
+  "dateModified": "2026-08-20"
 }
   </script>
 
@@ -223,6 +234,15 @@ Full animation system for entrances, continuous effects, interactions, and decor
       setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
     });
   });
+
+  // CSS hides the looping diagram for a reduced-motion reader, but a hidden video is
+  // not guaranteed to stop, so pause it outright and drop the autoplay attribute.
+  const anim = document.querySelector('.skill-anim-motion');
+  if (anim && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    anim.removeAttribute('autoplay');
+    anim.removeAttribute('loop');
+    anim.pause();
+  }
 
   const search = document.querySelector('[data-search]');
   if (search) {

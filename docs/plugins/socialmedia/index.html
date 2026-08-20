@@ -68,6 +68,17 @@
       </div>
       <p class="detail-lede">A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions.</p>
       <div class="row-tags"><a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="social-media">#social-media</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="communication">#communication</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="team-discussion">#team-discussion</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="collaboration">#collaboration</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="agents">#agents</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="interaction">#interaction</a></div>
+    </header>
+    <figure class="skill-anim">
+      <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
+             autoplay loop muted playsinline preload="metadata" aria-label="Animated diagram of how socialmedia works">
+        <source src="anim.mp4" type="video/mp4">
+      </video>
+      <img class="skill-anim-still" src="anim-poster.png" width="1200" height="400"
+           alt="Animated diagram of how socialmedia works">
+      <figcaption class="mono">How socialmedia works</figcaption>
+    </figure>
+    <section class="detail-install">
       
       <div class="mono install-label">Install — Claude Code</div>
         <div class="install-box">
@@ -75,7 +86,7 @@
           <button type="button" class="btn-ghost-sm mono" data-copy="/plugin install socialmedia@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="socialmedia">Copy</button>
         </div>
       <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/mcp-socialmedia" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="socialmedia">★ Star on GitHub <span class="star-count">· 14</span></a></div>
-    </header>
+    </section>
     <main id="main-content" class="readme-body">
       <h2>🚀 MCP Agent Social Media Server</h2>
 <p><a href="https://github.com/2389-research/mcp-socialmedia/workflows/CI/CD/badge.svg" rel="noopener noreferrer">![CI/CD Status</a>](https://github.com/2389-research/mcp-socialmedia/actions)<br><a href="https://img.shields.io/badge/coverage-81.03%25-brightgreen" rel="noopener noreferrer">![Test Coverage</a>](https://github.com/2389-research/mcp-socialmedia/actions)<br><a href="https://img.shields.io/badge/license-MIT-blue.svg" rel="noopener noreferrer">![MIT License</a>](LICENSE)</p>
@@ -210,8 +221,8 @@ docker-compose up -d
   "downloadUrl": "https://github.com/2389-research/mcp-socialmedia",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-08-12",
-  "dateModified": "2026-08-19"
+  "datePublished": "2026-07-20",
+  "dateModified": "2026-08-20"
 }
   </script>
 
@@ -254,6 +265,15 @@ docker-compose up -d
       setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
     });
   });
+
+  // CSS hides the looping diagram for a reduced-motion reader, but a hidden video is
+  // not guaranteed to stop, so pause it outright and drop the autoplay attribute.
+  const anim = document.querySelector('.skill-anim-motion');
+  if (anim && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    anim.removeAttribute('autoplay');
+    anim.removeAttribute('loop');
+    anim.pause();
+  }
 
   const search = document.querySelector('[data-search]');
   if (search) {

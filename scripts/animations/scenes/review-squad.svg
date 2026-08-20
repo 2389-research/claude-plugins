@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <rect width="1200" height="400" fill="#faf9f6"/>
+  <g font-family="Menlo, 'IBM Plex Mono', monospace">
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#8a857a">REVIEW-SQUAD</text>
+    <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#8a857a">FOUR PANELS · FOUR PERSONAS · ONE REPORT</text>
+
+    <!-- dispatch bus out, findings bus back -->
+    <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
+      <path d="M250,180 H1090"/>
+      <path d="M355,180 V150"/>
+      <path d="M545,180 V150"/>
+      <path d="M735,180 V150"/>
+      <path d="M925,180 V150"/>
+      <path d="M355,206 V246"/>
+      <path d="M545,206 V246"/>
+      <path d="M735,206 V246"/>
+      <path d="M925,206 V246"/>
+      <path d="M355,246 H925"/>
+      <path d="M640,246 V276"/>
+    </g>
+
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.02;0.10;0.95;1" values="0;0;1;1;0"/>
+      <rect x="60" y="150" width="190" height="60" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <text x="155" y="185" font-size="12" letter-spacing="1.2" fill="#171512" text-anchor="middle">PROJECT</text>
+    </g>
+
+    <!-- dispatch -->
+    <path d="M250,180 H1090" fill="none" stroke="#2f7d8c" stroke-width="1.5"
+          stroke-dasharray="840" stroke-dashoffset="840">
+      <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+               keyTimes="0;0.10;0.26;0.95;1" values="840;840;0;0;840"/>
+    </path>
+    <g fill="none" stroke="#2f7d8c" stroke-width="1.5">
+      <path d="M355,180 V150" stroke-dasharray="30" stroke-dashoffset="30">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.16;0.22;0.95;1" values="30;30;0;0;30"/>
+      </path>
+      <path d="M545,180 V150" stroke-dasharray="30" stroke-dashoffset="30">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.18;0.24;0.95;1" values="30;30;0;0;30"/>
+      </path>
+      <path d="M735,180 V150" stroke-dasharray="30" stroke-dashoffset="30">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.20;0.26;0.95;1" values="30;30;0;0;30"/>
+      </path>
+      <path d="M925,180 V150" stroke-dasharray="30" stroke-dashoffset="30">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.22;0.28;0.95;1" values="30;30;0;0;30"/>
+      </path>
+    </g>
+
+    <!-- the panels, each reading with different eyes -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.26;0.36;0.95;1" values="0;0;1;1;0"/>
+      <g fill="#ffffff" stroke="#171512" stroke-width="1.5">
+        <rect x="285" y="102" width="140" height="48"/>
+        <rect x="475" y="102" width="140" height="48"/>
+        <rect x="665" y="102" width="140" height="48"/>
+        <rect x="855" y="102" width="140" height="48"/>
+      </g>
+      <g font-size="11" letter-spacing="1.2" fill="#171512" text-anchor="middle">
+        <text x="355" y="132">EXPERTS</text>
+        <text x="545" y="132">NORMIES</text>
+        <text x="735" y="132">REGULARS</text>
+        <text x="925" y="132">PEDANTS</text>
+      </g>
+    </g>
+
+    <!-- the collection bus stays drawn, so the report reads as fed by all four -->
+    <g fill="none" stroke="#2f7d8c" stroke-width="1.5">
+      <path d="M355,150 V246" stroke-dasharray="96" stroke-dashoffset="96">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.40;0.52;0.95;1" values="96;96;0;0;96"/>
+      </path>
+      <path d="M545,150 V246" stroke-dasharray="96" stroke-dashoffset="96">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.42;0.54;0.95;1" values="96;96;0;0;96"/>
+      </path>
+      <path d="M735,150 V246" stroke-dasharray="96" stroke-dashoffset="96">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.44;0.56;0.95;1" values="96;96;0;0;96"/>
+      </path>
+      <path d="M925,150 V246" stroke-dasharray="96" stroke-dashoffset="96">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.46;0.58;0.95;1" values="96;96;0;0;96"/>
+      </path>
+      <path d="M355,246 H925" stroke-dasharray="570" stroke-dashoffset="570">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.48;0.62;0.95;1" values="570;570;0;0;570"/>
+      </path>
+      <path d="M640,246 V276" stroke-dasharray="30" stroke-dashoffset="30">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.60;0.66;0.95;1" values="30;30;0;0;30"/>
+      </path>
+    </g>
+
+    <!-- findings drop back onto the collection bus -->
+    <g fill="#2f7d8c">
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.40;0.41;0.60;0.62;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.40;0.61;1" keyPoints="0;0;1;1"
+                       path="M355,150 V246 H640 V276"/>
+      </circle>
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.42;0.43;0.61;0.63;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.42;0.62;1" keyPoints="0;0;1;1"
+                       path="M545,150 V246 H640 V276"/>
+      </circle>
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.44;0.45;0.62;0.64;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.44;0.63;1" keyPoints="0;0;1;1"
+                       path="M735,150 V246 H640 V276"/>
+      </circle>
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.46;0.47;0.63;0.65;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.46;0.64;1" keyPoints="0;0;1;1"
+                       path="M925,150 V246 H640 V276"/>
+      </circle>
+    </g>
+
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.66;0.78;0.95;1" values="0;0;1;1;0"/>
+      <rect x="500" y="276" width="280" height="60" fill="#2f7d8c"/>
+      <text x="640" y="312" font-size="12" letter-spacing="1.4" fill="#ffffff" text-anchor="middle">ONE REPORT</text>
+    </g>
+  </g>
+</svg>

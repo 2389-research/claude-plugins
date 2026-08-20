@@ -539,6 +539,15 @@ function generateInteractiveScript() {
     });
   });
 
+  // CSS hides the looping diagram for a reduced-motion reader, but a hidden video is
+  // not guaranteed to stop, so pause it outright and drop the autoplay attribute.
+  const anim = document.querySelector('.skill-anim-motion');
+  if (anim && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    anim.removeAttribute('autoplay');
+    anim.removeAttribute('loop');
+    anim.pause();
+  }
+
   const search = document.querySelector('[data-search]');
   if (search) {
     const rows = [...document.querySelectorAll('[data-skill-row]')];
@@ -633,6 +642,25 @@ function generateCategorySections() {
           ${rows}
         </section>`;
     }).join('\n');
+}
+
+// Motion diagram for a plugin's detail page. The MP4 and its poster are rendered
+// locally by scripts/animations/render.js from the SVG scene of the same name and
+// committed; CI only runs this generator, so emit nothing when they are absent.
+function generateSkillAnimation(plugin) {
+  const dir = path.join(__dirname, '..', 'docs', 'plugins', plugin.name);
+  if (!fs.existsSync(path.join(dir, 'anim.mp4'))
+    || !fs.existsSync(path.join(dir, 'anim-poster.png'))) return '';
+  const alt = `Animated diagram of how ${plugin.name} works`;
+  return `<figure class="skill-anim">
+      <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
+             autoplay loop muted playsinline preload="metadata" aria-label="${escapeHtml(alt)}">
+        <source src="anim.mp4" type="video/mp4">
+      </video>
+      <img class="skill-anim-still" src="anim-poster.png" width="1200" height="400"
+           alt="${escapeHtml(alt)}">
+      <figcaption class="mono">How ${plugin.name} works</figcaption>
+    </figure>`;
 }
 
 // Generate related plugins section for internal linking
@@ -741,10 +769,13 @@ ${generateHead(plugin.name, description, `plugins/${plugin.name}/`, plugin.keywo
       </div>
       <p class="detail-lede">${escapeHtml(description)}</p>
       <div class="row-tags">${tagHtml}</div>
+    </header>
+    ${generateSkillAnimation(plugin)}
+    <section class="detail-install">
       ${npxBlock}
       ${claudeBlock}
       ${starBlock}
-    </header>
+    </section>
     <main id="main-content" class="readme-body">
       ${readme ? readmeHtml : `<p>${escapeHtml(description)}</p>`}
     </main>
