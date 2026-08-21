@@ -2,7 +2,7 @@
 
 > Parallel exploration powered by diverse perspectives - independent agent panels propose, build variants in worktrees, review, pick a winner, and synthesize the best of all variants into the final result
 
-- **Version:** 1.0.0
+- **Version:** 1.1.0
 - **Source:** https://github.com/2389-research/jam
 
 ## Install
