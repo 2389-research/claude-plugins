@@ -74,6 +74,8 @@ whose animation was silently disabled looks like.
 - Labels are Menlo (IBM Plex Mono is not installed on the render host, and an
   `<img>`-embedded SVG would not load a webfont anyway — the raster bakes it in).
 
-Below 760px the page pans the diagram inside its own scroller rather than scaling it
-down: at a phone's full width the 11px labels land under 4px. That is a display
-decision, so keep authoring at 1200×400 and do not shrink the type to compensate.
+The page scales the diagram to whatever width its container has, down to a phone,
+where the labels end up too small to read. That is accepted: the diagram is
+supporting material and the README beside it carries the meaning. Keep authoring at
+1200×400 against the grid — don't inflate the type to survive a narrow viewport, and
+don't add a scroller to rescue it.
