@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
   <rect width="1200" height="400" fill="#faf9f6"/>
   <g font-family="Menlo, 'IBM Plex Mono', monospace">
-    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#8a857a">DELIBERATION</text>
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#767168">DELIBERATION</text>
     <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
-    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#8a857a">FIVE POSITIONS · DISCERNMENT · ONE SENSE OF THE MEETING</text>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#767168">FIVE POSITIONS · DISCERNMENT · ONE SENSE OF THE MEETING</text>
 
     <!-- five starting positions, genuinely apart -->
     <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
@@ -90,7 +90,7 @@
                keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
                keyTimes="0;0.08;0.18;0.95;1" values="0;0;1;1;0"/>
       <circle cx="770" cy="210" r="30" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
-      <text x="770" y="272" font-size="11" letter-spacing="1.4" fill="#8a857a" text-anchor="middle">DISCERNMENT</text>
+      <text x="770" y="272" font-size="11" letter-spacing="1.4" fill="#767168" text-anchor="middle">DISCERNMENT</text>
     </g>
     <g opacity="0">
       <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
@@ -111,9 +111,9 @@
       <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
                keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
                keyTimes="0;0.68;0.78;0.95;1" values="0;0;1;1;0"/>
-      <rect x="880" y="180" width="260" height="60" fill="#1f9e6b"/>
+      <rect x="880" y="180" width="260" height="60" fill="#198158"/>
       <text x="1010" y="216" font-size="12" letter-spacing="1.4" fill="#ffffff" text-anchor="middle">CLARITY</text>
-      <text x="1010" y="266" font-size="11" letter-spacing="1.2" fill="#8a857a" text-anchor="middle">not a tally of votes</text>
+      <text x="1010" y="266" font-size="11" letter-spacing="1.2" fill="#767168" text-anchor="middle">not a tally of votes</text>
     </g>
   </g>
 </svg>

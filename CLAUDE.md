@@ -107,11 +107,12 @@ Edit `.claude-plugin/marketplace.json` and add an entry to the `plugins` array:
 
 ### Step 3: Author a motion diagram
 
-Add `scripts/animations/scenes/my-plugin.svg` following the conventions in
-`scripts/animations/README.md`, then render it:
+**Use the `authoring-motion-diagrams` skill** — it carries the flow, the palette binding,
+and a conforming template, and it is how scenes stay consistent as plugins are added.
 
 ```bash
-node scripts/animations/render.js my-plugin
+node scripts/animations/render.js --check      # validate, ~1s, no Chrome
+node scripts/animations/render.js my-plugin    # render, ~75s
 ```
 
 ### Step 4: Regenerate the marketplace site
@@ -187,6 +188,9 @@ block. Sources live in `scripts/animations/scenes/<plugin>.svg` — one authored
 `marketplace.json` entry, using this site's palette and category colours.
 
 ```bash
+# Validate every scene against the contract — ~1s, no Chrome or ffmpeg
+node scripts/animations/render.js --check
+
 # Re-render every scene to docs/plugins/<plugin>/anim.mp4 + anim-poster.png
 npm run generate:anim
 
@@ -198,9 +202,12 @@ Rendering needs Chrome and `ffmpeg` and runs locally; the MP4 and poster are com
 like the OG images. CI never regenerates them — `generate-site.js` emits the embed
 markup only when both files exist for a plugin.
 
-When adding a plugin to the marketplace, add a scene for it too. The test suite fails
-on a marketplace entry with no scene or no rendered assets. Scene conventions and the
-validated SMIL contract are in `scripts/animations/README.md`.
+When adding a plugin to the marketplace, add a scene for it too, via the
+`authoring-motion-diagrams` skill. The test suite fails on a marketplace entry with no
+scene or no rendered assets, and on any scene that breaks the contract — the shared cycle,
+the SMIL count agreement, the 4.5:1 contrast floor for type, or the grid baseline. The
+skill holds the flow and the binding; `scripts/animations/README.md` is the tooling
+reference behind it.
 
 ## GitHub Actions
 

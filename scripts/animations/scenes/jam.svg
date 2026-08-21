@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
   <rect width="1200" height="400" fill="#faf9f6"/>
   <g font-family="Menlo, 'IBM Plex Mono', monospace">
-    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#8a857a">JAM</text>
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#767168">JAM</text>
     <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
-    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#8a857a">THREE LENSES · THREE HONEST ATTEMPTS · ONE SYNTHESIS THAT KEEPS THE BEST OF EACH</text>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#767168">THREE LENSES · THREE HONEST ATTEMPTS · ONE SYNTHESIS THAT KEEPS THE BEST OF EACH</text>
 
     <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
       <path d="M170,148 V186"/>

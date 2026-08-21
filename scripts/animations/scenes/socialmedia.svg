@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
   <rect width="1200" height="400" fill="#faf9f6"/>
   <g font-family="Menlo, 'IBM Plex Mono', monospace">
-    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#8a857a">SOCIALMEDIA</text>
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#767168">SOCIALMEDIA</text>
     <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
-    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#8a857a">AGENTS POST · AGENTS READ · ONE SHARED FEED</text>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#767168">AGENTS POST · AGENTS READ · ONE SHARED FEED</text>
 
     <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
       <path d="M260,128 H360 V138 H460"/>
@@ -63,7 +63,7 @@
 
     <!-- the feed, with the slots already there -->
     <rect x="460" y="100" width="300" height="220" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
-    <text x="460" y="94" font-size="11" letter-spacing="1.4" fill="#8a857a">FEED</text>
+    <text x="460" y="94" font-size="11" letter-spacing="1.4" fill="#767168">FEED</text>
     <g opacity="0">
       <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
                keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
@@ -113,8 +113,8 @@
       <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
                keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
                keyTimes="0;0.82;0.90;0.95;1" values="0;0;1;1;0"/>
-      <text x="1050" y="278" font-size="11" letter-spacing="1.2" fill="#8a857a" text-anchor="middle">STOPS REDOING</text>
-      <text x="1050" y="296" font-size="11" letter-spacing="1.2" fill="#8a857a" text-anchor="middle">SOMEONE ELSE'S WORK</text>
+      <text x="1050" y="278" font-size="11" letter-spacing="1.2" fill="#767168" text-anchor="middle">STOPS REDOING</text>
+      <text x="1050" y="296" font-size="11" letter-spacing="1.2" fill="#767168" text-anchor="middle">SOMEONE ELSE'S WORK</text>
     </g>
   </g>
 </svg>

@@ -4,6 +4,10 @@ One animated diagram per marketplace entry, shown near the top of that plugin's 
 page. Each scene says what the skill actually does — what moves, in what order, and what
 is different at the end.
 
+**Authoring one? Use the `authoring-motion-diagrams` skill** in
+`.claude/skills/authoring-motion-diagrams/` — it carries the flow, the binding, and a
+conforming template. This file is the tooling reference behind it.
+
 ## Layout
 
 ```
@@ -54,14 +58,27 @@ whose animation was silently disabled looks like.
   A mismatch disables the animation silently and reports nothing.
 - A `#faf9f6` ground rect is the first element, or the scene composites onto the page.
 - `keyTimes` start at 0, end at 1, and never go backwards.
+- Every text fill is a legal ink token and every solid block uses a category ink, so type
+  clears 4.5:1 on paper. The tokens live in `palette.js`, which recomputes its own contrast
+  claims before any scene is checked.
+- Placement sits on the 20px grid. The scenes predate this check and only two were ever on
+  it, so `grid-baseline.json` freezes the existing debt per scene: a new scene must be
+  clean, and an existing one may only improve.
+
+Run the contract on its own — about a second, no Chrome or ffmpeg needed:
+
+```bash
+node scripts/animations/render.js --check
+```
 
 ## Conventions the scenes share
 
 - 1200×400 viewBox, placement on a 20px grid, nothing crossing the frame.
-- Palette from `docs/style.css`: paper `#faf9f6`, ink `#171512`, body `#4a453b`,
-  muted `#8a857a`, hairline `#e2ddd2`. The one accent per scene is its category
-  colour — Development `#e6196e`, Testing & Review `#2f7d8c`, Agents & Orchestration
-  `#7a3fb0`, Infrastructure & Ops `#c67514`, Strategy & Reflection `#1f9e6b`.
+- Palette in `palette.js`: paper `#faf9f6`, ink `#171512`, body `#4a453b`,
+  muted `#767168`, hairline `#e2ddd2`. Each category has two accents — a `mark` for
+  strokes, routes and travelling dots at the 3:1 floor, and a darker `ink` for type and
+  for solid blocks carrying white type at 4.5:1. See the skill's `references/binding.md`
+  for the full table and the treatments.
 - Two easing curves only: travel `0.42 0 0.16 1` for anything crossing distance,
   settle `0.22 0.9 0.3 1` for anything coming to rest. Nothing linear.
 - Every change is two beats — something arrives, then something is different — and the
