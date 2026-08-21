@@ -31,12 +31,15 @@ for (const plugin of marketplace.plugins) {
   assert.match(html, /poster="anim-poster\.png"/, `${plugin.name} page should set the poster frame`);
   assert.doesNotMatch(html, /src="anim\.svg"/, `${plugin.name} page must not embed the SVG master`);
 
-  // Placement: the diagram comes after the lede and before the install block
+  // Placement: the diagram leads the README body, under its opening heading
   const figureAt = html.indexOf('<figure class="skill-anim">');
-  const ledeAt = html.indexOf('class="detail-lede"');
-  const installAt = html.indexOf('<section class="detail-install">');
-  assert.ok(ledeAt > -1 && figureAt > ledeAt, `${plugin.name}: diagram should follow the lede`);
-  assert.ok(installAt > figureAt, `${plugin.name}: diagram should sit before the install block`);
+  const mainAt = html.indexOf('<main id="main-content" class="readme-body">');
+  assert.ok(mainAt > -1 && figureAt > mainAt, `${plugin.name}: diagram should sit inside the main content`);
+
+  // Nothing but the opening heading may precede it inside main
+  const beforeFigure = html.slice(mainAt, figureAt).replace('<main id="main-content" class="readme-body">', '');
+  const stripped = beforeFigure.replace(/<h2>[\s\S]*?<\/h2>/, '').trim();
+  assert.strictEqual(stripped, '', `${plugin.name}: only the opening h2 may precede the diagram, found: ${stripped.slice(0, 60)}`);
 
   // A reader who opted out of motion still gets the settled frame as a still
   assert.match(html, /<img class="skill-anim-still"/, `${plugin.name} page should offer a static fallback`);

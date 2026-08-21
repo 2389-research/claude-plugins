@@ -51,7 +51,7 @@
   <!-- Analytics -->
   <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js?events" defer></script>
 </head>
-<body>
+<body style="--highlight:#1f9e6b">
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <canvas id="topo-bg" aria-hidden="true"></canvas>
   <div class="topo-fade" aria-hidden="true"></div>
@@ -68,8 +68,17 @@
       </div>
       <p class="detail-lede">A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts</p>
       <div class="row-tags"><a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="journal">#journal</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="journaling">#journaling</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="thoughts">#thoughts</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="feelings">#feelings</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="processing">#processing</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="private">#private</a></div>
+      
+      <div class="mono install-label">Install — Claude Code</div>
+        <div class="install-box">
+          <code class="mono">/plugin install journal@2389-research</code>
+          <button type="button" class="btn-ghost-sm mono" data-copy="/plugin install journal@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="journal">Copy</button>
+        </div>
+      <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/journal-mcp" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="journal">★ Star on GitHub <span class="star-count">· 9</span></a></div>
     </header>
-    <figure class="skill-anim">
+    <main id="main-content" class="readme-body">
+      <h2>Private Journal MCP Server</h2>
+<figure class="skill-anim">
       <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
              autoplay loop muted playsinline preload="metadata" aria-label="Animated diagram of how journal works">
         <source src="anim.mp4" type="video/mp4">
@@ -78,17 +87,6 @@
            alt="Animated diagram of how journal works">
       <figcaption class="mono">How journal works</figcaption>
     </figure>
-    <section class="detail-install">
-      
-      <div class="mono install-label">Install — Claude Code</div>
-        <div class="install-box">
-          <code class="mono">/plugin install journal@2389-research</code>
-          <button type="button" class="btn-ghost-sm mono" data-copy="/plugin install journal@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="journal">Copy</button>
-        </div>
-      <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/journal-mcp" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="journal">★ Star on GitHub <span class="star-count">· 9</span></a></div>
-    </section>
-    <main id="main-content" class="readme-body">
-      <h2>Private Journal MCP Server</h2>
 <p><a href="https://github.com/2389-research/journal-mcp/actions/workflows/coverage.yml/badge.svg" rel="noopener noreferrer">![Test Coverage</a>](https://github.com/2389-research/journal-mcp/actions/workflows/coverage.yml)<br><a href="https://img.shields.io/badge/coverage-86.8%25-brightgreen" rel="noopener noreferrer">![Coverage</a>](https://github.com/2389-research/journal-mcp/actions)</p>
 <p>A comprehensive MCP (Model Context Protocol) server that provides Claude with private journaling and semantic search capabilities for processing thoughts, feelings, and insights.</p>
 <h3>Features</h3>
@@ -323,7 +321,7 @@ Vector embeddings provide semantic understanding...
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
   "datePublished": "2026-07-20",
-  "dateModified": "2026-08-20"
+  "dateModified": "2026-08-21"
 }
   </script>
 
@@ -438,7 +436,10 @@ Vector embeddings provide semantic understanding...
     var SEG = 108, SIZE = 18;
     var geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG); geo.rotateX(-Math.PI/2);
     var base = geo.attributes.position.array.slice();
-    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xe6196e, wireframe: true, transparent: true, opacity: 0.16 })));
+    // The topo takes its colour from the page's --highlight, so a detail page reads in
+    // its category's accent rather than the marketplace pink everywhere.
+    var hl = getComputedStyle(document.body).getPropertyValue('--highlight').trim();
+    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: new THREE.Color(hl || '#e6196e'), wireframe: true, transparent: true, opacity: 0.16 })));
     var m2 = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0x171512, wireframe: true, transparent: true, opacity: 0.05 })); m2.position.y = 0.012; scene.add(m2);
     var p = [0,1,2,3].map(function(i){ return i * 1.7; });
     var H = function(x,z,t){ return Math.sin(x*0.55+t+p[0])*0.55 + Math.cos(z*0.42-t*0.75+p[1])*0.5 + Math.sin((x+z)*0.30+t*0.6+p[2])*0.42 + Math.sin(x*0.16-z*0.22+t*0.35+p[3])*0.7; };

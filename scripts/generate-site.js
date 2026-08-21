@@ -610,7 +610,10 @@ function generateInteractiveScript() {
     var SEG = 108, SIZE = 18;
     var geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG); geo.rotateX(-Math.PI/2);
     var base = geo.attributes.position.array.slice();
-    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xe6196e, wireframe: true, transparent: true, opacity: 0.16 })));
+    // The topo takes its colour from the page's --highlight, so a detail page reads in
+    // its category's accent rather than the marketplace pink everywhere.
+    var hl = getComputedStyle(document.body).getPropertyValue('--highlight').trim();
+    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: new THREE.Color(hl || '#e6196e'), wireframe: true, transparent: true, opacity: 0.16 })));
     var m2 = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0x171512, wireframe: true, transparent: true, opacity: 0.05 })); m2.position.y = 0.012; scene.add(m2);
     var p = [0,1,2,3].map(function(i){ return i * 1.7; });
     var H = function(x,z,t){ return Math.sin(x*0.55+t+p[0])*0.55 + Math.cos(z*0.42-t*0.75+p[1])*0.5 + Math.sin((x+z)*0.30+t*0.6+p[2])*0.42 + Math.sin(x*0.16-z*0.22+t*0.35+p[3])*0.7; };
@@ -663,6 +666,17 @@ function generateSkillAnimation(plugin) {
     </figure>`;
 }
 
+// Place the diagram at the top of the README body, under its opening heading. A
+// README with no top-level heading (markdown `#` becomes an h2) has nothing to sit
+// under, so the diagram leads the section instead.
+function insertUnderFirstHeading(html, block) {
+  if (!block) return html;
+  const close = html.match(/<\/h2>/i);
+  if (!close) return `${block}\n${html}`;
+  const at = close.index + close[0].length;
+  return `${html.slice(0, at)}\n${block}${html.slice(at)}`;
+}
+
 // Generate related plugins section for internal linking
 function generateRelatedPlugins(plugin, category) {
   const related = category.plugins.filter(p => p.name !== plugin.name).slice(0, 3);
@@ -685,6 +699,7 @@ function generatePluginPage(plugin) {
   const starCount = STAR_COUNTS.get(plugin.name) ?? null;
   const starText = starCount != null ? ` <span class="star-count">· ${starCount.toLocaleString('en-US')}</span>` : '';
   const starBlock = `<div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/${repo}" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="${plugin.name}">★ Star on GitHub${starText}</a></div>`;
+  const animationHtml = generateSkillAnimation(plugin);
   let readmeHtml = markdownToHtml(readme);
   // Convert relative links to GitHub URLs using per-plugin repo
   readmeHtml = convertRepoLinks(readmeHtml, plugin.name, repo, {
@@ -752,7 +767,7 @@ function generatePluginPage(plugin) {
   return `<!DOCTYPE html>
 <html lang="en">
 ${generateHead(plugin.name, description, `plugins/${plugin.name}/`, plugin.keywords)}
-<body>
+<body style="--highlight:${catColor}">
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <canvas id="topo-bg" aria-hidden="true"></canvas>
   <div class="topo-fade" aria-hidden="true"></div>
@@ -769,15 +784,14 @@ ${generateHead(plugin.name, description, `plugins/${plugin.name}/`, plugin.keywo
       </div>
       <p class="detail-lede">${escapeHtml(description)}</p>
       <div class="row-tags">${tagHtml}</div>
-    </header>
-    ${generateSkillAnimation(plugin)}
-    <section class="detail-install">
       ${npxBlock}
       ${claudeBlock}
       ${starBlock}
-    </section>
+    </header>
     <main id="main-content" class="readme-body">
-      ${readme ? readmeHtml : `<p>${escapeHtml(description)}</p>`}
+      ${readme
+    ? insertUnderFirstHeading(readmeHtml, animationHtml)
+    : `${animationHtml}\n<p>${escapeHtml(description)}</p>`}
     </main>
     <nav class="detail-nav mono rule-t" aria-label="Skill navigation">
       ${prev ? `<a href="../${prev.name}/" data-tinylytics-event="plugin.prev">← ${prev.name}</a>` : '<span></span>'}

@@ -51,7 +51,7 @@
   <!-- Analytics -->
   <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js?events" defer></script>
 </head>
-<body>
+<body style="--highlight:#1f9e6b">
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <canvas id="topo-bg" aria-hidden="true"></canvas>
   <div class="topo-fade" aria-hidden="true"></div>
@@ -68,17 +68,6 @@
       </div>
       <p class="detail-lede">Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction</p>
       <div class="row-tags"><a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="meeting">#meeting</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="summary">#summary</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="obsidian">#obsidian</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="transcript">#transcript</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="granola">#granola</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="knowledge-graph">#knowledge-graph</a></div>
-    </header>
-    <figure class="skill-anim">
-      <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
-             autoplay loop muted playsinline preload="metadata" aria-label="Animated diagram of how summarize-meetings works">
-        <source src="anim.mp4" type="video/mp4">
-      </video>
-      <img class="skill-anim-still" src="anim-poster.png" width="1200" height="400"
-           alt="Animated diagram of how summarize-meetings works">
-      <figcaption class="mono">How summarize-meetings works</figcaption>
-    </figure>
-    <section class="detail-install">
       
           <div class="mono install-label">Install — npx skills · recommended</div>
           <div class="install-box">
@@ -93,9 +82,18 @@
         </div>
         </details>
       <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/summarize-meetings" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="summarize-meetings">★ Star on GitHub <span class="star-count">· 12</span></a></div>
-    </section>
+    </header>
     <main id="main-content" class="readme-body">
       <h2>Summarize Meetings</h2>
+<figure class="skill-anim">
+      <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
+             autoplay loop muted playsinline preload="metadata" aria-label="Animated diagram of how summarize-meetings works">
+        <source src="anim.mp4" type="video/mp4">
+      </video>
+      <img class="skill-anim-still" src="anim-poster.png" width="1200" height="400"
+           alt="Animated diagram of how summarize-meetings works">
+      <figcaption class="mono">How summarize-meetings works</figcaption>
+    </figure>
 <p>Meeting transcripts pile up. The names, the action items, the project ideas, they're all in there but nobody's going back to read them. This skill turns a backlog of Granola transcripts into a connected Obsidian knowledge graph. Processes meetings in monthly batches, extracts the stuff that matters, and wires it all together with wiki-links. We used it to process ~600 meetings into something actually useful: <a href="https://harper.blog/2026/03/11/2026-immaculate-knowledge-graph/" rel="noopener noreferrer">My Now Immaculate Knowledge Graph of Life</a></p>
 <p>!<a href="https://github.com/user-attachments/assets/76a71ed6-018a-4dc6-8aff-79c2d76b86df" rel="noopener noreferrer">network-annotated_hu_dc5f11550bad1d72</a><br><em>Obsidian graph view after processing ~600 meetings. Nodes are people and concepts, edges are co-occurrence in the same meeting.</em></p>
 <h3>Installation</h3>
@@ -164,7 +162,7 @@
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
   "datePublished": "2026-07-20",
-  "dateModified": "2026-08-20"
+  "dateModified": "2026-08-21"
 }
   </script>
 
@@ -279,7 +277,10 @@
     var SEG = 108, SIZE = 18;
     var geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG); geo.rotateX(-Math.PI/2);
     var base = geo.attributes.position.array.slice();
-    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xe6196e, wireframe: true, transparent: true, opacity: 0.16 })));
+    // The topo takes its colour from the page's --highlight, so a detail page reads in
+    // its category's accent rather than the marketplace pink everywhere.
+    var hl = getComputedStyle(document.body).getPropertyValue('--highlight').trim();
+    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: new THREE.Color(hl || '#e6196e'), wireframe: true, transparent: true, opacity: 0.16 })));
     var m2 = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0x171512, wireframe: true, transparent: true, opacity: 0.05 })); m2.position.y = 0.012; scene.add(m2);
     var p = [0,1,2,3].map(function(i){ return i * 1.7; });
     var H = function(x,z,t){ return Math.sin(x*0.55+t+p[0])*0.55 + Math.cos(z*0.42-t*0.75+p[1])*0.5 + Math.sin((x+z)*0.30+t*0.6+p[2])*0.42 + Math.sin(x*0.16-z*0.22+t*0.35+p[3])*0.7; };
