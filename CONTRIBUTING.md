@@ -10,10 +10,20 @@ We welcome contributions! Here's how to get involved.
    ├── .claude-plugin/
    │   └── plugin.json
    ├── skills/
-   │   └── SKILL.md
+   │   └── my-skill/
+   │       └── SKILL.md
    ├── CLAUDE.md
    └── README.md
    ```
+
+   Every skill lives in its own directory: `skills/<skill-name>/SKILL.md`. Add
+   more directories under `skills/` for more skills.
+
+   **Do not put a `SKILL.md` directly in `skills/`.** A top-level
+   `skills/SKILL.md` is not a valid skill location, and when one is present
+   Claude Code registers only that file and silently drops every nested skill in
+   the plugin — they never appear in the available-skills list and cannot be
+   invoked by name.
 
 2. Add an entry to `.claude-plugin/marketplace.json` in this repo
 

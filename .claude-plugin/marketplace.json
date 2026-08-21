@@ -496,7 +496,7 @@
         "url": "https://github.com/2389-research/jam.git"
       },
       "description": "Parallel exploration powered by diverse perspectives - independent agent panels propose, build variants in worktrees, review, pick a winner, and synthesize the best of all variants into the final result",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "keywords": [
         "parallel",
         "exploration",
