@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
   <rect width="1200" height="400" fill="#faf9f6"/>
   <g font-family="Menlo, 'IBM Plex Mono', monospace">
-    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#8a857a">DOCUMENTATION-AUDIT</text>
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#767168">DOCUMENTATION-AUDIT</text>
     <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
-    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#8a857a">EXTRACT CLAIMS · MATCH AGAINST CODE · REPORT THE DRIFT</text>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#767168">EXTRACT CLAIMS · MATCH AGAINST CODE · REPORT THE DRIFT</text>
 
     <rect x="60" y="100" width="340" height="200" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
-    <text x="60" y="94" font-size="11" letter-spacing="1.4" fill="#8a857a">DOCS · CLAIMS</text>
+    <text x="60" y="94" font-size="11" letter-spacing="1.4" fill="#767168">DOCS · CLAIMS</text>
     <rect x="800" y="100" width="340" height="200" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
-    <text x="800" y="94" font-size="11" letter-spacing="1.4" fill="#8a857a">CODE · REALITY</text>
+    <text x="800" y="94" font-size="11" letter-spacing="1.4" fill="#767168">CODE · REALITY</text>
 
     <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
       <path d="M400,132 H600 V176 H800"/>
@@ -74,12 +74,12 @@
                keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
                keyTimes="0;0.54;0.64;0.95;1" values="0;0;1;1;0"/>
       <rect x="80" y="252" width="230" height="22" fill="#e6196e" opacity="0.16"/>
-      <text x="322" y="269" font-size="11" letter-spacing="1.2" fill="#e6196e">STALE</text>
+      <text x="322" y="269" font-size="11" letter-spacing="1.2" fill="#da1868">STALE</text>
       <g stroke="#e6196e" stroke-width="2">
         <line x1="520" y1="256" x2="536" y2="272"/>
         <line x1="536" y1="256" x2="520" y2="272"/>
       </g>
-      <text x="430" y="240" font-size="11" letter-spacing="1.4" fill="#e6196e">NO MATCH</text>
+      <text x="430" y="240" font-size="11" letter-spacing="1.4" fill="#da1868">NO MATCH</text>
     </g>
 
     <!-- verdict -->
@@ -87,7 +87,7 @@
       <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
                keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
                keyTimes="0;0.68;0.78;0.95;1" values="0;0;1;1;0"/>
-      <rect x="430" y="312" width="340" height="32" fill="#2f7d8c"/>
+      <rect x="430" y="312" width="340" height="32" fill="#2e7b8a"/>
       <text x="600" y="333" font-size="12" letter-spacing="1.4" fill="#ffffff" text-anchor="middle">3 VERIFIED · 1 DRIFTED</text>
     </g>
   </g>

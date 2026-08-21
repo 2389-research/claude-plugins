@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
   <rect width="1200" height="400" fill="#faf9f6"/>
   <g font-family="Menlo, 'IBM Plex Mono', monospace">
-    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#8a857a">XTOOL</text>
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#767168">XTOOL</text>
     <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
-    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#8a857a">SWIFTPM → XTOOL → DEVICE · NO XCODE REQUIRED</text>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#767168">SWIFTPM → XTOOL → DEVICE · NO XCODE REQUIRED</text>
 
     <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
       <path d="M260,220 H340"/>
@@ -31,7 +31,7 @@
       <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
                keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
                keyTimes="0;0.22;0.32;0.95;1" values="0;0;1;1;0"/>
-      <rect x="340" y="190" width="150" height="60" fill="#e6196e"/>
+      <rect x="340" y="190" width="150" height="60" fill="#da1868"/>
       <text x="415" y="225" font-size="13" letter-spacing="1.6" fill="#ffffff" text-anchor="middle">XTOOL</text>
     </g>
 
@@ -64,7 +64,7 @@
       <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
                keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
                keyTimes="0;0.66;0.78;0.95;1" values="0;0;1;1;0"/>
-      <rect x="805" y="180" width="60" height="60" fill="#e6196e"/>
+      <rect x="805" y="180" width="60" height="60" fill="#da1868"/>
       <text x="835" y="268" font-size="11" letter-spacing="1.4" fill="#171512" text-anchor="middle">INSTALLED</text>
     </g>
 
@@ -73,7 +73,7 @@
       <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
                keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
                keyTimes="0;0.28;0.40;0.95;1" values="0;0;1;1;0"/>
-      <text x="970" y="130" font-size="11" letter-spacing="1.4" fill="#8a857a">HOST OS</text>
+      <text x="970" y="130" font-size="11" letter-spacing="1.4" fill="#767168">HOST OS</text>
       <g fill="#ffffff" stroke="#171512" stroke-width="1.5">
         <rect x="970" y="146" width="170" height="44"/>
         <rect x="970" y="204" width="170" height="44"/>
@@ -92,7 +92,7 @@
                keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
                keyTimes="0;0.48;0.58;0.95;1" values="0;0;1;1;0"/>
       <rect x="340" y="286" width="150" height="44" fill="#ffffff" stroke="#b5b0a4" stroke-width="1.5"/>
-      <text x="415" y="313" font-size="12" letter-spacing="1.2" fill="#b5b0a4" text-anchor="middle">XCODE</text>
+      <text x="415" y="313" font-size="12" letter-spacing="1.2" fill="#767168" text-anchor="middle">XCODE</text>
       <line x1="350" y1="308" x2="480" y2="308" stroke="#e6196e" stroke-width="2"/>
     </g>
   </g>
