@@ -2,7 +2,7 @@
 
 > Parallel exploration powered by diverse perspectives - independent agent panels propose, build variants in worktrees, review, pick a winner, and synthesize the best of all variants into the final result
 
-- **Version:** 1.0.0
+- **Version:** 1.1.0
 - **Source:** https://github.com/2389-research/jam
 
 ## Install
@@ -120,7 +120,6 @@ You stay in the loop at every gate — panels and synthesis plans are always pre
 CLAUDE.md                    Agent-facing plugin guide
 AGENTS.md                    Same, for non-Claude agents
 skills/
-  SKILL.md                   Router skill
   jam/SKILL.md               The full Jam workflow
 evals/                       Comparative eval harness (Jam vs. other approaches)
 ```
