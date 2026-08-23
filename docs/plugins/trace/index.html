@@ -3,51 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <!-- Primary Meta Tags -->
-  <title>summarize-meetings | 2389 Research</title>
-  <meta name="title" content="summarize-meetings | 2389 Research">
-  <meta name="description" content="Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction">
-  <meta name="keywords" content="meeting, summary, obsidian, transcript, granola, knowledge-graph, vault, reflection, coding agent skills, Claude Code, MCP servers, Codex, Cursor, AI development, Anthropic, 2389 Research">
+  <title>trace | 2389 Research</title>
+  <meta name="title" content="trace | 2389 Research">
+  <meta name="description" content="Verify a repository against its authoritative spec with a canonical behavior matrix and executable evidence">
+  <meta name="keywords" content="verification, requirements, spec, acceptance-testing, behavior, audit, coding agent skills, Claude Code, MCP servers, Codex, Cursor, AI development, Anthropic, 2389 Research">
   <meta name="author" content="2389 Research Inc">
   <meta name="robots" content="index, follow">
-
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://skills.2389.ai/plugins/summarize-meetings/">
-
+  <link rel="canonical" href="https://skills.2389.ai/plugins/trace/">
   <!-- Markdown mirror for AI agents -->
-  <link rel="alternate" type="text/markdown" href="https://skills.2389.ai/plugins/summarize-meetings/index.md">
-
+  <link rel="alternate" type="text/markdown" href="https://skills.2389.ai/plugins/trace/index.md">
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://skills.2389.ai/plugins/summarize-meetings/">
-  <meta property="og:title" content="summarize-meetings | 2389 Research">
-  <meta property="og:description" content="Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction">
-  <meta property="og:image" content="https://skills.2389.ai/plugins/summarize-meetings/og-image.png">
+  <meta property="og:url" content="https://skills.2389.ai/plugins/trace/">
+  <meta property="og:title" content="trace | 2389 Research">
+  <meta property="og:description" content="Verify a repository against its authoritative spec with a canonical behavior matrix and executable evidence">
+  <meta property="og:image" content="https://skills.2389.ai/plugins/trace/og-image.png">
   <meta property="og:site_name" content="2389 Research Plugin Marketplace">
-
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://skills.2389.ai/plugins/summarize-meetings/">
-  <meta property="twitter:title" content="summarize-meetings | 2389 Research">
-  <meta property="twitter:description" content="Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction">
-  <meta property="twitter:image" content="https://skills.2389.ai/plugins/summarize-meetings/og-image.png">
-
+  <meta property="twitter:url" content="https://skills.2389.ai/plugins/trace/">
+  <meta property="twitter:title" content="trace | 2389 Research">
+  <meta property="twitter:description" content="Verify a repository against its authoritative spec with a canonical behavior matrix and executable evidence">
+  <meta property="twitter:image" content="https://skills.2389.ai/plugins/trace/og-image.png">
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔌</text></svg>">
-
   <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://github.com">
-
   <!-- Fonts with display=swap for performance -->
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-
   <!-- Styles -->
   <link rel="stylesheet" href="../../style.css">
-
   <!-- Analytics -->
   <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js?events" defer></script>
 </head>
@@ -61,62 +51,60 @@
       <span><a href="https://2389.ai" class="brand-link" target="_blank" rel="noopener noreferrer" data-tinylytics-event="brand.company" data-tinylytics-event-value="detail">2389 Research</a> · Agent Skills</span>
     </div>
     <header class="detail-head">
-      <div class="detail-kicker mono" style="color:#1f9e6b">Strategy & Reflection</div>
+      <div class="detail-kicker mono" style="color:#2f7d8c">Testing & Review</div>
       <div class="detail-title-row">
-        <h1 class="detail-name mono">summarize-meetings</h1>
-        <span class="detail-ver mono">v1.0.0</span>
+        <h1 class="detail-name mono">trace</h1>
+        <span class="detail-ver mono">v0.2.0</span>
       </div>
-      <p class="detail-lede">Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction</p>
-      <div class="row-tags"><a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="meeting">#meeting</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="summary">#summary</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="obsidian">#obsidian</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="transcript">#transcript</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="granola">#granola</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="knowledge-graph">#knowledge-graph</a></div>
-      
+      <p class="detail-lede">Verify a repository against its authoritative spec with a canonical behavior matrix and executable evidence</p>
+      <div class="row-tags"><a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="verification">#verification</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="requirements">#requirements</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="spec">#spec</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="acceptance-testing">#acceptance-testing</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="behavior">#behavior</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="audit">#audit</a></div>
           <div class="mono install-label">Install — npx skills · recommended</div>
           <div class="install-box">
-            <code class="mono">npx skills add 2389-research/summarize-meetings</code>
-            <button type="button" class="btn-primary" data-copy="npx skills add 2389-research/summarize-meetings" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="summarize-meetings-npx">Copy</button>
+            <code class="mono">npx skills add 2389-research/trace</code>
+            <button type="button" class="btn-primary" data-copy="npx skills add 2389-research/trace" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="trace-npx">Copy</button>
           </div>
       <details class="install-alt">
           <summary class="mono">Prefer Claude Code? Install via /plugin</summary>
           <div class="install-box">
-          <code class="mono">/plugin install summarize-meetings@2389-research</code>
-          <button type="button" class="btn-ghost-sm mono" data-copy="/plugin install summarize-meetings@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="summarize-meetings">Copy</button>
+          <code class="mono">/plugin install trace@2389-research</code>
+          <button type="button" class="btn-ghost-sm mono" data-copy="/plugin install trace@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="trace">Copy</button>
         </div>
         </details>
-      <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/summarize-meetings" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="summarize-meetings">★ Star on GitHub <span class="star-count">· 12</span></a></div>
+      <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/trace" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="trace">★ Star on GitHub <span class="star-count">· 0</span></a></div>
     </header>
     <main id="main-content" class="readme-body">
-      <h2>Summarize Meetings</h2>
-<p>Meeting transcripts pile up. The names, the action items, the project ideas, they're all in there but nobody's going back to read them. This skill turns a backlog of Granola transcripts into a connected Obsidian knowledge graph. Processes meetings in monthly batches, extracts the stuff that matters, and wires it all together with wiki-links. We used it to process ~600 meetings into something actually useful: <a href="https://harper.blog/2026/03/11/2026-immaculate-knowledge-graph/" rel="noopener noreferrer">My Now Immaculate Knowledge Graph of Life</a></p>
-<p>!<a href="https://github.com/user-attachments/assets/76a71ed6-018a-4dc6-8aff-79c2d76b86df" rel="noopener noreferrer">network-annotated_hu_dc5f11550bad1d72</a><br><em>Obsidian graph view after processing ~600 meetings. Nodes are people and concepts, edges are co-occurrence in the same meeting.</em></p>
-<h3>Installation</h3>
-<pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
-/plugin install summarize-meetings@2389-research
+      <h2>TRACE skill</h2>
+<p><strong>TRACE</strong> stands for <strong>Test Requirements Against Code & Execution</strong>.</p>
+<p>This package contains:</p>
+<ul><li><code>SKILL.md</code> — the agent skill.</li><li><code>scripts/trace_csv.py</code> — a standard-library helper that initializes and validates TRACE's canonical artifacts.</li></ul>
+<h3>Install</h3>
+<p>Copy the <code>trace</code> directory into the skills directory used by your agent runtime, preserving <code>SKILL.md</code> at the skill root:</p>
+<ul><li>Claude Code: <code>~/.claude/skills/trace/</code></li><li>Codex, Copilot CLI, Gemini CLI: <code>~/.agents/skills/trace/</code></li></ul>
+<p>The helper script needs Python 3.9+ (standard library only).</p>
+<h3>Start a run</h3>
+<p>From the target repository:</p>
+<pre><code class="language-bash">python3 /path/to/trace/scripts/trace_csv.py init --repo .
 </code></pre>
-<h3>What it does</h3>
-<p>Point this at a month of meeting transcripts and it will:</p>
-<ul><li>Read each transcript, skip the junk (empty stubs, scheduling fragments, recording setup chats)</li><li>Dispatch 10-15 parallel agents to process the real meetings</li><li>Write a summary file for each meeting with YAML frontmatter and a narrative recap</li><li>Create or update People notes in <code>People/</code> (checks for existing entries and aliases first)</li><li>Pull out concepts worth their own atomic note in <code>Concepts/</code></li><li>Stub out any projects mentioned that don't already exist</li><li>Report back with a table of what got processed and what got skipped</li></ul>
-<h3>What gets extracted</h3>
-<p>From each meeting, agents pull out seven categories: people, action items, project ideas, blog ideas, knowledge graph connections, concepts, and general ideas. The summary file includes all of these plus a 2-4 paragraph narrative that reads like a real meeting recap — what happened, what mattered, what the vibe was.</p>
-<h3>Triage</h3>
-<p>Not everything in <code>Meetings/transcripts/</code> is worth a summary. The skill skips files that are empty stubs, have fewer than 20 words of real content, are garbled recordings, or are medical appointments and kid-related content. Sparse but real notes (like bullet points from a fundraising call) still get processed.</p>
-<h3>How it works</h3>
-<pre><code class="language-">Scan month → Triage → Dispatch agents in waves → Compile report → Post update
+<p>Then invoke the <code>trace</code> skill with the repository and authoritative spec in context.</p>
+<h3>Validate at any point</h3>
+<pre><code class="language-bash">python3 /path/to/trace/scripts/trace_csv.py validate --repo .
 </code></pre>
-<p>Agents run in parallel (waves of 10-15) and each one handles a single transcript end-to-end. Large files (50K+) get chunked automatically.</p>
-<h3>Documentation</h3>
-<p>The full workflow, templates, and extraction rules are in <a href="https://github.com/2389-research/summarize-meetings/blob/main/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a>.</p>
-<h3>Like this?</h3>
-<p>If Summarize Meetings saved you from transcript purgatory, a star ⭐️ helps us know it's landing.</p>
+<h3>Get the next stable row ID</h3>
+<pre><code class="language-bash">python3 /path/to/trace/scripts/trace_csv.py next-id --repo .
+</code></pre>
+<h3>License</h3>
+<p>MIT — see <a href="https://github.com/2389-research/trace/tree/main/LICENSE" rel="noopener noreferrer" target="_blank">LICENSE</a>.</p>
     </main>
     <nav class="detail-nav mono rule-t" aria-label="Skill navigation">
-      <a href="../prbuddy/" data-tinylytics-event="plugin.prev">← prbuddy</a>
-      <a href="../travel-agent/" data-tinylytics-event="plugin.next">travel-agent →</a>
+      <a href="../sift/" data-tinylytics-event="plugin.prev">← sift</a>
+      <a href="../ceo-personal-os/" data-tinylytics-event="plugin.next">ceo-personal-os →</a>
     </nav>
     <section class="related rule-t">
-      <div class="mono related-label">More from Strategy & Reflection</div>
+      <div class="mono related-label">More from Testing & Review</div>
       <ul class="related-list">
-        <li><a href="../ceo-personal-os/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="ceo-personal-os"><span class="mono related-name">ceo-personal-os</span><span class="related-desc">Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)</span></a></li>
-        <li><a href="../worldview-synthesis/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="worldview-synthesis"><span class="mono related-name">worldview-synthesis</span><span class="related-desc">Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation</span></a></li>
-        <li><a href="../deliberation/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="deliberation"><span class="mono related-name">deliberation</span><span class="related-desc">Decision-making through deliberation - seeking unity through discernment rather than consensus through debate</span></a></li>
+        <li><a href="../test-kitchen/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="test-kitchen"><span class="mono related-name">test-kitchen</span><span class="related-desc">Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner</span></a></li>
+        <li><a href="../simmer/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="simmer"><span class="mono related-name">simmer</span><span class="related-desc">Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements</span></a></li>
+        <li><a href="../scenario-testing/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="scenario-testing"><span class="mono related-name">scenario-testing</span><span class="related-desc">End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth</span></a></li>
       </ul>
     </section>
     <footer class="colophon rule-t glass">
@@ -134,7 +122,7 @@
   {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "summarize-meetings",
+  "name": "trace",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Cross-platform",
   "offers": {
@@ -147,16 +135,15 @@
     "name": "2389 Research Inc",
     "url": "https://2389.ai"
   },
-  "description": "Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction",
-  "url": "https://skills.2389.ai/plugins/summarize-meetings/",
-  "downloadUrl": "https://github.com/2389-research/summarize-meetings",
-  "softwareVersion": "1.0.0",
+  "description": "Verify a repository against its authoritative spec with a canonical behavior matrix and executable evidence",
+  "url": "https://skills.2389.ai/plugins/trace/",
+  "downloadUrl": "https://github.com/2389-research/trace",
+  "softwareVersion": "0.2.0",
   "license": "https://opensource.org/licenses/MIT",
   "datePublished": "2026-07-20",
   "dateModified": "2026-08-23"
 }
   </script>
-
   <!-- Structured Data - Breadcrumbs -->
   <script type="application/ld+json">
   {
@@ -178,13 +165,12 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "summarize-meetings",
-      "item": "https://skills.2389.ai/plugins/summarize-meetings/"
+      "name": "trace",
+      "item": "https://skills.2389.ai/plugins/trace/"
     }
   ]
 }
   </script>
-
   <script>
   document.querySelectorAll('[data-copy]').forEach(btn => {
     btn.addEventListener('click', e => {
@@ -196,7 +182,6 @@
       setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
     });
   });
-
   const search = document.querySelector('[data-search]');
   if (search) {
     const rows = [...document.querySelectorAll('[data-skill-row]')];
