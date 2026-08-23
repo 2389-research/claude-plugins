@@ -79,6 +79,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://skills.2389.ai/plugins/sift/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://skills.2389.ai/plugins/trace/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://skills.2389.ai/plugins/ceo-personal-os/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -140,6 +152,12 @@
   </url>
   <url>
     <loc>https://skills.2389.ai/plugins/summarize-meetings/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://skills.2389.ai/plugins/travel-agent/</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

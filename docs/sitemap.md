@@ -20,6 +20,8 @@ Pages on this site, for AI agents and other tools that prefer markdown over XML.
 - [scenario-testing](https://skills.2389.ai/plugins/scenario-testing/) — End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth
 - [fresh-eyes-review](https://skills.2389.ai/plugins/fresh-eyes-review/) — Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests
 - [documentation-audit](https://skills.2389.ai/plugins/documentation-audit/) — Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection
+- [sift](https://skills.2389.ai/plugins/sift/) — Read-only whole-codebase audit for material simplifications in structure, state, control flow, algorithms, lifecycle, and ownership boundaries
+- [trace](https://skills.2389.ai/plugins/trace/) — Verify a repository against its authoritative spec with a canonical behavior matrix and executable evidence
 - [ceo-personal-os](https://skills.2389.ai/plugins/ceo-personal-os/) — Personal operating system for executives - reflection frameworks, goal systems, coaching-style reviews (Gustin, Ferriss, Robbins, Lieberman, Campbell, Eisenmann, Collins, Martell, Gerber, Blank)
 - [worldview-synthesis](https://skills.2389.ai/plugins/worldview-synthesis/) — Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation
 - [deliberation](https://skills.2389.ai/plugins/deliberation/) — Decision-making through deliberation - seeking unity through discernment rather than consensus through debate
@@ -31,6 +33,7 @@ Pages on this site, for AI agents and other tools that prefer markdown over XML.
 - [git-repo-prep](https://skills.2389.ai/plugins/git-repo-prep/) — Prepare codebases for public/open-source release and audit them for openness - full lifecycle prep or standalone review
 - [prbuddy](https://skills.2389.ai/plugins/prbuddy/) — PR health assistant - monitors CI, triages review comments, fixes issues with systematic prevention. Uses gh CLI and gh-pr-review extension.
 - [summarize-meetings](https://skills.2389.ai/plugins/summarize-meetings/) — Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction
+- [travel-agent](https://skills.2389.ai/plugins/travel-agent/) — Taste-based travel concierge for researched and verified restaurant, lodging, shopping, event, and cultural recommendations
 - [jam](https://skills.2389.ai/plugins/jam/) — Parallel exploration powered by diverse perspectives - independent agent panels propose, build variants in worktrees, review, pick a winner, and synthesize the best of all variants into the final result
 - [agent-drugs](https://skills.2389.ai/plugins/agent-drugs/) — Digital drugs that modify AI behavior through prompt injection
 - [socialmedia](https://skills.2389.ai/plugins/socialmedia/) — A server that provides social media functionality for AI agents, enabling them to interact in team-based discussions.

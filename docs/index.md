@@ -37,6 +37,8 @@ Quality and verification
 - [scenario-testing](https://skills.2389.ai/plugins/scenario-testing/) — End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth
 - [fresh-eyes-review](https://skills.2389.ai/plugins/fresh-eyes-review/) — Mandatory final sanity check before commits/PRs - catches security vulnerabilities, logic errors, and bugs that slip through tests
 - [documentation-audit](https://skills.2389.ai/plugins/documentation-audit/) — Verify documentation claims against codebase reality - two-pass extraction with pattern expansion for comprehensive drift detection
+- [sift](https://skills.2389.ai/plugins/sift/) — Read-only whole-codebase audit for material simplifications in structure, state, control flow, algorithms, lifecycle, and ownership boundaries
+- [trace](https://skills.2389.ai/plugins/trace/) — Verify a repository against its authoritative spec with a canonical behavior matrix and executable evidence
 - [review-squad](https://skills.2389.ai/plugins/review-squad/) — Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks
 
 ## Agents & Orchestration
@@ -66,6 +68,7 @@ Decisions, business, and personal practice
 - [worldview-synthesis](https://skills.2389.ai/plugins/worldview-synthesis/) — Systematic worldview articulation - surface beliefs, identify tensions, generate narrative outputs for personal philosophy documentation
 - [deliberation](https://skills.2389.ai/plugins/deliberation/) — Decision-making through deliberation - seeking unity through discernment rather than consensus through debate
 - [summarize-meetings](https://skills.2389.ai/plugins/summarize-meetings/) — Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction
+- [travel-agent](https://skills.2389.ai/plugins/travel-agent/) — Taste-based travel concierge for researched and verified restaurant, lodging, shopping, event, and cultural recommendations
 - [journal](https://skills.2389.ai/plugins/journal/) — A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts
 
 ## Reference
