@@ -6,6 +6,9 @@
   --hair:#e2ddd2; --hair-2:#e7e3da; --hair-3:#d8d3c8;
   --paper:#faf9f6; --white:#ffffff;
   --accent:#e6196e; --accent-hover:#b81259;
+  /* Per-page accent. Detail pages override it inline with their category colour;
+     everything else inherits the marketplace pink. */
+  --highlight:#e6196e;
   --cat-dev:#e6196e; --cat-infra:#c67514; --cat-agents:#7a3fb0; --cat-personal:#1f9e6b;
   --mcp:#7a3fb0;
   --wrap:1120px;
@@ -43,9 +46,13 @@ a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offse
 .hero-head em{font-style:italic;font-weight:400;}
 .hero-lede{font-size:clamp(18px,2.4vw,23px);line-height:1.5;color:var(--body);max-width:54ch;margin:0;}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px;}
-.btn-primary{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#fff;background:var(--accent);border:none;padding:9px 16px;cursor:pointer;}
-.btn-primary:hover{background:var(--accent-hover);}
-.btn-primary.copied{background:var(--cat-personal);}
+/* Acts on the page you are on, so it carries that page's colour. --highlight falls
+   back to --accent at :root, which keeps the index and glossary pink. */
+.btn-primary{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#fff;background:var(--highlight);border:none;padding:9px 16px;cursor:pointer;}
+.btn-primary:hover{background:color-mix(in srgb,var(--highlight) 80%,#000);}
+/* Ink, not green: on a Strategy page the button is already green, so a green
+   confirmation would read as no change at all. */
+.btn-primary.copied{background:var(--ink);}
 .btn-ghost{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink);border:1.5px solid var(--ink);padding:12px 22px;}
 .toolbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,0.86);backdrop-filter:blur(10px);}
 .toolbar-search{display:flex;align-items:center;gap:10px;padding:14px 0;}
@@ -102,6 +109,19 @@ a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offse
 .detail-lede{font-size:clamp(19px,2.4vw,24px);line-height:1.55;color:var(--body-2);margin:0 0 26px;text-wrap:pretty;}
 .detail-head .row-tags{gap:8px 18px;margin-bottom:36px;}
 .detail-actions{margin:10px 0 4px;}
+/* The motion diagram leads the README body, under its opening heading. */
+.skill-anim{margin:4px 0 34px;}
+/* Both selectors carry equal weight so the display swap below is decided by order,
+   not specificity — a bare .skill-anim-still would lose to `.skill-anim img`. */
+.skill-anim .skill-anim-motion,.skill-anim .skill-anim-still{width:100%;height:auto;border:1.5px solid var(--ink);background:var(--paper);}
+.skill-anim .skill-anim-motion{display:block;}
+.skill-anim .skill-anim-still{display:none;}
+.skill-anim figcaption{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:9px;}
+/* Honour an opted-out reader: hold the settled frame instead of looping. */
+@media(prefers-reduced-motion:reduce){
+  .skill-anim .skill-anim-motion{display:none;}
+  .skill-anim .skill-anim-still{display:block;}
+}
 .detail-star{text-decoration:none;}
 .detail-star .star-count{opacity:.6;}
 .install-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;}
@@ -114,7 +134,7 @@ a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offse
 .install-alt summary::-webkit-details-marker{display:none;}
 .install-alt summary::after{content:'+';font-size:14px;line-height:1;color:var(--muted-2);}
 .install-alt[open] summary::after{content:'\2212';}
-.install-alt summary:hover{color:var(--accent);}
+.install-alt summary:hover{color:var(--highlight);}
 .readme-body{max-width:760px;padding:20px 0 10px;font-size:18px;line-height:1.65;color:var(--body-2);}
 .readme-body h1,.readme-body h2,.readme-body h3{font-weight:600;letter-spacing:-0.01em;color:var(--ink);margin:1.6em 0 .5em;}
 .readme-body h2{font-size:28px;border-bottom:1px solid var(--hair);padding-bottom:.2em;}

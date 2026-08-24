@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <rect width="1200" height="400" fill="#faf9f6"/>
+  <g font-family="Menlo, 'IBM Plex Mono', monospace">
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#767168">SIMMER</text>
+    <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#767168">DRAFT · JUDGE BOARD · REFINE · AGAIN</text>
+
+    <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
+      <path d="M270,200 H340 V128 H400"/>
+      <path d="M270,200 H400"/>
+      <path d="M270,200 H340 V272 H400"/>
+      <path d="M590,128 H660 V200 H720"/>
+      <path d="M590,200 H720"/>
+      <path d="M590,272 H660 V200 H720"/>
+      <path d="M805,230 V318 H165 V230"/>
+    </g>
+
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.02;0.10;0.95;1" values="0;0;1;1;0"/>
+      <rect x="100" y="170" width="170" height="60" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <text x="185" y="205" font-size="12" letter-spacing="1.2" fill="#171512" text-anchor="middle">DRAFT</text>
+    </g>
+
+    <g fill="none" stroke="#2f7d8c" stroke-width="1.5">
+      <path d="M270,200 H340 V128 H400" stroke-dasharray="202" stroke-dashoffset="202">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.12;0.22;0.95;1" values="202;202;0;0;202"/>
+      </path>
+      <path d="M270,200 H400" stroke-dasharray="130" stroke-dashoffset="130">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.12;0.22;0.95;1" values="130;130;0;0;130"/>
+      </path>
+      <path d="M270,200 H340 V272 H400" stroke-dasharray="202" stroke-dashoffset="202">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.12;0.22;0.95;1" values="202;202;0;0;202"/>
+      </path>
+    </g>
+
+    <!-- the board investigates before it scores -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.22;0.32;0.95;1" values="0;0;1;1;0"/>
+      <text x="495" y="96" font-size="11" letter-spacing="1.6" fill="#767168" text-anchor="middle">JUDGE BOARD</text>
+      <g fill="#ffffff" stroke="#171512" stroke-width="1.5">
+        <rect x="400" y="104" width="190" height="48"/>
+        <rect x="400" y="176" width="190" height="48"/>
+        <rect x="400" y="248" width="190" height="48"/>
+      </g>
+      <g font-size="12" letter-spacing="1.2" fill="#171512" text-anchor="middle">
+        <text x="495" y="134">JUDGE A</text>
+        <text x="495" y="206">JUDGE B</text>
+        <text x="495" y="278">JUDGE C</text>
+      </g>
+    </g>
+
+    <!-- findings: two judges push back -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.36;0.46;0.95;1" values="0;0;1;1;0"/>
+      <rect x="400" y="104" width="190" height="48" fill="#2f7d8c" opacity="0.12"/>
+      <rect x="400" y="104" width="190" height="48" fill="none" stroke="#2f7d8c" stroke-width="3"/>
+      <rect x="400" y="248" width="190" height="48" fill="#2f7d8c" opacity="0.12"/>
+      <rect x="400" y="248" width="190" height="48" fill="none" stroke="#2f7d8c" stroke-width="3"/>
+      <text x="604" y="118" font-size="11" letter-spacing="1.4" fill="#2e7b8a">FINDING</text>
+      <text x="604" y="262" font-size="11" letter-spacing="1.4" fill="#2e7b8a">FINDING</text>
+    </g>
+
+    <g fill="none" stroke="#2f7d8c" stroke-width="1.5">
+      <path d="M590,128 H660 V200 H720" stroke-dasharray="202" stroke-dashoffset="202">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.50;0.60;0.95;1" values="202;202;0;0;202"/>
+      </path>
+      <path d="M590,272 H660 V200 H720" stroke-dasharray="202" stroke-dashoffset="202">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.50;0.60;0.95;1" values="202;202;0;0;202"/>
+      </path>
+    </g>
+
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.60;0.70;0.95;1" values="0;0;1;1;0"/>
+      <rect x="720" y="170" width="170" height="60" fill="#2e7b8a"/>
+      <text x="805" y="205" font-size="12" letter-spacing="1.2" fill="#ffffff" text-anchor="middle">REFINED</text>
+    </g>
+
+    <!-- and back around: the artifact re-enters the board -->
+    <path d="M805,230 V318 H165 V230" fill="none" stroke="#2f7d8c" stroke-width="1.5"
+          stroke-dasharray="816" stroke-dashoffset="816">
+      <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+               keyTimes="0;0.72;0.88;0.95;1" values="816;816;0;0;816"/>
+    </path>
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.82;0.90;0.95;1" values="0;0;1;1;0"/>
+      <text x="485" y="338" font-size="11" letter-spacing="1.6" fill="#2e7b8a" text-anchor="middle">NEXT PASS</text>
+    </g>
+
+    <!-- quality climbs a step per pass -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.06;0.16;0.95;1" values="0;0;1;1;0"/>
+      <text x="960" y="152" font-size="11" letter-spacing="1.6" fill="#767168">QUALITY</text>
+      <rect x="960" y="166" width="180" height="18" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <rect x="960" y="166" width="0" height="18" fill="#2e7b8a">
+        <animate attributeName="width" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+                 keyTimes="0;0.30;0.40;0.66;0.76;1" values="0;0;68;68;138;138"/>
+      </rect>
+    </g>
+  </g>
+</svg>

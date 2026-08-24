@@ -51,7 +51,7 @@
   <!-- Analytics -->
   <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js?events" defer></script>
 </head>
-<body>
+<body style="--highlight:#2f7d8c">
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <canvas id="topo-bg" aria-hidden="true"></canvas>
   <div class="topo-fade" aria-hidden="true"></div>
@@ -85,6 +85,15 @@
     </header>
     <main id="main-content" class="readme-body">
       <h2>Simmer</h2>
+<figure class="skill-anim">
+      <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
+             autoplay loop muted playsinline preload="metadata" aria-label="Animated diagram of how simmer works">
+        <source src="anim.mp4" type="video/mp4">
+      </video>
+      <img class="skill-anim-still" src="anim-poster.png" width="1200" height="400"
+           alt="Animated diagram of how simmer works">
+      <figcaption class="mono">How simmer works</figcaption>
+    </figure>
 <p>You wrote a prompt. It works. But is it <em>good</em>? Simmer runs your artifact through multiple rounds of criteria-driven refinement — each round, a panel of judges reads your code, understands the problem, and proposes specific improvements.</p>
 <p><a href="https://2389.ai/posts/simmer-skill/" rel="noopener noreferrer">Read the story behind Simmer →</a></p>
 <p>Iterative artifact refinement — take any artifact or workspace and hone it over multiple rounds using criteria-driven feedback.</p>
@@ -242,8 +251,8 @@ docs/simmer/                   # Tracking files (separate from workspace)
   "downloadUrl": "https://github.com/2389-research/simmer",
   "softwareVersion": "3.0.1",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-08-23",
-  "dateModified": "2026-08-23"
+  "datePublished": "2026-08-21",
+  "dateModified": "2026-08-24"
 }
   </script>
 
@@ -286,6 +295,15 @@ docs/simmer/                   # Tracking files (separate from workspace)
       setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
     });
   });
+
+  // CSS hides the looping diagram for a reduced-motion reader, but a hidden video is
+  // not guaranteed to stop, so pause it outright and drop the autoplay attribute.
+  const anim = document.querySelector('.skill-anim-motion');
+  if (anim && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    anim.removeAttribute('autoplay');
+    anim.removeAttribute('loop');
+    anim.pause();
+  }
 
   const search = document.querySelector('[data-search]');
   if (search) {
@@ -349,7 +367,10 @@ docs/simmer/                   # Tracking files (separate from workspace)
     var SEG = 108, SIZE = 18;
     var geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG); geo.rotateX(-Math.PI/2);
     var base = geo.attributes.position.array.slice();
-    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xe6196e, wireframe: true, transparent: true, opacity: 0.16 })));
+    // The topo takes its colour from the page's --highlight, so a detail page reads in
+    // its category's accent rather than the marketplace pink everywhere.
+    var hl = getComputedStyle(document.body).getPropertyValue('--highlight').trim();
+    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: new THREE.Color(hl || '#e6196e'), wireframe: true, transparent: true, opacity: 0.16 })));
     var m2 = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0x171512, wireframe: true, transparent: true, opacity: 0.05 })); m2.position.y = 0.012; scene.add(m2);
     var p = [0,1,2,3].map(function(i){ return i * 1.7; });
     var H = function(x,z,t){ return Math.sin(x*0.55+t+p[0])*0.55 + Math.cos(z*0.42-t*0.75+p[1])*0.5 + Math.sin((x+z)*0.30+t*0.6+p[2])*0.42 + Math.sin(x*0.16-z*0.22+t*0.35+p[3])*0.7; };

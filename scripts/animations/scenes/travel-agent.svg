@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <rect width="1200" height="400" fill="#faf9f6"/>
+  <g font-family="Menlo, 'IBM Plex Mono', monospace">
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#767168">TRAVEL-AGENT</text>
+    <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#767168">TASTE FIRST · VERIFY EACH · ONLY WHAT SURVIVES IS BOOKED</text>
+
+    <!-- the profile feeds every candidate, and only the survivors reach the itinerary, so
+         each side is a spine with stubs rather than one line through the middle of the
+         stack — a straight run would cross the rows it is not addressing -->
+    <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
+      <path d="M260,210 H340"/>
+      <path d="M340,136 V296"/>
+      <path d="M340,136 H400"/>
+      <path d="M340,176 H400"/>
+      <path d="M340,216 H400"/>
+      <path d="M340,256 H400"/>
+      <path d="M340,296 H400"/>
+      <path d="M600,136 H660"/>
+      <path d="M600,176 H660"/>
+      <path d="M600,296 H660"/>
+      <path d="M660,136 V296"/>
+      <path d="M660,190 H860"/>
+    </g>
+
+    <!-- the profile is the input, not a search box -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.02;0.10;0.95;1" values="0;0;1;1;0"/>
+      <text x="80" y="138" font-size="11" letter-spacing="1.6" fill="#767168">TASTE PROFILE</text>
+      <rect x="80" y="160" width="180" height="100" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <g font-size="11" letter-spacing="1.2" fill="#171512">
+        <text x="100" y="190">quiet rooms</text>
+        <text x="100" y="214">counter seats</text>
+        <text x="100" y="238">walkable, no cars</text>
+      </g>
+      <text x="400" y="112" font-size="11" letter-spacing="1.6" fill="#767168">CANDIDATES</text>
+      <g fill="#ffffff" stroke="#171512" stroke-width="1.5">
+        <rect x="400" y="120" width="200" height="32"/>
+        <rect x="400" y="160" width="200" height="32"/>
+        <rect x="400" y="200" width="200" height="32"/>
+        <rect x="400" y="240" width="200" height="32"/>
+        <rect x="400" y="280" width="200" height="32"/>
+      </g>
+      <g font-size="11" letter-spacing="1.2" fill="#171512">
+        <text x="420" y="141">RESTAURANT</text>
+        <text x="420" y="181">LODGING</text>
+        <text x="420" y="221">SHOPPING</text>
+        <text x="420" y="261">EVENT</text>
+        <text x="420" y="301">CULTURAL</text>
+      </g>
+    </g>
+
+    <g fill="none" stroke="#1f9e6b" stroke-width="1.5">
+      <path d="M260,210 H340" stroke-dasharray="80" stroke-dashoffset="80">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.14;0.20;0.95;1" values="80;80;0;0;80"/>
+      </path>
+      <path d="M340,136 V296" stroke-dasharray="160" stroke-dashoffset="160">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.20;0.26;0.95;1" values="160;160;0;0;160"/>
+      </path>
+      <g stroke-dasharray="60" stroke-dashoffset="60">
+        <path d="M340,136 H400">
+          <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                   keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                   keyTimes="0;0.24;0.30;0.95;1" values="60;60;0;0;60"/>
+        </path>
+        <path d="M340,176 H400">
+          <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                   keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                   keyTimes="0;0.24;0.30;0.95;1" values="60;60;0;0;60"/>
+        </path>
+        <path d="M340,216 H400">
+          <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                   keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                   keyTimes="0;0.24;0.30;0.95;1" values="60;60;0;0;60"/>
+        </path>
+        <path d="M340,256 H400">
+          <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                   keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                   keyTimes="0;0.24;0.30;0.95;1" values="60;60;0;0;60"/>
+        </path>
+        <path d="M340,296 H400">
+          <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                   keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                   keyTimes="0;0.24;0.30;0.95;1" values="60;60;0;0;60"/>
+        </path>
+      </g>
+    </g>
+
+    <!-- every candidate is checked against the real world; two do not survive it -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.30;0.40;0.95;1" values="0;0;1;1;0"/>
+      <g fill="#1f9e6b" opacity="0.12">
+        <rect x="400" y="120" width="200" height="32"/>
+        <rect x="400" y="160" width="200" height="32"/>
+        <rect x="400" y="280" width="200" height="32"/>
+      </g>
+      <g fill="none" stroke="#1f9e6b" stroke-width="3">
+        <rect x="400" y="120" width="200" height="32"/>
+        <rect x="400" y="160" width="200" height="32"/>
+        <rect x="400" y="280" width="200" height="32"/>
+      </g>
+      <!-- status sits inside its own row: the gutter belongs to the gather spine -->
+      <g font-size="11" letter-spacing="1.4" fill="#198158" text-anchor="end">
+        <text x="580" y="141">VERIFIED</text>
+        <text x="580" y="181">VERIFIED</text>
+        <text x="580" y="301">VERIFIED</text>
+      </g>
+      <g stroke="#767168" stroke-width="1.5">
+        <line x1="414" y1="216" x2="488" y2="216"/>
+        <line x1="414" y1="256" x2="465" y2="256"/>
+      </g>
+      <g font-size="11" letter-spacing="1.4" fill="#767168" text-anchor="end">
+        <text x="580" y="221">CLOSED</text>
+        <text x="580" y="261">UNVERIFIABLE</text>
+      </g>
+    </g>
+
+    <!-- only the three survivors are gathered; the dropped rows are never joined -->
+    <g fill="none" stroke="#1f9e6b" stroke-width="1.5">
+      <g stroke-dasharray="60" stroke-dashoffset="60">
+        <path d="M600,136 H660">
+          <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                   keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                   keyTimes="0;0.44;0.50;0.95;1" values="60;60;0;0;60"/>
+        </path>
+        <path d="M600,176 H660">
+          <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                   keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                   keyTimes="0;0.44;0.50;0.95;1" values="60;60;0;0;60"/>
+        </path>
+        <path d="M600,296 H660">
+          <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                   keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                   keyTimes="0;0.44;0.50;0.95;1" values="60;60;0;0;60"/>
+        </path>
+      </g>
+      <path d="M660,136 V296" stroke-dasharray="160" stroke-dashoffset="160">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.50;0.56;0.95;1" values="160;160;0;0;160"/>
+      </path>
+      <path d="M660,190 H860" stroke-dasharray="200" stroke-dashoffset="200">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.56;0.62;0.95;1" values="200;200;0;0;200"/>
+      </path>
+    </g>
+
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.64;0.74;0.95;1" values="0;0;1;1;0"/>
+      <text x="860" y="112" font-size="11" letter-spacing="1.6" fill="#767168">ITINERARY</text>
+      <rect x="860" y="120" width="260" height="140" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <g font-size="11" letter-spacing="1.2" fill="#171512">
+        <text x="880" y="155">counter, 6 seats</text>
+        <text x="880" y="195">room off the street</text>
+        <text x="880" y="235">the small museum</text>
+      </g>
+    </g>
+
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.78;0.88;0.95;1" values="0;0;1;1;0"/>
+      <rect x="860" y="280" width="260" height="40" fill="#198158"/>
+      <text x="990" y="305" font-size="12" letter-spacing="1.4" fill="#ffffff" text-anchor="middle">3 BOOKED · 2 DROPPED</text>
+    </g>
+  </g>
+</svg>

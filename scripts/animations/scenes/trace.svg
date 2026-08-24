@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <rect width="1200" height="400" fill="#faf9f6"/>
+  <g font-family="Menlo, 'IBM Plex Mono', monospace">
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#767168">TRACE</text>
+    <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#767168">CLAIM FROM SPEC · EVIDENCE FROM REPO · ONE ROW EACH</text>
+
+    <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
+      <path d="M240,200 H400"/>
+      <path d="M960,200 H800"/>
+    </g>
+
+    <!-- the two things being reconciled, pre-allocated so the matrix never reflows -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.02;0.10;0.95;1" values="0;0;1;1;0"/>
+      <text x="80" y="118" font-size="11" letter-spacing="1.6" fill="#767168">SPEC</text>
+      <rect x="80" y="140" width="160" height="120" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <g fill="#e2ddd2">
+        <rect x="100" y="160" width="120" height="8"/>
+        <rect x="100" y="180" width="100" height="8"/>
+        <rect x="100" y="200" width="120" height="8"/>
+        <rect x="100" y="220" width="80" height="8"/>
+      </g>
+      <text x="960" y="118" font-size="11" letter-spacing="1.6" fill="#767168">REPO</text>
+      <rect x="960" y="140" width="160" height="120" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <g fill="#e2ddd2">
+        <rect x="980" y="160" width="100" height="8"/>
+        <rect x="980" y="180" width="120" height="8"/>
+        <rect x="980" y="200" width="80" height="8"/>
+        <rect x="980" y="220" width="120" height="8"/>
+      </g>
+      <text x="400" y="112" font-size="11" letter-spacing="1.6" fill="#767168">BEHAVIOR MATRIX</text>
+      <rect x="400" y="120" width="400" height="160" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <g stroke="#e2ddd2" stroke-width="1">
+        <line x1="400" y1="160" x2="800" y2="160"/>
+        <line x1="400" y1="200" x2="800" y2="200"/>
+        <line x1="400" y1="240" x2="800" y2="240"/>
+      </g>
+    </g>
+
+    <!-- claims are lifted out of the spec first: the matrix is the spec's shape -->
+    <path d="M240,200 H400" fill="none" stroke="#2f7d8c" stroke-width="1.5"
+          stroke-dasharray="160" stroke-dashoffset="160">
+      <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+               keyTimes="0;0.12;0.24;0.95;1" values="160;160;0;0;160"/>
+    </path>
+    <circle r="5" fill="#2f7d8c" opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+               keyTimes="0;0.12;0.14;0.24;0.26;1" values="0;0;1;1;0;0"/>
+      <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                     keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                     path="M240,200 H400" keyTimes="0;0.12;0.24;1" keyPoints="0;0;1;1"/>
+    </circle>
+
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.26;0.36;0.95;1" values="0;0;1;1;0"/>
+      <g font-size="11" letter-spacing="1.2" fill="#171512">
+        <text x="420" y="145">accepts a valid token</text>
+        <text x="420" y="185">rejects an expired one</text>
+        <text x="420" y="225">retries twice, then stops</text>
+        <text x="420" y="265">emits an audit record</text>
+      </g>
+    </g>
+
+    <!-- evidence has to be executed, not asserted -->
+    <path d="M960,200 H800" fill="none" stroke="#2f7d8c" stroke-width="1.5"
+          stroke-dasharray="160" stroke-dashoffset="160">
+      <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+               keyTimes="0;0.40;0.52;0.95;1" values="160;160;0;0;160"/>
+    </path>
+    <circle r="5" fill="#2f7d8c" opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+               keyTimes="0;0.40;0.42;0.52;0.54;1" values="0;0;1;1;0;0"/>
+      <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                     keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                     path="M960,200 H800" keyTimes="0;0.40;0.52;1" keyPoints="0;0;1;1"/>
+    </circle>
+
+    <!-- three rows earn a verdict; the fourth has nothing executable behind it -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.56;0.66;0.95;1" values="0;0;1;1;0"/>
+      <g font-size="11" letter-spacing="1.4" fill="#2e7b8a">
+        <text x="700" y="145">VERIFIED</text>
+        <text x="700" y="185">VERIFIED</text>
+        <text x="700" y="225">VERIFIED</text>
+      </g>
+      <text x="700" y="265" font-size="11" letter-spacing="1.4" fill="#767168">NO EVIDENCE</text>
+      <rect x="400" y="240" width="400" height="40" fill="#2f7d8c" opacity="0.12"/>
+    </g>
+
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.72;0.82;0.95;1" values="0;0;1;1;0"/>
+      <rect x="400" y="300" width="400" height="40" fill="#2e7b8a"/>
+      <text x="600" y="325" font-size="12" letter-spacing="1.4" fill="#ffffff" text-anchor="middle">3 OF 4 BEHAVIOURS EVIDENCED</text>
+    </g>
+  </g>
+</svg>

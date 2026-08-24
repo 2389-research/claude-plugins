@@ -111,8 +111,8 @@
   "@type": "DefinedTermSet",
   "name": "Marketplace Glossary",
   "url": "https://skills.2389.ai/glossary/",
-  "datePublished": "2026-08-23",
-  "dateModified": "2026-08-23",
+  "datePublished": "2026-08-21",
+  "dateModified": "2026-08-24",
   "hasDefinedTerm": [
     {
       "@type": "DefinedTerm",
@@ -163,6 +163,15 @@
       setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
     });
   });
+
+  // CSS hides the looping diagram for a reduced-motion reader, but a hidden video is
+  // not guaranteed to stop, so pause it outright and drop the autoplay attribute.
+  const anim = document.querySelector('.skill-anim-motion');
+  if (anim && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    anim.removeAttribute('autoplay');
+    anim.removeAttribute('loop');
+    anim.pause();
+  }
 
   const search = document.querySelector('[data-search]');
   if (search) {
@@ -226,7 +235,10 @@
     var SEG = 108, SIZE = 18;
     var geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG); geo.rotateX(-Math.PI/2);
     var base = geo.attributes.position.array.slice();
-    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0xe6196e, wireframe: true, transparent: true, opacity: 0.16 })));
+    // The topo takes its colour from the page's --highlight, so a detail page reads in
+    // its category's accent rather than the marketplace pink everywhere.
+    var hl = getComputedStyle(document.body).getPropertyValue('--highlight').trim();
+    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: new THREE.Color(hl || '#e6196e'), wireframe: true, transparent: true, opacity: 0.16 })));
     var m2 = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0x171512, wireframe: true, transparent: true, opacity: 0.05 })); m2.position.y = 0.012; scene.add(m2);
     var p = [0,1,2,3].map(function(i){ return i * 1.7; });
     var H = function(x,z,t){ return Math.sin(x*0.55+t+p[0])*0.55 + Math.cos(z*0.42-t*0.75+p[1])*0.5 + Math.sin((x+z)*0.30+t*0.6+p[2])*0.42 + Math.sin(x*0.16-z*0.22+t*0.35+p[3])*0.7; };
