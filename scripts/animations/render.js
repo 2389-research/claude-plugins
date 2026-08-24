@@ -70,7 +70,7 @@ function validateScene(name, svg) {
 // checking the attribute alone would miss it.
 function elements(svg) {
   const out = [];
-  const stack = [{ fill: undefined }];
+  const stack = [{ fill: undefined, wash: 1 }];
   const source = svg.replace(/<!--[\s\S]*?-->/g, '');
   for (const m of source.matchAll(/<(\/?)([a-zA-Z][\w:-]*)([^>]*?)(\/?)>/g)) {
     const [, closing, tag, rawAttrs, selfClose] = m;
@@ -81,11 +81,17 @@ function elements(svg) {
     const attrs = {};
     for (const a of rawAttrs.matchAll(/([\w:-]+)="([^"]*)"/g)) attrs[a[1]] = a[2];
     const fill = attrs.fill !== undefined ? attrs.fill : stack[stack.length - 1].fill;
+    // Opacity carries down like fill, with one exception the idiom depends on: a group
+    // authored `opacity="0"` is a reveal that an <animate> drives up to 1, not a wash, so
+    // it must not dim what it contains. A static fraction is a genuine wash and does.
+    const own = Number(attrs.opacity ?? attrs['fill-opacity'] ?? '1');
+    const dims = Number.isFinite(own) && own > 0 && own < 1;
+    const wash = stack[stack.length - 1].wash * (dims ? own : 1);
     const content = tag === 'text' && !selfClose
       ? source.slice(m.index + m[0].length).split('<')[0]
       : '';
-    out.push({ tag, attrs, fill, content });
-    if (!selfClose) stack.push({ fill });
+    out.push({ tag, attrs, fill, content, wash });
+    if (!selfClose) stack.push({ fill, wash });
   }
   return out;
 }
@@ -113,8 +119,14 @@ function paletteProblems(name, svg) {
     if (el.tag === 'rect' && palette.MARKS.includes(fill)
       && !palette.LEGAL_SOLID_FILLS.has(fill)) {
       // A wash is a mark and only needs 3:1. A block at full strength is type backing.
-      const own = Number(el.attrs.opacity ?? el.attrs['fill-opacity'] ?? '1');
-      if (own >= 0.5) {
+      // The wash may sit on the rect or on a group around it; both count. Size matters
+      // too: a sweep bar is a mark that happens to be drawn as a rect, and nothing can
+      // sit on 3px of width, so only a rect large enough to hold a label is judged as
+      // backing for one.
+      const w = Number(el.attrs.width ?? '0');
+      const h = Number(el.attrs.height ?? '0');
+      const couldHoldType = w >= 40 && h >= 20;
+      if (el.wash >= 0.5 && couldHoldType) {
         problems.add(`${name}: solid rect filled with the mark colour ${fill} — use that `
           + `category's ink so white type on it clears ${palette.TEXT_FLOOR}:1`);
       }

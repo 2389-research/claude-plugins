@@ -7,7 +7,7 @@
     "generate:site": "node scripts/generate-site.js",
     "generate:og": "node scripts/generate-og-images.js",
     "generate:anim": "node scripts/animations/render.js",
-    "test": "node tests/convert-repo-links.test.js && node tests/generate-site-install-template.test.js && node tests/generate-site-npx-install.test.js && node tests/animation-contract.test.js && node tests/generate-site-skill-animation.test.js && node --test tests/generate-site-redesign.test.js"
+    "test": "node tests/convert-repo-links.test.js && node tests/generate-site-install-template.test.js && node tests/generate-site-npx-install.test.js && node tests/animation-contract.test.js && node tests/generate-site-skill-animation.test.js && node --test tests/marketplace-skills.test.js tests/generate-site-redesign.test.js"
   },
   "repository": {
     "type": "git",
