@@ -5,8 +5,8 @@
 
 ## Decisions
 
-- **rule 1** - `name` -- Plugin identifier, matches the GitHub repo name. _(source: CLAUDE.md)_
-- **rule 2** - `source.url` -- GitHub URL for the plugin repo. _(source: CLAUDE.md)_
+- `name` -- Plugin identifier, matches the GitHub repo name. _(source: CLAUDE.md)_
+- `source.url` -- GitHub URL for the plugin repo. _(source: CLAUDE.md)_
 
 ## Being worked on right now
 
