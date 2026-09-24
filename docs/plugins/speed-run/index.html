@@ -86,7 +86,7 @@
     <main id="main-content" class="readme-body">
       <h2>Speed-Run</h2>
 <p>Token-efficient code generation pipeline. Uses hosted LLM (Cerebras) for fast, cheap first-pass generation with Claude handling architecture and surgical fixes.</p>
-<table class="readme-table"><thead><tr><th>Skill</th><th>Description</th><th>Best For</th></tr></thead><tbody><tr><td><code>speed-run:turbo</code></td><td>Direct hosted codegen</td><td>Single task, algorithmic code, boilerplate</td></tr><tr><td><code>speed-run:showdown</code></td><td>Same design, parallel runners compete</td><td>Medium-high complexity, want best implementation</td></tr><tr><td><code>speed-run:any-percent</code></td><td>Different approaches explored in parallel</td><td>Unsure of architecture, want to compare designs</td></tr></tbody></table>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Skill</th><th>Description</th><th>Best For</th></tr></thead><tbody><tr><td><code>speed-run:turbo</code></td><td>Direct hosted codegen</td><td>Single task, algorithmic code, boilerplate</td></tr><tr><td><code>speed-run:showdown</code></td><td>Same design, parallel runners compete</td><td>Medium-high complexity, want best implementation</td></tr><tr><td><code>speed-run:any-percent</code></td><td>Different approaches explored in parallel</td><td>Unsure of architecture, want to compare designs</td></tr></tbody></table></div>
 <h3>Installation</h3>
 <pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
 /plugin install speed-run@2389-research
@@ -157,13 +157,13 @@ Same scenario tests run against all variants.
 Fresh-eyes review → judge scores all → winner selected.
 </code></pre>
 <h3>When to use it</h3>
-<table class="readme-table"><thead><tr><th>Scenario</th><th>Speed-run?</th></tr></thead><tbody><tr><td>Algorithmic code, data transforms</td><td>Yes, turbo</td></tr><tr><td>Boilerplate, scaffolding</td><td>Yes, turbo</td></tr><tr><td>Comparing multiple implementations</td><td>Yes, showdown</td></tr><tr><td>Exploring different architectures</td><td>Yes, any-percent</td></tr><tr><td>Complex business logic that needs reasoning</td><td>No, use Claude directly</td></tr><tr><td>One-liner fixes</td><td>No, overkill</td></tr></tbody></table>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Scenario</th><th>Speed-run?</th></tr></thead><tbody><tr><td>Algorithmic code, data transforms</td><td>Yes, turbo</td></tr><tr><td>Boilerplate, scaffolding</td><td>Yes, turbo</td></tr><tr><td>Comparing multiple implementations</td><td>Yes, showdown</td></tr><tr><td>Exploring different architectures</td><td>Yes, any-percent</td></tr><tr><td>Complex business logic that needs reasoning</td><td>No, use Claude directly</td></tr><tr><td>One-liner fixes</td><td>No, overkill</td></tr></tbody></table></div>
 <h3>How It Compares to Test Kitchen</h3>
 <p>Speed-run mirrors test-kitchen's parallel patterns but shifts code generation to a hosted LLM:</p>
-<table class="readme-table"><thead><tr><th></th><th>Test Kitchen</th><th>Speed-Run</th></tr></thead><tbody><tr><td>Code generation</td><td>Claude writes everything</td><td>Cerebras generates, Claude fixes</td></tr><tr><td>Token cost</td><td>Standard</td><td>~60-70% savings</td></tr><tr><td>Generation speed</td><td>~10s per file</td><td>~0.5s per file</td></tr><tr><td>First-pass quality</td><td>~100%</td><td>80-95%</td></tr><tr><td>External dependency</td><td>None</td><td>Cerebras API key</td></tr></tbody></table>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th></th><th>Test Kitchen</th><th>Speed-Run</th></tr></thead><tbody><tr><td>Code generation</td><td>Claude writes everything</td><td>Cerebras generates, Claude fixes</td></tr><tr><td>Token cost</td><td>Standard</td><td>~60-70% savings</td></tr><tr><td>Generation speed</td><td>~10s per file</td><td>~0.5s per file</td></tr><tr><td>First-pass quality</td><td>~100%</td><td>80-95%</td></tr><tr><td>External dependency</td><td>None</td><td>Cerebras API key</td></tr></tbody></table></div>
 The most direct comparison: test-kitchen's <strong>cookoff</strong> vs speed-run's <strong>showdown</strong> — same concept (multiple agents implement the same design), different execution strategy.
 <h3>Available Models</h3>
-<table class="readme-table"><thead><tr><th>Model</th><th>Speed</th><th>Notes</th></tr></thead><tbody><tr><td><code>gpt-oss-120b</code></td><td>~3000 t/s</td><td><strong>Default</strong> — best value, clean output</td></tr><tr><td><code>llama-3.3-70b</code></td><td>~2100 t/s</td><td>Reliable fallback</td></tr><tr><td><code>qwen-3-32b</code></td><td>~2600 t/s</td><td>Has verbose <code>&lt;think&gt;</code> tags</td></tr><tr><td><code>llama3.1-8b</code></td><td>~2200 t/s</td><td>Cheapest, may need more fixes</td></tr></tbody></table>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Model</th><th>Speed</th><th>Notes</th></tr></thead><tbody><tr><td><code>gpt-oss-120b</code></td><td>~3000 t/s</td><td><strong>Default</strong> — best value, clean output</td></tr><tr><td><code>llama-3.3-70b</code></td><td>~2100 t/s</td><td>Reliable fallback</td></tr><tr><td><code>qwen-3-32b</code></td><td>~2600 t/s</td><td>Has verbose <code>&lt;think&gt;</code> tags</td></tr><tr><td><code>llama3.1-8b</code></td><td>~2200 t/s</td><td>Cheapest, may need more fixes</td></tr></tbody></table></div>
 <h3>Dependencies</h3>
 <p>Speed-run orchestrates these skills (uses fallbacks if not installed):</p>
 <ul><li><code>superpowers:dispatching-parallel-agents</code></li><li><code>superpowers:using-git-worktrees</code></li><li><code>superpowers:writing-plans</code></li><li><code>superpowers:executing-plans</code></li><li><code>superpowers:test-driven-development</code></li><li><code>superpowers:verification-before-completion</code></li><li><code>fresh-eyes-review:skills</code></li><li><code>scenario-testing:skills</code></li><li><code>superpowers:finishing-a-development-branch</code></li></ul>
@@ -220,8 +220,8 @@ The most direct comparison: test-kitchen's <strong>cookoff</strong> vs speed-run
   "downloadUrl": "https://github.com/2389-research/speed-run",
   "softwareVersion": "1.1.1",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-08-21",
-  "dateModified": "2026-08-21"
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-09-24"
 }
   </script>
 

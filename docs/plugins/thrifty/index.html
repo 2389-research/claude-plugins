@@ -81,7 +81,7 @@
           <button type="button" class="btn-ghost-sm mono" data-copy="/plugin install thrifty@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="thrifty">Copy</button>
         </div>
         </details>
-      <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/thrifty" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="thrifty">★ Star on GitHub <span class="star-count">· 15</span></a></div>
+      <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/thrifty" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="thrifty">★ Star on GitHub <span class="star-count">· 17</span></a></div>
     </header>
     <main id="main-content" class="readme-body">
       <h2>thrifty</h2>
@@ -126,7 +126,7 @@ external runtime. The lean <code>thrifty-dispatch</code> flow shells out to
   reliably passes.
 <p>Where <code>local_code_gen</code> writes 600-line byte-pinned contracts for a tiny local<br>model (qwen3.6 / gemma), thrifty deliberately sits well above that floor. <strong>Haiku<br>is far stronger</strong>, so the contract pins only what is <em>cross-sprint AND genuinely<br>ambiguous</em> — the seams, not the interiors. Since the planner's (Sonnet) output is the<br>expensive part, terseness is the goal: pin the few decisions two capable sprints<br>would otherwise diverge on, and let Haiku infer the rest.</p>
 <h3>Skills</h3>
-<table class="readme-table"><thead><tr><th>Skill</th><th>Role</th><th>Model</th><th>Runs as</th></tr></thead><tbody><tr><td><code>thrifty</code></td><td>orchestrator (subagent flow)</td><td>—</td><td>this session</td></tr><tr><td><code>thrifty-dispatch</code></td><td>orchestrator (lean dispatch flow — <strong>default</strong>)</td><td>—</td><td>this session</td></tr><tr><td><code>thrifty-plan</code></td><td>director's planning discipline</td><td>Sonnet</td><td>this session</td></tr><tr><td><code>thrifty-brief</code></td><td>expand a unit spec into a brief <em>(split tier)</em></td><td>Sonnet</td><td>dispatched subagent</td></tr><tr><td><code>thrifty-execute</code></td><td>execute one unit</td><td>Haiku</td><td>dispatched subagent</td></tr><tr><td><code>thrifty-check</code></td><td>verify + fix one unit</td><td>Sonnet</td><td>dispatched subagent</td></tr></tbody></table>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Skill</th><th>Role</th><th>Model</th><th>Runs as</th></tr></thead><tbody><tr><td><code>thrifty</code></td><td>orchestrator (subagent flow)</td><td>—</td><td>this session</td></tr><tr><td><code>thrifty-dispatch</code></td><td>orchestrator (lean dispatch flow — <strong>default</strong>)</td><td>—</td><td>this session</td></tr><tr><td><code>thrifty-plan</code></td><td>director's planning discipline</td><td>Sonnet</td><td>this session</td></tr><tr><td><code>thrifty-brief</code></td><td>expand a unit spec into a brief <em>(split tier)</em></td><td>Sonnet</td><td>dispatched subagent</td></tr><tr><td><code>thrifty-execute</code></td><td>execute one unit</td><td>Haiku</td><td>dispatched subagent</td></tr><tr><td><code>thrifty-check</code></td><td>verify + fix one unit</td><td>Sonnet</td><td>dispatched subagent</td></tr></tbody></table></div>
 <h3>Planning tiers (who writes the briefs)</h3>
 <ul><li><strong>direct</strong> — the architect writes the contract <em>and</em> every brief. Fewest moving</li></ul>
   parts, one translation boundary. Best for <strong>few sprints / subtle,
@@ -187,7 +187,7 @@ it costs materially more (see why below).</blockquote>
     </main>
     <nav class="detail-nav mono rule-t" aria-label="Skill navigation">
       <a href="../journal/" data-tinylytics-event="plugin.prev">← journal</a>
-      <span></span>
+      <a href="../agent-ergo/" data-tinylytics-event="plugin.next">agent-ergo →</a>
     </nav>
     <section class="related rule-t">
       <div class="mono related-label">More from Agents & Orchestration</div>
@@ -230,8 +230,8 @@ it costs materially more (see why below).</blockquote>
   "downloadUrl": "https://github.com/2389-research/thrifty",
   "softwareVersion": "0.5.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-08-21",
-  "dateModified": "2026-08-21"
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-09-24"
 }
   </script>
 
