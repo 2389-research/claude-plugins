@@ -166,6 +166,17 @@ test('detail: prev/next follow flat marketplace order', () => {
   assert.match(simmer, new RegExp('\\.\\./' + marketplace.plugins[i-1].name + '/'));
   assert.match(simmer, new RegExp('\\.\\./' + marketplace.plugins[i+1].name + '/'));
 });
+test('detail: README rules render as hairlines, not as lines of dashes', () => {
+  // Most 2389 READMEs set their footer off with a --- rule. It reaches the page as an <hr>,
+  // drawn in the hairline the h2 underline uses rather than the browser's grey bevel.
+  const marketplace = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude-plugin/marketplace.json'), 'utf8'));
+  const pages = marketplace.plugins.map(p =>
+    fs.readFileSync(path.join(ROOT, 'docs/plugins', p.name, 'index.html'), 'utf8').replace(/<pre[\s\S]*?<\/pre>/g, ''));
+  assert.ok(pages.some(html => html.includes('<hr>')), 'at least one README renders a rule');
+  for (const html of pages) assert.doesNotMatch(html, /<p>\s*-{3,}\s*<\/p>/);
+  const css = fs.readFileSync(path.join(ROOT, 'docs/style.css'), 'utf8');
+  assert.match(css, /\.readme-body hr\{[^}]*border-top:1px solid var\(--hair\)/);
+});
 test('detail: README tables scroll inside their own box, not the whole page', () => {
   // A wide README table must not push a phone-width detail page sideways, so each
   // table sits in a wrapper that scrolls on its own, as <pre> blocks already do.

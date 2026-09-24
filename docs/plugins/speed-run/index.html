@@ -170,7 +170,7 @@ Fresh-eyes review → judge scores all → winner selected.
 <h3>How It Compares to Test Kitchen</h3>
 <p>Speed-run mirrors test-kitchen's parallel patterns but shifts code generation to a hosted LLM:</p>
 <div class="table-scroll"><table class="readme-table"><thead><tr><th></th><th>Test Kitchen</th><th>Speed-Run</th></tr></thead><tbody><tr><td>Code generation</td><td>Claude writes everything</td><td>Cerebras generates, Claude fixes</td></tr><tr><td>Token cost</td><td>Standard</td><td>~60-70% savings</td></tr><tr><td>Generation speed</td><td>~10s per file</td><td>~0.5s per file</td></tr><tr><td>First-pass quality</td><td>~100%</td><td>80-95%</td></tr><tr><td>External dependency</td><td>None</td><td>Cerebras API key</td></tr></tbody></table></div>
-The most direct comparison: test-kitchen's <strong>cookoff</strong> vs speed-run's <strong>showdown</strong> — same concept (multiple agents implement the same design), different execution strategy.
+<p>The most direct comparison: test-kitchen's <strong>cookoff</strong> vs speed-run's <strong>showdown</strong> — same concept (multiple agents implement the same design), different execution strategy.</p>
 <h3>Available Models</h3>
 <div class="table-scroll"><table class="readme-table"><thead><tr><th>Model</th><th>Speed</th><th>Notes</th></tr></thead><tbody><tr><td><code>gpt-oss-120b</code></td><td>~3000 t/s</td><td><strong>Default</strong> — best value, clean output</td></tr><tr><td><code>llama-3.3-70b</code></td><td>~2100 t/s</td><td>Reliable fallback</td></tr><tr><td><code>qwen-3-32b</code></td><td>~2600 t/s</td><td>Has verbose <code>&lt;think&gt;</code> tags</td></tr><tr><td><code>llama3.1-8b</code></td><td>~2200 t/s</td><td>Cheapest, may need more fixes</td></tr></tbody></table></div>
 <h3>Dependencies</h3>
@@ -180,7 +180,7 @@ The most direct comparison: test-kitchen's <strong>cookoff</strong> vs speed-run
 <ul><li><a href="https://github.com/2389-research/speed-run/blob/main/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> — Architecture, skill details, config, common mistakes</li><li><a href="https://github.com/2389-research/speed-run/blob/main/skills/turbo/SKILL.md" rel="noopener noreferrer" target="_blank">Turbo Skill</a> — Direct hosted codegen</li><li><a href="https://github.com/2389-research/speed-run/blob/main/skills/showdown/SKILL.md" rel="noopener noreferrer" target="_blank">Showdown Skill</a> — Parallel competition</li><li><a href="https://github.com/2389-research/speed-run/blob/main/skills/any-percent/SKILL.md" rel="noopener noreferrer" target="_blank">Any% Skill</a> — Parallel exploration</li><li><a href="https://github.com/2389-research/speed-run/blob/main/skills/judge/SKILL.md" rel="noopener noreferrer" target="_blank">Judge Skill</a> — Scoring framework</li></ul>
 <h3>Origin</h3>
 <p>Speed-run was born from test-kitchen's token cost problem. Running 3-5 parallel Claude agents generates a lot of expensive output tokens. By shifting first-pass code generation to Cerebras (~3000 tokens/second), we keep the same parallel exploration patterns at a fraction of the cost — Claude focuses on what it's best at: architecture, orchestration, and surgical fixes.</p>
-<p>---</p>
+<hr>
 <p>If Speed Run saved you tokens and time, a ⭐ helps us know it's landing.</p>
 <p>Built by <a href="https://2389.ai" rel="noopener noreferrer">2389</a> · Part of the <a href="https://github.com/2389-research/claude-plugins" rel="noopener noreferrer">Claude Code plugin marketplace</a></p>
     </main>
