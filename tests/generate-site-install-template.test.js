@@ -37,4 +37,16 @@ const simmerPage = readPage('simmer');
 assert.match(simmerPage, /npx skills add 2389-research\/simmer/, 'expected npx command on simmer page');
 assert.match(simmerPage, /\/plugin install simmer@2389-research/, 'expected /plugin install at-form on simmer page');
 
+// `/plugin install <name>@2389-research` fails until the marketplace is added, so every page's
+// Claude Code block starts with that step, in its own box with its own Copy button.
+const MARKETPLACE_ADD = '/plugin marketplace add 2389-research/claude-plugins';
+for (const { name } of require('../.claude-plugin/marketplace.json').plugins) {
+  const page = readPage(name);
+  const addAt = page.indexOf(`data-copy="${MARKETPLACE_ADD}"`);
+  const installAt = page.indexOf(`data-copy="/plugin install ${name}@${MARKETPLACE_NAME}"`);
+  assert.ok(installAt !== -1, `${name} page should offer /plugin install as a copyable command`);
+  assert.ok(addAt !== -1, `${name} page should offer "${MARKETPLACE_ADD}" as a copyable step`);
+  assert.ok(addAt < installAt, `${name} page should put the marketplace step before /plugin install`);
+}
+
 console.log('generate-site install template test passed');

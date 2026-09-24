@@ -548,7 +548,13 @@ function generatePluginPage(plugin) {
 
   // npx is the suggested path; the Claude Code command is deprioritized behind a click for
   // skill plugins. MCP-only entries have no npx install, so their Claude Code command stays visible.
+  // `/plugin install` resolves only after the marketplace is added, so that step comes first.
+  // Each step gets its own box, so every Copy button holds a single command.
   const claudeCodeBox = `<div class="install-box">
+          <code class="mono">${INTERNAL_MARKETPLACE_COMMAND}</code>
+          <button type="button" class="btn-ghost-sm mono" data-copy="${INTERNAL_MARKETPLACE_COMMAND}" data-tinylytics-event="plugin.copy-marketplace-add" data-tinylytics-event-value="${plugin.name}">Copy</button>
+        </div>
+        <div class="install-box">
           <code class="mono">${getPluginInstallCommand(plugin)}</code>
           <button type="button" class="btn-ghost-sm mono" data-copy="${getPluginInstallCommand(plugin)}" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="${plugin.name}">Copy</button>
         </div>`;
