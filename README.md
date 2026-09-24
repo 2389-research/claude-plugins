@@ -7,7 +7,7 @@
 
 Built by the team at [2389](https://2389.ai). These are the tools we use every day.
 
-**Browse the marketplace:** https://2389-research.github.io/claude-plugins
+**Browse the marketplace:** https://skills.2389.ai
 
 ## Quick Start
 

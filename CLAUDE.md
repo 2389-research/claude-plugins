@@ -179,7 +179,7 @@ npm run generate
 node scripts/generate-site.js
 ```
 
-Output goes to `docs/index.html`, served via GitHub Pages at https://2389-research.github.io/claude-plugins
+Output goes to `docs/index.html`, served via GitHub Pages at https://skills.2389.ai, the custom domain `docs/CNAME` sets
 
 ## Skill Animations
 
@@ -234,6 +234,6 @@ The generated `docs/index.html` is committed back to the repo automatically.
 
 ## Resources
 
-- **Marketplace Site:** https://2389-research.github.io/claude-plugins
+- **Marketplace Site:** https://skills.2389.ai
 - **GitHub:** https://github.com/2389-research/claude-plugins
 - **Claude Code Plugins Guide:** https://docs.claude.com/en/docs/claude-code/plugins
