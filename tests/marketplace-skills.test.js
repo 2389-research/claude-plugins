@@ -28,6 +28,12 @@ const expectedSkills = [
     source: 'https://github.com/harperreed/travel-agent.git',
     version: '1.1.0',
   },
+  {
+    name: 'agent-ergo',
+    category: 'agents',
+    source: 'https://github.com/2389-research/agent-ergo.git',
+    version: '1.0.0',
+  },
 ];
 
 for (const expected of expectedSkills) {

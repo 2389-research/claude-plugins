@@ -644,6 +644,25 @@
         "cost"
       ],
       "strict": false
+    },
+    {
+      "name": "agent-ergo",
+      "category": "agents",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/2389-research/agent-ergo.git"
+      },
+      "description": "Redesign a system so AI agents can find its state, act safely, verify results, recover from failure, and reuse past work",
+      "version": "1.0.0",
+      "keywords": [
+        "agent-native",
+        "ergonomics",
+        "system-design",
+        "specs",
+        "audit",
+        "agents"
+      ],
+      "strict": false
     }
   ]
 }

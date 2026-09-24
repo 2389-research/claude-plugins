@@ -33,10 +33,10 @@ test('copy: single data-copy handler with stopPropagation', () => {
 test('toolbar: search input, live count, the five category chips with counts', () => {
   assert.match(index, /data-search/);
   assert.match(index, /data-count/);
-  assert.match(index, /data-cat="all"[^>]*>All \(30\)/);
+  assert.match(index, /data-cat="all"[^>]*>All \(31\)/);
   assert.match(index, /data-cat="Development"[^>]*>Development \(7\)/);
   assert.match(index, /data-cat="Testing & Review"[^>]*>Testing & Review \(8\)/);
-  assert.match(index, /data-cat="Agents & Orchestration"[^>]*>Agents & Orchestration \(5\)/);
+  assert.match(index, /data-cat="Agents & Orchestration"[^>]*>Agents & Orchestration \(6\)/);
   assert.match(index, /data-cat="Infrastructure & Ops"[^>]*>Infrastructure & Ops \(4\)/);
   assert.match(index, /data-cat="Strategy & Reflection"[^>]*>Strategy & Reflection \(6\)/);
   // the old heuristic's category names are gone
