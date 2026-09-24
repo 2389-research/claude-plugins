@@ -88,16 +88,17 @@ function getReadmeContent(plugin) {
   }
 }
 
-// Fetch every repo's star count in ONE GraphQL request rather than one REST call per
-// plugin. GitHub GraphQL aliases let a single query select many repositories at once, so a
+// Fetch every repo's star count and licence in ONE GraphQL request rather than one REST call
+// per plugin. GitHub GraphQL aliases let a single query select many repositories at once, so a
 // 27-plugin marketplace costs one gh invocation instead of 27 — far lighter on local builds
 // and CI (27 serial subprocess spawns per generation was heavy enough to get the test suite
 // OOM-killed). It refreshes on every push plus the weekly cron: near-live, not live. Runs
 // through execFileSync so the query travels as one argv element with no shell quoting.
-// Returns Map<pluginName, count|null>; every failure path leaves counts null, so a rate
-// limit, a renamed repo, or a network blip omits the number instead of breaking the build.
-function getStarCounts(plugins) {
-  const counts = new Map(plugins.map(p => [p.name, null]));
+// Returns Map<pluginName, {stars, license}>, where license is the SPDX id GitHub reads from
+// the repo's LICENSE file. Every failure path leaves both null, so a rate limit, a renamed
+// repo, or a network blip omits the number and the licence claim instead of breaking the build.
+function getRepoFacts(plugins) {
+  const facts = new Map(plugins.map(p => [p.name, { stars: null, license: null }]));
   const aliasToName = new Map();
   const lit = s => JSON.stringify(String(s)); // GraphQL string literals share JSON escaping
   const selections = plugins.map((plugin, i) => {
@@ -107,7 +108,7 @@ function getStarCounts(plugins) {
     const name = repo.slice(slash + 1);
     const alias = `a${i}`; // plugin names aren't valid GraphQL aliases; index by position
     aliasToName.set(alias, plugin.name);
-    return `${alias}: repository(owner: ${lit(owner)}, name: ${lit(name)}) { stargazerCount }`;
+    return `${alias}: repository(owner: ${lit(owner)}, name: ${lit(name)}) { stargazerCount licenseInfo { spdxId } }`;
   }).join('\n');
   const query = `query {\n${selections}\n}`;
   try {
@@ -120,18 +121,26 @@ function getStarCounts(plugins) {
     if (data) {
       for (const [alias, node] of Object.entries(data)) {
         const name = aliasToName.get(alias);
-        const n = node && node.stargazerCount;
-        if (name && Number.isFinite(n)) counts.set(name, n);
+        if (!name || !node) continue;
+        const n = node.stargazerCount;
+        facts.set(name, {
+          stars: Number.isFinite(n) ? n : null,
+          license: node.licenseInfo?.spdxId ?? null,
+        });
       }
     }
   } catch {
-    // leave every count null — the pages simply omit the number
+    // leave every fact null — the pages simply omit the number and the licence claim
   }
-  return counts;
+  return facts;
 }
 
-// Built once at load: a single GraphQL round-trip covers all plugins' star counts.
-const STAR_COUNTS = getStarCounts(marketplace.plugins);
+// Built once at load: a single GraphQL round-trip covers all plugins' star counts and licences.
+const REPO_FACTS = getRepoFacts(marketplace.plugins);
+
+// schema.org's `license` wants a URL. Only licences listed here are ever claimed: a repo with
+// no licence, or one GitHub can't name (NOASSERTION), gets no claim rather than a wrong one.
+const LICENSE_URLS = { MIT: 'https://opensource.org/licenses/MIT' };
 
 // Track link issues for reporting
 const linkReport = {
@@ -697,7 +706,7 @@ function generatePluginPage(plugin) {
   const category = getCategoryForPlugin(plugin);
   const readme = getReadmeContent(plugin);
   const repo = getRepoName(plugin);
-  const starCount = STAR_COUNTS.get(plugin.name) ?? null;
+  const { stars: starCount, license } = REPO_FACTS.get(plugin.name);
   const starText = starCount != null ? ` <span class="star-count">· ${starCount.toLocaleString('en-US')}</span>` : '';
   const starBlock = `<div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/${repo}" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="${plugin.name}">★ Star on GitHub${starText}</a></div>`;
   const animationHtml = generateSkillAnimation(plugin);
@@ -729,7 +738,8 @@ function generatePluginPage(plugin) {
     "url": `${SITE_URL}/plugins/${plugin.name}/`,
     "downloadUrl": sourceUrl,
     "softwareVersion": plugin.version || "1.0.0",
-    "license": "https://opensource.org/licenses/MIT",
+    // undefined when there is nothing true to claim; JSON.stringify then drops the key
+    "license": LICENSE_URLS[license],
     "datePublished": MARKETPLACE_LASTMOD,
     "dateModified": BUILD_DATE
   };
