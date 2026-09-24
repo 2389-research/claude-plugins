@@ -122,6 +122,7 @@ a:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offse
 .readme-body pre{background:var(--paper);border:1.5px solid var(--ink);padding:16px;overflow-x:auto;}
 .readme-body pre code{background:none;padding:0;}
 .readme-body a{color:var(--accent);}
+.readme-body .table-scroll{overflow-x:auto;}
 .readme-body table{border-collapse:collapse;width:100%;}
 .readme-body th,.readme-body td{border:1px solid var(--hair);padding:8px 12px;text-align:left;}
 .detail-nav{display:flex;justify-content:space-between;gap:20px;padding:20px 0 10px;font-size:13px;}

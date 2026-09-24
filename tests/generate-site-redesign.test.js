@@ -166,6 +166,19 @@ test('detail: prev/next follow flat marketplace order', () => {
   assert.match(simmer, new RegExp('\\.\\./' + marketplace.plugins[i-1].name + '/'));
   assert.match(simmer, new RegExp('\\.\\./' + marketplace.plugins[i+1].name + '/'));
 });
+test('detail: README tables scroll inside their own box, not the whole page', () => {
+  // A wide README table must not push a phone-width detail page sideways, so each
+  // table sits in a wrapper that scrolls on its own, as <pre> blocks already do.
+  const marketplace = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude-plugin/marketplace.json'), 'utf8'));
+  const tables = marketplace.plugins.flatMap(p => {
+    const html = fs.readFileSync(path.join(ROOT, 'docs/plugins', p.name, 'index.html'), 'utf8');
+    return html.match(/(?:<div class="table-scroll">)?<table class="readme-table">/g) || [];
+  });
+  assert.ok(tables.length > 0, 'at least one README renders a table');
+  for (const t of tables) assert.match(t, /^<div class="table-scroll"><table/);
+  const css = fs.readFileSync(path.join(ROOT, 'docs/style.css'), 'utf8');
+  assert.match(css, /\.readme-body \.table-scroll\{[^}]*overflow-x:auto/);
+});
 test('glossary: editorial shell, tuples rendered, JSON-LD kept', () => {
   const g = fs.readFileSync(path.join(ROOT, 'docs/glossary/index.html'), 'utf8');
   assert.match(g, /family=Newsreader:/);

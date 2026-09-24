@@ -162,7 +162,8 @@ function convertMarkdownTable(tableText) {
   // Parse data rows
   const dataRows = lines.slice(2).map(parseRow);
 
-  let html = '<table class="readme-table"><thead><tr>';
+  // The wrapper scrolls a wide table on its own so it can't widen a phone-width page.
+  let html = '<div class="table-scroll"><table class="readme-table"><thead><tr>';
   headerCells.forEach(cell => {
     html += `<th>${cell}</th>`;
   });
@@ -176,7 +177,7 @@ function convertMarkdownTable(tableText) {
     html += '</tr>';
   });
 
-  html += '</tbody></table>';
+  html += '</tbody></table></div>';
   return html;
 }
 
