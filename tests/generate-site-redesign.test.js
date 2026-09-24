@@ -179,6 +179,15 @@ test('detail: README tables scroll inside their own box, not the whole page', ()
   const css = fs.readFileSync(path.join(ROOT, 'docs/style.css'), 'utf8');
   assert.match(css, /\.readme-body \.table-scroll\{[^}]*overflow-x:auto/);
 });
+test('style: a README word or path wider than a phone breaks instead of pushing the page sideways', () => {
+  // A token wider than the text column, such as a config path in inline code, must break
+  // rather than scroll the whole page. Tables keep their words whole and scroll in their own
+  // box instead: Chrome can size a column a fraction of a pixel narrower than its widest word,
+  // and break-word would split that word.
+  const css = fs.readFileSync(path.join(ROOT, 'docs/style.css'), 'utf8');
+  assert.match(css, /\.readme-body\{[^}]*overflow-wrap:break-word/);
+  assert.match(css, /\.readme-body table\{[^}]*overflow-wrap:normal/);
+});
 test('glossary: editorial shell, tuples rendered, JSON-LD kept', () => {
   const g = fs.readFileSync(path.join(ROOT, 'docs/glossary/index.html'), 'utf8');
   assert.match(g, /family=Newsreader:/);
