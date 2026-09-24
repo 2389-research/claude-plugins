@@ -1,5 +1,5 @@
 // ABOUTME: Unit tests for markdownToHtml, the renderer behind each plugin page's README section
-// ABOUTME: Pins line breaks, wrapped list items, headings, emphasis and block boundaries to GitHub's rendering
+// ABOUTME: Pins line breaks, wrapped list items, headings, emphasis, block boundaries and rules to GitHub's rendering
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { markdownToHtml } = require('../scripts/lib/markdown-to-html');
@@ -116,4 +116,27 @@ test('a task list right after a line of text is not wrapped in its paragraph', (
     markdownToHtml('Todo:\n- [ ] write tests'),
     '<p>Todo:</p>\n<ul class="task-list"><li class="task-item"><input type="checkbox" disabled> write tests</li></ul>'
   );
+});
+
+// Horizontal rules: most 2389 READMEs set their footer off with a --- rule.
+test('a line of three dashes between paragraphs is a rule, not text', () => {
+  assert.equal(
+    markdownToHtml('Para one.\n\n---\n\nIf this helped, a star.'),
+    '<p>Para one.</p>\n<hr>\n<p>If this helped, a star.</p>'
+  );
+});
+test('a line of stars or underscores is a rule too', () => {
+  for (const rule of ['***', '___']) {
+    assert.equal(markdownToHtml(`one\n\n${rule}\n\ntwo`), '<p>one</p>\n<hr>\n<p>two</p>');
+  }
+});
+test('a rule needs no blank line between it and a table or text', () => {
+  assert.equal(
+    markdownToHtml('| a | b |\n|---|---|\n| 1 | 2 |\n---\nAfter the rule.'),
+    '<div class="table-scroll"><table class="readme-table"><thead><tr><th>a</th><th>b</th></tr></thead>' +
+      '<tbody><tr><td>1</td><td>2</td></tr></tbody></table></div>\n<hr>\n<p>After the rule.</p>'
+  );
+});
+test('dashes with spaces between them make a rule, not a list item', () => {
+  assert.equal(markdownToHtml('one\n\n- - -\n\ntwo'), '<p>one</p>\n<hr>\n<p>two</p>');
 });

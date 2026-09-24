@@ -95,6 +95,12 @@ function markdownToHtml(md) {
   // A heading is a block of its own, even with no blank line before or after it
   md = md.replace(/^<h[2-6]>.*<\/h[2-6]>$/gm, '\n$&\n');
 
+  // A horizontal rule is a line of three or more matching -, * or _ marks, spaces allowed
+  // between them. It is a block of its own, blank lines around it or not, and it goes before
+  // the list passes, since "- - -" is a rule, not a list item. GitHub reads a --- line right
+  // under text as that text's heading underline instead, which this renderer does not support.
+  md = md.replace(/^ {0,3}([-*_])(?:[ \t]*\1){2,}[ \t]*$/gm, '\n<hr>\n');
+
   // Blockquotes
   md = md.replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>');
   md = md.replace(/<\/blockquote>\n<blockquote>/g, '\n');
@@ -206,7 +212,7 @@ function markdownToHtml(md) {
     block = block.trim();
     if (!block) return '';
     // Don't wrap if it's already a block element
-    if (/^<(h[1-6]|ul|ol|pre|table|blockquote|div)/.test(block)) {
+    if (/^<(h[1-6]|ul|ol|pre|table|blockquote|div|hr)/.test(block)) {
       return block;
     }
     // Don't wrap code block placeholders
