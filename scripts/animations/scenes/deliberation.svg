@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <rect width="1200" height="400" fill="#faf9f6"/>
+  <g font-family="Menlo, 'IBM Plex Mono', monospace">
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#767168">DELIBERATION</text>
+    <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#767168">FIVE POSITIONS · DISCERNMENT · ONE SENSE OF THE MEETING</text>
+
+    <!-- five starting positions, genuinely apart -->
+    <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
+      <path d="M200,110 C420,110 560,210 740,210"/>
+      <path d="M200,160 C420,160 560,210 740,210"/>
+      <path d="M200,210 H740"/>
+      <path d="M200,260 C420,260 560,210 740,210"/>
+      <path d="M200,310 C420,310 560,210 740,210"/>
+      <path d="M800,210 H880"/>
+    </g>
+
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.02;0.12;0.95;1" values="0;0;1;1;0"/>
+      <g fill="#ffffff" stroke="#171512" stroke-width="1.5">
+        <rect x="60" y="94" width="140" height="32"/>
+        <rect x="60" y="144" width="140" height="32"/>
+        <rect x="60" y="194" width="140" height="32"/>
+        <rect x="60" y="244" width="140" height="32"/>
+        <rect x="60" y="294" width="140" height="32"/>
+      </g>
+      <g font-size="11" letter-spacing="1.2" fill="#33302a">
+        <text x="76" y="115">ship now</text>
+        <text x="76" y="165">wait a beat</text>
+        <text x="76" y="215">split it up</text>
+        <text x="76" y="265">not yet</text>
+        <text x="76" y="315">ask them</text>
+      </g>
+    </g>
+
+    <!-- each position travels toward the centre on its own arc -->
+    <g fill="#1f9e6b">
+      <circle r="6" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.14;0.16;0.44;0.48;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.14;0.46;1" keyPoints="0;0;1;1"
+                       path="M200,110 C420,110 560,210 740,210"/>
+      </circle>
+      <circle r="6" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.17;0.19;0.45;0.49;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.17;0.47;1" keyPoints="0;0;1;1"
+                       path="M200,160 C420,160 560,210 740,210"/>
+      </circle>
+      <circle r="6" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.20;0.22;0.46;0.50;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.20;0.48;1" keyPoints="0;0;1;1"
+                       path="M200,210 H740"/>
+      </circle>
+      <circle r="6" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.23;0.25;0.47;0.51;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.23;0.49;1" keyPoints="0;0;1;1"
+                       path="M200,260 C420,260 560,210 740,210"/>
+      </circle>
+      <circle r="6" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.26;0.28;0.48;0.52;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.26;0.50;1" keyPoints="0;0;1;1"
+                       path="M200,310 C420,310 560,210 740,210"/>
+      </circle>
+    </g>
+
+    <!-- the meeting where they meet -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.08;0.18;0.95;1" values="0;0;1;1;0"/>
+      <circle cx="770" cy="210" r="30" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <text x="770" y="272" font-size="11" letter-spacing="1.4" fill="#767168" text-anchor="middle">DISCERNMENT</text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.50;0.60;0.95;1" values="0;0;1;1;0"/>
+      <circle cx="770" cy="210" r="30" fill="#1f9e6b" opacity="0.16"/>
+      <circle cx="770" cy="210" r="30" fill="none" stroke="#1f9e6b" stroke-width="3"/>
+    </g>
+
+    <path d="M800,210 H880" fill="none" stroke="#1f9e6b" stroke-width="1.5"
+          stroke-dasharray="80" stroke-dashoffset="80">
+      <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+               keyTimes="0;0.60;0.68;0.95;1" values="80;80;0;0;80"/>
+    </path>
+
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.68;0.78;0.95;1" values="0;0;1;1;0"/>
+      <rect x="880" y="180" width="260" height="60" fill="#198158"/>
+      <text x="1010" y="216" font-size="12" letter-spacing="1.4" fill="#ffffff" text-anchor="middle">CLARITY</text>
+      <text x="1010" y="266" font-size="11" letter-spacing="1.2" fill="#767168" text-anchor="middle">not a tally of votes</text>
+    </g>
+  </g>
+</svg>

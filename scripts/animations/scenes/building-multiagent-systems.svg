@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <rect width="1200" height="400" fill="#faf9f6"/>
+  <g font-family="Menlo, 'IBM Plex Mono', monospace">
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#767168">BUILDING-MULTIAGENT-SYSTEMS</text>
+    <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#767168">ORCHESTRATOR · FAN OUT · FAN IN · MERGE</text>
+
+    <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
+      <path d="M600,166 V206 H280 V250"/>
+      <path d="M600,166 V250"/>
+      <path d="M600,166 V206 H920 V250"/>
+    </g>
+
+    <!-- orchestrator -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.02;0.10;0.95;1" values="0;0;1;1;0"/>
+      <rect x="480" y="110" width="240" height="56" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <text x="600" y="144" font-size="12" letter-spacing="1.4" fill="#171512" text-anchor="middle">ORCHESTRATOR</text>
+    </g>
+
+    <!-- fan out -->
+    <g fill="none" stroke="#7a3fb0" stroke-width="1.5">
+      <path d="M600,166 V206 H280 V250" stroke-dasharray="404" stroke-dashoffset="404">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.12;0.26;0.95;1" values="404;404;0;0;404"/>
+      </path>
+      <path d="M600,166 V250" stroke-dasharray="84" stroke-dashoffset="84">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.14;0.24;0.95;1" values="84;84;0;0;84"/>
+      </path>
+      <path d="M600,166 V206 H920 V250" stroke-dasharray="404" stroke-dashoffset="404">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.12;0.26;0.95;1" values="404;404;0;0;404"/>
+      </path>
+    </g>
+
+    <!-- sub-agents, each with its own tool -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.26;0.36;0.95;1" values="0;0;1;1;0"/>
+      <g fill="#ffffff" stroke="#171512" stroke-width="1.5">
+        <rect x="180" y="250" width="200" height="56"/>
+        <rect x="500" y="250" width="200" height="56"/>
+        <rect x="820" y="250" width="200" height="56"/>
+      </g>
+      <g font-size="12" letter-spacing="1.2" fill="#171512" text-anchor="middle">
+        <text x="280" y="284">SUB-AGENT</text>
+        <text x="600" y="284">SUB-AGENT</text>
+        <text x="920" y="284">SUB-AGENT</text>
+      </g>
+      <g font-size="11" letter-spacing="1.4" fill="#767168" text-anchor="middle">
+        <text x="280" y="326">read</text>
+        <text x="600" y="326">search</text>
+        <text x="920" y="326">write</text>
+      </g>
+    </g>
+
+    <!-- results coming back up -->
+    <g fill="#7a3fb0">
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.44;0.45;0.61;0.63;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.44;0.62;1" keyPoints="0;0;1;1"
+                       path="M280,250 V206 H600 V166"/>
+      </circle>
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.47;0.48;0.62;0.64;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.47;0.63;1" keyPoints="0;0;1;1"
+                       path="M600,250 V166"/>
+      </circle>
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.45;0.46;0.62;0.64;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.45;0.63;1" keyPoints="0;0;1;1"
+                       path="M920,250 V206 H600 V166"/>
+      </circle>
+    </g>
+
+    <!-- merged -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.66;0.76;0.95;1" values="0;0;1;1;0"/>
+      <rect x="480" y="110" width="240" height="56" fill="#7a3fb0" opacity="0.12"/>
+      <rect x="480" y="110" width="240" height="56" fill="none" stroke="#7a3fb0" stroke-width="3"/>
+      <text x="600" y="98" font-size="11" letter-spacing="1.6" fill="#7a3fb0" text-anchor="middle">MERGED</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <rect width="1200" height="400" fill="#faf9f6"/>
+  <g font-family="Menlo, 'IBM Plex Mono', monospace">
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#767168">JAM</text>
+    <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#767168">THREE LENSES · THREE HONEST ATTEMPTS · ONE SYNTHESIS THAT KEEPS THE BEST OF EACH</text>
+
+    <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
+      <path d="M170,148 V186"/>
+      <path d="M600,148 V186"/>
+      <path d="M1030,148 V186"/>
+      <path d="M170,238 V262 H600 V286"/>
+      <path d="M600,238 V286"/>
+      <path d="M1030,238 V262 H600 V286"/>
+    </g>
+
+    <!-- three lenses, deliberately unalike -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.02;0.10;0.95;1" values="0;0;1;1;0"/>
+      <g fill="#ffffff" stroke="#171512" stroke-width="1.5">
+        <rect x="60" y="100" width="220" height="48"/>
+        <rect x="490" y="100" width="220" height="48"/>
+        <rect x="920" y="100" width="220" height="48"/>
+      </g>
+      <g font-size="12" letter-spacing="1.2" fill="#171512" text-anchor="middle">
+        <text x="170" y="130">MVP FIRST</text>
+        <text x="600" y="130">RISK FIRST</text>
+        <text x="1030" y="130">USER FIRST</text>
+      </g>
+    </g>
+
+    <g fill="none" stroke="#7a3fb0" stroke-width="1.5">
+      <path d="M170,148 V186" stroke-dasharray="38" stroke-dashoffset="38">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.12;0.20;0.95;1" values="38;38;0;0;38"/>
+      </path>
+      <path d="M600,148 V186" stroke-dasharray="38" stroke-dashoffset="38">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.14;0.22;0.95;1" values="38;38;0;0;38"/>
+      </path>
+      <path d="M1030,148 V186" stroke-dasharray="38" stroke-dashoffset="38">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.16;0.24;0.95;1" values="38;38;0;0;38"/>
+      </path>
+    </g>
+
+    <!-- each lens builds something real -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.20;0.30;0.95;1" values="0;0;1;1;0"/>
+      <rect x="60" y="186" width="220" height="52" fill="#7a3fb0" opacity="0.10"/>
+      <rect x="60" y="186" width="220" height="52" fill="none" stroke="#7a3fb0" stroke-width="1.5"/>
+      <text x="170" y="218" font-size="12" letter-spacing="1.2" fill="#171512" text-anchor="middle">VARIANT</text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.23;0.33;0.95;1" values="0;0;1;1;0"/>
+      <rect x="490" y="186" width="220" height="52" fill="#7a3fb0" opacity="0.10"/>
+      <rect x="490" y="186" width="220" height="52" fill="none" stroke="#7a3fb0" stroke-width="1.5"/>
+      <text x="600" y="218" font-size="12" letter-spacing="1.2" fill="#171512" text-anchor="middle">VARIANT</text>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.26;0.36;0.95;1" values="0;0;1;1;0"/>
+      <rect x="920" y="186" width="220" height="52" fill="#7a3fb0" opacity="0.10"/>
+      <rect x="920" y="186" width="220" height="52" fill="none" stroke="#7a3fb0" stroke-width="1.5"/>
+      <text x="1030" y="218" font-size="12" letter-spacing="1.2" fill="#171512" text-anchor="middle">VARIANT</text>
+    </g>
+
+    <!-- the three contributions stay visible in the finished state -->
+    <g fill="none" stroke="#7a3fb0" stroke-width="1.5">
+      <path d="M170,238 V262 H600 V286" stroke-dasharray="478" stroke-dashoffset="478">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.44;0.63;0.95;1" values="478;478;0;0;478"/>
+      </path>
+      <path d="M600,238 V286" stroke-dasharray="48" stroke-dashoffset="48">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.47;0.64;0.95;1" values="48;48;0;0;48"/>
+      </path>
+      <path d="M1030,238 V262 H600 V286" stroke-dasharray="478" stroke-dashoffset="478">
+        <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.45;0.64;0.95;1" values="478;478;0;0;478"/>
+      </path>
+    </g>
+
+    <!-- nothing is thrown away: each one contributes -->
+    <g fill="#7a3fb0">
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.44;0.45;0.62;0.64;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.44;0.63;1" keyPoints="0;0;1;1"
+                       path="M170,238 V262 H600 V286"/>
+      </circle>
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.47;0.48;0.63;0.65;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.47;0.64;1" keyPoints="0;0;1;1"
+                       path="M600,238 V286"/>
+      </circle>
+      <circle r="5" opacity="0">
+        <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+                 keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                 keyTimes="0;0.45;0.46;0.63;0.65;1" values="0;0;1;1;0;0"/>
+        <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                       keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                       keyTimes="0;0.45;0.64;1" keyPoints="0;0;1;1"
+                       path="M1030,238 V262 H600 V286"/>
+      </circle>
+    </g>
+
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.66;0.78;0.95;1" values="0;0;1;1;0"/>
+      <rect x="440" y="286" width="320" height="40" fill="#7a3fb0"/>
+      <text x="600" y="312" font-size="12" letter-spacing="1.6" fill="#ffffff" text-anchor="middle">SYNTHESIS</text>
+    </g>
+  </g>
+</svg>

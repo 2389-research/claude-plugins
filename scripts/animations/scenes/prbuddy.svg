@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <rect width="1200" height="400" fill="#faf9f6"/>
+  <g font-family="Menlo, 'IBM Plex Mono', monospace">
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#767168">PRBUDDY</text>
+    <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#767168">WATCH CI · TRIAGE THE COMMENTS · GET TO GREEN</text>
+
+    <rect x="60" y="96" width="1080" height="44" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+    <text x="84" y="124" font-size="13" fill="#171512">PR #128</text>
+    <text x="200" y="124" font-size="12" fill="#4a453b">feat: tiered delegation</text>
+
+    <!-- three checks, allocated before any of them reports -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.02;0.10;0.95;1" values="0;0;1;1;0"/>
+      <text x="60" y="176" font-size="11" letter-spacing="1.4" fill="#767168">CI</text>
+      <g fill="none" stroke="#d8d3c8" stroke-width="1.5">
+        <circle cx="96" cy="212" r="11"/>
+        <circle cx="96" cy="256" r="11"/>
+        <circle cx="96" cy="300" r="11"/>
+      </g>
+      <g font-size="12" fill="#33302a">
+        <text x="124" y="217">lint</text>
+        <text x="124" y="261">test</text>
+        <text x="124" y="305">build</text>
+      </g>
+    </g>
+
+    <!-- lint and build pass, test does not -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.12;0.20;0.95;1" values="0;0;1;1;0"/>
+      <circle cx="96" cy="212" r="11" fill="#171512"/>
+      <circle cx="96" cy="300" r="11" fill="#171512"/>
+    </g>
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.20;0.28;0.70;0.76;1" values="0;0;1;1;0;0"/>
+      <circle cx="96" cy="256" r="11" fill="#e6196e"/>
+      <text x="196" y="261" font-size="11" letter-spacing="1.2" fill="#da1868">FAILING</text>
+      <text x="124" y="284" font-size="11" fill="#767168">auth_spec.ts:44</text>
+    </g>
+
+    <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
+      <path d="M300,256 H420"/>
+      <path d="M660,256 H780"/>
+      <path d="M910,226 V140"/>
+    </g>
+
+    <path d="M300,256 H420" fill="none" stroke="#e6196e" stroke-width="1.5"
+          stroke-dasharray="120" stroke-dashoffset="120">
+      <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+               keyTimes="0;0.28;0.36;0.95;1" values="120;120;0;0;120"/>
+    </path>
+
+    <!-- triage: the review comments get read too -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.34;0.44;0.95;1" values="0;0;1;1;0"/>
+      <rect x="420" y="180" width="240" height="152" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <text x="440" y="206" font-size="11" letter-spacing="1.4" fill="#767168">TRIAGE</text>
+      <g font-size="11" fill="#33302a">
+        <text x="440" y="234">1 failing check</text>
+        <text x="440" y="258">2 review comments</text>
+        <text x="440" y="282">1 nit — deferred</text>
+      </g>
+      <rect x="440" y="296" width="200" height="20" fill="#e6196e" opacity="0.14"/>
+      <text x="448" y="311" font-size="11" letter-spacing="1.2" fill="#da1868">ROOT CAUSE FOUND</text>
+    </g>
+
+    <path d="M660,256 H780" fill="none" stroke="#e6196e" stroke-width="1.5"
+          stroke-dasharray="120" stroke-dashoffset="120">
+      <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+               keyTimes="0;0.48;0.56;0.95;1" values="120;120;0;0;120"/>
+    </path>
+
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.54;0.64;0.95;1" values="0;0;1;1;0"/>
+      <rect x="780" y="226" width="260" height="60" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <text x="910" y="252" font-size="12" letter-spacing="1.2" fill="#171512" text-anchor="middle">FIX + TEST</text>
+      <text x="910" y="272" font-size="11" fill="#767168" text-anchor="middle">so it cannot recur</text>
+    </g>
+
+    <!-- the check flips, and the PR is actually mergeable -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.74;0.82;0.95;1" values="0;0;1;1;0"/>
+      <circle cx="96" cy="256" r="11" fill="#171512"/>
+      <text x="196" y="261" font-size="11" letter-spacing="1.2" fill="#171512">PASSING</text>
+    </g>
+    <path d="M910,226 V140" fill="none" stroke="#e6196e" stroke-width="1.5"
+          stroke-dasharray="86" stroke-dashoffset="86">
+      <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+               keyTimes="0;0.68;0.76;0.95;1" values="86;86;0;0;86"/>
+    </path>
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.78;0.88;0.95;1" values="0;0;1;1;0"/>
+      <rect x="800" y="98" width="338" height="40" fill="#da1868"/>
+      <text x="969" y="124" font-size="12" letter-spacing="1.6" fill="#ffffff" text-anchor="middle">READY TO MERGE</text>
+    </g>
+  </g>
+</svg>
