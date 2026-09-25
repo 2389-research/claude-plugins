@@ -5,7 +5,9 @@ const { test, after } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const { parseNpxList, findSkillFiles, checkSkillLinks, installProblems } = require('../scripts/lib/install-checks');
+const {
+  parseNpxList, findSkillFiles, checkSkillLinks, findInstallCollisions, installProblems,
+} = require('../scripts/lib/install-checks');
 const { makeTree, skill, removeTrees } = require('./helpers/skill-tree');
 
 after(removeTrees);
@@ -60,6 +62,44 @@ test('checkSkillLinks reports links missing from the repo or from an npx install
   ]);
 });
 
+test('checkSkillLinks checks reference-style link definitions, not text that only looks like one', () => {
+  const dir = makeTree({
+    'skills/a/references/ok.md': 'ok',
+    'skills/a/SKILL.md': skill('a', [
+      'See [the notes][ok] and [the gone file][gone].',
+      '',
+      '[ok]: references/ok.md',
+      '[gone]: <../shared/gone.md> "A title"',
+      '[Step 1]: run the tests first',
+    ].join('\n')),
+  });
+  assert.deepEqual(checkSkillLinks(dir, findSkillFiles(dir)), [
+    { file: 'skills/a/SKILL.md', line: 9, target: '../shared/gone.md', problem: 'missing-in-repo' },
+  ]);
+});
+
+test('checkSkillLinks reads a SKILL.md saved with CRLF line endings', () => {
+  const dir = makeTree({
+    'skills/a/SKILL.md': skill('a', ['See [gone][g].', '', '[g]: ../shared/gone.md'].join('\n')).replace(/\n/g, '\r\n'),
+  });
+  assert.deepEqual(checkSkillLinks(dir, findSkillFiles(dir)), [
+    { file: 'skills/a/SKILL.md', line: 8, target: '../shared/gone.md', problem: 'missing-in-repo' },
+  ]);
+});
+
+test('checkSkillLinks knows npx leaves metadata.json and cache folders out of an install', () => {
+  const dir = makeTree({
+    'skills/a/metadata.json': '{}',
+    'skills/a/__pycache__/helper.pyc': '',
+    'skills/a/scripts/helper.py': '',
+    'skills/a/SKILL.md': skill('a', 'Read [meta](metadata.json), [cache](__pycache__/helper.pyc) and [script](scripts/helper.py).'),
+  });
+  assert.deepEqual(checkSkillLinks(dir, findSkillFiles(dir)), [
+    { file: 'skills/a/SKILL.md', line: 6, target: 'metadata.json', problem: 'missing-after-npx' },
+    { file: 'skills/a/SKILL.md', line: 6, target: '__pycache__/helper.pyc', problem: 'missing-after-npx' },
+  ]);
+});
+
 // npx installs every skill as a sibling folder named after its frontmatter name, so a link into a
 // sibling skill survives only when that name, as npx sanitizes it, is the sibling's folder name.
 test('checkSkillLinks accepts a link into a sibling skill that npx installs at the same path', () => {
@@ -77,6 +117,30 @@ test('checkSkillLinks rejects a link into a sibling skill that npx installs unde
   });
   assert.deepEqual(checkSkillLinks(dir, findSkillFiles(dir)), [
     { file: 'skills/prepare/SKILL.md', line: 6, target: '../review/SKILL.md', problem: 'missing-after-npx' },
+  ]);
+});
+
+test('findInstallCollisions names skills that npx would install into one folder', () => {
+  const dir = makeTree({
+    'skills/a/SKILL.md': skill('foo:bar'),
+    'skills/b/SKILL.md': skill('foo-bar'),
+    'skills/c/SKILL.md': skill('other'),
+  });
+  assert.deepEqual(findInstallCollisions(dir, findSkillFiles(dir)), [
+    { name: 'foo-bar', files: ['skills/a/SKILL.md', 'skills/b/SKILL.md'] },
+  ]);
+});
+
+test('installProblems reports skills that npx installs into one folder', () => {
+  const problems = installProblems({
+    skillFiles: ['skills/a/SKILL.md', 'skills/b/SKILL.md'],
+    npx: { listed: ['foo:bar', 'foo-bar'], skipped: [] },
+    npxStatus: 0,
+    links: [],
+    collisions: [{ name: 'foo-bar', files: ['skills/a/SKILL.md', 'skills/b/SKILL.md'] }],
+  });
+  assert.deepEqual(problems, [
+    'npx installs skills/a/SKILL.md and skills/b/SKILL.md into one folder, foo-bar/, so only one survives',
   ]);
 });
 

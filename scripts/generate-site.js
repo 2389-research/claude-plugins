@@ -6,7 +6,7 @@ const path = require('path');
 const { execSync, execFileSync } = require('child_process');
 const { convertRepoLinks } = require('./lib/convert-repo-links');
 const { markdownToHtml } = require('./lib/markdown-to-html');
-const { getRepoName, pluginHasSkills } = require('./lib/plugin-source');
+const { getRepoName, getSourceUrl, pluginHasSkills } = require('./lib/plugin-source');
 
 // Read marketplace.json
 const marketplace = JSON.parse(
@@ -141,17 +141,6 @@ const linkReport = {
 // convertRepoLinks lives in ./lib/convert-repo-links.js so it can be unit-tested in
 // isolation. It absolutizes relative README links against each plugin's GitHub repo;
 // marketplace.plugins and linkReport are passed in at the call site below.
-
-// Helper to get source URL
-function getSourceUrl(plugin) {
-  if (plugin.source?.url) {
-    return plugin.source.url.replace(/\.git$/, '');
-  }
-  if (typeof plugin.source === 'string') {
-    return `https://github.com/2389-research/${plugin.source.replace('./', '')}`;
-  }
-  return `https://github.com/2389-research/${plugin.name}`;
-}
 
 // Clean description
 function cleanDescription(desc) {

@@ -6,8 +6,10 @@ const { spawnSync } = require('child_process');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { getRepoName, pluginHasSkills } = require('./lib/plugin-source');
-const { parseNpxList, findSkillFiles, checkSkillLinks, installProblems } = require('./lib/install-checks');
+const { getRepoName, getSourceUrl, pluginHasSkills } = require('./lib/plugin-source');
+const {
+  parseNpxList, findSkillFiles, checkSkillLinks, findInstallCollisions, installProblems,
+} = require('./lib/install-checks');
 
 const MARKETPLACE = path.join(__dirname, '..', '.claude-plugin', 'marketplace.json');
 const COMMAND_TIMEOUT_MS = 180000;
@@ -40,7 +42,8 @@ function inspectRepo(repoDir, npxSource) {
     const npx = parseNpxList(`${listing.stdout || ''}\n${listing.stderr || ''}`);
     const skillFiles = findSkillFiles(repoDir);
     const links = checkSkillLinks(repoDir, skillFiles);
-    return { skillFiles, problems: installProblems({ skillFiles, npx, npxStatus: listing.status, links }) };
+    const collisions = findInstallCollisions(repoDir, skillFiles);
+    return { skillFiles, problems: installProblems({ skillFiles, npx, npxStatus: listing.status, links, collisions }) };
   } finally {
     fs.rmSync(npxCwd, { recursive: true, force: true });
   }
@@ -50,10 +53,11 @@ function checkPlugin(plugin) {
   const workDir = fs.mkdtempSync(path.join(os.tmpdir(), 'plugin-install-check-'));
   try {
     const repoDir = path.join(workDir, 'repo');
-    const clone = run('git', ['clone', '--depth', '1', '--quiet', plugin.source.url, repoDir], workDir);
+    const sourceUrl = getSourceUrl(plugin);
+    const clone = run('git', ['clone', '--depth', '1', '--quiet', sourceUrl, repoDir], workDir);
     if (clone.status !== 0) {
       const reason = (clone.stderr || '').trim().split('\n').pop() || `status ${clone.status}`;
-      return { skillFiles: [], problems: [`git clone ${plugin.source.url} failed: ${reason}`] };
+      return { skillFiles: [], problems: [`git clone ${sourceUrl} failed: ${reason}`] };
     }
     return inspectRepo(repoDir, getRepoName(plugin));
   } finally {
