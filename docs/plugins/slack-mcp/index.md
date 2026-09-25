@@ -81,6 +81,28 @@ npm run build
 npm start
 ```
 
+## Development
+
+### Running tests
+
+```bash
+npm test            # protocol + unit tests; no Slack calls; requires a built dist/
+```
+
+The default test suite spawns the compiled server process and speaks JSON-RPC over stdio. It uses `FAKE-audit-not-a-token` as the token — the server validates the token is present but does not call the Slack API until a tool is invoked, so the tests are network-free.
+
+### End-to-end tests
+
+To run tests against a real Slack workspace:
+
+```bash
+export SLACK_E2E_TOKEN="xoxb-your-real-token"
+export SLACK_E2E_CHANNEL="C123ABC"   # an existing channel the bot has access to
+npm run test:e2e
+```
+
+`npm run test:e2e` is intentionally excluded from `npm test` so CI stays green without Slack credentials.
+
 ## Tools
 
 ### slack_create_channel

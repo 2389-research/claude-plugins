@@ -24,7 +24,7 @@ Or natively in Claude Code:
 
 # Test Kitchen
 
-You have a spec. Three valid approaches exist. Instead of guessing which one to build, Test Kitchen builds all of them in parallel git worktrees and lets your tests pick the winner.
+Test Kitchen intercepts every build/create/implement request and offers parallel exploration before any code is written. At the design phase, omakase-off offers design exploration (3-5 approaches in parallel). At the implementation phase, cookoff runs parallel implementation competition (2-5 agents each creating their own plan). Tests and the judge pick the winner.
 
 Read more: [Cookoff: Same Spec, Different Code](https://2389.ai/posts/cookoff-same-spec-different-code/) · [Omakase: Show Me](https://2389.ai/posts/omakase-show-me/)
 
@@ -163,9 +163,10 @@ Test Kitchen orchestrates these skills (falls back gracefully if not installed):
 - `superpowers:dispatching-parallel-agents`
 - `superpowers:test-driven-development`
 - `superpowers:verification-before-completion`
-- `scenario-testing:skills`
-- `fresh-eyes-review:skills`
+- `scenario-testing:scenario-testing`
+- `fresh-eyes-review:fresh-eyes-review`
 - `superpowers:finishing-a-development-branch`
+- `test-kitchen:judge`
 
 ## Documentation
 

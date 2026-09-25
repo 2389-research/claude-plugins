@@ -133,6 +133,18 @@ users:read.email       # lookup users by email
 npm run build
 npm start
 </code></pre>
+<h3>Development</h3>
+<h4>Running tests</h4>
+<pre><code class="language-bash">npm test            # protocol + unit tests; no Slack calls; requires a built dist/
+</code></pre>
+<p>The default test suite spawns the compiled server process and speaks JSON-RPC over stdio. It uses <code>FAKE-audit-not-a-token</code> as the token — the server validates the token is present but does not call the Slack API until a tool is invoked, so the tests are network-free.</p>
+<h4>End-to-end tests</h4>
+<p>To run tests against a real Slack workspace:</p>
+<pre><code class="language-bash">export SLACK_E2E_TOKEN="xoxb-your-real-token"
+export SLACK_E2E_CHANNEL="C123ABC"   # an existing channel the bot has access to
+npm run test:e2e
+</code></pre>
+<p><code>npm run test:e2e</code> is intentionally excluded from <code>npm test</code> so CI stays green without Slack credentials.</p>
 <h3>Tools</h3>
 <h4>slack_create_channel</h4>
 <p>Create a new Slack channel.</p>
@@ -238,8 +250,8 @@ npm start
   "downloadUrl": "https://github.com/2389-research/slack-mcp",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-09-24",
-  "dateModified": "2026-09-24"
+  "datePublished": "2026-09-25",
+  "dateModified": "2026-09-25"
 }
   </script>
 

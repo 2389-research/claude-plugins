@@ -39,6 +39,16 @@ You pulled a binary off an embedded device. It's an ELF, probably ARM, and you n
 
 - `binary-re` -- structured RE workflow with hypothesis-driven analysis
 
+### Sub-skills
+
+| Name | Description |
+|------|-------------|
+| `binary-re:triage` | Fast binary fingerprinting — architecture, ABI, dependencies, and strings via rabin2. Use first on any unknown binary. |
+| `binary-re:static-analysis` | Deep code analysis via radare2 and Ghidra — functions, cross-references, decompilation, and CFGs without execution. |
+| `binary-re:dynamic-analysis` | Runtime behavior observation via QEMU, GDB, and Frida — syscall tracing, breakpoints, and memory inspection; requires human approval. |
+| `binary-re:synthesis` | Compiles analysis findings into structured reports with validated hypotheses and evidence chains. |
+| `binary-re:tool-setup` | Installs and configures radare2, Ghidra, GDB, QEMU, Frida, and cross-compilation toolchains. |
+
 ### Capabilities
 
 - Cross-architecture static analysis (ARM64, ARMv7, x86_64, MIPS)
@@ -118,7 +128,7 @@ The skill asks for confirmation before:
 ## Documentation
 
 - [CLAUDE.md](./CLAUDE.md) -- detailed skill reference
-- [skills/SKILL.md](./skills/SKILL.md) -- full workflow documentation
+- [skills/binary-re/SKILL.md](./skills/binary-re/SKILL.md) -- full workflow documentation
 
 ---
 

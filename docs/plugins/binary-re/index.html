@@ -106,6 +106,8 @@
 <h3>What this plugin provides</h3>
 <h4>Skills</h4>
 <ul><li><code>binary-re</code> -- structured RE workflow with hypothesis-driven analysis</li></ul>
+<h4>Sub-skills</h4>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td><code>binary-re:triage</code></td><td>Fast binary fingerprinting — architecture, ABI, dependencies, and strings via rabin2. Use first on any unknown binary.</td></tr><tr><td><code>binary-re:static-analysis</code></td><td>Deep code analysis via radare2 and Ghidra — functions, cross-references, decompilation, and CFGs without execution.</td></tr><tr><td><code>binary-re:dynamic-analysis</code></td><td>Runtime behavior observation via QEMU, GDB, and Frida — syscall tracing, breakpoints, and memory inspection; requires human approval.</td></tr><tr><td><code>binary-re:synthesis</code></td><td>Compiles analysis findings into structured reports with validated hypotheses and evidence chains.</td></tr><tr><td><code>binary-re:tool-setup</code></td><td>Installs and configures radare2, Ghidra, GDB, QEMU, Frida, and cross-compilation toolchains.</td></tr></tbody></table></div>
 <h4>Capabilities</h4>
 <ul><li>Cross-architecture static analysis (ARM64, ARMv7, x86_64, MIPS)</li><li>Dynamic tracing via QEMU user-mode emulation</li><li>GDB integration for debugging</li><li>Ghidra headless decompilation</li><li>Human-in-the-loop gates for risky operations</li></ul>
 <h3>Quick example</h3>
@@ -157,7 +159,7 @@ sudo apt install libc6-armhf-cross libc6-arm64-cross
 <p>The skill asks for confirmation before:</p>
 <ul><li>Executing binaries (even sandboxed)</li><li>Network-capable dynamic analysis</li><li>Operations requiring device access</li><li>Major changes in analysis direction</li></ul>
 <h3>Documentation</h3>
-<ul><li><a href="https://github.com/2389-research/binary-re/blob/main/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> -- detailed skill reference</li><li><a href="https://github.com/2389-research/binary-re/blob/main/skills/SKILL.md" rel="noopener noreferrer" target="_blank">skills/SKILL.md</a> -- full workflow documentation</li></ul>
+<ul><li><a href="https://github.com/2389-research/binary-re/blob/main/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> -- detailed skill reference</li><li><a href="https://github.com/2389-research/binary-re/blob/main/skills/binary-re/SKILL.md" rel="noopener noreferrer" target="_blank">skills/binary-re/SKILL.md</a> -- full workflow documentation</li></ul>
 <hr>
 <p>If Binary RE helped you crack a firmware blob, a ⭐ helps us know it's landing.</p>
 <p>Built by <a href="https://2389.ai" rel="noopener noreferrer">2389</a> · Part of the <a href="https://github.com/2389-research/claude-plugins" rel="noopener noreferrer">Claude Code plugin marketplace</a></p>
@@ -207,8 +209,8 @@ sudo apt install libc6-armhf-cross libc6-arm64-cross
   "downloadUrl": "https://github.com/2389-research/binary-re",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-09-24",
-  "dateModified": "2026-09-24"
+  "datePublished": "2026-09-25",
+  "dateModified": "2026-09-25"
 }
   </script>
 

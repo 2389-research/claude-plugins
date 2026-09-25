@@ -98,7 +98,7 @@
            alt="Animated diagram of how test-kitchen works">
       <figcaption class="mono">How test-kitchen works</figcaption>
     </figure>
-<p>You have a spec. Three valid approaches exist. Instead of guessing which one to build, Test Kitchen builds all of them in parallel git worktrees and lets your tests pick the winner.</p>
+<p>Test Kitchen intercepts every build/create/implement request and offers parallel exploration before any code is written. At the design phase, omakase-off offers design exploration (3-5 approaches in parallel). At the implementation phase, cookoff runs parallel implementation competition (2-5 agents each creating their own plan). Tests and the judge pick the winner.</p>
 <p>Read more: <a href="https://2389.ai/posts/cookoff-same-spec-different-code/" rel="noopener noreferrer">Cookoff: Same Spec, Different Code</a> · <a href="https://2389.ai/posts/omakase-show-me/" rel="noopener noreferrer">Omakase: Show Me</a></p>
 <p>Parallel implementation framework with two gate skills:</p>
 <div class="table-scroll"><table class="readme-table"><thead><tr><th>Skill</th><th>Gate</th><th>Trigger</th></tr></thead><tbody><tr><td><code>test-kitchen:omakase-off</code></td><td><strong>Entry</strong></td><td>FIRST on any build/create/implement request</td></tr><tr><td><code>test-kitchen:cookoff</code></td><td><strong>Exit</strong></td><td>At design→implementation transition</td></tr></tbody></table></div>
@@ -189,7 +189,7 @@ Which approach?
 <ul><li>Omakase-off claims the BUILD/CREATE moment (before brainstorming)</li><li>Cookoff claims the IMPLEMENT moment (after design)</li></ul>
 <h3>Dependencies</h3>
 <p>Test Kitchen orchestrates these skills (falls back gracefully if not installed):</p>
-<ul><li><code>superpowers:brainstorming</code></li><li><code>superpowers:writing-plans</code></li><li><code>superpowers:executing-plans</code></li><li><code>superpowers:using-git-worktrees</code></li><li><code>superpowers:dispatching-parallel-agents</code></li><li><code>superpowers:test-driven-development</code></li><li><code>superpowers:verification-before-completion</code></li><li><code>scenario-testing:skills</code></li><li><code>fresh-eyes-review:skills</code></li><li><code>superpowers:finishing-a-development-branch</code></li></ul>
+<ul><li><code>superpowers:brainstorming</code></li><li><code>superpowers:writing-plans</code></li><li><code>superpowers:executing-plans</code></li><li><code>superpowers:using-git-worktrees</code></li><li><code>superpowers:dispatching-parallel-agents</code></li><li><code>superpowers:test-driven-development</code></li><li><code>superpowers:verification-before-completion</code></li><li><code>scenario-testing:scenario-testing</code></li><li><code>fresh-eyes-review:fresh-eyes-review</code></li><li><code>superpowers:finishing-a-development-branch</code></li><li><code>test-kitchen:judge</code></li></ul>
 <h3>Documentation</h3>
 <ul><li><a href="https://github.com/2389-research/test-kitchen/blob/main/CLAUDE.md" rel="noopener noreferrer" target="_blank">CLAUDE.md</a> -- full plugin instructions</li><li><a href="https://github.com/2389-research/test-kitchen/blob/main/skills/omakase-off/SKILL.md" rel="noopener noreferrer" target="_blank">Omakase-off skill</a> -- entry gate (wraps brainstorming)</li><li><a href="https://github.com/2389-research/test-kitchen/blob/main/skills/cookoff/SKILL.md" rel="noopener noreferrer" target="_blank">Cookoff skill</a> -- exit gate (wraps implementation)</li></ul>
 <h3>Origin</h3>
@@ -243,8 +243,8 @@ Which approach?
   "downloadUrl": "https://github.com/2389-research/test-kitchen",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-09-24",
-  "dateModified": "2026-09-24"
+  "datePublished": "2026-09-25",
+  "dateModified": "2026-09-25"
 }
   </script>
 

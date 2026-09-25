@@ -47,7 +47,7 @@ A comprehensive MCP (Model Context Protocol) server that provides Claude with pr
 ### Core Technologies
 - **Node.js 18+** - Runtime environment with modern JavaScript features
 - **TypeScript 5.0+** - Type-safe development with strict configuration
-- **MCP SDK 0.4.0** - Official Model Context Protocol implementation
+- **MCP SDK 0.5.0** - Official Model Context Protocol implementation
 - **@xenova/transformers** - Local AI models for semantic embeddings (no external APIs)
 
 ### AI & Search

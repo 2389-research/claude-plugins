@@ -167,8 +167,8 @@ Speed-run orchestrates these skills (uses fallbacks if not installed):
 - `superpowers:executing-plans`
 - `superpowers:test-driven-development`
 - `superpowers:verification-before-completion`
-- `fresh-eyes-review:skills`
-- `scenario-testing:skills`
+- `fresh-eyes-review:fresh-eyes-review`
+- `scenario-testing:scenario-testing`
 - `superpowers:finishing-a-development-branch`
 
 ## Documentation

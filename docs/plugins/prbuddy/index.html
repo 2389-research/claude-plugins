@@ -88,7 +88,8 @@
       <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/prbuddy" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="prbuddy">★ Star on GitHub <span class="star-count">· 1</span></a></div>
     </header>
     <main id="main-content" class="readme-body">
-      <figure class="skill-anim">
+      <h2>prbuddy</h2>
+<figure class="skill-anim">
       <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
              autoplay loop muted playsinline preload="metadata" aria-label="Animated diagram of how prbuddy works">
         <source src="anim.mp4" type="video/mp4">
@@ -97,13 +98,37 @@
            alt="Animated diagram of how prbuddy works">
       <figcaption class="mono">How prbuddy works</figcaption>
     </figure>
-
+<p>PR health assistant for Claude Code. Monitors CI status, triages review comments, fixes issues, and implements systematic prevention so the same class of error cannot recur.</p>
+<h3>What It Does</h3>
+<p>prbuddy gives Claude three skills that cover the full PR health lifecycle:</p>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Skill</th><th>What it does</th></tr></thead><tbody><tr><td><code>prbuddy</code></td><td>Full orchestrator — detects the PR, checks CI, then routes to sub-skills</td></tr><tr><td><code>prbuddy:ci</code></td><td>Fetches failed CI logs, diagnoses root cause, fixes and prevents</td></tr><tr><td><code>prbuddy:reviews</code></td><td>Triages review threads: fixes critical comments, converts nitpicks to issues</td></tr></tbody></table></div>
+<h3>Usage</h3>
+<p>Trigger the main skill with natural language:</p>
+<ul><li>"check my PR"</li><li>"make PR green"</li><li>"fix PR"</li><li>"ready to merge"</li><li>"handle PR feedback"</li><li>"what's blocking my PR"</li></ul>
+<p>Or invoke sub-skills directly:</p>
+<ul><li><code>/prbuddy:ci</code> — jump straight to CI diagnosis</li><li><code>/prbuddy:reviews</code> — jump straight to review triage</li></ul>
 <h3>Installation</h3>
 <pre><code class="language-bash">/plugin marketplace add 2389-research/claude-plugins
 /plugin install prbuddy@2389-research
 </code></pre>
+<h3>Prerequisites</h3>
+<h4>Required: gh CLI</h4>
+<p>Must be installed and authenticated with the right scopes:</p>
+<pre><code class="language-bash">gh auth status
+</code></pre>
+<p>Required scopes: <code>repo</code>, <code>read:org</code>, <code>workflow</code>.</p>
+<h4>Required: gh-pr-review Extension</h4>
+<p>Used by <code>prbuddy:reviews</code> to list and resolve review threads:</p>
+<pre><code class="language-bash">gh extension install agynio/gh-pr-review
+</code></pre>
+<h4>Optional: PAL MCP Server</h4>
+<p><code>prbuddy:ci</code> (Step 6) and <code>prbuddy:reviews</code> (Step 4b) can call <code>mcp__pal__chat</code> on the team's PAL MCP server for expert diagnosis of complex failures and review analysis. If PAL is unavailable, both sub-skills fall back to direct log analysis and code inspection.</p>
+<h3>Core Philosophy</h3>
+<p><strong>"Fix the acute issue AND prevent the class of error from recurring."</strong></p>
+<p>Every fix includes a prevention delta. See CLAUDE.md for the prevention hierarchy.</p>
+<h3>Works Well With</h3>
+<ul><li><strong>fresh-eyes-review</strong> — run before committing fixes</li><li><strong>terminal-title</strong> — updates terminal title during PR work</li></ul>
 <hr>
-<p>If PRBuddy got your PR to green faster, a ⭐ helps us know it's landing.</p>
 <p>Built by <a href="https://2389.ai" rel="noopener noreferrer">2389</a> · Part of the <a href="https://github.com/2389-research/claude-plugins" rel="noopener noreferrer">Claude Code plugin marketplace</a></p>
     </main>
     <nav class="detail-nav mono rule-t" aria-label="Skill navigation">
@@ -151,8 +176,8 @@
   "downloadUrl": "https://github.com/2389-research/prbuddy",
   "softwareVersion": "1.0.0",
   "license": "https://opensource.org/licenses/MIT",
-  "datePublished": "2026-09-24",
-  "dateModified": "2026-09-24"
+  "datePublished": "2026-09-25",
+  "dateModified": "2026-09-25"
 }
   </script>
 
