@@ -1,0 +1,44 @@
+
+███████╗██╗  ██╗██╗██╗     ██╗     ███████╗
+██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝
+███████╗█████╔╝ ██║██║     ██║     ███████╗
+╚════██║██╔═██╗ ██║██║     ██║     ╚════██║
+███████║██║  ██╗██║███████╗███████╗███████║
+╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝
+
+┌   skills 
+│
+│  Tip: use the --yes (-y) and --global (-g) flags to install without prompts.
+│
+◇  Source: https://github.com/2389-research/firebase-development.git
+│
+◒  Cloning repository…◐  Cloning repository…◓  Cloning repository…◑  Cloning repository…◒  Cloning repository…◐  Cloning repository…◓  Cloning repository…◑  Cloning repository…◒  Cloning repository….◐  Cloning repository….◓  Cloning repository….◇  Repository cloned
+│
+◇  Found 5 skills
+
+│
+◇  Available Skills
+│
+│    firebase-development:add-feature
+│
+│      Adds Cloud Functions, Firestore collections, and API endpoints to existing Firebase projects using TDD. Use when adding a function, creating an endpoint, implementing a new Firestore collection, or building a feature in an existing Firebase project.
+│
+│    firebase-development:debug
+│
+│      Systematically troubleshoots Firebase-specific issues including emulator failures, Firestore rules violations, Cloud Functions errors, Firebase Auth problems, and Firebase deploy failures. Use when Firebase emulators won't start, Firestore returns PERMISSION_DENIED, Cloud Functions return errors, Firebase Auth fails in the emulator, or firebase deploy fails.
+│
+│    firebase-development
+│
+│      Routes Firebase development tasks to specialized sub-skills covering project setup, feature development, debugging, and validation. Use when starting a Firebase project, adding Cloud Functions or Firestore collections, troubleshooting Firebase emulator or deployment issues, or reviewing Firebase security rules and architecture.
+│
+│    firebase-development:project-setup
+│
+│      Initializes new Firebase projects with TypeScript, emulators, authentication, and security rules using proven architecture patterns. Use when starting a new Firebase project, running firebase init, or setting up Firebase for the first time in a repository.
+│
+│    firebase-development:validate
+│
+│      Reviews Firebase projects against security best practices, architecture patterns, and production readiness checklists. Use when auditing Firebase security rules, reviewing Firebase configuration, checking Firebase project architecture, or preparing a Firebase project for production deployment.
+
+│
+└  Use --skill <name> to install specific skills
+

@@ -21,7 +21,8 @@ claude-plugins/
 ├── tests/                        # Site generator tests
 ├── .github/
 │   └── workflows/
-│       └── generate-site.yml     # CI: regenerates site on push + weekly
+│       ├── generate-site.yml     # CI: regenerates site on push + weekly
+│       └── check-plugin-installs.yml  # CI: weekly check that npx installs every entry whole
 ├── package.json
 ├── CLAUDE.md                     # This file
 └── README.md
@@ -121,6 +122,8 @@ node scripts/animations/render.js my-plugin    # render, ~75s
 npm run generate
 ```
 
+Then check that npx installs the new entry whole: `node scripts/check-plugin-installs.js my-plugin`.
+
 ### Step 5: Commit and push
 
 ```bash
@@ -216,6 +219,15 @@ The workflow at `.github/workflows/generate-site.yml` regenerates the site:
 - On a weekly schedule
 
 The generated `docs/index.html` is committed back to the repo automatically.
+
+`.github/workflows/check-plugin-installs.yml` runs weekly and on demand, apart from the site
+build, so a broken plugin repo never stops the site from updating. For every skill entry,
+`scripts/check-plugin-installs.js` runs `npx skills add <owner/repo> --list` as the site prints
+it, clones the repo, and fails when npx skips or misses a SKILL.md, or when a SKILL.md links a
+file an npx install won't put at that path. npx exits 0 even when it skips a file, so the check
+reads its output. Run it locally with `npm run check:installs` (every entry, about a minute) or
+`node scripts/check-plugin-installs.js <name>...`. The workflow first runs
+`tests/install-checks.e2e.test.js`, which needs npx and the network, so `npm test` leaves it out.
 
 ## Troubleshooting
 
