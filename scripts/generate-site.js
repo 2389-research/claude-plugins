@@ -6,6 +6,7 @@ const path = require('path');
 const { execSync, execFileSync } = require('child_process');
 const { convertRepoLinks } = require('./lib/convert-repo-links');
 const { markdownToHtml } = require('./lib/markdown-to-html');
+const { getRepoName, pluginHasSkills } = require('./lib/plugin-source');
 
 // Read marketplace.json
 const marketplace = JSON.parse(
@@ -61,18 +62,6 @@ marketplace.plugins.forEach(plugin => {
 // Get category for a plugin. The loop above validated every plugin, so this always resolves.
 function getCategoryForPlugin(plugin) {
   return categories[plugin.category];
-}
-
-// Extract org/repo from a plugin source URL or fall back to 2389-research/{name}
-function getRepoName(plugin) {
-  if (plugin.source?.url) {
-    const match = plugin.source.url.replace(/\.git$/, '').match(/github\.com\/([^/]+\/[^/]+)/);
-    if (match) return match[1];
-  }
-  if (typeof plugin.source === 'string') {
-    return `2389-research/${plugin.source.replace('./', '')}`;
-  }
-  return `2389-research/${plugin.name}`;
 }
 
 // Fetch README.md from GitHub via gh api
@@ -309,11 +298,6 @@ function getPluginInstallCommand(plugin) {
 
 function getNpxInstallCommand(plugin) {
   return `npx skills add ${getRepoName(plugin)}`;
-}
-
-// MCP-only entries (strict: true) ship no skills, so npx skills add can't install them.
-function pluginHasSkills(plugin) {
-  return plugin.strict !== true;
 }
 
 
