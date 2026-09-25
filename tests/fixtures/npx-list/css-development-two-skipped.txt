@@ -1,0 +1,47 @@
+
+███████╗██╗  ██╗██╗██╗     ██╗     ███████╗
+██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝
+███████╗█████╔╝ ██║██║     ██║     ███████╗
+╚════██║██╔═██╗ ██║██║     ██║     ╚════██║
+███████║██║  ██╗██║███████╗███████╗███████║
+╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝
+
+┌   skills 
+│
+│  Tip: use the --yes (-y) and --global (-g) flags to install without prompts.
+│
+◇  Source: https://github.com/2389-research/css-development.git
+│
+◒  Cloning repository…◐  Cloning repository…◓  Cloning repository…◑  Cloning repository…◇  Repository cloned
+│
+⚠ Skipped /tmp/skills-Kb4yG7/skills/css-development/SKILL.md — YAML parse error: Nested mappings are not allowed in compact mappings at line 2, column 14:
+
+description: Handles CSS and Tailwind development — semantic class naming, @app…
+             ^
+
+⚠ Skipped /tmp/skills-Kb4yG7/skills/refactor/SKILL.md — YAML parse error: Nested mappings are not allowed in compact mappings at line 2, column 14:
+
+description: Converts inline styles or repeated Tailwind utility strings in mar…
+             ^
+
+◇  Found 2 skills
+
+│
+◇  Available Skills
+│
+│    css-development:create-component
+│
+│      Creates new styled UI components using semantic Tailwind class names, @apply composition, dark mode variants, and test coverage. Use when adding a new CSS component, creating a styled button/card/form-field, or wiring up dark mode for a new UI element.
+│
+│    css-development:validate
+│
+│      Audits existing CSS for semantic naming, @apply composition, dark-mode coverage, and test gaps, then reports actionable findings. Use when reviewing CSS before merging, before a refactor, or when spot-checking pattern compliance.
+
+│
+└  Use --skill <name> to install specific skills
+
+npm notice
+npm notice New major version of npm available! 11.19.0 -> 12.1.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.1.0
+npm notice To update run: npm install -g npm@12.1.0
+npm notice
