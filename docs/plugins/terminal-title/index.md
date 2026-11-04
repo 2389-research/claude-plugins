@@ -38,8 +38,9 @@ Automatically updates your terminal title with emoji + project + topic context. 
 Add these to your `.bashrc`, `.zshrc`, or shell profile:
 
 ```bash
-# Set to 1 to disable automatic terminal title updates
-export CLAUDE_CODE_DISABLE_TERMINAL_TITLE=0
+# Disables Claude Code's built-in terminal title updater so it doesn't
+# conflict with this plugin. Set to 1 if you notice double title updates.
+export CLAUDE_CODE_DISABLE_TERMINAL_TITLE=1
 
 # Optional: set an emoji prefix for your terminal title.
 # Useful for distinguishing work vs personal terminals at a glance.

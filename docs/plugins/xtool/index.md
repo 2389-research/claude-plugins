@@ -73,7 +73,7 @@ The skill auto-triggers on:
 
 ## Links
 
-- [xtool GitHub](https://github.com/nickyramone/xtool)
+- [xtool GitHub](https://github.com/nickyramone/xtool) — upstream xtool project (third-party)
 - [Plugin CLAUDE.md](./CLAUDE.md) -- development instructions
 
 ---

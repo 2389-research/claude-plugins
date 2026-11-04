@@ -53,6 +53,7 @@ Reflection frameworks, goal systems, and coaching-style reviews for executives. 
 | Buy Back Your Time | Dan Martell | Reclaim time through delegation, Production Quadrant |
 | E-Myth | Michael Gerber | Work ON your business not IN it, build systems |
 | Customer Development | Steve Blank | Search vs Execute, Get Out of the Building, MVP |
+| Human-Scale Economics | E.F. Schumacher | Purpose, permanence, and human-scale organization |
 
 ## Quick example
 
@@ -61,8 +62,8 @@ Start with: "Help me build a personal operating system"
 The skill generates a complete structure:
 ```
 ceo-personal-os/
-├── frameworks/          # 10 specific frameworks
-├── interviews/          # 10 coach-style question scripts
+├── frameworks/          # 11 specific frameworks
+├── interviews/          # 11 coach-style question scripts
 ├── reviews/             # Daily/weekly/quarterly/annual
 ├── goals/               # 1/3/10 year horizons
 ├── memory.md            # Pattern extraction

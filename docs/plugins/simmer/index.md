@@ -39,11 +39,12 @@ Iterative artifact refinement — take any artifact or workspace and hone it ove
 
 ## What This Plugin Provides
 
-One skill (`simmer`) with four subskills that run the refinement loop:
+One skill (`simmer`) with five subskills that run the refinement loop:
 
 - **Setup** — identify the artifact (file or workspace), elicit 2-3 quality criteria, determine evaluation method
 - **Generator** — produce an improved version based on the judge's ASI (Actionable Side Information — the single highest-leverage fix)
 - **Judge** — score the candidate 1-10 per criterion, produce the ASI
+- **Judge Board** — panel of perspective-diverse judges; drop-in replacement for Judge when JUDGE_MODE is board
 - **Reflect** — record the trajectory, track the best candidate across iterations
 
 ## Trigger Phrases
