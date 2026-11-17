@@ -80,6 +80,9 @@ function markdownToHtml(md) {
     return `{{INLINE_CODE_${index}}}`;
   });
 
+  // Ignore README comments after protecting code examples that display comment syntax.
+  md = md.replace(/<!--[\s\S]*?-->/g, '');
+
   // Convert tables (before other processing). The match stops at the last row's closing pipe:
   // the newline after it belongs to the blank line that ends the table.
   md = md.replace(/^(\|.+\|)\n(\|[-:\s|]+\|)\n((?:\|.+\|\n)*\|.+\|)/gm, (match) => {

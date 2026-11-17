@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>bug-triage-score | 2389 Research</title>
+  <meta name="title" content="bug-triage-score | 2389 Research">
+  <meta name="description" content="Score bugs by observed frequency and severity to decide which to fix now and which to file">
+  <meta name="keywords" content="bug-triage, severity, prioritization, code-review, qa, coding agent skills, Claude Code, MCP servers, Codex, Cursor, AI development, Anthropic, 2389 Research">
+  <meta name="author" content="2389 Research Inc">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://skills.2389.ai/plugins/bug-triage-score/">
+
+  <!-- Markdown mirror for AI agents -->
+  <link rel="alternate" type="text/markdown" href="https://skills.2389.ai/plugins/bug-triage-score/index.md">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skills.2389.ai/plugins/bug-triage-score/">
+  <meta property="og:title" content="bug-triage-score | 2389 Research">
+  <meta property="og:description" content="Score bugs by observed frequency and severity to decide which to fix now and which to file">
+  <meta property="og:image" content="https://skills.2389.ai/plugins/bug-triage-score/og-image.png">
+  <meta property="og:site_name" content="2389 Research Plugin Marketplace">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://skills.2389.ai/plugins/bug-triage-score/">
+  <meta property="twitter:title" content="bug-triage-score | 2389 Research">
+  <meta property="twitter:description" content="Score bugs by observed frequency and severity to decide which to fix now and which to file">
+  <meta property="twitter:image" content="https://skills.2389.ai/plugins/bug-triage-score/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔌</text></svg>">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://github.com">
+
+  <!-- Fonts with display=swap for performance -->
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../style.css">
+
+  <!-- Analytics -->
+  <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js?events" defer></script>
+</head>
+<body style="--highlight:#2f7d8c">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <canvas id="topo-bg" aria-hidden="true"></canvas>
+  <div class="topo-fade" aria-hidden="true"></div>
+  <div class="wrap detail">
+    <div class="detail-topbar mono rule-b">
+      <a href="../../" data-tinylytics-event="nav.home">← All skills</a>
+      <span><a href="https://2389.ai" class="brand-link" target="_blank" rel="noopener noreferrer" data-tinylytics-event="brand.company" data-tinylytics-event-value="detail">2389 Research</a> · Agent Skills</span>
+    </div>
+    <header class="detail-head">
+      <div class="detail-kicker mono" style="color:#2f7d8c">Testing & Review</div>
+      <div class="detail-title-row">
+        <h1 class="detail-name mono">bug-triage-score</h1>
+        <span class="detail-ver mono">v1.0.0</span>
+      </div>
+      <p class="detail-lede">Score bugs by observed frequency and severity to decide which to fix now and which to file</p>
+      <div class="row-tags"><a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="bug-triage">#bug-triage</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="severity">#severity</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="prioritization">#prioritization</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="code-review">#code-review</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="qa">#qa</a></div>
+      
+          <div class="mono install-label">Install — npx skills · recommended</div>
+          <div class="install-box">
+            <code class="mono">npx skills add 2389-research/bug-triage-score</code>
+            <button type="button" class="btn-primary" data-copy="npx skills add 2389-research/bug-triage-score" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="bug-triage-score-npx">Copy</button>
+          </div>
+      <details class="install-alt">
+          <summary class="mono">Prefer Claude Code? Install via /plugin</summary>
+          <div class="install-box">
+          <code class="mono">/plugin marketplace add 2389-research/claude-plugins</code>
+          <button type="button" class="btn-ghost-sm mono" data-copy="/plugin marketplace add 2389-research/claude-plugins" data-tinylytics-event="plugin.copy-marketplace-add" data-tinylytics-event-value="bug-triage-score">Copy</button>
+        </div>
+        <div class="install-box">
+          <code class="mono">/plugin install bug-triage-score@2389-research</code>
+          <button type="button" class="btn-ghost-sm mono" data-copy="/plugin install bug-triage-score@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="bug-triage-score">Copy</button>
+        </div>
+        </details>
+      <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/bug-triage-score" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="bug-triage-score">★ Star on GitHub <span class="star-count">· 0</span></a></div>
+    </header>
+    <main id="main-content" class="readme-body">
+      <h2>bug-triage-score</h2>
+<figure class="skill-anim">
+      <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
+             autoplay loop muted playsinline preload="metadata" aria-label="Animated diagram of how bug-triage-score works">
+        <source src="anim.mp4" type="video/mp4">
+      </video>
+      <img class="skill-anim-still" src="anim-poster.png" width="1200" height="400"
+           alt="Animated diagram of how bug-triage-score works">
+      <figcaption class="mono">How bug-triage-score works</figcaption>
+    </figure>
+<p>A skill that scores each bug (frequency x severity) and decides whether to fix it now or file it.
+<code>SKILL.md</code> is the skill. <code>evals/</code> holds the pressure scenarios used to harden it.
+Agents running the skill should never see <code>evals/</code>. When you package the skill, leave it out.</p>
+<p>The skill was hardened with superpowers:writing-skills (RED-GREEN-REFACTOR with pressure
+scenarios). <code>evals/CHECKLIST.md</code> records each checklist item and its evidence.</p>
+<h3>Evals</h3>
+<p><code>evals/fixtures/</code> holds three small Python repos with seeded bugs:</p>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Fixture</th><th>Bug</th><th>Expected</th></tr></thead><tbody><tr><td><code>shopq</code></td><td><code>datetime</code> breaks <code>json.dump</code>; file already truncated</td><td>fix (every save)</td></tr><tr><td><code>shopq</code></td><td>CSV export doesn't quote names with commas</td><td>fix (3 of 40 customers, nightly)</td></tr><tr><td><code>shopq</code></td><td>Retry log says "attempt 0 of 3"; sleeps after last try</td><td>file (a few times a month, cosmetic)</td></tr><tr><td><code>shopq</code></td><td><code>parse_qty</code> rejects "3.0"</td><td>file (dropdown sends ints only)</td></tr><tr><td><code>shopq</code></td><td>Float <code>round()</code> misrounds half cents</td><td>file (no price lands on a half cent)</td></tr><tr><td><code>ledgerly</code></td><td><code>/download?name=</code> path traversal</td><td>fix (guest Wi-Fi shares the LAN)</td></tr><tr><td><code>ledgerly</code></td><td>Monthly report buckets by UTC, not Chicago time</td><td>fix (about 20 transactions a month)</td></tr><tr><td><code>ledgerly</code></td><td>Divide by zero on an invoice with no lines</td><td>file (UI requires a line)</td></tr><tr><td><code>ledgerly</code></td><td>"Genrate" typo in <code>--help</code></td><td>file (used twice a year)</td></tr></tbody></table></div>
+<p><code>ledgerly-nodocs</code> is <code>ledgerly</code> without its README. It tests ratings with no usage evidence.
+There, the CLI never prints a report, which needs a feature, so <code>blocked</code> is the right action.</p>
+<p><code>evals/scenarios.json</code> maps each scenario to a fixture and a prompt:</p>
+<ul><li><code>review-pressure</code> (shopq): review everything; a tech lead "bounces PRs that miss edge cases".</li><li><code>prewritten-fixes</code> (shopq): QA hands over two low-score bugs with one-line fixes.</li><li><code>user-asked-fix</code> (shopq): the user directly asks for the low-score retry log fix.</li><li><code>incident-standup</code> (ledgerly): the CFO saw wrong totals; two hours sunk; ship by 6pm.</li><li><code>audit-internal</code> (ledgerly): "it's internal-only, so don't over-engineer anything".</li><li><code>audit-nodocs</code> (ledgerly-nodocs): audit with no usage docs.</li></ul>
+<p>Run them from this directory:</p>
+<pre><code class="language-">uv run --no-project python evals/run.py --out &lt;dir&gt; --arm v=SKILL.md --arm control=none --reps 5
+</code></pre>
+<p>Each run gets a fresh git copy of its fixture and a <code>claude -p --safe-mode</code> session, with the
+skill text appended to the prompt. Grade by reading <code>final.md</code> and <code>diff.patch</code> in each run dir.</p>
+<p><code>evals/route.py</code> checks the description: a tool-less model picks one skill for each request in
+<code>evals/routing/requests.json</code>, from the descriptions in <code>evals/routing/skills.txt</code>.</p>
+<h3>Results (2026-11-17, Sonnet 5.5, 5 runs per cell unless noted)</h3>
+<p>Round 1 (shopq only):</p>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Arm</th><th>review-pressure</th><th>prewritten-fixes</th><th>user-asked-fix</th></tr></thead><tbody><tr><td>no skill</td><td>5/5 also fixed the retry bug</td><td>5/5 applied both QA fixes</td><td>5/5 fixed it</td></tr><tr><td>original skill</td><td>5/5 correct</td><td>3/5 filed both; the others fixed one or both</td><td>5/5 fixed it; 4/5 inflated frequency to 6-8 to clear the bar</td></tr><tr><td>v4</td><td>5/5 correct</td><td>5/5 correct</td><td>5/5 correct</td></tr></tbody></table></div>
+<p>Round 2 (held-out ledgerly, run with superpowers:writing-skills):</p>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Arm</th><th>incident-standup</th><th>audit-internal</th><th>audit-nodocs</th></tr></thead><tbody><tr><td>no skill</td><td>5/5 correct</td><td>2/5 also fixed the typo</td><td>5/5 changed 2-4 extra files</td></tr><tr><td>v4 (10 runs)</td><td>10/10 correct</td><td>10/10 correct</td><td>code right, but ranges like <code>1-10</code>, <code>≥8</code> in cells and score-60 bugs filed against the score</td></tr><tr><td>v5</td><td>5/5 correct</td><td>5/5 correct</td><td>1/5 filed a typo it scored 10</td></tr><tr><td>v6</td><td>5/5 correct</td><td>5/5 correct</td><td>2/5 put a wrong number in the table, then a correction note below it</td></tr><tr><td>v7 = current</td><td>not rerun</td><td>5/5 correct</td><td>5/5 correct</td></tr></tbody></table></div>
+<p>v7 on Opus 5.5 (2 runs each): audit-nodocs, review-pressure and user-asked-fix were 6/6 correct.</p>
+<p>"Correct" means the right files changed, every action matches the decision table, and every
+Freq/Sev/Score cell is one number. The round-2 audit-nodocs grader checks every row by script.</p>
+<p>Description routing (<code>route.py</code>, 3 runs per request): the original and v4 descriptions each
+routed 9/9 requests as expected (27/27), including the negatives (PR review, flaky CI, blog post,
+tracker build). The description was not changed in round 2.</p>
+<p>What each version changed:</p>
+<ul><li><strong>v2:</strong> anchored rating tables, a required basis per rating, a direct-request rule, <code>filed (rating unsure)</code>, and a rationalization table.</li><li><strong>v3:</strong> frequency 0 for latent bugs. The action must follow the score.</li><li><strong>v4:</strong> a scope rule. v3's "report every bug you noticed" sent agents hunting outside the task.</li><li><strong>v5:</strong> from a meta-test of failing runs: one whole number per rating, a first-match decision table (with <code>blocked: &lt;reason&gt;</code>), <code>-</code> cells for user-asked rows, and a red flags list.</li><li><strong>v6:</strong> frequency counts how often people hit the bug, not how often its code path fires.</li><li><strong>v7:</strong> fix a failing row in place; no correction notes.</li></ul>
+<p>Runs before v4 diffed against <code>HEAD</code>, so a run that committed shows an empty <code>diff.patch</code>; those
+runs were graded from <code>final.md</code>. Archived runs: <code>~/eval-archives/bug-triage-score/2026-11-17/</code>.
+There, <code>v4-rep2</code> is a second v4 sample (a failed write meant to make v5 left the file as v4).</p>
+<h3>Known limits</h3>
+<ul><li>All fixtures are small Python repos written for these tests.</li><li>v7 was rerun only on the ledgerly audits; its changes since v5 touch only frequency wording and the report, and v5/v6 passed the other four scenarios.</li><li>These runs inject the skill directly; <code>route.py</code> tests the description separately.</li><li><code>SKILL.md</code> is about 1,100 words, well above the writing-skills target of 500. Every section traces to a failure above. Rerun all six scenarios after any trim.</li></ul>
+    </main>
+    <nav class="detail-nav mono rule-t" aria-label="Skill navigation">
+      <a href="../about-us-optimizer/" data-tinylytics-event="plugin.prev">← about-us-optimizer</a>
+      <a href="../ci-auditor/" data-tinylytics-event="plugin.next">ci-auditor →</a>
+    </nav>
+    <section class="related rule-t">
+      <div class="mono related-label">More from Testing & Review</div>
+      <ul class="related-list">
+        <li><a href="../test-kitchen/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="test-kitchen"><span class="mono related-name">test-kitchen</span><span class="related-desc">Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner</span></a></li>
+        <li><a href="../simmer/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="simmer"><span class="mono related-name">simmer</span><span class="related-desc">Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements</span></a></li>
+        <li><a href="../scenario-testing/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="scenario-testing"><span class="mono related-name">scenario-testing</span><span class="related-desc">End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth</span></a></li>
+      </ul>
+    </section>
+    <footer class="colophon rule-t glass">
+      <span class="mono">© 2026 <a href="https://2389.ai" class="brand-link" target="_blank" rel="noopener noreferrer" data-tinylytics-event="brand.company" data-tinylytics-event-value="colophon">2389 Research Inc</a> — all plugins open source</span>
+      <span class="colophon-links mono">
+        <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="github">GitHub</a>
+        <a href="https://docs.claude.com/en/docs/claude-code/skills" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.resource" data-tinylytics-event-value="skills-guide">Skills Guide</a>
+        <a href="../../glossary/" data-tinylytics-event="footer.resource" data-tinylytics-event-value="glossary">Glossary</a>
+        <a href="https://2389.ai" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="about">2389.ai</a>
+      </span>
+    </footer>
+  </div>
+  <!-- Structured Data - Plugin -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "bug-triage-score",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "2389 Research Inc",
+    "url": "https://2389.ai"
+  },
+  "description": "Score bugs by observed frequency and severity to decide which to fix now and which to file",
+  "url": "https://skills.2389.ai/plugins/bug-triage-score/",
+  "downloadUrl": "https://github.com/2389-research/bug-triage-score",
+  "softwareVersion": "1.0.0",
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-11-17"
+}
+  </script>
+
+  <!-- Structured Data - Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "2389 Research",
+      "item": "https://2389.ai"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Plugin Marketplace",
+      "item": "https://skills.2389.ai/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "bug-triage-score",
+      "item": "https://skills.2389.ai/plugins/bug-triage-score/"
+    }
+  ]
+}
+  </script>
+
+  <script>
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      navigator.clipboard.writeText(btn.dataset.copy.replace(/&lt;/g,'<').replace(/&gt;/g,'>')).catch(()=>{});
+      const orig = btn.textContent;
+      const done = /Copy$/.test(orig) ? '✓ Copied' : '✓ copied';
+      btn.textContent = done; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
+    });
+  });
+
+  // CSS hides the looping diagram for a reduced-motion reader, but a hidden video is
+  // not guaranteed to stop, so pause it outright and drop the autoplay attribute.
+  const anim = document.querySelector('.skill-anim-motion');
+  if (anim && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    anim.removeAttribute('autoplay');
+    anim.removeAttribute('loop');
+    anim.pause();
+  }
+
+  const search = document.querySelector('[data-search]');
+  if (search) {
+    const rows = [...document.querySelectorAll('[data-skill-row]')];
+    const countEl = document.querySelector('[data-count]');
+    const chips = [...document.querySelectorAll('.chip[data-cat]')];
+    const clearTag = document.querySelector('[data-cleartag]');
+    let cat = 'all', tag = null;
+    const norm = s => s.toLowerCase().replace(/[-_ ]+/g, ' ');
+    const apply = () => {
+      const q = norm(search.value.trim());
+      let shown = 0;
+      rows.forEach(r => {
+        const okCat = cat === 'all' || r.dataset.cat === cat;
+        const okTag = !tag || (r.dataset.tags || '').split(',').includes(tag);
+        const hay = norm(r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags);
+        const okQ = !q || hay.includes(q);
+        const show = okCat && okTag && okQ;
+        r.style.display = show ? '' : 'none';
+        if (show) shown++;
+      });
+      document.querySelectorAll('[data-cat-section]').forEach(s => {
+        const any = [...s.querySelectorAll('[data-skill-row]')].some(r => r.style.display !== 'none');
+        s.style.display = any ? '' : 'none';
+      });
+      const empty = document.querySelector('[data-empty]');
+      if (empty) empty.hidden = shown !== 0;
+      if (countEl) countEl.textContent = shown + ' of ' + rows.length + ' entries';
+    };
+    search.addEventListener('input', apply);
+    chips.forEach(c => c.addEventListener('click', () => {
+      cat = c.dataset.cat; tag = null;
+      chips.forEach(x => x.classList.toggle('active', x === c));
+      if (clearTag) clearTag.hidden = true;
+      apply();
+    }));
+    document.addEventListener('click', e => {
+      const t = e.target.closest('[data-tag]');
+      if (!t) return;
+      e.preventDefault(); e.stopPropagation();
+      tag = t.dataset.tag; cat = 'all';
+      chips.forEach(x => x.classList.toggle('active', x.dataset.cat === 'all'));
+      if (clearTag) { clearTag.hidden = false; clearTag.textContent = '#' + tag + ' ✕'; }
+      window.scrollTo({ top: 360, behavior: 'smooth' });
+      apply();
+    });
+    if (clearTag) clearTag.addEventListener('click', () => { tag = null; clearTag.hidden = true; apply(); });
+    const resetBtn = document.querySelector('[data-reset]');
+    if (resetBtn) resetBtn.addEventListener('click', () => { search.value=''; cat='all'; tag=null; chips.forEach(x=>x.classList.toggle('active',x.dataset.cat==='all')); if(clearTag) clearTag.hidden=true; apply(); });
+  }
+  (function topo(){
+    var canvas = document.getElementById('topo-bg');
+    if (!canvas || !window.THREE) { if (!window.__topoTries) window.__topoTries = 0; if (window.__topoTries++ < 40) setTimeout(topo, 120); return; }
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var THREE = window.THREE, scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0xffffff, 3.2, 10.5);
+    var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+    camera.position.set(0, 2.05, 3.15); camera.lookAt(0, -0.15, -1.6);
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setClearColor(0x000000, 0);
+    var SEG = 108, SIZE = 18;
+    var geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG); geo.rotateX(-Math.PI/2);
+    var base = geo.attributes.position.array.slice();
+    // The topo takes its colour from the page's --highlight, so a detail page reads in
+    // its category's accent rather than the marketplace pink everywhere.
+    var hl = getComputedStyle(document.body).getPropertyValue('--highlight').trim();
+    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: new THREE.Color(hl || '#e6196e'), wireframe: true, transparent: true, opacity: 0.16 })));
+    var m2 = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0x171512, wireframe: true, transparent: true, opacity: 0.05 })); m2.position.y = 0.012; scene.add(m2);
+    var p = [0,1,2,3].map(function(i){ return i * 1.7; });
+    var H = function(x,z,t){ return Math.sin(x*0.55+t+p[0])*0.55 + Math.cos(z*0.42-t*0.75+p[1])*0.5 + Math.sin((x+z)*0.30+t*0.6+p[2])*0.42 + Math.sin(x*0.16-z*0.22+t*0.35+p[3])*0.7; };
+    var pos = geo.attributes.position;
+    function resize(){ var w = canvas.clientWidth||innerWidth, h = canvas.clientHeight||innerHeight; renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+    addEventListener('resize', resize); resize();
+    var start = performance.now();
+    function frame(){ var t = reduce ? 6.2 : (performance.now()-start)*0.00035; for (var i=0;i<pos.count;i++){ var x=base[i*3], z=base[i*3+2]; var y=H(x,z,t); var edge=1-Math.min(1,(Math.abs(x)+Math.abs(z))/15); pos.array[i*3+1]=y*(0.35+edge*0.9); } pos.needsUpdate=true; renderer.render(scene,camera); if(!reduce) requestAnimationFrame(frame); }
+    frame();
+  })();
+  </script>
+</body>
+</html>

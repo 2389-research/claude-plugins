@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <rect width="1200" height="400" fill="#faf9f6"/>
+  <g font-family="Menlo, 'IBM Plex Mono', monospace">
+    <text x="60" y="52" font-size="13" letter-spacing="2.2" fill="#767168">CI TIMING AUDIT</text>
+    <line x1="60" y1="76" x2="1140" y2="76" stroke="#e2ddd2" stroke-width="1.5"/>
+    <text x="60" y="366" font-size="12" letter-spacing="1.6" fill="#767168">MEASURE JOBS · SPLIT THEIR TIME · RANK THE SLOWEST</text>
+
+    <!-- every route is drawn faint from frame one, so the layout never reflows -->
+    <g stroke="#d8d3c8" stroke-width="1.5" stroke-dasharray="2 6" fill="none">
+      <path d="M340,210 H760"/>
+    </g>
+
+    <!-- what exists at the start -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.02;0.12;0.95;1" values="0;0;1;1;0"/>
+      <rect x="100" y="180" width="240" height="60" fill="#ffffff" stroke="#171512" stroke-width="1.5"/>
+      <text x="220" y="215" font-size="12" letter-spacing="1.2" fill="#171512" text-anchor="middle">COMPLETED RUNS</text>
+    </g>
+
+    <!-- beat one: transit. the route fills in, and something visibly travels it -->
+    <path d="M340,210 H760" fill="none" stroke="#c67514" stroke-width="1.5"
+          stroke-dasharray="420" stroke-dashoffset="420">
+      <animate attributeName="stroke-dashoffset" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+               keyTimes="0;0.18;0.34;0.95;1" values="420;420;0;0;420"/>
+    </path>
+    <circle r="5" fill="#c67514" opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+               keyTimes="0;0.18;0.20;0.34;0.36;1" values="0;0;1;1;0;0"/>
+      <animateMotion dur="8s" repeatCount="indefinite" calcMode="spline"
+                     keySplines="0.42 0 0.16 1;0.42 0 0.16 1;0.42 0 0.16 1"
+                     path="M340,210 H760" keyTimes="0;0.18;0.34;1" keyPoints="0;0;1;1"/>
+    </circle>
+
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.28;0.38;0.95;1" values="0;0;1;1;0"/>
+      <rect x="380" y="120" width="100" height="40" fill="#ffffff" stroke="#c67514" stroke-width="1.5"/>
+      <text x="430" y="145" font-size="10" fill="#171512" text-anchor="middle">QUEUE</text>
+      <rect x="500" y="120" width="100" height="40" fill="#ffffff" stroke="#c67514" stroke-width="1.5"/>
+      <text x="550" y="145" font-size="10" fill="#171512" text-anchor="middle">SETUP</text>
+      <rect x="620" y="120" width="100" height="40" fill="#ffffff" stroke="#c67514" stroke-width="1.5"/>
+      <text x="670" y="145" font-size="10" fill="#171512" text-anchor="middle">TASK</text>
+      <text x="550" y="280" font-size="11" letter-spacing="1.2" fill="#767168" text-anchor="middle">SECONDS FROM JOB TIMESTAMPS</text>
+    </g>
+
+    <!-- beat two: settlement. the outcome is a solid ink block, and it holds to 0.95 -->
+    <g opacity="0">
+      <animate attributeName="opacity" dur="8s" repeatCount="indefinite" calcMode="spline"
+               keySplines="0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1;0.22 0.9 0.3 1"
+               keyTimes="0;0.40;0.50;0.95;1" values="0;0;1;1;0"/>
+      <rect x="760" y="180" width="240" height="60" fill="#a56111"/>
+      <text x="880" y="215" font-size="12" letter-spacing="1.2" fill="#ffffff" text-anchor="middle">MEASURED REPORT</text>
+    </g>
+  </g>
+</svg>

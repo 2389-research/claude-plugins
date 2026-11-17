@@ -7,6 +7,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const ROOT = path.join(__dirname, '..');
+const marketplace = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude-plugin/marketplace.json'), 'utf8'));
 // Generate once for the whole suite.
 execFileSync('node', ['scripts/generate-site.js'], { cwd: ROOT, stdio: 'pipe' });
 const index = fs.readFileSync(path.join(ROOT, 'docs/index.html'), 'utf8');
@@ -33,12 +34,17 @@ test('copy: single data-copy handler with stopPropagation', () => {
 test('toolbar: search input, live count, the five category chips with counts', () => {
   assert.match(index, /data-search/);
   assert.match(index, /data-count/);
-  assert.match(index, /data-cat="all"[^>]*>All \(31\)/);
-  assert.match(index, /data-cat="Development"[^>]*>Development \(7\)/);
-  assert.match(index, /data-cat="Testing & Review"[^>]*>Testing & Review \(8\)/);
-  assert.match(index, /data-cat="Agents & Orchestration"[^>]*>Agents & Orchestration \(6\)/);
-  assert.match(index, /data-cat="Infrastructure & Ops"[^>]*>Infrastructure & Ops \(4\)/);
-  assert.match(index, /data-cat="Strategy & Reflection"[^>]*>Strategy & Reflection \(6\)/);
+  assert.match(index, new RegExp(`data-cat="all"[^>]*>All \\(${marketplace.plugins.length}\\)`));
+  for (const [category, title] of Object.entries({
+    development: 'Development',
+    testing: 'Testing & Review',
+    agents: 'Agents & Orchestration',
+    infrastructure: 'Infrastructure & Ops',
+    strategy: 'Strategy & Reflection',
+  })) {
+    const count = marketplace.plugins.filter(plugin => plugin.category === category).length;
+    assert.match(index, new RegExp(`data-cat="${title}"[^>]*>${title} \\(${count}\\)`));
+  }
   // the old heuristic's category names are gone
   assert.doesNotMatch(index, /Agent Systems/);
   assert.doesNotMatch(index, /Personal & Strategy/);
@@ -72,7 +78,6 @@ test('search: norm() folds separators so "review squad" finds review-squad', () 
   assert.match(index, /hay = norm\(/);
 });
 test('index: one row per marketplace entry, with details links', () => {
-  const marketplace = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude-plugin/marketplace.json'), 'utf8'));
   const rowCount = (index.match(/class="skill-row"/g) || []).length;
   assert.strictEqual(rowCount, marketplace.plugins.length);
   assert.match(index, /href="plugins\/simmer\/"/);

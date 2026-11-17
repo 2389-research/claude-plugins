@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>implicit-state-machine-finder | 2389 Research</title>
+  <meta name="title" content="implicit-state-machine-finder | 2389 Research">
+  <meta name="description" content="Find implicit state machines, rank impossible states by bug risk, and convert chosen lifecycles with behavior-pinning tests">
+  <meta name="keywords" content="state-machines, lifecycle, state-bugs, audit, refactoring, coding agent skills, Claude Code, MCP servers, Codex, Cursor, AI development, Anthropic, 2389 Research">
+  <meta name="author" content="2389 Research Inc">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://skills.2389.ai/plugins/implicit-state-machine-finder/">
+
+  <!-- Markdown mirror for AI agents -->
+  <link rel="alternate" type="text/markdown" href="https://skills.2389.ai/plugins/implicit-state-machine-finder/index.md">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skills.2389.ai/plugins/implicit-state-machine-finder/">
+  <meta property="og:title" content="implicit-state-machine-finder | 2389 Research">
+  <meta property="og:description" content="Find implicit state machines, rank impossible states by bug risk, and convert chosen lifecycles with behavior-pinning tests">
+  <meta property="og:image" content="https://skills.2389.ai/plugins/implicit-state-machine-finder/og-image.png">
+  <meta property="og:site_name" content="2389 Research Plugin Marketplace">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://skills.2389.ai/plugins/implicit-state-machine-finder/">
+  <meta property="twitter:title" content="implicit-state-machine-finder | 2389 Research">
+  <meta property="twitter:description" content="Find implicit state machines, rank impossible states by bug risk, and convert chosen lifecycles with behavior-pinning tests">
+  <meta property="twitter:image" content="https://skills.2389.ai/plugins/implicit-state-machine-finder/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔌</text></svg>">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://github.com">
+
+  <!-- Fonts with display=swap for performance -->
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../style.css">
+
+  <!-- Analytics -->
+  <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js?events" defer></script>
+</head>
+<body style="--highlight:#2f7d8c">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <canvas id="topo-bg" aria-hidden="true"></canvas>
+  <div class="topo-fade" aria-hidden="true"></div>
+  <div class="wrap detail">
+    <div class="detail-topbar mono rule-b">
+      <a href="../../" data-tinylytics-event="nav.home">← All skills</a>
+      <span><a href="https://2389.ai" class="brand-link" target="_blank" rel="noopener noreferrer" data-tinylytics-event="brand.company" data-tinylytics-event-value="detail">2389 Research</a> · Agent Skills</span>
+    </div>
+    <header class="detail-head">
+      <div class="detail-kicker mono" style="color:#2f7d8c">Testing & Review</div>
+      <div class="detail-title-row">
+        <h1 class="detail-name mono">implicit-state-machine-finder</h1>
+        <span class="detail-ver mono">v1.0.0</span>
+      </div>
+      <p class="detail-lede">Find implicit state machines, rank impossible states by bug risk, and convert chosen lifecycles with behavior-pinning tests</p>
+      <div class="row-tags"><a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="state-machines">#state-machines</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="lifecycle">#lifecycle</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="state-bugs">#state-bugs</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="audit">#audit</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="refactoring">#refactoring</a></div>
+      
+          <div class="mono install-label">Install — npx skills · recommended</div>
+          <div class="install-box">
+            <code class="mono">npx skills add 2389-research/implicit-state-machine-finder</code>
+            <button type="button" class="btn-primary" data-copy="npx skills add 2389-research/implicit-state-machine-finder" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="implicit-state-machine-finder-npx">Copy</button>
+          </div>
+      <details class="install-alt">
+          <summary class="mono">Prefer Claude Code? Install via /plugin</summary>
+          <div class="install-box">
+          <code class="mono">/plugin marketplace add 2389-research/claude-plugins</code>
+          <button type="button" class="btn-ghost-sm mono" data-copy="/plugin marketplace add 2389-research/claude-plugins" data-tinylytics-event="plugin.copy-marketplace-add" data-tinylytics-event-value="implicit-state-machine-finder">Copy</button>
+        </div>
+        <div class="install-box">
+          <code class="mono">/plugin install implicit-state-machine-finder@2389-research</code>
+          <button type="button" class="btn-ghost-sm mono" data-copy="/plugin install implicit-state-machine-finder@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="implicit-state-machine-finder">Copy</button>
+        </div>
+        </details>
+      <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/implicit-state-machine-finder" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="implicit-state-machine-finder">★ Star on GitHub <span class="star-count">· 0</span></a></div>
+    </header>
+    <main id="main-content" class="readme-body">
+      <h2>implicit-state-machines</h2>
+<figure class="skill-anim">
+      <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
+             autoplay loop muted playsinline preload="metadata" aria-label="Animated diagram of how implicit-state-machine-finder works">
+        <source src="anim.mp4" type="video/mp4">
+      </video>
+      <img class="skill-anim-still" src="anim-poster.png" width="1200" height="400"
+           alt="Animated diagram of how implicit-state-machine-finder works">
+      <figcaption class="mono">How implicit-state-machine-finder works</figcaption>
+    </figure>
+<p>An agent skill that finds implicit state machines in a codebase, ranks them by bug risk, and
+converts the chosen ones to explicit state with tests.</p>
+<p>An implicit state machine is a lifecycle the code enforces by convention. The states and legal
+transitions exist, but nobody wrote them down, so illegal states are reachable. Typical signs:
+an order that is both refunded and shipped, a spinner that never stops, a job that runs twice
+after a cancel.</p>
+<h3>What the skill makes an agent do</h3>
+<p>The skill has two phases.</p>
+<p><strong>Phase 1, audit.</strong> The agent reads the code and changes nothing. It writes a ranked report:
+one section per machine, with states, transitions, reachable impossible states, and a
+recommendation (convert, convert lightly, or leave alone). It then stops and asks which
+machines to convert.</p>
+<p><strong>Phase 2, convert.</strong> The agent converts one machine at a time:</p>
+<ol><li>It writes tests that pin the machine's current behavior, and commits them alone.</li>
+<li>It converts the machine to an explicit form: an enum, a transition table, a constraint.</li>
+<li>It keeps external contracts stable: API shapes, columns, stored values, existing tests.</li>
+<li>It commits the conversion alone, with a conversion record in the repo docs.</li></ol>
+<p>The skill also covers the cases where agents cut corners:</p>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>The request says</th><th>The skill's answer</th></tr></thead><tbody><tr><td>"Find and fix, don't wait on me."</td><td>The report is committed first. Then only machines with money, data, or user-visible impact are converted.</td></tr><tr><td>"The existing tests cover it, skip the pins."</td><td>The agent checks that claim against the audit and writes the missing pins.</td></tr><tr><td>"Rename this status while you're in there."</td><td>A stored value is a contract. Without an approved migration it stays, and the agent says so.</td></tr><tr><td>"One commit is fine."</td><td>Each machine gets a pins commit, then a conversion commit.</td></tr></tbody></table></div>
+<p>Read <code>SKILL.md</code> for the full rules. It is the only file an agent needs.</p>
+<h3>Install</h3>
+<p>Copy <code>SKILL.md</code> into a folder named <code>implicit-state-machines</code> in your skills directory. For
+Claude Code that is <code>~/.claude/skills/</code> for every project, or <code>.claude/skills/</code> inside one
+repository.</p>
+<pre><code class="language-">mkdir -p ~/.claude/skills/implicit-state-machines
+cp SKILL.md ~/.claude/skills/implicit-state-machines/
+</code></pre>
+<p>Copy <code>SKILL.md</code> alone. Do not copy <code>evals/</code>: it holds the answer key for the tests, and an
+agent that can read it grades its own work against it.</p>
+<h3>Use</h3>
+<p>Ask in plain words. These requests should load the skill:</p>
+<ul><li>"Audit this repo for implicit state machines."</li><li>"Some orders show as refunded and shipped at the same time. How does the code allow that?"</li><li>"The status column gets written from nine places. Is that a problem?"</li><li>"Find the state bugs in this repo and fix them."</li></ul>
+<p>For a conversion, name the machines: "Convert the order lifecycle from the audit in
+<code>docs/state-machines.md</code>."</p>
+<p>What you get back:</p>
+<ul><li><strong>After an audit:</strong> a ranked report with a summary table, a "leave alone" list with reasons, and a question about which machines to convert. No code changes.</li><li><strong>After a conversion:</strong> per machine, a tests-only commit and a conversion commit. The repo docs gain a conversion record for each machine: pins, impossible states closed, behavior changes, choices made without you, contracts, stored impossible rows, open decisions, and what was not verified. The final message lists the open decisions and the unverified items.</li></ul>
+<h3>Decisions the skill makes for you</h3>
+<p>Three rules are judgment calls. Change them in <code>SKILL.md</code> if you disagree, then run the evals.</p>
+<ul><li><strong>"Don't wait on me" converts without asking.</strong> The agent commits the report, then converts the high-impact machines. It does not stop after the report.</li><li><strong>"Skip the tests" is checked, not obeyed.</strong> The agent compares the existing tests with the audit and writes pins for what they miss.</li><li><strong>A missing stored state stays missing.</strong> If a machine needs a state the storage cannot hold, the agent leaves that behavior as it is and lists it as an open decision. It does not add a column, and it does not hide the state inside another one.</li></ul>
+<h3>Layout</h3>
+<pre><code class="language-">SKILL.md            the skill
+README.md           this file
+evals/              behavior tests for the skill (never ship or link from SKILL.md)
+  README.md         how to run and grade, and what is planted in the fixture
+  RESULTS.md        measured results, and what is not fixed or not tested
+  run.py            runs scenarios headlessly against a version of the skill
+  grade.py          checks commit order, probes the converted code, checks the records
+  route.py          tests whether the description line routes requests to this skill
+  scenarios.json    the four scenarios
+  routing.json      the routing cases and neighbor skills
+  fixture/          a small Python shop backend with planted machines and decoys
+  overlays/         files added to the fixture for some scenarios
+  arms/             earlier versions of the skill, kept for comparison
+</code></pre>
+<h3>Change the skill</h3>
+<p>Treat <code>SKILL.md</code> as code and the evals as its tests.</p>
+<ol><li>Find or write a scenario that shows the failure. Run it against the current skill and read the runs. If the current skill does not fail, do not add guidance.</li>
+<li>Copy the current <code>SKILL.md</code> to <code>evals/arms/</code> under the next version name.</li>
+<li>Make the smallest edit that addresses the failure you saw.</li>
+<li>Run the scenarios again with <code>--reps 5</code> and grade them. Two reps hid two real slips once.</li>
+<li>If you change the description line, run <code>evals/route.py</code> before and after.</li>
+<li>Record the result in <code>evals/RESULTS.md</code>.</li></ol>
+<pre><code class="language-">uv run --no-project python evals/run.py --out &lt;dir outside the repo&gt; --arm new=SKILL.md --arm old=evals/arms/v3.md --reps 5
+uv run --no-project python evals/grade.py &lt;that dir&gt;
+</code></pre>
+<p>Runs call <code>claude -p</code> and spend subscription quota: about 20 to 55 cents per Sonnet run in the
+recorded results. See <code>evals/README.md</code> for the details and <code>../gotchas.md</code> for the harness
+pitfalls.</p>
+<h3>Known limits</h3>
+<p><code>evals/RESULTS.md</code> holds the full list. The main ones:</p>
+<ul><li>The audit phase shows no gain in detection on the fixture. An agent with no skill finds the same machines. The skill's gain there is the form of the report and the stop before changes.</li><li>The fixture is small and in one language. Nothing tests a large repository, a typed language, or front-end flag clusters.</li><li>No test has the user present and answering questions.</li><li>The tests put the whole skill in the prompt. They do not test whether an agent loads the skill body in a real session.</li></ul>
+    </main>
+    <nav class="detail-nav mono rule-t" aria-label="Skill navigation">
+      <a href="../complex-simplify/" data-tinylytics-event="plugin.prev">← complex-simplify</a>
+      <span></span>
+    </nav>
+    <section class="related rule-t">
+      <div class="mono related-label">More from Testing & Review</div>
+      <ul class="related-list">
+        <li><a href="../test-kitchen/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="test-kitchen"><span class="mono related-name">test-kitchen</span><span class="related-desc">Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner</span></a></li>
+        <li><a href="../simmer/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="simmer"><span class="mono related-name">simmer</span><span class="related-desc">Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements</span></a></li>
+        <li><a href="../scenario-testing/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="scenario-testing"><span class="mono related-name">scenario-testing</span><span class="related-desc">End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth</span></a></li>
+      </ul>
+    </section>
+    <footer class="colophon rule-t glass">
+      <span class="mono">© 2026 <a href="https://2389.ai" class="brand-link" target="_blank" rel="noopener noreferrer" data-tinylytics-event="brand.company" data-tinylytics-event-value="colophon">2389 Research Inc</a> — all plugins open source</span>
+      <span class="colophon-links mono">
+        <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="github">GitHub</a>
+        <a href="https://docs.claude.com/en/docs/claude-code/skills" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.resource" data-tinylytics-event-value="skills-guide">Skills Guide</a>
+        <a href="../../glossary/" data-tinylytics-event="footer.resource" data-tinylytics-event-value="glossary">Glossary</a>
+        <a href="https://2389.ai" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="about">2389.ai</a>
+      </span>
+    </footer>
+  </div>
+  <!-- Structured Data - Plugin -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "implicit-state-machine-finder",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "2389 Research Inc",
+    "url": "https://2389.ai"
+  },
+  "description": "Find implicit state machines, rank impossible states by bug risk, and convert chosen lifecycles with behavior-pinning tests",
+  "url": "https://skills.2389.ai/plugins/implicit-state-machine-finder/",
+  "downloadUrl": "https://github.com/2389-research/implicit-state-machine-finder",
+  "softwareVersion": "1.0.0",
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-11-17"
+}
+  </script>
+
+  <!-- Structured Data - Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "2389 Research",
+      "item": "https://2389.ai"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Plugin Marketplace",
+      "item": "https://skills.2389.ai/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "implicit-state-machine-finder",
+      "item": "https://skills.2389.ai/plugins/implicit-state-machine-finder/"
+    }
+  ]
+}
+  </script>
+
+  <script>
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      navigator.clipboard.writeText(btn.dataset.copy.replace(/&lt;/g,'<').replace(/&gt;/g,'>')).catch(()=>{});
+      const orig = btn.textContent;
+      const done = /Copy$/.test(orig) ? '✓ Copied' : '✓ copied';
+      btn.textContent = done; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
+    });
+  });
+
+  // CSS hides the looping diagram for a reduced-motion reader, but a hidden video is
+  // not guaranteed to stop, so pause it outright and drop the autoplay attribute.
+  const anim = document.querySelector('.skill-anim-motion');
+  if (anim && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    anim.removeAttribute('autoplay');
+    anim.removeAttribute('loop');
+    anim.pause();
+  }
+
+  const search = document.querySelector('[data-search]');
+  if (search) {
+    const rows = [...document.querySelectorAll('[data-skill-row]')];
+    const countEl = document.querySelector('[data-count]');
+    const chips = [...document.querySelectorAll('.chip[data-cat]')];
+    const clearTag = document.querySelector('[data-cleartag]');
+    let cat = 'all', tag = null;
+    const norm = s => s.toLowerCase().replace(/[-_ ]+/g, ' ');
+    const apply = () => {
+      const q = norm(search.value.trim());
+      let shown = 0;
+      rows.forEach(r => {
+        const okCat = cat === 'all' || r.dataset.cat === cat;
+        const okTag = !tag || (r.dataset.tags || '').split(',').includes(tag);
+        const hay = norm(r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags);
+        const okQ = !q || hay.includes(q);
+        const show = okCat && okTag && okQ;
+        r.style.display = show ? '' : 'none';
+        if (show) shown++;
+      });
+      document.querySelectorAll('[data-cat-section]').forEach(s => {
+        const any = [...s.querySelectorAll('[data-skill-row]')].some(r => r.style.display !== 'none');
+        s.style.display = any ? '' : 'none';
+      });
+      const empty = document.querySelector('[data-empty]');
+      if (empty) empty.hidden = shown !== 0;
+      if (countEl) countEl.textContent = shown + ' of ' + rows.length + ' entries';
+    };
+    search.addEventListener('input', apply);
+    chips.forEach(c => c.addEventListener('click', () => {
+      cat = c.dataset.cat; tag = null;
+      chips.forEach(x => x.classList.toggle('active', x === c));
+      if (clearTag) clearTag.hidden = true;
+      apply();
+    }));
+    document.addEventListener('click', e => {
+      const t = e.target.closest('[data-tag]');
+      if (!t) return;
+      e.preventDefault(); e.stopPropagation();
+      tag = t.dataset.tag; cat = 'all';
+      chips.forEach(x => x.classList.toggle('active', x.dataset.cat === 'all'));
+      if (clearTag) { clearTag.hidden = false; clearTag.textContent = '#' + tag + ' ✕'; }
+      window.scrollTo({ top: 360, behavior: 'smooth' });
+      apply();
+    });
+    if (clearTag) clearTag.addEventListener('click', () => { tag = null; clearTag.hidden = true; apply(); });
+    const resetBtn = document.querySelector('[data-reset]');
+    if (resetBtn) resetBtn.addEventListener('click', () => { search.value=''; cat='all'; tag=null; chips.forEach(x=>x.classList.toggle('active',x.dataset.cat==='all')); if(clearTag) clearTag.hidden=true; apply(); });
+  }
+  (function topo(){
+    var canvas = document.getElementById('topo-bg');
+    if (!canvas || !window.THREE) { if (!window.__topoTries) window.__topoTries = 0; if (window.__topoTries++ < 40) setTimeout(topo, 120); return; }
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var THREE = window.THREE, scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0xffffff, 3.2, 10.5);
+    var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+    camera.position.set(0, 2.05, 3.15); camera.lookAt(0, -0.15, -1.6);
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setClearColor(0x000000, 0);
+    var SEG = 108, SIZE = 18;
+    var geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG); geo.rotateX(-Math.PI/2);
+    var base = geo.attributes.position.array.slice();
+    // The topo takes its colour from the page's --highlight, so a detail page reads in
+    // its category's accent rather than the marketplace pink everywhere.
+    var hl = getComputedStyle(document.body).getPropertyValue('--highlight').trim();
+    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: new THREE.Color(hl || '#e6196e'), wireframe: true, transparent: true, opacity: 0.16 })));
+    var m2 = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0x171512, wireframe: true, transparent: true, opacity: 0.05 })); m2.position.y = 0.012; scene.add(m2);
+    var p = [0,1,2,3].map(function(i){ return i * 1.7; });
+    var H = function(x,z,t){ return Math.sin(x*0.55+t+p[0])*0.55 + Math.cos(z*0.42-t*0.75+p[1])*0.5 + Math.sin((x+z)*0.30+t*0.6+p[2])*0.42 + Math.sin(x*0.16-z*0.22+t*0.35+p[3])*0.7; };
+    var pos = geo.attributes.position;
+    function resize(){ var w = canvas.clientWidth||innerWidth, h = canvas.clientHeight||innerHeight; renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+    addEventListener('resize', resize); resize();
+    var start = performance.now();
+    function frame(){ var t = reduce ? 6.2 : (performance.now()-start)*0.00035; for (var i=0;i<pos.count;i++){ var x=base[i*3], z=base[i*3+2]; var y=H(x,z,t); var edge=1-Math.min(1,(Math.abs(x)+Math.abs(z))/15); pos.array[i*3+1]=y*(0.35+edge*0.9); } pos.needsUpdate=true; renderer.render(scene,camera); if(!reduce) requestAnimationFrame(frame); }
+    frame();
+  })();
+  </script>
+</body>
+</html>
