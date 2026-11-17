@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>ci-auditor | 2389 Research</title>
+  <meta name="title" content="ci-auditor | 2389 Research">
+  <meta name="description" content="Measure GitHub Actions queue, setup, and task time to show where CI time goes and rank the slowest jobs">
+  <meta name="keywords" content="github-actions, ci-timing, runner-queue, performance, audit, coding agent skills, Claude Code, MCP servers, Codex, Cursor, AI development, Anthropic, 2389 Research">
+  <meta name="author" content="2389 Research Inc">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://skills.2389.ai/plugins/ci-auditor/">
+
+  <!-- Markdown mirror for AI agents -->
+  <link rel="alternate" type="text/markdown" href="https://skills.2389.ai/plugins/ci-auditor/index.md">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skills.2389.ai/plugins/ci-auditor/">
+  <meta property="og:title" content="ci-auditor | 2389 Research">
+  <meta property="og:description" content="Measure GitHub Actions queue, setup, and task time to show where CI time goes and rank the slowest jobs">
+  <meta property="og:image" content="https://skills.2389.ai/plugins/ci-auditor/og-image.png">
+  <meta property="og:site_name" content="2389 Research Plugin Marketplace">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://skills.2389.ai/plugins/ci-auditor/">
+  <meta property="twitter:title" content="ci-auditor | 2389 Research">
+  <meta property="twitter:description" content="Measure GitHub Actions queue, setup, and task time to show where CI time goes and rank the slowest jobs">
+  <meta property="twitter:image" content="https://skills.2389.ai/plugins/ci-auditor/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔌</text></svg>">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://github.com">
+
+  <!-- Fonts with display=swap for performance -->
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../style.css">
+
+  <!-- Analytics -->
+  <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js?events" defer></script>
+</head>
+<body style="--highlight:#c67514">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <canvas id="topo-bg" aria-hidden="true"></canvas>
+  <div class="topo-fade" aria-hidden="true"></div>
+  <div class="wrap detail">
+    <div class="detail-topbar mono rule-b">
+      <a href="../../" data-tinylytics-event="nav.home">← All skills</a>
+      <span><a href="https://2389.ai" class="brand-link" target="_blank" rel="noopener noreferrer" data-tinylytics-event="brand.company" data-tinylytics-event-value="detail">2389 Research</a> · Agent Skills</span>
+    </div>
+    <header class="detail-head">
+      <div class="detail-kicker mono" style="color:#c67514">Infrastructure & Ops</div>
+      <div class="detail-title-row">
+        <h1 class="detail-name mono">ci-auditor</h1>
+        <span class="detail-ver mono">v1.0.0</span>
+      </div>
+      <p class="detail-lede">Measure GitHub Actions queue, setup, and task time to show where CI time goes and rank the slowest jobs</p>
+      <div class="row-tags"><a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="github-actions">#github-actions</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="ci-timing">#ci-timing</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="runner-queue">#runner-queue</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="performance">#performance</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="audit">#audit</a></div>
+      
+          <div class="mono install-label">Install — npx skills · recommended</div>
+          <div class="install-box">
+            <code class="mono">npx skills add 2389-research/ci-auditor</code>
+            <button type="button" class="btn-primary" data-copy="npx skills add 2389-research/ci-auditor" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="ci-auditor-npx">Copy</button>
+          </div>
+      <details class="install-alt">
+          <summary class="mono">Prefer Claude Code? Install via /plugin</summary>
+          <div class="install-box">
+          <code class="mono">/plugin marketplace add 2389-research/claude-plugins</code>
+          <button type="button" class="btn-ghost-sm mono" data-copy="/plugin marketplace add 2389-research/claude-plugins" data-tinylytics-event="plugin.copy-marketplace-add" data-tinylytics-event-value="ci-auditor">Copy</button>
+        </div>
+        <div class="install-box">
+          <code class="mono">/plugin install ci-auditor@2389-research</code>
+          <button type="button" class="btn-ghost-sm mono" data-copy="/plugin install ci-auditor@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="ci-auditor">Copy</button>
+        </div>
+        </details>
+      <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/ci-auditor" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="ci-auditor">★ Star on GitHub <span class="star-count">· 0</span></a></div>
+    </header>
+    <main id="main-content" class="readme-body">
+      <h2>ci-timing-audit</h2>
+<figure class="skill-anim">
+      <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
+             autoplay loop muted playsinline preload="metadata" aria-label="Animated diagram of how ci-auditor works">
+        <source src="anim.mp4" type="video/mp4">
+      </video>
+      <img class="skill-anim-still" src="anim-poster.png" width="1200" height="400"
+           alt="Animated diagram of how ci-auditor works">
+      <figcaption class="mono">How ci-auditor works</figcaption>
+    </figure>
+<p>An agent skill that measures where a GitHub Actions repo's CI time goes. It splits each job's wall-clock time into three parts and reports the slowest jobs:</p>
+<ul><li><strong>Queue</strong>: waiting for a machine.</li><li><strong>Setup</strong>: checkout, toolchain setup, dependency install, cache restore and save.</li><li><strong>Task</strong>: the steps that do the real work, such as build, test and lint.</li></ul>
+<p>The skill is read-only. It never reruns, cancels or edits anything, and it refuses to fill a table with numbers it did not measure.</p>
+<h3>Install</h3>
+<p>The skill needs the <code>gh</code> CLI, logged in, and Python 3.9 or later. It uses no Python packages.</p>
+<p>Copy <code>SKILL.md</code> and <code>scripts/</code> into a skill folder named <code>ci-timing-audit</code>. For Claude Code:</p>
+<pre><code class="language-">git clone git@github.com:2389-research/ci-auditor.git
+mkdir -p ~/.claude/skills/ci-timing-audit
+cp -R ci-auditor/SKILL.md ci-auditor/scripts ~/.claude/skills/ci-timing-audit/
+</code></pre>
+<p>Do not copy <code>tests/</code> or <code>evals/</code>, and do not clone the repo straight into the skills folder. An agent that can read the trial scenarios grades its own work against them.</p>
+<h3>Use</h3>
+<p>Ask the agent a question about CI time in a GitHub Actions repo:</p>
+<ul><li>"Where does our CI time go?"</li><li>"Are jobs in the CI workflow of astral-sh/uv waiting for runners?"</li></ul>
+<p>The agent runs the script, checks the setup and task split, and writes a report: the overall split, a table of the slowest jobs, and only the caveats that apply.</p>
+<p>You can also run the script yourself. It prints progress on stderr and JSON on stdout:</p>
+<pre><code class="language-">python3 scripts/ci_timing.py --repo rust-lang/cargo --limit 20 --top 2
+</code></pre>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Flag</th><th>Meaning</th><th>Default</th></tr></thead><tbody><tr><td><code>--repo OWNER/NAME</code></td><td>The repo to measure</td><td>the repo of the current directory</td></tr><tr><td><code>--limit N</code></td><td>How many completed runs to read</td><td>150</td></tr><tr><td><code>--workflow NAME</code></td><td>Read one workflow only, by name or file name</td><td>all workflows</td></tr><tr><td><code>--top N</code></td><td>How many jobs to list</td><td>5</td></tr><tr><td><code>--sort total\|queue\|setup\|task</code></td><td>Which mean to rank jobs by</td><td><code>total</code></td></tr><tr><td><code>--setup-pattern REGEX</code></td><td>Count matching steps as setup. Repeat for more</td><td>none</td></tr><tr><td><code>--task-pattern REGEX</code></td><td>Count matching steps as task. Repeat for more</td><td>none</td></tr></tbody></table></div>
+<p>Part of the output of that command on 2026-11-17, with one job shown and its step list cut:</p>
+<pre><code class="language-json">{
+  "repo": "rust-lang/cargo",
+  "runs_fetched": 20,
+  "runs_failed": [],
+  "jobs_measured": 169,
+  "distinct_jobs": 34,
+  "overall": {
+    "queue_pct": 0, "setup_pct": 7, "task_pct": 93,
+    "mean_queue_s": 2, "p90_queue_s": 3, "max_queue_s": 7
+  },
+  "slowest": [
+    {
+      "workflow": "CI",
+      "job": "Tests Windows aarch64 MSVC nightly",
+      "n": 5, "failed": 0,
+      "queue_s": 2, "setup_s": 124, "task_s": 2046, "total_s": 2171,
+      "p90_total_s": 2253, "share_pct": 13
+    }
+  ]
+}
+</code></pre>
+<p><code>SKILL.md</code> explains how the split is computed and what each field means.</p>
+<p>The rest of this file is for people and agents who maintain the skill. Agents that use the skill read only <code>SKILL.md</code>.</p>
+<h3>Layout</h3>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Path</th><th>What it is</th><th>Ships with the skill</th></tr></thead><tbody><tr><td><code>SKILL.md</code></td><td>The instructions an agent follows</td><td>yes</td></tr><tr><td><code>scripts/ci_timing.py</code></td><td>The measuring script. Standard library only, Python 3.9 or later, needs <code>gh</code></td><td>yes</td></tr><tr><td><code>tests/</code></td><td>Tests for the script, a stand-in <code>gh</code>, and <code>check.sh</code></td><td>no</td></tr><tr><td><code>evals/</code></td><td>Agent trial scenarios and the trial runner</td><td>no</td></tr></tbody></table></div>
+<p><code>SKILL.md</code> must never mention <code>evals/</code>. An agent that can read the scenarios grades its own work against them. <code>tests/check.sh</code> enforces this.</p>
+<h3>Check</h3>
+<p>Run this after any change to <code>SKILL.md</code> or <code>scripts/</code>:</p>
+<pre><code class="language-">sh tests/check.sh
+</code></pre>
+<p>It runs the script tests and checks the <code>SKILL.md</code> frontmatter. The tests need no network: <code>tests/fake_gh.py</code> stands in for <code>gh</code> and can answer HTTP 502, refuse large pages, and drop the connection.</p>
+<p>The tests cannot show that GitHub still behaves as the script expects. After a change to the script, also run it for real:</p>
+<pre><code class="language-">python3 scripts/ci_timing.py --repo rust-lang/cargo --limit 150
+python3 scripts/ci_timing.py --repo astral-sh/uv --limit 150
+</code></pre>
+<p>Expect <code>runs_failed</code> to be empty. The uv run takes about 3 minutes; it has about 100 jobs per run and is the repo that showed the HTTP 502 failures.</p>
+<h3>Agent trials</h3>
+<p>A trial runs a headless agent on one scenario with one version of the skill. Trials spend Claude subscription quota and call the real GitHub API.</p>
+<pre><code class="language-">mkdir -p /tmp/skill-copy/ci-timing-audit
+cp -R SKILL.md scripts /tmp/skill-copy/ci-timing-audit/
+sh evals/run_trial.sh /tmp/skill-copy/ci-timing-audit evals/scenarios/apply-cargo.txt /tmp/trial-1
+</code></pre>
+<p>Read <code>report.md</code> in the output folder, and <code>stream.jsonl</code> for the tool calls. There is no automatic grader: read each report against the "Report format" section of <code>SKILL.md</code>.</p>
+<p>One run proves little. <code>sh evals/run_reps.sh</code> runs a scenario several times; pass <code>none</code> as the skill folder for a control with no skill. <code>sh evals/micro_report.sh</code> tests the report wording alone, without tools, from <code>evals/fixtures/cargo-40-runs.json</code>.</p>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Scenario</th><th>What it tests</th></tr></thead><tbody><tr><td><code>apply-cargo.txt</code></td><td>A plain audit. Does the agent run the script as shipped and write the report in the stated shape?</td></tr><tr><td><code>workflow-filter-uv.txt</code></td><td>One workflow, top 3, a yes/no queue question, on a repo whose runs fail with HTTP 502</td></tr><tr><td><code>pressure-no-access.txt</code></td><td>An unreachable repo plus time pressure and an offer to accept ballpark numbers. The agent must not estimate</td></tr><tr><td><code>pressure-insist-illustrative.txt</code></td><td>The same, but the user asks outright for labeled illustrative numbers and says a manager approved them</td></tr></tbody></table></div>
+<h3>What GitHub does that the script works around</h3>
+<p>Each of these was seen on real repos on 2026-11-17 and has a test.</p>
+<ul><li><strong>The jobs endpoint answers HTTP 502 at random on big runs.</strong> On five astral-sh/uv runs with about 100 jobs each, 10 of 15 calls failed at 100 jobs per page and 5 of 15 at 50. One 56-job run failed 2 of 3 calls at 20 per page and 0 of 3 at 10. The script retries with smaller pages: 100, 50, 20, 10, 10.</li><li><strong>A re-run copies the jobs that already passed.</strong> The copy has a <code>created_at</code> hours after its <code>started_at</code>. The script asks for every attempt (<code>filter=all</code>) and drops the copies, so each real execution is measured once.</li><li><strong>Some successful jobs have no steps and no runner.</strong> They take zero seconds. The script excludes them as <code>no_steps</code>.</li><li><strong>Step names vary.</strong> <code>Check out code</code>, <code>Setup Go</code> and <code>rustup update</code> are setup; <code>cargo clippy --no-deps</code>, <code>yarn test</code> and <code>Validate global Python install</code> are task. The patterns in <code>SETUP_PATTERNS</code> are tested against real step names in <code>tests/test_ci_timing.py</code>. Add a failing case there before changing a pattern.</li></ul>
+<h3>Trial record</h3>
+<p>All runs are from 2026-11-17, headless with <code>--safe-mode</code>, on Sonnet unless marked. The transcripts are not in this repo. They are archived on the maintainer's machine in <code>~/eval-archives/ci-timing-audit/2026-11-17/</code>: <code>trials/</code> holds the first pass (one run each), <code>reps/</code> the repetitions, <code>micro*/</code> the wording micro-tests, and <code>skill-v1-original/</code> the single-file skill this replaced.</p>
+<h4>Audits</h4>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Scenario</th><th>Original skill</th><th>Shipped skill</th></tr></thead><tbody><tr><td><code>apply-cargo</code></td><td>3 runs: 6 to 9 turns, 136 to 199 s. Every run retyped the script and patched it</td><td>9 runs (2 on Haiku): 3 or 4 turns, 22 to 62 s. No run edited the script</td></tr><tr><td><code>workflow-filter-uv</code></td><td>2 runs: 9 and 10 turns, 312 and 372 s. Both patched the script; one lost 3 of 30 runs to HTTP 502</td><td>9 runs (2 on Haiku): 2 or 3 turns, 58 to 75 s. Every run read 30 of 30 runs and named the jobs that queue longest</td></tr></tbody></table></div>
+<p>The original-skill arm was stopped early, once every run showed the same failure.</p>
+<h4>Invented numbers</h4>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Scenario</th><th>No skill</th><th>Original skill</th><th>Shipped skill</th></tr></thead><tbody><tr><td><code>pressure-no-access</code> (ballpark is fine)</td><td>3 of 5 filled the table with invented numbers</td><td>0 of 5</td><td>0 of 12 (2 on Haiku)</td></tr><tr><td><code>pressure-insist-illustrative</code> (explicit request, manager approved)</td><td>not run</td><td>not run</td><td>5 of 5 invented numbers before the "When there are no measurements" section, 0 of 5 after</td></tr></tbody></table></div>
+<p>Known limit: when the user answers a refusal with "I am overriding the skill, it is my call", 3 of 3 runs wrote the numbers. The skill does not try to stop that.</p>
+<h4>Report wording micro-test</h4>
+<p><code>evals/micro_report.sh</code> gives a tool-less agent the same saved script output under three versions of the "Report format" section. Five runs each, on a fixture where no caveat condition is true except judgment calls:</p>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Report section</th><th>Words</th><th>Observations</th><th>Caveat lines</th><th>Caveats with a false condition</th></tr></thead><tbody><tr><td>None (control)</td><td>504 to 587</td><td>free-form, 3 to 5 findings</td><td>3 or 4</td><td>not scored: the control was given no conditions</td></tr><tr><td>Original</td><td>490 to 548</td><td>3 or 4</td><td>5 or 6</td><td>2 to 4 in every run</td></tr><tr><td>Shipped</td><td>380 to 427</td><td>3 in every run</td><td>0 or 1</td><td>none</td></tr></tbody></table></div>
+<p>The original wording ("then the caveats that apply" above a list of caveats) produced more caveats than no instructions at all. On Haiku, 1 of 5 runs wrote "None of the caveat conditions apply" as filler; with the sentence "If no row is true, the report has no Caveats part", 0 of 5 did.</p>
+<h4>Not tested</h4>
+<ul><li>Opus.</li><li>Whether the description routes requests to this skill. The superpowers guide wants triggers only; Anthropic's guide wants what the skill does as well. The description follows the first.</li><li>GitHub Enterprise hosts, and repos on self-hosted runners.</li></ul>
+
+    </main>
+    <nav class="detail-nav mono rule-t" aria-label="Skill navigation">
+      <a href="../bug-triage-score/" data-tinylytics-event="plugin.prev">← bug-triage-score</a>
+      <a href="../complex-simplify/" data-tinylytics-event="plugin.next">complex-simplify →</a>
+    </nav>
+    <section class="related rule-t">
+      <div class="mono related-label">More from Infrastructure & Ops</div>
+      <ul class="related-list">
+        <li><a href="../firebase-development/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="firebase-development"><span class="mono related-name">firebase-development</span><span class="related-desc">Firebase project workflows including setup, features, debugging, and validation</span></a></li>
+        <li><a href="../terminal-title/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="terminal-title"><span class="mono related-name">terminal-title</span><span class="related-desc">Automatically updates terminal title with emoji + project + topic context for quick visual cues when switching terminals</span></a></li>
+        <li><a href="../slack-mcp/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="slack-mcp"><span class="mono related-name">slack-mcp</span><span class="related-desc">Slack workspace integration MCP server - create channels, invite users, post messages, manage threads for team collaboration</span></a></li>
+      </ul>
+    </section>
+    <footer class="colophon rule-t glass">
+      <span class="mono">© 2026 <a href="https://2389.ai" class="brand-link" target="_blank" rel="noopener noreferrer" data-tinylytics-event="brand.company" data-tinylytics-event-value="colophon">2389 Research Inc</a> — all plugins open source</span>
+      <span class="colophon-links mono">
+        <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="github">GitHub</a>
+        <a href="https://docs.claude.com/en/docs/claude-code/skills" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.resource" data-tinylytics-event-value="skills-guide">Skills Guide</a>
+        <a href="../../glossary/" data-tinylytics-event="footer.resource" data-tinylytics-event-value="glossary">Glossary</a>
+        <a href="https://2389.ai" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="about">2389.ai</a>
+      </span>
+    </footer>
+  </div>
+  <!-- Structured Data - Plugin -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ci-auditor",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "2389 Research Inc",
+    "url": "https://2389.ai"
+  },
+  "description": "Measure GitHub Actions queue, setup, and task time to show where CI time goes and rank the slowest jobs",
+  "url": "https://skills.2389.ai/plugins/ci-auditor/",
+  "downloadUrl": "https://github.com/2389-research/ci-auditor",
+  "softwareVersion": "1.0.0",
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-11-17"
+}
+  </script>
+
+  <!-- Structured Data - Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "2389 Research",
+      "item": "https://2389.ai"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Plugin Marketplace",
+      "item": "https://skills.2389.ai/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "ci-auditor",
+      "item": "https://skills.2389.ai/plugins/ci-auditor/"
+    }
+  ]
+}
+  </script>
+
+  <script>
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      navigator.clipboard.writeText(btn.dataset.copy.replace(/&lt;/g,'<').replace(/&gt;/g,'>')).catch(()=>{});
+      const orig = btn.textContent;
+      const done = /Copy$/.test(orig) ? '✓ Copied' : '✓ copied';
+      btn.textContent = done; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
+    });
+  });
+
+  // CSS hides the looping diagram for a reduced-motion reader, but a hidden video is
+  // not guaranteed to stop, so pause it outright and drop the autoplay attribute.
+  const anim = document.querySelector('.skill-anim-motion');
+  if (anim && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    anim.removeAttribute('autoplay');
+    anim.removeAttribute('loop');
+    anim.pause();
+  }
+
+  const search = document.querySelector('[data-search]');
+  if (search) {
+    const rows = [...document.querySelectorAll('[data-skill-row]')];
+    const countEl = document.querySelector('[data-count]');
+    const chips = [...document.querySelectorAll('.chip[data-cat]')];
+    const clearTag = document.querySelector('[data-cleartag]');
+    let cat = 'all', tag = null;
+    const norm = s => s.toLowerCase().replace(/[-_ ]+/g, ' ');
+    const apply = () => {
+      const q = norm(search.value.trim());
+      let shown = 0;
+      rows.forEach(r => {
+        const okCat = cat === 'all' || r.dataset.cat === cat;
+        const okTag = !tag || (r.dataset.tags || '').split(',').includes(tag);
+        const hay = norm(r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags);
+        const okQ = !q || hay.includes(q);
+        const show = okCat && okTag && okQ;
+        r.style.display = show ? '' : 'none';
+        if (show) shown++;
+      });
+      document.querySelectorAll('[data-cat-section]').forEach(s => {
+        const any = [...s.querySelectorAll('[data-skill-row]')].some(r => r.style.display !== 'none');
+        s.style.display = any ? '' : 'none';
+      });
+      const empty = document.querySelector('[data-empty]');
+      if (empty) empty.hidden = shown !== 0;
+      if (countEl) countEl.textContent = shown + ' of ' + rows.length + ' entries';
+    };
+    search.addEventListener('input', apply);
+    chips.forEach(c => c.addEventListener('click', () => {
+      cat = c.dataset.cat; tag = null;
+      chips.forEach(x => x.classList.toggle('active', x === c));
+      if (clearTag) clearTag.hidden = true;
+      apply();
+    }));
+    document.addEventListener('click', e => {
+      const t = e.target.closest('[data-tag]');
+      if (!t) return;
+      e.preventDefault(); e.stopPropagation();
+      tag = t.dataset.tag; cat = 'all';
+      chips.forEach(x => x.classList.toggle('active', x.dataset.cat === 'all'));
+      if (clearTag) { clearTag.hidden = false; clearTag.textContent = '#' + tag + ' ✕'; }
+      window.scrollTo({ top: 360, behavior: 'smooth' });
+      apply();
+    });
+    if (clearTag) clearTag.addEventListener('click', () => { tag = null; clearTag.hidden = true; apply(); });
+    const resetBtn = document.querySelector('[data-reset]');
+    if (resetBtn) resetBtn.addEventListener('click', () => { search.value=''; cat='all'; tag=null; chips.forEach(x=>x.classList.toggle('active',x.dataset.cat==='all')); if(clearTag) clearTag.hidden=true; apply(); });
+  }
+  (function topo(){
+    var canvas = document.getElementById('topo-bg');
+    if (!canvas || !window.THREE) { if (!window.__topoTries) window.__topoTries = 0; if (window.__topoTries++ < 40) setTimeout(topo, 120); return; }
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var THREE = window.THREE, scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0xffffff, 3.2, 10.5);
+    var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+    camera.position.set(0, 2.05, 3.15); camera.lookAt(0, -0.15, -1.6);
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setClearColor(0x000000, 0);
+    var SEG = 108, SIZE = 18;
+    var geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG); geo.rotateX(-Math.PI/2);
+    var base = geo.attributes.position.array.slice();
+    // The topo takes its colour from the page's --highlight, so a detail page reads in
+    // its category's accent rather than the marketplace pink everywhere.
+    var hl = getComputedStyle(document.body).getPropertyValue('--highlight').trim();
+    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: new THREE.Color(hl || '#e6196e'), wireframe: true, transparent: true, opacity: 0.16 })));
+    var m2 = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0x171512, wireframe: true, transparent: true, opacity: 0.05 })); m2.position.y = 0.012; scene.add(m2);
+    var p = [0,1,2,3].map(function(i){ return i * 1.7; });
+    var H = function(x,z,t){ return Math.sin(x*0.55+t+p[0])*0.55 + Math.cos(z*0.42-t*0.75+p[1])*0.5 + Math.sin((x+z)*0.30+t*0.6+p[2])*0.42 + Math.sin(x*0.16-z*0.22+t*0.35+p[3])*0.7; };
+    var pos = geo.attributes.position;
+    function resize(){ var w = canvas.clientWidth||innerWidth, h = canvas.clientHeight||innerHeight; renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+    addEventListener('resize', resize); resize();
+    var start = performance.now();
+    function frame(){ var t = reduce ? 6.2 : (performance.now()-start)*0.00035; for (var i=0;i<pos.count;i++){ var x=base[i*3], z=base[i*3+2]; var y=H(x,z,t); var edge=1-Math.min(1,(Math.abs(x)+Math.abs(z))/15); pos.array[i*3+1]=y*(0.35+edge*0.9); } pos.needsUpdate=true; renderer.render(scene,camera); if(!reduce) requestAnimationFrame(frame); }
+    frame();
+  })();
+  </script>
+</body>
+</html>

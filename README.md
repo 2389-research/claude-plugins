@@ -3,7 +3,7 @@
 
 # 2389 Research Claude Code Plugin Marketplace
 
-28 plugins and MCP servers for Claude Code — parallel exploration, iterative refinement, binary reverse engineering, structured decision-making, and more.
+36 plugins and MCP servers for Claude Code — parallel exploration, iterative refinement, binary reverse engineering, structured decision-making, and more.
 
 Built by the team at [2389](https://2389.ai). These are the tools we use every day.
 
@@ -55,6 +55,10 @@ Or natively in Claude Code:
 | Plugin | Description |
 |--------|-------------|
 | [test-kitchen](https://github.com/2389-research/test-kitchen) | Parallel exploration of implementation approaches |
+| [bug-triage-score](https://github.com/2389-research/bug-triage-score) | Score bugs by frequency and severity to decide what to fix or file |
+| [complex-simplify](https://github.com/2389-research/complex-simplify) | Review recent changes for reuse, quality, and efficiency, then apply focused cleanups |
+| [implicit-state-machine-finder](https://github.com/2389-research/implicit-state-machine-finder) | Find implicit state machines and convert chosen lifecycles with behavior-pinning tests |
+| [ci-auditor](https://github.com/2389-research/ci-auditor) | Measure GitHub Actions queue, setup, and task time |
 | [simmer](https://github.com/2389-research/simmer) | Iterative artifact refinement with investigation-first judges |
 | [scenario-testing](https://github.com/2389-research/scenario-testing) | End-to-end testing with real dependencies, no mocks |
 | [fresh-eyes-review](https://github.com/2389-research/fresh-eyes-review) | Final sanity check before commits/PRs |
@@ -68,6 +72,7 @@ Or natively in Claude Code:
 | Plugin | Description |
 |--------|-------------|
 | [ceo-personal-os](https://github.com/2389-research/ceo-personal-os) | Personal operating system for executives |
+| [about-us-optimizer](https://github.com/2389-research/about-us-optimizer) | Write or audit company About pages using supplied sources |
 | [worldview-synthesis](https://github.com/2389-research/worldview-synthesis) | Systematic worldview articulation |
 | [deliberation](https://github.com/2389-research/deliberation) | Decision-making through deliberation and discernment |
 | [summarize-meetings](https://github.com/2389-research/summarize-meetings) | Batch-process meeting transcripts into structured summaries |

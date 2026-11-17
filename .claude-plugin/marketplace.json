@@ -663,6 +663,66 @@
         "agents"
       ],
       "strict": false
+    },
+    {
+      "name": "about-us-optimizer",
+      "category": "strategy",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/2389-research/about-us-optimizer.git"
+      },
+      "description": "Write or audit company About pages from supplied sources, with checkable facts, clear offerings, and buyer-focused FAQs",
+      "version": "2.0.0",
+      "keywords": ["about-page", "content", "sourcing", "company-profile", "faq"],
+      "strict": false
+    },
+    {
+      "name": "bug-triage-score",
+      "category": "testing",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/2389-research/bug-triage-score.git"
+      },
+      "description": "Score bugs by observed frequency and severity to decide which to fix now and which to file",
+      "version": "1.0.0",
+      "keywords": ["bug-triage", "severity", "prioritization", "code-review", "qa"],
+      "strict": false
+    },
+    {
+      "name": "ci-auditor",
+      "category": "infrastructure",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/2389-research/ci-auditor.git"
+      },
+      "description": "Measure GitHub Actions queue, setup, and task time to show where CI time goes and rank the slowest jobs",
+      "version": "1.0.0",
+      "keywords": ["github-actions", "ci-timing", "runner-queue", "performance", "audit"],
+      "strict": false
+    },
+    {
+      "name": "complex-simplify",
+      "category": "testing",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/2389-research/complex-simplify.git"
+      },
+      "description": "Review recent changes for reuse, quality, and efficiency, apply focused cleanups, and run the project's checks",
+      "version": "1.0.0",
+      "keywords": ["simplify", "code-review", "refactoring", "reuse", "quality", "efficiency"],
+      "strict": false
+    },
+    {
+      "name": "implicit-state-machine-finder",
+      "category": "testing",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/2389-research/implicit-state-machine-finder.git"
+      },
+      "description": "Find implicit state machines, rank impossible states by bug risk, and convert chosen lifecycles with behavior-pinning tests",
+      "version": "1.0.0",
+      "keywords": ["state-machines", "lifecycle", "state-bugs", "audit", "refactoring"],
+      "strict": false
     }
   ]
 }

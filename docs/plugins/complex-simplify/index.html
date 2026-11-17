@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>complex-simplify | 2389 Research</title>
+  <meta name="title" content="complex-simplify | 2389 Research">
+  <meta name="description" content="Review recent changes for reuse, quality, and efficiency, apply focused cleanups, and run the project's checks">
+  <meta name="keywords" content="simplify, code-review, refactoring, reuse, quality, efficiency, coding agent skills, Claude Code, MCP servers, Codex, Cursor, AI development, Anthropic, 2389 Research">
+  <meta name="author" content="2389 Research Inc">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://skills.2389.ai/plugins/complex-simplify/">
+
+  <!-- Markdown mirror for AI agents -->
+  <link rel="alternate" type="text/markdown" href="https://skills.2389.ai/plugins/complex-simplify/index.md">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skills.2389.ai/plugins/complex-simplify/">
+  <meta property="og:title" content="complex-simplify | 2389 Research">
+  <meta property="og:description" content="Review recent changes for reuse, quality, and efficiency, apply focused cleanups, and run the project's checks">
+  <meta property="og:image" content="https://skills.2389.ai/plugins/complex-simplify/og-image.png">
+  <meta property="og:site_name" content="2389 Research Plugin Marketplace">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://skills.2389.ai/plugins/complex-simplify/">
+  <meta property="twitter:title" content="complex-simplify | 2389 Research">
+  <meta property="twitter:description" content="Review recent changes for reuse, quality, and efficiency, apply focused cleanups, and run the project's checks">
+  <meta property="twitter:image" content="https://skills.2389.ai/plugins/complex-simplify/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔌</text></svg>">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://github.com">
+
+  <!-- Fonts with display=swap for performance -->
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../style.css">
+
+  <!-- Analytics -->
+  <script src="https://tinylytics.app/embed/5QhFsgM-mdxovUNCvS-o.js?events" defer></script>
+</head>
+<body style="--highlight:#2f7d8c">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <canvas id="topo-bg" aria-hidden="true"></canvas>
+  <div class="topo-fade" aria-hidden="true"></div>
+  <div class="wrap detail">
+    <div class="detail-topbar mono rule-b">
+      <a href="../../" data-tinylytics-event="nav.home">← All skills</a>
+      <span><a href="https://2389.ai" class="brand-link" target="_blank" rel="noopener noreferrer" data-tinylytics-event="brand.company" data-tinylytics-event-value="detail">2389 Research</a> · Agent Skills</span>
+    </div>
+    <header class="detail-head">
+      <div class="detail-kicker mono" style="color:#2f7d8c">Testing & Review</div>
+      <div class="detail-title-row">
+        <h1 class="detail-name mono">complex-simplify</h1>
+        <span class="detail-ver mono">v1.0.0</span>
+      </div>
+      <p class="detail-lede">Review recent changes for reuse, quality, and efficiency, apply focused cleanups, and run the project's checks</p>
+      <div class="row-tags"><a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="simplify">#simplify</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="code-review">#code-review</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="refactoring">#refactoring</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="reuse">#reuse</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="quality">#quality</a> <a href="../../" class="tag-btn mono" data-tinylytics-event="plugin.tag" data-tinylytics-event-value="efficiency">#efficiency</a></div>
+      
+          <div class="mono install-label">Install — npx skills · recommended</div>
+          <div class="install-box">
+            <code class="mono">npx skills add 2389-research/complex-simplify</code>
+            <button type="button" class="btn-primary" data-copy="npx skills add 2389-research/complex-simplify" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="complex-simplify-npx">Copy</button>
+          </div>
+      <details class="install-alt">
+          <summary class="mono">Prefer Claude Code? Install via /plugin</summary>
+          <div class="install-box">
+          <code class="mono">/plugin marketplace add 2389-research/claude-plugins</code>
+          <button type="button" class="btn-ghost-sm mono" data-copy="/plugin marketplace add 2389-research/claude-plugins" data-tinylytics-event="plugin.copy-marketplace-add" data-tinylytics-event-value="complex-simplify">Copy</button>
+        </div>
+        <div class="install-box">
+          <code class="mono">/plugin install complex-simplify@2389-research</code>
+          <button type="button" class="btn-ghost-sm mono" data-copy="/plugin install complex-simplify@2389-research" data-tinylytics-event="plugin.copy-install" data-tinylytics-event-value="complex-simplify">Copy</button>
+        </div>
+        </details>
+      <div class="detail-actions"><a class="detail-star btn-ghost-sm mono" href="https://github.com/2389-research/complex-simplify" target="_blank" rel="noopener noreferrer" data-tinylytics-event="plugin.star-github" data-tinylytics-event-value="complex-simplify">★ Star on GitHub <span class="star-count">· 0</span></a></div>
+    </header>
+    <main id="main-content" class="readme-body">
+      <h2>Simplify Changes</h2>
+<figure class="skill-anim">
+      <video class="skill-anim-motion" poster="anim-poster.png" width="1200" height="400"
+             autoplay loop muted playsinline preload="metadata" aria-label="Animated diagram of how complex-simplify works">
+        <source src="anim.mp4" type="video/mp4">
+      </video>
+      <img class="skill-anim-still" src="anim-poster.png" width="1200" height="400"
+           alt="Animated diagram of how complex-simplify works">
+      <figcaption class="mono">How complex-simplify works</figcaption>
+    </figure>
+<p>A skill for reuse, quality, and efficiency cleanup of recently changed code. It
+reviews the change with three read-only reviewers running in parallel, fixes the
+verified issues with small behavior-preserving edits, and validates the result.</p>
+<p>Use it to simplify, clean up, or tidy code you just wrote, to remove duplication
+or waste from a diff before a commit or PR, or to list such cleanups without
+editing. It is not for new features or broad rewrites.</p>
+<h3>Start here</h3>
+<pre><code class="language-text">Use simplify-changes to review the changes I just made for reuse, quality, and
+efficiency problems, fix the ones worth fixing, and tell me what checks you ran.
+</code></pre>
+<p>Ask for a review only to get findings without edits. Name paths or a diff range
+to narrow the review; otherwise it reviews the working tree's staged, unstaged,
+and untracked changes.</p>
+<h3>Design principles built into the workflow</h3>
+<ul><li>It reviews what changed, or the paths or range you name. It never picks files by timestamp and never checks out old revisions.</li><li>Three reviewers run at once, each with its own checklist: reuse, quality, and efficiency. They read and report; only the main agent edits, and only after all three finish. Without a delegation tool, it runs the checklists as separate passes and says so.</li><li>Reviewers report only problems they confirmed in code they read. Each finding is a claim to check against the code, its callers, and tests, not a vote, and ends as fix, skip, or blocked, with a reason.</li><li>Fixes are small and keep behavior, public interfaces, error semantics, and unrelated user changes. No reformatting, unrelated cleanup, or speculative abstractions.</li><li>It never stages, commits, stashes, or discards changes, and never installs dependencies. It never copies credentials and lists <code>.env*</code> files by name only.</li><li>It runs the repository's own checks and reports each command and its result. It never claims a check it did not run, and it stops after one pass.</li></ul>
+<h3>Package contents</h3>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>File or directory</th><th>Purpose</th></tr></thead><tbody><tr><td><code>SKILL.md</code></td><td>The workflow: find the changes, run three reviews in parallel, fix, validate</td></tr><tr><td><code>agents/openai.yaml</code></td><td>Display name, short description, and default prompt</td></tr><tr><td><code>evals/make_fixture.sh</code></td><td>Builds the seeded fixture repo each eval run works on</td></tr><tr><td><code>evals/run_arm.sh</code></td><td>One headless Claude Code run: one arm, one scenario, one rep</td></tr><tr><td><code>evals/run_matrix.sh</code></td><td>Several arms in parallel, reps in sequence, then a scoreboard</td></tr><tr><td><code>evals/analyze_run.py</code></td><td>Summarizes one run: cost, models, reviewers, git safety, tests, canary leaks</td></tr><tr><td><code>evals/grade.py</code></td><td>Scores runs against the fixture's seeded issues and traps</td></tr><tr><td><code>evals/lint_skill.py</code></td><td>Static checks on <code>SKILL.md</code> and <code>agents/openai.yaml</code></td></tr><tr><td><code>evals/testdata/</code></td><td>A trimmed stream and two runs' changed files, for the unit tests</td></tr><tr><td><code>tests/</code></td><td>Unit tests, harness tests that use a stub <code>claude</code>, and <code>check.sh</code></td></tr></tbody></table></div>
+<p>The skill itself runs no scripts. An installed copy needs only <code>SKILL.md</code> and
+<code>agents/</code>; <code>evals/</code> and <code>tests/</code> are optional development tools.</p>
+<h3>Install</h3>
+<p>Claude Code reads personal skills from <code>~/.claude/skills/&lt;skill-name&gt;/</code> and
+project skills from <code>.claude/skills/&lt;skill-name&gt;/</code>. It takes the command name
+from the directory name, so keep that <code>simplify-changes</code>. From this directory:</p>
+<pre><code class="language-bash">mkdir -p ~/.claude/skills/simplify-changes
+cp -R SKILL.md agents ~/.claude/skills/simplify-changes/
+</code></pre>
+<p>Invoke it with <code>/simplify-changes</code>, or ask in plain words: Claude uses a skill
+when your request matches its description. The name avoids Claude Code's bundled
+<code>/simplify</code> skill, which a personal or project skill named <code>simplify</code> would
+replace.</p>
+<p>Codex reads user skills from <code>$HOME/.agents/skills</code> and repository skills from
+<code>.agents/skills</code> in each directory from the current one up to the repository
+root:</p>
+<pre><code class="language-bash">mkdir -p ~/.agents/skills/simplify-changes
+cp -R SKILL.md agents ~/.agents/skills/simplify-changes/
+</code></pre>
+<p>Invoke it with <code>$simplify-changes</code> or pick it from <code>/skills</code>; Codex can also
+choose it when your task matches its description. Codex detects new skills; if
+this one does not appear, restart Codex.</p>
+<h3>Optional checks</h3>
+<pre><code class="language-bash">bash tests/check.sh
+</code></pre>
+<p><code>tests/check.sh</code> runs the unit and harness tests, <code>evals/lint_skill.py</code>,
+<code>bash -n</code>, and <code>shellcheck</code>. It prints one PASS, FAIL, or SKIP line per step and
+exits nonzero if any step failed; it skips <code>shellcheck</code> when that is not
+installed. The harness tests run the real scripts with a stub <code>claude</code> first on
+<code>PATH</code>, so they spend nothing and need no network.</p>
+<h3>Evals</h3>
+<p>The evals compare arms on a seeded repo built by <code>evals/make_fixture.sh</code>: a
+small Python package with a staged change, an unstaged edit on top of it, an
+untracked new module with seeded issues, and an untracked <code>.env.local</code> that
+holds a canary value. Each run swaps in a random value of its own, so a leak
+counts only against the run whose value it holds, even when runs share <code>/tmp</code>.</p>
+<p>Arms:</p>
+<ul><li><code>control</code>: no skill; <code>--disable-slash-commands</code> turns off all skills.</li><li><code>builtin</code>: nothing installed, so Claude Code's bundled <code>/simplify</code> is there.</li><li>A skill directory: installed as a project skill in the fixture repo, without <code>evals/</code>, <code>tests/</code>, or <code>README.md</code>. A skill named <code>simplify</code> installs under its lowercased directory name (<code>simplify-vA</code> becomes <code>simplify-va</code>); the harness refuses one that would still install as <code>simplify</code>.</li></ul>
+<p>Scenarios:</p>
+<ul><li><code>clean</code>: an explicit request. <code>builtin</code> gets <code>/simplify</code>, a skill arm gets <code>/&lt;name&gt;</code>, and <code>control</code> gets a plain request to simplify the changed code.</li><li><code>review</code>: skill arms only. The prompt is <code>/&lt;name&gt;</code> followed by "review only; do not edit files. Only look at inventory/sync.py."</li><li><code>natural</code>: every arm gets "Clean up the code I just changed before I commit it." This shows whether the skill triggers when nobody names it.</li></ul>
+<p>The harness needs <code>claude</code> on <code>PATH</code>, plus bash, git, python3, shasum, and
+uuidgen. Run one arm, or a matrix, from this directory:</p>
+<pre><code class="language-bash">export EVAL_RUNS=~/evals/simplify-changes
+bash evals/run_arm.sh . natural 1
+bash evals/run_matrix.sh clean 3 control builtin .
+python3 evals/analyze_run.py "$EVAL_RUNS/opus-simplify-changes-natural-1"
+python3 evals/grade.py --summary "$EVAL_RUNS"/*/
+</code></pre>
+<p><code>run_arm.sh</code> takes <code>&lt;control|builtin|SKILL_DIR&gt; &lt;clean|review|natural&gt; &lt;rep&gt;</code>
+and writes one run directory. <code>run_matrix.sh</code> takes a scenario, a rep count, and
+one or more arms. It runs the arms in parallel and each arm's reps in sequence,
+logs each run to <code>$EVAL_RUNS/logs/&lt;run name&gt;.log</code>, then grades every run under
+<code>$EVAL_RUNS</code> into <code>$EVAL_RUNS/scoreboard-&lt;UTC time&gt;.txt</code>. Ctrl-C stops every run
+it started.</p>
+<div class="table-scroll"><table class="readme-table"><thead><tr><th>Variable</th><th>Default</th><th>Meaning</th></tr></thead><tbody><tr><td><code>MODEL</code></td><td><code>opus</code></td><td>The main model, passed to <code>--model</code></td></tr><tr><td><code>EFFORT</code></td><td><code>low</code> if <code>MODEL</code> contains "haiku", else <code>high</code></td><td>Passed to <code>--effort</code></td></tr><tr><td><code>BUDGET</code></td><td><code>5</code></td><td>Most dollars a run may spend, passed to <code>--max-budget-usd</code></td></tr><tr><td><code>MAX_WALL</code></td><td><code>1800</code></td><td>Seconds before a watchdog stops claude</td></tr><tr><td><code>SUITE_CAP</code></td><td><code>120</code></td><td>Seconds the fixture's test suite may run, before or after claude; past that, the harness kills it and counts it as failed</td></tr><tr><td><code>EVAL_RUNS</code></td><td><code>${TMPDIR:-/tmp}/simplify-changes-evals</code></td><td>Where run directories go</td></tr><tr><td><code>EVAL_WORK</code></td><td><code>/tmp</code></td><td>Parent of each run's working copy. The model sees that path, so it must not contain <code>simplify</code> or the skill name</td></tr><tr><td><code>FORCE</code></td><td>unset</td><td><code>1</code> replaces an existing run directory</td></tr><tr><td><code>START_REP</code></td><td><code>1</code></td><td><code>run_matrix.sh</code> only: the first rep number</td></tr><tr><td><code>QUOTA_STOP</code></td><td><code>0.85</code></td><td><code>run_matrix.sh</code> only: start no more runs once the five-hour utilization reaches this, until that window resets</td></tr></tbody></table></div>
+<p>Every run calls <code>claude -p</code> with <code>--dangerously-skip-permissions</code> in a throwaway
+copy of the fixture, and spends real subscription usage. Before each run, the
+matrix reads the five-hour window from the newest stream under <code>$EVAL_RUNS</code> that
+reports one. If its utilization is at <code>QUOTA_STOP</code> or above and its <code>resetsAt</code>
+time has not passed, the matrix starts no more runs. Once that time passes, the
+window has reset and the old reading no longer counts, so a rerun with
+<code>START_REP</code> picks up where the guard stopped.</p>
+<p>Keep <code>$EVAL_RUNS</code> outside the package, because runs hold transcripts. A run
+directory, <code>&lt;model&gt;-&lt;arm&gt;-&lt;scenario&gt;-&lt;rep&gt;</code>, holds <code>meta.json</code>, the prompt, the
+stream, git and test snapshots from before and after the run, the repo itself
+at <code>repo/</code>, <code>analysis.txt</code>, and <code>tmp-canary.txt</code>. That last file lists, by path
+only, the files that hold the run's canary: new files under <code>/tmp</code> and
+<code>$TMPDIR</code>, and files in the repo outside <code>.git/</code> and <code>.env.local</code>.</p>
+<p><code>MODEL</code> names the main thread only; reviewer subagents may run on another model.
+Claude Code takes a subagent's model from the model Claude passes when it starts
+the subagent, then the agent definition's <code>model</code> field, then
+<code>CLAUDE_CODE_SUBAGENT_MODEL</code>, then the main model. Setting
+<code>CLAUDE_CODE_SUBAGENT_MODEL</code> alone does not change the built-in Explore and Plan
+agents (<a href="https://code.claude.com/docs/en/sub-agents#choose-a-model" rel="noopener noreferrer">Choose a model</a>).
+<code>meta.json</code> records the <code>CLAUDE*</code> and <code>ANTHROPIC*</code> variables claude receives,
+leaving out names that look like secrets, and <code>analyze_run.py</code> prints the models
+each run used. If you want reviewers on the main model, unset
+<code>CLAUDE_CODE_SUBAGENT_MODEL</code> before you run the harness. The harness itself
+unsets <code>CLAUDE_CODE_EFFORT_LEVEL</code>, which takes precedence over <code>--effort</code>
+(<a href="https://code.claude.com/docs/en/env-vars" rel="noopener noreferrer">environment variables</a>).</p>
+<p><code>evals/RESULTS.md</code> holds the setup, the pass bar, scores, costs, and known
+limits. The shipped <code>SKILL.md</code> passes every pass-bar item but one: to change one
+call, Haiku sometimes rewrites a whole function and drops a comment that
+explains why, even after a reviewer said to keep it.</p>
+<h3>References</h3>
+<ul><li><a href="https://agentskills.io/specification" rel="noopener noreferrer">Agent Skills specification</a></li><li><a href="https://code.claude.com/docs/en/skills" rel="noopener noreferrer">Claude Code skills</a></li><li><a href="https://developers.openai.com/codex/skills/" rel="noopener noreferrer">Codex skills</a></li></ul>
+    </main>
+    <nav class="detail-nav mono rule-t" aria-label="Skill navigation">
+      <a href="../ci-auditor/" data-tinylytics-event="plugin.prev">← ci-auditor</a>
+      <a href="../implicit-state-machine-finder/" data-tinylytics-event="plugin.next">implicit-state-machine-finder →</a>
+    </nav>
+    <section class="related rule-t">
+      <div class="mono related-label">More from Testing & Review</div>
+      <ul class="related-list">
+        <li><a href="../test-kitchen/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="test-kitchen"><span class="mono related-name">test-kitchen</span><span class="related-desc">Parallel exploration of implementation approaches - implements multiple variants simultaneously and lets tests determine the winner</span></a></li>
+        <li><a href="../simmer/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="simmer"><span class="mono related-name">simmer</span><span class="related-desc">Iterative artifact refinement with investigation-first judge board - constructs problem-specific judges that read the code, understand the problem, and propose evidence-based improvements</span></a></li>
+        <li><a href="../scenario-testing/" data-tinylytics-event="related.view-plugin" data-tinylytics-event-value="scenario-testing"><span class="mono related-name">scenario-testing</span><span class="related-desc">End-to-end testing with real dependencies - no mocks allowed; scenarios with real data are the only source of truth</span></a></li>
+      </ul>
+    </section>
+    <footer class="colophon rule-t glass">
+      <span class="mono">© 2026 <a href="https://2389.ai" class="brand-link" target="_blank" rel="noopener noreferrer" data-tinylytics-event="brand.company" data-tinylytics-event-value="colophon">2389 Research Inc</a> — all plugins open source</span>
+      <span class="colophon-links mono">
+        <a href="https://github.com/2389-research/claude-plugins" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="github">GitHub</a>
+        <a href="https://docs.claude.com/en/docs/claude-code/skills" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.resource" data-tinylytics-event-value="skills-guide">Skills Guide</a>
+        <a href="../../glossary/" data-tinylytics-event="footer.resource" data-tinylytics-event-value="glossary">Glossary</a>
+        <a href="https://2389.ai" target="_blank" rel="noopener noreferrer" data-tinylytics-event="footer.company" data-tinylytics-event-value="about">2389.ai</a>
+      </span>
+    </footer>
+  </div>
+  <!-- Structured Data - Plugin -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "complex-simplify",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "2389 Research Inc",
+    "url": "https://2389.ai"
+  },
+  "description": "Review recent changes for reuse, quality, and efficiency, apply focused cleanups, and run the project's checks",
+  "url": "https://skills.2389.ai/plugins/complex-simplify/",
+  "downloadUrl": "https://github.com/2389-research/complex-simplify",
+  "softwareVersion": "1.0.0",
+  "datePublished": "2026-09-24",
+  "dateModified": "2026-11-17"
+}
+  </script>
+
+  <!-- Structured Data - Breadcrumbs -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "2389 Research",
+      "item": "https://2389.ai"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Plugin Marketplace",
+      "item": "https://skills.2389.ai/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "complex-simplify",
+      "item": "https://skills.2389.ai/plugins/complex-simplify/"
+    }
+  ]
+}
+  </script>
+
+  <script>
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      navigator.clipboard.writeText(btn.dataset.copy.replace(/&lt;/g,'<').replace(/&gt;/g,'>')).catch(()=>{});
+      const orig = btn.textContent;
+      const done = /Copy$/.test(orig) ? '✓ Copied' : '✓ copied';
+      btn.textContent = done; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
+    });
+  });
+
+  // CSS hides the looping diagram for a reduced-motion reader, but a hidden video is
+  // not guaranteed to stop, so pause it outright and drop the autoplay attribute.
+  const anim = document.querySelector('.skill-anim-motion');
+  if (anim && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    anim.removeAttribute('autoplay');
+    anim.removeAttribute('loop');
+    anim.pause();
+  }
+
+  const search = document.querySelector('[data-search]');
+  if (search) {
+    const rows = [...document.querySelectorAll('[data-skill-row]')];
+    const countEl = document.querySelector('[data-count]');
+    const chips = [...document.querySelectorAll('.chip[data-cat]')];
+    const clearTag = document.querySelector('[data-cleartag]');
+    let cat = 'all', tag = null;
+    const norm = s => s.toLowerCase().replace(/[-_ ]+/g, ' ');
+    const apply = () => {
+      const q = norm(search.value.trim());
+      let shown = 0;
+      rows.forEach(r => {
+        const okCat = cat === 'all' || r.dataset.cat === cat;
+        const okTag = !tag || (r.dataset.tags || '').split(',').includes(tag);
+        const hay = norm(r.dataset.name + ' ' + r.dataset.desc + ' ' + r.dataset.tags);
+        const okQ = !q || hay.includes(q);
+        const show = okCat && okTag && okQ;
+        r.style.display = show ? '' : 'none';
+        if (show) shown++;
+      });
+      document.querySelectorAll('[data-cat-section]').forEach(s => {
+        const any = [...s.querySelectorAll('[data-skill-row]')].some(r => r.style.display !== 'none');
+        s.style.display = any ? '' : 'none';
+      });
+      const empty = document.querySelector('[data-empty]');
+      if (empty) empty.hidden = shown !== 0;
+      if (countEl) countEl.textContent = shown + ' of ' + rows.length + ' entries';
+    };
+    search.addEventListener('input', apply);
+    chips.forEach(c => c.addEventListener('click', () => {
+      cat = c.dataset.cat; tag = null;
+      chips.forEach(x => x.classList.toggle('active', x === c));
+      if (clearTag) clearTag.hidden = true;
+      apply();
+    }));
+    document.addEventListener('click', e => {
+      const t = e.target.closest('[data-tag]');
+      if (!t) return;
+      e.preventDefault(); e.stopPropagation();
+      tag = t.dataset.tag; cat = 'all';
+      chips.forEach(x => x.classList.toggle('active', x.dataset.cat === 'all'));
+      if (clearTag) { clearTag.hidden = false; clearTag.textContent = '#' + tag + ' ✕'; }
+      window.scrollTo({ top: 360, behavior: 'smooth' });
+      apply();
+    });
+    if (clearTag) clearTag.addEventListener('click', () => { tag = null; clearTag.hidden = true; apply(); });
+    const resetBtn = document.querySelector('[data-reset]');
+    if (resetBtn) resetBtn.addEventListener('click', () => { search.value=''; cat='all'; tag=null; chips.forEach(x=>x.classList.toggle('active',x.dataset.cat==='all')); if(clearTag) clearTag.hidden=true; apply(); });
+  }
+  (function topo(){
+    var canvas = document.getElementById('topo-bg');
+    if (!canvas || !window.THREE) { if (!window.__topoTries) window.__topoTries = 0; if (window.__topoTries++ < 40) setTimeout(topo, 120); return; }
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var THREE = window.THREE, scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0xffffff, 3.2, 10.5);
+    var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+    camera.position.set(0, 2.05, 3.15); camera.lookAt(0, -0.15, -1.6);
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setClearColor(0x000000, 0);
+    var SEG = 108, SIZE = 18;
+    var geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG); geo.rotateX(-Math.PI/2);
+    var base = geo.attributes.position.array.slice();
+    // The topo takes its colour from the page's --highlight, so a detail page reads in
+    // its category's accent rather than the marketplace pink everywhere.
+    var hl = getComputedStyle(document.body).getPropertyValue('--highlight').trim();
+    scene.add(new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: new THREE.Color(hl || '#e6196e'), wireframe: true, transparent: true, opacity: 0.16 })));
+    var m2 = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: 0x171512, wireframe: true, transparent: true, opacity: 0.05 })); m2.position.y = 0.012; scene.add(m2);
+    var p = [0,1,2,3].map(function(i){ return i * 1.7; });
+    var H = function(x,z,t){ return Math.sin(x*0.55+t+p[0])*0.55 + Math.cos(z*0.42-t*0.75+p[1])*0.5 + Math.sin((x+z)*0.30+t*0.6+p[2])*0.42 + Math.sin(x*0.16-z*0.22+t*0.35+p[3])*0.7; };
+    var pos = geo.attributes.position;
+    function resize(){ var w = canvas.clientWidth||innerWidth, h = canvas.clientHeight||innerHeight; renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+    addEventListener('resize', resize); resize();
+    var start = performance.now();
+    function frame(){ var t = reduce ? 6.2 : (performance.now()-start)*0.00035; for (var i=0;i<pos.count;i++){ var x=base[i*3], z=base[i*3+2]; var y=H(x,z,t); var edge=1-Math.min(1,(Math.abs(x)+Math.abs(z))/15); pos.array[i*3+1]=y*(0.35+edge*0.9); } pos.needsUpdate=true; renderer.render(scene,camera); if(!reduce) requestAnimationFrame(frame); }
+    frame();
+  })();
+  </script>
+</body>
+</html>

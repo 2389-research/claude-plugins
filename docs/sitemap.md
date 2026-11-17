@@ -40,3 +40,8 @@ Pages on this site, for AI agents and other tools that prefer markdown over XML.
 - [journal](https://skills.2389.ai/plugins/journal/) — A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts
 - [thrifty](https://skills.2389.ai/plugins/thrifty/) — Tiered-delegation execution where Sonnet plans a spec into sprints, a cheap Haiku agent builds and self-verifies against the gate, and a scoped Sonnet fix runs only on failure - benchmarked ~64% cheaper than Opus at equal quality.
 - [agent-ergo](https://skills.2389.ai/plugins/agent-ergo/) — Redesign a system so AI agents can find its state, act safely, verify results, recover from failure, and reuse past work
+- [about-us-optimizer](https://skills.2389.ai/plugins/about-us-optimizer/) — Write or audit company About pages from supplied sources, with checkable facts, clear offerings, and buyer-focused FAQs
+- [bug-triage-score](https://skills.2389.ai/plugins/bug-triage-score/) — Score bugs by observed frequency and severity to decide which to fix now and which to file
+- [ci-auditor](https://skills.2389.ai/plugins/ci-auditor/) — Measure GitHub Actions queue, setup, and task time to show where CI time goes and rank the slowest jobs
+- [complex-simplify](https://skills.2389.ai/plugins/complex-simplify/) — Review recent changes for reuse, quality, and efficiency, apply focused cleanups, and run the project's checks
+- [implicit-state-machine-finder](https://skills.2389.ai/plugins/implicit-state-machine-finder/) — Find implicit state machines, rank impossible states by bug risk, and convert chosen lifecycles with behavior-pinning tests

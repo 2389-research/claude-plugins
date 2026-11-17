@@ -40,6 +40,9 @@ Quality and verification
 - [sift](https://skills.2389.ai/plugins/sift/) — Read-only whole-codebase audit for material simplifications in structure, state, control flow, algorithms, lifecycle, and ownership boundaries
 - [trace](https://skills.2389.ai/plugins/trace/) — Verify a repository against its authoritative spec with a canonical behavior matrix and executable evidence
 - [review-squad](https://skills.2389.ai/plugins/review-squad/) — Dispatch panels of specialized subagents to review projects — expert audits, first-impression personas, task-completion flows, and pedantic nitpicks
+- [bug-triage-score](https://skills.2389.ai/plugins/bug-triage-score/) — Score bugs by observed frequency and severity to decide which to fix now and which to file
+- [complex-simplify](https://skills.2389.ai/plugins/complex-simplify/) — Review recent changes for reuse, quality, and efficiency, apply focused cleanups, and run the project's checks
+- [implicit-state-machine-finder](https://skills.2389.ai/plugins/implicit-state-machine-finder/) — Find implicit state machines, rank impossible states by bug risk, and convert chosen lifecycles with behavior-pinning tests
 
 ## Agents & Orchestration
 
@@ -60,6 +63,7 @@ Backend, systems, and integrations
 - [terminal-title](https://skills.2389.ai/plugins/terminal-title/) — Automatically updates terminal title with emoji + project + topic context for quick visual cues when switching terminals
 - [slack-mcp](https://skills.2389.ai/plugins/slack-mcp/) — Slack workspace integration MCP server - create channels, invite users, post messages, manage threads for team collaboration
 - [remote-system-maintenance](https://skills.2389.ai/plugins/remote-system-maintenance/) — Structured procedures for Linux system diagnostics and maintenance via SSH/tmux with Ubuntu/Debian cleanup checklists
+- [ci-auditor](https://skills.2389.ai/plugins/ci-auditor/) — Measure GitHub Actions queue, setup, and task time to show where CI time goes and rank the slowest jobs
 
 ## Strategy & Reflection
 
@@ -71,6 +75,7 @@ Decisions, business, and personal practice
 - [summarize-meetings](https://skills.2389.ai/plugins/summarize-meetings/) — Batch-process meeting transcripts from Obsidian vault into structured summaries with knowledge graph updates, people notes, and concept extraction
 - [travel-agent](https://skills.2389.ai/plugins/travel-agent/) — Taste-based travel concierge for researched and verified restaurant, lodging, shopping, event, and cultural recommendations
 - [journal](https://skills.2389.ai/plugins/journal/) — A lightweight MCP server that provides Claude with a private journaling capability to process feelings and thoughts
+- [about-us-optimizer](https://skills.2389.ai/plugins/about-us-optimizer/) — Write or audit company About pages from supplied sources, with checkable facts, clear offerings, and buyer-focused FAQs
 
 ## Reference
 

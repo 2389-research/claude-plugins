@@ -1,5 +1,9 @@
 # Gotchas
 
+## About-page skill publication (verified 2026-11-17)
+
+- `2389-research/about-us-optimizer` uses a clean package snapshot. Doctor Biz excluded the original evaluation fixtures because their provenance was uncertain. Update a clone of the public repo. Never push the original local repo's history into it; deleting fixtures from the current tree would still publish them through history.
+
 ## Site build (verified 2026-09-24)
 
 - CI never rebuilds the OG share cards. `.github/workflows/generate-site.yml` runs `npm test` and `scripts/generate-site.js`, not `scripts/generate-og-images.js`. After changing a plugin's version or description, run `npm run generate` and commit the PNGs, or the card goes stale.

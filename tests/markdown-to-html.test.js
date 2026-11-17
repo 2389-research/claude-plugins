@@ -49,6 +49,18 @@ test('blank lines before a list do not push its first item a level deeper', () =
 });
 
 // Headings
+test('HTML comments do not create visible paragraphs before a heading or within text', () => {
+  assert.equal(
+    markdownToHtml('<!-- ABOUTME: First. -->\n<!-- ABOUTME:\nSecond. -->\n\n# Skill\n\nBefore <!-- hidden --> after.').trim(),
+    '<h2>Skill</h2>\n<p>Before  after.</p>'
+  );
+});
+test('HTML comments in fenced and inline code stay visible as examples', () => {
+  assert.equal(
+    markdownToHtml('```html\n<!-- example -->\n```\n\n`<!-- inline -->`'),
+    '<pre><code class="language-html">&lt;!-- example --&gt;\n</code></pre>\n<p><code>&lt;!-- inline --&gt;</code></p>'
+  );
+});
 test('#### renders as a heading one level below ###', () => {
   assert.equal(markdownToHtml('#### Config'), '<h5>Config</h5>');
 });
